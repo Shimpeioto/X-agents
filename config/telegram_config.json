@@ -1,0 +1,19 @@
+{
+  "commands": {
+    "/approve": {"description": "Approve all or specific posts", "args": "optional: comma-separated indices"},
+    "/edit": {"description": "Edit a post", "args": "<index> \"<new text>\""},
+    "/status": {"description": "Pipeline health check"},
+    "/pause": {"description": "Halt posting & outbound"},
+    "/resume": {"description": "Resume after pause"},
+    "/strategy": {"description": "Override strategy", "args": "\"<directive>\""},
+    "/details": {"description": "Full content plan"},
+    "/metrics": {"description": "Performance metrics", "args": "optional: en|jp"},
+    "/competitors": {"description": "Competitor list & stats"},
+    "/help": {"description": "List commands"}
+  },
+  "notification_settings": {
+    "morning_brief_time": "07:00",
+    "daily_report_time": "23:30",
+    "timezone": "Asia/Tokyo"
+  }
+}
