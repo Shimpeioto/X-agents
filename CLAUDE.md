@@ -3,6 +3,9 @@
 ## Global Rules
 @config/global_rules.md
 
+## Documentation
+- All project docs live in `docs/` (context, spec, PRD, compliance review, runbook, etc.)
+
 ## Project Context
 - Two accounts: EN (global) and JP (日本市場)
 - All X operations use X API v2 Basic plan ($200/month)

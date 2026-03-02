@@ -634,6 +634,8 @@ project/
 │   ├── rate_limits_{date}.json   ← API rate limit counters
 │   └── pipeline_state_{date}.json ← Task-based agent coordination state (see Section 14.4)
 │
+├── docs/                         ← Project documentation (context, spec, PRD, compliance, runbook)
+│
 ├── media/
 │   ├── pending/                  ← Human places images here
 │   │   ├── en_20260301_01.png
@@ -660,6 +662,8 @@ project/
 │   ├── playwright_metrics.py     ← Impression scraping (Playwright)
 │   ├── telegram_bot.py           ← Telegram Bot (always-on daemon)
 │   └── db_manager.py             ← SQLite management utility
+│
+├── backups/                      ← Daily backups
 │
 └── browser_profiles/
     ├── en_profile/               ← EN account Playwright profile (impression scraping only)

@@ -432,59 +432,41 @@ Human (Shimpei)
 │   Excludes: secrets (accounts.json, .env), databases, logs,
 │             media files, node_modules, OS files
 │
-├── context.md                              ← THIS FILE
-│   Purpose: Third-party orientation document
-│   Scope:   Full project (framework + demo)
-│   Read first to understand everything
+├── CLAUDE.md                               ← CLAUDE CODE PROJECT CONFIG
+│   Auto-loaded at session start. References agents/ and config/.
 │
-├── autonomous-agent-system-analysis.md     ← FRAMEWORK ANALYSIS
-│   Purpose: OpenClaw vs Claude Code comparison
-│   Scope:   General autonomous agent architecture
-│   Contains: 8 architectural principles, feature comparison matrix,
-│             hardware requirements, capability gap analysis
-│   Status:  Complete (historical reference — findings are incorporated
-│            into the spec and context)
-│
-├── x-ai-beauty-spec-v2.3.md               ← TECHNICAL SPECIFICATION (Demo)
-│   Purpose: How to build the X Beauty demo system
-│   Scope:   Demo project only
-│   Contains:
-│     Sections 1-8:   Agent roster (6 agents), X API strategy,
-│                      pipeline schedule, shared state architecture,
-│                      implementation phases, risk management
-│     Section 9:       Authentication & credentials (OAuth 2.0 flows)
-│     Section 10:      Configuration file schemas (5 JSON schemas)
-│     Section 11:      Cron job definitions (full crontab + orchestrator.sh)
-│     Section 12:      Environment variables
-│     Section 13:      Memory architecture (CLAUDE.md hierarchy)
-│     Section 14:      Agent design principles (6 principles from Claude Code article)
-│     Section 15:      Testing strategy (5 phases, per-agent test cases)
-│     Section 16:      Deployment procedure (VPS setup, 20-item checklist)
-│     Section 17:      Risk management
-│   Status:  Current (v2.4)
-│
-├── x-ai-beauty-prd-v1.md                  ← PRODUCT REQUIREMENTS (Demo)
-│   Purpose: What to build and why
-│   Scope:   Demo project only
-│   Contains: Goals & success metrics, user personas, feature scope
-│             (10 MVP + 7 post-launch), 18 user stories, Telegram
-│             command spec, content lifecycle, launch criteria,
-│             8 open questions
-│   Status:  Current (v1.1)
-│
-├── x-developer-terms-compliance-review.md ← COMPLIANCE REVIEW
-│   Purpose: Log of X Developer Terms concerns for this project
-│   Scope:   Legal/policy compliance
-│   Contains: 7 issues (4 critical, 3 medium), confirmed-compliant
-│             checklist, review schedule by implementation phase
-│   Status:  Living document — update as issues are resolved
-│
-├── phase-0-runbook.md                      ← PHASE 0 SETUP GUIDE
-│   Purpose: Local development environment setup
-│   Scope:   Phase 0 only (CLI tools, X API, Telegram, project structure)
-│   Contains: 9 steps, test scripts, health check
-│   Note:    No VPS — all development is local. VPS comes at Phase 5.
-│   Status:  ✅ Complete — 30/30 health check passed
+├── docs/                                   ← PROJECT DOCUMENTATION
+│   ├── context.md                          ← THIS FILE
+│   │   Purpose: Third-party orientation document
+│   │   Scope:   Full project (framework + demo)
+│   │
+│   ├── autonomous-agent-system-analysis.md ← FRAMEWORK ANALYSIS
+│   │   Purpose: OpenClaw vs Claude Code comparison
+│   │   Contains: 8 architectural principles, feature comparison
+│   │   Status:  Complete (historical reference)
+│   │
+│   ├── x-ai-beauty-spec-v2.3.md           ← TECHNICAL SPECIFICATION (Demo)
+│   │   Purpose: How to build the X Beauty demo system
+│   │   Contains: Agent roster, API strategy, pipeline, config schemas,
+│   │             cron, auth, memory, agent design, testing, deployment
+│   │   Status:  Current (v2.4)
+│   │
+│   ├── x-ai-beauty-prd-v1.md              ← PRODUCT REQUIREMENTS (Demo)
+│   │   Purpose: What to build and why
+│   │   Contains: Goals, user stories, features, launch criteria
+│   │   Status:  Current (v1.1)
+│   │
+│   ├── x-developer-terms-compliance-review.md ← COMPLIANCE REVIEW
+│   │   Purpose: X Developer Terms concerns log
+│   │   Contains: 7 issues (4 critical, 3 medium)
+│   │   Status:  Living document
+│   │
+│   ├── phase-0-runbook.md                  ← PHASE 0 SETUP GUIDE
+│   │   Purpose: Local development environment setup
+│   │   Contains: 9 steps, test scripts, health check
+│   │   Status:  ✅ Complete — 30/30 health check passed
+│   │
+│   └── review.md                           ← REVIEW NOTES
 │
 ├── config/
 │   ├── accounts.json                       ← CREDENTIALS (git-ignored)
@@ -496,6 +478,7 @@ Human (Shimpei)
 │   │   creator.md, publisher.md, analyst.md
 │   └── (placeholders — built during Phases 1-4)
 │
+├── scripts/                                ← UTILITY SCRIPTS
 ├── data/.gitkeep                           ← PIPELINE STATE (empty, git-tracked)
 ├── logs/.gitkeep                           ← AGENT LOGS (empty, git-tracked)
 ├── backups/.gitkeep                        ← DAILY BACKUPS (empty, git-tracked)
