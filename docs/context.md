@@ -411,7 +411,7 @@ Human (Shimpei)
 | # | Question | Impact | Status |
 |---|---|---|---|
 | OQ-1 | Which AI image generation tool (Midjourney, SD, Flux)? | Affects Creator's prompt format | Open |
-| OQ-2 | Initial competitor list (10+ accounts)? | Blocks Phase 1 testing | Open (can defer to Phase 1) |
+| OQ-2 | Initial competitor list (10+ accounts)? | Blocks Phase 1 testing | **Resolved: 41 unique accounts (26 EN + 17 JP, 2 overlap)** |
 | OQ-3 | Fresh X accounts or existing ones? | Affects Phase 0 setup | **Resolved: Use existing accounts** |
 | OQ-4 | Monthly budget ceiling above $350? | Determines scope constraints | Open |
 | OQ-5 | Operate on weekends/holidays? | Affects scheduling | Open |

@@ -1,6 +1,376 @@
 {
-  "last_updated": "2026-03-02",
-  "competitors": [],
+  "last_updated": "2026-03-03",
+  "competitors": [
+    {
+      "handle": "JosephinaM3131",
+      "user_id": "",
+      "display_name": "MIKENEKO_E",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "sessypuuh",
+      "user_id": "",
+      "display_name": "Sessy",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "ai_hiyo_",
+      "user_id": "",
+      "display_name": "Hiyoko",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "NotjustRen00",
+      "user_id": "",
+      "display_name": "Wren",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": "China-based"
+    },
+    {
+      "handle": "IvoryLane_plus",
+      "user_id": "",
+      "display_name": "Su-jin",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "PinUpGirl_AI",
+      "user_id": "",
+      "display_name": "あいぷぐ/AiPugu",
+      "category": "ai_beauty",
+      "market": "both",
+      "priority": "medium",
+      "notes": "JP/EN dual account"
+    },
+    {
+      "handle": "leahyunaxo",
+      "user_id": "",
+      "display_name": "Leah Yuna",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "Angelwithcakee",
+      "user_id": "",
+      "display_name": "Sienna",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "katekarsyn",
+      "user_id": "",
+      "display_name": "Kate Karsyn",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "Estherbron1",
+      "user_id": "",
+      "display_name": "esterbby",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "lucidevlinxyz",
+      "user_id": "",
+      "display_name": "luci tha devil",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "HannaJonso",
+      "user_id": "",
+      "display_name": "hanna jonso",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "yuumi005",
+      "user_id": "",
+      "display_name": "yuumi (優美)",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "yogana_19",
+      "user_id": "",
+      "display_name": "Ana Sakura",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "baharaykin",
+      "user_id": "",
+      "display_name": "Bahar Aykin",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "LeahSunkissed",
+      "user_id": "",
+      "display_name": "Leah Monroe",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "marylivbrown",
+      "user_id": "",
+      "display_name": "Mary Liv Brown",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "iiCoraMaay",
+      "user_id": "",
+      "display_name": "Cora Maay",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "KissofStarova",
+      "user_id": "",
+      "display_name": "Starova",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "yuumispm",
+      "user_id": "",
+      "display_name": "yuumi",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "Ava_starz",
+      "user_id": "",
+      "display_name": "Ava Starz",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "IsabellaCruz_47",
+      "user_id": "",
+      "display_name": "Isabella Cruz",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "Lux_aeterna_",
+      "user_id": "",
+      "display_name": "Luna (ルナ) AIart",
+      "category": "ai_beauty",
+      "market": "both",
+      "priority": "medium",
+      "notes": "JP/EN dual account"
+    },
+    {
+      "handle": "imrubyreid",
+      "user_id": "",
+      "display_name": "Ruby Reid",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "itsluna_baby",
+      "user_id": "",
+      "display_name": "luna lovekiss",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "tanarainw",
+      "user_id": "",
+      "display_name": "Tana Rain",
+      "category": "ai_beauty",
+      "market": "EN",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "AI_MIKENEKO",
+      "user_id": "",
+      "display_name": "AI_三毛猫",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "BoobistR",
+      "user_id": "",
+      "display_name": "Mia Nakajima (中島ミア)",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "yunaelegant",
+      "user_id": "",
+      "display_name": "YUNA",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "ai_nontan_room",
+      "user_id": "",
+      "display_name": "-TAKATO- AI_room",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "ai_hyk",
+      "user_id": "",
+      "display_name": "Hiyoko",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "tororo_223",
+      "user_id": "",
+      "display_name": "とろろ",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "hakoirikumatan",
+      "user_id": "",
+      "display_name": "りのっくま",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "honoka_shiri",
+      "user_id": "",
+      "display_name": "ほのか",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "2nd_karen_AI",
+      "user_id": "",
+      "display_name": "華蓮 ~Karen~",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "AI_Girls_Studio",
+      "user_id": "",
+      "display_name": "AI ガール Studio",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "AIart_yama94",
+      "user_id": "",
+      "display_name": "AINA@AIart",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "seisei_ai_1st",
+      "user_id": "",
+      "display_name": "聖星あい@AIギャルプロデューサー",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "Shizuku_AItuber",
+      "user_id": "",
+      "display_name": "しずく / Shizuku AI VTuber",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": "AI VTuber"
+    },
+    {
+      "handle": "ganbarukaisyain",
+      "user_id": "",
+      "display_name": "社畜のダリだよ",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "handle": "nene__chandayo",
+      "user_id": "",
+      "display_name": "ねね",
+      "category": "ai_beauty",
+      "market": "JP",
+      "priority": "medium",
+      "notes": ""
+    }
+  ],
   "tracked_keywords": [
     "#AIbeauty", "#AIart", "#AIgirl", "#AImodel",
     "#midjourney", "#stablediffusion", "#aiイラスト", "#AI美女"
