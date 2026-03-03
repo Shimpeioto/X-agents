@@ -1,0 +1,97 @@
+{
+  "date": "2026-03-03",
+  "generated_at": "2026-03-03T23:50:00+09:00",
+  "scout_report_used": "data/scout_report_20260303.json",
+  "EN": {
+    "posting_schedule": [
+      {"slot": 1, "time": "14:00 UTC", "category": "portrait", "priority": "high"},
+      {"slot": 2, "time": "18:00 UTC", "category": "fashion", "priority": "high"},
+      {"slot": 3, "time": "22:00 UTC", "category": "artistic", "priority": "medium"},
+      {"slot": 4, "time": "02:00 UTC", "category": "trend_reactive", "priority": "medium"}
+    ],
+    "content_mix": {
+      "portrait": 35,
+      "fashion": 20,
+      "artistic": 20,
+      "trend_reactive": 15,
+      "lifestyle": 10
+    },
+    "hashtag_strategy": {
+      "always_use": ["#AIbeauty", "#AIart"],
+      "rotate": ["#digitalart", "#AIgirl", "#AImodel", "#midjourney"],
+      "trending_today": ["#TwinTailTuesday"],
+      "max_per_post": 4
+    },
+    "outbound_strategy": {
+      "daily_likes": 30,
+      "daily_replies": 10,
+      "daily_follows": 5,
+      "target_accounts": ["@sessypuuh", "@HannaJonso", "@leahyunaxo", "@marylivbrown", "@JuliAIkiko"],
+      "reply_style": "Supportive and enthusiastic — compliment specific visual elements in their posts (lighting, composition, style). Keep replies concise, authentic, and community-building. Avoid generic comments."
+    },
+    "ab_test": {
+      "variable": "posting_frequency",
+      "variant_a": "3 posts per day at slots 1-3 only",
+      "variant_b": "4 posts per day using all 4 slots",
+      "duration_days": 5,
+      "start_date": "2026-03-03"
+    },
+    "key_insights": [
+      "EN market shows 25x higher average engagement rate (6.1%) than JP (0.24%), indicating a more interactive audience — prioritize EN for rapid follower growth",
+      "Top EN performers (sessypuuh 37.7%, yuumispm 54.4%) post infrequently (0.7/day) with high-quality portrait content — quality over quantity is the proven formula",
+      "Hashtag usage among competitors is surprisingly low — only #SFW, #digitalart, and #Fictional appear frequently. There is a gap to fill with #AIbeauty and #AIart which are actively searched but underused by competitors",
+      "Newly discovered account @JuliAIkiko (9.2K followers) is active in #AIbeauty keyword space — potential collaboration or engagement target for cross-pollination",
+      "Most trending content features standalone beauty portraits with minimal text — captions should be short and emoji-driven rather than long-form"
+    ],
+    "risks": [
+      "EN market is dominated by large accounts (avg 140K followers) — breaking through will require differentiated visual style and consistent engagement",
+      "Low hashtag adoption among top performers suggests the algorithm may deprioritize hashtag-heavy posts — monitor engagement with 4 vs fewer hashtags"
+    ]
+  },
+  "JP": {
+    "posting_schedule": [
+      {"slot": 1, "time": "07:30 JST", "category": "portrait", "priority": "high"},
+      {"slot": 2, "time": "12:00 JST", "category": "artistic", "priority": "high"},
+      {"slot": 3, "time": "19:00 JST", "category": "trend_reactive", "priority": "high"},
+      {"slot": 4, "time": "22:00 JST", "category": "character", "priority": "medium"}
+    ],
+    "content_mix": {
+      "portrait": 30,
+      "artistic": 25,
+      "fashion": 15,
+      "trend_reactive": 15,
+      "character": 15
+    },
+    "hashtag_strategy": {
+      "always_use": ["#AI美女", "#AIart"],
+      "rotate": ["#AIイラスト", "#digitalart", "#SFW", "#AIgirl"],
+      "trending_today": ["#ひな祭り"],
+      "max_per_post": 5
+    },
+    "outbound_strategy": {
+      "daily_likes": 30,
+      "daily_replies": 10,
+      "daily_follows": 5,
+      "target_accounts": ["@hakoirikumatan", "@yunaelegant", "@AI_MIKENEKO", "@tororo_223"],
+      "reply_style": "Polite and warm in Japanese — use casual keigo, light emoji, and specific compliments about artwork style or character design. Match the community tone of supportive peer interaction."
+    },
+    "ab_test": {
+      "variable": "hashtag_count",
+      "variant_a": "3 hashtags per post (always_use + 1 rotate)",
+      "variant_b": "5 hashtags per post (always_use + 2 rotate + 1 trending)",
+      "duration_days": 5,
+      "start_date": "2026-03-03"
+    },
+    "key_insights": [
+      "JP competitors post more frequently (6.4/day vs 4.3 EN) but with much lower engagement (0.24%) — the market is saturated with volume; differentiation through quality and timing is critical",
+      "JP market shows strong affinity for character-based and illustration-style content (#SFW, #Fictional, #Zimage are top hashtags) — lean into anime-influenced aesthetic rather than photorealistic",
+      "#AI美女 and #AIイラスト are the most active JP-specific trending keywords with consistent daily volume — these should be staples in every JP post",
+      "Top JP performer @hakoirikumatan achieves 1.7% engagement at 2 posts/day — confirming that moderate frequency with high quality outperforms high-volume posting in JP market",
+      "ひな祭り (Hinamatsuri/Girls' Day) is March 3 — timely seasonal content featuring traditional Japanese aesthetic blended with AI art could capture trend traffic"
+    ],
+    "risks": [
+      "JP market has smaller average account size (67K vs 140K EN) and lower engagement — growth may be slower and require longer commitment",
+      "Heavy reliance on anime/illustration style in JP market means photorealistic AI beauty content may not resonate — must test and adapt visual style to JP preferences"
+    ]
+  }
+}

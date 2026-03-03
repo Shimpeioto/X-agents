@@ -27,6 +27,9 @@ touch "$LOCK_FILE"
 echo "Starting pipeline for ${DATE}..."
 echo "Project: ${PROJECT_DIR}"
 
-claude -p "You are Marc, the COO agent. Read agents/marc.md for your full instructions.
+env -u CLAUDECODE claude -p "You are Marc, the COO agent. Read agents/marc.md for your full instructions.
+
+IMPORTANT: You are running in non-interactive mode. Execute ALL scripts directly using your bash tool — do not ask the user to run commands or paste output.
+
 Run today's pipeline for ${DATE}.
 Project directory: ${PROJECT_DIR}" --dangerously-skip-permissions

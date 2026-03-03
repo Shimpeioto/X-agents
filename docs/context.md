@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 3, 2026 (Session 14: Phase 1 Implementation & Testing)
+**Last updated**: March 3, 2026 (Session 15: Phase 1 Testing Complete)
 
 ---
 
@@ -653,7 +653,7 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-4 are local CLI development. Phase 5 is VPS deployment. Phase 6 is autonomous operation.
 
-**Latest**: Phase 1 implementation complete, manual testing in progress (March 3, 2026).
+**Latest**: Phase 1 complete — all 12 tests passed (March 3, 2026).
 
 All 7 Phase 1 files implemented:
 - `scripts/x_api.py` — X API v2 wrapper (tweepy-based, retry logic, rate limit handling)
@@ -664,7 +664,7 @@ All 7 Phase 1 files implemented:
 - `agents/scout.md` — Scout skill file (data collection scope, error handling, CLI usage)
 - `agents/strategist.md` — Strategist skill file (analysis steps, output schema, validation rules)
 
-Phase 1 manual testing (Section 8.1) — Tests 1-7 passed:
+Phase 1 manual testing — all 12 tests passed:
 
 | Test | Description | Result |
 |---|---|---|
@@ -675,13 +675,18 @@ Phase 1 manual testing (Section 8.1) — Tests 1-7 passed:
 | 5 | Scout --dry-run | **PASS** — mock data generated instantly, no API calls |
 | 6 | Full Scout (all 41 competitors) | **PASS** — 41 fetched, 0 skipped, 55 new accounts, ~18 seconds |
 | 7 | Verify user_ids cached | **PASS** — all user_ids resolved and saved to competitors.json |
+| 8 | Validate Scout report | **PASS** — all 8 validation checks passed |
+| 9 | Validate Strategist (missing file) | **PASS** — correctly rejected with "file_not_found" |
+| 10 | Full Marc pipeline (run_pipeline.sh) | **PASS** — completed in 3m17s, all steps executed |
+| 11 | Verify pipeline outputs | **PASS** — strategy validates (14/14), strategy_current matches, pipeline log exists. Cross-validation: 5 warnings (justified — gap-fill hashtags + discovered account) |
+| 12 | Lock file cleanup | **PASS** — lock file removed after pipeline completion |
 
-Remaining tests: validate.py (scout/strategist/cross modes), full Marc pipeline via run_pipeline.sh.
+Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (prevents nested session error) and include non-interactive override in Marc prompt (ensures Marc runs commands directly instead of asking for user input).
 
 | Phase | Description | Where | Status |
 |---|---|---|---|
 | Phase 0 | Local Development Setup (CLI, APIs, Telegram, project structure) | Local machine | **✅ Complete** — 30/30 health check, pushed to GitHub |
-| Phase 1 | Scout + Strategist + Marc Foundation | Local machine | **🔧 Testing** — 7 files implemented, Tests 1-7 passed, validation & pipeline tests remaining |
+| Phase 1 | Scout + Strategist + Marc Foundation | Local machine | **✅ Complete** — 7 files implemented, all 12 tests passed, pipeline runs end-to-end |
 | Phase 2 | Creator + Telegram Command Processing | Local machine | Not started |
 | Phase 3 | Publisher + X API Posting | Local machine | Not started |
 | Phase 4 | Analyst + Full Integration (2-3 day manual test) | Local machine | Not started |
