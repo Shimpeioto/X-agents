@@ -450,6 +450,11 @@ Human (Shimpei)
 │   │   Contains: 9 steps, test scripts, health check
 │   │   Status:  ✅ Complete — 30/30 health check passed
 │   │
+│   ├── competitor-accounts.md              ← COMPETITOR REFERENCE
+│   │   Purpose: Human-readable competitor account list
+│   │   Contains: 26 EN + 17 JP accounts (41 unique, 2 overlap)
+│   │   Status:  Current
+│   │
 │   ├── review.md                           ← REVIEW NOTES
 │   │
 │   └── specs/                              ← SPECIFICATIONS & COMPLIANCE
@@ -472,6 +477,9 @@ Human (Shimpei)
 ├── config/
 │   ├── accounts.json                       ← CREDENTIALS (git-ignored)
 │   ├── accounts.example.json               ← CREDENTIAL TEMPLATE (safe to share)
+│   ├── competitors.json                    ← COMPETITOR DATA (machine-readable)
+│   │   Contains: 41 accounts with handle, category, market, priority
+│   │   user_id resolved by Scout on first run
 │   └── global_rules.md                     ← BEHAVIORAL RULES
 │
 ├── agents/                                 ← AGENT SKILL FILES
@@ -556,6 +564,8 @@ context.md (this file)
 | `specs/x-developer-terms-compliance-review.md` | Compliance | X Developer Terms concerns log — 7 issues to resolve during implementation |
 | `.gitignore` | Config | Git ignore rules — excludes secrets, databases, logs, media, OS files |
 | `config/accounts.example.json` | Template | Credential template with placeholder values for safe sharing |
+| `competitor-accounts.md` | Reference | Human-readable competitor list — 26 EN + 17 JP accounts (41 unique, 2 overlap) |
+| `config/competitors.json` | Data | Machine-readable competitor list — 41 entries with handle, category, market, priority |
 | `context.md` | Meta | This document — full project context for third-party understanding |
 
 ---
