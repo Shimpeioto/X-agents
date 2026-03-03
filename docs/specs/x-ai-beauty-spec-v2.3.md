@@ -634,7 +634,13 @@ project/
 │   ├── rate_limits_{date}.json   ← API rate limit counters
 │   └── pipeline_state_{date}.json ← Task-based agent coordination state (see Section 14.4)
 │
-├── docs/                         ← Project documentation (context, spec, PRD, compliance, runbook)
+├── docs/                         ← Project documentation
+│   ├── specs/                    ← Spec, PRD, compliance review
+│   │   ├── x-ai-beauty-spec-v2.3.md
+│   │   ├── x-ai-beauty-prd-v1.md
+│   │   └── x-developer-terms-compliance-review.md
+│   ├── context.md, phase-0-runbook.md, review.md
+│   └── autonomous-agent-system-analysis.md
 │
 ├── media/
 │   ├── pending/                  ← Human places images here
@@ -778,7 +784,7 @@ Phase 6 (autonomous):        Agents operate overnight. You review via Telegram i
 - [ ] CLAUDE.md memory files creation
 - [ ] Competitor account list (`config/competitors.json`)
 
-**Detailed steps**: See [Phase 0 Runbook](./phase-0-runbook.md)
+**Detailed steps**: See [Phase 0 Runbook](../phase-0-runbook.md)
 
 ### Phase 1: Scout + Strategist + Marc Foundation (Day 3-5)
 - [ ] X API wrapper (`x_api.py`) development

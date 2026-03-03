@@ -108,7 +108,7 @@ python3 -c "import playwright; print('playwright OK')"
    > (likes, replies, follows) for our AI-generated art accounts. All automation is for
    > accounts we own and operate. Content is human-approved before posting."
 
-   > ⚠️ **Important**: Your use case description is binding per X Developer Terms. Ensure it accurately covers all planned functionality including outbound engagement (likes, replies, follows). See [`x-developer-terms-compliance-review.md`](./x-developer-terms-compliance-review.md) Issue 7 for details.
+   > ⚠️ **Important**: Your use case description is binding per X Developer Terms. Ensure it accurately covers all planned functionality including outbound engagement (likes, replies, follows). See [`x-developer-terms-compliance-review.md`](./specs/x-developer-terms-compliance-review.md) Issue 7 for details.
 
 5. Complete payment
 
@@ -346,7 +346,7 @@ sqlite3 data/metrics_history.db ".tables"
 
 Playwright is only used for impression scraping. Persistent profiles avoid re-login each time.
 
-> ⚠️ **Compliance note**: Playwright scraping (even on own account pages) carries X Terms risk as non-API automation of the website is prohibited. See [`x-developer-terms-compliance-review.md`](./x-developer-terms-compliance-review.md) Issue 4. Risk accepted for the value of impression data.
+> ⚠️ **Compliance note**: Playwright scraping (even on own account pages) carries X Terms risk as non-API automation of the website is prohibited. See [`x-developer-terms-compliance-review.md`](./specs/x-developer-terms-compliance-review.md) Issue 4. Risk accepted for the value of impression data.
 
 ```bash
 cat > scripts/setup_browser_profiles.py << 'PYEOF'
@@ -556,12 +556,12 @@ Iterate on skill files until each agent produces reliable output. Only after all
 
 ## Related Documents
 
-- [Technical Specification v2.4](./x-ai-beauty-spec-v2.3.md) — Full system design and agent specifications
-- [Product Requirements Document v1.1](./x-ai-beauty-prd-v1.md) — Goals, features, and success metrics
-- [X Developer Terms Compliance Review](./x-developer-terms-compliance-review.md) — 7 compliance issues and risk acceptance decisions
+- [Technical Specification v2.4](./specs/x-ai-beauty-spec-v2.3.md) — Full system design and agent specifications
+- [Product Requirements Document v1.1](./specs/x-ai-beauty-prd-v1.md) — Goals, features, and success metrics
+- [X Developer Terms Compliance Review](./specs/x-developer-terms-compliance-review.md) — 7 compliance issues and risk acceptance decisions
 - [Project Context](./context.md) — Full project history, decisions, and architecture overview
 
 ---
 
 *Document version: 2.1*
-*Related: [Technical Specification v2.4](./x-ai-beauty-spec-v2.3.md)*
+*Related: [Technical Specification v2.4](./specs/x-ai-beauty-spec-v2.3.md)*

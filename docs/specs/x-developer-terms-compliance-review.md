@@ -114,7 +114,7 @@
 
 ## Cross-References
 
-**Referenced by**: [Technical Specification v2.4](./x-ai-beauty-spec-v2.3.md) (Sections 2.3, 2.5, 3.4), [PRD v1.1](./x-ai-beauty-prd-v1.md) (Sections 5.1, 13.3), [Phase 0 Runbook](./phase-0-runbook.md) (Steps 3, 7)
+**Referenced by**: [Technical Specification v2.4](./x-ai-beauty-spec-v2.3.md) (Sections 2.3, 2.5, 3.4), [PRD v1.1](./x-ai-beauty-prd-v1.md) (Sections 5.1, 13.3), [Phase 0 Runbook](../phase-0-runbook.md) (Steps 3, 7)
 
 ---
 

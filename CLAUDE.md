@@ -4,7 +4,8 @@
 @config/global_rules.md
 
 ## Documentation
-- All project docs live in `docs/` (context, spec, PRD, compliance review, runbook, etc.)
+- All project docs live in `docs/` (context, analysis, runbook, review)
+- Spec, PRD, and compliance review live in `docs/specs/`
 
 ## Project Context
 - Two accounts: EN (global) and JP (日本市場)
