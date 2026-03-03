@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 3, 2026 (Session 12: Phase 1 Spec & PRD)
+**Last updated**: March 3, 2026 (Session 14: Phase 1 Implementation & Testing)
 
 ---
 
@@ -653,12 +653,35 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-4 are local CLI development. Phase 5 is VPS deployment. Phase 6 is autonomous operation.
 
-**Latest**: Phase 1 spec and PRD written and reviewed (March 3, 2026). Architecture decision: Marc as Claude agent with `validate.py` and `run_pipeline.sh`. Parent docs updated for consistency. Self-review found and fixed 10 issues. Ready to begin Phase 1 implementation.
+**Latest**: Phase 1 implementation complete, manual testing in progress (March 3, 2026).
+
+All 7 Phase 1 files implemented:
+- `scripts/x_api.py` — X API v2 wrapper (tweepy-based, retry logic, rate limit handling)
+- `scripts/scout.py` — Scout agent script (41 competitors, 8 keyword searches, user_id caching)
+- `scripts/validate.py` — Deterministic validation (scout, strategist, cross modes)
+- `scripts/run_pipeline.sh` — Shell wrapper (lock file, date handling, Marc invocation)
+- `agents/marc.md` — Marc orchestration skill file (7-step pipeline, error recovery, logging)
+- `agents/scout.md` — Scout skill file (data collection scope, error handling, CLI usage)
+- `agents/strategist.md` — Strategist skill file (analysis steps, output schema, validation rules)
+
+Phase 1 manual testing (Section 8.1) — Tests 1-7 passed:
+
+| Test | Description | Result |
+|---|---|---|
+| 1 | X API wrapper — resolve 1 handle | **PASS** — returned user_id, username, name, description, public_metrics |
+| 2 | X API wrapper — fetch 1 timeline | **PASS** — 5 tweets with full metrics including impression_count |
+| 3 | Scout --max-competitors 1 | **PASS** — resolved 41 user_ids, fetched 1 competitor, 59 new accounts discovered |
+| 4 | Scout --max-competitors 5 | **PASS** — 5 competitors fetched, user_ids cached (0 new resolves) |
+| 5 | Scout --dry-run | **PASS** — mock data generated instantly, no API calls |
+| 6 | Full Scout (all 41 competitors) | **PASS** — 41 fetched, 0 skipped, 55 new accounts, ~18 seconds |
+| 7 | Verify user_ids cached | **PASS** — all user_ids resolved and saved to competitors.json |
+
+Remaining tests: validate.py (scout/strategist/cross modes), full Marc pipeline via run_pipeline.sh.
 
 | Phase | Description | Where | Status |
 |---|---|---|---|
 | Phase 0 | Local Development Setup (CLI, APIs, Telegram, project structure) | Local machine | **✅ Complete** — 30/30 health check, pushed to GitHub |
-| Phase 1 | Scout + Strategist + Marc Foundation | Local machine | **Spec & PRD written** — ready to implement (Days 3-5) |
+| Phase 1 | Scout + Strategist + Marc Foundation | Local machine | **🔧 Testing** — 7 files implemented, Tests 1-7 passed, validation & pipeline tests remaining |
 | Phase 2 | Creator + Telegram Command Processing | Local machine | Not started |
 | Phase 3 | Publisher + X API Posting | Local machine | Not started |
 | Phase 4 | Analyst + Full Integration (2-3 day manual test) | Local machine | Not started |
