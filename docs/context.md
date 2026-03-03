@@ -237,7 +237,7 @@ This was explicitly framed as a demonstration — a real-world test of the auton
 
 **Decision 9**: Treat the existing config document as the Technical Specification (updated to v2.2 with 7 new sections covering auth, config schemas, cron definitions, env vars, memory architecture, testing, and deployment). Create a separate PRD covering the product layer.
 
-**Deliverables**: `x-ai-beauty-spec-v2.3.md` + `x-ai-beauty-prd-v1.md`
+**Deliverables**: `specs/x-ai-beauty-spec-v2.3.md` + `specs/x-ai-beauty-prd-v1.md`
 
 #### Session 9: Agent Design Principles & Phase 0 Runbook (Mar 1-2, ~15:00-02:00 UTC)
 
@@ -282,7 +282,7 @@ This was explicitly framed as a demonstration — a real-world test of the auton
 - 🟡 Cross-account content must be genuinely unique (Phase 2)
 - 🟡 Use case description is binding (Phase 0)
 
-**Deliverable**: `x-developer-terms-compliance-review.md`
+**Deliverable**: `specs/x-developer-terms-compliance-review.md`
 
 #### Session 11: Phase 0 Execution & GitHub Setup (Mar 3, ~00:00+ UTC)
 
@@ -396,7 +396,7 @@ Human (Shimpei)
         └── 📈 Analyst ────── Metrics collection & data storage         [X API + Playwright ⚠️]
 ```
 
-⚠️ = X Developer Terms compliance concerns logged. See `x-developer-terms-compliance-review.md`.
+⚠️ = X Developer Terms compliance concerns logged. See `specs/x-developer-terms-compliance-review.md`.
 
 ### 6.2 Key Details
 
@@ -445,28 +445,29 @@ Human (Shimpei)
 │   │   Contains: 8 architectural principles, feature comparison
 │   │   Status:  Complete (historical reference)
 │   │
-│   ├── x-ai-beauty-spec-v2.3.md           ← TECHNICAL SPECIFICATION (Demo)
-│   │   Purpose: How to build the X Beauty demo system
-│   │   Contains: Agent roster, API strategy, pipeline, config schemas,
-│   │             cron, auth, memory, agent design, testing, deployment
-│   │   Status:  Current (v2.4)
-│   │
-│   ├── x-ai-beauty-prd-v1.md              ← PRODUCT REQUIREMENTS (Demo)
-│   │   Purpose: What to build and why
-│   │   Contains: Goals, user stories, features, launch criteria
-│   │   Status:  Current (v1.1)
-│   │
-│   ├── x-developer-terms-compliance-review.md ← COMPLIANCE REVIEW
-│   │   Purpose: X Developer Terms concerns log
-│   │   Contains: 7 issues (4 critical, 3 medium)
-│   │   Status:  Living document
-│   │
 │   ├── phase-0-runbook.md                  ← PHASE 0 SETUP GUIDE
 │   │   Purpose: Local development environment setup
 │   │   Contains: 9 steps, test scripts, health check
 │   │   Status:  ✅ Complete — 30/30 health check passed
 │   │
-│   └── review.md                           ← REVIEW NOTES
+│   ├── review.md                           ← REVIEW NOTES
+│   │
+│   └── specs/                              ← SPECIFICATIONS & COMPLIANCE
+│       ├── x-ai-beauty-spec-v2.3.md       ← TECHNICAL SPECIFICATION (Demo)
+│       │   Purpose: How to build the X Beauty demo system
+│       │   Contains: Agent roster, API strategy, pipeline, config schemas,
+│       │             cron, auth, memory, agent design, testing, deployment
+│       │   Status:  Current (v2.4)
+│       │
+│       ├── x-ai-beauty-prd-v1.md          ← PRODUCT REQUIREMENTS (Demo)
+│       │   Purpose: What to build and why
+│       │   Contains: Goals, user stories, features, launch criteria
+│       │   Status:  Current (v1.1)
+│       │
+│       └── x-developer-terms-compliance-review.md ← COMPLIANCE REVIEW
+│           Purpose: X Developer Terms concerns log
+│           Contains: 7 issues (4 critical, 3 medium)
+│           Status:  Living document
 │
 ├── config/
 │   ├── accounts.json                       ← CREDENTIALS (git-ignored)
@@ -492,9 +493,9 @@ Human (Shimpei)
 ### Reading Order for Third Parties
 
 1. **Start here** → `context.md` — understand the vision, decisions, and current state
-2. **Understand the product** → `x-ai-beauty-prd-v1.md` — what's being built and why
-3. **Understand the implementation** → `x-ai-beauty-spec-v2.3.md` — how it's built
-4. **Check compliance** → `x-developer-terms-compliance-review.md` — known policy concerns and resolution schedule
+2. **Understand the product** → `specs/x-ai-beauty-prd-v1.md` — what's being built and why
+3. **Understand the implementation** → `specs/x-ai-beauty-spec-v2.3.md` — how it's built
+4. **Check compliance** → `specs/x-developer-terms-compliance-review.md` — known policy concerns and resolution schedule
 5. **Background research** → `autonomous-agent-system-analysis.md` — how the architecture was chosen
 6. **Execute Phase 0** → `phase-0-runbook.md` — set up local development environment
 
@@ -512,14 +513,14 @@ context.md (this file)
     │       │
     │       └──▶ Findings feed into ──▶ spec + PRD
     │
-    ├──▶ x-ai-beauty-prd-v1.md
+    ├──▶ specs/x-ai-beauty-prd-v1.md
     │       │
     │       │  "What to build & why"
     │       │  "Success = 10K followers"
     │       │
     │       └──▶ References ──▶ spec for "how"
     │
-    ├──▶ x-ai-beauty-spec-v2.3.md
+    ├──▶ specs/x-ai-beauty-spec-v2.3.md
     │       │
     │       │  "How to build it"
     │       │  "Agents, APIs, cron, deployment"
@@ -527,7 +528,7 @@ context.md (this file)
     │       ├──▶ References ──▶ PRD for "why"
     │       └──▶ Constrained by ──▶ compliance review
     │
-    ├──▶ x-developer-terms-compliance-review.md
+    ├──▶ specs/x-developer-terms-compliance-review.md
     │       │
     │       │  "7 policy concerns"
     │       │  "Review schedule by phase"
@@ -549,10 +550,10 @@ context.md (this file)
 | File | Type | Description |
 |---|---|---|
 | `autonomous-agent-system-analysis.md` | Framework | OpenClaw vs Claude Code comparison; 8 architectural principles; capability gap analysis |
-| `x-ai-beauty-spec-v2.3.md` | Demo Spec | Technical Specification — agents, API strategy, pipeline, config schemas, cron, auth, memory, agent design principles, testing, deployment |
-| `x-ai-beauty-prd-v1.md` | Demo PRD | Product Requirements — goals, user stories, features, agent design philosophy, launch criteria, open questions |
+| `specs/x-ai-beauty-spec-v2.3.md` | Demo Spec | Technical Specification — agents, API strategy, pipeline, config schemas, cron, auth, memory, agent design principles, testing, deployment |
+| `specs/x-ai-beauty-prd-v1.md` | Demo PRD | Product Requirements — goals, user stories, features, agent design philosophy, launch criteria, open questions |
 | `phase-0-runbook.md` | Runbook | Step-by-step Phase 0 local development setup with verification scripts |
-| `x-developer-terms-compliance-review.md` | Compliance | X Developer Terms concerns log — 7 issues to resolve during implementation |
+| `specs/x-developer-terms-compliance-review.md` | Compliance | X Developer Terms concerns log — 7 issues to resolve during implementation |
 | `.gitignore` | Config | Git ignore rules — excludes secrets, databases, logs, media, OS files |
 | `config/accounts.example.json` | Template | Credential template with placeholder values for safe sharing |
 | `context.md` | Meta | This document — full project context for third-party understanding |
