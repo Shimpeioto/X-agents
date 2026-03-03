@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 3, 2026 (Session 15: Phase 1 Testing Complete)
+**Last updated**: March 4, 2026 (Session 16: Phase 2 Implementation)
 
 ---
 
@@ -538,15 +538,20 @@ Human (Shimpei)
 │   └── global_rules.md                     ← BEHAVIORAL RULES
 │
 ├── agents/                                 ← AGENT SKILL FILES
-│   ├── marc.md, scout.md, strategist.md,
-│   │   creator.md, publisher.md, analyst.md
-│   └── (placeholders — built during Phases 1-4)
+│   ├── marc.md                            ← COO / Orchestrator (Phase 2)
+│   ├── scout.md                           ← Competitor Research
+│   ├── strategist.md                      ← Growth Strategy
+│   ├── creator.md                         ← Content Planning & Image Prompts (Phase 2)
+│   ├── publisher.md                       ← (placeholder — Phase 3)
+│   └── analyst.md                         ← (placeholder — Phase 4)
 │
 ├── scripts/                                ← PIPELINE & UTILITY SCRIPTS
-│   ├── run_pipeline.sh                    ← Phase 1 entry point (thin wrapper → Marc)
-│   ├── validate.py                        ← Deterministic validation (scout/strategist/cross)
+│   ├── run_pipeline.sh                    ← Pipeline entry point (thin wrapper → Marc)
+│   ├── validate.py                        ← Deterministic validation (scout/strategist/cross/creator/creator_cross)
 │   ├── x_api.py                           ← X API v2 wrapper library
-│   └── scout.py                           ← Scout agent script
+│   ├── scout.py                           ← Scout agent script
+│   ├── telegram_send.py                   ← Telegram send helper (Phase 2)
+│   └── telegram_bot.py                    ← Telegram bot daemon (Phase 2)
 ├── data/.gitkeep                           ← PIPELINE STATE (empty, git-tracked)
 ├── logs/.gitkeep                           ← AGENT LOGS (empty, git-tracked)
 ├── backups/.gitkeep                        ← DAILY BACKUPS (empty, git-tracked)
@@ -653,7 +658,34 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-4 are local CLI development. Phase 5 is VPS deployment. Phase 6 is autonomous operation.
 
-**Latest**: Phase 1 complete — all 12 tests passed (March 3, 2026).
+**Latest**: Phase 2 complete — all tests passed (March 4, 2026).
+
+Phase 2 files added/modified (5 files):
+- `agents/creator.md` — Creator skill file (content planning, image prompts, reply templates, output schema)
+- `agents/marc.md` — Updated to Phase 2 (13-step pipeline: Scout → Strategist → Creator EN/JP → War Room Lite → Telegram)
+- `scripts/validate.py` — Extended with `creator` mode (12 checks) and `creator_cross` mode (3 checks)
+- `scripts/telegram_send.py` — Telegram send helper (auto-splits >4096 chars, --file mode)
+- `scripts/telegram_bot.py` — Telegram bot daemon (/approve, /status, /details, /pause, /resume, /help)
+
+Phase 2 testing — all tests passed:
+
+| Test | Description | Result |
+|---|---|---|
+| 1 | Telegram send helper | **PASS** — message delivered to chat |
+| 2 | Telegram bot startup | **PASS** — daemon runs, accepts commands |
+| 3 | Full pipeline (Scout + Strategist + Creator EN/JP) | **PASS** — completed in 7m, all 13 tasks succeeded |
+| 4 | Creator EN validation (12 checks) | **PASS** — 4 posts, 8 reply templates |
+| 5 | Creator JP validation (12 checks) | **PASS** — 4 posts, 8 reply templates |
+| 6 | Creator EN cross-validation (3 checks) | **PASS** — categories, hashtags, post count match strategy |
+| 7 | Creator JP cross-validation (3 checks) | **PASS** |
+| 8 | War Room Lite | **PASS** — no semantic issues across all outputs |
+| 9 | Telegram preview delivery | **PASS** — content preview arrived in Telegram |
+| 10 | Bot /details command | **PASS** — all posts shown with draft status |
+| 11 | Bot /approve EN | **PASS** — EN posts updated to approved |
+| 12 | Bot /approve JP 1,2 | **PASS** — specific JP slots approved |
+| 13 | Bot /status | **PASS** — pipeline summary with task counts |
+| 14 | Bot /pause + /resume | **PASS** — pause flag created/removed |
+| 15 | Bot /help | **PASS** — command list displayed |
 
 All 7 Phase 1 files implemented:
 - `scripts/x_api.py` — X API v2 wrapper (tweepy-based, retry logic, rate limit handling)
@@ -687,7 +719,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 |---|---|---|---|
 | Phase 0 | Local Development Setup (CLI, APIs, Telegram, project structure) | Local machine | **✅ Complete** — 30/30 health check, pushed to GitHub |
 | Phase 1 | Scout + Strategist + Marc Foundation | Local machine | **✅ Complete** — 7 files implemented, all 12 tests passed, pipeline runs end-to-end |
-| Phase 2 | Creator + Telegram Command Processing | Local machine | Not started |
+| Phase 2 | Creator + Telegram Command Processing | Local machine | **✅ Complete** — 5 files added/modified, all 15 tests passed, pipeline runs end-to-end with Telegram integration |
 | Phase 3 | Publisher + X API Posting | Local machine | Not started |
 | Phase 4 | Analyst + Full Integration (2-3 day manual test) | Local machine | Not started |
 | Phase 5 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |

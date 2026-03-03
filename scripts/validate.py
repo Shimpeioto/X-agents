@@ -1,14 +1,17 @@
-"""Unified validation script for Scout, Strategist, and cross-validation.
+"""Unified validation script for Scout, Strategist, Creator, and cross-validation.
 
 Usage:
     python3 scripts/validate.py scout data/scout_report_20260303.json
     python3 scripts/validate.py strategist data/strategy_20260303.json
     python3 scripts/validate.py cross data/scout_report_20260303.json data/strategy_20260303.json
+    python3 scripts/validate.py creator data/content_plan_20260304_EN.json
+    python3 scripts/validate.py creator_cross data/content_plan_20260304_EN.json data/strategy_20260304.json
 
 Exit codes: 0=pass, 1=fail, 2=usage error
 """
 
 import json
+import re
 import sys
 
 
@@ -250,6 +253,176 @@ def cross_validate(scout_path: str, strategy_path: str) -> tuple[bool, list[str]
     return passed, issues
 
 
+def validate_creator(plan_path: str) -> tuple[bool, list[str]]:
+    """Validate Creator content plan output. Returns (passed, list_of_issues)."""
+    issues = []
+
+    # Check 1: File exists and is non-empty
+    try:
+        with open(plan_path) as f:
+            content = f.read()
+        if not content.strip():
+            issues.append("file_empty: Content plan file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {plan_path} does not exist")
+        return False, issues
+
+    # Check 2: Valid JSON (strip code fences if present)
+    content = content.strip()
+    if content.startswith("```"):
+        lines = content.split("\n")
+        lines = [l for l in lines if not l.strip().startswith("```")]
+        content = "\n".join(lines)
+
+    try:
+        plan = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 3: Required top-level fields
+    required_top = ["date", "account", "posts", "reply_templates"]
+    for field in required_top:
+        if field not in plan:
+            issues.append(f"missing_field: top-level '{field}' not found")
+
+    if any("missing_field" in i for i in issues):
+        return False, issues
+
+    account = plan["account"]
+
+    # Check 4: account is EN or JP
+    if account not in ("EN", "JP"):
+        issues.append(f"invalid_account: account is '{account}', expected 'EN' or 'JP'")
+
+    # Check 5: posts is a non-empty array
+    posts = plan.get("posts", [])
+    if not isinstance(posts, list) or len(posts) < 1:
+        issues.append(f"no_posts: posts array has {len(posts) if isinstance(posts, list) else 0} entries")
+
+    # Check 6: Each post has required fields
+    post_required = ["id", "slot", "scheduled_time", "category", "priority", "status", "text", "hashtags", "image_prompt"]
+    for i, post in enumerate(posts):
+        missing = [f for f in post_required if f not in post]
+        if missing:
+            issues.append(f"post_missing_fields: post[{i}] missing {missing}")
+
+    # Check 7: Post IDs follow {account}_{YYYYMMDD}_{slot} convention
+    id_pattern = re.compile(r"^(EN|JP)_\d{8}_\d{2}$")
+    for i, post in enumerate(posts):
+        pid = post.get("id", "")
+        if not id_pattern.match(pid):
+            issues.append(f"invalid_post_id: post[{i}] id '{pid}' doesn't match {{account}}_YYYYMMDD_{{slot}} format")
+        elif not pid.startswith(account + "_"):
+            issues.append(f"post_id_account_mismatch: post[{i}] id '{pid}' doesn't start with '{account}_'")
+
+    # Check 8: All statuses are "draft"
+    for i, post in enumerate(posts):
+        if post.get("status") != "draft":
+            issues.append(f"non_draft_status: post[{i}] status is '{post.get('status')}', expected 'draft'")
+
+    # Check 9: No post text starts with @
+    for i, post in enumerate(posts):
+        text = post.get("text", "")
+        if isinstance(text, str) and text.lstrip().startswith("@"):
+            issues.append(f"text_starts_with_at: post[{i}] text starts with '@' (hidden from feeds)")
+
+    # Check 10: Image prompts have tool + prompt + aspect_ratio
+    for i, post in enumerate(posts):
+        ip = post.get("image_prompt", {})
+        if not isinstance(ip, dict):
+            issues.append(f"invalid_image_prompt: post[{i}] image_prompt is not a dict")
+        else:
+            ip_required = ["tool", "prompt", "aspect_ratio"]
+            ip_missing = [f for f in ip_required if f not in ip]
+            if ip_missing:
+                issues.append(f"image_prompt_missing: post[{i}] image_prompt missing {ip_missing}")
+
+    # Check 11: 5-10 reply templates, no duplicates
+    templates = plan.get("reply_templates", [])
+    if not isinstance(templates, list):
+        issues.append("reply_templates_not_array: reply_templates is not an array")
+    else:
+        if len(templates) < 5 or len(templates) > 10:
+            issues.append(f"reply_template_count: {len(templates)} templates, expected 5-10")
+        if len(set(templates)) != len(templates):
+            issues.append("reply_template_duplicates: duplicate reply templates found")
+
+    # Check 12: No reply template starts with @
+    if isinstance(templates, list):
+        for i, tmpl in enumerate(templates):
+            if isinstance(tmpl, str) and tmpl.lstrip().startswith("@"):
+                issues.append(f"reply_starts_with_at: reply_template[{i}] starts with '@'")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
+def creator_cross_validate(plan_path: str, strategy_path: str) -> tuple[bool, list[str]]:
+    """Cross-validate Creator plan against Strategy. Returns (passed, list_of_issues)."""
+    issues = []
+
+    # Load content plan
+    try:
+        with open(plan_path) as f:
+            content = f.read().strip()
+        if content.startswith("```"):
+            lines = content.split("\n")
+            lines = [l for l in lines if not l.strip().startswith("```")]
+            content = "\n".join(lines)
+        plan = json.loads(content)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        issues.append(f"plan_load_error: {e}")
+        return False, issues
+
+    # Load strategy
+    try:
+        with open(strategy_path) as f:
+            content = f.read().strip()
+        if content.startswith("```"):
+            lines = content.split("\n")
+            lines = [l for l in lines if not l.strip().startswith("```")]
+            content = "\n".join(lines)
+        strategy = json.loads(content)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        issues.append(f"strategy_load_error: {e}")
+        return False, issues
+
+    account = plan.get("account", "")
+    if account not in strategy:
+        issues.append(f"account_not_in_strategy: '{account}' section not found in strategy")
+        return False, issues
+
+    strat_section = strategy[account]
+
+    # Check 1: Post count matches strategy's posting_schedule slot count
+    schedule = strat_section.get("posting_schedule", [])
+    posts = plan.get("posts", [])
+    if len(posts) != len(schedule):
+        issues.append(f"post_count_mismatch: plan has {len(posts)} posts, strategy has {len(schedule)} slots")
+
+    # Check 2: Post categories match strategy schedule categories
+    for i, slot in enumerate(schedule):
+        expected_cat = slot.get("category", "")
+        if i < len(posts):
+            actual_cat = posts[i].get("category", "")
+            if expected_cat and actual_cat and expected_cat.lower() != actual_cat.lower():
+                issues.append(f"category_mismatch: slot {i+1} expected '{expected_cat}', got '{actual_cat}'")
+
+    # Check 3: always_use hashtags appear in posts
+    hs = strat_section.get("hashtag_strategy", {})
+    always_use = hs.get("always_use", [])
+    for i, post in enumerate(posts):
+        post_tags = [t.lower() for t in post.get("hashtags", [])]
+        for tag in always_use:
+            if tag.lower() not in post_tags:
+                issues.append(f"missing_always_use_hashtag: post[{i}] missing always_use hashtag '{tag}'")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
 def main():
     if len(sys.argv) < 3:
         print("Usage: python3 scripts/validate.py {scout|strategist|cross} <file1> [<file2>]", file=sys.stderr)
@@ -275,12 +448,24 @@ def main():
             sys.exit(2)
         passed, issues = cross_validate(sys.argv[2], sys.argv[3])
 
+    elif mode == "creator":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py creator <content_plan.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_creator(sys.argv[2])
+
+    elif mode == "creator_cross":
+        if len(sys.argv) < 4:
+            print("Usage: python3 scripts/validate.py creator_cross <content_plan.json> <strategy.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = creator_cross_validate(sys.argv[2], sys.argv[3])
+
     else:
-        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', or 'cross'.", file=sys.stderr)
+        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', or 'creator_cross'.", file=sys.stderr)
         sys.exit(2)
 
     # Determine total checks from mode
-    check_counts = {"scout": 8, "strategist": 14, "cross": 4}
+    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3}
     total_checks = check_counts.get(mode, len(issues) + 1)
 
     if passed:
