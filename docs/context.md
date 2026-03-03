@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 3, 2026
+**Last updated**: March 3, 2026 (Session 12: Phase 1 Spec & PRD)
 
 ---
 
@@ -294,6 +294,40 @@ This was explicitly framed as a demonstration — a real-world test of the auton
 
 **Decision 13**: Initialize git and push to GitHub at Phase 0 completion — establishes version control before any agent development begins.
 
+#### Session 12: Phase 1 Specification & PRD (Mar 3, 2026)
+
+**Phase 1 Spec and PRD written**: Full technical specification and product requirements for Phase 1 (Scout + Strategist + Marc Foundation).
+
+**Key architecture decision — Marc-as-Claude agent**:
+
+The original parent spec assumed a Python orchestrator script (`run_pipeline.py`) would sequence agents. This was rearchitected: Marc is now a **Claude agent** invoked via `scripts/run_pipeline.sh` (thin shell wrapper), with `scripts/validate.py` providing deterministic validation as a feedback loop.
+
+| Component | Role |
+|---|---|
+| `scripts/run_pipeline.sh` | Thin shell wrapper — sets date, checks `.pipeline.lock`, invokes `claude -p` with Marc's skill file |
+| `agents/marc.md` | Marc's full instruction set — orchestration logic, sequencing, error recovery, semantic cross-validation |
+| `scripts/validate.py` | Deterministic pass/fail validation (scout, strategist, cross modes) — Marc calls this via bash tool |
+
+**Rationale**: Orchestration involves judgment (error recovery, cross-validation reasoning, adaptive retry prompts) — Claude's strength. Deterministic checks (schema validation, field presence, data bounds) stay in Python. This avoids a Phase 2 rewrite since the parent spec already defines Marc as a Claude agent in all cron jobs.
+
+**Decision 14**: Marc implemented as a Claude agent (`agents/marc.md`) with `scripts/validate.py` for deterministic validation and `scripts/run_pipeline.sh` as the entry point. Replaces the originally-assumed Python orchestrator script.
+
+**Decision 15**: Strategist writes only the dated file (`strategy_{YYYYMMDD}.json`). Marc copies to `strategy_current.json` only after all validations pass — preventing unvalidated data from corrupting the current strategy.
+
+**Parent docs updated for consistency**:
+- Parent spec (`x-ai-beauty-spec-v2.3.md`): project structure updated, Section 11.2 annotated as Phase 5+, locking recommendation extended, Phase 5 checklist annotated
+- Parent PRD (`x-ai-beauty-prd-v1.md`): F7 note updated to link Phase 1 spec
+- Review doc (`review.md`): Issues 3.15 and 3.16 annotated with Phase 1 resolution status
+
+**Self-review found and fixed 10 issues** (2 HIGH, 2 MEDIUM, 6 LOW):
+- **HIGH**: `strategy_current.json` write conflict (Strategist vs Marc) — resolved: Marc is sole writer after validation
+- **HIGH**: Strategist invocation mechanism ambiguous (`$(cat)` vs progressive disclosure) — resolved: standardized on progressive disclosure
+- **MEDIUM**: `run_pipeline.sh` missing `.pipeline.lock` implementation — added
+- **MEDIUM**: `competitors.json` schema missing — added cross-reference to parent spec Section 10.2
+- **LOW**: Date format conversion undocumented, hardcoded competitor counts, `--dry-run` undefined, Scout output path convention, Phase 0 prerequisite missing from PRD, `--dangerously-skip-permissions` security note missing — all fixed
+
+**Deliverables**: `specs/phase-1-spec.md` (v1.0) + `specs/phase-1-prd.md` (v1.0)
+
 ---
 
 ## 4. Decision Summary
@@ -320,6 +354,8 @@ This was explicitly framed as a demonstration — a real-world test of the auton
 | D11 | Log compliance concerns, resolve during implementation | Avoids premature spec changes; each issue reviewed at relevant phase |
 | D12 | Accept X Terms risks for likes/follows/replies/Playwright | Risk accepted for all 4 critical compliance issues — implement with awareness; monitor for enforcement changes |
 | D13 | Git + GitHub at Phase 0 completion | Version control established before agent development; private repo with secrets excluded via `.gitignore` |
+| D14 | Marc as Claude agent + `validate.py` + `run_pipeline.sh` | Orchestration = judgment (Claude's strength); deterministic checks = Python; avoids Phase 2 rewrite |
+| D15 | Marc is sole writer of `strategy_current.json` | Prevents unvalidated Strategist output from corrupting the current strategy file |
 
 ---
 
@@ -469,12 +505,24 @@ Human (Shimpei)
 │       │   Purpose: How to build the X Beauty demo system
 │       │   Contains: Agent roster, API strategy, pipeline, config schemas,
 │       │             cron, auth, memory, agent design, testing, deployment
-│       │   Status:  Current (v2.4)
+│       │   Status:  Current (v2.4, updated for Phase 1 consistency)
 │       │
 │       ├── x-ai-beauty-prd-v1.md          ← PRODUCT REQUIREMENTS (Demo)
 │       │   Purpose: What to build and why
 │       │   Contains: Goals, user stories, features, launch criteria
-│       │   Status:  Current (v1.1)
+│       │   Status:  Current (v1.1, F7 updated to link Phase 1)
+│       │
+│       ├── phase-1-spec.md                ← PHASE 1 TECHNICAL SPECIFICATION
+│       │   Purpose: How to build Phase 1 (Scout + Strategist + Marc)
+│       │   Contains: Agent definitions, file specs, output schemas,
+│       │             validation rules, testing strategy, edge cases
+│       │   Status:  Current (v1.0)
+│       │
+│       ├── phase-1-prd.md                 ← PHASE 1 PRODUCT REQUIREMENTS
+│       │   Purpose: What Phase 1 delivers and why
+│       │   Contains: Goals, success criteria, user stories, exit criteria,
+│       │             risks, timeline, feature-to-spec mapping
+│       │   Status:  Current (v1.0)
 │       │
 │       └── x-developer-terms-compliance-review.md ← COMPLIANCE REVIEW
 │           Purpose: X Developer Terms concerns log
@@ -494,7 +542,11 @@ Human (Shimpei)
 │   │   creator.md, publisher.md, analyst.md
 │   └── (placeholders — built during Phases 1-4)
 │
-├── scripts/                                ← UTILITY SCRIPTS
+├── scripts/                                ← PIPELINE & UTILITY SCRIPTS
+│   ├── run_pipeline.sh                    ← Phase 1 entry point (thin wrapper → Marc)
+│   ├── validate.py                        ← Deterministic validation (scout/strategist/cross)
+│   ├── x_api.py                           ← X API v2 wrapper library
+│   └── scout.py                           ← Scout agent script
 ├── data/.gitkeep                           ← PIPELINE STATE (empty, git-tracked)
 ├── logs/.gitkeep                           ← AGENT LOGS (empty, git-tracked)
 ├── backups/.gitkeep                        ← DAILY BACKUPS (empty, git-tracked)
@@ -541,7 +593,15 @@ context.md (this file)
     │       │  "Agents, APIs, cron, deployment"
     │       │
     │       ├──▶ References ──▶ PRD for "why"
-    │       └──▶ Constrained by ──▶ compliance review
+    │       ├──▶ Constrained by ──▶ compliance review
+    │       └──▶ Parent of ──▶ phase-1-spec.md + phase-1-prd.md
+    │
+    ├──▶ specs/phase-1-spec.md + specs/phase-1-prd.md
+    │       │
+    │       │  "Phase 1: Scout + Strategist + Marc foundation"
+    │       │  "Marc-as-Claude architecture, validate.py, run_pipeline.sh"
+    │       │
+    │       └──▶ Child of ──▶ parent spec + parent PRD
     │
     ├──▶ specs/x-developer-terms-compliance-review.md
     │       │
@@ -581,6 +641,8 @@ context.md (this file)
 | `competitor-accounts.md` | Reference | Human-readable competitor list — 26 EN + 17 JP accounts (41 unique, 2 overlap) |
 | `config/competitors.json` | Data | Machine-readable competitor list — 41 entries with handle, category, market, priority |
 | `procedures/add-competitor.md` | Procedure | Step-by-step guide for adding/removing competitor accounts — JSON template, validation commands, example walkthrough |
+| `specs/phase-1-spec.md` | Demo Spec | Phase 1 Technical Specification — Scout, Strategist, Marc foundation, validation rules, output schemas, testing strategy, edge cases |
+| `specs/phase-1-prd.md` | Demo PRD | Phase 1 Product Requirements — goals, success criteria, user stories, exit criteria, risks, timeline, feature mapping |
 | `context.md` | Meta | This document — full project context for third-party understanding |
 
 ---
@@ -591,12 +653,12 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-4 are local CLI development. Phase 5 is VPS deployment. Phase 6 is autonomous operation.
 
-**Latest**: Phase 0 completed March 3, 2026 — all 9 runbook steps executed, 30/30 health check passed. Git initialized with `.gitignore` (secrets excluded), pushed to private GitHub repo (`https://github.com/Shimpeioto/X-agents`). Ready to begin Phase 1.
+**Latest**: Phase 1 spec and PRD written and reviewed (March 3, 2026). Architecture decision: Marc as Claude agent with `validate.py` and `run_pipeline.sh`. Parent docs updated for consistency. Self-review found and fixed 10 issues. Ready to begin Phase 1 implementation.
 
 | Phase | Description | Where | Status |
 |---|---|---|---|
 | Phase 0 | Local Development Setup (CLI, APIs, Telegram, project structure) | Local machine | **✅ Complete** — 30/30 health check, pushed to GitHub |
-| Phase 1 | Scout + Strategist + Marc Foundation | Local machine | Not started |
+| Phase 1 | Scout + Strategist + Marc Foundation | Local machine | **Spec & PRD written** — ready to implement (Days 3-5) |
 | Phase 2 | Creator + Telegram Command Processing | Local machine | Not started |
 | Phase 3 | Publisher + X API Posting | Local machine | Not started |
 | Phase 4 | Analyst + Full Integration (2-3 day manual test) | Local machine | Not started |

@@ -127,7 +127,7 @@ While Marc is an AI agent, it's useful to define his "user experience" since he 
 | F4 | Automated posting | X API-based post publishing with image upload. Scheduled at optimal times. Rate-limit-aware. | P0 |
 | F5 | Outbound engagement | Automated likes, replies, and follows via X API. Human-like pacing with random delays. Conservative daily limits. ⚠️ See compliance review — automated likes, follows, and cold replies carry X Terms risk. Risk accepted. | P0 |
 | F6 | Metrics collection | Post performance tracking (public_metrics via API + impressions via Playwright). Account-level daily snapshots. SQLite storage. | P0 |
-| F7 | COO orchestration | Marc manages the full pipeline: agent sequencing, dependency management, error handling, War Room reviews. *Note: Detailed Marc orchestration specification to be developed during Phase 1 implementation.* | P0 |
+| F7 | COO orchestration | Marc manages the full pipeline: agent sequencing, dependency management, error handling, War Room reviews. *Phase 1 implements Marc as a Claude agent (`agents/marc.md`) with `scripts/validate.py` for deterministic validation. See [Phase 1 Spec](./phase-1-spec.md).* | P0 |
 | F8 | Telegram interface | Morning briefs, daily reports, instant alerts. Command processing (/approve, /status, /pause, /edit, /strategy). | P0 |
 | F9 | Human approval flow | Draft → approve → media_ready → posted lifecycle. No content goes live without explicit human approval. | P0 |
 | F10 | EN/JP A/B testing | Parallel accounts with comparative analytics to determine market fit. | P0 |

@@ -246,6 +246,7 @@ The six documents are approximately **80% solid** and demonstrate thorough think
 - **Location**: Spec line 1094 (`orchestrator.sh` references it)
 - **Problem**: The orchestrator.sh script calls `telegram_alert.py` for error notifications but this script is never defined anywhere.
 - **Fix**: Define the script or remove the reference.
+- **Phase 1 resolution note**: This remains a Phase 2+ concern. Phase 1 uses `run_pipeline.sh` (not `orchestrator.sh`), so `telegram_alert.py` is not needed until the full orchestrator is deployed in Phase 5.
 
 ### 3.16 No Claude Model Selection Per Agent [MEDIUM]
 
@@ -253,6 +254,7 @@ The six documents are approximately **80% solid** and demonstrate thorough think
 - **Quote**: `CLAUDE_MODEL=claude-sonnet-4-20250514  # or opus for Marc`
 - **Problem**: There is no mechanism for dynamically selecting different models for different agents. Each cron invocation is a separate `claude -p` call. Marc can't use Opus while Scout uses Sonnet unless the orchestrator sets different environment variables per invocation. This is never addressed.
 - **Fix**: Add model selection logic to orchestrator.sh or agent invocation.
+- **Phase 1 resolution note**: Phase 1's `run_pipeline.sh` supports setting `CLAUDE_MODEL` before invoking Marc. Marc can also set `CLAUDE_MODEL` per subagent invocation via `claude -p` calls. See [Phase 1 Spec](./docs/specs/phase-1-spec.md) Section 4.2.
 
 ### 3.17 Cron Job Timing Assumes Zero Latency [MEDIUM]
 

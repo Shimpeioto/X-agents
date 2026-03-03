@@ -662,7 +662,9 @@ project/
 │   └── analyst.md
 │
 ├── scripts/
-│   ├── orchestrator.sh           ← cron → launches Marc (entry point)
+│   ├── orchestrator.sh           ← cron → launches Marc (full system, Phase 5+)
+│   ├── run_pipeline.sh           ← Phase 1 entry point (thin wrapper → Marc)
+│   ├── validate.py               ← Deterministic validation (scout/strategist/cross)
 │   ├── x_api.py                  ← X API v2 wrapper library
 │   ├── media_upload.py           ← Image upload (v1.1 media/upload)
 │   ├── playwright_metrics.py     ← Impression scraping (Playwright)
@@ -840,7 +842,7 @@ claude -p "$(cat agents/strategist.md) Generate growth strategy based on today's
 - [ ] Install Node.js 22+, Claude Code, Python 3.11+, Playwright
 - [ ] Copy project directory from local machine to VPS
 - [ ] Verify all API credentials work from VPS
-- [ ] Install cron with orchestrator script
+- [ ] Install cron with orchestrator script (`orchestrator.sh` — supersedes Phase 1's `run_pipeline.sh`)
 - [ ] Run health check on VPS
 
 **Detailed steps**: See [Deployment Procedure (Section 16)](#16-deployment-procedure)
@@ -1048,6 +1050,8 @@ All credentials are stored in `config/accounts.json` (gitignored, never committe
 All cron jobs run under the project's system user on the VPS. Times are in JST (UTC+9).
 
 > **Locking recommendation**: For Phase 5 deployment, use `flock`-based locking on all cron entries to prevent concurrent execution if a previous job overruns. Example: `flock -n /tmp/pipeline.lock bash scripts/orchestrator.sh`. The orchestrator script already has a file-based lock, but `flock` provides kernel-level protection.
+>
+> For Phase 1 (local development), `run_pipeline.sh` uses a simpler `.pipeline.lock` file check. The `flock` approach applies to Phase 5 VPS deployment with `orchestrator.sh`.
 
 ### 11.1 Crontab Entries
 
@@ -1101,6 +1105,8 @@ LOG_DIR=/home/agent/x-ai-beauty/logs
 ```
 
 ### 11.2 Orchestrator Script (`scripts/orchestrator.sh`)
+
+> **Phase note**: This orchestrator script is for the full 7-agent system (Phase 5+ VPS deployment). During Phase 1 (local development), Marc is invoked via `scripts/run_pipeline.sh` — a thin shell wrapper that calls `claude -p` with Marc's skill file. See [Phase 1 Technical Specification](./phase-1-spec.md) Section 4.2 for details.
 
 The orchestrator is the main entry point for the overnight pipeline. It invokes Marc, who then invokes downstream agents in sequence.
 
