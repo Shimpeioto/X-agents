@@ -457,6 +457,13 @@ Human (Shimpei)
 │   │
 │   ├── review.md                           ← REVIEW NOTES
 │   │
+│   ├── procedures/                         ← OPERATIONAL PROCEDURES
+│   │   └── add-competitor.md              ← ADD/REMOVE COMPETITOR PROCEDURE
+│   │       Purpose: Step-by-step guide for adding/removing competitor accounts
+│   │       Contains: Duplicate check, JSON template, validation commands,
+│   │                 removal procedure, example walkthrough, checklist
+│   │       Status:  Current
+│   │
 │   └── specs/                              ← SPECIFICATIONS & COMPLIANCE
 │       ├── x-ai-beauty-spec-v2.3.md       ← TECHNICAL SPECIFICATION (Demo)
 │       │   Purpose: How to build the X Beauty demo system
@@ -543,12 +550,19 @@ context.md (this file)
     │       │
     │       └──▶ May require changes to ──▶ spec (Phases 2-4)
     │
-    └──▶ phase-0-runbook.md
+    ├──▶ phase-0-runbook.md
+    │       │
+    │       │  "Local dev setup (9 steps)"
+    │       │  "First step of implementation"
+    │       │
+    │       └──▶ Implements ──▶ Phase 0 of spec
+    │
+    └──▶ procedures/add-competitor.md
             │
-            │  "Local dev setup (9 steps)"
-            │  "First step of implementation"
+            │  "Add/remove competitor accounts"
+            │  "Keeps competitor-accounts.md + competitors.json in sync"
             │
-            └──▶ Implements ──▶ Phase 0 of spec
+            └──▶ Operates on ──▶ competitor-accounts.md + competitors.json
 ```
 
 ---
@@ -566,6 +580,7 @@ context.md (this file)
 | `config/accounts.example.json` | Template | Credential template with placeholder values for safe sharing |
 | `competitor-accounts.md` | Reference | Human-readable competitor list — 26 EN + 17 JP accounts (41 unique, 2 overlap) |
 | `config/competitors.json` | Data | Machine-readable competitor list — 41 entries with handle, category, market, priority |
+| `procedures/add-competitor.md` | Procedure | Step-by-step guide for adding/removing competitor accounts — JSON template, validation commands, example walkthrough |
 | `context.md` | Meta | This document — full project context for third-party understanding |
 
 ---
