@@ -423,9 +423,144 @@ def creator_cross_validate(plan_path: str, strategy_path: str) -> tuple[bool, li
     return passed, issues
 
 
+def validate_publisher(plan_path: str) -> tuple[bool, list[str]]:
+    """Validate Publisher output (content plan after posting). Returns (passed, list_of_issues)."""
+    issues = []
+
+    # Check 1: File exists and is valid JSON
+    try:
+        with open(plan_path) as f:
+            content = f.read().strip()
+        if not content:
+            issues.append("file_empty: Content plan file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {plan_path} does not exist")
+        return False, issues
+
+    if content.startswith("```"):
+        lines = content.split("\n")
+        lines = [l for l in lines if not l.strip().startswith("```")]
+        content = "\n".join(lines)
+
+    try:
+        plan = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 2: At least 1 post has status "posted"
+    posts = plan.get("posts", [])
+    posted_count = sum(1 for p in posts if p.get("status") == "posted")
+    if posted_count < 1:
+        issues.append(f"no_posted: {posted_count} posts have status 'posted', expected >= 1")
+
+    # Check 3: All "posted" posts have tweet_id, post_url, posted_at
+    for i, p in enumerate(posts):
+        if p.get("status") != "posted":
+            continue
+        for field in ["tweet_id", "post_url", "posted_at"]:
+            if not p.get(field):
+                issues.append(f"missing_posted_field: post[{i}] ({p.get('id', '?')}) status is 'posted' but missing '{field}'")
+
+    # Check 4: No post text starts with @
+    for i, p in enumerate(posts):
+        text = p.get("text", "")
+        if isinstance(text, str) and text.lstrip().startswith("@"):
+            issues.append(f"text_starts_with_at: post[{i}] text starts with '@'")
+
+    # Check 5: No duplicate tweet_ids among posted posts
+    tweet_ids = [p.get("tweet_id") for p in posts if p.get("status") == "posted" and p.get("tweet_id")]
+    if len(tweet_ids) != len(set(tweet_ids)):
+        dupes = [tid for tid in tweet_ids if tweet_ids.count(tid) > 1]
+        issues.append(f"duplicate_tweet_ids: duplicate tweet_id(s) found: {set(dupes)}")
+
+    # Check 6: post_url format (basic check)
+    for i, p in enumerate(posts):
+        if p.get("status") != "posted":
+            continue
+        url = p.get("post_url", "")
+        if url and not url.startswith("https://x.com/"):
+            issues.append(f"invalid_post_url: post[{i}] post_url doesn't start with 'https://x.com/'")
+
+    # Check 7: No "posted" post has a "failed" status (sanity)
+    for i, p in enumerate(posts):
+        if p.get("status") == "posted" and p.get("error"):
+            issues.append(f"posted_with_error: post[{i}] has status 'posted' but also has error field")
+
+    # Check 8: account field is present and valid
+    account = plan.get("account")
+    if account not in ("EN", "JP"):
+        issues.append(f"invalid_account: account is '{account}', expected 'EN' or 'JP'")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
+def validate_publisher_rate_limits(limits_path: str) -> tuple[bool, list[str]]:
+    """Validate Publisher rate limits file. Returns (passed, list_of_issues)."""
+    issues = []
+
+    # Check 1: File exists and is valid JSON
+    try:
+        with open(limits_path) as f:
+            content = f.read().strip()
+        if not content:
+            issues.append("file_empty: Rate limits file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {limits_path} does not exist")
+        return False, issues
+
+    try:
+        limits = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 2: date field present
+    if "date" not in limits:
+        issues.append("missing_date: 'date' field not found")
+
+    # Check 3: EN and JP sections present
+    for account in ["EN", "JP"]:
+        if account not in limits:
+            issues.append(f"missing_account: '{account}' section not found")
+
+    if any("missing_account" in i for i in issues):
+        return False, issues
+
+    # Check 4: All counters have used/limit fields
+    expected_actions = ["posts", "likes", "replies", "follows"]
+    for account in ["EN", "JP"]:
+        section = limits[account]
+        for action in expected_actions:
+            if action not in section:
+                issues.append(f"missing_action: {account}.{action} not found")
+                continue
+            entry = section[action]
+            if "used" not in entry:
+                issues.append(f"missing_used: {account}.{action} missing 'used'")
+            if "limit" not in entry:
+                issues.append(f"missing_limit: {account}.{action} missing 'limit'")
+
+    # Check 5: No used > limit
+    for account in ["EN", "JP"]:
+        section = limits.get(account, {})
+        for action in expected_actions:
+            entry = section.get(action, {})
+            used = entry.get("used", 0)
+            limit = entry.get("limit", 0)
+            if isinstance(used, (int, float)) and isinstance(limit, (int, float)) and used > limit:
+                issues.append(f"limit_exceeded: {account}.{action} used={used} > limit={limit}")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python3 scripts/validate.py {scout|strategist|cross} <file1> [<file2>]", file=sys.stderr)
+        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits} <file1> [<file2>]", file=sys.stderr)
         sys.exit(2)
 
     mode = sys.argv[1]
@@ -460,12 +595,24 @@ def main():
             sys.exit(2)
         passed, issues = creator_cross_validate(sys.argv[2], sys.argv[3])
 
+    elif mode == "publisher":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py publisher <content_plan.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_publisher(sys.argv[2])
+
+    elif mode == "publisher_rate_limits":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py publisher_rate_limits <rate_limits.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_publisher_rate_limits(sys.argv[2])
+
     else:
-        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', or 'creator_cross'.", file=sys.stderr)
+        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', or 'publisher_rate_limits'.", file=sys.stderr)
         sys.exit(2)
 
     # Determine total checks from mode
-    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3}
+    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5}
     total_checks = check_counts.get(mode, len(issues) + 1)
 
     if passed:

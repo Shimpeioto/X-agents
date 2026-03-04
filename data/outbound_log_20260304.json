@@ -1,0 +1,210 @@
+{
+  "date": "2026-03-04",
+  "actions": [
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "dry_0",
+      "timestamp": "2026-03-04T02:36:22.643020+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "dry_1",
+      "timestamp": "2026-03-04T02:36:22.643144+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "dry_2",
+      "timestamp": "2026-03-04T02:36:22.643214+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "dry_0",
+      "reply_text": "The textures in this are next level. You can almost feel the fabric.",
+      "timestamp": "2026-03-04T02:36:22.643279+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "target_user_id": "dry_run_sessypuuh",
+      "timestamp": "2026-03-04T02:36:22.643308+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "dry_0",
+      "timestamp": "2026-03-04T02:36:22.643358+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "dry_1",
+      "timestamp": "2026-03-04T02:36:22.643378+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "dry_2",
+      "timestamp": "2026-03-04T02:36:22.643399+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "dry_0",
+      "reply_text": "Love the styling on this one — the details really make it stand out.",
+      "timestamp": "2026-03-04T02:36:22.643430+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@yuumispm",
+      "target_user_id": "dry_run_yuumispm",
+      "timestamp": "2026-03-04T02:36:22.643449+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "dry_0",
+      "timestamp": "2026-03-04T02:36:22.643485+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "dry_1",
+      "timestamp": "2026-03-04T02:36:22.643597+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "dry_2",
+      "timestamp": "2026-03-04T02:36:22.643834+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "dry_0",
+      "reply_text": "Incredible composition here. The depth of field adds so much to the mood.",
+      "timestamp": "2026-03-04T02:36:22.643997+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@baharaykin",
+      "target_user_id": "dry_run_baharaykin",
+      "timestamp": "2026-03-04T02:36:22.644028+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "dry_0",
+      "timestamp": "2026-03-04T02:36:22.644071+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "dry_1",
+      "timestamp": "2026-03-04T02:36:22.644090+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "dry_2",
+      "timestamp": "2026-03-04T02:36:22.644111+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "dry_0",
+      "reply_text": "The lighting in this is unreal — love how it catches the highlights so naturally.",
+      "timestamp": "2026-03-04T02:36:22.644134+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "target_user_id": "dry_run_Ava_starz",
+      "timestamp": "2026-03-04T02:36:22.644153+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@bluebunny996",
+      "tweet_id": "dry_0",
+      "timestamp": "2026-03-04T02:36:22.644189+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@bluebunny996",
+      "tweet_id": "dry_1",
+      "timestamp": "2026-03-04T02:36:22.644206+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@bluebunny996",
+      "tweet_id": "dry_2",
+      "timestamp": "2026-03-04T02:36:22.644225+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@bluebunny996",
+      "tweet_id": "dry_0",
+      "reply_text": "The lighting in this is unreal — love how it catches the highlights so naturally.",
+      "timestamp": "2026-03-04T02:36:22.644244+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@bluebunny996",
+      "target_user_id": "dry_run_bluebunny996",
+      "timestamp": "2026-03-04T02:36:22.644261+09:00",
+      "dry_run": true
+    }
+  ]
+}

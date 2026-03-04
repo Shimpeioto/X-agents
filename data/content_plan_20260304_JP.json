@@ -1,0 +1,115 @@
+{
+  "date": "2026-03-04",
+  "account": "JP",
+  "generated_at": "2026-03-04T09:15:00+09:00",
+  "strategy_used": "data/strategy_20260304.json",
+  "total_posts": 4,
+  "posts": [
+    {
+      "id": "JP_20260304_01",
+      "slot": 1,
+      "scheduled_time": "07:30 JST",
+      "category": "portrait",
+      "priority": "high",
+      "status": "approved",
+      "text": "朝の光に包まれた横顔。柔らかいライティングが生む透明感、AIだからこそ表現できる繊細な美しさ。\n\n#AI美女 #AIart #AIイラスト",
+      "hashtags": [
+        "#AI美女",
+        "#AIart",
+        "#AIイラスト"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Close-up portrait of a beautiful Japanese woman, soft morning sunlight streaming through sheer curtains, gentle side lighting on face, translucent skin with natural glow, delicate eyelashes, subtle pink lip tint, hair slightly tousled, serene expression, photorealistic, editorial beauty photography, warm golden hour tones, shallow depth of field, 85mm lens look",
+        "negative_prompt": "harsh shadows, overexposed, anime style, cartoon, text, watermark, deformed features",
+        "style_reference": "Japanese beauty editorial, soft-focus glamour photography",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": "A",
+      "notes": "Variant A test — 3 hashtags only (always_use + 1 rotate). Morning slot targeting commute scrollers."
+    },
+    {
+      "id": "JP_20260304_02",
+      "slot": 2,
+      "scheduled_time": "12:00 JST",
+      "category": "fashion",
+      "priority": "high",
+      "status": "approved",
+      "text": "春の訪れを感じるパステルコーデ。トレンチコートにラベンダーのスカーフを添えて、街を歩くだけでランウェイに。あなたならどんな春カラーを選ぶ？\n\n#AI美女 #AIart #digitalart #AIグラビア #火曜日",
+      "hashtags": [
+        "#AI美女",
+        "#AIart",
+        "#digitalart",
+        "#AIグラビア",
+        "#火曜日"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Full-body fashion shot of a stylish Japanese woman walking on a clean urban sidewalk in Tokyo, wearing a beige trench coat with lavender silk scarf, pastel spring outfit, cherry blossom petals falling softly in background, natural daylight, street style photography, confident stride, photorealistic, modern Japanese fashion editorial, clean composition",
+        "negative_prompt": "cluttered background, dark lighting, anime, cartoon, text, watermark, distorted proportions",
+        "style_reference": "Tokyo street fashion editorial, Japanese Vogue spring lookbook",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B test — 5 hashtags (always_use + 2 rotate + 1 trending). Fashion category testing for JP market — strategy notes this is underrepresented among competitors."
+    },
+    {
+      "id": "JP_20260304_03",
+      "slot": 3,
+      "scheduled_time": "19:00 JST",
+      "category": "artistic",
+      "priority": "high",
+      "status": "approved",
+      "text": "夜の東京、ネオンの光と影が織りなすサイバーパンクの世界。現実と仮想の境界が曖昧になる瞬間を切り取りました。\n\n#AI美女 #AIart #SFW",
+      "hashtags": [
+        "#AI美女",
+        "#AIart",
+        "#SFW"
+      ],
+      "image_prompt": {
+        "tool": "stable_diffusion",
+        "prompt": "Artistic portrait of a beautiful woman standing in a neon-lit Tokyo alleyway at night, cyberpunk aesthetic, reflections on wet pavement, vibrant pink and blue neon signs, cinematic composition, dramatic lighting contrast, futuristic fashion elements, detailed face illuminated by neon glow, photorealistic with artistic stylization, 8k quality",
+        "negative_prompt": "daylight, cartoon, anime, low quality, blurry, text overlay, watermark, nsfw",
+        "style_reference": "Blade Runner 2049 meets Tokyo nightlife photography, cyberpunk noir",
+        "aspect_ratio": "1:1"
+      },
+      "ab_test_variant": "A",
+      "notes": "Variant A test — 3 hashtags only. Evening prime-time slot. Artistic/cyberpunk theme to stand out from anime-illustration norm in JP market."
+    },
+    {
+      "id": "JP_20260304_04",
+      "slot": 4,
+      "scheduled_time": "22:00 JST",
+      "category": "trend_reactive",
+      "priority": "medium",
+      "status": "approved",
+      "text": "3月に入って春の気配。AIが描く「理想の春デート服」、リアルに着てみたいコーデはどれ？左と右、あなたはどっち派？\n\n#AI美女 #AIart #AIgirl #AIイラスト #火曜日",
+      "hashtags": [
+        "#AI美女",
+        "#AIart",
+        "#AIgirl",
+        "#AIイラスト",
+        "#火曜日"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Split composition showing two beautiful Japanese women side by side, left wearing a casual spring dress with floral pattern and straw hat, right wearing a chic urban spring outfit with blazer and pleated skirt, both smiling warmly, cherry blossom park background, soft natural lighting, fashion comparison layout, photorealistic, bright and inviting spring palette",
+        "negative_prompt": "dark mood, winter clothing, anime, cartoon, text, watermark, deformed",
+        "style_reference": "Japanese fashion magazine comparison spread, spring coordinate feature",
+        "aspect_ratio": "1:1"
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B test — 5 hashtags. Engagement-bait format (choose A or B) inspired by @baharaykin's success with interactive captions. Late-night casual scrolling slot."
+    }
+  ],
+  "reply_templates": [
+    "素敵な作品ですね！光の使い方がとても印象的です✨",
+    "このクオリティすごい…色彩のバランスが絶妙ですね",
+    "細部まで丁寧に作り込まれていて見入ってしまいました。特に髪の質感が美しいです",
+    "こういう世界観、大好きです。どんなプロンプトで作られたか気になります🤔",
+    "表情の自然さがすごいですね。AIアートの進化を感じます",
+    "背景の雰囲気とモデルの表情がマッチしていて素晴らしいです",
+    "ファッションのコーディネートがリアルで参考になります！",
+    "色使いがとても綺麗ですね。この暖かいトーンが春っぽくて好きです🌸"
+  ]
+}

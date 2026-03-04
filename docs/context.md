@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 4, 2026 (Session 16: Phase 2 Implementation)
+**Last updated**: March 4, 2026 (Session 17: Phase 3 Implementation)
 
 ---
 
@@ -538,11 +538,11 @@ Human (Shimpei)
 │   └── global_rules.md                     ← BEHAVIORAL RULES
 │
 ├── agents/                                 ← AGENT SKILL FILES
-│   ├── marc.md                            ← COO / Orchestrator (Phase 2)
+│   ├── marc.md                            ← COO / Orchestrator (Phase 3)
 │   ├── scout.md                           ← Competitor Research
 │   ├── strategist.md                      ← Growth Strategy
 │   ├── creator.md                         ← Content Planning & Image Prompts (Phase 2)
-│   ├── publisher.md                       ← (placeholder — Phase 3)
+│   ├── publisher.md                       ← X API Posting & Outbound Engagement (Phase 3)
 │   └── analyst.md                         ← (placeholder — Phase 4)
 │
 ├── scripts/                                ← PIPELINE & UTILITY SCRIPTS
@@ -658,7 +658,36 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-4 are local CLI development. Phase 5 is VPS deployment. Phase 6 is autonomous operation.
 
-**Latest**: Phase 2 complete — all tests passed (March 4, 2026).
+**Latest**: Phase 3 implemented — dry-run tests passed, awaiting real API testing (March 4, 2026).
+
+Phase 3 files added/modified (6 files):
+- `scripts/x_api.py` — Extended with `XApiWriteClient` class (OAuth 1.0a, create_post, upload_media, like_tweet, reply_to_tweet, follow_user)
+- `scripts/publisher.py` — New Publisher script (post + outbound subcommands, --dry-run, --slot filtering, rate limit tracking, media upload)
+- `scripts/validate.py` — Extended with `publisher` mode (8 checks) and `publisher_rate_limits` mode (5 checks)
+- `agents/publisher.md` — Full skill file replacing placeholder (role, CLI, post/outbound flows, rate limits, compliance)
+- `agents/marc.md` — Updated to Phase 3 (added Publishing Sequence steps P1-P5, PUBLISHER logging agent, expanded task IDs)
+- `scripts/telegram_bot.py` — Added `/publish` command, fixed status emoji mapping (`"posted"` not `"published"`)
+
+Phase 3 dry-run testing — all passed:
+
+| Test | Description | Result |
+|---|---|---|
+| 1 | Dry-run post EN (4 approved posts) | **PASS** — 4 posted, 0 failed |
+| 2 | Dry-run post JP (4 approved posts) | **PASS** — 4 posted, 0 failed |
+| 3 | Rate limits validation (5 checks) | **PASS** — all counters within limits |
+| 4 | Dry-run outbound EN (5 targets) | **PASS** — 15 likes, 5 replies, 5 follows logged |
+| 5 | Rate limits after outbound (5 checks) | **PASS** — no overages |
+| 6 | Outbound log validation | **PASS** — 25 actions logged correctly |
+
+Phase 3 remaining tests (require real API calls):
+
+| Test | Description | Status |
+|---|---|---|
+| 7 | Auth test — XApiWriteClient for EN + JP | Not yet run |
+| 8 | Single slot post — real tweet on X | Not yet run |
+| 9 | Publisher validation after real post | Not yet run |
+| 10 | Telegram /publish command | Not yet run |
+| 11 | Full flow — pipeline → approve → publish → verify | Not yet run |
 
 Phase 2 files added/modified (5 files):
 - `agents/creator.md` — Creator skill file (content planning, image prompts, reply templates, output schema)
@@ -720,7 +749,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Phase 0 | Local Development Setup (CLI, APIs, Telegram, project structure) | Local machine | **✅ Complete** — 30/30 health check, pushed to GitHub |
 | Phase 1 | Scout + Strategist + Marc Foundation | Local machine | **✅ Complete** — 7 files implemented, all 12 tests passed, pipeline runs end-to-end |
 | Phase 2 | Creator + Telegram Command Processing | Local machine | **✅ Complete** — 5 files added/modified, all 15 tests passed, pipeline runs end-to-end with Telegram integration |
-| Phase 3 | Publisher + X API Posting | Local machine | Not started |
+| Phase 3 | Publisher + X API Posting | Local machine | **🟡 Implemented** — code complete, dry-run tests pass, awaiting real API testing |
 | Phase 4 | Analyst + Full Integration (2-3 day manual test) | Local machine | Not started |
 | Phase 5 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 6 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |

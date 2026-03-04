@@ -18,11 +18,14 @@ Stop with: Ctrl+C or kill the process
 import json
 import os
 import signal
+import subprocess
 import sys
 from datetime import datetime
 
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
+
+PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 CONFIG_PATH = "config/accounts.json"
 DATA_DIR = "data"
@@ -168,7 +171,7 @@ async def cmd_details(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         lines.append(f"\n{account}:")
         for post in plan.get("posts", []):
             status = post.get("status", "unknown")
-            emoji = {"draft": "\u270f\ufe0f", "approved": "\u2705", "published": "\U0001f4e4", "rejected": "\u274c"}.get(status, "\u2753")
+            emoji = {"draft": "\u270f\ufe0f", "approved": "\u2705", "posted": "\U0001f4e4", "failed": "\u274c"}.get(status, "\u2753")
             text = post.get("text", "")[:60]
             slot = post.get("slot", "?")
             cat = post.get("category", "?")
@@ -205,6 +208,8 @@ async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "/approve — Approve all posts\n"
         "/approve EN — Approve all EN posts\n"
         "/approve EN 1,3 — Approve specific EN slots\n"
+        "/publish — Publish approved posts (both accounts)\n"
+        "/publish EN — Publish approved EN posts only\n"
         "/status — Pipeline status summary\n"
         "/details — All posts with statuses\n"
         "/pause — Pause pipeline\n"
@@ -214,6 +219,54 @@ async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "/edit, /strategy, /metrics, /competitors"
     )
     await update.message.reply_text(msg)
+
+
+async def cmd_publish(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Run publisher.py post for specified account(s)."""
+    if not is_authorized(update):
+        return
+
+    args = context.args or []
+    accounts = [args[0].upper()] if args else ["EN", "JP"]
+
+    for account in accounts:
+        if account not in ("EN", "JP"):
+            await update.message.reply_text(f"Invalid account: {account}. Use EN or JP.")
+            return
+
+    results = []
+    for account in accounts:
+        # Check if there are approved posts first
+        plan, _ = load_content_plan(account)
+        if plan is None:
+            results.append(f"{account}: No content plan found for today")
+            continue
+        approved = sum(1 for p in plan.get("posts", []) if p.get("status") == "approved")
+        if approved == 0:
+            results.append(f"{account}: No approved posts to publish")
+            continue
+
+        await update.message.reply_text(f"Publishing {approved} approved post(s) for {account}...")
+
+        try:
+            result = subprocess.run(
+                ["python3", os.path.join(PROJECT, "scripts", "publisher.py"), "post", "--account", account],
+                capture_output=True, text=True, timeout=120, cwd=PROJECT,
+            )
+            if result.returncode == 0:
+                # Re-read plan to get results
+                plan, _ = load_content_plan(account)
+                posted = sum(1 for p in plan.get("posts", []) if p.get("status") == "posted") if plan else 0
+                failed = sum(1 for p in plan.get("posts", []) if p.get("status") == "failed") if plan else 0
+                results.append(f"{account}: {posted} posted, {failed} failed")
+            else:
+                results.append(f"{account}: Publisher error — {result.stderr[:200]}")
+        except subprocess.TimeoutExpired:
+            results.append(f"{account}: Publisher timed out (120s)")
+        except Exception as e:
+            results.append(f"{account}: Error — {str(e)[:200]}")
+
+    await update.message.reply_text("\n".join(results))
 
 
 async def cmd_stub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -229,6 +282,7 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
 
     app.add_handler(CommandHandler("approve", cmd_approve))
+    app.add_handler(CommandHandler("publish", cmd_publish))
     app.add_handler(CommandHandler("status", cmd_status))
     app.add_handler(CommandHandler("details", cmd_details))
     app.add_handler(CommandHandler("pause", cmd_pause))
