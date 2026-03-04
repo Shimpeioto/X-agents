@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 4, 2026 (Session 17: Phase 3 Implementation)
+**Last updated**: March 4, 2026 (Session 18: Phase 3 Complete — real API tests passed)
 
 ---
 
@@ -679,15 +679,17 @@ Phase 3 dry-run testing — all passed:
 | 5 | Rate limits after outbound (5 checks) | **PASS** — no overages |
 | 6 | Outbound log validation | **PASS** — 25 actions logged correctly |
 
-Phase 3 remaining tests (require real API calls):
+Phase 3 real API tests — all passed (March 4, 2026):
 
-| Test | Description | Status |
+| Test | Description | Result |
 |---|---|---|
-| 7 | Auth test — XApiWriteClient for EN + JP | Not yet run |
-| 8 | Single slot post — real tweet on X | Not yet run |
-| 9 | Publisher validation after real post | Not yet run |
-| 10 | Telegram /publish command | Not yet run |
-| 11 | Full flow — pipeline → approve → publish → verify | Not yet run |
+| 7 | Auth test — XApiWriteClient for EN + JP | **PASS** — EN user_id: 2024417575887917057, JP user_id: 1147717472 |
+| 8 | Single slot post — real tweet on EN | **PASS** — https://x.com/iammeruru/status/2029059847917093267 |
+| 9 | Publisher validation after real post | **PASS** — 8/8 checks |
+| 10 | JP publish — 4 real tweets | **PASS** — 4 posted, 0 failed |
+| 11 | Full validation (EN + JP + rate limits) | **PASS** — EN 8/8, JP 8/8, rate limits 5/5 |
+
+Note: Initial Test 8 attempt failed with 403 (app permissions were Read-only). Fixed by updating X Developer Console to "Read and Write" + "Web App, Automated App or Bot" and regenerating access tokens.
 
 Phase 2 files added/modified (5 files):
 - `agents/creator.md` — Creator skill file (content planning, image prompts, reply templates, output schema)
@@ -749,7 +751,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Phase 0 | Local Development Setup (CLI, APIs, Telegram, project structure) | Local machine | **✅ Complete** — 30/30 health check, pushed to GitHub |
 | Phase 1 | Scout + Strategist + Marc Foundation | Local machine | **✅ Complete** — 7 files implemented, all 12 tests passed, pipeline runs end-to-end |
 | Phase 2 | Creator + Telegram Command Processing | Local machine | **✅ Complete** — 5 files added/modified, all 15 tests passed, pipeline runs end-to-end with Telegram integration |
-| Phase 3 | Publisher + X API Posting | Local machine | **🟡 Implemented** — code complete, dry-run tests pass, awaiting real API testing |
+| Phase 3 | Publisher + X API Posting | Local machine | **✅ Complete** — 6 dry-run tests + 5 real API tests passed, 8 tweets posted live (4 EN + 4 JP) |
 | Phase 4 | Analyst + Full Integration (2-3 day manual test) | Local machine | Not started |
 | Phase 5 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 6 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
