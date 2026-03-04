@@ -11,7 +11,7 @@
       "scheduled_time": "07:30 JST",
       "category": "portrait",
       "priority": "high",
-      "status": "approved",
+      "status": "posted",
       "text": "朝の光に包まれた横顔。柔らかいライティングが生む透明感、AIだからこそ表現できる繊細な美しさ。\n\n#AI美女 #AIart #AIイラスト",
       "hashtags": [
         "#AI美女",
@@ -26,7 +26,10 @@
         "aspect_ratio": "4:5"
       },
       "ab_test_variant": "A",
-      "notes": "Variant A test — 3 hashtags only (always_use + 1 rotate). Morning slot targeting commute scrollers."
+      "notes": "Variant A test — 3 hashtags only (always_use + 1 rotate). Morning slot targeting commute scrollers.",
+      "tweet_id": "2029061418595872871",
+      "post_url": "https://x.com/xx10x14xx/status/2029061418595872871",
+      "posted_at": "2026-03-04T14:08:35.129265+09:00"
     },
     {
       "id": "JP_20260304_02",
@@ -34,7 +37,7 @@
       "scheduled_time": "12:00 JST",
       "category": "fashion",
       "priority": "high",
-      "status": "approved",
+      "status": "posted",
       "text": "春の訪れを感じるパステルコーデ。トレンチコートにラベンダーのスカーフを添えて、街を歩くだけでランウェイに。あなたならどんな春カラーを選ぶ？\n\n#AI美女 #AIart #digitalart #AIグラビア #火曜日",
       "hashtags": [
         "#AI美女",
@@ -51,7 +54,10 @@
         "aspect_ratio": "4:5"
       },
       "ab_test_variant": "B",
-      "notes": "Variant B test — 5 hashtags (always_use + 2 rotate + 1 trending). Fashion category testing for JP market — strategy notes this is underrepresented among competitors."
+      "notes": "Variant B test — 5 hashtags (always_use + 2 rotate + 1 trending). Fashion category testing for JP market — strategy notes this is underrepresented among competitors.",
+      "tweet_id": "2029061419602518293",
+      "post_url": "https://x.com/xx10x14xx/status/2029061419602518293",
+      "posted_at": "2026-03-04T14:08:35.380787+09:00"
     },
     {
       "id": "JP_20260304_03",
@@ -59,7 +65,7 @@
       "scheduled_time": "19:00 JST",
       "category": "artistic",
       "priority": "high",
-      "status": "approved",
+      "status": "posted",
       "text": "夜の東京、ネオンの光と影が織りなすサイバーパンクの世界。現実と仮想の境界が曖昧になる瞬間を切り取りました。\n\n#AI美女 #AIart #SFW",
       "hashtags": [
         "#AI美女",
@@ -74,7 +80,10 @@
         "aspect_ratio": "1:1"
       },
       "ab_test_variant": "A",
-      "notes": "Variant A test — 3 hashtags only. Evening prime-time slot. Artistic/cyberpunk theme to stand out from anime-illustration norm in JP market."
+      "notes": "Variant A test — 3 hashtags only. Evening prime-time slot. Artistic/cyberpunk theme to stand out from anime-illustration norm in JP market.",
+      "tweet_id": "2029061420667810222",
+      "post_url": "https://x.com/xx10x14xx/status/2029061420667810222",
+      "posted_at": "2026-03-04T14:08:35.798522+09:00"
     },
     {
       "id": "JP_20260304_04",
@@ -82,7 +91,7 @@
       "scheduled_time": "22:00 JST",
       "category": "trend_reactive",
       "priority": "medium",
-      "status": "approved",
+      "status": "posted",
       "text": "3月に入って春の気配。AIが描く「理想の春デート服」、リアルに着てみたいコーデはどれ？左と右、あなたはどっち派？\n\n#AI美女 #AIart #AIgirl #AIイラスト #火曜日",
       "hashtags": [
         "#AI美女",
@@ -99,7 +108,10 @@
         "aspect_ratio": "1:1"
       },
       "ab_test_variant": "B",
-      "notes": "Variant B test — 5 hashtags. Engagement-bait format (choose A or B) inspired by @baharaykin's success with interactive captions. Late-night casual scrolling slot."
+      "notes": "Variant B test — 5 hashtags. Engagement-bait format (choose A or B) inspired by @baharaykin's success with interactive captions. Late-night casual scrolling slot.",
+      "tweet_id": "2029061422412681351",
+      "post_url": "https://x.com/xx10x14xx/status/2029061422412681351",
+      "posted_at": "2026-03-04T14:08:36.107609+09:00"
     }
   ],
   "reply_templates": [

@@ -11,7 +11,7 @@
       "scheduled_time": "14:00 UTC",
       "category": "portrait",
       "priority": "high",
-      "status": "approved",
+      "status": "posted",
       "text": "Soft light, sharp gaze. There's something about golden hour portraits that makes everything feel cinematic.\n\n#AIbeauty #AIart #digitalart #midjourney",
       "hashtags": [
         "#AIbeauty",
@@ -27,7 +27,10 @@
         "aspect_ratio": "4:5"
       },
       "ab_test_variant": "A",
-      "notes": "Slot 1 — always posted in both variant A (3 posts) and variant B (4 posts). Portrait is our highest-performing category."
+      "notes": "Slot 1 — always posted in both variant A (3 posts) and variant B (4 posts). Portrait is our highest-performing category.",
+      "tweet_id": "2029059847917093267",
+      "post_url": "https://x.com/iammeruru/status/2029059847917093267",
+      "posted_at": "2026-03-04T14:02:20.672268+09:00"
     },
     {
       "id": "EN_20260304_02",
@@ -35,7 +38,7 @@
       "scheduled_time": "18:00 UTC",
       "category": "fashion",
       "priority": "high",
-      "status": "approved",
+      "status": "posted",
       "text": "Oversized blazer, minimal makeup, maximum attitude. Less is always more when the fit speaks for itself.\n\n#AIbeauty #AIart #AImodel #stablediffusion",
       "hashtags": [
         "#AIbeauty",
@@ -51,7 +54,10 @@
         "aspect_ratio": "4:5"
       },
       "ab_test_variant": "A",
-      "notes": "Slot 2 — always posted in both variants. Fashion slot targeting the 18:00 UTC peak engagement window."
+      "notes": "Slot 2 — always posted in both variants. Fashion slot targeting the 18:00 UTC peak engagement window.",
+      "tweet_id": "2029061473935479018",
+      "post_url": "https://x.com/iammeruru/status/2029061473935479018",
+      "posted_at": "2026-03-04T14:08:48.343788+09:00"
     },
     {
       "id": "EN_20260304_03",
@@ -59,7 +65,7 @@
       "scheduled_time": "22:00 UTC",
       "category": "artistic",
       "priority": "medium",
-      "status": "approved",
+      "status": "posted",
       "text": "Somewhere between a dream and a painting. When art meets code, the boundaries dissolve.\n\n#AIbeauty #AIart #AIgirl #TuesdayVibes",
       "hashtags": [
         "#AIbeauty",
@@ -75,7 +81,10 @@
         "aspect_ratio": "1:1"
       },
       "ab_test_variant": "A",
-      "notes": "Slot 3 — always posted in both variants. Artistic category with trending #TuesdayVibes hashtag for discoverability."
+      "notes": "Slot 3 — always posted in both variants. Artistic category with trending #TuesdayVibes hashtag for discoverability.",
+      "tweet_id": "2029061475026051150",
+      "post_url": "https://x.com/iammeruru/status/2029061475026051150",
+      "posted_at": "2026-03-04T14:08:48.578910+09:00"
     },
     {
       "id": "EN_20260304_04",
@@ -83,7 +92,7 @@
       "scheduled_time": "02:00 UTC",
       "category": "trend_reactive",
       "priority": "medium",
-      "status": "approved",
+      "status": "posted",
       "text": "You can only pick one look for the rest of the year — which one are you choosing? Drop your answer below 👇\n\n#AIbeauty #AIart #digitalart",
       "hashtags": [
         "#AIbeauty",
@@ -98,7 +107,10 @@
         "aspect_ratio": "1:1"
       },
       "ab_test_variant": "B",
-      "notes": "Slot 4 — only posted in variant B (4 posts/day). Interactive engagement-bait format inspired by @baharaykin's 'choose one' strategy driving high reply counts."
+      "notes": "Slot 4 — only posted in variant B (4 posts/day). Interactive engagement-bait format inspired by @baharaykin's 'choose one' strategy driving high reply counts.",
+      "tweet_id": "2029061476024205810",
+      "post_url": "https://x.com/iammeruru/status/2029061476024205810",
+      "posted_at": "2026-03-04T14:08:48.829502+09:00"
     }
   ],
   "reply_templates": [

@@ -3,16 +3,19 @@
 Usage:
     python3 scripts/telegram_send.py "message text"
     python3 scripts/telegram_send.py --file path/to/file.txt
+    python3 scripts/telegram_send.py --document path/to/file.html "caption text"
 
 Auto-splits messages >4096 chars (Telegram limit).
 Exit codes: 0=success, 1=failure
 """
 
 import json
+import os
 import sys
 import urllib.request
 import urllib.error
 import urllib.parse
+import uuid
 
 CONFIG_PATH = "config/accounts.json"
 MAX_MSG_LEN = 4096
@@ -64,12 +67,79 @@ def send_long_message(bot_token: str, chat_id: str, text: str) -> bool:
     return True
 
 
+def send_document(bot_token: str, chat_id: str, file_path: str, caption: str = "") -> bool:
+    """Upload a document to Telegram using multipart/form-data (no external deps)."""
+    url = f"https://api.telegram.org/bot{bot_token}/sendDocument"
+    boundary = uuid.uuid4().hex
+
+    filename = os.path.basename(file_path)
+    with open(file_path, "rb") as f:
+        file_data = f.read()
+
+    # Build multipart body
+    parts = []
+
+    # chat_id field
+    parts.append(f"--{boundary}\r\n".encode())
+    parts.append(b'Content-Disposition: form-data; name="chat_id"\r\n\r\n')
+    parts.append(f"{chat_id}\r\n".encode())
+
+    # document field
+    parts.append(f"--{boundary}\r\n".encode())
+    parts.append(f'Content-Disposition: form-data; name="document"; filename="{filename}"\r\n'.encode())
+    parts.append(b"Content-Type: application/octet-stream\r\n\r\n")
+    parts.append(file_data)
+    parts.append(b"\r\n")
+
+    # caption field (optional)
+    if caption:
+        parts.append(f"--{boundary}\r\n".encode())
+        parts.append(b'Content-Disposition: form-data; name="caption"\r\n\r\n')
+        parts.append(f"{caption}\r\n".encode())
+
+    # closing boundary
+    parts.append(f"--{boundary}--\r\n".encode())
+
+    body = b"".join(parts)
+    headers = {
+        "Content-Type": f"multipart/form-data; boundary={boundary}",
+        "Content-Length": str(len(body)),
+    }
+
+    req = urllib.request.Request(url, data=body, headers=headers)
+    try:
+        with urllib.request.urlopen(req) as resp:
+            result = json.loads(resp.read())
+            return result.get("ok", False)
+    except urllib.error.HTTPError as e:
+        print(f"ERROR: Telegram API returned {e.code}: {e.read().decode()}", file=sys.stderr)
+        return False
+    except Exception as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        return False
+
+
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python3 scripts/telegram_send.py \"message\" | --file path", file=sys.stderr)
+        print("Usage: python3 scripts/telegram_send.py \"message\" | --file path | --document path [caption]", file=sys.stderr)
         sys.exit(2)
 
     bot_token, chat_id = load_config()
+
+    if sys.argv[1] == "--document":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/telegram_send.py --document <path> [caption]", file=sys.stderr)
+            sys.exit(2)
+        file_path = sys.argv[2]
+        if not os.path.isfile(file_path):
+            print(f"ERROR: File not found: {file_path}", file=sys.stderr)
+            sys.exit(1)
+        caption = sys.argv[3] if len(sys.argv) > 3 else ""
+        if send_document(bot_token, chat_id, file_path, caption):
+            print(f"OK: Document sent ({os.path.basename(file_path)})")
+            sys.exit(0)
+        else:
+            sys.exit(1)
 
     if sys.argv[1] == "--file":
         if len(sys.argv) < 3:

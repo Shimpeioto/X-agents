@@ -11,6 +11,7 @@ Commands:
     /metrics post_id key=value  — Input manual metrics
     /confirm                    — Confirm pending screenshot metrics
     /cancel                     — Cancel pending screenshot metrics
+    /task <description>         — Queue a task for Marc
     /pause                      — Pause pipeline
     /resume                     — Resume pipeline
     /help                       — List commands
@@ -226,11 +227,12 @@ async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "Send photo — Parse metrics from screenshot\n"
         "/confirm — Save parsed screenshot metrics\n"
         "/cancel — Discard parsed screenshot metrics\n"
+        "/task <description> — Queue a task for Marc\n"
         "/pause — Pause pipeline\n"
         "/resume — Resume pipeline\n"
         "/help — This message\n"
         "\nFuture commands (not yet implemented):\n"
-        "/edit, /strategy, /competitors"
+        "/edit, /competitors"
     )
     await update.message.reply_text(msg)
 
@@ -538,6 +540,66 @@ async def cmd_cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         await update.message.reply_text("Nothing to cancel.")
 
 
+def _generate_task_id() -> str:
+    """Generate a unique task ID: YYYYMMDD_NNN."""
+    from zoneinfo import ZoneInfo
+    date_str = datetime.now(ZoneInfo("Asia/Tokyo")).strftime("%Y%m%d")
+    tasks_dir = os.path.join(DATA_DIR, "tasks")
+    os.makedirs(tasks_dir, exist_ok=True)
+
+    # Find next sequence number for today
+    existing = [f for f in os.listdir(tasks_dir) if f.startswith(f"task_{date_str}_")]
+    seq = 1
+    for f in existing:
+        try:
+            n = int(f.replace(f"task_{date_str}_", "").replace(".json", ""))
+            seq = max(seq, n + 1)
+        except ValueError:
+            pass
+    return f"{date_str}_{seq:03d}"
+
+
+async def cmd_task(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Queue a task for Marc to execute.
+
+    /task <description> — Create a task for Marc to handle autonomously.
+    """
+    if not is_authorized(update):
+        return
+
+    args = context.args or []
+    if not args:
+        await update.message.reply_text(
+            "Usage: /task <description>\n"
+            "Example: /task Analyze top 5 competitors and recommend content strategy for next week"
+        )
+        return
+
+    description = " ".join(args)
+    task_id = _generate_task_id()
+
+    task_data = {
+        "task_id": task_id,
+        "status": "pending",
+        "description": description,
+        "created_at": datetime.now().astimezone().isoformat(),
+        "started_at": None,
+        "completed_at": None,
+        "result": None,
+    }
+
+    tasks_dir = os.path.join(DATA_DIR, "tasks")
+    os.makedirs(tasks_dir, exist_ok=True)
+    task_path = os.path.join(tasks_dir, f"task_{task_id}.json")
+    save_json(task_path, task_data)
+
+    await update.message.reply_text(
+        f"Task queued: {task_id}\n"
+        f"Description: {description}\n"
+        f"To execute: ./scripts/run_task.sh {task_id}"
+    )
+
+
 async def cmd_stub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not is_authorized(update):
         return
@@ -559,11 +621,12 @@ def main():
     app.add_handler(CommandHandler("cancel", cmd_cancel))
     app.add_handler(CommandHandler("pause", cmd_pause))
     app.add_handler(CommandHandler("resume", cmd_resume))
+    app.add_handler(CommandHandler("task", cmd_task))
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
 
     # Stub handlers for future phases
-    for cmd in ["edit", "strategy", "competitors"]:
+    for cmd in ["edit", "competitors"]:
         app.add_handler(CommandHandler(cmd, cmd_stub))
 
     def shutdown(signum, frame):
