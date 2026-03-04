@@ -258,6 +258,23 @@ def run_post(account: str, slot: int | None, dry_run: bool) -> int:
 
 # --- Outbound Subcommand ---
 
+def _sqlite_log_outbound(date_iso: str, account: str, action_type: str,
+                         target_handle: str, target_tweet_id: str,
+                         success: bool, api_response_code: int | None = None):
+    """Best-effort dual-write to SQLite. Logs warning on failure."""
+    try:
+        import db_manager
+        db_manager.init()
+        db_manager.insert_outbound_log(
+            date=date_iso, account=account, action_type=action_type,
+            target_handle=target_handle, target_tweet_id=target_tweet_id,
+            success=1 if success else 0, api_response_code=api_response_code,
+            timestamp=now_iso(),
+        )
+    except Exception as e:
+        logger.warning(f"SQLite outbound log failed (continuing): {e}")
+
+
 def run_outbound(account: str, dry_run: bool) -> int:
     """Run outbound engagement for an account. Returns 0 on success, 1 on error."""
     date = today_str()
@@ -360,6 +377,8 @@ def run_outbound(account: str, dry_run: bool) -> int:
                 "timestamp": now_iso(),
                 "dry_run": dry_run,
             })
+            date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
+            _sqlite_log_outbound(date_iso, account, "like", f"@{handle}", tweet_id, True)
 
         # Reply to one tweet (if templates available and within limits)
         if recent_tweets and reply_templates and check_rate_limit(limits, account, "replies"):
@@ -386,6 +405,8 @@ def run_outbound(account: str, dry_run: bool) -> int:
                 "timestamp": now_iso(),
                 "dry_run": dry_run,
             })
+            date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
+            _sqlite_log_outbound(date_iso, account, "reply", f"@{handle}", tweet["tweet_id"], True)
 
         # Follow target (if within limits)
         if check_rate_limit(limits, account, "follows"):
@@ -408,6 +429,8 @@ def run_outbound(account: str, dry_run: bool) -> int:
                 "timestamp": now_iso(),
                 "dry_run": dry_run,
             })
+            date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
+            _sqlite_log_outbound(date_iso, account, "follow", f"@{handle}", None, True)
 
     # Save rate limits and outbound log
     save_rate_limits(date, limits)

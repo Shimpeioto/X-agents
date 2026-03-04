@@ -94,6 +94,30 @@ class XApiClient:
             return []
         return [self._normalize_tweet(t) for t in response.data if t is not None]
 
+    def get_tweets_batch(self, tweet_ids: list[str]) -> list[dict]:
+        """Batch lookup tweets by IDs (up to 100 per request).
+
+        Args:
+            tweet_ids: List of tweet ID strings
+
+        Returns:
+            List of normalized tweet dicts. Deleted/not-found tweets are skipped.
+        """
+        results = []
+        for i in range(0, len(tweet_ids), 100):
+            batch = tweet_ids[i : i + 100]
+            response = self._api_call_with_retry(
+                self.client.get_tweets,
+                ids=batch,
+                tweet_fields=TWEET_FIELDS,
+            )
+            if response and response.data:
+                for tweet in response.data:
+                    normalized = self._normalize_tweet(tweet)
+                    if normalized:
+                        results.append(normalized)
+        return results
+
     def search_recent(self, query: str, max_results: int = 10) -> list[dict]:
         """Search recent tweets by keyword.
 

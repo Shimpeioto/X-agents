@@ -1,4 +1,4 @@
-"""Unified validation script for Scout, Strategist, Creator, and cross-validation.
+"""Unified validation script for Scout, Strategist, Creator, Analyst, and cross-validation.
 
 Usage:
     python3 scripts/validate.py scout data/scout_report_20260303.json
@@ -6,12 +6,16 @@ Usage:
     python3 scripts/validate.py cross data/scout_report_20260303.json data/strategy_20260303.json
     python3 scripts/validate.py creator data/content_plan_20260304_EN.json
     python3 scripts/validate.py creator_cross data/content_plan_20260304_EN.json data/strategy_20260304.json
+    python3 scripts/validate.py analyst data/metrics_20260304_EN.json
+    python3 scripts/validate.py analyst_metrics data/metrics_history.db
 
 Exit codes: 0=pass, 1=fail, 2=usage error
 """
 
 import json
+import os
 import re
+import sqlite3
 import sys
 
 
@@ -558,9 +562,131 @@ def validate_publisher_rate_limits(limits_path: str) -> tuple[bool, list[str]]:
     return passed, issues
 
 
+def validate_analyst(summary_path: str) -> tuple[bool, list[str]]:
+    """Validate Analyst summary JSON output. Returns (passed, list_of_issues)."""
+    issues = []
+
+    # Check 1: File exists and is non-empty
+    try:
+        with open(summary_path) as f:
+            content = f.read()
+        if not content.strip():
+            issues.append("file_empty: Analyst summary file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {summary_path} does not exist")
+        return False, issues
+
+    # Check 2: Valid JSON
+    try:
+        summary = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 3: Required top-level fields
+    required = ["account", "date", "generated_at", "post_count"]
+    for field in required:
+        if field not in summary:
+            issues.append(f"missing_field: top-level '{field}' not found")
+
+    # Check 4: account is EN or JP
+    account = summary.get("account", "")
+    if account not in ("EN", "JP"):
+        issues.append(f"invalid_account: account is '{account}', expected 'EN' or 'JP'")
+
+    # Check 5: date is valid ISO date format
+    date = summary.get("date", "")
+    if not re.match(r"^\d{4}-\d{2}-\d{2}$", str(date)):
+        issues.append(f"invalid_date: date '{date}' doesn't match YYYY-MM-DD format")
+
+    # Check 6: post_metrics is an array
+    post_metrics = summary.get("post_metrics", None)
+    if post_metrics is not None and not isinstance(post_metrics, list):
+        issues.append("post_metrics_not_array: post_metrics is not an array")
+
+    # Check 7: totals section present with expected fields
+    totals = summary.get("totals", None)
+    if totals is None:
+        issues.append("missing_totals: 'totals' section not found")
+    elif isinstance(totals, dict):
+        for field in ["likes", "retweets", "replies"]:
+            if field not in totals:
+                issues.append(f"missing_total_field: totals.{field} not found")
+
+    # Check 8: post_count matches post_metrics length
+    if isinstance(post_metrics, list):
+        declared = summary.get("post_count", -1)
+        actual = len(post_metrics)
+        if declared != actual:
+            issues.append(f"post_count_mismatch: post_count={declared} but post_metrics has {actual} entries")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
+def validate_analyst_metrics(db_path: str) -> tuple[bool, list[str]]:
+    """Validate Analyst SQLite database integrity. Returns (passed, list_of_issues)."""
+    issues = []
+
+    # Check 1: Database file exists
+    if not os.path.exists(db_path):
+        issues.append(f"db_not_found: {db_path} does not exist")
+        return False, issues
+
+    try:
+        conn = sqlite3.connect(db_path)
+        conn.row_factory = sqlite3.Row
+        c = conn.cursor()
+    except sqlite3.Error as e:
+        issues.append(f"db_open_error: {e}")
+        return False, issues
+
+    # Check 2: Required tables exist
+    tables = [row[0] for row in c.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
+    for table in ["post_metrics", "account_metrics", "outbound_log", "error_log"]:
+        if table not in tables:
+            issues.append(f"missing_table: '{table}' table not found")
+
+    if any("missing_table" in i for i in issues):
+        conn.close()
+        return False, issues
+
+    # Check 3: post_metrics has expected columns
+    pm_cols = [row[1] for row in c.execute("PRAGMA table_info(post_metrics)").fetchall()]
+    for col in ["post_id", "tweet_id", "account", "measured_at", "likes", "retweets", "source"]:
+        if col not in pm_cols:
+            issues.append(f"missing_column: post_metrics.{col} not found")
+
+    # Check 4: account_metrics has expected columns
+    am_cols = [row[1] for row in c.execute("PRAGMA table_info(account_metrics)").fetchall()]
+    for col in ["account", "date", "followers", "followers_change"]:
+        if col not in am_cols:
+            issues.append(f"missing_column: account_metrics.{col} not found")
+
+    # Check 5: outbound_log has timestamp column (migration check)
+    ol_cols = [row[1] for row in c.execute("PRAGMA table_info(outbound_log)").fetchall()]
+    if "timestamp" not in ol_cols:
+        issues.append("missing_column: outbound_log.timestamp not found (migration needed)")
+
+    # Check 6: No negative metric values in post_metrics
+    neg_rows = c.execute(
+        """SELECT post_id, likes, retweets, replies, quotes, bookmarks
+           FROM post_metrics
+           WHERE likes < 0 OR retweets < 0 OR replies < 0 OR quotes < 0 OR bookmarks < 0"""
+    ).fetchall()
+    if neg_rows:
+        issues.append(f"negative_metrics: {len(neg_rows)} rows have negative metric values")
+
+    conn.close()
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits} <file1> [<file2>]", file=sys.stderr)
+        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits|analyst|analyst_metrics} <file1> [<file2>]", file=sys.stderr)
         sys.exit(2)
 
     mode = sys.argv[1]
@@ -607,12 +733,24 @@ def main():
             sys.exit(2)
         passed, issues = validate_publisher_rate_limits(sys.argv[2])
 
+    elif mode == "analyst":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py analyst <metrics_summary.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_analyst(sys.argv[2])
+
+    elif mode == "analyst_metrics":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py analyst_metrics <metrics_history.db>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_analyst_metrics(sys.argv[2])
+
     else:
-        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', or 'publisher_rate_limits'.", file=sys.stderr)
+        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', 'publisher_rate_limits', 'analyst', or 'analyst_metrics'.", file=sys.stderr)
         sys.exit(2)
 
     # Determine total checks from mode
-    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5}
+    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6}
     total_checks = check_counts.get(mode, len(issues) + 1)
 
     if passed:

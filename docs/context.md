@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 4, 2026 (Session 18: Phase 3 Complete — real API tests passed)
+**Last updated**: March 4, 2026 (Session 19: Phase 4 Complete — Analyst, manual metrics, War Room upgrade, dual-write)
 
 ---
 
@@ -543,15 +543,18 @@ Human (Shimpei)
 │   ├── strategist.md                      ← Growth Strategy
 │   ├── creator.md                         ← Content Planning & Image Prompts (Phase 2)
 │   ├── publisher.md                       ← X API Posting & Outbound Engagement (Phase 3)
-│   └── analyst.md                         ← (placeholder — Phase 4)
+│   └── analyst.md                         ← Metrics Collection & Data Storage (Phase 4)
 │
 ├── scripts/                                ← PIPELINE & UTILITY SCRIPTS
 │   ├── run_pipeline.sh                    ← Pipeline entry point (thin wrapper → Marc)
-│   ├── validate.py                        ← Deterministic validation (scout/strategist/cross/creator/creator_cross)
-│   ├── x_api.py                           ← X API v2 wrapper library
+│   ├── validate.py                        ← Deterministic validation (all agents + cross-validation)
+│   ├── x_api.py                           ← X API v2 wrapper library (read + write + batch)
+│   ├── db_manager.py                      ← SQLite database layer (WAL mode, insert/query)
 │   ├── scout.py                           ← Scout agent script
+│   ├── publisher.py                       ← Publisher agent script (post + outbound + SQLite dual-write)
+│   ├── analyst.py                         ← Analyst agent script (collect + summary + import) (Phase 4)
 │   ├── telegram_send.py                   ← Telegram send helper (Phase 2)
-│   └── telegram_bot.py                    ← Telegram bot daemon (Phase 2)
+│   └── telegram_bot.py                    ← Telegram bot daemon (commands + /metrics + screenshot) (Phase 4)
 ├── data/.gitkeep                           ← PIPELINE STATE (empty, git-tracked)
 ├── logs/.gitkeep                           ← AGENT LOGS (empty, git-tracked)
 ├── backups/.gitkeep                        ← DAILY BACKUPS (empty, git-tracked)
@@ -658,7 +661,43 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-4 are local CLI development. Phase 5 is VPS deployment. Phase 6 is autonomous operation.
 
-**Latest**: Phase 3 implemented — dry-run tests passed, awaiting real API testing (March 4, 2026).
+**Latest**: Phase 4 implemented and E2E Day 1 tested — all tests passed (March 4, 2026).
+
+Phase 4 files added/modified (8 files):
+- `scripts/db_manager.py` — Extended with WAL mode, `_connect()` helper, `timestamp` column migration, 4 insert functions, 5 query functions
+- `scripts/x_api.py` — Added `get_tweets_batch()` method to XApiClient (batch tweet lookup, chunks at 100)
+- `scripts/analyst.py` — **New** Analyst agent script (~300 lines): `Analyst` class with `collect_post_metrics`, `collect_account_metrics`, `generate_summary`, `import_manual_metrics` (CSV+JSON), CLI with `collect`/`summary`/`import` subcommands + `--dry-run`
+- `scripts/validate.py` — Extended with `analyst` mode (8 checks on summary JSON) and `analyst_metrics` mode (6 checks on SQLite integrity)
+- `scripts/telegram_bot.py` — Added `/metrics` (view + input modes), screenshot handling via Claude Vision API, `/confirm`, `/cancel`, photo message handler
+- `scripts/publisher.py` — Added SQLite dual-write for outbound log (best-effort, JSON remains primary)
+- `agents/analyst.md` — Full skill file replacing placeholder (role, data collection, CLI, output schema, error handling, schedule)
+- `agents/marc.md` — Updated to Phase 4: War Room Lite → Full War Room (6-criterion rubric, 0-100 scoring), added Steps P6-P8 (Analyst collect, summary+validate, follower anomaly detection, daily report), updated pipeline state task IDs
+
+Phase 4 testing — all passed:
+
+| Test | Description | Result |
+|---|---|---|
+| 1 | db_manager insert/query (post_metrics + account_metrics + daily_summary) | **PASS** — insert, replace, and query all work |
+| 2 | Analyst dry-run collect | **PASS** — found 4 EN + 4 JP posted tweets, logged correctly |
+| 3 | analyst_metrics validation (6 checks on SQLite) | **PASS** — all tables, columns, migration verified |
+| 4 | Analyst live collect (real API) | **PASS** — 8 tweets fetched, 2 account snapshots (EN: 7 followers, JP: 140 followers) |
+| 5 | Analyst summary generation (EN + JP) | **PASS** — both JSON summaries written |
+| 6 | Analyst summary validation (8 checks) | **PASS** — EN 8/8, JP 8/8 |
+| 7 | Publisher dry-run outbound with dual-write | **PASS** — 25 outbound rows in SQLite alongside JSON |
+| 8 | CSV manual metrics import | **PASS** — 2 rows imported |
+| 9 | JSON manual metrics import | **PASS** — 2 entries imported |
+| 10 | Follower anomaly detection simulation | **PASS** — correctly detects -15% as anomaly |
+| 11 | E2E P6-P8: Collect → Summary → Validate → Anomaly → Daily Report → Telegram | **PASS** — full flow, daily report sent to Telegram |
+
+Phase 4 E2E Day 1 results:
+- EN: 4 posts measured (1-1-0-1 likes), 7 followers (first day)
+- JP: 4 posts measured (2-2-2-0 likes), 140 followers (first day)
+- Outbound: EN 15 likes, 5 replies, 5 follows (from Phase 3 test); JP not yet run
+- Daily report delivered to Telegram successfully
+
+Remaining Phase 4 E2E tests (require consecutive calendar days):
+- E2E Day 2: Verify `followers_change` calculated, anomaly detection with real delta
+- E2E Day 3: 3 consecutive days in SQLite, historical queries work
 
 Phase 3 files added/modified (6 files):
 - `scripts/x_api.py` — Extended with `XApiWriteClient` class (OAuth 1.0a, create_post, upload_media, like_tweet, reply_to_tweet, follow_user)
@@ -752,7 +791,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Phase 1 | Scout + Strategist + Marc Foundation | Local machine | **✅ Complete** — 7 files implemented, all 12 tests passed, pipeline runs end-to-end |
 | Phase 2 | Creator + Telegram Command Processing | Local machine | **✅ Complete** — 5 files added/modified, all 15 tests passed, pipeline runs end-to-end with Telegram integration |
 | Phase 3 | Publisher + X API Posting | Local machine | **✅ Complete** — 6 dry-run tests + 5 real API tests passed, 8 tweets posted live (4 EN + 4 JP) |
-| Phase 4 | Analyst + Full Integration (2-3 day manual test) | Local machine | Not started |
+| Phase 4 | Analyst + Manual Metrics + War Room Upgrade | Local machine | **✅ Complete** — 11 tests passed, E2E Day 1 verified, daily report sent to Telegram. Days 2-3 E2E pending (consecutive calendar days). |
 | Phase 5 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 6 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 
@@ -793,7 +832,7 @@ Each agent maps to a distinct skill domain. Combining any two would bloat contex
 | **Strategist** | Demo agent: formulates growth strategy based on Scout and Analyst data |
 | **Creator** | Demo agent: drafts post content and image prompts |
 | **Publisher** | Demo agent: executes posting and outbound engagement via X API |
-| **Analyst** | Demo agent: collects performance metrics via X API (Playwright impression scraping under compliance review) |
+| **Analyst** | Demo agent: collects post metrics via X API batch lookup, account snapshots, stores in SQLite, generates JSON summaries. Manual impression input via Telegram /metrics, screenshot parsing (Claude Vision), or CSV/JSON import. |
 | **War Room** | Marc's daily review session where all agent outputs are cross-checked for consistency |
 | **Pipeline** | The agent execution sequence — during development, triggered manually via CLI; in production, triggered by cron overnight |
 | **CLAUDE.md** | Claude Code's native memory system — markdown files auto-loaded at session start |

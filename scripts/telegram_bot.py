@@ -7,6 +7,10 @@ Commands:
     /approve [account] [slots]  — Approve posts (all, by account, or by slot)
     /status                     — Pipeline status summary
     /details                    — All posts with status emojis
+    /metrics [account]          — View metrics summary
+    /metrics post_id key=value  — Input manual metrics
+    /confirm                    — Confirm pending screenshot metrics
+    /cancel                     — Cancel pending screenshot metrics
     /pause                      — Pause pipeline
     /resume                     — Resume pipeline
     /help                       — List commands
@@ -16,6 +20,7 @@ Stop with: Ctrl+C or kill the process
 """
 
 import json
+import logging
 import os
 import signal
 import subprocess
@@ -23,9 +28,12 @@ import sys
 from datetime import datetime
 
 from telegram import Update
-from telegram.ext import Application, CommandHandler, ContextTypes
+from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(PROJECT, "scripts"))
+
+logger = logging.getLogger(__name__)
 
 CONFIG_PATH = "config/accounts.json"
 DATA_DIR = "data"
@@ -212,11 +220,17 @@ async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "/publish EN — Publish approved EN posts only\n"
         "/status — Pipeline status summary\n"
         "/details — All posts with statuses\n"
+        "/metrics — View metrics summary\n"
+        "/metrics EN — View EN metrics\n"
+        "/metrics post_id key=value — Input manual metrics\n"
+        "Send photo — Parse metrics from screenshot\n"
+        "/confirm — Save parsed screenshot metrics\n"
+        "/cancel — Discard parsed screenshot metrics\n"
         "/pause — Pause pipeline\n"
         "/resume — Resume pipeline\n"
         "/help — This message\n"
         "\nFuture commands (not yet implemented):\n"
-        "/edit, /strategy, /metrics, /competitors"
+        "/edit, /strategy, /competitors"
     )
     await update.message.reply_text(msg)
 
@@ -269,6 +283,261 @@ async def cmd_publish(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     await update.message.reply_text("\n".join(results))
 
 
+async def cmd_metrics(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """View metrics or input manual metrics.
+
+    /metrics           — View summary for both accounts
+    /metrics EN        — View summary for EN
+    /metrics EN_20260304_01 impressions=5000 — Input manual metrics
+    """
+    if not is_authorized(update):
+        return
+
+    args = context.args or []
+
+    if len(args) == 0:
+        # View mode: show both accounts
+        await _show_metrics_summary(update)
+        return
+
+    if len(args) == 1 and args[0].upper() in ("EN", "JP"):
+        # View mode: specific account
+        await _show_metrics_summary(update, account=args[0].upper())
+        return
+
+    # Input mode: post_id key=value pairs
+    post_id = args[0]
+    metrics = {}
+    for arg in args[1:]:
+        if "=" not in arg:
+            await update.message.reply_text(f"Invalid format: '{arg}'. Use key=value (e.g., impressions=5000)")
+            return
+        key, val = arg.split("=", 1)
+        try:
+            metrics[key.strip()] = int(val.strip())
+        except ValueError:
+            await update.message.reply_text(f"Invalid value for {key}: '{val}'. Must be a number.")
+            return
+
+    if not metrics:
+        await update.message.reply_text("No metrics provided. Use: /metrics post_id impressions=5000")
+        return
+
+    try:
+        import db_manager
+        db_manager.init()
+
+        # Derive account from post_id
+        account = post_id.split("_")[0] if "_" in post_id else "EN"
+        measured_at = datetime.now().astimezone().isoformat()
+
+        db_manager.insert_post_metrics(
+            post_id=post_id,
+            tweet_id=metrics.get("tweet_id", "manual"),
+            account=account,
+            measured_at=measured_at,
+            hours_after_post=metrics.get("hours_after_post", 0),
+            likes=metrics.get("likes"),
+            retweets=metrics.get("retweets"),
+            replies=metrics.get("replies"),
+            quotes=metrics.get("quotes"),
+            bookmarks=metrics.get("bookmarks"),
+            impressions=metrics.get("impressions"),
+            engagement_rate=None,
+            source="manual_telegram",
+        )
+
+        parts = [f"{k}={v}" for k, v in metrics.items()]
+        await update.message.reply_text(f"Saved metrics for {post_id}:\n" + "\n".join(parts))
+
+    except Exception as e:
+        await update.message.reply_text(f"Error saving metrics: {e}")
+
+
+async def _show_metrics_summary(update: Update, account: str | None = None) -> None:
+    """Query db_manager and show formatted metrics summary."""
+    try:
+        import db_manager
+        db_manager.init()
+
+        date = today_iso()
+        accounts = [account] if account else ["EN", "JP"]
+        lines = [f"Metrics Summary — {date}\n"]
+
+        for acct in accounts:
+            summary = db_manager.get_daily_summary(acct, date)
+            am = summary.get("account_metrics")
+            posts = summary.get("post_metrics", [])
+            totals = summary.get("totals", {})
+
+            flag = {"EN": "US", "JP": "JP"}.get(acct, "")
+            lines.append(f"\n{acct}:")
+
+            if am:
+                change = am.get("followers_change")
+                change_str = f" ({change:+d})" if change is not None else ""
+                lines.append(f"  Followers: {am.get('followers', '?')}{change_str}")
+            else:
+                lines.append("  No account data yet")
+
+            if posts:
+                lines.append(f"  Posts measured: {len(posts)}")
+                lines.append(f"  Total: {totals.get('likes', 0)} likes, "
+                             f"{totals.get('retweets', 0)} RTs, "
+                             f"{totals.get('replies', 0)} replies")
+            else:
+                lines.append("  No post metrics yet")
+
+        await update.message.reply_text("\n".join(lines))
+
+    except Exception as e:
+        await update.message.reply_text(f"Error loading metrics: {e}")
+
+
+async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Handle screenshot photo — parse metrics via Claude Vision API."""
+    if not is_authorized(update):
+        return
+
+    try:
+        import anthropic
+
+        photo = update.message.photo[-1]  # Highest resolution
+        file = await photo.get_file()
+
+        # Download to temp location
+        os.makedirs(os.path.join(PROJECT, "data", "temp"), exist_ok=True)
+        temp_path = os.path.join(PROJECT, "data", "temp", f"screenshot_{today_str()}.jpg")
+        await file.download_to_drive(temp_path)
+
+        await update.message.reply_text("Analyzing screenshot...")
+
+        # Read image and send to Claude Vision
+        import base64
+        with open(temp_path, "rb") as f:
+            image_data = base64.standard_b64encode(f.read()).decode("utf-8")
+
+        client = anthropic.Anthropic()
+        response = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=1024,
+            messages=[{
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": "image/jpeg",
+                            "data": image_data,
+                        },
+                    },
+                    {
+                        "type": "text",
+                        "text": (
+                            "This is a screenshot of X (Twitter) Analytics or post metrics. "
+                            "Extract the following metrics as JSON: "
+                            '{"post_id": "if visible", "impressions": number, "likes": number, '
+                            '"retweets": number, "replies": number, "quotes": number, "bookmarks": number}. '
+                            "Return ONLY valid JSON, no commentary. If a metric is not visible, omit it."
+                        ),
+                    },
+                ],
+            }],
+        )
+
+        # Parse Claude's response
+        text = response.content[0].text.strip()
+        if text.startswith("```"):
+            lines = text.split("\n")
+            lines = [l for l in lines if not l.strip().startswith("```")]
+            text = "\n".join(lines)
+
+        parsed = json.loads(text)
+
+        # Store in user_data for confirmation
+        context.user_data["pending_screenshot_metrics"] = parsed
+        context.user_data["pending_screenshot_path"] = temp_path
+
+        # Format for display
+        display_lines = ["Parsed metrics from screenshot:"]
+        for k, v in parsed.items():
+            if v is not None:
+                display_lines.append(f"  {k}: {v}")
+        display_lines.append("\nUse /confirm to save or /cancel to discard.")
+
+        await update.message.reply_text("\n".join(display_lines))
+
+    except ImportError:
+        await update.message.reply_text(
+            "anthropic package not installed. Install with: pip install anthropic"
+        )
+    except json.JSONDecodeError:
+        await update.message.reply_text(
+            "Could not parse metrics from screenshot. Please try a clearer image or use /metrics command."
+        )
+    except Exception as e:
+        logger.error(f"Screenshot processing error: {e}")
+        await update.message.reply_text(f"Error processing screenshot: {e}")
+
+
+async def cmd_confirm(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Confirm and save pending screenshot metrics to SQLite."""
+    if not is_authorized(update):
+        return
+
+    pending = context.user_data.get("pending_screenshot_metrics")
+    if not pending:
+        await update.message.reply_text("No pending metrics to confirm. Send a screenshot first.")
+        return
+
+    try:
+        import db_manager
+        db_manager.init()
+
+        post_id = pending.get("post_id", "screenshot_" + today_str())
+        account = post_id.split("_")[0] if "_" in post_id else "EN"
+        measured_at = datetime.now().astimezone().isoformat()
+
+        db_manager.insert_post_metrics(
+            post_id=post_id,
+            tweet_id="screenshot",
+            account=account,
+            measured_at=measured_at,
+            hours_after_post=0,
+            likes=pending.get("likes"),
+            retweets=pending.get("retweets"),
+            replies=pending.get("replies"),
+            quotes=pending.get("quotes"),
+            bookmarks=pending.get("bookmarks"),
+            impressions=pending.get("impressions"),
+            engagement_rate=None,
+            source="manual_screenshot",
+        )
+
+        # Clear pending
+        del context.user_data["pending_screenshot_metrics"]
+        context.user_data.pop("pending_screenshot_path", None)
+
+        await update.message.reply_text(f"Saved screenshot metrics for {post_id}")
+
+    except Exception as e:
+        await update.message.reply_text(f"Error saving metrics: {e}")
+
+
+async def cmd_cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Cancel pending screenshot metrics."""
+    if not is_authorized(update):
+        return
+
+    if "pending_screenshot_metrics" in context.user_data:
+        del context.user_data["pending_screenshot_metrics"]
+        context.user_data.pop("pending_screenshot_path", None)
+        await update.message.reply_text("Pending screenshot metrics discarded.")
+    else:
+        await update.message.reply_text("Nothing to cancel.")
+
+
 async def cmd_stub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not is_authorized(update):
         return
@@ -285,12 +554,16 @@ def main():
     app.add_handler(CommandHandler("publish", cmd_publish))
     app.add_handler(CommandHandler("status", cmd_status))
     app.add_handler(CommandHandler("details", cmd_details))
+    app.add_handler(CommandHandler("metrics", cmd_metrics))
+    app.add_handler(CommandHandler("confirm", cmd_confirm))
+    app.add_handler(CommandHandler("cancel", cmd_cancel))
     app.add_handler(CommandHandler("pause", cmd_pause))
     app.add_handler(CommandHandler("resume", cmd_resume))
     app.add_handler(CommandHandler("help", cmd_help))
+    app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
 
     # Stub handlers for future phases
-    for cmd in ["edit", "strategy", "metrics", "competitors"]:
+    for cmd in ["edit", "strategy", "competitors"]:
         app.add_handler(CommandHandler(cmd, cmd_stub))
 
     def shutdown(signum, frame):
