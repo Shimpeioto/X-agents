@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 4, 2026 (Session 19: Phase 4 Complete — Analyst, manual metrics, War Room upgrade, dual-write)
+**Last updated**: March 5, 2026 (Session 20: Architecture Review & Agent Building Guidelines)
 
 ---
 
@@ -328,6 +328,23 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 
 **Deliverables**: `specs/phase-1-spec.md` (v1.0) + `specs/phase-1-prd.md` (v1.0)
 
+#### Session 20: Architecture Review & Agent Building Guidelines (Mar 5, 2026)
+
+**Post-Phase 4 architecture documentation sprint**: With all 6 agents implemented and tested through Phase 4, codified the implicit patterns into explicit documentation.
+
+**Architecture Review** (completed before this session):
+- Split `marc.md` (~400+ lines) into hub + 3 reference files following Progressive Disclosure principle: `marc.md` (hub, ~131 lines), `marc_pipeline.md` (Steps 1-13, ~201 lines), `marc_publishing.md` (Steps P1-P8, ~138 lines), `marc_schemas.md` (schemas & formats, ~140 lines)
+- Added metadata comment headers to all 9 agent files (name, role, invocation, modes, inputs, outputs, dependencies)
+- Created `docs/harness.md` — Three-layer architecture model (Shell → Marc → Specialists), OS analogy (Schmid 2026), 5 key patterns (Validation-First, H3 Retry, Human Gating, State Machine, Progressive Disclosure), file layout reference
+
+**Agent Building Guidelines** (this session):
+- Created `docs/guides/agent-building-guidelines.md` (~1000 lines) — comprehensive guide for building new agents
+- 10 sections: Principles (8), Decision Framework, Agent Anatomy (template included), Script Companion (Python template), I/O Contract (file naming, data flow map), Orchestration Integration (5 registration locations), Validation & Error Handling (7 check levels, H3 protocol), Testing (6-step pipeline testing sequence), New Agent Checklist, References (7 articles)
+- Updated `docs/harness.md` with "Related Documentation" link to the guide
+- Updated `CLAUDE.md` Documentation section with guide reference
+
+**Deliverables**: `docs/guides/agent-building-guidelines.md`, updated `docs/harness.md`, updated `CLAUDE.md`
+
 ---
 
 ## 4. Decision Summary
@@ -493,6 +510,18 @@ Human (Shimpei)
 │   │
 │   ├── review.md                           ← REVIEW NOTES
 │   │
+│   ├── harness.md                          ← ARCHITECTURE DOCUMENT
+│   │   Purpose: Three-layer architecture model, OS analogy, key patterns
+│   │   Contains: Shell → Marc → Specialists model, file layout reference
+│   │   Status:  Current
+│   │
+│   ├── guides/                             ← PRACTICAL GUIDES
+│   │   └── agent-building-guidelines.md   ← AGENT BUILDING GUIDE
+│   │       Purpose: How to build new agents for the system
+│   │       Contains: 8 principles, decision framework, templates, I/O contracts,
+│   │                 validation patterns, testing sequence, new-agent checklist
+│   │       Status:  Current
+│   │
 │   ├── procedures/                         ← OPERATIONAL PROCEDURES
 │   │   └── add-competitor.md              ← ADD/REMOVE COMPETITOR PROCEDURE
 │   │       Purpose: Step-by-step guide for adding/removing competitor accounts
@@ -538,7 +567,10 @@ Human (Shimpei)
 │   └── global_rules.md                     ← BEHAVIORAL RULES
 │
 ├── agents/                                 ← AGENT SKILL FILES
-│   ├── marc.md                            ← COO / Orchestrator (Phase 3)
+│   ├── marc.md                            ← COO / Orchestrator hub (Phase 4)
+│   ├── marc_pipeline.md                   ← Pipeline Steps 1-13 (loaded on demand)
+│   ├── marc_publishing.md                 ← Publishing Steps P1-P8 (loaded on demand)
+│   ├── marc_schemas.md                    ← Schemas & report formats (loaded on demand)
 │   ├── scout.md                           ← Competitor Research
 │   ├── strategist.md                      ← Growth Strategy
 │   ├── creator.md                         ← Content Planning & Image Prompts (Phase 2)
@@ -547,6 +579,7 @@ Human (Shimpei)
 │
 ├── scripts/                                ← PIPELINE & UTILITY SCRIPTS
 │   ├── run_pipeline.sh                    ← Pipeline entry point (thin wrapper → Marc)
+│   ├── run_task.sh                        ← Operator task entry point (reads task file → Marc)
 │   ├── validate.py                        ← Deterministic validation (all agents + cross-validation)
 │   ├── x_api.py                           ← X API v2 wrapper library (read + write + batch)
 │   ├── db_manager.py                      ← SQLite database layer (WAL mode, insert/query)
@@ -625,12 +658,26 @@ context.md (this file)
     │       │
     │       └──▶ Implements ──▶ Phase 0 of spec
     │
-    └──▶ procedures/add-competitor.md
+    ├──▶ procedures/add-competitor.md
+    │       │
+    │       │  "Add/remove competitor accounts"
+    │       │  "Keeps competitor-accounts.md + competitors.json in sync"
+    │       │
+    │       └──▶ Operates on ──▶ competitor-accounts.md + competitors.json
+    │
+    ├──▶ harness.md
+    │       │
+    │       │  "Three-layer architecture (Shell → Marc → Specialists)"
+    │       │  "OS analogy, key patterns, file layout"
+    │       │
+    │       └──▶ Referenced by ──▶ guides/agent-building-guidelines.md
+    │
+    └──▶ guides/agent-building-guidelines.md
             │
-            │  "Add/remove competitor accounts"
-            │  "Keeps competitor-accounts.md + competitors.json in sync"
+            │  "How to build new agents"
+            │  "Principles, templates, checklist"
             │
-            └──▶ Operates on ──▶ competitor-accounts.md + competitors.json
+            └──▶ References ──▶ all agent files + harness.md
 ```
 
 ---
@@ -651,6 +698,8 @@ context.md (this file)
 | `procedures/add-competitor.md` | Procedure | Step-by-step guide for adding/removing competitor accounts — JSON template, validation commands, example walkthrough |
 | `specs/phase-1-spec.md` | Demo Spec | Phase 1 Technical Specification — Scout, Strategist, Marc foundation, validation rules, output schemas, testing strategy, edge cases |
 | `specs/phase-1-prd.md` | Demo PRD | Phase 1 Product Requirements — goals, success criteria, user stories, exit criteria, risks, timeline, feature mapping |
+| `harness.md` | Architecture | Three-layer architecture model (Shell → Marc → Specialists), OS analogy, key patterns, file layout |
+| `guides/agent-building-guidelines.md` | Guide | How to build new agents — principles, templates, I/O contracts, validation, checklist |
 | `context.md` | Meta | This document — full project context for third-party understanding |
 
 ---

@@ -1,3 +1,13 @@
+<!-- Agent Metadata
+name: creator
+role: Content Planning & Image Prompts
+invocation: Claude subagent with agents/creator.md
+modes: daily-content
+inputs: data/strategy_{YYYYMMDD}.json
+outputs: data/content_plan_{YYYYMMDD}_{account}.json
+dependencies: strategist
+-->
+
 # Creator Agent — Content Planning & Image Prompts
 
 ## Role
@@ -132,10 +142,4 @@ Write valid JSON to the file path specified in the prompt. The JSON MUST match t
 
 ## Format Rules
 
-- Output ONLY valid JSON — no markdown code fences, no commentary, no explanation
-- Do not wrap the JSON in ```json``` blocks
-- Do not add any text before or after the JSON
-- The first character of your output must be `{` and the last must be `}`
-- Ensure all numbers are actual numbers (not strings)
-- Ensure all arrays are actual arrays
-- Double-check all post IDs are correctly formatted before outputting
+Output ONLY valid JSON — no markdown fences, no commentary. First character `{`, last character `}`.

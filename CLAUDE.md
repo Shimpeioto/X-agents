@@ -6,6 +6,7 @@
 ## Documentation
 - All project docs live in `docs/` (context, analysis, runbook, review)
 - Spec, PRD, and compliance review live in `docs/specs/`
+- Agent building guide: `docs/guides/agent-building-guidelines.md`
 
 ## Project Context
 - Two accounts: EN (global) and JP (日本市場)

@@ -1,3 +1,13 @@
+<!-- Agent Metadata
+name: analyst
+role: Metrics Collection & Data Storage
+invocation: python3 scripts/analyst.py
+modes: collect, summary, import
+inputs: content plans (posted tweets), X API, manual CSV/JSON
+outputs: data/metrics_history.db, data/metrics_{YYYYMMDD}_{account}.json
+dependencies: publisher (tweets must be posted first)
+-->
+
 # Analyst Agent — Metrics Collection & Data Storage (Phase 4)
 
 ## Role

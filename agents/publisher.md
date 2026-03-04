@@ -1,3 +1,13 @@
+<!-- Agent Metadata
+name: publisher
+role: X API Posting & Outbound Engagement
+invocation: python3 scripts/publisher.py
+modes: post, outbound
+inputs: data/content_plan_{YYYYMMDD}_{account}.json, data/strategy_{YYYYMMDD}.json
+outputs: updated content_plan, data/rate_limits_{YYYYMMDD}.json, data/outbound_log_{YYYYMMDD}.json
+dependencies: creator (content plans must exist and be approved)
+-->
+
 # Publisher Agent — X API Posting & Outbound Engagement
 
 ## Role
