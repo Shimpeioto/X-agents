@@ -1,0 +1,95 @@
+{
+  "date": "2026-03-05",
+  "generated_at": "2026-03-05T02:30:00+09:00",
+  "scout_report_used": "data/scout_report_fallback_test.json",
+  "EN": {
+    "posting_schedule": [
+      {"slot": 1, "time": "09:00 UTC", "category": "portrait", "priority": "high"},
+      {"slot": 2, "time": "13:00 UTC", "category": "fashion", "priority": "high"},
+      {"slot": 3, "time": "17:00 UTC", "category": "artistic", "priority": "medium"},
+      {"slot": 4, "time": "21:00 UTC", "category": "trend_reactive", "priority": "medium"}
+    ],
+    "content_mix": {
+      "portrait": 35,
+      "fashion": 25,
+      "artistic": 25,
+      "trend_reactive": 15
+    },
+    "hashtag_strategy": {
+      "always_use": ["#AIgirl", "#AIart"],
+      "rotate": ["#stablediffusion", "#midjourney", "#AIbeauty", "#AI美女"],
+      "trending_today": ["#AImodel"],
+      "max_per_post": 4
+    },
+    "outbound_strategy": {
+      "daily_likes": 30,
+      "daily_replies": 10,
+      "daily_follows": 5,
+      "target_accounts": ["@mock_en_1", "@mock_en_5", "@mock_en_3", "@viral_creator"],
+      "reply_style": "Genuine compliments on AI art quality and technique, ask about tools or workflow. Keep it brief and enthusiastic without being sycophantic."
+    },
+    "ab_test": {
+      "variable": "hashtag_count_per_post",
+      "variant_a": "2 hashtags per post (always_use only: #AIgirl #AIart)",
+      "variant_b": "4 hashtags per post (always_use + 2 rotate tags)",
+      "duration_days": 5,
+      "start_date": "2026-03-05"
+    },
+    "key_insights": [
+      "EN market avg engagement rate is 5.14% across 5 competitors — mock_en_1 leads at 7.65% with 3.7 posts/day, suggesting higher frequency correlates with stronger engagement in this niche.",
+      "Top-performing EN tweets (mock_en_1 tweet mock_1001_8 at 10.9% ER, mock_en_5 tweet mock_1005_2 at 11.5% ER) both feature #stablediffusion combined with other niche tags, indicating tool-specific hashtags drive discovery.",
+      "mock_en_5 achieves the second-highest engagement (7.13%) despite having the fewest followers (16,482) and lowest posting frequency (1.6/day) — quality over quantity approach is viable but higher frequency top performers still dominate total reach.",
+      "#AIbeauty is trending with a sample tweet hitting 4,600 likes — capitalizing on this trend today could boost visibility significantly.",
+      "A viral post by @viral_creator reached 10,000 likes at 12% ER — engaging with this creator's content could expose our account to a highly active audience segment."
+    ],
+    "risks": [
+      "Posting 4x/day is above current EN competitor average of 3.1 — monitor follower response to ensure we are not over-saturating feeds.",
+      "Heavy reliance on #AIgirl may attract bot followers rather than genuine engagement — track follower quality metrics."
+    ]
+  },
+  "JP": {
+    "posting_schedule": [
+      {"slot": 1, "time": "08:00 JST", "category": "portrait", "priority": "high"},
+      {"slot": 2, "time": "12:00 JST", "category": "artistic", "priority": "high"},
+      {"slot": 3, "time": "18:00 JST", "category": "fashion", "priority": "medium"},
+      {"slot": 4, "time": "21:00 JST", "category": "trend_reactive", "priority": "medium"}
+    ],
+    "content_mix": {
+      "portrait": 30,
+      "artistic": 30,
+      "fashion": 25,
+      "trend_reactive": 15
+    },
+    "hashtag_strategy": {
+      "always_use": ["#AIart", "#aiイラスト"],
+      "rotate": ["#stablediffusion", "#AI美女", "#midjourney", "#AIgirl", "#AIbeauty"],
+      "trending_today": ["#AImodel"],
+      "max_per_post": 4
+    },
+    "outbound_strategy": {
+      "daily_likes": 30,
+      "daily_replies": 10,
+      "daily_follows": 5,
+      "target_accounts": ["@mock_jp_3", "@mock_jp_1", "@mock_jp_2"],
+      "reply_style": "日本語で丁寧かつ親しみやすいトーン。AIアートの技術や美しさを褒め、使用ツールやプロンプトについて自然に質問する。短くフレンドリーに。"
+    },
+    "ab_test": {
+      "variable": "posting_time_optimization",
+      "variant_a": "Morning-heavy schedule: slots at 08:00, 12:00, 15:00, 18:00 JST",
+      "variant_b": "Evening-heavy schedule: slots at 10:00, 15:00, 18:00, 21:00 JST",
+      "duration_days": 5,
+      "start_date": "2026-03-05"
+    },
+    "key_insights": [
+      "JP market avg engagement rate (6.56%) is 28% higher than EN (5.14%) despite having 21% fewer average followers (20,582 vs 26,223) — JP audience is more actively engaged per follower.",
+      "JP competitors post at 3.9/day vs EN's 3.1/day — the JP market rewards consistent daily presence. mock_jp_3 achieves 7.49% ER with 3.7 posts/day, and mock_jp_1 hits 7.24% ER at 4.0 posts/day.",
+      "#stablediffusion dominates JP hashtag usage (12 instances across 3 competitors) — JP audience is more tool-specific in their discovery behavior compared to EN which leads with character tags (#AIgirl).",
+      "mock_jp_3's top tweet (mock_2003_7) hit 11.2% ER with 2,000 likes using only #stablediffusion — single strong hashtag can outperform multi-tag strategies in JP market.",
+      "mock_jp_1's tweet mock_2001_8 achieved 12.1% ER (1,993 likes) with #stablediffusion, confirming the tag's outsized pull in the JP market. Building authority around this hashtag should be a priority."
+    ],
+    "risks": [
+      "JP competitor pool is smaller (3 accounts) — conclusions drawn from limited data may not generalize. Continue expanding JP competitor tracking.",
+      "High JP engagement rates could partly reflect smaller, tighter community — as our account grows, per-follower engagement may naturally decline."
+    ]
+  }
+}

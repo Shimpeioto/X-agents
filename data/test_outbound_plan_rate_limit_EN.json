@@ -1,0 +1,30 @@
+{
+  "account": "EN",
+  "date": "2026-03-05",
+  "generated_at": "2026-03-05T10:00:00+09:00",
+  "strategy_used": "data/strategy_20260304.json",
+  "targets": [
+    {
+      "handle": "@sessypuuh",
+      "user_id": "1234567890",
+      "tweets_to_like": ["fake_tweet_001", "fake_tweet_002", "fake_tweet_003", "fake_tweet_004"],
+      "reply_to": {
+        "tweet_id": "fake_tweet_001",
+        "reply_text": "Love the lighting in this portrait — really captures the mood beautifully!",
+        "reasoning": "Test fixture — verifying rate limit enforcement"
+      },
+      "follow": true
+    },
+    {
+      "handle": "@yuumispm",
+      "user_id": "9876543210",
+      "tweets_to_like": ["fake_tweet_005", "fake_tweet_006", "fake_tweet_007", "fake_tweet_008"],
+      "reply_to": {
+        "tweet_id": "fake_tweet_005",
+        "reply_text": "This composition is incredible — the contrast really makes it pop!",
+        "reasoning": "Test fixture — verifying rate limit enforcement"
+      },
+      "follow": true
+    }
+  ]
+}

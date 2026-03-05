@@ -1,0 +1,1947 @@
+{
+  "date": "2026-03-05",
+  "generated_at": "2026-03-05T17:52:29.568724+09:00",
+  "competitors_total": 41,
+  "competitors_fetched": 8,
+  "competitors_skipped": 1,
+  "competitors": [
+    {
+      "handle": "mock_en_1",
+      "user_id": "1001",
+      "display_name": "MockCreator EN 1",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 19510,
+      "following": 612,
+      "tweet_count": 2264,
+      "description": "Mock AI beauty account (EN)",
+      "recent_posts": [
+        {
+          "tweet_id": "mock_1001_0",
+          "text": "Mock tweet 0 from @mock_en_1 #stablediffusion #AIart #AIgirl",
+          "created_at": "2026-03-01T10:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1383,
+            "retweet_count": 54,
+            "reply_count": 3,
+            "quote_count": 17,
+            "bookmark_count": 3
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#AIart",
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.07468
+        },
+        {
+          "tweet_id": "mock_1001_1",
+          "text": "Mock tweet 1 from @mock_en_1 #stablediffusion #midjourney #aiイラスト",
+          "created_at": "2026-03-02T11:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1201,
+            "retweet_count": 18,
+            "reply_count": 16,
+            "quote_count": 9,
+            "bookmark_count": 29
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#midjourney",
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.063762
+        },
+        {
+          "tweet_id": "mock_1001_2",
+          "text": "Mock tweet 2 from @mock_en_1 #stablediffusion #AIgirl",
+          "created_at": "2026-03-03T12:00:00+00:00",
+          "public_metrics": {
+            "like_count": 670,
+            "retweet_count": 33,
+            "reply_count": 17,
+            "quote_count": 9,
+            "bookmark_count": 18
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.037365
+        },
+        {
+          "tweet_id": "mock_1001_3",
+          "text": "Mock tweet 3 from @mock_en_1 #AIart #AI美女",
+          "created_at": "2026-03-04T13:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1763,
+            "retweet_count": 91,
+            "reply_count": 14,
+            "quote_count": 17,
+            "bookmark_count": 12
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.096617
+        },
+        {
+          "tweet_id": "mock_1001_4",
+          "text": "Mock tweet 4 from @mock_en_1 #aiイラスト",
+          "created_at": "2026-03-05T14:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1752,
+            "retweet_count": 84,
+            "reply_count": 50,
+            "quote_count": 2,
+            "bookmark_count": 7
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.096771
+        },
+        {
+          "tweet_id": "mock_1001_5",
+          "text": "Mock tweet 5 from @mock_en_1 #midjourney",
+          "created_at": "2026-03-06T15:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1671,
+            "retweet_count": 68,
+            "reply_count": 40,
+            "quote_count": 11,
+            "bookmark_count": 20
+          },
+          "entities": {},
+          "hashtags": [
+            "#midjourney"
+          ],
+          "engagement_rate": 0.091748
+        },
+        {
+          "tweet_id": "mock_1001_6",
+          "text": "Mock tweet 6 from @mock_en_1 #aiイラスト #AI美女",
+          "created_at": "2026-03-07T16:00:00+00:00",
+          "public_metrics": {
+            "like_count": 708,
+            "retweet_count": 26,
+            "reply_count": 4,
+            "quote_count": 12,
+            "bookmark_count": 6
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.038442
+        },
+        {
+          "tweet_id": "mock_1001_7",
+          "text": "Mock tweet 7 from @mock_en_1 #stablediffusion #aiイラスト #AIgirl",
+          "created_at": "2026-03-08T17:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1821,
+            "retweet_count": 34,
+            "reply_count": 11,
+            "quote_count": 2,
+            "bookmark_count": 19
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#aiイラスト",
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.095746
+        },
+        {
+          "tweet_id": "mock_1001_8",
+          "text": "Mock tweet 8 from @mock_en_1 #midjourney #AIgirl #stablediffusion",
+          "created_at": "2026-03-09T18:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1975,
+            "retweet_count": 143,
+            "reply_count": 4,
+            "quote_count": 11,
+            "bookmark_count": 26
+          },
+          "entities": {},
+          "hashtags": [
+            "#midjourney",
+            "#AIgirl",
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.109329
+        },
+        {
+          "tweet_id": "mock_1001_9",
+          "text": "Mock tweet 9 from @mock_en_1 #AIgirl #AIart #aiイラスト",
+          "created_at": "2026-03-09T19:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1110,
+            "retweet_count": 31,
+            "reply_count": 34,
+            "quote_count": 15,
+            "bookmark_count": 5
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl",
+            "#AIart",
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.060994
+        }
+      ],
+      "avg_engagement_rate": 0.076545,
+      "posting_frequency": 3.7,
+      "top_posts": [
+        {
+          "tweet_id": "mock_1001_8",
+          "engagement_rate": 0.109329,
+          "like_count": 1975
+        },
+        {
+          "tweet_id": "mock_1001_4",
+          "engagement_rate": 0.096771,
+          "like_count": 1752
+        },
+        {
+          "tweet_id": "mock_1001_3",
+          "engagement_rate": 0.096617,
+          "like_count": 1763
+        }
+      ],
+      "hashtags_used": {
+        "#stablediffusion": 5,
+        "#AIart": 3,
+        "#AIgirl": 5,
+        "#midjourney": 3,
+        "#aiイラスト": 5,
+        "#AI美女": 2
+      }
+    },
+    {
+      "handle": "mock_en_2",
+      "user_id": "1002",
+      "display_name": "MockCreator EN 2",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 40088,
+      "following": 1703,
+      "tweet_count": 1245,
+      "description": "Mock AI beauty account (EN)",
+      "recent_posts": [
+        {
+          "tweet_id": "mock_1002_0",
+          "text": "Mock tweet 0 from @mock_en_2 #aiイラスト #AIgirl #AIart",
+          "created_at": "2026-03-01T10:00:00+00:00",
+          "public_metrics": {
+            "like_count": 283,
+            "retweet_count": 62,
+            "reply_count": 16,
+            "quote_count": 3,
+            "bookmark_count": 27
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト",
+            "#AIgirl",
+            "#AIart"
+          ],
+          "engagement_rate": 0.00908
+        },
+        {
+          "tweet_id": "mock_1002_1",
+          "text": "Mock tweet 1 from @mock_en_2 #stablediffusion #midjourney #AIbeauty",
+          "created_at": "2026-03-02T11:00:00+00:00",
+          "public_metrics": {
+            "like_count": 902,
+            "retweet_count": 63,
+            "reply_count": 50,
+            "quote_count": 5,
+            "bookmark_count": 15
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#midjourney",
+            "#AIbeauty"
+          ],
+          "engagement_rate": 0.025444
+        },
+        {
+          "tweet_id": "mock_1002_2",
+          "text": "Mock tweet 2 from @mock_en_2 #AIgirl",
+          "created_at": "2026-03-03T12:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1256,
+            "retweet_count": 184,
+            "reply_count": 3,
+            "quote_count": 12,
+            "bookmark_count": 5
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.036295
+        },
+        {
+          "tweet_id": "mock_1002_3",
+          "text": "Mock tweet 3 from @mock_en_2 #AIgirl #aiイラスト",
+          "created_at": "2026-03-04T13:00:00+00:00",
+          "public_metrics": {
+            "like_count": 809,
+            "retweet_count": 98,
+            "reply_count": 34,
+            "quote_count": 14,
+            "bookmark_count": 21
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl",
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.023823
+        },
+        {
+          "tweet_id": "mock_1002_4",
+          "text": "Mock tweet 4 from @mock_en_2 #AIart",
+          "created_at": "2026-03-05T14:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1077,
+            "retweet_count": 14,
+            "reply_count": 23,
+            "quote_count": 19,
+            "bookmark_count": 23
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart"
+          ],
+          "engagement_rate": 0.028263
+        },
+        {
+          "tweet_id": "mock_1002_5",
+          "text": "Mock tweet 5 from @mock_en_2 #AIgirl #stablediffusion",
+          "created_at": "2026-03-06T15:00:00+00:00",
+          "public_metrics": {
+            "like_count": 296,
+            "retweet_count": 115,
+            "reply_count": 14,
+            "quote_count": 14,
+            "bookmark_count": 24
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl",
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.010951
+        },
+        {
+          "tweet_id": "mock_1002_6",
+          "text": "Mock tweet 6 from @mock_en_2 #AIart #AIbeauty #AIgirl",
+          "created_at": "2026-03-07T16:00:00+00:00",
+          "public_metrics": {
+            "like_count": 765,
+            "retweet_count": 24,
+            "reply_count": 8,
+            "quote_count": 16,
+            "bookmark_count": 14
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart",
+            "#AIbeauty",
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.02028
+        },
+        {
+          "tweet_id": "mock_1002_7",
+          "text": "Mock tweet 7 from @mock_en_2 #AI美女 #aiイラスト",
+          "created_at": "2026-03-08T17:00:00+00:00",
+          "public_metrics": {
+            "like_count": 107,
+            "retweet_count": 112,
+            "reply_count": 5,
+            "quote_count": 20,
+            "bookmark_count": 28
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女",
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.006087
+        },
+        {
+          "tweet_id": "mock_1002_8",
+          "text": "Mock tweet 8 from @mock_en_2 #AIbeauty #stablediffusion #AI美女",
+          "created_at": "2026-03-09T18:00:00+00:00",
+          "public_metrics": {
+            "like_count": 797,
+            "retweet_count": 52,
+            "reply_count": 46,
+            "quote_count": 2,
+            "bookmark_count": 29
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIbeauty",
+            "#stablediffusion",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.022376
+        },
+        {
+          "tweet_id": "mock_1002_9",
+          "text": "Mock tweet 9 from @mock_en_2 #AI美女",
+          "created_at": "2026-03-09T19:00:00+00:00",
+          "public_metrics": {
+            "like_count": 930,
+            "retweet_count": 113,
+            "reply_count": 7,
+            "quote_count": 12,
+            "bookmark_count": 4
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女"
+          ],
+          "engagement_rate": 0.026492
+        }
+      ],
+      "avg_engagement_rate": 0.020909,
+      "posting_frequency": 2.1,
+      "top_posts": [
+        {
+          "tweet_id": "mock_1002_2",
+          "engagement_rate": 0.036295,
+          "like_count": 1256
+        },
+        {
+          "tweet_id": "mock_1002_4",
+          "engagement_rate": 0.028263,
+          "like_count": 1077
+        },
+        {
+          "tweet_id": "mock_1002_9",
+          "engagement_rate": 0.026492,
+          "like_count": 930
+        }
+      ],
+      "hashtags_used": {
+        "#aiイラスト": 3,
+        "#AIgirl": 5,
+        "#AIart": 3,
+        "#stablediffusion": 3,
+        "#midjourney": 1,
+        "#AIbeauty": 3,
+        "#AI美女": 3
+      }
+    },
+    {
+      "handle": "mock_en_3",
+      "user_id": "1003",
+      "display_name": "MockCreator EN 3",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 28040,
+      "following": 658,
+      "tweet_count": 1496,
+      "description": "Mock AI beauty account (EN)",
+      "recent_posts": [
+        {
+          "tweet_id": "mock_1003_0",
+          "text": "Mock tweet 0 from @mock_en_3 #AI美女 #AIbeauty",
+          "created_at": "2026-03-01T10:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1688,
+            "retweet_count": 71,
+            "reply_count": 4,
+            "quote_count": 15,
+            "bookmark_count": 10
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女",
+            "#AIbeauty"
+          ],
+          "engagement_rate": 0.063409
+        },
+        {
+          "tweet_id": "mock_1003_1",
+          "text": "Mock tweet 1 from @mock_en_3 #AIbeauty #aiイラスト",
+          "created_at": "2026-03-02T11:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1750,
+            "retweet_count": 128,
+            "reply_count": 8,
+            "quote_count": 3,
+            "bookmark_count": 0
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIbeauty",
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.067368
+        },
+        {
+          "tweet_id": "mock_1003_2",
+          "text": "Mock tweet 2 from @mock_en_3 #AI美女 #AIart",
+          "created_at": "2026-03-03T12:00:00+00:00",
+          "public_metrics": {
+            "like_count": 245,
+            "retweet_count": 137,
+            "reply_count": 28,
+            "quote_count": 0,
+            "bookmark_count": 24
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女",
+            "#AIart"
+          ],
+          "engagement_rate": 0.014622
+        },
+        {
+          "tweet_id": "mock_1003_3",
+          "text": "Mock tweet 3 from @mock_en_3 #AIbeauty",
+          "created_at": "2026-03-04T13:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1311,
+            "retweet_count": 64,
+            "reply_count": 25,
+            "quote_count": 12,
+            "bookmark_count": 24
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIbeauty"
+          ],
+          "engagement_rate": 0.050357
+        },
+        {
+          "tweet_id": "mock_1003_4",
+          "text": "Mock tweet 4 from @mock_en_3 #AIbeauty #midjourney #AI美女",
+          "created_at": "2026-03-05T14:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1617,
+            "retweet_count": 25,
+            "reply_count": 7,
+            "quote_count": 5,
+            "bookmark_count": 3
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIbeauty",
+            "#midjourney",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.058987
+        },
+        {
+          "tweet_id": "mock_1003_5",
+          "text": "Mock tweet 5 from @mock_en_3 #midjourney #AIgirl #AIbeauty",
+          "created_at": "2026-03-06T15:00:00+00:00",
+          "public_metrics": {
+            "like_count": 847,
+            "retweet_count": 33,
+            "reply_count": 30,
+            "quote_count": 20,
+            "bookmark_count": 17
+          },
+          "entities": {},
+          "hashtags": [
+            "#midjourney",
+            "#AIgirl",
+            "#AIbeauty"
+          ],
+          "engagement_rate": 0.033167
+        },
+        {
+          "tweet_id": "mock_1003_6",
+          "text": "Mock tweet 6 from @mock_en_3 #midjourney #aiイラスト #AI美女",
+          "created_at": "2026-03-07T16:00:00+00:00",
+          "public_metrics": {
+            "like_count": 72,
+            "retweet_count": 56,
+            "reply_count": 27,
+            "quote_count": 16,
+            "bookmark_count": 6
+          },
+          "entities": {},
+          "hashtags": [
+            "#midjourney",
+            "#aiイラスト",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.006098
+        },
+        {
+          "tweet_id": "mock_1003_7",
+          "text": "Mock tweet 7 from @mock_en_3 #AIgirl #AI美女",
+          "created_at": "2026-03-08T17:00:00+00:00",
+          "public_metrics": {
+            "like_count": 313,
+            "retweet_count": 6,
+            "reply_count": 26,
+            "quote_count": 8,
+            "bookmark_count": 30
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.012589
+        },
+        {
+          "tweet_id": "mock_1003_8",
+          "text": "Mock tweet 8 from @mock_en_3 #midjourney",
+          "created_at": "2026-03-09T18:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1897,
+            "retweet_count": 99,
+            "reply_count": 17,
+            "quote_count": 13,
+            "bookmark_count": 17
+          },
+          "entities": {},
+          "hashtags": [
+            "#midjourney"
+          ],
+          "engagement_rate": 0.072254
+        },
+        {
+          "tweet_id": "mock_1003_9",
+          "text": "Mock tweet 9 from @mock_en_3 #stablediffusion",
+          "created_at": "2026-03-09T19:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1028,
+            "retweet_count": 194,
+            "reply_count": 6,
+            "quote_count": 10,
+            "bookmark_count": 5
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.044151
+        }
+      ],
+      "avg_engagement_rate": 0.0423,
+      "posting_frequency": 4.0,
+      "top_posts": [
+        {
+          "tweet_id": "mock_1003_8",
+          "engagement_rate": 0.072254,
+          "like_count": 1897
+        },
+        {
+          "tweet_id": "mock_1003_1",
+          "engagement_rate": 0.067368,
+          "like_count": 1750
+        },
+        {
+          "tweet_id": "mock_1003_0",
+          "engagement_rate": 0.063409,
+          "like_count": 1688
+        }
+      ],
+      "hashtags_used": {
+        "#AI美女": 5,
+        "#AIbeauty": 5,
+        "#aiイラスト": 2,
+        "#AIart": 1,
+        "#midjourney": 4,
+        "#AIgirl": 2,
+        "#stablediffusion": 1
+      }
+    },
+    {
+      "handle": "mock_en_4",
+      "user_id": "1004",
+      "display_name": "MockCreator EN 4",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 26999,
+      "following": 563,
+      "tweet_count": 2792,
+      "description": "Mock AI beauty account (EN)",
+      "recent_posts": [
+        {
+          "tweet_id": "mock_1004_0",
+          "text": "Mock tweet 0 from @mock_en_4 #stablediffusion #AIart",
+          "created_at": "2026-03-01T10:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1256,
+            "retweet_count": 62,
+            "reply_count": 20,
+            "quote_count": 13,
+            "bookmark_count": 15
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#AIart"
+          ],
+          "engagement_rate": 0.050039
+        },
+        {
+          "tweet_id": "mock_1004_1",
+          "text": "Mock tweet 1 from @mock_en_4 #AIgirl",
+          "created_at": "2026-03-02T11:00:00+00:00",
+          "public_metrics": {
+            "like_count": 711,
+            "retweet_count": 162,
+            "reply_count": 37,
+            "quote_count": 19,
+            "bookmark_count": 18
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.034409
+        },
+        {
+          "tweet_id": "mock_1004_2",
+          "text": "Mock tweet 2 from @mock_en_4 #AI美女",
+          "created_at": "2026-03-03T12:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1882,
+            "retweet_count": 64,
+            "reply_count": 10,
+            "quote_count": 0,
+            "bookmark_count": 2
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女"
+          ],
+          "engagement_rate": 0.072447
+        },
+        {
+          "tweet_id": "mock_1004_3",
+          "text": "Mock tweet 3 from @mock_en_4 #AIgirl",
+          "created_at": "2026-03-04T13:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1195,
+            "retweet_count": 198,
+            "reply_count": 20,
+            "quote_count": 2,
+            "bookmark_count": 25
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.052409
+        },
+        {
+          "tweet_id": "mock_1004_4",
+          "text": "Mock tweet 4 from @mock_en_4 #aiイラスト",
+          "created_at": "2026-03-05T14:00:00+00:00",
+          "public_metrics": {
+            "like_count": 803,
+            "retweet_count": 89,
+            "reply_count": 45,
+            "quote_count": 4,
+            "bookmark_count": 29
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.034853
+        },
+        {
+          "tweet_id": "mock_1004_5",
+          "text": "Mock tweet 5 from @mock_en_4 #aiイラスト #AI美女 #AIgirl",
+          "created_at": "2026-03-06T15:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1586,
+            "retweet_count": 118,
+            "reply_count": 33,
+            "quote_count": 16,
+            "bookmark_count": 17
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト",
+            "#AI美女",
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.064928
+        },
+        {
+          "tweet_id": "mock_1004_6",
+          "text": "Mock tweet 6 from @mock_en_4 #AI美女 #midjourney #AIart",
+          "created_at": "2026-03-07T16:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1009,
+            "retweet_count": 88,
+            "reply_count": 17,
+            "quote_count": 11,
+            "bookmark_count": 0
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女",
+            "#midjourney",
+            "#AIart"
+          ],
+          "engagement_rate": 0.041668
+        },
+        {
+          "tweet_id": "mock_1004_7",
+          "text": "Mock tweet 7 from @mock_en_4 #AI美女 #aiイラスト #AIart",
+          "created_at": "2026-03-08T17:00:00+00:00",
+          "public_metrics": {
+            "like_count": 121,
+            "retweet_count": 157,
+            "reply_count": 45,
+            "quote_count": 2,
+            "bookmark_count": 18
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女",
+            "#aiイラスト",
+            "#AIart"
+          ],
+          "engagement_rate": 0.012037
+        },
+        {
+          "tweet_id": "mock_1004_8",
+          "text": "Mock tweet 8 from @mock_en_4 #AIgirl #AIbeauty #AIart",
+          "created_at": "2026-03-09T18:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1450,
+            "retweet_count": 127,
+            "reply_count": 30,
+            "quote_count": 10,
+            "bookmark_count": 9
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl",
+            "#AIbeauty",
+            "#AIart"
+          ],
+          "engagement_rate": 0.059891
+        },
+        {
+          "tweet_id": "mock_1004_9",
+          "text": "Mock tweet 9 from @mock_en_4 #midjourney",
+          "created_at": "2026-03-09T19:00:00+00:00",
+          "public_metrics": {
+            "like_count": 856,
+            "retweet_count": 152,
+            "reply_count": 27,
+            "quote_count": 12,
+            "bookmark_count": 8
+          },
+          "entities": {},
+          "hashtags": [
+            "#midjourney"
+          ],
+          "engagement_rate": 0.038779
+        }
+      ],
+      "avg_engagement_rate": 0.046146,
+      "posting_frequency": 3.9,
+      "top_posts": [
+        {
+          "tweet_id": "mock_1004_2",
+          "engagement_rate": 0.072447,
+          "like_count": 1882
+        },
+        {
+          "tweet_id": "mock_1004_5",
+          "engagement_rate": 0.064928,
+          "like_count": 1586
+        },
+        {
+          "tweet_id": "mock_1004_8",
+          "engagement_rate": 0.059891,
+          "like_count": 1450
+        }
+      ],
+      "hashtags_used": {
+        "#stablediffusion": 1,
+        "#AIart": 4,
+        "#AIgirl": 4,
+        "#AI美女": 4,
+        "#aiイラスト": 3,
+        "#midjourney": 2,
+        "#AIbeauty": 1
+      }
+    },
+    {
+      "handle": "mock_en_5",
+      "user_id": "1005",
+      "display_name": "MockCreator EN 5",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 16482,
+      "following": 752,
+      "tweet_count": 2756,
+      "description": "Mock AI beauty account (EN)",
+      "recent_posts": [
+        {
+          "tweet_id": "mock_1005_0",
+          "text": "Mock tweet 0 from @mock_en_5 #stablediffusion #midjourney #AI美女",
+          "created_at": "2026-03-01T10:00:00+00:00",
+          "public_metrics": {
+            "like_count": 938,
+            "retweet_count": 29,
+            "reply_count": 26,
+            "quote_count": 12,
+            "bookmark_count": 29
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#midjourney",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.060976
+        },
+        {
+          "tweet_id": "mock_1005_1",
+          "text": "Mock tweet 1 from @mock_en_5 #stablediffusion",
+          "created_at": "2026-03-02T11:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1529,
+            "retweet_count": 139,
+            "reply_count": 41,
+            "quote_count": 5,
+            "bookmark_count": 8
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.103992
+        },
+        {
+          "tweet_id": "mock_1005_2",
+          "text": "Mock tweet 2 from @mock_en_5 #aiイラスト #stablediffusion #AIgirl",
+          "created_at": "2026-03-03T12:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1788,
+            "retweet_count": 42,
+            "reply_count": 40,
+            "quote_count": 18,
+            "bookmark_count": 6
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト",
+            "#stablediffusion",
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.114549
+        },
+        {
+          "tweet_id": "mock_1005_3",
+          "text": "Mock tweet 3 from @mock_en_5 #stablediffusion #AIart",
+          "created_at": "2026-03-04T13:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1156,
+            "retweet_count": 6,
+            "reply_count": 35,
+            "quote_count": 15,
+            "bookmark_count": 8
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#AIart"
+          ],
+          "engagement_rate": 0.073535
+        },
+        {
+          "tweet_id": "mock_1005_4",
+          "text": "Mock tweet 4 from @mock_en_5 #AI美女 #midjourney",
+          "created_at": "2026-03-05T14:00:00+00:00",
+          "public_metrics": {
+            "like_count": 528,
+            "retweet_count": 151,
+            "reply_count": 22,
+            "quote_count": 13,
+            "bookmark_count": 16
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女",
+            "#midjourney"
+          ],
+          "engagement_rate": 0.04332
+        },
+        {
+          "tweet_id": "mock_1005_5",
+          "text": "Mock tweet 5 from @mock_en_5 #AIart #AI美女",
+          "created_at": "2026-03-06T15:00:00+00:00",
+          "public_metrics": {
+            "like_count": 232,
+            "retweet_count": 88,
+            "reply_count": 2,
+            "quote_count": 1,
+            "bookmark_count": 23
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.019597
+        },
+        {
+          "tweet_id": "mock_1005_6",
+          "text": "Mock tweet 6 from @mock_en_5 #stablediffusion #midjourney #AIgirl",
+          "created_at": "2026-03-07T16:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1535,
+            "retweet_count": 119,
+            "reply_count": 20,
+            "quote_count": 12,
+            "bookmark_count": 14
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#midjourney",
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.102293
+        },
+        {
+          "tweet_id": "mock_1005_7",
+          "text": "Mock tweet 7 from @mock_en_5 #AI美女",
+          "created_at": "2026-03-08T17:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1133,
+            "retweet_count": 130,
+            "reply_count": 17,
+            "quote_count": 17,
+            "bookmark_count": 7
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女"
+          ],
+          "engagement_rate": 0.078692
+        },
+        {
+          "tweet_id": "mock_1005_8",
+          "text": "Mock tweet 8 from @mock_en_5 #aiイラスト #AIgirl #AIart",
+          "created_at": "2026-03-09T18:00:00+00:00",
+          "public_metrics": {
+            "like_count": 787,
+            "retweet_count": 138,
+            "reply_count": 42,
+            "quote_count": 9,
+            "bookmark_count": 27
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト",
+            "#AIgirl",
+            "#AIart"
+          ],
+          "engagement_rate": 0.059216
+        },
+        {
+          "tweet_id": "mock_1005_9",
+          "text": "Mock tweet 9 from @mock_en_5 #AIart #AI美女",
+          "created_at": "2026-03-09T19:00:00+00:00",
+          "public_metrics": {
+            "like_count": 851,
+            "retweet_count": 35,
+            "reply_count": 47,
+            "quote_count": 10,
+            "bookmark_count": 17
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.057214
+        }
+      ],
+      "avg_engagement_rate": 0.071338,
+      "posting_frequency": 1.6,
+      "top_posts": [
+        {
+          "tweet_id": "mock_1005_2",
+          "engagement_rate": 0.114549,
+          "like_count": 1788
+        },
+        {
+          "tweet_id": "mock_1005_1",
+          "engagement_rate": 0.103992,
+          "like_count": 1529
+        },
+        {
+          "tweet_id": "mock_1005_6",
+          "engagement_rate": 0.102293,
+          "like_count": 1535
+        }
+      ],
+      "hashtags_used": {
+        "#stablediffusion": 5,
+        "#midjourney": 3,
+        "#AI美女": 5,
+        "#aiイラスト": 2,
+        "#AIgirl": 3,
+        "#AIart": 4
+      }
+    },
+    {
+      "handle": "mock_jp_1",
+      "user_id": "2001",
+      "display_name": "MockCreator JP 1",
+      "status": "ok",
+      "market": "JP",
+      "category": "ai_beauty",
+      "followers": 17152,
+      "following": 357,
+      "tweet_count": 1686,
+      "description": "Mock AI beauty account (JP)",
+      "recent_posts": [
+        {
+          "tweet_id": "mock_2001_0",
+          "text": "Mock tweet 0 from @mock_jp_1 #aiイラスト",
+          "created_at": "2026-03-01T10:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1606,
+            "retweet_count": 20,
+            "reply_count": 35,
+            "quote_count": 10,
+            "bookmark_count": 0
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.097423
+        },
+        {
+          "tweet_id": "mock_2001_1",
+          "text": "Mock tweet 1 from @mock_jp_1 #AIgirl",
+          "created_at": "2026-03-02T11:00:00+00:00",
+          "public_metrics": {
+            "like_count": 511,
+            "retweet_count": 160,
+            "reply_count": 20,
+            "quote_count": 10,
+            "bookmark_count": 30
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.04087
+        },
+        {
+          "tweet_id": "mock_2001_2",
+          "text": "Mock tweet 2 from @mock_jp_1 #AIart #midjourney",
+          "created_at": "2026-03-03T12:00:00+00:00",
+          "public_metrics": {
+            "like_count": 158,
+            "retweet_count": 125,
+            "reply_count": 2,
+            "quote_count": 2,
+            "bookmark_count": 14
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart",
+            "#midjourney"
+          ],
+          "engagement_rate": 0.016733
+        },
+        {
+          "tweet_id": "mock_2001_3",
+          "text": "Mock tweet 3 from @mock_jp_1 #AIbeauty #AI美女 #stablediffusion",
+          "created_at": "2026-03-04T13:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1805,
+            "retweet_count": 74,
+            "reply_count": 19,
+            "quote_count": 10,
+            "bookmark_count": 26
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIbeauty",
+            "#AI美女",
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.111241
+        },
+        {
+          "tweet_id": "mock_2001_4",
+          "text": "Mock tweet 4 from @mock_jp_1 #stablediffusion",
+          "created_at": "2026-03-05T14:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1737,
+            "retweet_count": 185,
+            "reply_count": 48,
+            "quote_count": 14,
+            "bookmark_count": 4
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.115672
+        },
+        {
+          "tweet_id": "mock_2001_5",
+          "text": "Mock tweet 5 from @mock_jp_1 #AIart #aiイラスト #AI美女",
+          "created_at": "2026-03-06T15:00:00+00:00",
+          "public_metrics": {
+            "like_count": 344,
+            "retweet_count": 72,
+            "reply_count": 37,
+            "quote_count": 6,
+            "bookmark_count": 30
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart",
+            "#aiイラスト",
+            "#AI美女"
+          ],
+          "engagement_rate": 0.026761
+        },
+        {
+          "tweet_id": "mock_2001_6",
+          "text": "Mock tweet 6 from @mock_jp_1 #aiイラスト",
+          "created_at": "2026-03-07T16:00:00+00:00",
+          "public_metrics": {
+            "like_count": 716,
+            "retweet_count": 50,
+            "reply_count": 26,
+            "quote_count": 8,
+            "bookmark_count": 4
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.046642
+        },
+        {
+          "tweet_id": "mock_2001_7",
+          "text": "Mock tweet 7 from @mock_jp_1 #aiイラスト #AIgirl",
+          "created_at": "2026-03-08T17:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1541,
+            "retweet_count": 54,
+            "reply_count": 23,
+            "quote_count": 0,
+            "bookmark_count": 2
+          },
+          "entities": {},
+          "hashtags": [
+            "#aiイラスト",
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.094333
+        },
+        {
+          "tweet_id": "mock_2001_8",
+          "text": "Mock tweet 8 from @mock_jp_1 #stablediffusion",
+          "created_at": "2026-03-09T18:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1993,
+            "retweet_count": 27,
+            "reply_count": 50,
+            "quote_count": 10,
+            "bookmark_count": 24
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.121269
+        },
+        {
+          "tweet_id": "mock_2001_9",
+          "text": "Mock tweet 9 from @mock_jp_1 #AIbeauty",
+          "created_at": "2026-03-09T19:00:00+00:00",
+          "public_metrics": {
+            "like_count": 751,
+            "retweet_count": 100,
+            "reply_count": 45,
+            "quote_count": 13,
+            "bookmark_count": 25
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIbeauty"
+          ],
+          "engagement_rate": 0.052997
+        }
+      ],
+      "avg_engagement_rate": 0.072394,
+      "posting_frequency": 4.0,
+      "top_posts": [
+        {
+          "tweet_id": "mock_2001_8",
+          "engagement_rate": 0.121269,
+          "like_count": 1993
+        },
+        {
+          "tweet_id": "mock_2001_4",
+          "engagement_rate": 0.115672,
+          "like_count": 1737
+        },
+        {
+          "tweet_id": "mock_2001_3",
+          "engagement_rate": 0.111241,
+          "like_count": 1805
+        }
+      ],
+      "hashtags_used": {
+        "#aiイラスト": 4,
+        "#AIgirl": 2,
+        "#AIart": 2,
+        "#midjourney": 1,
+        "#AIbeauty": 2,
+        "#AI美女": 2,
+        "#stablediffusion": 3
+      }
+    },
+    {
+      "handle": "mock_jp_2",
+      "user_id": "2002",
+      "display_name": "MockCreator JP 2",
+      "status": "ok",
+      "market": "JP",
+      "category": "ai_beauty",
+      "followers": 25353,
+      "following": 701,
+      "tweet_count": 1492,
+      "description": "Mock AI beauty account (JP)",
+      "recent_posts": [
+        {
+          "tweet_id": "mock_2002_0",
+          "text": "Mock tweet 0 from @mock_jp_2 #stablediffusion",
+          "created_at": "2026-03-01T10:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1226,
+            "retweet_count": 71,
+            "reply_count": 11,
+            "quote_count": 14,
+            "bookmark_count": 1
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.052144
+        },
+        {
+          "tweet_id": "mock_2002_1",
+          "text": "Mock tweet 1 from @mock_jp_2 #AIgirl #midjourney",
+          "created_at": "2026-03-02T11:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1679,
+            "retweet_count": 94,
+            "reply_count": 4,
+            "quote_count": 14,
+            "bookmark_count": 1
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl",
+            "#midjourney"
+          ],
+          "engagement_rate": 0.070643
+        },
+        {
+          "tweet_id": "mock_2002_2",
+          "text": "Mock tweet 2 from @mock_jp_2 #midjourney",
+          "created_at": "2026-03-03T12:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1789,
+            "retweet_count": 140,
+            "reply_count": 26,
+            "quote_count": 14,
+            "bookmark_count": 13
+          },
+          "entities": {},
+          "hashtags": [
+            "#midjourney"
+          ],
+          "engagement_rate": 0.077663
+        },
+        {
+          "tweet_id": "mock_2002_3",
+          "text": "Mock tweet 3 from @mock_jp_2 #AIgirl #stablediffusion",
+          "created_at": "2026-03-04T13:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1608,
+            "retweet_count": 9,
+            "reply_count": 29,
+            "quote_count": 13,
+            "bookmark_count": 18
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl",
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.065436
+        },
+        {
+          "tweet_id": "mock_2002_4",
+          "text": "Mock tweet 4 from @mock_jp_2 #AIbeauty",
+          "created_at": "2026-03-05T14:00:00+00:00",
+          "public_metrics": {
+            "like_count": 618,
+            "retweet_count": 146,
+            "reply_count": 2,
+            "quote_count": 9,
+            "bookmark_count": 13
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIbeauty"
+          ],
+          "engagement_rate": 0.030568
+        },
+        {
+          "tweet_id": "mock_2002_5",
+          "text": "Mock tweet 5 from @mock_jp_2 #AI美女 #stablediffusion",
+          "created_at": "2026-03-06T15:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1773,
+            "retweet_count": 44,
+            "reply_count": 23,
+            "quote_count": 9,
+            "bookmark_count": 12
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女",
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.07293
+        },
+        {
+          "tweet_id": "mock_2002_6",
+          "text": "Mock tweet 6 from @mock_jp_2 #stablediffusion #aiイラスト",
+          "created_at": "2026-03-07T16:00:00+00:00",
+          "public_metrics": {
+            "like_count": 104,
+            "retweet_count": 164,
+            "reply_count": 5,
+            "quote_count": 4,
+            "bookmark_count": 8
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#aiイラスト"
+          ],
+          "engagement_rate": 0.010926
+        },
+        {
+          "tweet_id": "mock_2002_7",
+          "text": "Mock tweet 7 from @mock_jp_2 #AIart",
+          "created_at": "2026-03-08T17:00:00+00:00",
+          "public_metrics": {
+            "like_count": 612,
+            "retweet_count": 171,
+            "reply_count": 21,
+            "quote_count": 2,
+            "bookmark_count": 1
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart"
+          ],
+          "engagement_rate": 0.031791
+        },
+        {
+          "tweet_id": "mock_2002_8",
+          "text": "Mock tweet 8 from @mock_jp_2 #stablediffusion #AI美女 #AIart",
+          "created_at": "2026-03-09T18:00:00+00:00",
+          "public_metrics": {
+            "like_count": 154,
+            "retweet_count": 58,
+            "reply_count": 24,
+            "quote_count": 16,
+            "bookmark_count": 4
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#AI美女",
+            "#AIart"
+          ],
+          "engagement_rate": 0.00994
+        },
+        {
+          "tweet_id": "mock_2002_9",
+          "text": "Mock tweet 9 from @mock_jp_2 #AIart",
+          "created_at": "2026-03-09T19:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1676,
+            "retweet_count": 135,
+            "reply_count": 47,
+            "quote_count": 12,
+            "bookmark_count": 29
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart"
+          ],
+          "engagement_rate": 0.073759
+        }
+      ],
+      "avg_engagement_rate": 0.04958,
+      "posting_frequency": 4.0,
+      "top_posts": [
+        {
+          "tweet_id": "mock_2002_2",
+          "engagement_rate": 0.077663,
+          "like_count": 1789
+        },
+        {
+          "tweet_id": "mock_2002_9",
+          "engagement_rate": 0.073759,
+          "like_count": 1676
+        },
+        {
+          "tweet_id": "mock_2002_5",
+          "engagement_rate": 0.07293,
+          "like_count": 1773
+        }
+      ],
+      "hashtags_used": {
+        "#stablediffusion": 5,
+        "#AIgirl": 2,
+        "#midjourney": 2,
+        "#AIbeauty": 1,
+        "#AI美女": 2,
+        "#aiイラスト": 1,
+        "#AIart": 3
+      }
+    },
+    {
+      "handle": "mock_jp_3",
+      "user_id": "2003",
+      "display_name": "MockCreator JP 3",
+      "status": "ok",
+      "market": "JP",
+      "category": "ai_beauty",
+      "followers": 19242,
+      "following": 1779,
+      "tweet_count": 784,
+      "description": "Mock AI beauty account (JP)",
+      "recent_posts": [
+        {
+          "tweet_id": "mock_2003_0",
+          "text": "Mock tweet 0 from @mock_jp_3 #AIbeauty",
+          "created_at": "2026-03-01T10:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1998,
+            "retweet_count": 19,
+            "reply_count": 14,
+            "quote_count": 4,
+            "bookmark_count": 26
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIbeauty"
+          ],
+          "engagement_rate": 0.105758
+        },
+        {
+          "tweet_id": "mock_2003_1",
+          "text": "Mock tweet 1 from @mock_jp_3 #AI美女",
+          "created_at": "2026-03-02T11:00:00+00:00",
+          "public_metrics": {
+            "like_count": 674,
+            "retweet_count": 198,
+            "reply_count": 34,
+            "quote_count": 8,
+            "bookmark_count": 19
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女"
+          ],
+          "engagement_rate": 0.0475
+        },
+        {
+          "tweet_id": "mock_2003_2",
+          "text": "Mock tweet 2 from @mock_jp_3 #stablediffusion #midjourney",
+          "created_at": "2026-03-03T12:00:00+00:00",
+          "public_metrics": {
+            "like_count": 896,
+            "retweet_count": 156,
+            "reply_count": 36,
+            "quote_count": 10,
+            "bookmark_count": 30
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion",
+            "#midjourney"
+          ],
+          "engagement_rate": 0.057063
+        },
+        {
+          "tweet_id": "mock_2003_3",
+          "text": "Mock tweet 3 from @mock_jp_3 #stablediffusion",
+          "created_at": "2026-03-04T13:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1851,
+            "retweet_count": 99,
+            "reply_count": 44,
+            "quote_count": 0,
+            "bookmark_count": 19
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.103627
+        },
+        {
+          "tweet_id": "mock_2003_4",
+          "text": "Mock tweet 4 from @mock_jp_3 #AIart #midjourney",
+          "created_at": "2026-03-05T14:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1490,
+            "retweet_count": 26,
+            "reply_count": 50,
+            "quote_count": 9,
+            "bookmark_count": 12
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIart",
+            "#midjourney"
+          ],
+          "engagement_rate": 0.081852
+        },
+        {
+          "tweet_id": "mock_2003_5",
+          "text": "Mock tweet 5 from @mock_jp_3 #AI美女 #AIbeauty",
+          "created_at": "2026-03-06T15:00:00+00:00",
+          "public_metrics": {
+            "like_count": 613,
+            "retweet_count": 100,
+            "reply_count": 24,
+            "quote_count": 15,
+            "bookmark_count": 15
+          },
+          "entities": {},
+          "hashtags": [
+            "#AI美女",
+            "#AIbeauty"
+          ],
+          "engagement_rate": 0.039081
+        },
+        {
+          "tweet_id": "mock_2003_6",
+          "text": "Mock tweet 6 from @mock_jp_3 #AIgirl #midjourney",
+          "created_at": "2026-03-07T16:00:00+00:00",
+          "public_metrics": {
+            "like_count": 1677,
+            "retweet_count": 183,
+            "reply_count": 42,
+            "quote_count": 11,
+            "bookmark_count": 0
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl",
+            "#midjourney"
+          ],
+          "engagement_rate": 0.099418
+        },
+        {
+          "tweet_id": "mock_2003_7",
+          "text": "Mock tweet 7 from @mock_jp_3 #stablediffusion",
+          "created_at": "2026-03-08T17:00:00+00:00",
+          "public_metrics": {
+            "like_count": 2000,
+            "retweet_count": 88,
+            "reply_count": 46,
+            "quote_count": 19,
+            "bookmark_count": 10
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.111891
+        },
+        {
+          "tweet_id": "mock_2003_8",
+          "text": "Mock tweet 8 from @mock_jp_3 #AIgirl",
+          "created_at": "2026-03-09T18:00:00+00:00",
+          "public_metrics": {
+            "like_count": 953,
+            "retweet_count": 20,
+            "reply_count": 35,
+            "quote_count": 20,
+            "bookmark_count": 9
+          },
+          "entities": {},
+          "hashtags": [
+            "#AIgirl"
+          ],
+          "engagement_rate": 0.053425
+        },
+        {
+          "tweet_id": "mock_2003_9",
+          "text": "Mock tweet 9 from @mock_jp_3 #stablediffusion",
+          "created_at": "2026-03-09T19:00:00+00:00",
+          "public_metrics": {
+            "like_count": 777,
+            "retweet_count": 146,
+            "reply_count": 29,
+            "quote_count": 4,
+            "bookmark_count": 23
+          },
+          "entities": {},
+          "hashtags": [
+            "#stablediffusion"
+          ],
+          "engagement_rate": 0.049683
+        }
+      ],
+      "avg_engagement_rate": 0.07493,
+      "posting_frequency": 3.7,
+      "top_posts": [
+        {
+          "tweet_id": "mock_2003_7",
+          "engagement_rate": 0.111891,
+          "like_count": 2000
+        },
+        {
+          "tweet_id": "mock_2003_0",
+          "engagement_rate": 0.105758,
+          "like_count": 1998
+        },
+        {
+          "tweet_id": "mock_2003_3",
+          "engagement_rate": 0.103627,
+          "like_count": 1851
+        }
+      ],
+      "hashtags_used": {
+        "#AIbeauty": 2,
+        "#AI美女": 2,
+        "#stablediffusion": 4,
+        "#midjourney": 3,
+        "#AIart": 1,
+        "#AIgirl": 2
+      }
+    }
+  ],
+  "skipped_competitors": [
+    {
+      "handle": "mock_suspended",
+      "status": "suspended",
+      "reason": "Account suspended (mock)"
+    }
+  ],
+  "hashtag_frequency": {
+    "#stablediffusion": 27,
+    "#AIgirl": 25,
+    "#AI美女": 25,
+    "#AIart": 21,
+    "#aiイラスト": 20,
+    "#midjourney": 19,
+    "#AIbeauty": 14
+  },
+  "hashtag_by_market": {
+    "EN": {
+      "#AIgirl": 19,
+      "#AI美女": 19,
+      "#stablediffusion": 15,
+      "#AIart": 15,
+      "#aiイラスト": 15,
+      "#midjourney": 13,
+      "#AIbeauty": 9
+    },
+    "JP": {
+      "#stablediffusion": 12,
+      "#AIgirl": 6,
+      "#AIart": 6,
+      "#midjourney": 6,
+      "#AI美女": 6,
+      "#aiイラスト": 5,
+      "#AIbeauty": 5
+    }
+  },
+  "market_comparison": {
+    "EN": {
+      "competitor_count": 5,
+      "avg_followers": 26223,
+      "avg_engagement_rate": 0.051448,
+      "avg_posting_frequency": 3.1,
+      "top_hashtags": [
+        "#AIgirl",
+        "#AI美女",
+        "#stablediffusion",
+        "#AIart",
+        "#aiイラスト"
+      ]
+    },
+    "JP": {
+      "competitor_count": 3,
+      "avg_followers": 20582,
+      "avg_engagement_rate": 0.065635,
+      "avg_posting_frequency": 3.9,
+      "top_hashtags": [
+        "#stablediffusion",
+        "#AIgirl",
+        "#AIart",
+        "#midjourney",
+        "#AI美女"
+      ]
+    }
+  },
+  "trending_topics": [
+    {
+      "keyword": "#AIbeauty",
+      "sample_tweets": [
+        {
+          "tweet_id": "mock_trend_#AIbeauty_0",
+          "text": "Trending tweet about #AIbeauty #AIbeauty",
+          "author": "trend_author_0",
+          "like_count": 4600
+        },
+        {
+          "tweet_id": "mock_trend_#AIbeauty_1",
+          "text": "Trending tweet about #AIbeauty #AIbeauty",
+          "author": "trend_author_1",
+          "like_count": 255
+        },
+        {
+          "tweet_id": "mock_trend_#AIbeauty_2",
+          "text": "Trending tweet about #AIbeauty #AIbeauty",
+          "author": "trend_author_2",
+          "like_count": 3756
+        }
+      ]
+    },
+    {
+      "keyword": "#AIart",
+      "sample_tweets": [
+        {
+          "tweet_id": "mock_trend_#AIart_0",
+          "text": "Trending tweet about #AIart #AIart",
+          "author": "trend_author_0",
+          "like_count": 2160
+        },
+        {
+          "tweet_id": "mock_trend_#AIart_1",
+          "text": "Trending tweet about #AIart #AIart",
+          "author": "trend_author_1",
+          "like_count": 2168
+        },
+        {
+          "tweet_id": "mock_trend_#AIart_2",
+          "text": "Trending tweet about #AIart #AIart",
+          "author": "trend_author_2",
+          "like_count": 3999
+        }
+      ]
+    },
+    {
+      "keyword": "#AIgirl",
+      "sample_tweets": [
+        {
+          "tweet_id": "mock_trend_#AIgirl_0",
+          "text": "Trending tweet about #AIgirl #AIgirl",
+          "author": "trend_author_0",
+          "like_count": 3108
+        },
+        {
+          "tweet_id": "mock_trend_#AIgirl_1",
+          "text": "Trending tweet about #AIgirl #AIgirl",
+          "author": "trend_author_1",
+          "like_count": 3018
+        },
+        {
+          "tweet_id": "mock_trend_#AIgirl_2",
+          "text": "Trending tweet about #AIgirl #AIgirl",
+          "author": "trend_author_2",
+          "like_count": 2683
+        }
+      ]
+    },
+    {
+      "keyword": "#AImodel",
+      "sample_tweets": [
+        {
+          "tweet_id": "mock_trend_#AImodel_0",
+          "text": "Trending tweet about #AImodel #AImodel",
+          "author": "trend_author_0",
+          "like_count": 3514
+        },
+        {
+          "tweet_id": "mock_trend_#AImodel_1",
+          "text": "Trending tweet about #AImodel #AImodel",
+          "author": "trend_author_1",
+          "like_count": 4377
+        },
+        {
+          "tweet_id": "mock_trend_#AImodel_2",
+          "text": "Trending tweet about #AImodel #AImodel",
+          "author": "trend_author_2",
+          "like_count": 3047
+        }
+      ]
+    }
+  ],
+  "trending_posts": [
+    {
+      "tweet_id": "mock_viral_1",
+      "text": "This AI beauty post went viral! #AIbeauty #AIart",
+      "author": "viral_creator",
+      "like_count": 10000,
+      "engagement_rate": 0.12
+    }
+  ],
+  "new_accounts_discovered": [
+    {
+      "handle": "new_ai_creator_mock",
+      "followers": 8500,
+      "source": "keyword_search:#AIbeauty"
+    }
+  ]
+}

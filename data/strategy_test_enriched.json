@@ -1,0 +1,99 @@
+{
+  "date": "2026-03-04",
+  "generated_at": "2026-03-04T09:15:00+09:00",
+  "scout_report_used": "data/scout_report_enriched_test.json",
+  "EN": {
+    "posting_schedule": [
+      {"slot": 1, "time": "08:00 UTC", "category": "portrait", "priority": "high"},
+      {"slot": 2, "time": "12:00 UTC", "category": "fashion", "priority": "high"},
+      {"slot": 3, "time": "16:00 UTC", "category": "engagement_bait", "priority": "medium"},
+      {"slot": 4, "time": "20:00 UTC", "category": "artistic", "priority": "medium"}
+    ],
+    "content_mix": {
+      "portrait": 35,
+      "fashion": 25,
+      "engagement_bait": 25,
+      "artistic": 15
+    },
+    "hashtag_strategy": {
+      "always_use": ["#AIart"],
+      "rotate": ["#AIbeauty", "#digitalart", "#AIgirl"],
+      "trending_today": ["#midjourney"],
+      "max_per_post": 2
+    },
+    "outbound_strategy": {
+      "daily_likes": 30,
+      "daily_replies": 10,
+      "daily_follows": 5,
+      "target_accounts": ["@imrubyreid", "@yogana_19", "@sessypuuh", "@yuumi005", "@IsabellaCruz_47"],
+      "reply_style": "Genuine and conversational. Compliment specific image qualities (lighting, composition, style). Use short, natural sentences. Avoid generic praise — reference something visible in their post."
+    },
+    "ab_test": {
+      "variable": "caption_length",
+      "variant_a": "Ultra-short captions (1-5 words) mimicking top performers like @yuumispm and @imrubyreid who post image-first with minimal text",
+      "variant_b": "Engagement-question captions (6-15 words) using question hooks like 'would you?' or 'rate me 1-10' based on trending post patterns",
+      "duration_days": 5,
+      "start_date": "2026-03-04"
+    },
+    "key_insights": [
+      "Top EN performers (@imrubyreid 48K likes, @yuumispm 32K likes) succeed with image-first posts and ultra-short captions — visual quality drives engagement, not text length.",
+      "Engagement-bait questions ('would you?', 'rate me 1-10', 'how many pounds should I lose?') consistently appear in trending posts (6 of 12 viral posts use this pattern) — incorporate question hooks into 25% of posts.",
+      "92.7% of competitors use zero hashtags; the few hashtag-heavy accounts (#SFW, #digitalart) are mid-tier performers — minimize hashtag usage to 0-2 per post to match top performer behavior.",
+      "Reply contamination is 36.9% across competitors — many accounts inflate engagement rates through reply conversations. Focus on organic feed post engagement rather than reply chains for authentic growth.",
+      "EN market avg posting frequency is 4.3/day but top performers (@sessypuuh, @yuumispm) post only 0.7/day with much higher per-post quality — quality over quantity is the proven EN strategy.",
+      "Newly discovered @AndrewDark350 (208K followers) and @waifu4u2 (76K) represent potential collaboration or engagement targets in the #AIgirl space."
+    ],
+    "risks": [
+      "Engagement-bait captions may attract low-quality followers who don't convert to long-term engagement — monitor follower retention after A/B test.",
+      "Low posting frequency (4 posts/day) means each post must be high quality; a single poor-performing post significantly impacts daily metrics.",
+      "Competition is fierce in EN market (avg 140K followers) — differentiation through unique visual style is essential to stand out."
+    ]
+  },
+  "JP": {
+    "posting_schedule": [
+      {"slot": 1, "time": "07:00 JST", "category": "portrait", "priority": "high"},
+      {"slot": 2, "time": "12:00 JST", "category": "fashion", "priority": "high"},
+      {"slot": 3, "time": "18:00 JST", "category": "artistic", "priority": "medium"},
+      {"slot": 4, "time": "21:00 JST", "category": "trend_reactive", "priority": "medium"}
+    ],
+    "content_mix": {
+      "portrait": 40,
+      "fashion": 25,
+      "artistic": 20,
+      "trend_reactive": 15
+    },
+    "hashtag_strategy": {
+      "always_use": ["#AIart"],
+      "rotate": ["#AIイラスト", "#AI美女", "#AIgirl"],
+      "trending_today": ["#stablediffusion"],
+      "max_per_post": 2
+    },
+    "outbound_strategy": {
+      "daily_likes": 30,
+      "daily_replies": 10,
+      "daily_follows": 5,
+      "target_accounts": ["@tororo_223", "@yunaelegant", "@AI_Girls_Studio", "@AIart_yama94"],
+      "reply_style": "Japanese-natural, friendly tone. Use casual polite form (ですます). Compliment specific aesthetic elements. Keep replies warm and genuine — avoid overly formal or robotic language. One emoji maximum."
+    },
+    "ab_test": {
+      "variable": "posting_frequency",
+      "variant_a": "3 posts per day with high visual quality focus, matching EN-style quality-over-quantity approach (days 1-2: skip slot 4)",
+      "variant_b": "4 posts per day at scheduled times with standard quality (days 3-5: full schedule)",
+      "duration_days": 5,
+      "start_date": "2026-03-04"
+    },
+    "key_insights": [
+      "JP market has lower avg engagement (0.23% follower-based) but impression-based rates are actually higher (6.32% avg) than EN (5.06%) — JP posts reach fewer followers but those who see them engage more. Focus on maximizing reach through algorithm-friendly posting.",
+      "Top JP performer @ganbarukaisyain (338K followers) uses zero hashtags and posts infrequently (0.3/day) — extreme quality-over-quantity approach works even in the high-frequency JP market where avg is 6.6 posts/day.",
+      "@tororo_223 achieved 1,529 likes with only 11K followers (16.8% engagement rate), the highest reply-adjusted rate in JP market — study their content style for template reference.",
+      "JP market is heavily reply-contaminated: @hakoirikumatan, @2nd_karen_AI, @seisei_ai_1st have 100% reply rates with zero organic feed posts — avoid this community-chat trap that produces zero organic growth.",
+      "JP market has lower competition density (67K avg followers vs 140K EN) and fewer competitors (17 vs 26) — there is more room for a quality-focused newcomer to establish presence.",
+      "JP hashtag ecosystem (#AIイラスト, #AI美女, #SFW) is slightly more active than EN, but still used by only mid-tier accounts. Keep hashtag usage minimal (0-2 per post) to align with top performer patterns."
+    ],
+    "risks": [
+      "JP audience expects consistent posting rhythm — the A/B test of reduced frequency (variant A) may cause temporary follower loss if audience expects daily content.",
+      "Reply contamination patterns are culturally ingrained in JP AI art community — must actively resist the temptation to grow through reply chains rather than organic feed posts.",
+      "JP market #SFW tag association means content must stay strictly clean — any borderline content risks community backlash and potential account issues."
+    ]
+  }
+}
