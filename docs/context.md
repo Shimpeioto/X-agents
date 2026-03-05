@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 5, 2026 (Session 20: Architecture Review & Agent Building Guidelines)
+**Last updated**: March 5, 2026 (Session 23: Phase 5 E2E Testing — 20-Test Battery Complete)
 
 ---
 
@@ -260,14 +260,15 @@ This was explicitly framed as a demonstration — a real-world test of the auton
 
 **Shimpei's key insight**: VPS is only needed for autonomous operation — not during development. During development, you sit at your own machine and trigger agents from the CLI. VPS deployment should be deferred to when all agents are proven reliable.
 
-**Decision 10**: Local-first development. Phases 0-4 run on your own machine (CLI). VPS provisioning moves to Phase 5. Autonomous cron operation is Phase 6.
+**Decision 10**: Local-first development. Phases 0-4 run on your own machine (CLI). VPS provisioning moves to Phase 6. Autonomous cron operation is Phase 7.
 
 **Phase 0 Runbook rewritten**: Completely replaced VPS-centric 12-step guide with local development setup (9 steps). No server provisioning, hardening, or cron setup.
 
 **Implementation phases restructured**: 5 phases → 7 phases:
 - Phases 0-4: Your machine (build, test, iterate)
-- Phase 5: VPS deployment (provision, copy project, install cron)
-- Phase 6: Autonomous operation (cron triggers agents overnight)
+- Phase 5: Claude hybrid agent conversion (Analyst, Scout, Publisher intelligence)
+- Phase 6: VPS deployment (provision, copy project, install cron)
+- Phase 7: Autonomous operation (cron triggers agents overnight)
 
 **X Developer Terms compliance review**: Full review of Developer Agreement, Developer Policy, and Automation Rules against our project design.
 
@@ -315,7 +316,7 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 **Decision 15**: Strategist writes only the dated file (`strategy_{YYYYMMDD}.json`). Marc copies to `strategy_current.json` only after all validations pass — preventing unvalidated data from corrupting the current strategy.
 
 **Parent docs updated for consistency**:
-- Parent spec (`x-ai-beauty-spec-v2.3.md`): project structure updated, Section 11.2 annotated as Phase 5+, locking recommendation extended, Phase 5 checklist annotated
+- Parent spec (`x-ai-beauty-spec-v2.3.md`): project structure updated, Section 11.2 annotated as Phase 6+, locking recommendation extended, Phase 6 checklist annotated
 - Parent PRD (`x-ai-beauty-prd-v1.md`): F7 note updated to link Phase 1 spec
 - Review doc (`review.md`): Issues 3.15 and 3.16 annotated with Phase 1 resolution status
 
@@ -345,6 +346,84 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 
 **Deliverables**: `docs/guides/agent-building-guidelines.md`, updated `docs/harness.md`, updated `CLAUDE.md`
 
+#### Session 21: Phase 5 Spec & PRD — Claude Hybrid Agent Conversion (Mar 5, 2026)
+
+**Deep exploration of all three Python-only agents** (Scout, Publisher, Analyst) to identify where Claude reasoning adds value vs. where Python should stay.
+
+**Scout analysis**: Found 36.9% reply contamination (151/409 sampled tweets are @replies), hardcoded trending threshold (`like_count >= 100`) returns zero results, 59 unfiltered new accounts mixing bots with 200K-follower accounts, impression data collected but never used, 92.7% of competitors use zero hashtags.
+
+**Publisher analysis**: `random.choice(reply_templates)` with no semantic matching, always targets `recent_tweets[0]` regardless of content, no relevance filtering, identical error logging for all failure types.
+
+**Analyst analysis**: Zero interpretation layer — computes only `hours_after_post`, `engagement_rate` (always NULL from API), and `followers_change`. Marc manually owns anomaly detection, report composition, and A/B test evaluation in Step P8.
+
+**Approved conversion plan** — "Claude Brain, Python Hands":
+- Analyst Intelligence Mode: Claude reads raw metrics, detects anomalies, composes daily report. Python collect/summary/import unchanged.
+- Scout Intelligence Mode: Claude runs `scout.py --raw --compact`, analyzes compact output (457KB→30KB), writes enriched report with `analysis` section (backward compatible).
+- Publisher Smart Outbound Mode: Claude reads target tweets via new `publisher_outbound_data.py`, selects relevant tweets, crafts contextual replies, writes outbound plan. New `smart-outbound` subcommand executes plan. Post subcommand unchanged.
+- All three have fallback to Phase 4 behavior if Claude fails.
+
+**Phase renumbering**: Phase 5 = Claude Hybrid Agent Conversion, Phase 6 = VPS Deployment (was 5), Phase 7 = Autonomous Operation (was 6). Total phases: 7.
+
+**Deliverables**: `docs/specs/phase-5-spec.md` (1456 lines), `docs/specs/phase-5-prd.md` (258 lines), updated `docs/context.md`
+
+---
+
+#### Session 22: Phase 5 Implementation — Claude Hybrid Agent Conversion (Mar 5, 2026)
+
+**Implemented all three sub-phases** of the "Claude Brain, Python Hands" hybrid agent conversion:
+
+**Sub-Phase 1 — Analyst Intelligence**:
+- `agents/analyst.md` — Added "Intelligence Mode" section (Steps 1-4: read inputs, analyze per account, outbound effectiveness, compose report)
+- `scripts/validate.py` — Added `validate_analyst_report()` (8 checks), `validate_scout_analysis()` (6 checks), `validate_outbound_plan()` (7 checks) + CLI routing for all three
+- `agents/marc_publishing.md` — Replaced Step P8 with P8a (Claude subagent) → P8b (validate) → P8c (send report + alerts via Telegram)
+
+**Sub-Phase 2 — Scout Intelligence**:
+- `scripts/scout.py` — Added `--raw`/`--compact` CLI flags, `compute_pre_analysis()` (reply contamination, impression engagement, dynamic trending threshold, hashtag usage), `compact_report()` (457KB→~30KB)
+- `agents/scout.md` — Added "Daily Intelligence Mode" section (Steps 1-3: collect raw+compact, analyze using _pre_analysis stats, write enriched backward-compatible report)
+- `agents/marc_pipeline.md` — Replaced Step 2 with Claude Scout subagent invocation + H3 retry + fallback to plain `python3 scripts/scout.py`
+
+**Sub-Phase 3 — Publisher Smart Outbound**:
+- `scripts/publisher_outbound_data.py` — **New file** (~120 lines): `OutboundDataFetcher` class, fetches target account info + 5 recent tweets, JSON output to stdout
+- `scripts/publisher.py` — Added `run_smart_outbound()` function + `smart-outbound` CLI subcommand (reads Claude-generated plan, executes with same rate limits/delays)
+- `agents/publisher.md` — Added "Smart Outbound Mode" section (Steps 1-4: read inputs, fetch target data, analyze and plan, write outbound plan)
+- `agents/marc_publishing.md` — Replaced Step P4 with P4a (Claude subagent generates plan) → P4b (validate) → P4c (publisher.py smart-outbound executes) + fallback to legacy outbound
+
+**Files modified** (9): `agents/analyst.md`, `agents/scout.md`, `agents/publisher.md`, `agents/marc_pipeline.md`, `agents/marc_publishing.md`, `scripts/scout.py`, `scripts/publisher.py`, `scripts/validate.py`, `docs/context.md`
+**Files created** (1): `scripts/publisher_outbound_data.py`
+**Files unchanged** (as designed): `scripts/analyst.py` — Python collect/summary/import stays as-is
+
+**Deliverables**: All code changes per `docs/specs/phase-5-spec.md` §5.1-5.9.
+
+---
+
+### Session 23 — Phase 5 E2E Testing: 20-Test Battery Complete (March 5, 2026)
+
+**Goal**: Execute the full 20-test E2E battery defined in `docs/specs/phase-5-spec.md` §8, validating all Phase 5 Claude hybrid agent conversions end-to-end.
+
+**Test Phases**:
+- **Phase A (Dry-Run / Script-Level)**: Tests 8, 15, 16 — Scout `--raw --compact` produces 15KB compact file with `_pre_analysis`, publisher rate limits enforced correctly, legacy outbound fallback works
+- **Phase B (API-Level)**: Test 12 — `publisher_outbound_data.py` fetches real target data, returns valid JSON with user info + recent tweets
+- **Phase C (Claude Subagent Intelligence)**: Tests 1-7, 9-11, 13-14, 17 — All Claude intelligence modes verified (Analyst Intelligence, Scout Intelligence, Publisher Smart Outbound), validators accept enriched outputs, cross-check passes
+- **Phase D (Full E2E Pipeline)**: Tests 18-20 — Full pipeline with Claude subagents, live posting (8 tweets: 4 EN + 4 JP, Day 2), fallback resilience confirmed
+
+**Issues Found & Resolved**:
+- Schema drift between Claude output and `validate.py` — validators updated to accept both `string` and `null` for optional fields (`anomaly_detail`, `reasoning`)
+- Null handling in outbound plans — `validate_outbound_plan` relaxed to accept `null` for optional `reply_to` and `reasoning` fields when target is skipped
+- X API 402 (Payment Required) during testing — intermittent, resolved on retry
+
+**Test Artifacts Created**:
+- `scripts/run_phase5_tests.sh` — Phase A+B test runner
+- `scripts/run_phase5_tests_c.sh` — Phase C test runner (Claude subagents)
+- `scripts/run_phase5_tests_d.sh` — Phase D test runner (full E2E + live posting)
+- `data/scout_report_enriched_test.json` — Fixture for Claude intelligence tests
+- `data/scout_report_fallback_test.json` — Fixture for fallback resilience tests
+- `data/strategy_fallback_test.json` — Fixture for fallback testing
+- `data/strategy_test_enriched.json` — Fixture for enriched strategy testing
+
+**Live Posts**: 4 EN + 4 JP tweets posted successfully (Day 2, March 5, 2026)
+
+**Result**: **20/20 PASS** — All tests passed. Phase 5 complete.
+
 ---
 
 ## 4. Decision Summary
@@ -354,7 +433,7 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 | # | Decision | Rationale |
 |---|---|---|
 | D1 | Claude Code + cron as the agent execution framework | Handles 80% natively; cron fills scheduling gap; avoids dependency on OpenClaw |
-| D2 | VPS for always-on compute (Phase 5 deployment) | Cheaper than hardware ($12/mo Vultr Tokyo); only needed for autonomous operation |
+| D2 | VPS for always-on compute (Phase 6 deployment) | Cheaper than hardware ($12/mo Vultr Tokyo); only needed for autonomous operation |
 | D3 | Telegram Bot for human-agent communication | Simple (~50 lines Python), free, feature-rich; universal across any project |
 | D8 | CLAUDE.md for persistent behavioral memory | Native auto-loading; rules persist across sessions; no custom code needed |
 
@@ -367,7 +446,7 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 | D6 | Merge Reporter into Marc (7→6 agents) | COO already holds full context; separate Reporter loses judgment |
 | D7 | English docs with JP terms preserved | Operator preference |
 | D9 | Separate PRD + Technical Spec | Config = spec (how); PRD = product layer (why, success criteria) |
-| D10 | Local-first development; VPS deferred to Phase 5 | VPS only needed for autonomous operation; development uses your own machine + CLI |
+| D10 | Local-first development; VPS deferred to Phase 6 | VPS only needed for autonomous operation; development uses your own machine + CLI |
 | D11 | Log compliance concerns, resolve during implementation | Avoids premature spec changes; each issue reviewed at relevant phase |
 | D12 | Accept X Terms risks for likes/follows/replies/Playwright | Risk accepted for all 4 critical compliance issues — implement with awareness; monitor for enforcement changes |
 | D13 | Git + GitHub at Phase 0 completion | Version control established before agent development; private repo with secrets excluded via `.gitignore` |
@@ -431,6 +510,7 @@ This is the general-purpose architecture that emerged from the research and is b
 6. **Human-in-the-loop at decision points** — approval gates before irreversible actions
 7. **Error handling with classification** — auto-retry vs. escalate vs. halt based on error type
 8. **Telegram as the single communication channel** — reports, alerts, commands, all unified
+9. **Hybrid agents ("Claude Brain, Python Hands")** — Agents that need both deterministic execution (API calls, rate limits, data storage) AND reasoning (analysis, filtering, composition) use a hybrid pattern: Python handles execution, Claude handles intelligence. Failures degrade gracefully to Python-only behavior.
 
 ---
 
@@ -442,22 +522,26 @@ This is the general-purpose architecture that emerged from the research and is b
 Human (Shimpei)
 └── Telegram (unified communication)
     └── 🎖️ Marc (COO / Orchestrator / Reporter)
-        ├── 🔍 Scout ──────── Competitor research & trend analysis      [X API v2]
+        ├── 🔍 Scout ──────── Competitor research & trend analysis      [X API v2 + Claude Intelligence]
         ├── 📊 Strategist ─── Data-driven growth strategy               [Claude Code]
         ├── ✍️ Creator ─────── Content drafting & image prompts          [Claude Code]
-        ├── 📢 Publisher ──── Posting & outbound engagement             [X API v2 ⚠️]
-        └── 📈 Analyst ────── Metrics collection & data storage         [X API + Playwright ⚠️]
+        ├── 📢 Publisher ──── Posting [X API v2] + Smart outbound       [X API v2 + Claude Intelligence ⚠️]
+        └── 📈 Analyst ────── Metrics collection + daily reporting      [X API + Claude Intelligence]
 ```
 
 ⚠️ = X Developer Terms compliance concerns logged. See `specs/x-developer-terms-compliance-review.md`.
+
+#### 6.1.1 Hybrid Agent Pattern (Phase 5)
+
+Three agents operate as "Claude Brain, Python Hands" hybrids. Python scripts handle all API calls, rate limiting, and data storage. Claude subagents add intelligence: anomaly detection (Analyst), reply filtering & executive summaries (Scout), contextual engagement planning (Publisher outbound). If Claude fails, each agent falls back to Phase 4 Python-only behavior. Post publishing remains Python-only (safety-critical, human-gated). See `docs/specs/phase-5-spec.md` §4.1 for the full pattern.
 
 ### 6.2 Key Details
 
 - **Goal**: 0 → 10,000 followers on at least one account (EN or JP)
 - **Tech stack**: Claude Code CLI + cron + X API v2 (Basic $200/mo) + Playwright (under compliance review) + python-telegram-bot + SQLite + CLAUDE.md
-- **Monthly cost**: $300 during development (X API $200 + Claude Max $100). Vultr VPS ($12/mo) added at Phase 5 deployment.
+- **Monthly cost**: ~$227-245/month (X API $200, Claude subagent tokens ~$27-45). Vultr VPS ($12/mo) added at Phase 6 deployment.
 - **Daily pipeline**: 0:30 AM pipeline start → 7:00 AM morning brief → 7-9 AM human approval → 9 AM-9 PM posting & engagement → 11 PM metrics → 11:30 PM daily report → 11:45 PM retrospective
-- **Estimated timeline**: ~19 days from Phase 0 start to autonomous operation (Phases 0-4 local development, Phase 5 VPS deployment, Phase 6 autonomous)
+- **Estimated timeline**: ~22 days from Phase 0 start to autonomous operation (Phases 0-5 local development, Phase 6 VPS deployment, Phase 7 autonomous). Updated from ~19 days after Phase 5 (Claude Hybrid Agent Conversion) was added.
 
 ### 6.3 Open Questions (Unresolved)
 
@@ -468,11 +552,11 @@ Human (Shimpei)
 | OQ-3 | Fresh X accounts or existing ones? | Affects Phase 0 setup | **Resolved: Use existing accounts** |
 | OQ-4 | Monthly budget ceiling above $350? | Determines scope constraints | Open |
 | OQ-5 | Operate on weekends/holidays? | Affects scheduling | Open |
-| OQ-6 | VPS provider preference? | Affects Phase 5 deployment | **Resolved: Vultr Tokyo ($12/mo)** |
+| OQ-6 | VPS provider preference? | Affects Phase 6 deployment | **Resolved: Vultr Tokyo ($12/mo)** |
 | OQ-7 | Claude subscription tier (Pro $20 vs Max $100)? | Affects cost and capability | **Resolved: Claude Max ($100/mo)** |
 | OQ-8 | Backup destination (S3, Google Drive, local)? | Affects Phase 4 implementation | Open |
 
-**Updated monthly cost**: $300 during development (X API $200 + Claude Max $100). Vultr VPS ($12/mo) added at Phase 5.
+**Updated monthly cost**: ~$227-245/month (X API $200, Claude subagent tokens ~$27-45). Vultr VPS ($12/mo) added at Phase 6.
 
 ---
 
@@ -553,6 +637,17 @@ Human (Shimpei)
 │       │             risks, timeline, feature-to-spec mapping
 │       │   Status:  Current (v1.0)
 │       │
+│       ├── phase-5-spec.md                 ← PHASE 5 TECHNICAL SPECIFICATION
+│       │   Purpose: How to build Phase 5 (Claude Hybrid Agent Conversion)
+│       │   Contains: 3 sub-phases (Analyst, Scout, Publisher intelligence),
+│       │             hybrid pattern, validation rules, E2E test battery
+│       │   Status:  Current (v1.0)
+│       │
+│       ├── phase-5-prd.md                  ← PHASE 5 PRODUCT REQUIREMENTS
+│       │   Purpose: What Phase 5 delivers and why
+│       │   Contains: Goals, success criteria, sub-phase breakdown
+│       │   Status:  Current (v1.0)
+│       │
 │       └── x-developer-terms-compliance-review.md ← COMPLIANCE REVIEW
 │           Purpose: X Developer Terms concerns log
 │           Contains: 7 issues (4 critical, 3 medium)
@@ -568,26 +663,30 @@ Human (Shimpei)
 │
 ├── agents/                                 ← AGENT SKILL FILES
 │   ├── marc.md                            ← COO / Orchestrator hub (Phase 4)
-│   ├── marc_pipeline.md                   ← Pipeline Steps 1-13 (loaded on demand)
-│   ├── marc_publishing.md                 ← Publishing Steps P1-P8 (loaded on demand)
+│   ├── marc_pipeline.md                   ← Pipeline Steps 1-13 (Phase 5: Step 2 Claude subagent)
+│   ├── marc_publishing.md                 ← Publishing Steps P1-P8 (Phase 5: Steps P4, P8 Claude subagents)
 │   ├── marc_schemas.md                    ← Schemas & report formats (loaded on demand)
-│   ├── scout.md                           ← Competitor Research
+│   ├── scout.md                           ← Competitor Research (Phase 5: Daily Intelligence Mode)
 │   ├── strategist.md                      ← Growth Strategy
 │   ├── creator.md                         ← Content Planning & Image Prompts (Phase 2)
-│   ├── publisher.md                       ← X API Posting & Outbound Engagement (Phase 3)
-│   └── analyst.md                         ← Metrics Collection & Data Storage (Phase 4)
+│   ├── publisher.md                       ← X API Posting & Outbound Engagement (Phase 5: Smart Outbound Mode)
+│   └── analyst.md                         ← Metrics Collection & Data Storage (Phase 5: Intelligence Mode)
 │
 ├── scripts/                                ← PIPELINE & UTILITY SCRIPTS
 │   ├── run_pipeline.sh                    ← Pipeline entry point (thin wrapper → Marc)
 │   ├── run_task.sh                        ← Operator task entry point (reads task file → Marc)
-│   ├── validate.py                        ← Deterministic validation (all agents + cross-validation)
+│   ├── validate.py                        ← Deterministic validation (Phase 5: analyst_report, scout_analysis, outbound_plan)
 │   ├── x_api.py                           ← X API v2 wrapper library (read + write + batch)
 │   ├── db_manager.py                      ← SQLite database layer (WAL mode, insert/query)
-│   ├── scout.py                           ← Scout agent script
-│   ├── publisher.py                       ← Publisher agent script (post + outbound + SQLite dual-write)
+│   ├── scout.py                           ← Scout agent script (Phase 5: --raw/--compact + pre-analysis)
+│   ├── publisher.py                       ← Publisher agent script (Phase 5: smart-outbound subcommand)
+│   ├── publisher_outbound_data.py         ← Outbound data fetcher for Claude analysis (Phase 5)
 │   ├── analyst.py                         ← Analyst agent script (collect + summary + import) (Phase 4)
 │   ├── telegram_send.py                   ← Telegram send helper (Phase 2)
-│   └── telegram_bot.py                    ← Telegram bot daemon (commands + /metrics + screenshot) (Phase 4)
+│   ├── telegram_bot.py                    ← Telegram bot daemon (commands + /metrics + screenshot) (Phase 4)
+│   ├── run_phase5_tests.sh               ← Phase 5 E2E test runner — Phase A+B (dry-run + API)
+│   ├── run_phase5_tests_c.sh             ← Phase 5 E2E test runner — Phase C (Claude subagents)
+│   └── run_phase5_tests_d.sh             ← Phase 5 E2E test runner — Phase D (full E2E + live posting)
 ├── data/.gitkeep                           ← PIPELINE STATE (empty, git-tracked)
 ├── logs/.gitkeep                           ← AGENT LOGS (empty, git-tracked)
 ├── backups/.gitkeep                        ← DAILY BACKUPS (empty, git-tracked)
@@ -701,6 +800,7 @@ context.md (this file)
 | `harness.md` | Architecture | Three-layer architecture model (Shell → Marc → Specialists), OS analogy, key patterns, file layout |
 | `guides/agent-building-guidelines.md` | Guide | How to build new agents — principles, templates, I/O contracts, validation, checklist |
 | `context.md` | Meta | This document — full project context for third-party understanding |
+| `scripts/run_phase5_tests*.sh` (×3) | Testing | Phase 5 E2E test runners — Phase A+B (dry-run + API), Phase C (Claude subagents), Phase D (full E2E + live posting) |
 
 ---
 
@@ -708,9 +808,21 @@ context.md (this file)
 
 ### Development Approach
 
-All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-4 are local CLI development. Phase 5 is VPS deployment. Phase 6 is autonomous operation.
+All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Phase 4 implemented and E2E Day 1 tested — all tests passed (March 4, 2026).
+**Latest**: Phase 5 complete (March 5, 2026). 20/20 E2E tests passed (spec §8). 8 live tweets posted (Day 2).
+
+Phase 5 files added/modified (10 files):
+- `agents/analyst.md` — Added "Intelligence Mode" section (anomaly detection, category breakdown, A/B test evaluation, trend comparison, report composition)
+- `agents/scout.md` — Added "Daily Intelligence Mode" section + updated CLI usage with `--raw`/`--compact` flags
+- `agents/publisher.md` — Added "Smart Outbound Mode" section (relevance check, tweet selection, contextual reply crafting, outbound plan)
+- `agents/marc_pipeline.md` — Step 2 replaced with Claude Scout subagent invocation + fallback
+- `agents/marc_publishing.md` — Step P4 replaced with smart outbound flow (P4a-P4c), Step P8 replaced with analyst intelligence flow (P8a-P8c)
+- `scripts/scout.py` — Added `--raw`/`--compact` flags, `compute_pre_analysis()`, `compact_report()` functions
+- `scripts/publisher.py` — Added `smart-outbound` subcommand and `run_smart_outbound()` function
+- `scripts/publisher_outbound_data.py` — **New** OutboundDataFetcher (~120 lines): fetch target account data for Claude analysis
+- `scripts/validate.py` — Added 3 new validation functions: `validate_analyst_report` (8 checks), `validate_scout_analysis` (6 checks), `validate_outbound_plan` (7 checks)
+- `docs/context.md` — Updated architecture sections (principle #9, agent tree, hybrid pattern subsection, cost estimate)
 
 Phase 4 files added/modified (8 files):
 - `scripts/db_manager.py` — Extended with WAL mode, `_connect()` helper, `timestamp` column migration, 4 insert functions, 5 query functions
@@ -747,6 +859,31 @@ Phase 4 E2E Day 1 results:
 Remaining Phase 4 E2E tests (require consecutive calendar days):
 - E2E Day 2: Verify `followers_change` calculated, anomaly detection with real delta
 - E2E Day 3: 3 consecutive days in SQLite, historical queries work
+
+Phase 5 E2E testing — 20/20 passed:
+
+| Test | Phase | Description | Result |
+|---|---|---|---|
+| 1 | C | Analyst Intelligence — reads metrics + content plans, produces daily report | **PASS** |
+| 2 | C | Analyst Intelligence — anomaly detection flags >10% follower change | **PASS** |
+| 3 | C | Analyst Intelligence — category breakdown matches content plan categories | **PASS** |
+| 4 | C | Analyst Intelligence — A/B test evaluation with variant comparison | **PASS** |
+| 5 | C | Analyst Intelligence — `validate.py analyst_report` accepts output (8 checks) | **PASS** |
+| 6 | C | Scout Intelligence — reads compact data, produces enriched analysis | **PASS** |
+| 7 | C | Scout Intelligence — `validate.py scout_analysis` accepts output (6 checks) | **PASS** |
+| 8 | A | Scout `--raw --compact` — produces compact file (~15KB) with `_pre_analysis` | **PASS** |
+| 9 | C | Pipeline cross-check — scout analysis + strategy consistency verified | **PASS** |
+| 10 | C | Publisher Smart Outbound — reads target data, generates contextual plan | **PASS** |
+| 11 | C | Publisher Smart Outbound — `validate.py outbound_plan` accepts output (7 checks) | **PASS** |
+| 12 | B | `publisher_outbound_data.py` — fetches real target data via API | **PASS** |
+| 13 | C | Smart Outbound — reply text does not start with `@`, language matches account | **PASS** |
+| 14 | C | Smart Outbound — skip decision with reasoning for irrelevant targets | **PASS** |
+| 15 | A | Publisher rate limits — enforced correctly across post + outbound actions | **PASS** |
+| 16 | A | Legacy outbound fallback — works when Claude subagent unavailable | **PASS** |
+| 17 | C | Full pipeline with Claude Scout + Analyst intelligence modes | **PASS** |
+| 18 | D | Full E2E pipeline — Scout → Strategist → Creator → War Room → approval | **PASS** |
+| 19 | D | Live posting — 8 tweets (4 EN + 4 JP) posted via Publisher | **PASS** |
+| 20 | D | Fallback resilience — pipeline completes when Claude subagent fails | **PASS** |
 
 Phase 3 files added/modified (6 files):
 - `scripts/x_api.py` — Extended with `XApiWriteClient` class (OAuth 1.0a, create_post, upload_media, like_tweet, reply_to_tweet, follow_user)
@@ -841,8 +978,9 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Phase 2 | Creator + Telegram Command Processing | Local machine | **✅ Complete** — 5 files added/modified, all 15 tests passed, pipeline runs end-to-end with Telegram integration |
 | Phase 3 | Publisher + X API Posting | Local machine | **✅ Complete** — 6 dry-run tests + 5 real API tests passed, 8 tweets posted live (4 EN + 4 JP) |
 | Phase 4 | Analyst + Manual Metrics + War Room Upgrade | Local machine | **✅ Complete** — 11 tests passed, E2E Day 1 verified, daily report sent to Telegram. Days 2-3 E2E pending (consecutive calendar days). |
-| Phase 5 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
-| Phase 6 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
+| Phase 5 | Claude Hybrid Agent Conversion (Analyst, Scout, Publisher intelligence) | Local machine | **✅ Complete** — 10 files modified/created, all 3 sub-phases implemented. 20/20 E2E tests passed. |
+| Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
+| Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 
 ---
 
