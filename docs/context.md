@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 5, 2026 (Session 23: Phase 5 E2E Testing — 20-Test Battery Complete)
+**Last updated**: March 5, 2026 (Session 24: Agent Teams Migration — Conversational Marc + Teammate Architecture)
 
 ---
 
@@ -424,6 +424,38 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 
 **Result**: **20/20 PASS** — All tests passed. Phase 5 complete.
 
+### Session 24 — Agent Teams Migration: Conversational Marc + Teammate Architecture (March 5, 2026)
+
+**Goal**: Migrate from pipeline-driven subagent architecture (`claude -p` isolated subagents) to Claude Code Agent Teams with a two-layer conversational architecture.
+
+**Architecture Change**:
+- **Before**: Shell scripts → `claude -p` Marc → nested `claude -p` subagents (isolated, no coordination)
+- **After**: Telegram → Conversational Marc (`claude -p`, lightweight) → Execution Layer (Agent Teams: Marc as Team Leader, teammates with shared task list + messaging)
+
+**Two-Layer Design**:
+- **Conversational Layer**: Marc receives Telegram messages via `claude -p`, reasons about them, asks clarifying questions, decides when to execute. Uses `START_TASK:` JSON marker to signal task execution.
+- **Execution Layer**: Claude Code Agent Teams — Marc spawns teammates (Scout, Strategist, Creator, Publisher, Analyst) with shared task coordination via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
+
+**Files created** (1): `agents/marc_conversation.md`
+**Files rewritten** (3): `agents/marc.md`, `agents/marc_pipeline.md`, `agents/marc_publishing.md`
+**Files edited** (9): `agents/scout.md`, `agents/strategist.md`, `agents/creator.md`, `agents/publisher.md`, `agents/analyst.md`, `CLAUDE.md`, `scripts/run_task.sh`, `scripts/run_pipeline.sh`, `scripts/telegram_bot.py`
+
+**Key changes**:
+- `agents/marc.md`: Rewritten as Team Leader (spawns teammates via Agent tool instead of nested `claude -p`)
+- `agents/marc_conversation.md`: New system prompt for conversational Marc (identity, team reference, decision rules, START_TASK tool)
+- `agents/marc_pipeline.md`: Transformed from 13 rigid steps to goal-oriented playbook with parallel teammate spawning
+- `agents/marc_publishing.md`: Transformed from P1-P8 steps to goal-oriented playbook with teammate spawning
+- All 5 agent skill files: Added "Teammate Mode" section for autonomous operation when spawned as teammates
+- `scripts/telegram_bot.py`: Major rewrite (~645→~910 lines) — added conversational layer via `claude -p`, `_execute_task()` spawner, default text handler, `/pipeline` command, `/running` command
+- `scripts/run_task.sh` + `run_pipeline.sh`: Added `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` env var, updated prompts for Team Leader role
+- `CLAUDE.md`: Added Architecture section describing two-layer design
+
+**Issues encountered & resolved**:
+1. Anthropic API key not available → switched conversational layer from Anthropic API to `claude -p` (uses Max subscription)
+2. `--no-input` flag doesn't exist in claude CLI → removed invalid flag
+
+**Result**: Marc responds conversationally via Telegram, spawns Agent Teams for execution.
+
 ---
 
 ## 4. Decision Summary
@@ -436,6 +468,7 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 | D2 | VPS for always-on compute (Phase 6 deployment) | Cheaper than hardware ($12/mo Vultr Tokyo); only needed for autonomous operation |
 | D3 | Telegram Bot for human-agent communication | Simple (~50 lines Python), free, feature-rich; universal across any project |
 | D8 | CLAUDE.md for persistent behavioral memory | Native auto-loading; rules persist across sessions; no custom code needed |
+| D16 | Agent Teams for multi-agent coordination | Enables shared task lists, teammate messaging, and parallel execution — replacing isolated `claude -p` subagents |
 
 ### Demo-Specific Decisions (X Beauty Project)
 
@@ -460,44 +493,52 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 This is the general-purpose architecture that emerged from the research and is being validated through the X Beauty demo:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    AUTONOMOUS AGENT FRAMEWORK                │
-│                                                              │
-│  ┌─────────┐     ┌──────────────────────────────────────┐   │
-│  │  cron   │────▶│  Orchestrator Script (entry point)    │   │
-│  └─────────┘     └──────────────┬───────────────────────┘   │
-│                                  │                           │
-│                                  ▼                           │
-│                    ┌─────────────────────────┐               │
-│                    │  COO Agent (Marc)        │               │
-│                    │  - Pipeline control      │               │
-│                    │  - Agent sequencing      │◀──┐           │
-│                    │  - Error handling        │   │           │
-│                    │  - War Room reviews      │   │  Telegram │
-│                    │  - Human communication   │───┤  Bot      │
-│                    │  - Rule updates          │   │  (daemon) │
-│                    └────────┬────────────────┘   │           │
-│                             │                     │           │
-│              ┌──────────────┼──────────────┐     │           │
-│              ▼              ▼              ▼      │           │
-│         ┌────────┐    ┌────────┐    ┌────────┐   │           │
-│         │Agent 1 │    │Agent 2 │    │Agent N │   └──▶[HUMAN] │
-│         │(domain │    │(domain │    │(domain │               │
-│         │specific)│   │specific)│   │specific)│              │
-│         └───┬────┘    └───┬────┘    └───┬────┘               │
-│             │             │             │                     │
-│             ▼             ▼             ▼                     │
-│  ┌─────────────────────────────────────────────────────┐     │
-│  │              Shared State Layer                       │    │
-│  │  CLAUDE.md (behavioral rules, auto-loaded)           │    │
-│  │  JSON files (agent-to-agent data exchange)           │    │
-│  │  SQLite (structured metrics & history)               │    │
-│  └─────────────────────────────────────────────────────┘     │
-│                                                              │
-│  Tech stack: Claude Code CLI + cron + Telegram Bot +         │
-│              CLAUDE.md memory + SQLite + JSON + Python        │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│                    AUTONOMOUS AGENT FRAMEWORK                     │
+│                                                                   │
+│  ┌─────────┐                                                      │
+│  │  cron   │──┐                                                   │
+│  └─────────┘  │                                                   │
+│               │     ┌─────────────────────────────────────────┐   │
+│  ┌─────────┐  ├────▶│  CONVERSATIONAL LAYER                   │   │
+│  │Telegram │──┘     │  Lightweight `claude -p` (Marc)          │   │
+│  │  Bot    │◀───────│  - Receives messages / cron triggers     │   │
+│  │(daemon) │        │  - Reasons about tasks                   │   │
+│  └────┬────┘        │  - Asks clarifying questions             │   │
+│       │             │  - Decides when to execute               │   │
+│       │             └──────────────┬──────────────────────────┘   │
+│       │                            │ START_TASK: marker            │
+│       │                            ▼                               │
+│       │             ┌─────────────────────────────────────────┐   │
+│       │             │  EXECUTION LAYER (Agent Teams)           │   │
+│       │             │  Marc as Team Leader                     │   │
+│       │             │  - Spawns teammates via Agent tool       │   │
+│       │             │  - Shared task list coordination         │   │
+│       │             │  - Teammate messaging                    │   │
+│       │             │  - Parallel execution                    │   │
+│       │             └────────┬────────────────────────────────┘   │
+│       │                      │                                     │
+│       │       ┌──────────────┼──────────────┐                     │
+│       │       ▼              ▼              ▼                      │
+│       │  ┌────────┐    ┌────────┐    ┌────────┐                   │
+│       │  │Agent 1 │    │Agent 2 │    │Agent N │                   │
+│  [HUMAN] │(team-  │    │(team-  │    │(team-  │                   │
+│       │  │ mate)  │    │ mate)  │    │ mate)  │                   │
+│       │  └───┬────┘    └───┬────┘    └───┬────┘                   │
+│       │      │             │             │                         │
+│       │      ▼             ▼             ▼                         │
+│       │  ┌─────────────────────────────────────────────────┐      │
+│       │  │              Shared State Layer                   │     │
+│       │  │  CLAUDE.md (behavioral rules, auto-loaded)       │     │
+│       │  │  JSON files (agent-to-agent data exchange)       │     │
+│       │  │  SQLite (structured metrics & history)           │     │
+│       │  │  Task list (Agent Teams shared coordination)     │     │
+│       │  └─────────────────────────────────────────────────┘      │
+│       │                                                            │
+│       │  Tech stack: Claude Code CLI + Agent Teams + cron +        │
+│       │              Telegram Bot + CLAUDE.md + SQLite + JSON       │
+│       │                                                            │
+└───────┴────────────────────────────────────────────────────────────┘
 ```
 
 **Key principles** (from the original article, validated and refined):
@@ -511,6 +552,7 @@ This is the general-purpose architecture that emerged from the research and is b
 7. **Error handling with classification** — auto-retry vs. escalate vs. halt based on error type
 8. **Telegram as the single communication channel** — reports, alerts, commands, all unified
 9. **Hybrid agents ("Claude Brain, Python Hands")** — Agents that need both deterministic execution (API calls, rate limits, data storage) AND reasoning (analysis, filtering, composition) use a hybrid pattern: Python handles execution, Claude handles intelligence. Failures degrade gracefully to Python-only behavior.
+10. **Agent Teams with shared coordination** — Agents operate as teammates with shared task lists and messaging, enabling parallel execution and iterative collaboration. The conversational layer (lightweight `claude -p`) handles task intake; the execution layer (Agent Teams) handles the work.
 
 ---
 
@@ -521,19 +563,22 @@ This is the general-purpose architecture that emerged from the research and is b
 ```
 Human (Shimpei)
 └── Telegram (unified communication)
-    └── 🎖️ Marc (COO / Orchestrator / Reporter)
-        ├── 🔍 Scout ──────── Competitor research & trend analysis      [X API v2 + Claude Intelligence]
-        ├── 📊 Strategist ─── Data-driven growth strategy               [Claude Code]
-        ├── ✍️ Creator ─────── Content drafting & image prompts          [Claude Code]
-        ├── 📢 Publisher ──── Posting [X API v2] + Smart outbound       [X API v2 + Claude Intelligence ⚠️]
-        └── 📈 Analyst ────── Metrics collection + daily reporting      [X API + Claude Intelligence]
+    └── 💬 Conversational Marc (claude -p, lightweight reasoning)
+        └── 🎖️ Marc (COO / Team Leader — Agent Teams execution layer)
+            ├── 🔍 Scout ──────── Competitor research & trend analysis      [Teammate + X API v2 + Claude Intelligence]
+            ├── 📊 Strategist ─── Data-driven growth strategy               [Teammate + Claude Code]
+            ├── ✍️ Creator ─────── Content drafting & image prompts          [Teammate + Claude Code]
+            ├── 📢 Publisher ──── Posting [X API v2] + Smart outbound       [Teammate + X API v2 + Claude Intelligence ⚠️]
+            └── 📈 Analyst ────── Metrics collection + daily reporting      [Teammate + X API + Claude Intelligence]
 ```
 
 ⚠️ = X Developer Terms compliance concerns logged. See `specs/x-developer-terms-compliance-review.md`.
 
-#### 6.1.1 Hybrid Agent Pattern (Phase 5)
+#### 6.1.1 Hybrid Agent Pattern (Phase 5) + Agent Teams (Session 24)
 
 Three agents operate as "Claude Brain, Python Hands" hybrids. Python scripts handle all API calls, rate limiting, and data storage. Claude subagents add intelligence: anomaly detection (Analyst), reply filtering & executive summaries (Scout), contextual engagement planning (Publisher outbound). If Claude fails, each agent falls back to Phase 4 Python-only behavior. Post publishing remains Python-only (safety-critical, human-gated). See `docs/specs/phase-5-spec.md` §4.1 for the full pattern.
+
+As of Session 24, all agents operate as **teammates** within Claude Code Agent Teams. Marc spawns them via the Agent tool with shared task lists and messaging. This adds a coordination layer on top of the hybrid pattern — agents can now work in parallel (e.g., Creator EN + JP simultaneously), message each other, and claim tasks from a shared list. The conversational layer (Conversational Marc via `claude -p`) handles task intake and reasoning before spawning the heavier Agent Teams execution layer.
 
 ### 6.2 Key Details
 
@@ -662,19 +707,20 @@ Three agents operate as "Claude Brain, Python Hands" hybrids. Python scripts han
 │   └── global_rules.md                     ← BEHAVIORAL RULES
 │
 ├── agents/                                 ← AGENT SKILL FILES
-│   ├── marc.md                            ← COO / Orchestrator hub (Phase 4)
-│   ├── marc_pipeline.md                   ← Pipeline Steps 1-13 (Phase 5: Step 2 Claude subagent)
-│   ├── marc_publishing.md                 ← Publishing Steps P1-P8 (Phase 5: Steps P4, P8 Claude subagents)
+│   ├── marc.md                            ← COO / Team Leader (Session 24: Agent Teams)
+│   ├── marc_conversation.md               ← Conversational Marc system prompt (Session 24: identity, team reference, decision rules)
+│   ├── marc_pipeline.md                   ← Goal-oriented Pipeline Playbook (Session 24: teammate spawning)
+│   ├── marc_publishing.md                 ← Goal-oriented Publishing Playbook (Session 24: teammate spawning)
 │   ├── marc_schemas.md                    ← Schemas & report formats (loaded on demand)
-│   ├── scout.md                           ← Competitor Research (Phase 5: Daily Intelligence Mode)
-│   ├── strategist.md                      ← Growth Strategy
-│   ├── creator.md                         ← Content Planning & Image Prompts (Phase 2)
-│   ├── publisher.md                       ← X API Posting & Outbound Engagement (Phase 5: Smart Outbound Mode)
-│   └── analyst.md                         ← Metrics Collection & Data Storage (Phase 5: Intelligence Mode)
+│   ├── scout.md                           ← Competitor Research (Phase 5: Daily Intelligence Mode, Session 24: Teammate Mode added)
+│   ├── strategist.md                      ← Growth Strategy (Session 24: Teammate Mode added)
+│   ├── creator.md                         ← Content Planning & Image Prompts (Phase 2, Session 24: Teammate Mode added)
+│   ├── publisher.md                       ← X API Posting & Outbound Engagement (Phase 5: Smart Outbound Mode, Session 24: Teammate Mode added)
+│   └── analyst.md                         ← Metrics Collection & Data Storage (Phase 5: Intelligence Mode, Session 24: Teammate Mode added)
 │
 ├── scripts/                                ← PIPELINE & UTILITY SCRIPTS
-│   ├── run_pipeline.sh                    ← Pipeline entry point (thin wrapper → Marc)
-│   ├── run_task.sh                        ← Operator task entry point (reads task file → Marc)
+│   ├── run_pipeline.sh                    ← Pipeline entry point (Agent Teams enabled, Session 24: Team Leader prompt)
+│   ├── run_task.sh                        ← Operator task entry point (Agent Teams enabled, Session 24: Team Leader prompt)
 │   ├── validate.py                        ← Deterministic validation (Phase 5: analyst_report, scout_analysis, outbound_plan)
 │   ├── x_api.py                           ← X API v2 wrapper library (read + write + batch)
 │   ├── db_manager.py                      ← SQLite database layer (WAL mode, insert/query)
@@ -683,7 +729,7 @@ Three agents operate as "Claude Brain, Python Hands" hybrids. Python scripts han
 │   ├── publisher_outbound_data.py         ← Outbound data fetcher for Claude analysis (Phase 5)
 │   ├── analyst.py                         ← Analyst agent script (collect + summary + import) (Phase 4)
 │   ├── telegram_send.py                   ← Telegram send helper (Phase 2)
-│   ├── telegram_bot.py                    ← Telegram bot daemon (commands + /metrics + screenshot) (Phase 4)
+│   ├── telegram_bot.py                    ← Telegram bot daemon (conversational Marc + Agent Teams execution + commands) (Session 24)
 │   ├── run_phase5_tests.sh               ← Phase 5 E2E test runner — Phase A+B (dry-run + API)
 │   ├── run_phase5_tests_c.sh             ← Phase 5 E2E test runner — Phase C (Claude subagents)
 │   └── run_phase5_tests_d.sh             ← Phase 5 E2E test runner — Phase D (full E2E + live posting)
@@ -810,7 +856,17 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Phase 5 complete (March 5, 2026). 20/20 E2E tests passed (spec §8). 8 live tweets posted (Day 2).
+**Latest**: Session 24 — Agent Teams migration complete (March 5, 2026). Conversational Marc + Teammate architecture live.
+
+Session 24 files added/modified (10 files):
+- `agents/marc.md` — Rewritten as Team Leader (Agent tool teammate spawning replaces nested `claude -p`)
+- `agents/marc_conversation.md` — **New** System prompt for conversational Marc (identity, team reference, decision rules, START_TASK)
+- `agents/marc_pipeline.md` — Rewritten as goal-oriented Pipeline Playbook (parallel teammate spawning)
+- `agents/marc_publishing.md` — Rewritten as goal-oriented Publishing Playbook (teammate spawning)
+- `agents/scout.md`, `strategist.md`, `creator.md`, `publisher.md`, `analyst.md` — Added "Teammate Mode" section
+- `scripts/telegram_bot.py` — Major rewrite: conversational layer via `claude -p`, `_execute_task()` Agent Teams spawner, `/pipeline`, `/running` commands
+- `scripts/run_task.sh`, `run_pipeline.sh` — Added `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`, Team Leader prompts
+- `CLAUDE.md` — Added Architecture section (two-layer design)
 
 Phase 5 files added/modified (10 files):
 - `agents/analyst.md` — Added "Intelligence Mode" section (anomaly detection, category breakdown, A/B test evaluation, trend comparison, report composition)
@@ -979,6 +1035,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Phase 3 | Publisher + X API Posting | Local machine | **✅ Complete** — 6 dry-run tests + 5 real API tests passed, 8 tweets posted live (4 EN + 4 JP) |
 | Phase 4 | Analyst + Manual Metrics + War Room Upgrade | Local machine | **✅ Complete** — 11 tests passed, E2E Day 1 verified, daily report sent to Telegram. Days 2-3 E2E pending (consecutive calendar days). |
 | Phase 5 | Claude Hybrid Agent Conversion (Analyst, Scout, Publisher intelligence) | Local machine | **✅ Complete** — 10 files modified/created, all 3 sub-phases implemented. 20/20 E2E tests passed. |
+| Session 24 | Agent Teams Migration (Conversational Marc + Teammates) | Local machine | **✅ Complete** — 10 files modified/created, Marc responds conversationally via Telegram, spawns Agent Teams for execution |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 
@@ -1006,6 +1063,14 @@ CLAUDE.md files are automatically loaded by Claude Code at session start with ze
 
 Each agent maps to a distinct skill domain. Combining any two would bloat context windows. Splitting further would add coordination overhead without benefit. The COO-over-specialists pattern matches the original article's architecture and scales well — adding a new capability means adding one agent, not restructuring the whole system.
 
+### Why Agent Teams instead of isolated subagents?
+
+The original architecture spawned each agent as an isolated `claude -p` subprocess. Agents couldn't communicate, share task state, or work in parallel. Agent Teams (experimental feature) enables shared task lists, teammate messaging, and parallel execution — Creator EN and JP can now run simultaneously. The trade-off is dependency on an experimental feature, mitigated by keeping `run_task.sh` and `run_pipeline.sh` as fallback entry points.
+
+### Why `claude -p` for the conversational layer instead of Anthropic API?
+
+The operator subscribes to Claude Max ($100/mo) which includes unlimited `claude` CLI usage. Using the Anthropic API would require a separate API key and billing. Since the conversational layer only needs text-in/text-out (no streaming, no complex tool use), `claude -p` provides the same capability at zero additional cost. The conversation uses a `START_TASK:` JSON marker pattern to signal when Marc decides to execute, replacing the Anthropic API's native tool_use mechanism.
+
 ---
 
 ## 11. Glossary
@@ -1029,3 +1094,8 @@ Each agent maps to a distinct skill domain. Combining any two would bloat contex
 | **Compliance Review** | Living document tracking 7 X Developer Terms issues to resolve during implementation |
 | **Amarry Technologies** | Shimpei's company — the broader corporate context |
 | **UniModel** | Amarry's primary product — an AI model marketplace (separate from this project) |
+| **Agent Teams** | Claude Code experimental feature enabling multi-agent coordination with shared task lists, teammate messaging, and parallel execution |
+| **Teammate** | An agent spawned by Marc via the Agent tool within an Agent Teams session — can claim tasks, message other teammates, and work in parallel |
+| **Conversational Layer** | The lightweight `claude -p` layer that handles Telegram message intake, reasoning, and task routing before spawning the heavier execution layer |
+| **Execution Layer** | The Agent Teams session where Marc as Team Leader spawns teammates to do the actual work (Scout, Strategist, Creator, Publisher, Analyst) |
+| **START_TASK marker** | Text-based protocol (`START_TASK:{json}`) used by conversational Marc to signal that a task should be executed via the Agent Teams execution layer |
