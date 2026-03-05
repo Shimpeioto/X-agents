@@ -1,21 +1,21 @@
 {
   "account": "EN",
-  "date": "2026-03-04",
+  "date": "2026-03-05",
   "account_metrics": {
     "account": "EN",
-    "date": "2026-03-04",
-    "followers": 7,
+    "date": "2026-03-05",
+    "followers": 6,
     "following": 39,
     "total_posts": 2,
-    "followers_change": null
+    "followers_change": -1
   },
   "post_metrics": [
     {
       "post_id": "EN_20260304_01",
       "tweet_id": "2029059847917093267",
       "account": "EN",
-      "measured_at": "2026-03-04T20:23:20.130785+09:00",
-      "hours_after_post": 6,
+      "measured_at": "2026-03-05T01:12:15.375077+09:00",
+      "hours_after_post": 11,
       "likes": 1,
       "retweets": 0,
       "replies": 0,
@@ -32,8 +32,8 @@
       "post_id": "EN_20260304_02",
       "tweet_id": "2029061473935479018",
       "account": "EN",
-      "measured_at": "2026-03-04T20:23:20.130785+09:00",
-      "hours_after_post": 6,
+      "measured_at": "2026-03-05T01:12:15.375077+09:00",
+      "hours_after_post": 11,
       "likes": 1,
       "retweets": 0,
       "replies": 0,
@@ -50,8 +50,8 @@
       "post_id": "EN_20260304_03",
       "tweet_id": "2029061475026051150",
       "account": "EN",
-      "measured_at": "2026-03-04T20:23:20.130785+09:00",
-      "hours_after_post": 6,
+      "measured_at": "2026-03-05T01:12:15.375077+09:00",
+      "hours_after_post": 11,
       "likes": 0,
       "retweets": 0,
       "replies": 0,
@@ -68,8 +68,8 @@
       "post_id": "EN_20260304_04",
       "tweet_id": "2029061476024205810",
       "account": "EN",
-      "measured_at": "2026-03-04T20:23:20.130785+09:00",
-      "hours_after_post": 6,
+      "measured_at": "2026-03-05T01:12:15.375077+09:00",
+      "hours_after_post": 11,
       "likes": 1,
       "retweets": 0,
       "replies": 0,
@@ -90,6 +90,6 @@
     "quotes": 0,
     "bookmarks": 0
   },
-  "generated_at": "2026-03-04T20:39:09.122200+09:00",
+  "generated_at": "2026-03-05T01:15:27.619085+09:00",
   "post_count": 4
 }

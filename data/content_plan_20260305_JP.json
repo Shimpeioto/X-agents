@@ -1,0 +1,125 @@
+{
+  "date": "2026-03-05",
+  "account": "JP",
+  "generated_at": "2026-03-05T19:15:00+09:00",
+  "strategy_used": "data/strategy_20260305.json",
+  "total_posts": 4,
+  "posts": [
+    {
+      "id": "JP_20260305_01",
+      "slot": 1,
+      "scheduled_time": "07:30 JST",
+      "category": "portrait",
+      "priority": "high",
+      "status": "posted",
+      "text": "朝の光に包まれた彼女の横顔。静かな美しさに思わず息をのむ。\n\n#AI美女 #AIart #AIイラスト",
+      "hashtags": [
+        "#AI美女",
+        "#AIart",
+        "#AIイラスト"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Photorealistic portrait of a beautiful Japanese woman in soft golden morning light, side profile, delicate features, natural skin texture, hair gently catching sunlight, warm bokeh background of a sunlit window, serene expression with closed eyes, ultra detailed, 8K quality, cinematic lighting",
+        "negative_prompt": "cartoon, anime, oversaturated, harsh shadows, heavy makeup, unnatural skin",
+        "style_reference": "Editorial beauty photography, Rinko Kawauchi soft light aesthetic",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": "A",
+      "notes": "Variant A: 3 hashtags. Morning portrait slot.",
+      "tweet_id": "2029504928717435319",
+      "post_url": "https://x.com/xx10x14xx/status/2029504928717435319",
+      "posted_at": "2026-03-05T19:30:56.192891+09:00"
+    },
+    {
+      "id": "JP_20260305_02",
+      "slot": 2,
+      "scheduled_time": "12:00 JST",
+      "category": "fashion",
+      "priority": "high",
+      "status": "posted",
+      "text": "春のストリートを歩く彼女。このコーデ、あなたは何点つける？\n\n#AI美女 #AIart #AIグラビア #digitalart",
+      "hashtags": [
+        "#AI美女",
+        "#AIart",
+        "#AIグラビア",
+        "#digitalart"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Full-body fashion shot of a stylish young Japanese woman walking on a Tokyo street in spring, wearing a pastel oversized blazer over a white mini dress and knee-high boots, cherry blossom petals drifting, natural afternoon sunlight, street fashion photography style, sharp focus on outfit details, blurred urban background with Japanese signage",
+        "negative_prompt": "static pose, studio background, anime, cartoon, low resolution, distorted limbs",
+        "style_reference": "Japanese street fashion magazine editorial, ViVi magazine aesthetic",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B: 4 hashtags. Question-based caption.",
+      "tweet_id": "2029504929770205432",
+      "post_url": "https://x.com/xx10x14xx/status/2029504929770205432",
+      "posted_at": "2026-03-05T19:30:56.432923+09:00"
+    },
+    {
+      "id": "JP_20260305_03",
+      "slot": 3,
+      "scheduled_time": "19:00 JST",
+      "category": "artistic",
+      "priority": "high",
+      "status": "posted",
+      "text": "夢と現実の境界線。AIが描く幻想的な世界に、あなたを招待します。\n\n#AI美女 #AIart #AIイラスト",
+      "hashtags": [
+        "#AI美女",
+        "#AIart",
+        "#AIイラスト"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Ethereal artistic portrait of a Japanese woman floating in a dreamlike surreal landscape, bioluminescent flowers surrounding her, iridescent butterfly wings merging with her flowing hair, deep midnight blue and violet color palette with glowing cyan accents, fantasy art meets fashion photography, intricate details, magical atmosphere, concept art quality",
+        "negative_prompt": "realistic photo, mundane setting, harsh lighting, simple background, low detail",
+        "style_reference": "Yoshitaka Amano meets contemporary digital fantasy art, ethereal surrealism",
+        "aspect_ratio": "1:1"
+      },
+      "ab_test_variant": "A",
+      "notes": "Variant A: 3 hashtags. Evening artistic slot.",
+      "tweet_id": "2029504930785231253",
+      "post_url": "https://x.com/xx10x14xx/status/2029504930785231253",
+      "posted_at": "2026-03-05T19:30:56.681540+09:00"
+    },
+    {
+      "id": "JP_20260305_04",
+      "slot": 4,
+      "scheduled_time": "22:00 JST",
+      "category": "trend_reactive",
+      "priority": "medium",
+      "status": "posted",
+      "text": "もしAIが「理想の花見デート相手」を描いたら？春はすぐそこ、あなたの理想は？\n\n#AI美女 #AIart #AIグラビア #digitalart",
+      "hashtags": [
+        "#AI美女",
+        "#AIart",
+        "#AIグラビア",
+        "#digitalart"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Beautiful AI-generated Japanese woman sitting under a cherry blossom tree in full bloom, wearing a light pink kimono-inspired modern dress, petals falling around her, holding a cup of matcha, warm sunset light filtering through branches, dreamy spring atmosphere, photorealistic with painterly background, soft focus bokeh of pink and white blossoms",
+        "negative_prompt": "winter scene, dark mood, heavy clothing, cartoon, anime style, indoor setting",
+        "style_reference": "Spring hanami photography aesthetic, soft romantic Japanese portrait style",
+        "aspect_ratio": "16:9"
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B: 4 hashtags. Trend-reactive spring/hanami theme.",
+      "tweet_id": "2029504931829563842",
+      "post_url": "https://x.com/xx10x14xx/status/2029504931829563842",
+      "posted_at": "2026-03-05T19:30:56.940863+09:00"
+    }
+  ],
+  "reply_templates": [
+    "この作品の色使いが本当に素敵ですね！光の表現がとても繊細で好きです",
+    "すごいクオリティ！特に髪の毛の質感がリアルで驚きました",
+    "この世界観、めちゃくちゃ惹かれます。どんなプロンプトで生成されたんですか？",
+    "AIアートの可能性を感じる一枚ですね。構図のセンスが素晴らしいです",
+    "表情の繊細さがすごい。見るたびに新しい発見があります",
+    "背景のディテールまで美しい！全体の雰囲気がとても統一されていますね",
+    "このスタイル、参考にさせていただきます！ライティングが特に上手ですね",
+    "一目見て目が離せなくなりました。色彩のバランスが絶妙です"
+  ]
+}

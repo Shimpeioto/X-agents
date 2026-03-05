@@ -1,0 +1,4962 @@
+{
+  "date": "2026-03-05",
+  "generated_at": "2026-03-05T17:49:25.394464+09:00",
+  "analysis_generated_at": "2026-03-05T17:55:46.270119+09:00",
+  "competitors_total": 41,
+  "competitors_fetched": 14,
+  "competitors_skipped": 27,
+  "competitors": [
+    {
+      "handle": "JosephinaM3131",
+      "user_id": "1941403756261752832",
+      "display_name": "MIKENEKO_E",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 36742,
+      "following": 17,
+      "tweet_count": 322,
+      "description": "AI_MIKENEKO English Version",
+      "recent_posts": [
+        {
+          "tweet_id": "2029378891610243156",
+          "text": "@NaeemAh78347923 😘💕💕💕💕💕💕💕",
+          "created_at": "2026-03-05T02:10:06+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 2405
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 16,
+                "username": "NaeemAh78347923",
+                "id": "1099359752054685697"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        },
+        {
+          "tweet_id": "2029378854612287960",
+          "text": "@ChanAnyoneGal 😘💕💕💕💕💕💕💕",
+          "created_at": "2026-03-05T02:09:57+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 5438
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 14,
+                "username": "ChanAnyoneGal",
+                "id": "1632989939628376064"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        },
+        {
+          "tweet_id": "2029378806948261978",
+          "text": "@drsandeephri 😘💕💕💕💕💕💕💕",
+          "created_at": "2026-03-05T02:09:46+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 5781
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 13,
+                "username": "drsandeephri",
+                "id": "2023082906357465088"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 2.7e-05
+        },
+        {
+          "tweet_id": "2029378758550118772",
+          "text": "@Dark_pat0628 😘💕💕💕💕💕💕💕",
+          "created_at": "2026-03-05T02:09:34+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 1589
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 13,
+                "username": "Dark_pat0628",
+                "id": "1811235815156051968"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        },
+        {
+          "tweet_id": "2029378725314478224",
+          "text": "@bolvii17 😘💕💕💕💕💕💕💕💕",
+          "created_at": "2026-03-05T02:09:26+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 1,
+            "impression_count": 1727
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 9,
+                "username": "bolvii17",
+                "id": "1883259683328471040"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        },
+        {
+          "tweet_id": "2029222645821259901",
+          "text": "SFW  \nRate her out of 10? https://t.co/PkaPbfw2cN",
+          "created_at": "2026-03-04T15:49:14+00:00",
+          "public_metrics": {
+            "retweet_count": 264,
+            "reply_count": 116,
+            "like_count": 6693,
+            "quote_count": 5,
+            "bookmark_count": 4627,
+            "impression_count": 793313
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 26,
+                "end": 49,
+                "url": "https://t.co/PkaPbfw2cN",
+                "expanded_url": "https://x.com/JosephinaM3131/status/2029222645821259901/photo/1",
+                "display_url": "pic.x.com/PkaPbfw2cN",
+                "media_key": "3_2029221975231709184"
+              },
+              {
+                "start": 26,
+                "end": 49,
+                "url": "https://t.co/PkaPbfw2cN",
+                "expanded_url": "https://x.com/JosephinaM3131/status/2029222645821259901/photo/1",
+                "display_url": "pic.x.com/PkaPbfw2cN",
+                "media_key": "3_2029222082610085888"
+              },
+              {
+                "start": 26,
+                "end": 49,
+                "url": "https://t.co/PkaPbfw2cN",
+                "expanded_url": "https://x.com/JosephinaM3131/status/2029222645821259901/photo/1",
+                "display_url": "pic.x.com/PkaPbfw2cN",
+                "media_key": "3_2029222532101095424"
+              },
+              {
+                "start": 26,
+                "end": 49,
+                "url": "https://t.co/PkaPbfw2cN",
+                "expanded_url": "https://x.com/JosephinaM3131/status/2029222645821259901/photo/1",
+                "display_url": "pic.x.com/PkaPbfw2cN",
+                "media_key": "3_2029222552862900230"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.192641
+        },
+        {
+          "tweet_id": "2029174828536873381",
+          "text": "@Agunwa25 Thank you😘💕💕💕💕💕",
+          "created_at": "2026-03-04T12:39:14+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 1,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 519
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 9,
+                "username": "Agunwa25",
+                "id": "1784249263272218624"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 5.4e-05
+        },
+        {
+          "tweet_id": "2029174794793652585",
+          "text": "@Jean08373698513 Thank you😘💕💕💕💕💕",
+          "created_at": "2026-03-04T12:39:05+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 1385
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 16,
+                "username": "Jean08373698513",
+                "id": "1872815277496512512"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        },
+        {
+          "tweet_id": "2029174659519033803",
+          "text": "@GlamCinemaHub Thank you😘💕💕💕💕💕",
+          "created_at": "2026-03-04T12:38:33+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 1,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 68
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 14,
+                "username": "GlamCinemaHub",
+                "id": "2025387366828179458"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 5.4e-05
+        },
+        {
+          "tweet_id": "2029170079993348526",
+          "text": "SFW\nWhich one is best? https://t.co/tcMI2TWUYb",
+          "created_at": "2026-03-04T12:20:21+00:00",
+          "public_metrics": {
+            "retweet_count": 64,
+            "reply_count": 20,
+            "like_count": 1201,
+            "quote_count": 3,
+            "bookmark_count": 552,
+            "impression_count": 55199
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 23,
+                "end": 46,
+                "url": "https://t.co/tcMI2TWUYb",
+                "expanded_url": "https://x.com/JosephinaM3131/status/2029170079993348526/photo/1",
+                "display_url": "pic.x.com/tcMI2TWUYb",
+                "media_key": "3_2029169923432542208"
+              },
+              {
+                "start": 23,
+                "end": 46,
+                "url": "https://t.co/tcMI2TWUYb",
+                "expanded_url": "https://x.com/JosephinaM3131/status/2029170079993348526/photo/1",
+                "display_url": "pic.x.com/tcMI2TWUYb",
+                "media_key": "3_2029169940142698496"
+              },
+              {
+                "start": 23,
+                "end": 46,
+                "url": "https://t.co/tcMI2TWUYb",
+                "expanded_url": "https://x.com/JosephinaM3131/status/2029170079993348526/photo/1",
+                "display_url": "pic.x.com/tcMI2TWUYb",
+                "media_key": "3_2029169965417529344"
+              },
+              {
+                "start": 23,
+                "end": 46,
+                "url": "https://t.co/tcMI2TWUYb",
+                "expanded_url": "https://x.com/JosephinaM3131/status/2029170079993348526/photo/1",
+                "display_url": "pic.x.com/tcMI2TWUYb",
+                "media_key": "3_2029170018685276160"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.035055
+        }
+      ],
+      "avg_engagement_rate": 0.022783,
+      "posting_frequency": 10.0,
+      "top_posts": [
+        {
+          "tweet_id": "2029222645821259901",
+          "engagement_rate": 0.192641,
+          "like_count": 6693
+        },
+        {
+          "tweet_id": "2029170079993348526",
+          "engagement_rate": 0.035055,
+          "like_count": 1201
+        },
+        {
+          "tweet_id": "2029174828536873381",
+          "engagement_rate": 5.4e-05,
+          "like_count": 1
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "sessypuuh",
+      "user_id": "1859818002767597568",
+      "display_name": "Sessy",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 7676,
+      "following": 8,
+      "tweet_count": 51,
+      "description": "",
+      "recent_posts": [
+        {
+          "tweet_id": "2028567037954465817",
+          "text": "would u date me? https://t.co/6k0WiV0edl",
+          "created_at": "2026-03-02T20:24:05+00:00",
+          "public_metrics": {
+            "retweet_count": 43,
+            "reply_count": 103,
+            "like_count": 1565,
+            "quote_count": 2,
+            "bookmark_count": 151,
+            "impression_count": 15711
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 17,
+                "end": 40,
+                "url": "https://t.co/6k0WiV0edl",
+                "expanded_url": "https://x.com/sessypuuh/status/2028567037954465817/photo/1",
+                "display_url": "pic.x.com/6k0WiV0edl",
+                "media_key": "3_2028567033118334976"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.223163
+        },
+        {
+          "tweet_id": "2028232378582270441",
+          "text": "Am I ur type? https://t.co/heicwIDr0F",
+          "created_at": "2026-03-01T22:14:16+00:00",
+          "public_metrics": {
+            "retweet_count": 83,
+            "reply_count": 415,
+            "like_count": 4605,
+            "quote_count": 6,
+            "bookmark_count": 376,
+            "impression_count": 64509
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 14,
+                "end": 37,
+                "url": "https://t.co/heicwIDr0F",
+                "expanded_url": "https://x.com/sessypuuh/status/2028232378582270441/photo/1",
+                "display_url": "pic.x.com/heicwIDr0F",
+                "media_key": "3_2028232372815273984"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.665581
+        },
+        {
+          "tweet_id": "2027522958185353620",
+          "text": "Am I wifey material? https://t.co/1eY0KLXjTB",
+          "created_at": "2026-02-27T23:15:17+00:00",
+          "public_metrics": {
+            "retweet_count": 33,
+            "reply_count": 69,
+            "like_count": 994,
+            "quote_count": 1,
+            "bookmark_count": 108,
+            "impression_count": 12361
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 21,
+                "end": 44,
+                "url": "https://t.co/1eY0KLXjTB",
+                "expanded_url": "https://x.com/sessypuuh/status/2027522958185353620/photo/1",
+                "display_url": "pic.x.com/1eY0KLXjTB",
+                "media_key": "3_2027522952590176256"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.142913
+        },
+        {
+          "tweet_id": "2027083258492531063",
+          "text": "am I wifey material? https://t.co/zzKvkBibgP",
+          "created_at": "2026-02-26T18:08:04+00:00",
+          "public_metrics": {
+            "retweet_count": 64,
+            "reply_count": 170,
+            "like_count": 2089,
+            "quote_count": 2,
+            "bookmark_count": 192,
+            "impression_count": 21717
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 21,
+                "end": 44,
+                "url": "https://t.co/zzKvkBibgP",
+                "expanded_url": "https://x.com/sessypuuh/status/2027083258492531063/photo/1",
+                "display_url": "pic.x.com/zzKvkBibgP",
+                "media_key": "3_2027083251194437633"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.302892
+        },
+        {
+          "tweet_id": "2026764750055440842",
+          "text": "Am I ur type 👀 https://t.co/j6RwKVDuIc",
+          "created_at": "2026-02-25T21:02:26+00:00",
+          "public_metrics": {
+            "retweet_count": 27,
+            "reply_count": 80,
+            "like_count": 1219,
+            "quote_count": 0,
+            "bookmark_count": 142,
+            "impression_count": 16074
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 15,
+                "end": 38,
+                "url": "https://t.co/j6RwKVDuIc",
+                "expanded_url": "https://x.com/sessypuuh/status/2026764750055440842/photo/1",
+                "display_url": "pic.x.com/j6RwKVDuIc",
+                "media_key": "3_2026764744825192449"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.172746
+        },
+        {
+          "tweet_id": "2026384590626078762",
+          "text": "Am I ur type 👀 https://t.co/LRBgbXmbZ2",
+          "created_at": "2026-02-24T19:51:49+00:00",
+          "public_metrics": {
+            "retweet_count": 87,
+            "reply_count": 115,
+            "like_count": 2842,
+            "quote_count": 0,
+            "bookmark_count": 308,
+            "impression_count": 30060
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 15,
+                "end": 38,
+                "url": "https://t.co/LRBgbXmbZ2",
+                "expanded_url": "https://x.com/sessypuuh/status/2026384590626078762/photo/1",
+                "display_url": "pic.x.com/LRBgbXmbZ2",
+                "media_key": "3_2026384582254153728"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.396561
+        },
+        {
+          "tweet_id": "2026011945380245928",
+          "text": "Am I ur type 👀 https://t.co/jmrJ4dWaMq",
+          "created_at": "2026-02-23T19:11:03+00:00",
+          "public_metrics": {
+            "retweet_count": 157,
+            "reply_count": 203,
+            "like_count": 5434,
+            "quote_count": 0,
+            "bookmark_count": 820,
+            "impression_count": 58346
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 15,
+                "end": 38,
+                "url": "https://t.co/jmrJ4dWaMq",
+                "expanded_url": "https://x.com/sessypuuh/status/2026011945380245928/photo/1",
+                "display_url": "pic.x.com/jmrJ4dWaMq",
+                "media_key": "3_2026011937956401153"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.75482
+        },
+        {
+          "tweet_id": "2024164282087113041",
+          "text": "Would you date me?👀 https://t.co/uM8sJYrsXy",
+          "created_at": "2026-02-18T16:49:06+00:00",
+          "public_metrics": {
+            "retweet_count": 105,
+            "reply_count": 356,
+            "like_count": 3996,
+            "quote_count": 5,
+            "bookmark_count": 465,
+            "impression_count": 59751
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 20,
+                "end": 43,
+                "url": "https://t.co/uM8sJYrsXy",
+                "expanded_url": "https://x.com/sessypuuh/status/2024164282087113041/photo/1",
+                "display_url": "pic.x.com/uM8sJYrsXy",
+                "media_key": "3_2024164275606949888"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.581292
+        },
+        {
+          "tweet_id": "2023786047684153844",
+          "text": "Would you date me?👀 https://t.co/kZqIi0tAmk",
+          "created_at": "2026-02-17T15:46:08+00:00",
+          "public_metrics": {
+            "retweet_count": 23,
+            "reply_count": 69,
+            "like_count": 1435,
+            "quote_count": 0,
+            "bookmark_count": 156,
+            "impression_count": 15039
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 20,
+                "end": 43,
+                "url": "https://t.co/kZqIi0tAmk",
+                "expanded_url": "https://x.com/sessypuuh/status/2023786047684153844/photo/1",
+                "display_url": "pic.x.com/kZqIi0tAmk",
+                "media_key": "3_2023786040625164293"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.198932
+        },
+        {
+          "tweet_id": "2023383610519117939",
+          "text": "would you date me?👀 https://t.co/UhWOvkXAXu",
+          "created_at": "2026-02-16T13:07:00+00:00",
+          "public_metrics": {
+            "retweet_count": 68,
+            "reply_count": 234,
+            "like_count": 2520,
+            "quote_count": 0,
+            "bookmark_count": 239,
+            "impression_count": 28356
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 20,
+                "end": 43,
+                "url": "https://t.co/UhWOvkXAXu",
+                "expanded_url": "https://x.com/sessypuuh/status/2023383610519117939/photo/1",
+                "display_url": "pic.x.com/UhWOvkXAXu",
+                "media_key": "3_2023383603590434816"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.367639
+        }
+      ],
+      "avg_engagement_rate": 0.380654,
+      "posting_frequency": 0.7,
+      "top_posts": [
+        {
+          "tweet_id": "2026011945380245928",
+          "engagement_rate": 0.75482,
+          "like_count": 5434
+        },
+        {
+          "tweet_id": "2028232378582270441",
+          "engagement_rate": 0.665581,
+          "like_count": 4605
+        },
+        {
+          "tweet_id": "2024164282087113041",
+          "engagement_rate": 0.581292,
+          "like_count": 3996
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "ai_hiyo_",
+      "user_id": "1048483718858305536",
+      "display_name": "Hiyoko🐣",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 387413,
+      "following": 237,
+      "tweet_count": 32918,
+      "description": "INFP | Surrealist Muse of Aesthetics | You can edit my images using grok in the comments 🤖\n⏬",
+      "recent_posts": [
+        {
+          "tweet_id": "2028928656253567320",
+          "text": "https://t.co/MrcESX7qKn",
+          "created_at": "2026-03-03T20:21:01+00:00",
+          "public_metrics": {
+            "retweet_count": 80,
+            "reply_count": 56,
+            "like_count": 1516,
+            "quote_count": 2,
+            "bookmark_count": 287,
+            "impression_count": 54373
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/MrcESX7qKn",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028928656253567320/photo/1",
+                "display_url": "pic.x.com/MrcESX7qKn",
+                "media_key": "3_2028928542134943745"
+              },
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/MrcESX7qKn",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028928656253567320/photo/1",
+                "display_url": "pic.x.com/MrcESX7qKn",
+                "media_key": "3_2028928547541381120"
+              },
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/MrcESX7qKn",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028928656253567320/photo/1",
+                "display_url": "pic.x.com/MrcESX7qKn",
+                "media_key": "3_2028928556173254656"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.004269
+        },
+        {
+          "tweet_id": "2028616964399419578",
+          "text": "@foxyy4i 好きなの選んで🥹\nhttps://t.co/vNvZXQXINV",
+          "created_at": "2026-03-02T23:42:28+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 1,
+            "like_count": 4,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 3325
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 18,
+                "end": 41,
+                "url": "https://t.co/vNvZXQXINV",
+                "expanded_url": "https://x.com/hamcha_2009/status/2028290314834993373",
+                "display_url": "x.com/hamcha_2009/st…"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 0,
+                "end": 8,
+                "username": "foxyy4i",
+                "id": "1664406189902557184"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 1.3e-05
+        },
+        {
+          "tweet_id": "2028588723634683921",
+          "text": "@kotundesu でしょー🥹",
+          "created_at": "2026-03-02T21:50:15+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 779
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 10,
+                "username": "kotundesu",
+                "id": "120077308"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 3e-06
+        },
+        {
+          "tweet_id": "2028588539966009466",
+          "text": "@foxyy4i 次回箱乗り編！🥹",
+          "created_at": "2026-03-02T21:49:31+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 2,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 789
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 8,
+                "username": "foxyy4i",
+                "id": "1664406189902557184"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 5e-06
+        },
+        {
+          "tweet_id": "2028588394239131804",
+          "text": "@foxyy4i ピンク髪いいなぁ🥹",
+          "created_at": "2026-03-02T21:48:57+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 1,
+            "like_count": 14,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 2733
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 8,
+                "username": "foxyy4i",
+                "id": "1664406189902557184"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 3.9e-05
+        },
+        {
+          "tweet_id": "2028576460651585971",
+          "text": "hey @grok tap the post to combine those four images https://t.co/opPWPdyy73 https://t.co/kIAsrodg4Q",
+          "created_at": "2026-03-02T21:01:32+00:00",
+          "public_metrics": {
+            "retweet_count": 21,
+            "reply_count": 31,
+            "like_count": 729,
+            "quote_count": 0,
+            "bookmark_count": 182,
+            "impression_count": 109312
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 52,
+                "end": 75,
+                "url": "https://t.co/opPWPdyy73",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028576460651585971/photo/1",
+                "display_url": "pic.x.com/opPWPdyy73",
+                "media_key": "3_2028576373250625536"
+              },
+              {
+                "start": 52,
+                "end": 75,
+                "url": "https://t.co/opPWPdyy73",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028576460651585971/photo/1",
+                "display_url": "pic.x.com/opPWPdyy73",
+                "media_key": "3_2028576373309329408"
+              },
+              {
+                "start": 52,
+                "end": 75,
+                "url": "https://t.co/opPWPdyy73",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028576460651585971/photo/1",
+                "display_url": "pic.x.com/opPWPdyy73",
+                "media_key": "3_2028576373267365888"
+              },
+              {
+                "start": 52,
+                "end": 75,
+                "url": "https://t.co/opPWPdyy73",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028576460651585971/photo/1",
+                "display_url": "pic.x.com/opPWPdyy73",
+                "media_key": "3_2028576373263237120"
+              },
+              {
+                "start": 76,
+                "end": 99,
+                "url": "https://t.co/kIAsrodg4Q",
+                "expanded_url": "https://twitter.com/ai_hiyo_/status/2028576297883214017",
+                "display_url": "x.com/ai_hiyo_/statu…"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 4,
+                "end": 9,
+                "username": "grok",
+                "id": "1720665183188922368"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.002016
+        },
+        {
+          "tweet_id": "2028576297883214017",
+          "text": "tap the post to reveal the view",
+          "created_at": "2026-03-02T21:00:53+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 2,
+            "like_count": 36,
+            "quote_count": 1,
+            "bookmark_count": 1,
+            "impression_count": 118075
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.000101
+        },
+        {
+          "tweet_id": "2028571177501982778",
+          "text": "@ziyeyuxiang 😍🙌",
+          "created_at": "2026-03-02T20:40:32+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 509
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 12,
+                "username": "ziyeyuxiang",
+                "id": "3460873338"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        },
+        {
+          "tweet_id": "2028571124200841265",
+          "text": "@YesMrknowitall thank you🥰🙏",
+          "created_at": "2026-03-02T20:40:19+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 1123
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 15,
+                "username": "YesMrknowitall",
+                "id": "41003804"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 3e-06
+        },
+        {
+          "tweet_id": "2028570797770764682",
+          "text": "@jeanloma41 🤣💞",
+          "created_at": "2026-03-02T20:39:01+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 780
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 11,
+                "username": "jeanloma41",
+                "id": "760185134343741442"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        }
+      ],
+      "avg_engagement_rate": 0.000645,
+      "posting_frequency": 10.0,
+      "top_posts": [
+        {
+          "tweet_id": "2028928656253567320",
+          "engagement_rate": 0.004269,
+          "like_count": 1516
+        },
+        {
+          "tweet_id": "2028576460651585971",
+          "engagement_rate": 0.002016,
+          "like_count": 729
+        },
+        {
+          "tweet_id": "2028576297883214017",
+          "engagement_rate": 0.000101,
+          "like_count": 36
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "NotjustRen00",
+      "user_id": "1058031225086984192",
+      "display_name": "Wren",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 16697,
+      "following": 1008,
+      "tweet_count": 367,
+      "description": "數據不會騙人，但這張臉會。👠 AI",
+      "recent_posts": [
+        {
+          "tweet_id": "2029400483446833273",
+          "text": "@NaigaiEcho @fairy43662383 Gemini",
+          "created_at": "2026-03-05T03:35:54+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 1,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 10
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 11,
+                "username": "NaigaiEcho",
+                "id": "1139945142465384453"
+              },
+              {
+                "start": 12,
+                "end": 26,
+                "username": "fairy43662383",
+                "id": "1447212046622150667"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 6e-05
+        },
+        {
+          "tweet_id": "2029393587214114986",
+          "text": "那天孙子看着我的手机，问\n“爷爷这些照片中的人是谁啊？”\n“啊，好多年啦，真怀念当时啊”\n\n“怀念什么啊？”\n\n“当时与她相处的日子”\n\n“那她现在在干嘛？”\n\n心里os “不就在你面前拿着手机看这些照片吗”\n\n#恶搞 #AI变装 https://t.co/b8QluHQV8L",
+          "created_at": "2026-03-05T03:08:30+00:00",
+          "public_metrics": {
+            "retweet_count": 1,
+            "reply_count": 2,
+            "like_count": 25,
+            "quote_count": 0,
+            "bookmark_count": 5,
+            "impression_count": 2845
+          },
+          "entities": {
+            "hashtags": [
+              {
+                "start": 106,
+                "end": 109,
+                "tag": "恶搞"
+              },
+              {
+                "start": 110,
+                "end": 115,
+                "tag": "AI变装"
+              }
+            ],
+            "urls": [
+              {
+                "start": 116,
+                "end": 139,
+                "url": "https://t.co/b8QluHQV8L",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029393587214114986/photo/1",
+                "display_url": "pic.x.com/b8QluHQV8L",
+                "media_key": "3_2029393577735016448"
+              },
+              {
+                "start": 116,
+                "end": 139,
+                "url": "https://t.co/b8QluHQV8L",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029393587214114986/photo/1",
+                "display_url": "pic.x.com/b8QluHQV8L",
+                "media_key": "3_2029393577722429441"
+              },
+              {
+                "start": 116,
+                "end": 139,
+                "url": "https://t.co/b8QluHQV8L",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029393587214114986/photo/1",
+                "display_url": "pic.x.com/b8QluHQV8L",
+                "media_key": "3_2029393577722429445"
+              },
+              {
+                "start": 116,
+                "end": 139,
+                "url": "https://t.co/b8QluHQV8L",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029393587214114986/photo/1",
+                "display_url": "pic.x.com/b8QluHQV8L",
+                "media_key": "3_2029393577722413056"
+              }
+            ]
+          },
+          "hashtags": [
+            "#恶搞",
+            "#AI变装"
+          ],
+          "engagement_rate": 0.001677
+        },
+        {
+          "tweet_id": "2029375350581674258",
+          "text": "@Wusiden11625En 使用这张图片的提示词就可以了",
+          "created_at": "2026-03-05T01:56:02+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 5
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 15,
+                "username": "Wusiden11625En",
+                "id": "1999865796085141504"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        },
+        {
+          "tweet_id": "2029350707317621161",
+          "text": "记得搭造型 https://t.co/AlfzXKQgER",
+          "created_at": "2026-03-05T00:18:06+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 719
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 6,
+                "end": 29,
+                "url": "https://t.co/AlfzXKQgER",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029350707317621161/photo/1",
+                "display_url": "pic.x.com/AlfzXKQgER",
+                "media_key": "3_2029350701995057152"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 6e-05
+        },
+        {
+          "tweet_id": "2029331751873724871",
+          "text": "Close-up portrait with flawlessly integrated hyper-feminine Asian soft glam makeup, \"Pure and Desire\" (Chunyu) aesthetic. Completely clean-shaven, no moustache, no beard, flawless concealer on upper lip. Skin is flawless porcelain, semi-matte base with soft focus and strategic https://t.co/JiQZ5VRtm3",
+          "created_at": "2026-03-04T23:02:47+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 2,
+            "like_count": 4,
+            "quote_count": 0,
+            "bookmark_count": 1,
+            "impression_count": 955
+          },
+          "entities": {
+            "annotations": [
+              {
+                "start": 94,
+                "end": 99,
+                "probability": 0.5031,
+                "type": "Other",
+                "normalized_text": "Desire"
+              },
+              {
+                "start": 103,
+                "end": 108,
+                "probability": 0.6017,
+                "type": "Other",
+                "normalized_text": "Chunyu"
+              }
+            ],
+            "urls": [
+              {
+                "start": 278,
+                "end": 301,
+                "url": "https://t.co/JiQZ5VRtm3",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029331751873724871/photo/1",
+                "display_url": "pic.x.com/JiQZ5VRtm3",
+                "media_key": "3_2029331745670320128"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.000359
+        },
+        {
+          "tweet_id": "2029331656763674688",
+          "text": "Close-up portrait with flawlessly integrated hyper-feminine Asian soft glam makeup, \"Pure and Desire\" (Chunyu) aesthetic. Completely clean-shaven, no moustache, no beard, flawless concealer on upper lip. Skin is flawless porcelain, semi-matte base with soft focus and strategic",
+          "created_at": "2026-03-04T23:02:24+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 5,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 953
+          },
+          "entities": {
+            "annotations": [
+              {
+                "start": 103,
+                "end": 108,
+                "probability": 0.5983,
+                "type": "Other",
+                "normalized_text": "Chunyu"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.000299
+        },
+        {
+          "tweet_id": "2029331526765421020",
+          "text": "刚刚实测，原来不要用分开，可以直接完成变装，直接把任务照片以及服装给gemini\n\n提示词在留言处\n\n#AI变装 https://t.co/4tAzlpTP11 https://t.co/EVPe5MdfxH",
+          "created_at": "2026-03-04T23:01:53+00:00",
+          "public_metrics": {
+            "retweet_count": 10,
+            "reply_count": 7,
+            "like_count": 88,
+            "quote_count": 0,
+            "bookmark_count": 52,
+            "impression_count": 22276
+          },
+          "entities": {
+            "hashtags": [
+              {
+                "start": 51,
+                "end": 56,
+                "tag": "AI变装"
+              }
+            ],
+            "urls": [
+              {
+                "start": 57,
+                "end": 80,
+                "url": "https://t.co/4tAzlpTP11",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029331526765421020/photo/1",
+                "display_url": "pic.x.com/4tAzlpTP11",
+                "media_key": "3_2029331521904267264"
+              },
+              {
+                "start": 57,
+                "end": 80,
+                "url": "https://t.co/4tAzlpTP11",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029331526765421020/photo/1",
+                "display_url": "pic.x.com/4tAzlpTP11",
+                "media_key": "3_2029331521908424714"
+              },
+              {
+                "start": 81,
+                "end": 104,
+                "url": "https://t.co/EVPe5MdfxH",
+                "expanded_url": "https://twitter.com/notjustren00/status/2029184936952119500",
+                "display_url": "x.com/notjustren00/s…"
+              }
+            ]
+          },
+          "hashtags": [
+            "#AI变装"
+          ],
+          "engagement_rate": 0.006289
+        },
+        {
+          "tweet_id": "2029201525135032634",
+          "text": "@VivianZilver 到時記得交作業 🤭",
+          "created_at": "2026-03-04T14:25:18+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 2,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 748
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 13,
+                "username": "VivianZilver",
+                "id": "1977631373109481472"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.00018
+        },
+        {
+          "tweet_id": "2029201400673312772",
+          "text": "可以找自己想要的造型，可到电商网站，pinterest找 https://t.co/8AUMu0H1JV",
+          "created_at": "2026-03-04T14:24:49+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 1,
+            "like_count": 17,
+            "quote_count": 0,
+            "bookmark_count": 2,
+            "impression_count": 3582
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 29,
+                "end": 52,
+                "url": "https://t.co/8AUMu0H1JV",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029201400673312772/photo/1",
+                "display_url": "pic.x.com/8AUMu0H1JV",
+                "media_key": "3_2029201373284450305"
+              },
+              {
+                "start": 29,
+                "end": 52,
+                "url": "https://t.co/8AUMu0H1JV",
+                "expanded_url": "https://x.com/NotjustRen00/status/2029201400673312772/photo/1",
+                "display_url": "pic.x.com/8AUMu0H1JV",
+                "media_key": "3_2029201373343240192"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.001078
+        },
+        {
+          "tweet_id": "2029184936952119500",
+          "text": "https://t.co/XVY9KmZZZ7",
+          "created_at": "2026-03-04T13:19:24+00:00",
+          "public_metrics": {
+            "retweet_count": 39,
+            "reply_count": 6,
+            "like_count": 259,
+            "quote_count": 1,
+            "bookmark_count": 233,
+            "impression_count": 50853
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/XVY9KmZZZ7",
+                "expanded_url": "http://x.com/i/article/2029173128619081728",
+                "display_url": "x.com/i/article/2029…",
+                "status": 500,
+                "unwound_url": "https://x.com/i/article/2029173128619081728"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.018267
+        }
+      ],
+      "avg_engagement_rate": 0.002827,
+      "posting_frequency": 10.0,
+      "top_posts": [
+        {
+          "tweet_id": "2029184936952119500",
+          "engagement_rate": 0.018267,
+          "like_count": 259
+        },
+        {
+          "tweet_id": "2029331526765421020",
+          "engagement_rate": 0.006289,
+          "like_count": 88
+        },
+        {
+          "tweet_id": "2029393587214114986",
+          "engagement_rate": 0.001677,
+          "like_count": 25
+        }
+      ],
+      "hashtags_used": {
+        "#恶搞": 1,
+        "#AI变装": 2
+      }
+    },
+    {
+      "handle": "IvoryLane_plus",
+      "user_id": "1637688245252395010",
+      "display_name": "Su-jin 수진",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 253332,
+      "following": 228,
+      "tweet_count": 4994,
+      "description": "I stream, game, read and like to travel 💜",
+      "recent_posts": [
+        {
+          "tweet_id": "2029210256614801558",
+          "text": "this ok? https://t.co/l1LPThU4jz",
+          "created_at": "2026-03-04T15:00:00+00:00",
+          "public_metrics": {
+            "retweet_count": 48,
+            "reply_count": 76,
+            "like_count": 1180,
+            "quote_count": 1,
+            "bookmark_count": 99,
+            "impression_count": 6328
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 9,
+                "end": 32,
+                "url": "https://t.co/l1LPThU4jz",
+                "expanded_url": "https://x.com/IvoryLane_plus/status/2029210256614801558/photo/1",
+                "display_url": "pic.x.com/l1LPThU4jz",
+                "media_key": "3_2026533128865480704"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.005151
+        },
+        {
+          "tweet_id": "2028847868803514773",
+          "text": "Too big or just right? https://t.co/ZnyRUi7J4w",
+          "created_at": "2026-03-03T15:00:00+00:00",
+          "public_metrics": {
+            "retweet_count": 78,
+            "reply_count": 179,
+            "like_count": 2188,
+            "quote_count": 2,
+            "bookmark_count": 144,
+            "impression_count": 15863
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 23,
+                "end": 46,
+                "url": "https://t.co/ZnyRUi7J4w",
+                "expanded_url": "https://x.com/IvoryLane_plus/status/2028847868803514773/photo/1",
+                "display_url": "pic.x.com/ZnyRUi7J4w",
+                "media_key": "3_2026532883653955584"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.009659
+        },
+        {
+          "tweet_id": "2028514245672120385",
+          "text": "RT @IvoryLane_plus: be mine? https://t.co/9j577SyV5r",
+          "created_at": "2026-03-02T16:54:18+00:00",
+          "public_metrics": {
+            "retweet_count": 109,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 1
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 3,
+                "end": 18,
+                "username": "IvoryLane_plus",
+                "id": "1637688245252395010"
+              }
+            ],
+            "urls": [
+              {
+                "start": 29,
+                "end": 52,
+                "url": "https://t.co/9j577SyV5r",
+                "expanded_url": "https://x.com/IvoryLane_plus/status/2027398319748608153/photo/1",
+                "display_url": "pic.x.com/9j577SyV5r",
+                "media_key": "3_2026531948181491712"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.00043
+        },
+        {
+          "tweet_id": "2028485478987821187",
+          "text": "say hi if you see this https://t.co/Lp88yMTlEV",
+          "created_at": "2026-03-02T15:00:00+00:00",
+          "public_metrics": {
+            "retweet_count": 103,
+            "reply_count": 201,
+            "like_count": 3374,
+            "quote_count": 2,
+            "bookmark_count": 255,
+            "impression_count": 28160
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 23,
+                "end": 46,
+                "url": "https://t.co/Lp88yMTlEV",
+                "expanded_url": "https://x.com/IvoryLane_plus/status/2028485478987821187/photo/1",
+                "display_url": "pic.x.com/Lp88yMTlEV",
+                "media_key": "3_2026532673993252864"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.014526
+        },
+        {
+          "tweet_id": "2028123342839181454",
+          "text": "I heard its Sunday funday https://t.co/Jb7aAykqJj",
+          "created_at": "2026-03-01T15:01:00+00:00",
+          "public_metrics": {
+            "retweet_count": 68,
+            "reply_count": 95,
+            "like_count": 2286,
+            "quote_count": 0,
+            "bookmark_count": 142,
+            "impression_count": 19606
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 26,
+                "end": 49,
+                "url": "https://t.co/Jb7aAykqJj",
+                "expanded_url": "https://x.com/IvoryLane_plus/status/2028123342839181454/photo/1",
+                "display_url": "pic.x.com/Jb7aAykqJj",
+                "media_key": "3_2026532422263685121"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.009667
+        },
+        {
+          "tweet_id": "2027760707052441643",
+          "text": "Any weekend plans? https://t.co/BuoZLZfKvq",
+          "created_at": "2026-02-28T15:00:01+00:00",
+          "public_metrics": {
+            "retweet_count": 86,
+            "reply_count": 139,
+            "like_count": 2240,
+            "quote_count": 3,
+            "bookmark_count": 149,
+            "impression_count": 18903
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 19,
+                "end": 42,
+                "url": "https://t.co/BuoZLZfKvq",
+                "expanded_url": "https://x.com/IvoryLane_plus/status/2027760707052441643/photo/1",
+                "display_url": "pic.x.com/BuoZLZfKvq",
+                "media_key": "3_2026532169812721664"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.009742
+        },
+        {
+          "tweet_id": "2027398319748608153",
+          "text": "be mine? https://t.co/9j577SyV5r",
+          "created_at": "2026-02-27T15:00:01+00:00",
+          "public_metrics": {
+            "retweet_count": 109,
+            "reply_count": 158,
+            "like_count": 3096,
+            "quote_count": 5,
+            "bookmark_count": 285,
+            "impression_count": 33773
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 9,
+                "end": 32,
+                "url": "https://t.co/9j577SyV5r",
+                "expanded_url": "https://x.com/IvoryLane_plus/status/2027398319748608153/photo/1",
+                "display_url": "pic.x.com/9j577SyV5r",
+                "media_key": "3_2026531948181491712"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.013295
+        },
+        {
+          "tweet_id": "2027035939999240663",
+          "text": "hey honey https://t.co/EariL4Zsw8",
+          "created_at": "2026-02-26T15:00:03+00:00",
+          "public_metrics": {
+            "retweet_count": 137,
+            "reply_count": 162,
+            "like_count": 3994,
+            "quote_count": 2,
+            "bookmark_count": 332,
+            "impression_count": 32126
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 10,
+                "end": 33,
+                "url": "https://t.co/EariL4Zsw8",
+                "expanded_url": "https://x.com/IvoryLane_plus/status/2027035939999240663/photo/1",
+                "display_url": "pic.x.com/EariL4Zsw8",
+                "media_key": "3_2026530301187641344"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.016954
+        },
+        {
+          "tweet_id": "2026673552183931254",
+          "text": "who want me? https://t.co/86rNVq1pU9",
+          "created_at": "2026-02-25T15:00:03+00:00",
+          "public_metrics": {
+            "retweet_count": 103,
+            "reply_count": 183,
+            "like_count": 3293,
+            "quote_count": 1,
+            "bookmark_count": 256,
+            "impression_count": 29299
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 13,
+                "end": 36,
+                "url": "https://t.co/86rNVq1pU9",
+                "expanded_url": "https://x.com/IvoryLane_plus/status/2026673552183931254/photo/1",
+                "display_url": "pic.x.com/86rNVq1pU9",
+                "media_key": "3_2026530098506248192"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.014132
+        },
+        {
+          "tweet_id": "2026410659181899785",
+          "text": "RT @sunaevt: Little stream update. Im currently in the middle of moving to a whole different state 😅 Ill also be in a hotel for a bit so st…",
+          "created_at": "2026-02-24T21:35:24+00:00",
+          "public_metrics": {
+            "retweet_count": 1,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 1
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 3,
+                "end": 11,
+                "username": "sunaevt",
+                "id": "1744559966810152960"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 4e-06
+        }
+      ],
+      "avg_engagement_rate": 0.009356,
+      "posting_frequency": 1.3,
+      "top_posts": [
+        {
+          "tweet_id": "2027035939999240663",
+          "engagement_rate": 0.016954,
+          "like_count": 3994
+        },
+        {
+          "tweet_id": "2028485478987821187",
+          "engagement_rate": 0.014526,
+          "like_count": 3374
+        },
+        {
+          "tweet_id": "2026673552183931254",
+          "engagement_rate": 0.014132,
+          "like_count": 3293
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "PinUpGirl_AI",
+      "user_id": "1652690832976392193",
+      "display_name": "あいぷぐ/AiPugu✨",
+      "status": "ok",
+      "market": "both",
+      "category": "ai_beauty",
+      "followers": 66105,
+      "following": 114,
+      "tweet_count": 42029,
+      "description": "@fanvue ambassador\nThanks to our supporters💞\nAIで作った画像を投稿しています❣仲良しさんとご支援者様に感謝🥰\n※無断で転載・加工・販売等は禁止です🥺",
+      "recent_posts": [
+        {
+          "tweet_id": "2029311968411304037",
+          "text": "@omokage_AIsOK エモエ◇❄️🥹",
+          "created_at": "2026-03-04T21:44:10+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 82
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 14,
+                "username": "omokage_AIsOK",
+                "id": "1921555284931334144"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 1.5e-05
+        },
+        {
+          "tweet_id": "2029311964837748886",
+          "text": "RT @omokage_AIsOK: Showing me a happy face, walking in this magic space https://t.co/VlkbkDyP4Z",
+          "created_at": "2026-03-04T21:44:09+00:00",
+          "public_metrics": {
+            "retweet_count": 13,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 0
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 3,
+                "end": 17,
+                "username": "omokage_AIsOK",
+                "id": "1921555284931334144"
+              }
+            ],
+            "urls": [
+              {
+                "start": 72,
+                "end": 95,
+                "url": "https://t.co/VlkbkDyP4Z",
+                "expanded_url": "https://x.com/omokage_AIsOK/status/2029134767216529679/photo/1",
+                "display_url": "pic.x.com/VlkbkDyP4Z",
+                "media_key": "3_2028889308535635968"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.000197
+        },
+        {
+          "tweet_id": "2029311568232759550",
+          "text": "@Saiko_AIch お水とお玉がきれいでしゅごひ♪👏🥹",
+          "created_at": "2026-03-04T21:42:35+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 99
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 11,
+                "username": "Saiko_AIch",
+                "id": "1743640260368912384"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        },
+        {
+          "tweet_id": "2029311408492691795",
+          "text": "RT @Saiko_AIch: 気づいたらもうこんな時間。早く寝なきゃー\nIt's already this late. I need to go to bed early😌\n#SFW #Fictional #digitalart https://t.co/H5O3ojNbiH",
+          "created_at": "2026-03-04T21:41:57+00:00",
+          "public_metrics": {
+            "retweet_count": 11,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 0
+          },
+          "entities": {
+            "hashtags": [
+              {
+                "start": 88,
+                "end": 92,
+                "tag": "SFW"
+              },
+              {
+                "start": 93,
+                "end": 103,
+                "tag": "Fictional"
+              },
+              {
+                "start": 104,
+                "end": 115,
+                "tag": "digitalart"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 3,
+                "end": 14,
+                "username": "Saiko_AIch",
+                "id": "1743640260368912384"
+              }
+            ],
+            "urls": [
+              {
+                "start": 116,
+                "end": 139,
+                "url": "https://t.co/H5O3ojNbiH",
+                "expanded_url": "https://x.com/Saiko_AIch/status/2029248130517229808/photo/1",
+                "display_url": "pic.x.com/H5O3ojNbiH",
+                "media_key": "3_2029247436544458752"
+              }
+            ]
+          },
+          "hashtags": [
+            "#SFW",
+            "#Fictional",
+            "#digitalart"
+          ],
+          "engagement_rate": 0.000166
+        },
+        {
+          "tweet_id": "2029310751207506191",
+          "text": "@yonflower3 ひまわりさんおはよーございまっま！🌻ヾ(*´∀｀*)ﾉ🌻\n一昨日は雨音で眠れず昨日は風で眠れず…ちゅらい🥹",
+          "created_at": "2026-03-04T21:39:20+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 140
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 11,
+                "username": "yonflower3",
+                "id": "1530776522910339073"
+              }
+            ],
+            "annotations": [
+              {
+                "start": 12,
+                "end": 17,
+                "probability": 0.7133,
+                "type": "Person",
+                "normalized_text": "ひまわりさん"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 1.5e-05
+        },
+        {
+          "tweet_id": "2029310127237677378",
+          "text": "@ai_hiyo_ Vlogでアマルフィーいった気分味わってます🌺🥹",
+          "created_at": "2026-03-04T21:36:51+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 191
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 9,
+                "username": "ai_hiyo_",
+                "id": "1048483718858305536"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0
+        },
+        {
+          "tweet_id": "2029310123861262713",
+          "text": "RT @ai_hiyo_: https://t.co/MrcESX7qKn",
+          "created_at": "2026-03-04T21:36:50+00:00",
+          "public_metrics": {
+            "retweet_count": 80,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 0
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 3,
+                "end": 12,
+                "username": "ai_hiyo_",
+                "id": "1048483718858305536"
+              }
+            ],
+            "urls": [
+              {
+                "start": 14,
+                "end": 37,
+                "url": "https://t.co/MrcESX7qKn",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028928656253567320/photo/1",
+                "display_url": "pic.x.com/MrcESX7qKn",
+                "media_key": "3_2028928542134943745"
+              },
+              {
+                "start": 14,
+                "end": 37,
+                "url": "https://t.co/MrcESX7qKn",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028928656253567320/photo/1",
+                "display_url": "pic.x.com/MrcESX7qKn",
+                "media_key": "3_2028928547541381120"
+              },
+              {
+                "start": 14,
+                "end": 37,
+                "url": "https://t.co/MrcESX7qKn",
+                "expanded_url": "https://x.com/ai_hiyo_/status/2028928656253567320/photo/1",
+                "display_url": "pic.x.com/MrcESX7qKn",
+                "media_key": "3_2028928556173254656"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.00121
+        },
+        {
+          "tweet_id": "2029308727065755900",
+          "text": "@foxyy4i 🦴🥲",
+          "created_at": "2026-03-04T21:31:17+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 1,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 163
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 8,
+                "username": "foxyy4i",
+                "id": "1664406189902557184"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 3e-05
+        },
+        {
+          "tweet_id": "2029308718207386072",
+          "text": "RT @foxyy4i: My body count status:   \n\n2022: 🥚\n2023: 🐣\n2024: 🐔\n2025: 🍗\n…show more https://t.co/hJRUhp1z2f",
+          "created_at": "2026-03-04T21:31:15+00:00",
+          "public_metrics": {
+            "retweet_count": 10,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 0
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 3,
+                "end": 11,
+                "username": "foxyy4i",
+                "id": "1664406189902557184"
+              }
+            ],
+            "urls": [
+              {
+                "start": 82,
+                "end": 105,
+                "url": "https://t.co/hJRUhp1z2f",
+                "expanded_url": "https://x.com/foxyy4i/status/2029073956775616927/photo/1",
+                "display_url": "pic.x.com/hJRUhp1z2f",
+                "media_key": "3_2029073943299313664"
+              },
+              {
+                "start": 82,
+                "end": 105,
+                "url": "https://t.co/hJRUhp1z2f",
+                "expanded_url": "https://x.com/foxyy4i/status/2029073956775616927/photo/1",
+                "display_url": "pic.x.com/hJRUhp1z2f",
+                "media_key": "3_2029073943672524801"
+              },
+              {
+                "start": 82,
+                "end": 105,
+                "url": "https://t.co/hJRUhp1z2f",
+                "expanded_url": "https://x.com/foxyy4i/status/2029073956775616927/photo/1",
+                "display_url": "pic.x.com/hJRUhp1z2f",
+                "media_key": "3_2029073943672569857"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.000151
+        },
+        {
+          "tweet_id": "2029308130715476379",
+          "text": "@adrianMadrian4 Adrian💯ありがとーっ✨🥰",
+          "created_at": "2026-03-04T21:28:55+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 1,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 46
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 15,
+                "username": "adrianMadrian4",
+                "id": "1430868683019149320"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 3e-05
+        }
+      ],
+      "avg_engagement_rate": 0.000181,
+      "posting_frequency": 10.0,
+      "top_posts": [
+        {
+          "tweet_id": "2029310123861262713",
+          "engagement_rate": 0.00121,
+          "like_count": 0
+        },
+        {
+          "tweet_id": "2029311964837748886",
+          "engagement_rate": 0.000197,
+          "like_count": 0
+        },
+        {
+          "tweet_id": "2029311408492691795",
+          "engagement_rate": 0.000166,
+          "like_count": 0
+        }
+      ],
+      "hashtags_used": {
+        "#SFW": 1,
+        "#Fictional": 1,
+        "#digitalart": 1
+      }
+    },
+    {
+      "handle": "leahyunaxo",
+      "user_id": "1922665614503469057",
+      "display_name": "Leah Yuna",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 72823,
+      "following": 43,
+      "tweet_count": 245,
+      "description": "IG: realyunaxo 💓 - follow my bestie @voidcina 💕",
+      "recent_posts": [
+        {
+          "tweet_id": "2029313483045487044",
+          "text": "👀 more &amp; talk to me👇\nhttps://t.co/LGrNaeKS3h https://t.co/cCiRSwiYmi",
+          "created_at": "2026-03-04T21:50:11+00:00",
+          "public_metrics": {
+            "retweet_count": 3,
+            "reply_count": 3,
+            "like_count": 99,
+            "quote_count": 0,
+            "bookmark_count": 15,
+            "impression_count": 8378
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 25,
+                "end": 48,
+                "url": "https://t.co/LGrNaeKS3h",
+                "expanded_url": "http://tapforallmylinks.com/leahyuna",
+                "display_url": "tapforallmylinks.com/leahyuna",
+                "status": 200,
+                "title": "Tapforallmylinks - undefined",
+                "description": "Find all undefined links on Tapforallmylinks. undefined. exclusive content 💋, Message me, More of me 💕.",
+                "unwound_url": "https://tapforallmylinks.com/leahyuna"
+              },
+              {
+                "start": 49,
+                "end": 72,
+                "url": "https://t.co/cCiRSwiYmi",
+                "expanded_url": "https://x.com/leahyunaxo/status/2029313483045487044/photo/1",
+                "display_url": "pic.x.com/cCiRSwiYmi",
+                "media_key": "3_2029313474489401344"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.001442
+        },
+        {
+          "tweet_id": "2029302462545310078",
+          "text": "wifey material? https://t.co/vZjBtRDcHR",
+          "created_at": "2026-03-04T21:06:24+00:00",
+          "public_metrics": {
+            "retweet_count": 436,
+            "reply_count": 326,
+            "like_count": 16642,
+            "quote_count": 4,
+            "bookmark_count": 2894,
+            "impression_count": 140316
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 16,
+                "end": 39,
+                "url": "https://t.co/vZjBtRDcHR",
+                "expanded_url": "https://x.com/leahyunaxo/status/2029302462545310078/photo/1",
+                "display_url": "pic.x.com/vZjBtRDcHR",
+                "media_key": "3_2029302456799133698"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.239045
+        },
+        {
+          "tweet_id": "2028953618049565180",
+          "text": "👀 more &amp; talk to me👇\nhttps://t.co/LGrNaeKS3h https://t.co/VDZBBOSUdc",
+          "created_at": "2026-03-03T22:00:13+00:00",
+          "public_metrics": {
+            "retweet_count": 3,
+            "reply_count": 4,
+            "like_count": 149,
+            "quote_count": 0,
+            "bookmark_count": 21,
+            "impression_count": 12759
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 25,
+                "end": 48,
+                "url": "https://t.co/LGrNaeKS3h",
+                "expanded_url": "http://tapforallmylinks.com/leahyuna",
+                "display_url": "tapforallmylinks.com/leahyuna",
+                "status": 200,
+                "title": "Tapforallmylinks - undefined",
+                "description": "Find all undefined links on Tapforallmylinks. undefined. exclusive content 💋, Message me, More of me 💕.",
+                "unwound_url": "https://tapforallmylinks.com/leahyuna"
+              },
+              {
+                "start": 49,
+                "end": 72,
+                "url": "https://t.co/VDZBBOSUdc",
+                "expanded_url": "https://x.com/leahyunaxo/status/2028953618049565180/photo/1",
+                "display_url": "pic.x.com/VDZBBOSUdc",
+                "media_key": "3_2028953610722172928"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.002142
+        },
+        {
+          "tweet_id": "2028941945234415772",
+          "text": "be honest.. am I attractive? https://t.co/OgZpH6S3V3",
+          "created_at": "2026-03-03T21:13:50+00:00",
+          "public_metrics": {
+            "retweet_count": 478,
+            "reply_count": 350,
+            "like_count": 15537,
+            "quote_count": 6,
+            "bookmark_count": 2935,
+            "impression_count": 161832
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 29,
+                "end": 52,
+                "url": "https://t.co/OgZpH6S3V3",
+                "expanded_url": "https://x.com/leahyunaxo/status/2028941945234415772/photo/1",
+                "display_url": "pic.x.com/OgZpH6S3V3",
+                "media_key": "3_2028941936640339968"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.224805
+        },
+        {
+          "tweet_id": "2028601293237796994",
+          "text": "👀 more &amp; talk to me👇\nhttps://t.co/LGrNaeKS3h https://t.co/PKvgiqywJE",
+          "created_at": "2026-03-02T22:40:12+00:00",
+          "public_metrics": {
+            "retweet_count": 1,
+            "reply_count": 4,
+            "like_count": 132,
+            "quote_count": 0,
+            "bookmark_count": 24,
+            "impression_count": 9759
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 25,
+                "end": 48,
+                "url": "https://t.co/LGrNaeKS3h",
+                "expanded_url": "http://tapforallmylinks.com/leahyuna",
+                "display_url": "tapforallmylinks.com/leahyuna",
+                "status": 200,
+                "title": "Tapforallmylinks - undefined",
+                "description": "Find all undefined links on Tapforallmylinks. undefined. exclusive content 💋, Message me, More of me 💕.",
+                "unwound_url": "https://tapforallmylinks.com/leahyuna"
+              },
+              {
+                "start": 49,
+                "end": 72,
+                "url": "https://t.co/PKvgiqywJE",
+                "expanded_url": "https://x.com/leahyunaxo/status/2028601293237796994/photo/1",
+                "display_url": "pic.x.com/PKvgiqywJE",
+                "media_key": "3_2028601288955678720"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.001881
+        },
+        {
+          "tweet_id": "2028585742276960286",
+          "text": "RT @irldollsx: lemme eat your soul https://t.co/NH6ymcQcJo",
+          "created_at": "2026-03-02T21:38:24+00:00",
+          "public_metrics": {
+            "retweet_count": 15,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 0
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 3,
+                "end": 13,
+                "username": "irldollsx",
+                "id": "1850392973155938304"
+              }
+            ],
+            "urls": [
+              {
+                "start": 35,
+                "end": 58,
+                "url": "https://t.co/NH6ymcQcJo",
+                "expanded_url": "https://x.com/irldollsx/status/2028551436171145655/photo/1",
+                "display_url": "pic.x.com/NH6ymcQcJo",
+                "media_key": "3_2028551430131560448"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.000206
+        },
+        {
+          "tweet_id": "2028585177878868440",
+          "text": "who want me https://t.co/lMYGY454vk",
+          "created_at": "2026-03-02T21:36:10+00:00",
+          "public_metrics": {
+            "retweet_count": 76,
+            "reply_count": 196,
+            "like_count": 2082,
+            "quote_count": 2,
+            "bookmark_count": 288,
+            "impression_count": 28624
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 12,
+                "end": 35,
+                "url": "https://t.co/lMYGY454vk",
+                "expanded_url": "https://x.com/leahyunaxo/status/2028585177878868440/photo/1",
+                "display_url": "pic.x.com/lMYGY454vk",
+                "media_key": "3_2028585171222724609"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.032352
+        },
+        {
+          "tweet_id": "2028211215369933250",
+          "text": "👀 more &amp; talk to me👇\nhttps://t.co/LGrNaeKS3h https://t.co/vxFrbQMULb",
+          "created_at": "2026-03-01T20:50:10+00:00",
+          "public_metrics": {
+            "retweet_count": 1,
+            "reply_count": 6,
+            "like_count": 120,
+            "quote_count": 0,
+            "bookmark_count": 13,
+            "impression_count": 11533
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 25,
+                "end": 48,
+                "url": "https://t.co/LGrNaeKS3h",
+                "expanded_url": "http://tapforallmylinks.com/leahyuna",
+                "display_url": "tapforallmylinks.com/leahyuna",
+                "status": 200,
+                "title": "Tapforallmylinks - undefined",
+                "description": "Find all undefined links on Tapforallmylinks. undefined. exclusive content 💋, Message me, More of me 💕.",
+                "unwound_url": "https://tapforallmylinks.com/leahyuna"
+              },
+              {
+                "start": 49,
+                "end": 72,
+                "url": "https://t.co/vxFrbQMULb",
+                "expanded_url": "https://x.com/leahyunaxo/status/2028211215369933250/photo/1",
+                "display_url": "pic.x.com/vxFrbQMULb",
+                "media_key": "3_2028211207207866368"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.001744
+        },
+        {
+          "tweet_id": "2028194474187202857",
+          "text": "describe me in 1 word? https://t.co/FwyllSkBBp",
+          "created_at": "2026-03-01T19:43:39+00:00",
+          "public_metrics": {
+            "retweet_count": 254,
+            "reply_count": 394,
+            "like_count": 8961,
+            "quote_count": 5,
+            "bookmark_count": 1345,
+            "impression_count": 108985
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 23,
+                "end": 46,
+                "url": "https://t.co/FwyllSkBBp",
+                "expanded_url": "https://x.com/leahyunaxo/status/2028194474187202857/photo/1",
+                "display_url": "pic.x.com/FwyllSkBBp",
+                "media_key": "3_2028194468763934720"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.132019
+        },
+        {
+          "tweet_id": "2028084964160409647",
+          "text": "RT @voidcina: would you date a 2007 girl? https://t.co/M3sgxHh8vr",
+          "created_at": "2026-03-01T12:28:30+00:00",
+          "public_metrics": {
+            "retweet_count": 11,
+            "reply_count": 0,
+            "like_count": 0,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 1
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 3,
+                "end": 12,
+                "username": "voidcina",
+                "id": "1992010910236319744"
+              }
+            ],
+            "urls": [
+              {
+                "start": 42,
+                "end": 65,
+                "url": "https://t.co/M3sgxHh8vr",
+                "expanded_url": "https://x.com/voidcina/status/2028084325317550491/photo/1",
+                "display_url": "pic.x.com/M3sgxHh8vr",
+                "media_key": "3_2028084195562561536"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.000151
+        }
+      ],
+      "avg_engagement_rate": 0.063579,
+      "posting_frequency": 2.9,
+      "top_posts": [
+        {
+          "tweet_id": "2029302462545310078",
+          "engagement_rate": 0.239045,
+          "like_count": 16642
+        },
+        {
+          "tweet_id": "2028941945234415772",
+          "engagement_rate": 0.224805,
+          "like_count": 15537
+        },
+        {
+          "tweet_id": "2028194474187202857",
+          "engagement_rate": 0.132019,
+          "like_count": 8961
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "Angelwithcakee",
+      "user_id": "1916760212519747584",
+      "display_name": "Sienna",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 35198,
+      "following": 14,
+      "tweet_count": 56,
+      "description": "Just a blonde with a playful side 😇 | Join my journey @siennacakee 💕",
+      "recent_posts": [
+        {
+          "tweet_id": "2028624501857034601",
+          "text": "say something nice abt me 🥹 https://t.co/cGmeZfKtaY",
+          "created_at": "2026-03-03T00:12:25+00:00",
+          "public_metrics": {
+            "retweet_count": 21,
+            "reply_count": 49,
+            "like_count": 396,
+            "quote_count": 3,
+            "bookmark_count": 33,
+            "impression_count": 8192
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 28,
+                "end": 51,
+                "url": "https://t.co/cGmeZfKtaY",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2028624501857034601/photo/1",
+                "display_url": "pic.x.com/cGmeZfKtaY",
+                "media_key": "3_2028624494152048640"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.013325
+        },
+        {
+          "tweet_id": "2028273416936051024",
+          "text": "my kiss count status: \n\n2022: 0\n2023: 0\n2024: 1\n2025: 1\n…show more https://t.co/pzIbXjOxmh",
+          "created_at": "2026-03-02T00:57:20+00:00",
+          "public_metrics": {
+            "retweet_count": 56,
+            "reply_count": 44,
+            "like_count": 1750,
+            "quote_count": 5,
+            "bookmark_count": 216,
+            "impression_count": 44370
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 67,
+                "end": 90,
+                "url": "https://t.co/pzIbXjOxmh",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2028273416936051024/photo/1",
+                "display_url": "pic.x.com/pzIbXjOxmh",
+                "media_key": "3_2028273411940556802"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.052702
+        },
+        {
+          "tweet_id": "2027923312152637542",
+          "text": "you mind? https://t.co/BzcnqyQSxC",
+          "created_at": "2026-03-01T01:46:09+00:00",
+          "public_metrics": {
+            "retweet_count": 112,
+            "reply_count": 81,
+            "like_count": 3008,
+            "quote_count": 1,
+            "bookmark_count": 486,
+            "impression_count": 40166
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 10,
+                "end": 33,
+                "url": "https://t.co/BzcnqyQSxC",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2027923312152637542/photo/1",
+                "display_url": "pic.x.com/BzcnqyQSxC",
+                "media_key": "3_2027923304477003776"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.090971
+        },
+        {
+          "tweet_id": "2027554360943612398",
+          "text": "hey @grok put me in a bikini https://t.co/nNPTb0hT3u",
+          "created_at": "2026-02-28T01:20:04+00:00",
+          "public_metrics": {
+            "retweet_count": 10,
+            "reply_count": 25,
+            "like_count": 263,
+            "quote_count": 0,
+            "bookmark_count": 28,
+            "impression_count": 9120
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 29,
+                "end": 52,
+                "url": "https://t.co/nNPTb0hT3u",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2027554360943612398/photo/1",
+                "display_url": "pic.x.com/nNPTb0hT3u",
+                "media_key": "3_2027554355058966528"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 4,
+                "end": 9,
+                "username": "grok",
+                "id": "1720665183188922368"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.008466
+        },
+        {
+          "tweet_id": "2027164342160933255",
+          "text": "Would I get your attention? https://t.co/0zZHvdXldi",
+          "created_at": "2026-02-26T23:30:16+00:00",
+          "public_metrics": {
+            "retweet_count": 45,
+            "reply_count": 139,
+            "like_count": 2217,
+            "quote_count": 1,
+            "bookmark_count": 174,
+            "impression_count": 31062
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 28,
+                "end": 51,
+                "url": "https://t.co/0zZHvdXldi",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2027164342160933255/photo/1",
+                "display_url": "pic.x.com/0zZHvdXldi",
+                "media_key": "3_2027164337375436800"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.068243
+        },
+        {
+          "tweet_id": "2026737199249760677",
+          "text": "Describe me using one word??? https://t.co/zSSzupf3LU",
+          "created_at": "2026-02-25T19:12:57+00:00",
+          "public_metrics": {
+            "retweet_count": 28,
+            "reply_count": 129,
+            "like_count": 600,
+            "quote_count": 0,
+            "bookmark_count": 32,
+            "impression_count": 9826
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 30,
+                "end": 53,
+                "url": "https://t.co/zSSzupf3LU",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2026737199249760677/photo/1",
+                "display_url": "pic.x.com/zSSzupf3LU",
+                "media_key": "3_2026737192203165696"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.021507
+        },
+        {
+          "tweet_id": "2026251793705869522",
+          "text": "would you? https://t.co/fiC2UKcI6U",
+          "created_at": "2026-02-24T11:04:08+00:00",
+          "public_metrics": {
+            "retweet_count": 14,
+            "reply_count": 116,
+            "like_count": 316,
+            "quote_count": 1,
+            "bookmark_count": 10,
+            "impression_count": 10881
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 11,
+                "end": 34,
+                "url": "https://t.co/fiC2UKcI6U",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2026251793705869522/photo/1",
+                "display_url": "pic.x.com/fiC2UKcI6U",
+                "media_key": "3_2026251788957962240"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.0127
+        },
+        {
+          "tweet_id": "2025978924837019674",
+          "text": "single btw ✌️ https://t.co/eXUYitCEME",
+          "created_at": "2026-02-23T16:59:51+00:00",
+          "public_metrics": {
+            "retweet_count": 90,
+            "reply_count": 240,
+            "like_count": 2979,
+            "quote_count": 4,
+            "bookmark_count": 248,
+            "impression_count": 45579
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 14,
+                "end": 37,
+                "url": "https://t.co/eXUYitCEME",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2025978924837019674/photo/1",
+                "display_url": "pic.x.com/eXUYitCEME",
+                "media_key": "3_2025978918868557824"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.094125
+        },
+        {
+          "tweet_id": "2025752308160594251",
+          "text": "Be brave enough to open the comments ;) https://t.co/dOdoVoBkhG",
+          "created_at": "2026-02-23T01:59:21+00:00",
+          "public_metrics": {
+            "retweet_count": 72,
+            "reply_count": 261,
+            "like_count": 2425,
+            "quote_count": 1,
+            "bookmark_count": 163,
+            "impression_count": 62942
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 40,
+                "end": 63,
+                "url": "https://t.co/dOdoVoBkhG",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2025752308160594251/photo/1",
+                "display_url": "pic.x.com/dOdoVoBkhG",
+                "media_key": "3_2025752304318570496"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.078385
+        },
+        {
+          "tweet_id": "2025582994983964849",
+          "text": "Hey @grok turn me around completely https://t.co/BdwvGgtYOg",
+          "created_at": "2026-02-22T14:46:34+00:00",
+          "public_metrics": {
+            "retweet_count": 7,
+            "reply_count": 18,
+            "like_count": 270,
+            "quote_count": 0,
+            "bookmark_count": 18,
+            "impression_count": 8317
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 36,
+                "end": 59,
+                "url": "https://t.co/BdwvGgtYOg",
+                "expanded_url": "https://x.com/Angelwithcakee/status/2025582994983964849/photo/1",
+                "display_url": "pic.x.com/BdwvGgtYOg",
+                "media_key": "3_2025582990764445696"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 4,
+                "end": 9,
+                "username": "grok",
+                "id": "1720665183188922368"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.008381
+        }
+      ],
+      "avg_engagement_rate": 0.044881,
+      "posting_frequency": 1.2,
+      "top_posts": [
+        {
+          "tweet_id": "2025978924837019674",
+          "engagement_rate": 0.094125,
+          "like_count": 2979
+        },
+        {
+          "tweet_id": "2027923312152637542",
+          "engagement_rate": 0.090971,
+          "like_count": 3008
+        },
+        {
+          "tweet_id": "2025752308160594251",
+          "engagement_rate": 0.078385,
+          "like_count": 2425
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "katekarsyn",
+      "user_id": "1886536168717881344",
+      "display_name": "Kate Karsyn",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 104324,
+      "following": 3,
+      "tweet_count": 34,
+      "description": "i just want to play Fortnite\nmember: @huzzhousee\nmore of me ⬇️",
+      "recent_posts": [
+        {
+          "tweet_id": "2029341323527102812",
+          "text": "I saw you stop. https://t.co/IYPjJaOKPZ",
+          "created_at": "2026-03-04T23:40:49+00:00",
+          "public_metrics": {
+            "retweet_count": 32,
+            "reply_count": 153,
+            "like_count": 886,
+            "quote_count": 1,
+            "bookmark_count": 52,
+            "impression_count": 10329
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 16,
+                "end": 39,
+                "url": "https://t.co/IYPjJaOKPZ",
+                "expanded_url": "https://x.com/katekarsyn/status/2029341323527102812/photo/1",
+                "display_url": "pic.x.com/IYPjJaOKPZ",
+                "media_key": "3_2029341316820418560"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.010276
+        },
+        {
+          "tweet_id": "2029341200315269386",
+          "text": "hey @grok zoom out https://t.co/zc0iCarT5D",
+          "created_at": "2026-03-04T23:40:20+00:00",
+          "public_metrics": {
+            "retweet_count": 6,
+            "reply_count": 19,
+            "like_count": 167,
+            "quote_count": 1,
+            "bookmark_count": 13,
+            "impression_count": 11223
+          },
+          "entities": {
+            "annotations": [
+              {
+                "start": 10,
+                "end": 13,
+                "probability": 0.6949,
+                "type": "Other",
+                "normalized_text": "zoom"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 4,
+                "end": 9,
+                "username": "grok",
+                "id": "1720665183188922368"
+              }
+            ],
+            "urls": [
+              {
+                "start": 19,
+                "end": 42,
+                "url": "https://t.co/zc0iCarT5D",
+                "expanded_url": "https://x.com/katekarsyn/status/2029341200315269386/photo/1",
+                "display_url": "pic.x.com/zc0iCarT5D",
+                "media_key": "3_2029341189070307330"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.00185
+        },
+        {
+          "tweet_id": "2029341072850288741",
+          "text": "How many pounds should i loose? https://t.co/EzgPIL1hak",
+          "created_at": "2026-03-04T23:39:49+00:00",
+          "public_metrics": {
+            "retweet_count": 47,
+            "reply_count": 239,
+            "like_count": 1395,
+            "quote_count": 0,
+            "bookmark_count": 85,
+            "impression_count": 17198
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 32,
+                "end": 55,
+                "url": "https://t.co/EzgPIL1hak",
+                "expanded_url": "https://x.com/katekarsyn/status/2029341072850288741/photo/1",
+                "display_url": "pic.x.com/EzgPIL1hak",
+                "media_key": "3_2029341058065416194"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.016113
+        },
+        {
+          "tweet_id": "2029294326581477571",
+          "text": "my favorite position https://t.co/yQ3TtVvCEv",
+          "created_at": "2026-03-04T20:34:04+00:00",
+          "public_metrics": {
+            "retweet_count": 7,
+            "reply_count": 23,
+            "like_count": 268,
+            "quote_count": 0,
+            "bookmark_count": 17,
+            "impression_count": 7738
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 21,
+                "end": 44,
+                "url": "https://t.co/yQ3TtVvCEv",
+                "expanded_url": "https://twitter.com/thatdailymilk/status/2028952238341660818",
+                "display_url": "x.com/thatdailymilk/…"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.002856
+        },
+        {
+          "tweet_id": "2029294263004217820",
+          "text": "me in 2016 btw https://t.co/hDkOTivixP",
+          "created_at": "2026-03-04T20:33:49+00:00",
+          "public_metrics": {
+            "retweet_count": 9,
+            "reply_count": 26,
+            "like_count": 304,
+            "quote_count": 0,
+            "bookmark_count": 22,
+            "impression_count": 4991
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 15,
+                "end": 38,
+                "url": "https://t.co/hDkOTivixP",
+                "expanded_url": "https://x.com/katekarsyn/status/2029294263004217820/photo/1",
+                "display_url": "pic.x.com/hDkOTivixP",
+                "media_key": "3_2029294227939868672"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.003249
+        },
+        {
+          "tweet_id": "2029000615712702825",
+          "text": "Tell me honestly, am I your type? https://t.co/qTejm1g3ys",
+          "created_at": "2026-03-04T01:06:58+00:00",
+          "public_metrics": {
+            "retweet_count": 177,
+            "reply_count": 954,
+            "like_count": 5613,
+            "quote_count": 14,
+            "bookmark_count": 280,
+            "impression_count": 89834
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 34,
+                "end": 57,
+                "url": "https://t.co/qTejm1g3ys",
+                "expanded_url": "https://x.com/katekarsyn/status/2029000615712702825/photo/1",
+                "display_url": "pic.x.com/qTejm1g3ys",
+                "media_key": "3_2029000603624718338"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.064779
+        },
+        {
+          "tweet_id": "2029000393611723145",
+          "text": "hey @grok uncrop this pic https://t.co/V0Kn2zckhs",
+          "created_at": "2026-03-04T01:06:05+00:00",
+          "public_metrics": {
+            "retweet_count": 34,
+            "reply_count": 56,
+            "like_count": 991,
+            "quote_count": 0,
+            "bookmark_count": 71,
+            "impression_count": 31921
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 4,
+                "end": 9,
+                "username": "grok",
+                "id": "1720665183188922368"
+              }
+            ],
+            "urls": [
+              {
+                "start": 26,
+                "end": 49,
+                "url": "https://t.co/V0Kn2zckhs",
+                "expanded_url": "https://x.com/katekarsyn/status/2029000393611723145/photo/1",
+                "display_url": "pic.x.com/V0Kn2zckhs",
+                "media_key": "3_2029000367447625728"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.010362
+        },
+        {
+          "tweet_id": "2028972784660169219",
+          "text": "rate me 1-10 https://t.co/pHe8CvFh3X",
+          "created_at": "2026-03-03T23:16:23+00:00",
+          "public_metrics": {
+            "retweet_count": 30,
+            "reply_count": 95,
+            "like_count": 693,
+            "quote_count": 1,
+            "bookmark_count": 50,
+            "impression_count": 18587
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 13,
+                "end": 36,
+                "url": "https://t.co/pHe8CvFh3X",
+                "expanded_url": "https://x.com/katekarsyn/status/2028972784660169219/photo/1",
+                "display_url": "pic.x.com/pHe8CvFh3X",
+                "media_key": "3_2028972769808138241"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.007851
+        },
+        {
+          "tweet_id": "2028972660588437679",
+          "text": "got some sunn xd https://t.co/Fbz2D39gVF",
+          "created_at": "2026-03-03T23:15:53+00:00",
+          "public_metrics": {
+            "retweet_count": 83,
+            "reply_count": 151,
+            "like_count": 2097,
+            "quote_count": 0,
+            "bookmark_count": 124,
+            "impression_count": 30156
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 17,
+                "end": 40,
+                "url": "https://t.co/Fbz2D39gVF",
+                "expanded_url": "https://x.com/katekarsyn/status/2028972660588437679/photo/1",
+                "display_url": "pic.x.com/Fbz2D39gVF",
+                "media_key": "3_2028972649293201408"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.022344
+        },
+        {
+          "tweet_id": "2028972511313182793",
+          "text": "This isn't accidental. Your move. https://t.co/PNXwJ4zQzh",
+          "created_at": "2026-03-03T23:15:17+00:00",
+          "public_metrics": {
+            "retweet_count": 111,
+            "reply_count": 252,
+            "like_count": 3922,
+            "quote_count": 4,
+            "bookmark_count": 326,
+            "impression_count": 61196
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 34,
+                "end": 57,
+                "url": "https://t.co/PNXwJ4zQzh",
+                "expanded_url": "https://x.com/katekarsyn/status/2028972511313182793/photo/1",
+                "display_url": "pic.x.com/PNXwJ4zQzh",
+                "media_key": "3_2028972500408049664"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.041112
+        }
+      ],
+      "avg_engagement_rate": 0.018079,
+      "posting_frequency": 9.8,
+      "top_posts": [
+        {
+          "tweet_id": "2029000615712702825",
+          "engagement_rate": 0.064779,
+          "like_count": 5613
+        },
+        {
+          "tweet_id": "2028972511313182793",
+          "engagement_rate": 0.041112,
+          "like_count": 3922
+        },
+        {
+          "tweet_id": "2028972660588437679",
+          "engagement_rate": 0.022344,
+          "like_count": 2097
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "Estherbron1",
+      "user_id": "831028808098598912",
+      "display_name": "esterbby",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 1240434,
+      "following": 25,
+      "tweet_count": 1391,
+      "description": "",
+      "recent_posts": [
+        {
+          "tweet_id": "2028201277620887992",
+          "text": "Say “yes” to see it from the back💗 https://t.co/hXK8RStOji",
+          "created_at": "2026-03-01T20:10:41+00:00",
+          "public_metrics": {
+            "retweet_count": 32,
+            "reply_count": 46,
+            "like_count": 1082,
+            "quote_count": 0,
+            "bookmark_count": 170,
+            "impression_count": 27201
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 35,
+                "end": 58,
+                "url": "https://t.co/hXK8RStOji",
+                "expanded_url": "https://x.com/Estherbron1/status/2028201277620887992/photo/1",
+                "display_url": "pic.x.com/hXK8RStOji",
+                "media_key": "3_2028201265931411456"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.000935
+        },
+        {
+          "tweet_id": "2027247292374208976",
+          "text": "Still single btw😝 https://t.co/5Aaaz3LxND",
+          "created_at": "2026-02-27T04:59:53+00:00",
+          "public_metrics": {
+            "retweet_count": 103,
+            "reply_count": 43,
+            "like_count": 2715,
+            "quote_count": 1,
+            "bookmark_count": 877,
+            "impression_count": 50669
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 18,
+                "end": 41,
+                "url": "https://t.co/5Aaaz3LxND",
+                "expanded_url": "https://x.com/Estherbron1/status/2027247292374208976/photo/1",
+                "display_url": "pic.x.com/5Aaaz3LxND",
+                "media_key": "3_2027247286770601984"
+              },
+              {
+                "start": 18,
+                "end": 41,
+                "url": "https://t.co/5Aaaz3LxND",
+                "expanded_url": "https://x.com/Estherbron1/status/2027247292374208976/photo/1",
+                "display_url": "pic.x.com/5Aaaz3LxND",
+                "media_key": "3_2027247286900981760"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.002307
+        },
+        {
+          "tweet_id": "2026572134626054541",
+          "text": "Left or right? https://t.co/nqROPa80Lg",
+          "created_at": "2026-02-25T08:17:03+00:00",
+          "public_metrics": {
+            "retweet_count": 85,
+            "reply_count": 201,
+            "like_count": 2821,
+            "quote_count": 4,
+            "bookmark_count": 526,
+            "impression_count": 59597
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 15,
+                "end": 38,
+                "url": "https://t.co/nqROPa80Lg",
+                "expanded_url": "https://x.com/Estherbron1/status/2026572134626054541/photo/1",
+                "display_url": "pic.x.com/nqROPa80Lg",
+                "media_key": "3_2026572131111227392"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.002508
+        },
+        {
+          "tweet_id": "2025727928583991337",
+          "text": "Rate me 1-10 https://t.co/THYoK6jHAL",
+          "created_at": "2026-02-23T00:22:29+00:00",
+          "public_metrics": {
+            "retweet_count": 38,
+            "reply_count": 135,
+            "like_count": 1128,
+            "quote_count": 1,
+            "bookmark_count": 146,
+            "impression_count": 50369
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 13,
+                "end": 36,
+                "url": "https://t.co/THYoK6jHAL",
+                "expanded_url": "https://x.com/Estherbron1/status/2025727928583991337/photo/1",
+                "display_url": "pic.x.com/THYoK6jHAL",
+                "media_key": "3_2025727922753957888"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.00105
+        },
+        {
+          "tweet_id": "2025082176145162673",
+          "text": "https://t.co/Bv2ombKTx1",
+          "created_at": "2026-02-21T05:36:29+00:00",
+          "public_metrics": {
+            "retweet_count": 28,
+            "reply_count": 89,
+            "like_count": 1344,
+            "quote_count": 1,
+            "bookmark_count": 172,
+            "impression_count": 55379
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/Bv2ombKTx1",
+                "expanded_url": "https://x.com/Estherbron1/status/2025082176145162673/photo/1",
+                "display_url": "pic.x.com/Bv2ombKTx1",
+                "media_key": "3_2025082171971739648"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.001179
+        },
+        {
+          "tweet_id": "2024196085774721228",
+          "text": "Front or back? https://t.co/tCNK57M7b3",
+          "created_at": "2026-02-18T18:55:29+00:00",
+          "public_metrics": {
+            "retweet_count": 214,
+            "reply_count": 114,
+            "like_count": 4640,
+            "quote_count": 2,
+            "bookmark_count": 1346,
+            "impression_count": 97912
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 15,
+                "end": 38,
+                "url": "https://t.co/tCNK57M7b3",
+                "expanded_url": "https://x.com/Estherbron1/status/2024196085774721228/photo/1",
+                "display_url": "pic.x.com/tCNK57M7b3",
+                "media_key": "3_2024196081437798400"
+              },
+              {
+                "start": 15,
+                "end": 38,
+                "url": "https://t.co/tCNK57M7b3",
+                "expanded_url": "https://x.com/Estherbron1/status/2024196085774721228/photo/1",
+                "display_url": "pic.x.com/tCNK57M7b3",
+                "media_key": "3_2024196081437884418"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.004007
+        },
+        {
+          "tweet_id": "2023547425311600649",
+          "text": "Say “hi” for a surprise in your dms https://t.co/LJHHvrBH0k",
+          "created_at": "2026-02-16T23:57:56+00:00",
+          "public_metrics": {
+            "retweet_count": 34,
+            "reply_count": 87,
+            "like_count": 1230,
+            "quote_count": 0,
+            "bookmark_count": 240,
+            "impression_count": 65739
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 36,
+                "end": 59,
+                "url": "https://t.co/LJHHvrBH0k",
+                "expanded_url": "https://x.com/Estherbron1/status/2023547425311600649/photo/1",
+                "display_url": "pic.x.com/LJHHvrBH0k",
+                "media_key": "3_2023547419149918208"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.001089
+        },
+        {
+          "tweet_id": "2022055903907000759",
+          "text": "What are you looking at pretty boy? https://t.co/zh8Z5P7AKq",
+          "created_at": "2026-02-12T21:11:10+00:00",
+          "public_metrics": {
+            "retweet_count": 62,
+            "reply_count": 273,
+            "like_count": 2240,
+            "quote_count": 1,
+            "bookmark_count": 334,
+            "impression_count": 100106
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 36,
+                "end": 59,
+                "url": "https://t.co/zh8Z5P7AKq",
+                "expanded_url": "https://x.com/Estherbron1/status/2022055903907000759/photo/1",
+                "display_url": "pic.x.com/zh8Z5P7AKq",
+                "media_key": "3_2022055898211045376"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.002077
+        },
+        {
+          "tweet_id": "2021312090217095178",
+          "text": "Would you get a pump for me?🍑 https://t.co/VDTDlP5sh8",
+          "created_at": "2026-02-10T19:55:31+00:00",
+          "public_metrics": {
+            "retweet_count": 30,
+            "reply_count": 40,
+            "like_count": 940,
+            "quote_count": 0,
+            "bookmark_count": 211,
+            "impression_count": 86801
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 30,
+                "end": 53,
+                "url": "https://t.co/VDTDlP5sh8",
+                "expanded_url": "https://x.com/Estherbron1/status/2021312090217095178/photo/1",
+                "display_url": "pic.x.com/VDTDlP5sh8",
+                "media_key": "3_2021312083158310912"
+              },
+              {
+                "start": 30,
+                "end": 53,
+                "url": "https://t.co/VDTDlP5sh8",
+                "expanded_url": "https://x.com/Estherbron1/status/2021312090217095178/photo/1",
+                "display_url": "pic.x.com/VDTDlP5sh8",
+                "media_key": "3_2021312083179208706"
+              },
+              {
+                "start": 30,
+                "end": 53,
+                "url": "https://t.co/VDTDlP5sh8",
+                "expanded_url": "https://x.com/Estherbron1/status/2021312090217095178/photo/1",
+                "display_url": "pic.x.com/VDTDlP5sh8",
+                "media_key": "3_2021312083049025536"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.000814
+        },
+        {
+          "tweet_id": "2020628519295082797",
+          "text": "🏈 https://t.co/jaeUrnVGLC",
+          "created_at": "2026-02-08T22:39:15+00:00",
+          "public_metrics": {
+            "retweet_count": 145,
+            "reply_count": 77,
+            "like_count": 4685,
+            "quote_count": 1,
+            "bookmark_count": 1411,
+            "impression_count": 125405
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 2,
+                "end": 25,
+                "url": "https://t.co/jaeUrnVGLC",
+                "expanded_url": "https://x.com/Estherbron1/status/2020628519295082797/photo/1",
+                "display_url": "pic.x.com/jaeUrnVGLC",
+                "media_key": "3_2020628512907079680"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.003957
+        }
+      ],
+      "avg_engagement_rate": 0.001992,
+      "posting_frequency": 0.5,
+      "top_posts": [
+        {
+          "tweet_id": "2024196085774721228",
+          "engagement_rate": 0.004007,
+          "like_count": 4640
+        },
+        {
+          "tweet_id": "2020628519295082797",
+          "engagement_rate": 0.003957,
+          "like_count": 4685
+        },
+        {
+          "tweet_id": "2026572134626054541",
+          "engagement_rate": 0.002508,
+          "like_count": 2821
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "lucidevlinxyz",
+      "user_id": "1485421747545407488",
+      "display_name": "𝕝𝕦𝕔𝕚 𝕥𝕙𝕒 𝕕𝕖𝕧𝕚𝕝 ♡",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 44114,
+      "following": 121,
+      "tweet_count": 1558,
+      "description": "filipina 𓆩ꨄ︎𓆪 i just wanna watch anime and play val",
+      "recent_posts": [
+        {
+          "tweet_id": "2029367648702865808",
+          "text": "snap trade?",
+          "created_at": "2026-03-05T01:25:25+00:00",
+          "public_metrics": {
+            "retweet_count": 2,
+            "reply_count": 16,
+            "like_count": 84,
+            "quote_count": 0,
+            "bookmark_count": 2,
+            "impression_count": 6696
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.002312
+        },
+        {
+          "tweet_id": "2029271640052515298",
+          "text": "imma start dming random men who like my tweets just bc why not tbh 🤷🏻‍♀️",
+          "created_at": "2026-03-04T19:03:55+00:00",
+          "public_metrics": {
+            "retweet_count": 9,
+            "reply_count": 12,
+            "like_count": 1201,
+            "quote_count": 1,
+            "bookmark_count": 5,
+            "impression_count": 28033
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.027724
+        },
+        {
+          "tweet_id": "2028552624086327773",
+          "text": "MEN ONLY: Do you find Filipina girls attractive?",
+          "created_at": "2026-03-02T19:26:48+00:00",
+          "public_metrics": {
+            "retweet_count": 17,
+            "reply_count": 332,
+            "like_count": 1662,
+            "quote_count": 22,
+            "bookmark_count": 28,
+            "impression_count": 62914
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.046085
+        },
+        {
+          "tweet_id": "2027800017646587985",
+          "text": "Men who think Asian women are fine, raise your hands up 🙌🏼🙋🏻‍♀️",
+          "created_at": "2026-02-28T17:36:13+00:00",
+          "public_metrics": {
+            "retweet_count": 74,
+            "reply_count": 261,
+            "like_count": 5112,
+            "quote_count": 25,
+            "bookmark_count": 58,
+            "impression_count": 129984
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.124042
+        },
+        {
+          "tweet_id": "2026965511641465207",
+          "text": "Men who fw short Asian women, heart this and say hi 👋🏼",
+          "created_at": "2026-02-26T10:20:11+00:00",
+          "public_metrics": {
+            "retweet_count": 16,
+            "reply_count": 153,
+            "like_count": 1731,
+            "quote_count": 2,
+            "bookmark_count": 30,
+            "impression_count": 64695
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.043116
+        },
+        {
+          "tweet_id": "2026750224799293815",
+          "text": "can i see ur dc!!kkkkkk? (very serious) https://t.co/dddQsSX3Hk",
+          "created_at": "2026-02-25T20:04:43+00:00",
+          "public_metrics": {
+            "retweet_count": 14,
+            "reply_count": 88,
+            "like_count": 463,
+            "quote_count": 1,
+            "bookmark_count": 75,
+            "impression_count": 40100
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 40,
+                "end": 63,
+                "url": "https://t.co/dddQsSX3Hk",
+                "expanded_url": "https://x.com/lucidevlinxyz/status/2026750224799293815/photo/1",
+                "display_url": "pic.x.com/dddQsSX3Hk",
+                "media_key": "3_2026750217475993604"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.01283
+        },
+        {
+          "tweet_id": "2026651082634703361",
+          "text": "Since likes are private … interact for a secret pic ;)",
+          "created_at": "2026-02-25T13:30:46+00:00",
+          "public_metrics": {
+            "retweet_count": 10,
+            "reply_count": 33,
+            "like_count": 621,
+            "quote_count": 0,
+            "bookmark_count": 7,
+            "impression_count": 33607
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.015052
+        },
+        {
+          "tweet_id": "2026390425289040240",
+          "text": "who wanna see my feet",
+          "created_at": "2026-02-24T20:15:00+00:00",
+          "public_metrics": {
+            "retweet_count": 10,
+            "reply_count": 60,
+            "like_count": 472,
+            "quote_count": 0,
+            "bookmark_count": 18,
+            "impression_count": 38921
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.012286
+        },
+        {
+          "tweet_id": "2025865135492092172",
+          "text": "real freaks love feet",
+          "created_at": "2026-02-23T09:27:41+00:00",
+          "public_metrics": {
+            "retweet_count": 64,
+            "reply_count": 13,
+            "like_count": 728,
+            "quote_count": 9,
+            "bookmark_count": 21,
+            "impression_count": 48171
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.018452
+        },
+        {
+          "tweet_id": "2025481717365309503",
+          "text": "imma start dming random ppl who like my tweets bc why not lol 🤷🏻‍♀️",
+          "created_at": "2026-02-22T08:04:07+00:00",
+          "public_metrics": {
+            "retweet_count": 14,
+            "reply_count": 12,
+            "like_count": 1636,
+            "quote_count": 1,
+            "bookmark_count": 15,
+            "impression_count": 62779
+          },
+          "entities": {},
+          "hashtags": [],
+          "engagement_rate": 0.037698
+        }
+      ],
+      "avg_engagement_rate": 0.03396,
+      "posting_frequency": 0.9,
+      "top_posts": [
+        {
+          "tweet_id": "2027800017646587985",
+          "engagement_rate": 0.124042,
+          "like_count": 5112
+        },
+        {
+          "tweet_id": "2028552624086327773",
+          "engagement_rate": 0.046085,
+          "like_count": 1662
+        },
+        {
+          "tweet_id": "2026965511641465207",
+          "engagement_rate": 0.043116,
+          "like_count": 1731
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "HannaJonso",
+      "user_id": "1936094554865754112",
+      "display_name": "hanna jonso",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 18733,
+      "following": 17,
+      "tweet_count": 113,
+      "description": "sent me a message I have something special for you check the link below 👇",
+      "recent_posts": [
+        {
+          "tweet_id": "2028832324024991948",
+          "text": "My body count status: \n\n2022: 0\n2023: 0\n2024: 0\n2025: 0\n…show more https://t.co/iAsN54nnjp",
+          "created_at": "2026-03-03T13:58:14+00:00",
+          "public_metrics": {
+            "retweet_count": 4,
+            "reply_count": 10,
+            "like_count": 162,
+            "quote_count": 0,
+            "bookmark_count": 13,
+            "impression_count": 2982
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 67,
+                "end": 90,
+                "url": "https://t.co/iAsN54nnjp",
+                "expanded_url": "https://x.com/HannaJonso/status/2028832324024991948/photo/1",
+                "display_url": "pic.x.com/iAsN54nnjp",
+                "media_key": "3_2028832317704179712"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.009395
+        },
+        {
+          "tweet_id": "2028541769420292268",
+          "text": "If you want to chat with me sent me a message on @hannajosnso https://t.co/dSpnoe5FIv",
+          "created_at": "2026-03-02T18:43:40+00:00",
+          "public_metrics": {
+            "retweet_count": 7,
+            "reply_count": 10,
+            "like_count": 331,
+            "quote_count": 1,
+            "bookmark_count": 28,
+            "impression_count": 7974
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 62,
+                "end": 85,
+                "url": "https://t.co/dSpnoe5FIv",
+                "expanded_url": "https://twitter.com/hannajonso/status/2027885177284730962",
+                "display_url": "x.com/hannajonso/sta…"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 49,
+                "end": 61,
+                "username": "hannajosnso",
+                "id": "1760749672870666241"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.01863
+        },
+        {
+          "tweet_id": "2028234267642245555",
+          "text": "My body count status: \n\n2022: 0\n2023: 0\n2024: 0\n2025: 0\n…show more https://t.co/nw3kHrctEs",
+          "created_at": "2026-03-01T22:21:46+00:00",
+          "public_metrics": {
+            "retweet_count": 7,
+            "reply_count": 20,
+            "like_count": 176,
+            "quote_count": 0,
+            "bookmark_count": 19,
+            "impression_count": 4976
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 67,
+                "end": 90,
+                "url": "https://t.co/nw3kHrctEs",
+                "expanded_url": "https://x.com/HannaJonso/status/2028234267642245555/photo/1",
+                "display_url": "pic.x.com/nw3kHrctEs",
+                "media_key": "3_2028234261283717120"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.010836
+        },
+        {
+          "tweet_id": "2027885177284730962",
+          "text": "Generational bottom https://t.co/YJ22ulZWWg",
+          "created_at": "2026-02-28T23:14:37+00:00",
+          "public_metrics": {
+            "retweet_count": 88,
+            "reply_count": 100,
+            "like_count": 2737,
+            "quote_count": 4,
+            "bookmark_count": 317,
+            "impression_count": 37442
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 20,
+                "end": 43,
+                "url": "https://t.co/YJ22ulZWWg",
+                "expanded_url": "https://x.com/HannaJonso/status/2027885177284730962/photo/1",
+                "display_url": "pic.x.com/YJ22ulZWWg",
+                "media_key": "3_2027885168602554368"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.156355
+        },
+        {
+          "tweet_id": "2027884893812789717",
+          "text": "@tokyoaeste That’s me ✌️",
+          "created_at": "2026-02-28T23:13:29+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 1,
+            "like_count": 6,
+            "quote_count": 0,
+            "bookmark_count": 1,
+            "impression_count": 1307
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 11,
+                "username": "tokyoaeste",
+                "id": "1920351483695960064"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.000374
+        },
+        {
+          "tweet_id": "2027623357911294171",
+          "text": "hey @grok can you please turn me around 180° in this photo? https://t.co/YQV0jmhG9p",
+          "created_at": "2026-02-28T05:54:14+00:00",
+          "public_metrics": {
+            "retweet_count": 9,
+            "reply_count": 10,
+            "like_count": 257,
+            "quote_count": 1,
+            "bookmark_count": 50,
+            "impression_count": 5910
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 60,
+                "end": 83,
+                "url": "https://t.co/YQV0jmhG9p",
+                "expanded_url": "https://x.com/HannaJonso/status/2027623357911294171/photo/1",
+                "display_url": "pic.x.com/YQV0jmhG9p",
+                "media_key": "3_2027623351779315712"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 4,
+                "end": 9,
+                "username": "grok",
+                "id": "1720665183188922368"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.014787
+        },
+        {
+          "tweet_id": "2027510547046973921",
+          "text": "how many pounds should I lose? https://t.co/Z3yCk1Izwt",
+          "created_at": "2026-02-27T22:25:58+00:00",
+          "public_metrics": {
+            "retweet_count": 59,
+            "reply_count": 337,
+            "like_count": 2783,
+            "quote_count": 2,
+            "bookmark_count": 295,
+            "impression_count": 38965
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 31,
+                "end": 54,
+                "url": "https://t.co/Z3yCk1Izwt",
+                "expanded_url": "https://x.com/HannaJonso/status/2027510547046973921/photo/1",
+                "display_url": "pic.x.com/Z3yCk1Izwt",
+                "media_key": "3_2027510540445122560"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.169807
+        },
+        {
+          "tweet_id": "2027510310764994944",
+          "text": "@hostokyo Thats mr",
+          "created_at": "2026-02-27T22:25:02+00:00",
+          "public_metrics": {
+            "retweet_count": 0,
+            "reply_count": 0,
+            "like_count": 1,
+            "quote_count": 0,
+            "bookmark_count": 0,
+            "impression_count": 291
+          },
+          "entities": {
+            "mentions": [
+              {
+                "start": 0,
+                "end": 9,
+                "username": "hostokyo",
+                "id": "1942988543976181760"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 5.3e-05
+        },
+        {
+          "tweet_id": "2027419142828019768",
+          "text": "My relationship status: \n\n2022: single \n2023: single\n2024: single\n2025: single\n…show more https://t.co/qAy5VtNb8n",
+          "created_at": "2026-02-27T16:22:45+00:00",
+          "public_metrics": {
+            "retweet_count": 12,
+            "reply_count": 27,
+            "like_count": 273,
+            "quote_count": 0,
+            "bookmark_count": 36,
+            "impression_count": 6350
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 90,
+                "end": 113,
+                "url": "https://t.co/qAy5VtNb8n",
+                "expanded_url": "https://x.com/HannaJonso/status/2027419142828019768/photo/1",
+                "display_url": "pic.x.com/qAy5VtNb8n",
+                "media_key": "3_2027419137329287172"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.016655
+        },
+        {
+          "tweet_id": "2027161339924226379",
+          "text": "Wyd if you had 30 minutes with me? https://t.co/2hvmLnJmIZ",
+          "created_at": "2026-02-26T23:18:20+00:00",
+          "public_metrics": {
+            "retweet_count": 91,
+            "reply_count": 652,
+            "like_count": 3173,
+            "quote_count": 4,
+            "bookmark_count": 246,
+            "impression_count": 44773
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 35,
+                "end": 58,
+                "url": "https://t.co/2hvmLnJmIZ",
+                "expanded_url": "https://x.com/HannaJonso/status/2027161339924226379/photo/1",
+                "display_url": "pic.x.com/2hvmLnJmIZ",
+                "media_key": "3_2027161331837874176"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.209256
+        }
+      ],
+      "avg_engagement_rate": 0.060615,
+      "posting_frequency": 2.2,
+      "top_posts": [
+        {
+          "tweet_id": "2027161339924226379",
+          "engagement_rate": 0.209256,
+          "like_count": 3173
+        },
+        {
+          "tweet_id": "2027510547046973921",
+          "engagement_rate": 0.169807,
+          "like_count": 2783
+        },
+        {
+          "tweet_id": "2027885177284730962",
+          "engagement_rate": 0.156355,
+          "like_count": 2737
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "yuumi005",
+      "user_id": "1843195312845778944",
+      "display_name": "yuumi 🌸 優美",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 81770,
+      "following": 200,
+      "tweet_count": 101,
+      "description": "ゆうみです(20)☺️ https://t.co/vs6Mho3GTk",
+      "recent_posts": [
+        {
+          "tweet_id": "2029443663642665075",
+          "text": "https://t.co/sE8f9Ebhye",
+          "created_at": "2026-03-05T06:27:29+00:00",
+          "public_metrics": {
+            "retweet_count": 4,
+            "reply_count": 16,
+            "like_count": 410,
+            "quote_count": 0,
+            "bookmark_count": 14,
+            "impression_count": 2573
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/sE8f9Ebhye",
+                "expanded_url": "https://x.com/yuumi005/status/2029443663642665075/photo/1",
+                "display_url": "pic.x.com/sE8f9Ebhye",
+                "media_key": "3_2029443657649274882"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.005259
+        },
+        {
+          "tweet_id": "2028955395574644843",
+          "text": "https://t.co/BDH8YcQorB",
+          "created_at": "2026-03-03T22:07:17+00:00",
+          "public_metrics": {
+            "retweet_count": 64,
+            "reply_count": 17,
+            "like_count": 2796,
+            "quote_count": 0,
+            "bookmark_count": 246,
+            "impression_count": 25546
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/BDH8YcQorB",
+                "expanded_url": "https://x.com/yuumi005/status/2028955395574644843/photo/1",
+                "display_url": "pic.x.com/BDH8YcQorB",
+                "media_key": "3_2028955388851142657"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.035184
+        },
+        {
+          "tweet_id": "2028714299284148339",
+          "text": "https://t.co/SjuO0k6iFo",
+          "created_at": "2026-03-03T06:09:15+00:00",
+          "public_metrics": {
+            "retweet_count": 34,
+            "reply_count": 19,
+            "like_count": 1594,
+            "quote_count": 1,
+            "bookmark_count": 138,
+            "impression_count": 11942
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/SjuO0k6iFo",
+                "expanded_url": "https://x.com/yuumi005/status/2028714299284148339/photo/1",
+                "display_url": "pic.x.com/SjuO0k6iFo",
+                "media_key": "3_2028714292108025856"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.020154
+        },
+        {
+          "tweet_id": "2028678861114740855",
+          "text": "https://t.co/mZQ4rG8aNj",
+          "created_at": "2026-03-03T03:48:26+00:00",
+          "public_metrics": {
+            "retweet_count": 55,
+            "reply_count": 30,
+            "like_count": 3051,
+            "quote_count": 1,
+            "bookmark_count": 258,
+            "impression_count": 33315
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/mZQ4rG8aNj",
+                "expanded_url": "https://x.com/yuumi005/status/2028678861114740855/photo/1",
+                "display_url": "pic.x.com/mZQ4rG8aNj",
+                "media_key": "3_2028678855049773056"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.038364
+        },
+        {
+          "tweet_id": "2028444827700892146",
+          "text": "https://t.co/qmbpYktWpK",
+          "created_at": "2026-03-02T12:18:28+00:00",
+          "public_metrics": {
+            "retweet_count": 64,
+            "reply_count": 27,
+            "like_count": 2804,
+            "quote_count": 0,
+            "bookmark_count": 228,
+            "impression_count": 33052
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/qmbpYktWpK",
+                "expanded_url": "https://x.com/yuumi005/status/2028444827700892146/photo/1",
+                "display_url": "pic.x.com/qmbpYktWpK",
+                "media_key": "3_2028444817177333760"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.035404
+        },
+        {
+          "tweet_id": "2026789384519852456",
+          "text": "https://t.co/GOjJpCmyGH",
+          "created_at": "2026-02-25T22:40:19+00:00",
+          "public_metrics": {
+            "retweet_count": 30,
+            "reply_count": 18,
+            "like_count": 1303,
+            "quote_count": 0,
+            "bookmark_count": 106,
+            "impression_count": 13704
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/GOjJpCmyGH",
+                "expanded_url": "https://x.com/yuumi005/status/2026789384519852456/photo/1",
+                "display_url": "pic.x.com/GOjJpCmyGH",
+                "media_key": "3_2026789378110996481"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.016522
+        },
+        {
+          "tweet_id": "2026422506114969603",
+          "text": "left or right? https://t.co/eSY1h3NVXv",
+          "created_at": "2026-02-24T22:22:29+00:00",
+          "public_metrics": {
+            "retweet_count": 127,
+            "reply_count": 93,
+            "like_count": 5612,
+            "quote_count": 2,
+            "bookmark_count": 587,
+            "impression_count": 67766
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 15,
+                "end": 38,
+                "url": "https://t.co/eSY1h3NVXv",
+                "expanded_url": "https://x.com/yuumi005/status/2026422506114969603/photo/1",
+                "display_url": "pic.x.com/eSY1h3NVXv",
+                "media_key": "3_2026422501396393984"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.071346
+        },
+        {
+          "tweet_id": "2026179771210535144",
+          "text": "https://t.co/xEIjB99pVd",
+          "created_at": "2026-02-24T06:17:56+00:00",
+          "public_metrics": {
+            "retweet_count": 37,
+            "reply_count": 16,
+            "like_count": 1381,
+            "quote_count": 0,
+            "bookmark_count": 147,
+            "impression_count": 25706
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/xEIjB99pVd",
+                "expanded_url": "https://x.com/yuumi005/status/2026179771210535144/photo/1",
+                "display_url": "pic.x.com/xEIjB99pVd",
+                "media_key": "3_2026179765569204224"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.017537
+        },
+        {
+          "tweet_id": "2026042429703352372",
+          "text": "https://t.co/37d961jLtk",
+          "created_at": "2026-02-23T21:12:11+00:00",
+          "public_metrics": {
+            "retweet_count": 312,
+            "reply_count": 69,
+            "like_count": 12914,
+            "quote_count": 2,
+            "bookmark_count": 1894,
+            "impression_count": 236923
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/37d961jLtk",
+                "expanded_url": "https://x.com/yuumi005/status/2026042429703352372/photo/1",
+                "display_url": "pic.x.com/37d961jLtk",
+                "media_key": "3_2026042424095608832"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.162615
+        },
+        {
+          "tweet_id": "2025922050867556621",
+          "text": "https://t.co/nXRCOkYHmY",
+          "created_at": "2026-02-23T13:13:51+00:00",
+          "public_metrics": {
+            "retweet_count": 64,
+            "reply_count": 20,
+            "like_count": 2829,
+            "quote_count": 0,
+            "bookmark_count": 345,
+            "impression_count": 40696
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/nXRCOkYHmY",
+                "expanded_url": "https://x.com/yuumi005/status/2025922050867556621/photo/1",
+                "display_url": "pic.x.com/nXRCOkYHmY",
+                "media_key": "3_2025922045226172416"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.035624
+        }
+      ],
+      "avg_engagement_rate": 0.043801,
+      "posting_frequency": 1.0,
+      "top_posts": [
+        {
+          "tweet_id": "2026042429703352372",
+          "engagement_rate": 0.162615,
+          "like_count": 12914
+        },
+        {
+          "tweet_id": "2026422506114969603",
+          "engagement_rate": 0.071346,
+          "like_count": 5612
+        },
+        {
+          "tweet_id": "2028678861114740855",
+          "engagement_rate": 0.038364,
+          "like_count": 3051
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "yogana_19",
+      "user_id": "1269692949387935750",
+      "display_name": "Ana Sakura 🌸",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 26464,
+      "following": 710,
+      "tweet_count": 2437,
+      "description": "I'm just an 19 y/o girl from Japan 💖",
+      "recent_posts": [
+        {
+          "tweet_id": "2029364017492300076",
+          "text": "smash or pass https://t.co/Zi743O7gIl",
+          "created_at": "2026-03-05T01:11:00+00:00",
+          "public_metrics": {
+            "retweet_count": 24,
+            "reply_count": 97,
+            "like_count": 702,
+            "quote_count": 0,
+            "bookmark_count": 43,
+            "impression_count": 6448
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 14,
+                "end": 37,
+                "url": "https://t.co/Zi743O7gIl",
+                "expanded_url": "https://x.com/yogana_19/status/2029364017492300076/photo/1",
+                "display_url": "pic.x.com/Zi743O7gIl",
+                "media_key": "3_2029233016631906305"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.031099
+        },
+        {
+          "tweet_id": "2029240956990701689",
+          "text": "engage with this post...  \n\nthank me later. 😉 https://t.co/r62IidOTQN",
+          "created_at": "2026-03-04T17:02:00+00:00",
+          "public_metrics": {
+            "retweet_count": 14,
+            "reply_count": 34,
+            "like_count": 373,
+            "quote_count": 0,
+            "bookmark_count": 18,
+            "impression_count": 7018
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 46,
+                "end": 69,
+                "url": "https://t.co/r62IidOTQN",
+                "expanded_url": "https://x.com/yogana_19/status/2029240956990701689/video/1",
+                "display_url": "pic.x.com/r62IidOTQN",
+                "media_key": "13_2029232483825233920"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.015908
+        },
+        {
+          "tweet_id": "2029183426088321513",
+          "text": "Tell me honestly, am I your type? https://t.co/fsjzgT2Eoe",
+          "created_at": "2026-03-04T13:13:23+00:00",
+          "public_metrics": {
+            "retweet_count": 15,
+            "reply_count": 90,
+            "like_count": 833,
+            "quote_count": 2,
+            "bookmark_count": 21,
+            "impression_count": 11289
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 34,
+                "end": 57,
+                "url": "https://t.co/fsjzgT2Eoe",
+                "expanded_url": "https://twitter.com/sakuuana/status/2029032835923997046",
+                "display_url": "x.com/sakuuana/statu…"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.03552
+        },
+        {
+          "tweet_id": "2029121671941304668",
+          "text": "wyd if you see me in person 🤫 https://t.co/eCktjlfTz2",
+          "created_at": "2026-03-04T09:08:00+00:00",
+          "public_metrics": {
+            "retweet_count": 83,
+            "reply_count": 422,
+            "like_count": 3615,
+            "quote_count": 1,
+            "bookmark_count": 366,
+            "impression_count": 42802
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 30,
+                "end": 53,
+                "url": "https://t.co/eCktjlfTz2",
+                "expanded_url": "https://x.com/yogana_19/status/2029121671941304668/photo/1",
+                "display_url": "pic.x.com/eCktjlfTz2",
+                "media_key": "3_2028974852497928192"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.155721
+        },
+        {
+          "tweet_id": "2029000371939754246",
+          "text": "Day 1 of trying to find a man on X who’s looking for a japanese girl https://t.co/huqt5HHFYW",
+          "created_at": "2026-03-04T01:06:00+00:00",
+          "public_metrics": {
+            "retweet_count": 66,
+            "reply_count": 257,
+            "like_count": 2592,
+            "quote_count": 2,
+            "bookmark_count": 191,
+            "impression_count": 28575
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 69,
+                "end": 92,
+                "url": "https://t.co/huqt5HHFYW",
+                "expanded_url": "https://x.com/yogana_19/status/2029000371939754246/photo/1",
+                "display_url": "pic.x.com/huqt5HHFYW",
+                "media_key": "3_2028974701859803136"
+              }
+            ],
+            "annotations": [
+              {
+                "start": 33,
+                "end": 33,
+                "probability": 0.6358,
+                "type": "Other",
+                "normalized_text": "X"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.110225
+        },
+        {
+          "tweet_id": "2028918205754785947",
+          "text": "hey @grok turn my body 90° to the left please https://t.co/ERTZlY0fY7",
+          "created_at": "2026-03-03T19:39:30+00:00",
+          "public_metrics": {
+            "retweet_count": 7,
+            "reply_count": 14,
+            "like_count": 179,
+            "quote_count": 0,
+            "bookmark_count": 9,
+            "impression_count": 6440
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 46,
+                "end": 69,
+                "url": "https://t.co/ERTZlY0fY7",
+                "expanded_url": "https://twitter.com/sakuuana/status/2028911195483144603",
+                "display_url": "x.com/sakuuana/statu…"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 4,
+                "end": 9,
+                "username": "grok",
+                "id": "1720665183188922368"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.007557
+        },
+        {
+          "tweet_id": "2028882419906924584",
+          "text": "rate me 1-10 https://t.co/sxLyZmkZ0B",
+          "created_at": "2026-03-03T17:17:18+00:00",
+          "public_metrics": {
+            "retweet_count": 67,
+            "reply_count": 392,
+            "like_count": 3015,
+            "quote_count": 6,
+            "bookmark_count": 227,
+            "impression_count": 34739
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 13,
+                "end": 36,
+                "url": "https://t.co/sxLyZmkZ0B",
+                "expanded_url": "https://x.com/yogana_19/status/2028882419906924584/photo/1",
+                "display_url": "pic.x.com/sxLyZmkZ0B",
+                "media_key": "3_2028882396649496576"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.131499
+        },
+        {
+          "tweet_id": "2028824976778780769",
+          "text": "Can I be your co-pilot? https://t.co/MCSTaSwDds",
+          "created_at": "2026-03-03T13:29:02+00:00",
+          "public_metrics": {
+            "retweet_count": 7,
+            "reply_count": 19,
+            "like_count": 209,
+            "quote_count": 0,
+            "bookmark_count": 10,
+            "impression_count": 5787
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 24,
+                "end": 47,
+                "url": "https://t.co/MCSTaSwDds",
+                "expanded_url": "https://twitter.com/sakuuana/status/2028673971043045382",
+                "display_url": "x.com/sakuuana/statu…"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.00888
+        },
+        {
+          "tweet_id": "2028762051108323423",
+          "text": "Hey @grok remove hello kitty https://t.co/6WCm8ypRLH",
+          "created_at": "2026-03-03T09:19:00+00:00",
+          "public_metrics": {
+            "retweet_count": 33,
+            "reply_count": 86,
+            "like_count": 1586,
+            "quote_count": 2,
+            "bookmark_count": 213,
+            "impression_count": 34846
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 29,
+                "end": 52,
+                "url": "https://t.co/6WCm8ypRLH",
+                "expanded_url": "https://x.com/yogana_19/status/2028762051108323423/photo/1",
+                "display_url": "pic.x.com/6WCm8ypRLH",
+                "media_key": "3_2028620745329246208"
+              }
+            ],
+            "annotations": [
+              {
+                "start": 23,
+                "end": 27,
+                "probability": 0.568,
+                "type": "Other",
+                "normalized_text": "kitty"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 4,
+                "end": 9,
+                "username": "grok",
+                "id": "1720665183188922368"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.064503
+        },
+        {
+          "tweet_id": "2028637480799621167",
+          "text": "Have you ever fallen in love with a traditional Japanese woman? https://t.co/QzvilGkYP4",
+          "created_at": "2026-03-03T01:04:00+00:00",
+          "public_metrics": {
+            "retweet_count": 9,
+            "reply_count": 50,
+            "like_count": 374,
+            "quote_count": 0,
+            "bookmark_count": 27,
+            "impression_count": 6886
+          },
+          "entities": {
+            "urls": [
+              {
+                "start": 64,
+                "end": 87,
+                "url": "https://t.co/QzvilGkYP4",
+                "expanded_url": "https://x.com/yogana_19/status/2028637480799621167/video/1",
+                "display_url": "pic.x.com/QzvilGkYP4",
+                "media_key": "13_2028616712996651009"
+              }
+            ]
+          },
+          "hashtags": [],
+          "engagement_rate": 0.016362
+        }
+      ],
+      "avg_engagement_rate": 0.057727,
+      "posting_frequency": 5.0,
+      "top_posts": [
+        {
+          "tweet_id": "2029121671941304668",
+          "engagement_rate": 0.155721,
+          "like_count": 3615
+        },
+        {
+          "tweet_id": "2028882419906924584",
+          "engagement_rate": 0.131499,
+          "like_count": 3015
+        },
+        {
+          "tweet_id": "2029000371939754246",
+          "engagement_rate": 0.110225,
+          "like_count": 2592
+        }
+      ],
+      "hashtags_used": {}
+    }
+  ],
+  "skipped_competitors": [
+    {
+      "handle": "baharaykin",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "LeahSunkissed",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "marylivbrown",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "iiCoraMaay",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "KissofStarova",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "yuumispm",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "Ava_starz",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "IsabellaCruz_47",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "Lux_aeterna_",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "imrubyreid",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "itsluna_baby",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "tanarainw",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "AI_MIKENEKO",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "BoobistR",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "yunaelegant",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "ai_nontan_room",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "ai_hyk",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "tororo_223",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "hakoirikumatan",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "honoka_shiri",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "2nd_karen_AI",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "AI_Girls_Studio",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "AIart_yama94",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "seisei_ai_1st",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "Shizuku_AItuber",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "ganbarukaisyain",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "nene__chandayo",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    }
+  ],
+  "hashtag_frequency": {
+    "#AI变装": 2,
+    "#恶搞": 1,
+    "#SFW": 1,
+    "#Fictional": 1,
+    "#digitalart": 1
+  },
+  "hashtag_by_market": {
+    "EN": {
+      "#AI变装": 2,
+      "#恶搞": 1,
+      "#SFW": 1,
+      "#Fictional": 1,
+      "#digitalart": 1
+    },
+    "JP": {
+      "#SFW": 1,
+      "#Fictional": 1,
+      "#digitalart": 1
+    }
+  },
+  "market_comparison": {
+    "EN": {
+      "competitor_count": 14,
+      "avg_followers": 170844,
+      "avg_engagement_rate": 0.052934,
+      "avg_posting_frequency": 4.7,
+      "top_hashtags": [
+        "#AI变装",
+        "#恶搞",
+        "#SFW",
+        "#Fictional",
+        "#digitalart"
+      ]
+    },
+    "JP": {
+      "competitor_count": 1,
+      "avg_followers": 66105,
+      "avg_engagement_rate": 0.000181,
+      "avg_posting_frequency": 10.0,
+      "top_hashtags": [
+        "#SFW",
+        "#Fictional",
+        "#digitalart"
+      ]
+    }
+  },
+  "trending_topics": [
+    {
+      "keyword": "#AIbeauty",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#AIart",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#AIgirl",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#AImodel",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#midjourney",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#stablediffusion",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#aiイラスト",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#AI美女",
+      "sample_tweets": []
+    }
+  ],
+  "trending_posts": [],
+  "new_accounts_discovered": [],
+  "analysis": {
+    "data_quality": {
+      "reply_contamination_rate": 0.186,
+      "total_replies_in_sample": 26,
+      "total_tweets_sampled": 140,
+      "high_contamination_accounts": [
+        {
+          "handle": "JosephinaM3131",
+          "reply_rate": 0.8,
+          "reply_count": 8,
+          "total_sampled": 10
+        },
+        {
+          "handle": "ai_hiyo_",
+          "reply_rate": 0.7,
+          "reply_count": 7,
+          "total_sampled": 10
+        },
+        {
+          "handle": "PinUpGirl_AI",
+          "reply_rate": 0.6,
+          "reply_count": 6,
+          "total_sampled": 10
+        }
+      ],
+      "note": "3 of 14 fetched competitors have >50% reply contamination, inflating or deflating their engagement rates. JosephinaM3131 (80% replies), ai_hiyo_ (70% replies), and PinUpGirl_AI (60% replies) are the worst offenders. Their raw engagement rates are unreliable; reply-adjusted rates should be used instead."
+    },
+    "engagement_adjusted": {
+      "EN": {
+        "competitor_count": 14,
+        "avg_raw_engagement_rate": 0.052934,
+        "avg_reply_adjusted_engagement_rate": 0.060725,
+        "avg_impression_based_engagement_rate": 0.044434,
+        "top_performers_reply_adjusted": [
+          {
+            "handle": "sessypuuh",
+            "market": "EN",
+            "raw_engagement_rate": 0.380654,
+            "reply_adjusted_engagement_rate": 0.380654,
+            "impression_based_engagement_rate": 0.094283,
+            "reply_rate": 0.0
+          },
+          {
+            "handle": "JosephinaM3131",
+            "market": "EN",
+            "raw_engagement_rate": 0.022783,
+            "reply_adjusted_engagement_rate": 0.113848,
+            "impression_based_engagement_rate": 0.006569,
+            "reply_rate": 0.8
+          },
+          {
+            "handle": "HannaJonso",
+            "market": "EN",
+            "raw_engagement_rate": 0.060615,
+            "reply_adjusted_engagement_rate": 0.075715,
+            "impression_based_engagement_rate": 0.04958,
+            "reply_rate": 0.2
+          },
+          {
+            "handle": "leahyunaxo",
+            "market": "EN",
+            "raw_engagement_rate": 0.063579,
+            "reply_adjusted_engagement_rate": 0.063579,
+            "impression_based_engagement_rate": 1.271728,
+            "reply_rate": 0.0
+          },
+          {
+            "handle": "yogana_19",
+            "market": "EN",
+            "raw_engagement_rate": 0.057727,
+            "reply_adjusted_engagement_rate": 0.057727,
+            "impression_based_engagement_rate": 0.075296,
+            "reply_rate": 0.0
+          }
+        ],
+        "note": "Impression-based rates for IvoryLane_plus (11.11) and leahyunaxo (1.27) are outliers -- likely due to low impression counts on sampled tweets or API data anomalies. These are excluded from the impression-based average."
+      },
+      "JP": {
+        "competitor_count": 1,
+        "avg_raw_engagement_rate": 0.000181,
+        "avg_reply_adjusted_engagement_rate": 0.000431,
+        "avg_impression_based_engagement_rate": 0.012514,
+        "top_performers_reply_adjusted": [
+          {
+            "handle": "PinUpGirl_AI",
+            "market": "both",
+            "raw_engagement_rate": 0.000181,
+            "reply_adjusted_engagement_rate": 0.000431,
+            "impression_based_engagement_rate": 0.012514,
+            "reply_rate": 0.6
+          }
+        ],
+        "note": "Only 1 JP-market competitor (PinUpGirl_AI, market=both) was fetched. JP data is severely limited -- 27 competitors were skipped due to API 402 errors. Strategy should rely more on EN market signals until JP data improves."
+      }
+    },
+    "executive_summary": [
+      "EN Market: The EN AI beauty niche shows strong engagement diversity. Top performers sessypuuh (38.1% raw ER), HannaJonso (7.6% adjusted), leahyunaxo (6.4% adjusted), and yogana_19 (5.8% adjusted) demonstrate that smaller, focused accounts (7K-82K followers) consistently outperform the largest accounts like Estherbron1 (1.24M followers, 0.2% ER) and ai_hiyo_ (387K followers, 0.2% adjusted ER).",
+      "EN Market: Reply contamination is a significant data quality issue -- 18.6% of all sampled tweets are replies. Three accounts (JosephinaM3131 at 80%, ai_hiyo_ at 70%, PinUpGirl_AI at 60%) have severely inflated or distorted engagement metrics due to reply-heavy posting. Reply-adjusted rates reveal JosephinaM3131's true engagement is 11.4% (not 2.3%), as the non-reply posts perform well but are diluted by zero-engagement reply spam.",
+      "EN Market: Viral content follows a clear pattern -- short, question-based captions paired with AI-generated images drive massive engagement. The 4 trending posts (16.6K, 15.5K, 12.9K, 9.0K likes) all use simple prompts like 'wifey material?', 'be honest.. am I attractive?', and 'describe me in 1 word?' This engagement-bait style dominates the EN niche.",
+      "JP Market: Data is severely limited with only 1 JP-market competitor fetched (PinUpGirl_AI). This account has very low engagement (0.018% raw, 0.04% adjusted) despite posting 10x/day and using hashtags (#SFW, #Fictional, #digitalart). 27 JP competitors were unreachable due to API errors. JP strategy should be cautious and data-driven once more competitors are fetchable.",
+      "Hashtag Signal: 85.7% of fetched competitors (12 of 14) use zero hashtags. The highest-engagement accounts (sessypuuh at 38.1% ER, leahyunaxo at 6.4% ER, yogana_19 at 5.8% ER) all post without hashtags. This strongly suggests that in the AI beauty niche, hashtags are not a growth driver -- visual content quality and caption hooks matter more.",
+      "Growth Pattern: Accounts with fewer but higher-quality posts significantly outperform high-frequency posters. sessypuuh posts 0.7x/day with 38.1% ER; Estherbron1 posts 0.5x/day with 0.2% ER (but has 1.24M followers indicating historical growth). Mid-tier accounts like katekarsyn (104K followers, 9.8 posts/day, 1.8% ER) show that high frequency can work at scale but engagement per post drops."
+    ],
+    "new_accounts_filtered": [],
+    "trending_adjusted": {
+      "threshold_likes": 6782.8,
+      "method": "mean + 2*stddev of all sampled tweet likes",
+      "total_trending_posts": 4,
+      "posts": [
+        {
+          "tweet_id": "2029302462545310078",
+          "handle": "leahyunaxo",
+          "likes": 16642,
+          "text_preview": "wifey material? https://t.co/vZjBtRDcHR",
+          "notable_because": "Viral AI beauty post with 16642 likes, well above the dynamic threshold of 6782 likes. Uses question-based engagement bait caption."
+        },
+        {
+          "tweet_id": "2028941945234415772",
+          "handle": "leahyunaxo",
+          "likes": 15537,
+          "text_preview": "be honest.. am I attractive? https://t.co/OgZpH6S3V3",
+          "notable_because": "Viral AI beauty post with 15537 likes, well above the dynamic threshold of 6782 likes. Uses question-based engagement bait caption."
+        },
+        {
+          "tweet_id": "2028194474187202857",
+          "handle": "leahyunaxo",
+          "likes": 8961,
+          "text_preview": "describe me in 1 word? https://t.co/FwyllSkBBp",
+          "notable_because": "Viral AI beauty post with 8961 likes, well above the dynamic threshold of 6782 likes. Uses question-based engagement bait caption."
+        },
+        {
+          "tweet_id": "2026042429703352372",
+          "handle": "yuumi005",
+          "likes": 12914,
+          "text_preview": "https://t.co/37d961jLtk",
+          "notable_because": "Viral AI beauty post with 12914 likes, well above the dynamic threshold of 6782 likes. Image-only or minimal caption post -- visual content alone drives engagement."
+        }
+      ]
+    },
+    "hashtag_signal": {
+      "competitors_with_zero_hashtags_pct": 85.7,
+      "competitors_with_zero_hashtags": 12,
+      "total_competitors_fetched": 14,
+      "signal": "strong_negative",
+      "interpretation": "85.7% of fetched competitors (12 of 14) use zero hashtags. The highest-engagement accounts (sessypuuh at 38.1% ER, leahyunaxo at 6.4% ER, yogana_19 at 5.8% ER) all post without hashtags. The two accounts using hashtags (NotjustRen00 with Chinese tags, PinUpGirl_AI with generic tags) have among the lowest engagement rates. Recommendation: minimize hashtag usage; invest in visual quality and caption hooks instead.",
+      "recommendation": "Use 0-2 hashtags maximum per post. If using hashtags, prefer niche-specific tags like #AIart over generic ones. Do not rely on hashtags for discovery -- algorithm-driven distribution via engagement is the primary growth mechanism in this niche."
+    }
+  }
+}

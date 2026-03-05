@@ -1,0 +1,362 @@
+{
+  "date": "2026-03-05",
+  "generated_at": "2026-03-05T23:45:00+09:00",
+  "accounts": {
+    "EN": {
+      "followers": 6,
+      "followers_change": -1,
+      "following": 39,
+      "total_posts": 2,
+      "followers_change_pct": -16.7,
+      "total_likes": 3,
+      "total_retweets": 0,
+      "total_replies": 0,
+      "total_quotes": 0,
+      "total_bookmarks": 0,
+      "anomaly": true,
+      "anomaly_detail": "Follower count dropped by 1 (from 7 to 6), a -16.7% change which exceeds the 10% anomaly threshold. This anomaly persists from yesterday. With only 6 followers, any single unfollow triggers the threshold. Note: Mar 5 posts all failed to publish (402 payment errors), so no new posting data is available — metrics shown are carried forward from Mar 4 collection.",
+      "post_count": 4,
+      "post_metrics": [
+        {
+          "post_id": "EN_20260304_01",
+          "tweet_id": "2029059847917093267",
+          "category": "portrait",
+          "likes": 1,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "impressions": null,
+          "hours_after_post": 11,
+          "ab_test_variant": "A",
+          "text_preview": "Soft light, sharp gaze. There's something about golden hour portraits that makes"
+        },
+        {
+          "post_id": "EN_20260304_02",
+          "tweet_id": "2029061473935479018",
+          "category": "fashion",
+          "likes": 1,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "impressions": null,
+          "hours_after_post": 11,
+          "ab_test_variant": "A",
+          "text_preview": "Oversized blazer, minimal makeup, maximum attitude. Less is always more when the"
+        },
+        {
+          "post_id": "EN_20260304_03",
+          "tweet_id": "2029061475026051150",
+          "category": "artistic",
+          "likes": 0,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "impressions": null,
+          "hours_after_post": 11,
+          "ab_test_variant": "A",
+          "text_preview": "Somewhere between a dream and a painting. When art meets code, the boundaries di"
+        },
+        {
+          "post_id": "EN_20260304_04",
+          "tweet_id": "2029061476024205810",
+          "category": "trend_reactive",
+          "likes": 1,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "impressions": null,
+          "hours_after_post": 11,
+          "ab_test_variant": "B",
+          "text_preview": "You can only pick one look for the rest of the year — which one are you choosing"
+        }
+      ],
+      "totals": {
+        "likes": 3,
+        "retweets": 0,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 0
+      },
+      "category_breakdown": {
+        "portrait": {
+          "posts": 1,
+          "likes": 1,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 1
+        },
+        "fashion": {
+          "posts": 1,
+          "likes": 1,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 1
+        },
+        "artistic": {
+          "posts": 1,
+          "likes": 0,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 0
+        },
+        "trend_reactive": {
+          "posts": 1,
+          "likes": 1,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 1
+        }
+      },
+      "best_category": "portrait",
+      "worst_category": "artistic",
+      "engagement_trend": {
+        "likes": {"yesterday": 3, "today": 3, "change_pct": 0.0, "direction": "flat"},
+        "retweets": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"},
+        "replies": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"},
+        "quotes": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"},
+        "bookmarks": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"}
+      },
+      "engagement_trend_notes": "Metrics are unchanged from yesterday — same Mar 4 data reused because API credits are exhausted and Mar 5 posts failed to publish (402 errors). No fresh collection was possible.",
+      "outbound": {
+        "likes": 14,
+        "replies": 4,
+        "follows": 5,
+        "total_actions": 23,
+        "all_dry_run": true,
+        "failures": 0,
+        "notes": "All 23 outbound actions were dry-run only (no live API calls). Targets: @sessypuuh, @yuumispm, @baharaykin."
+      },
+      "ab_test_status": {
+        "variable": "posting_frequency",
+        "variant_a": "3 posts per day at slots 1-3 only",
+        "variant_b": "4 posts per day using all 4 slots",
+        "variant_a_posts": [
+          "EN_20260304_01",
+          "EN_20260304_02",
+          "EN_20260304_03"
+        ],
+        "variant_b_posts": [
+          "EN_20260304_04"
+        ],
+        "variant_a_total_engagement": 2,
+        "variant_b_total_engagement": 1,
+        "variant_a_avg_engagement": 0.67,
+        "variant_b_avg_engagement": 1.0,
+        "verdict": "insufficient_data",
+        "notes": "Day 3 of 5. No new data points added today because all Mar 5 posts failed to publish (402 errors). Cumulative data: Variant A has 3 posts, Variant B has 1 post — still below the 3 data points per variant threshold. Test must continue through 2026-03-08, but the publishing failure means this day produced no usable test data."
+      },
+      "best_performing_post": {
+        "post_id": "EN_20260304_01",
+        "category": "portrait",
+        "likes": 1,
+        "retweets": 0,
+        "replies": 0,
+        "quotes": 0,
+        "total_engagement": 1
+      }
+    },
+    "JP": {
+      "followers": 140,
+      "followers_change": 0,
+      "following": 80,
+      "total_posts": 21,
+      "followers_change_pct": 0.0,
+      "total_likes": 6,
+      "total_retweets": 0,
+      "total_replies": 0,
+      "total_quotes": 0,
+      "total_bookmarks": 0,
+      "anomaly": false,
+      "anomaly_detail": null,
+      "post_count": 4,
+      "post_metrics": [
+        {
+          "post_id": "JP_20260304_01",
+          "tweet_id": "2029061418595872871",
+          "category": "portrait",
+          "likes": 2,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "impressions": null,
+          "hours_after_post": 11,
+          "ab_test_variant": "A",
+          "text_preview": "朝の光に包まれた横顔。柔らかいライティングが生む透明感、AIだからこそ表現できる繊細な美しさ。"
+        },
+        {
+          "post_id": "JP_20260304_02",
+          "tweet_id": "2029061419602518293",
+          "category": "fashion",
+          "likes": 2,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "impressions": null,
+          "hours_after_post": 11,
+          "ab_test_variant": "B",
+          "text_preview": "春の訪れを感じるパステルコーデ。トレンチコートにラベンダーのスカーフを添えて、街を歩くだけでランウェイに。"
+        },
+        {
+          "post_id": "JP_20260304_03",
+          "tweet_id": "2029061420667810222",
+          "category": "artistic",
+          "likes": 2,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "impressions": null,
+          "hours_after_post": 11,
+          "ab_test_variant": "A",
+          "text_preview": "夜の東京、ネオンの光と影が織りなすサイバーパンクの世界。現実と仮想の境界が曖昧になる瞬間を切り取りました。"
+        },
+        {
+          "post_id": "JP_20260304_04",
+          "tweet_id": "2029061422412681351",
+          "category": "trend_reactive",
+          "likes": 0,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "impressions": null,
+          "hours_after_post": 11,
+          "ab_test_variant": "B",
+          "text_preview": "3月に入って春の気配。AIが描く「理想の春デート服」、リアルに着てみたいコーデはどれ？"
+        }
+      ],
+      "totals": {
+        "likes": 6,
+        "retweets": 0,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 0
+      },
+      "category_breakdown": {
+        "portrait": {
+          "posts": 1,
+          "likes": 2,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 2
+        },
+        "fashion": {
+          "posts": 1,
+          "likes": 2,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 2
+        },
+        "artistic": {
+          "posts": 1,
+          "likes": 2,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 2
+        },
+        "trend_reactive": {
+          "posts": 1,
+          "likes": 0,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 0
+        }
+      },
+      "best_category": "portrait",
+      "worst_category": "trend_reactive",
+      "engagement_trend": {
+        "likes": {"yesterday": 6, "today": 6, "change_pct": 0.0, "direction": "flat"},
+        "retweets": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"},
+        "replies": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"},
+        "quotes": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"},
+        "bookmarks": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"}
+      },
+      "engagement_trend_notes": "Metrics are unchanged from yesterday — same Mar 4 data reused because API credits are exhausted and Mar 5 posts failed to publish (402 errors). No fresh collection was possible.",
+      "outbound": {
+        "likes": 0,
+        "replies": 0,
+        "follows": 0,
+        "total_actions": 0,
+        "all_dry_run": false,
+        "failures": 0,
+        "notes": "No outbound actions executed for JP account today. Outbound log contains EN-only dry-run actions."
+      },
+      "ab_test_status": {
+        "variable": "hashtag_count",
+        "variant_a": "3 hashtags per post (always_use + 1 rotate)",
+        "variant_b": "5 hashtags per post (always_use + 2 rotate + 1 trending)",
+        "variant_a_posts": [
+          "JP_20260304_01",
+          "JP_20260304_03"
+        ],
+        "variant_b_posts": [
+          "JP_20260304_02",
+          "JP_20260304_04"
+        ],
+        "variant_a_total_engagement": 4,
+        "variant_b_total_engagement": 2,
+        "variant_a_avg_engagement": 2.0,
+        "variant_b_avg_engagement": 1.0,
+        "verdict": "insufficient_data",
+        "notes": "Day 3 of 5. No new data points added today because all Mar 5 posts failed to publish (402 errors). Cumulative data: Variant A has 2 posts (avg 2.0 eng), Variant B has 2 posts (avg 1.0 eng). Early signal favors fewer hashtags but sample is far too small. Test must continue through 2026-03-08."
+      },
+      "best_performing_post": {
+        "post_id": "JP_20260304_01",
+        "category": "portrait",
+        "likes": 2,
+        "retweets": 0,
+        "replies": 0,
+        "quotes": 0,
+        "total_engagement": 2
+      }
+    }
+  },
+  "telegram_report": "Daily Report -- 2026-03-05\n\nIMPORTANT: All Mar 5 posts FAILED (402 payment error). Metrics below are carried forward from Mar 4. API credits exhausted — no fresh collection possible.\n\nAccount Growth:\n  EN: 6 followers (-1) -- ANOMALY: -16.7% drop (persists from yesterday)\n  JP: 140 followers (+0) -- stable\n\nPost Performance (Mar 4 data, 11h after posting):\n  EN (4 posts): 3 likes, 0 RTs, 0 replies\n    Best: EN_20260304_01 (portrait) 1 like\n  JP (4 posts): 6 likes, 0 RTs, 0 replies\n    Best: JP_20260304_01 (portrait) 2 likes\n\nCategory Winners:\n  EN: portrait/fashion/trend_reactive tied (1 eng), artistic (0)\n  JP: portrait/fashion/artistic tied (2 eng), trend_reactive (0)\n\nA/B Tests (day 3/5, no new data today):\n  EN posting_frequency: insufficient data\n  JP hashtag_count: insufficient data, early signal favors 3 tags\n\nOutbound:\n  EN: 14 likes, 4 replies, 5 follows (all dry-run) -- @sessypuuh, @yuumispm, @baharaykin\n  JP: no outbound today\n\nAction Required: Resolve 402 payment error before next publishing run.",
+  "telegram_alerts": [
+    "Follower Anomaly -- EN\nChange: -1 (-16.7%)\nPrevious: 7 -> Current: 6\nAnomaly persists from yesterday. With only 6 followers, single unfollows trigger the 10% threshold. Monitor but low severity.",
+    "Publishing Failure -- ALL ACCOUNTS\nAll 8 posts (4 EN + 4 JP) failed to publish on Mar 5 with 402 errors. This indicates an API payment/billing issue. Action required: check X API billing status and resolve before next publishing run."
+  ],
+  "outbound_summary": {
+    "EN": {
+      "likes": 14,
+      "replies": 4,
+      "follows": 5,
+      "total_actions": 23,
+      "all_dry_run": true,
+      "failures": 0,
+      "notes": "All 23 outbound actions were dry-run only (no live API calls). Targets: @sessypuuh, @yuumispm, @baharaykin."
+    },
+    "JP": {
+      "likes": 0,
+      "replies": 0,
+      "follows": 0,
+      "total_actions": 0,
+      "all_dry_run": false,
+      "failures": 0,
+      "notes": "No outbound actions executed for JP account today. Outbound log contains EN-only dry-run actions."
+    }
+  },
+  "data_notes": "Metrics data is from Mar 4 collection (reused). API credits exhausted — no fresh analyst.py collection was run for Mar 5. All Mar 5 posts failed to publish due to 402 payment errors, so no new post metrics exist for today."
+}

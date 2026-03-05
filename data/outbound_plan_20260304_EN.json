@@ -1,0 +1,73 @@
+{
+  "date": "2026-03-04",
+  "account": "EN",
+  "generated_at": "2026-03-04T15:30:00+09:00",
+  "strategy_used": "data/strategy_20260304.json",
+  "content_plan_used": "data/content_plan_20260304_EN.json",
+  "targets": [
+    {
+      "handle": "@sessypuuh",
+      "user_id": "1859818002767597568",
+      "skip": false,
+      "tweets_to_like": [
+        "2028567037954465817",
+        "2028232378582270441",
+        "2027522958185353620"
+      ],
+      "reply_to": {
+        "tweet_id": "2028567037954465817",
+        "reply_text": "The lighting on this is stunning — that soft glow really pulls you in. Beautiful work.",
+        "reasoning": "Most recent post (Mar 2) with strong engagement (1,313 likes). The portrait style with soft lighting directly aligns with our content niche. A genuine compliment about the visual quality positions us as a peer in the AI beauty space, not a bot."
+      },
+      "follow": true
+    },
+    {
+      "handle": "@yuumispm",
+      "user_id": "2017339337738702848",
+      "skip": false,
+      "tweets_to_like": [
+        "2028589336581513318",
+        "2028230833274834948",
+        "2027542768898232603",
+        "2027149456177566194"
+      ],
+      "reply_to": {
+        "tweet_id": "2028589336581513318",
+        "reply_text": "The composition here is so clean — love how the colors just flow together naturally.",
+        "reasoning": "Most recent post (Mar 2) with 247 likes. Choosing this over the viral 16K-like post because a reply on a smaller post is more likely to be seen and appreciated. yuumispm posts image-only content, so complimenting visual composition feels authentic and specific."
+      },
+      "follow": true
+    },
+    {
+      "handle": "@baharaykin",
+      "user_id": "1223324175802294273",
+      "skip": false,
+      "tweets_to_like": [
+        "2028567270520217767",
+        "2028219965363367950",
+        "2027791104712593675"
+      ],
+      "reply_to": {
+        "tweet_id": "2028567270520217767",
+        "reply_text": "This is impossible to choose — the styling on both is completely different vibes but equally stunning.",
+        "reasoning": "Most recent original post (Mar 2) with 756 likes and 597 replies, making it a high-visibility conversation. The 'choose one' format invites participation, so our reply engages naturally with the prompt rather than just complimenting. This aligns with the interactive engagement-bait strategy we are testing in slot 4."
+      },
+      "follow": true
+    },
+    {
+      "handle": "@Ava_starz",
+      "user_id": "1830839679870193664",
+      "skip": true,
+      "skip_reason": "High reply contamination — 9 of 10 most recent posts are @replies to individual users, not original content. Only 1 original post in the feed ('War bad / Boobs good') which is off-topic for AI beauty aesthetics. Engagement rate is 0.04% despite 60K followers, indicating inflated follower count with minimal organic reach. Engaging here provides low visibility and weak niche alignment."
+    },
+    {
+      "handle": "@bluebunny996",
+      "user_id": null,
+      "skip": false,
+      "tweets_to_like": [],
+      "reply_to": null,
+      "follow": true,
+      "note": "Discovered via #AIbeauty keyword search with 20,851 followers. No recent tweet data available from scout report — only listed in new_accounts_discovered. Recommend following to establish connection. Like and reply actions should be planned after running publisher_outbound_data.py to fetch their recent tweets."
+    }
+  ]
+}

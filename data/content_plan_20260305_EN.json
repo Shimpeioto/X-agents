@@ -1,0 +1,119 @@
+{
+  "date": "2026-03-05",
+  "account": "EN",
+  "generated_at": "2026-03-05T19:15:00+09:00",
+  "strategy_used": "data/strategy_20260305.json",
+  "total_posts": 4,
+  "posts": [
+    {
+      "id": "EN_20260305_01",
+      "slot": 1,
+      "scheduled_time": "14:00 UTC",
+      "category": "portrait",
+      "priority": "high",
+      "status": "posted",
+      "text": "Be honest.. would you look twice?\n\n#AIart #AIbeauty",
+      "hashtags": [
+        "#AIart",
+        "#AIbeauty"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Hyper-realistic AI-generated portrait of a beautiful woman, soft golden hour lighting, shallow depth of field, looking directly at camera with a subtle confident smile, flawless skin with natural texture, light freckles, flowing dark hair with warm highlights, neutral blurred background, cinematic color grading, 85mm lens aesthetic",
+        "negative_prompt": "cartoon, anime, deformed hands, extra fingers, blurry face, uncanny valley, harsh shadows, overexposed",
+        "style_reference": "Editorial beauty photography, soft-focus portrait style",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": null,
+      "notes": "High-priority portrait slot. Uses question-based caption inspired by leahyunaxo's viral pattern.",
+      "tweet_id": "2029504721850109954",
+      "post_url": "https://x.com/iammeruru/status/2029504721850109954",
+      "posted_at": "2026-03-05T19:30:06.906592+09:00"
+    },
+    {
+      "id": "EN_20260305_02",
+      "slot": 2,
+      "scheduled_time": "18:00 UTC",
+      "category": "fashion",
+      "priority": "high",
+      "status": "posted",
+      "text": "Street style but make it AI. Which outfit would you pick, left or right?\n\n#AIart #AIgirl",
+      "hashtags": [
+        "#AIart",
+        "#AIgirl"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Split composition showing two AI-generated fashion looks side by side: left side features a woman in an oversized streetwear outfit with sneakers and bucket hat in a Tokyo alleyway; right side shows the same woman in an elegant minimalist trench coat and heels on a European cobblestone street. Both hyper-realistic, full body shot, editorial fashion photography lighting, natural daylight, clean background",
+        "negative_prompt": "cartoon, anime, deformed limbs, bad proportions, blurry, low quality, watermark",
+        "style_reference": "Vogue street style editorial, clean fashion photography",
+        "aspect_ratio": "1:1"
+      },
+      "ab_test_variant": null,
+      "notes": "Fashion slot with interactive question caption to drive replies.",
+      "tweet_id": "2029504723062296776",
+      "post_url": "https://x.com/iammeruru/status/2029504723062296776",
+      "posted_at": "2026-03-05T19:30:07.173785+09:00"
+    },
+    {
+      "id": "EN_20260305_03",
+      "slot": 3,
+      "scheduled_time": "21:00 UTC",
+      "category": "artistic",
+      "priority": "medium",
+      "status": "posted",
+      "text": "When AI dreams of spring. This took my breath away\n\n#AIart #digitalart",
+      "hashtags": [
+        "#AIart",
+        "#digitalart"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Ethereal AI-generated portrait of a woman surrounded by floating cherry blossom petals, soft pink and lavender color palette, dreamlike atmosphere with light particle effects, semi-transparent flowing fabric draped over shoulders, impressionist-meets-photorealistic style, bokeh light orbs in background, gentle wind effect on hair, fantasy spring garden setting",
+        "negative_prompt": "harsh colors, dark mood, horror, gore, deformed face, bad anatomy, text, watermark",
+        "style_reference": "Alphonse Mucha meets modern digital art, Art Nouveau floral aesthetic",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": null,
+      "notes": "Artistic slot leveraging spring seasonal theme.",
+      "tweet_id": "2029504724173799615",
+      "post_url": "https://x.com/iammeruru/status/2029504724173799615",
+      "posted_at": "2026-03-05T19:30:07.423558+09:00"
+    },
+    {
+      "id": "EN_20260305_04",
+      "slot": 4,
+      "scheduled_time": "02:00 UTC",
+      "category": "trend_reactive",
+      "priority": "medium",
+      "status": "posted",
+      "text": "POV: AI just reinvented the red carpet. Drop a fire emoji if you'd wear this to the Met Gala\n\n#AIart #AIbeauty",
+      "hashtags": [
+        "#AIart",
+        "#AIbeauty"
+      ],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "AI-generated stunning full-length red carpet look, woman in an avant-garde couture gown with iridescent fabric that shifts between silver and holographic blue, dramatic architectural silhouette, paparazzi flash lighting, grand marble staircase background, high fashion editorial pose, ultra-detailed fabric textures, crystal and metallic embellishments",
+        "negative_prompt": "casual clothing, low quality, blurry, deformed, bad anatomy, cartoon style, unrealistic proportions",
+        "style_reference": "Met Gala avant-garde fashion photography, dramatic red carpet editorial",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": "B",
+      "notes": "Slot 4 is the A/B test differentiator: only posted in variant B (4 posts/day).",
+      "tweet_id": "2029504725369122822",
+      "post_url": "https://x.com/iammeruru/status/2029504725369122822",
+      "posted_at": "2026-03-05T19:30:07.709512+09:00"
+    }
+  ],
+  "reply_templates": [
+    "The lighting in this is incredible, how do you get that glow effect?",
+    "This might be your best one yet. The details are unreal.",
+    "Okay wait, the expression is so lifelike. What tool did you use for this?",
+    "Obsessed with the color palette here. Giving main character energy.",
+    "This stopped my scroll. The composition is so clean.",
+    "Love how you handled the hair texture, that's always the hardest part with AI art.",
+    "The background really makes this pop. Do you do the editing in post or is that all prompt work?",
+    "Been following your work for a while and the quality jump is insane. Keep going!"
+  ]
+}

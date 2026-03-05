@@ -1,0 +1,213 @@
+{
+  "date": "2026-03-05",
+  "actions": [
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "fake_tweet_001",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T17:13:54.136609+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "fake_tweet_002",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T17:13:54.618742+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "fake_tweet_001",
+      "reply_text": "@sessypuuh Love the lighting in this portrait — really captures the mood beautifully!",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T17:13:54.620632+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "target_user_id": "1234567890",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T17:13:54.622584+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "dry_0",
+      "timestamp": "2026-03-05T17:13:55.175178+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "dry_1",
+      "timestamp": "2026-03-05T17:13:55.183812+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "target_user_id": "dry_run_sessypuuh",
+      "timestamp": "2026-03-05T17:13:55.185605+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "2028567037954465817",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.028614+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "2028232378582270441",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.053402+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "2027522958185353620",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.055319+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "tweet_id": "2028567037954465817",
+      "reply_text": "@sessypuuh The lighting on this is stunning — that soft glow really pulls you in. Beautiful work.",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.056785+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@sessypuuh",
+      "target_user_id": "1859818002767597568",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.058665+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "2028589336581513318",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.060790+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "2028230833274834948",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.062333+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "2027542768898232603",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.063703+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "2027149456177566194",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.065027+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "2028589336581513318",
+      "reply_text": "@yuumispm The composition here is so clean — love how the colors just flow together naturally.",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.066237+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@yuumispm",
+      "target_user_id": "2017339337738702848",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.067807+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "2028567270520217767",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.069375+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "2028219965363367950",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.070896+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "2027791104712593675",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.072099+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "2028567270520217767",
+      "reply_text": "@baharaykin This is impossible to choose — the styling on both is completely different vibes but equally stunning.",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.073136+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@baharaykin",
+      "target_user_id": "1223324175802294273",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-05T18:26:35.074493+09:00",
+      "dry_run": true
+    }
+  ]
+}

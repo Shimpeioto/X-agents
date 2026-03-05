@@ -1,0 +1,99 @@
+{
+  "date": "2026-03-05",
+  "generated_at": "2026-03-05T18:30:00+09:00",
+  "scout_report_used": "data/scout_report_20260305.json",
+  "EN": {
+    "posting_schedule": [
+      {"slot": 1, "time": "14:00 UTC", "category": "portrait", "priority": "high"},
+      {"slot": 2, "time": "18:00 UTC", "category": "fashion", "priority": "high"},
+      {"slot": 3, "time": "21:00 UTC", "category": "artistic", "priority": "medium"},
+      {"slot": 4, "time": "02:00 UTC", "category": "trend_reactive", "priority": "medium"}
+    ],
+    "content_mix": {
+      "portrait": 40,
+      "fashion": 20,
+      "artistic": 20,
+      "trend_reactive": 10,
+      "lifestyle": 10
+    },
+    "hashtag_strategy": {
+      "always_use": ["#AIart"],
+      "rotate": ["#AIbeauty", "#AIgirl", "#digitalart"],
+      "trending_today": [],
+      "max_per_post": 2
+    },
+    "outbound_strategy": {
+      "daily_likes": 30,
+      "daily_replies": 10,
+      "daily_follows": 5,
+      "target_accounts": ["@sessypuuh", "@leahyunaxo", "@HannaJonso", "@yogana_19", "@Angelwithcakee"],
+      "reply_style": "Short, genuine compliments referencing specific visual elements (lighting, expression, composition). Use question-based engagement when appropriate. Keep replies to 1-2 sentences, avoid generic praise. Match the casual, conversational tone of top EN performers."
+    },
+    "ab_test": {
+      "variable": "posting_frequency",
+      "variant_a": "3 posts per day at slots 1-3 only",
+      "variant_b": "4 posts per day using all 4 slots",
+      "duration_days": 5,
+      "start_date": "2026-03-03"
+    },
+    "key_insights": [
+      "EN market reply-adjusted avg ER is 6.1% — sessypuuh leads at 38.1% with only 0.7 posts/day and zero hashtags, confirming that quality over quantity drives engagement in this niche",
+      "Viral content pattern is clear: leahyunaxo's top posts (16.6K, 15.5K, 9.0K likes) all use short question-based captions like 'wifey material?', 'be honest.. am I attractive?', 'describe me in 1 word?' paired with a single AI beauty image — adopt this engagement-bait caption style for high-priority portrait slots",
+      "85.7% of fetched competitors (12 of 14) use zero hashtags. The hashtag signal analysis shows 'strong_negative' correlation between hashtag usage and engagement rate — reduce max_per_post from 4 to 2, focusing on niche-specific #AIart only as a consistent tag",
+      "IvoryLane_plus (253K followers) uses question-based captions ('this ok?', 'Too big or just right?', 'say hi if you see this') with 1 post/day at a consistent 15:00 UTC schedule, achieving 0.9% ER — consistent timing + interactive captions is a proven mid-scale growth formula",
+      "Impression-based ER diverges significantly from follower-based ER: sessypuuh shows 9.4% impression-based vs 38.1% follower-based, indicating high algorithmic reach relative to follower count — focus on producing the type of content that gets recommended beyond follower base"
+    ],
+    "risks": [
+      "The posting frequency A/B test (day 3 of 5) is still running — maintain both variants consistently through 2026-03-07 before drawing conclusions. Prematurely changing frequency would invalidate the test.",
+      "27 of 41 tracked competitors returned 'not_found' errors (65.9% skip rate), including previously high-value targets @baharaykin, @yuumispm, @Ava_starz — these may be suspended or renamed. Investigate and update competitors.json before next pipeline run.",
+      "Top EN performers have 7K-1.2M followers — breaking through requires differentiated visual style since question-based captions are becoming saturated across multiple accounts (leahyunaxo, sessypuuh, Angelwithcakee, yogana_19 all use variations)"
+    ]
+  },
+  "JP": {
+    "posting_schedule": [
+      {"slot": 1, "time": "07:30 JST", "category": "portrait", "priority": "high"},
+      {"slot": 2, "time": "12:00 JST", "category": "fashion", "priority": "high"},
+      {"slot": 3, "time": "19:00 JST", "category": "artistic", "priority": "high"},
+      {"slot": 4, "time": "22:00 JST", "category": "trend_reactive", "priority": "medium"}
+    ],
+    "content_mix": {
+      "portrait": 30,
+      "artistic": 25,
+      "fashion": 20,
+      "trend_reactive": 15,
+      "character": 10
+    },
+    "hashtag_strategy": {
+      "always_use": ["#AI美女", "#AIart"],
+      "rotate": ["#AIイラスト", "#AIグラビア", "#digitalart"],
+      "trending_today": [],
+      "max_per_post": 4
+    },
+    "outbound_strategy": {
+      "daily_likes": 30,
+      "daily_replies": 10,
+      "daily_follows": 5,
+      "target_accounts": ["@PinUpGirl_AI", "@ai_hiyo_", "@NotjustRen00", "@katekarsyn"],
+      "reply_style": "Polite and warm in Japanese — use casual keigo, light emoji (1-2 per reply), and specific compliments about artwork detail, color choice, or character expression. Match the supportive peer-community tone of the JP AI art space."
+    },
+    "ab_test": {
+      "variable": "hashtag_count",
+      "variant_a": "3 hashtags per post (always_use + 1 rotate)",
+      "variant_b": "5 hashtags per post (always_use + 2 rotate + 1 trending)",
+      "duration_days": 5,
+      "start_date": "2026-03-03"
+    },
+    "key_insights": [
+      "JP data is severely limited — only 1 JP-market competitor (PinUpGirl_AI, market=both) was fetched today, with 27 JP competitors unreachable due to API errors. All JP strategy recommendations should be treated as provisional until data coverage improves.",
+      "PinUpGirl_AI (66K followers, 10 posts/day, 0.018% raw ER, 0.04% reply-adjusted) demonstrates that high-volume posting with 60% reply contamination yields near-zero engagement — reinforces the quality-over-quantity approach for JP (keep to 3-4 posts/day max)",
+      "JP hashtag strategy diverges from EN: since JP competitors that were previously tracked (tororo_223, ai_nontan_room) used #AI美女 and #AIイラスト as discovery tags, maintain these for JP even though EN data suggests hashtags are unnecessary — JP X culture relies more on hashtag-based discovery than EN",
+      "The hashtag count A/B test (day 3 of 5) continues — JP Variant A (3 tags) vs Variant B (5 tags) will provide critical data on whether JP audience responds to heavier tagging. Do not change the test mid-run.",
+      "Cross-market opportunity: ai_hiyo_ (387K followers, market=EN) posts in both English and Japanese, achieving 0.4% ER with 10 posts/day. Their Grok image-editing engagement mechanic ('hey @grok tap the post to combine those four images') drove 729 likes — interactive AI tool integration is a differentiator worth testing in JP"
+    ],
+    "risks": [
+      "With 27 JP competitors unreachable, the JP strategy is effectively flying blind — set conservative expectations and focus on building a baseline content library rather than optimizing for engagement patterns we cannot reliably measure",
+      "PinUpGirl_AI is the only JP data point and it has a market='both' classification with Chinese-language content mixed in — it may not be representative of the core JP AI beauty audience. Avoid over-indexing on this single data point.",
+      "Previous JP outbound targets (@tororo_223, @ai_nontan_room, @yunaelegant, @AI_MIKENEKO) are all now unreachable — pivot outbound to reachable accounts that post in Japanese (ai_hiyo_, NotjustRen00 who posts in Chinese but has JP audience overlap)"
+    ]
+  }
+}

@@ -1,0 +1,913 @@
+{
+  "date": "2026-03-05",
+  "generated_at": "2026-03-05T17:49:25.394464+09:00",
+  "competitors_total": 41,
+  "competitors_fetched": 14,
+  "competitors_skipped": 27,
+  "competitors": [
+    {
+      "handle": "JosephinaM3131",
+      "user_id": "1941403756261752832",
+      "display_name": "MIKENEKO_E",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 36742,
+      "following": 17,
+      "tweet_count": 322,
+      "description": "AI_MIKENEKO English Version",
+      "avg_engagement_rate": 0.022783,
+      "posting_frequency": 10.0,
+      "top_posts": [
+        {
+          "tweet_id": "2029222645821259901",
+          "engagement_rate": 0.192641,
+          "like_count": 6693
+        },
+        {
+          "tweet_id": "2029170079993348526",
+          "engagement_rate": 0.035055,
+          "like_count": 1201
+        },
+        {
+          "tweet_id": "2029174828536873381",
+          "engagement_rate": 5.4e-05,
+          "like_count": 1
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "sessypuuh",
+      "user_id": "1859818002767597568",
+      "display_name": "Sessy",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 7676,
+      "following": 8,
+      "tweet_count": 51,
+      "description": "",
+      "avg_engagement_rate": 0.380654,
+      "posting_frequency": 0.7,
+      "top_posts": [
+        {
+          "tweet_id": "2026011945380245928",
+          "engagement_rate": 0.75482,
+          "like_count": 5434
+        },
+        {
+          "tweet_id": "2028232378582270441",
+          "engagement_rate": 0.665581,
+          "like_count": 4605
+        },
+        {
+          "tweet_id": "2024164282087113041",
+          "engagement_rate": 0.581292,
+          "like_count": 3996
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "ai_hiyo_",
+      "user_id": "1048483718858305536",
+      "display_name": "Hiyoko🐣",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 387413,
+      "following": 237,
+      "tweet_count": 32918,
+      "description": "INFP | Surrealist Muse of Aesthetics | You can edit my images using grok in the comments 🤖\n⏬",
+      "avg_engagement_rate": 0.000645,
+      "posting_frequency": 10.0,
+      "top_posts": [
+        {
+          "tweet_id": "2028928656253567320",
+          "engagement_rate": 0.004269,
+          "like_count": 1516
+        },
+        {
+          "tweet_id": "2028576460651585971",
+          "engagement_rate": 0.002016,
+          "like_count": 729
+        },
+        {
+          "tweet_id": "2028576297883214017",
+          "engagement_rate": 0.000101,
+          "like_count": 36
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "NotjustRen00",
+      "user_id": "1058031225086984192",
+      "display_name": "Wren",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 16697,
+      "following": 1008,
+      "tweet_count": 367,
+      "description": "數據不會騙人，但這張臉會。👠 AI",
+      "avg_engagement_rate": 0.002827,
+      "posting_frequency": 10.0,
+      "top_posts": [
+        {
+          "tweet_id": "2029184936952119500",
+          "engagement_rate": 0.018267,
+          "like_count": 259
+        },
+        {
+          "tweet_id": "2029331526765421020",
+          "engagement_rate": 0.006289,
+          "like_count": 88
+        },
+        {
+          "tweet_id": "2029393587214114986",
+          "engagement_rate": 0.001677,
+          "like_count": 25
+        }
+      ],
+      "hashtags_used": {
+        "#恶搞": 1,
+        "#AI变装": 2
+      }
+    },
+    {
+      "handle": "IvoryLane_plus",
+      "user_id": "1637688245252395010",
+      "display_name": "Su-jin 수진",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 253332,
+      "following": 228,
+      "tweet_count": 4994,
+      "description": "I stream, game, read and like to travel 💜",
+      "avg_engagement_rate": 0.009356,
+      "posting_frequency": 1.3,
+      "top_posts": [
+        {
+          "tweet_id": "2027035939999240663",
+          "engagement_rate": 0.016954,
+          "like_count": 3994
+        },
+        {
+          "tweet_id": "2028485478987821187",
+          "engagement_rate": 0.014526,
+          "like_count": 3374
+        },
+        {
+          "tweet_id": "2026673552183931254",
+          "engagement_rate": 0.014132,
+          "like_count": 3293
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "PinUpGirl_AI",
+      "user_id": "1652690832976392193",
+      "display_name": "あいぷぐ/AiPugu✨",
+      "status": "ok",
+      "market": "both",
+      "category": "ai_beauty",
+      "followers": 66105,
+      "following": 114,
+      "tweet_count": 42029,
+      "description": "@fanvue ambassador\nThanks to our supporters💞\nAIで作った画像を投稿しています❣仲良しさんとご支援者様に感謝🥰\n※無断で転載・加工・販売等は禁止です🥺",
+      "avg_engagement_rate": 0.000181,
+      "posting_frequency": 10.0,
+      "top_posts": [
+        {
+          "tweet_id": "2029310123861262713",
+          "engagement_rate": 0.00121,
+          "like_count": 0
+        },
+        {
+          "tweet_id": "2029311964837748886",
+          "engagement_rate": 0.000197,
+          "like_count": 0
+        },
+        {
+          "tweet_id": "2029311408492691795",
+          "engagement_rate": 0.000166,
+          "like_count": 0
+        }
+      ],
+      "hashtags_used": {
+        "#SFW": 1,
+        "#Fictional": 1,
+        "#digitalart": 1
+      }
+    },
+    {
+      "handle": "leahyunaxo",
+      "user_id": "1922665614503469057",
+      "display_name": "Leah Yuna",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 72823,
+      "following": 43,
+      "tweet_count": 245,
+      "description": "IG: realyunaxo 💓 - follow my bestie @voidcina 💕",
+      "avg_engagement_rate": 0.063579,
+      "posting_frequency": 2.9,
+      "top_posts": [
+        {
+          "tweet_id": "2029302462545310078",
+          "engagement_rate": 0.239045,
+          "like_count": 16642
+        },
+        {
+          "tweet_id": "2028941945234415772",
+          "engagement_rate": 0.224805,
+          "like_count": 15537
+        },
+        {
+          "tweet_id": "2028194474187202857",
+          "engagement_rate": 0.132019,
+          "like_count": 8961
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "Angelwithcakee",
+      "user_id": "1916760212519747584",
+      "display_name": "Sienna",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 35198,
+      "following": 14,
+      "tweet_count": 56,
+      "description": "Just a blonde with a playful side 😇 | Join my journey @siennacakee 💕",
+      "avg_engagement_rate": 0.044881,
+      "posting_frequency": 1.2,
+      "top_posts": [
+        {
+          "tweet_id": "2025978924837019674",
+          "engagement_rate": 0.094125,
+          "like_count": 2979
+        },
+        {
+          "tweet_id": "2027923312152637542",
+          "engagement_rate": 0.090971,
+          "like_count": 3008
+        },
+        {
+          "tweet_id": "2025752308160594251",
+          "engagement_rate": 0.078385,
+          "like_count": 2425
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "katekarsyn",
+      "user_id": "1886536168717881344",
+      "display_name": "Kate Karsyn",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 104324,
+      "following": 3,
+      "tweet_count": 34,
+      "description": "i just want to play Fortnite\nmember: @huzzhousee\nmore of me ⬇️",
+      "avg_engagement_rate": 0.018079,
+      "posting_frequency": 9.8,
+      "top_posts": [
+        {
+          "tweet_id": "2029000615712702825",
+          "engagement_rate": 0.064779,
+          "like_count": 5613
+        },
+        {
+          "tweet_id": "2028972511313182793",
+          "engagement_rate": 0.041112,
+          "like_count": 3922
+        },
+        {
+          "tweet_id": "2028972660588437679",
+          "engagement_rate": 0.022344,
+          "like_count": 2097
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "Estherbron1",
+      "user_id": "831028808098598912",
+      "display_name": "esterbby",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 1240434,
+      "following": 25,
+      "tweet_count": 1391,
+      "description": "",
+      "avg_engagement_rate": 0.001992,
+      "posting_frequency": 0.5,
+      "top_posts": [
+        {
+          "tweet_id": "2024196085774721228",
+          "engagement_rate": 0.004007,
+          "like_count": 4640
+        },
+        {
+          "tweet_id": "2020628519295082797",
+          "engagement_rate": 0.003957,
+          "like_count": 4685
+        },
+        {
+          "tweet_id": "2026572134626054541",
+          "engagement_rate": 0.002508,
+          "like_count": 2821
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "lucidevlinxyz",
+      "user_id": "1485421747545407488",
+      "display_name": "𝕝𝕦𝕔𝕚 𝕥𝕙𝕒 𝕕𝕖𝕧𝕚𝕝 ♡",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 44114,
+      "following": 121,
+      "tweet_count": 1558,
+      "description": "filipina 𓆩ꨄ︎𓆪 i just wanna watch anime and play val",
+      "avg_engagement_rate": 0.03396,
+      "posting_frequency": 0.9,
+      "top_posts": [
+        {
+          "tweet_id": "2027800017646587985",
+          "engagement_rate": 0.124042,
+          "like_count": 5112
+        },
+        {
+          "tweet_id": "2028552624086327773",
+          "engagement_rate": 0.046085,
+          "like_count": 1662
+        },
+        {
+          "tweet_id": "2026965511641465207",
+          "engagement_rate": 0.043116,
+          "like_count": 1731
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "HannaJonso",
+      "user_id": "1936094554865754112",
+      "display_name": "hanna jonso",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 18733,
+      "following": 17,
+      "tweet_count": 113,
+      "description": "sent me a message I have something special for you check the link below 👇",
+      "avg_engagement_rate": 0.060615,
+      "posting_frequency": 2.2,
+      "top_posts": [
+        {
+          "tweet_id": "2027161339924226379",
+          "engagement_rate": 0.209256,
+          "like_count": 3173
+        },
+        {
+          "tweet_id": "2027510547046973921",
+          "engagement_rate": 0.169807,
+          "like_count": 2783
+        },
+        {
+          "tweet_id": "2027885177284730962",
+          "engagement_rate": 0.156355,
+          "like_count": 2737
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "yuumi005",
+      "user_id": "1843195312845778944",
+      "display_name": "yuumi 🌸 優美",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 81770,
+      "following": 200,
+      "tweet_count": 101,
+      "description": "ゆうみです(20)☺️ https://t.co/vs6Mho3GTk",
+      "avg_engagement_rate": 0.043801,
+      "posting_frequency": 1.0,
+      "top_posts": [
+        {
+          "tweet_id": "2026042429703352372",
+          "engagement_rate": 0.162615,
+          "like_count": 12914
+        },
+        {
+          "tweet_id": "2026422506114969603",
+          "engagement_rate": 0.071346,
+          "like_count": 5612
+        },
+        {
+          "tweet_id": "2028678861114740855",
+          "engagement_rate": 0.038364,
+          "like_count": 3051
+        }
+      ],
+      "hashtags_used": {}
+    },
+    {
+      "handle": "yogana_19",
+      "user_id": "1269692949387935750",
+      "display_name": "Ana Sakura 🌸",
+      "status": "ok",
+      "market": "EN",
+      "category": "ai_beauty",
+      "followers": 26464,
+      "following": 710,
+      "tweet_count": 2437,
+      "description": "I'm just an 19 y/o girl from Japan 💖",
+      "avg_engagement_rate": 0.057727,
+      "posting_frequency": 5.0,
+      "top_posts": [
+        {
+          "tweet_id": "2029121671941304668",
+          "engagement_rate": 0.155721,
+          "like_count": 3615
+        },
+        {
+          "tweet_id": "2028882419906924584",
+          "engagement_rate": 0.131499,
+          "like_count": 3015
+        },
+        {
+          "tweet_id": "2029000371939754246",
+          "engagement_rate": 0.110225,
+          "like_count": 2592
+        }
+      ],
+      "hashtags_used": {}
+    }
+  ],
+  "skipped_competitors": [
+    {
+      "handle": "baharaykin",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "LeahSunkissed",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "marylivbrown",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "iiCoraMaay",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "KissofStarova",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "yuumispm",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "Ava_starz",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "IsabellaCruz_47",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "Lux_aeterna_",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "imrubyreid",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "itsluna_baby",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "tanarainw",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "AI_MIKENEKO",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "BoobistR",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "yunaelegant",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "ai_nontan_room",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "ai_hyk",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "tororo_223",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "hakoirikumatan",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "honoka_shiri",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "2nd_karen_AI",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "AI_Girls_Studio",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "AIart_yama94",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "seisei_ai_1st",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "Shizuku_AItuber",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "ganbarukaisyain",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    },
+    {
+      "handle": "nene__chandayo",
+      "status": "not_found",
+      "reason": "Account not found or suspended"
+    }
+  ],
+  "hashtag_frequency": {
+    "#AI变装": 2,
+    "#恶搞": 1,
+    "#SFW": 1,
+    "#Fictional": 1,
+    "#digitalart": 1
+  },
+  "hashtag_by_market": {
+    "EN": {
+      "#AI变装": 2,
+      "#恶搞": 1,
+      "#SFW": 1,
+      "#Fictional": 1,
+      "#digitalart": 1
+    },
+    "JP": {
+      "#SFW": 1,
+      "#Fictional": 1,
+      "#digitalart": 1
+    }
+  },
+  "market_comparison": {
+    "EN": {
+      "competitor_count": 14,
+      "avg_followers": 170844,
+      "avg_engagement_rate": 0.052934,
+      "avg_posting_frequency": 4.7,
+      "top_hashtags": [
+        "#AI变装",
+        "#恶搞",
+        "#SFW",
+        "#Fictional",
+        "#digitalart"
+      ]
+    },
+    "JP": {
+      "competitor_count": 1,
+      "avg_followers": 66105,
+      "avg_engagement_rate": 0.000181,
+      "avg_posting_frequency": 10.0,
+      "top_hashtags": [
+        "#SFW",
+        "#Fictional",
+        "#digitalart"
+      ]
+    }
+  },
+  "trending_topics": [
+    {
+      "keyword": "#AIbeauty",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#AIart",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#AIgirl",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#AImodel",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#midjourney",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#stablediffusion",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#aiイラスト",
+      "sample_tweets": []
+    },
+    {
+      "keyword": "#AI美女",
+      "sample_tweets": []
+    }
+  ],
+  "trending_posts": [],
+  "new_accounts_discovered": [],
+  "_pre_analysis": {
+    "reply_contamination": {
+      "overall_rate": 0.186,
+      "total_replies": 26,
+      "total_sampled": 140,
+      "per_competitor": [
+        {
+          "handle": "JosephinaM3131",
+          "market": "EN",
+          "reply_rate": 0.8,
+          "reply_count": 8,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.113848,
+          "impression_based_rate": 0.006569
+        },
+        {
+          "handle": "sessypuuh",
+          "market": "EN",
+          "reply_rate": 0.0,
+          "reply_count": 0,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.380654,
+          "impression_based_rate": 0.094283
+        },
+        {
+          "handle": "ai_hiyo_",
+          "market": "EN",
+          "reply_rate": 0.7,
+          "reply_count": 7,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.002129,
+          "impression_based_rate": 0.00496
+        },
+        {
+          "handle": "NotjustRen00",
+          "market": "EN",
+          "reply_rate": 0.3,
+          "reply_count": 3,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.004004,
+          "impression_based_rate": 0.014251
+        },
+        {
+          "handle": "IvoryLane_plus",
+          "market": "EN",
+          "reply_rate": 0.0,
+          "reply_count": 0,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.009356,
+          "impression_based_rate": 11.110224
+        },
+        {
+          "handle": "PinUpGirl_AI",
+          "market": "both",
+          "reply_rate": 0.6,
+          "reply_count": 6,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.000431,
+          "impression_based_rate": 0.012514
+        },
+        {
+          "handle": "leahyunaxo",
+          "market": "EN",
+          "reply_rate": 0.0,
+          "reply_count": 0,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.063579,
+          "impression_based_rate": 1.271728
+        },
+        {
+          "handle": "Angelwithcakee",
+          "market": "EN",
+          "reply_rate": 0.0,
+          "reply_count": 0,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.04488,
+          "impression_based_rate": 0.055889
+        },
+        {
+          "handle": "katekarsyn",
+          "market": "EN",
+          "reply_rate": 0.0,
+          "reply_count": 0,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.018079,
+          "impression_based_rate": 0.06257
+        },
+        {
+          "handle": "Estherbron1",
+          "market": "EN",
+          "reply_rate": 0.0,
+          "reply_count": 0,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.001992,
+          "impression_based_rate": 0.03514
+        },
+        {
+          "handle": "lucidevlinxyz",
+          "market": "EN",
+          "reply_rate": 0.0,
+          "reply_count": 0,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.03396,
+          "impression_based_rate": 0.025386
+        },
+        {
+          "handle": "HannaJonso",
+          "market": "EN",
+          "reply_rate": 0.2,
+          "reply_count": 2,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.075715,
+          "impression_based_rate": 0.04958
+        },
+        {
+          "handle": "yuumi005",
+          "market": "EN",
+          "reply_rate": 0.0,
+          "reply_count": 0,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.043801,
+          "impression_based_rate": 0.096765
+        },
+        {
+          "handle": "yogana_19",
+          "market": "EN",
+          "reply_rate": 0.0,
+          "reply_count": 0,
+          "total_sampled": 10,
+          "engagement_rate_excl_replies": 0.057727,
+          "impression_based_rate": 0.075296
+        }
+      ]
+    },
+    "impression_engagement": {
+      "per_competitor": [
+        {
+          "handle": "JosephinaM3131",
+          "rate": 0.006569
+        },
+        {
+          "handle": "sessypuuh",
+          "rate": 0.094283
+        },
+        {
+          "handle": "ai_hiyo_",
+          "rate": 0.00496
+        },
+        {
+          "handle": "NotjustRen00",
+          "rate": 0.014251
+        },
+        {
+          "handle": "IvoryLane_plus",
+          "rate": 11.110224
+        },
+        {
+          "handle": "PinUpGirl_AI",
+          "rate": 0.012514
+        },
+        {
+          "handle": "leahyunaxo",
+          "rate": 1.271728
+        },
+        {
+          "handle": "Angelwithcakee",
+          "rate": 0.055889
+        },
+        {
+          "handle": "katekarsyn",
+          "rate": 0.06257
+        },
+        {
+          "handle": "Estherbron1",
+          "rate": 0.03514
+        },
+        {
+          "handle": "lucidevlinxyz",
+          "rate": 0.025386
+        },
+        {
+          "handle": "HannaJonso",
+          "rate": 0.04958
+        },
+        {
+          "handle": "yuumi005",
+          "rate": 0.096765
+        },
+        {
+          "handle": "yogana_19",
+          "rate": 0.075296
+        }
+      ]
+    },
+    "trending": {
+      "threshold": 6782.8,
+      "method": "mean + 2*stddev of all sampled tweet likes",
+      "posts": [
+        {
+          "tweet_id": "2029302462545310078",
+          "handle": "",
+          "likes": 16642,
+          "text_preview": "wifey material? https://t.co/vZjBtRDcHR"
+        },
+        {
+          "tweet_id": "2028941945234415772",
+          "handle": "",
+          "likes": 15537,
+          "text_preview": "be honest.. am I attractive? https://t.co/OgZpH6S3V3"
+        },
+        {
+          "tweet_id": "2028194474187202857",
+          "handle": "",
+          "likes": 8961,
+          "text_preview": "describe me in 1 word? https://t.co/FwyllSkBBp"
+        },
+        {
+          "tweet_id": "2026042429703352372",
+          "handle": "",
+          "likes": 12914,
+          "text_preview": "https://t.co/37d961jLtk"
+        }
+      ]
+    },
+    "hashtag_usage": {
+      "competitors_with_zero": 12,
+      "competitors_with_zero_pct": 85.7
+    }
+  }
+}
