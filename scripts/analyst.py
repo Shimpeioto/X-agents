@@ -370,6 +370,8 @@ def _safe_int(val):
 def main():
     parser = argparse.ArgumentParser(description="Analyst agent — metrics collection and import")
     parser.add_argument("--dry-run", action="store_true", help="Log actions without API calls or DB writes")
+    parser.add_argument("--date", default=None,
+                        help="Override date for content plan lookup (YYYYMMDD). Account metrics always use today.")
 
     subparsers = parser.add_subparsers(dest="command", help="Subcommand")
 
@@ -394,6 +396,11 @@ def main():
         sys.exit(2)
 
     analyst = Analyst(dry_run=args.dry_run)
+
+    # Override content plan date if specified (post metrics use this date's plan)
+    if args.date:
+        analyst.date = args.date
+        logger.info(f"Using content plan date override: {args.date}")
 
     if args.dry_run:
         logger.info("[DRY-RUN MODE] No API calls or DB writes")

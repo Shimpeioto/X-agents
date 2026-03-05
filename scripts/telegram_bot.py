@@ -1,31 +1,42 @@
-"""Telegram bot daemon for human-in-the-loop command processing.
+"""Telegram bot daemon with conversational Marc + Agent Teams execution.
+
+Architecture:
+    Conversational Layer (claude -p via Max plan) — handles message intake + clarification
+    Execution Layer (Claude Code Agent Teams) — spawns Marc as Team Leader with teammates
 
 Usage:
     python3 scripts/telegram_bot.py
 
 Commands:
     /approve [account] [slots]  — Approve posts (all, by account, or by slot)
+    /publish [account]          — Publish approved posts
+    /pipeline                   — Run today's daily content pipeline
+    /task <description>         — Send a task to Marc
     /status                     — Pipeline status summary
     /details                    — All posts with status emojis
     /metrics [account]          — View metrics summary
     /metrics post_id key=value  — Input manual metrics
     /confirm                    — Confirm pending screenshot metrics
     /cancel                     — Cancel pending screenshot metrics
-    /task <description>         — Queue a task for Marc
+    /running                    — Check active tasks
     /pause                      — Pause pipeline
     /resume                     — Resume pipeline
     /help                       — List commands
+
+    Or just send a free-form message — Marc will respond conversationally.
 
 Start with: python3 scripts/telegram_bot.py
 Stop with: Ctrl+C or kill the process
 """
 
+import asyncio
 import json
 import logging
 import os
 import signal
 import subprocess
 import sys
+import threading
 from datetime import datetime
 
 from telegram import Update
@@ -34,11 +45,20 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(PROJECT, "scripts"))
 
-logger = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger("telegram_bot")
 
 CONFIG_PATH = "config/accounts.json"
 DATA_DIR = "data"
 PAUSE_FLAG = os.path.join(DATA_DIR, ".paused")
+
+# ---------------------------------------------------------------------------
+# Config
+# ---------------------------------------------------------------------------
 
 
 def load_config() -> tuple[str, str]:
@@ -48,6 +68,11 @@ def load_config() -> tuple[str, str]:
 
 
 BOT_TOKEN, AUTHORIZED_CHAT_ID = load_config()
+
+
+# ---------------------------------------------------------------------------
+# Utilities
+# ---------------------------------------------------------------------------
 
 
 def today_str() -> str:
@@ -89,6 +114,246 @@ def load_content_plan(account: str) -> tuple[dict | None, str]:
     return load_json(path), path
 
 
+def _generate_task_id() -> str:
+    """Generate a unique task ID: YYYYMMDD_NNN."""
+    from zoneinfo import ZoneInfo
+    date_str = datetime.now(ZoneInfo("Asia/Tokyo")).strftime("%Y%m%d")
+    tasks_dir = os.path.join(DATA_DIR, "tasks")
+    os.makedirs(tasks_dir, exist_ok=True)
+
+    existing = [f for f in os.listdir(tasks_dir) if f.startswith(f"task_{date_str}_")]
+    seq = 1
+    for f in existing:
+        try:
+            n = int(f.replace(f"task_{date_str}_", "").replace(".json", "").replace(".md", ""))
+            seq = max(seq, n + 1)
+        except ValueError:
+            pass
+    return f"{date_str}_{seq:03d}"
+
+
+# ---------------------------------------------------------------------------
+# Conversational Marc (claude -p, uses Max plan)
+# ---------------------------------------------------------------------------
+
+_marc_system_prompt: str = ""
+_conversation_history: list[dict] = []  # [{"role": "user"|"assistant", "content": str}]
+
+
+def _load_marc_system_prompt() -> str:
+    path = os.path.join(PROJECT, "agents", "marc_conversation.md")
+    with open(path) as f:
+        return f.read()
+
+
+def _reset_conversation():
+    """Reset conversation history for a fresh session."""
+    global _conversation_history
+    _conversation_history = []
+
+
+def _build_conversation_prompt(user_message: str) -> str:
+    """Build a full prompt for claude -p including system prompt + history."""
+    global _marc_system_prompt
+    if not _marc_system_prompt:
+        _marc_system_prompt = _load_marc_system_prompt()
+
+    # Format conversation history
+    history_lines = []
+    for msg in _conversation_history:
+        role = "Operator" if msg["role"] == "user" else "Marc"
+        history_lines.append(f"{role}: {msg['content']}")
+
+    history_text = "\n".join(history_lines) if history_lines else "(no prior messages)"
+
+    return f"""{_marc_system_prompt}
+
+## Conversation History
+{history_text}
+
+Operator: {user_message}
+
+## Response Instructions
+Respond to the operator's latest message as Marc. Be concise.
+
+If you decide to start executing a task, include a JSON block at the END of your response
+on its own line, formatted exactly like this (no markdown fences):
+
+START_TASK:{{"task_description": "what to do", "task_type": "research|pipeline|publishing|report|custom", "agents_needed": ["scout", "strategist"], "notes": "any context"}}
+
+If you're just chatting (no task to execute), respond normally without any START_TASK line.
+Today's date: {today_iso()}"""
+
+
+async def chat_with_marc(user_message: str) -> tuple[str, dict | None]:
+    """Send message to conversational Marc via claude -p.
+
+    Returns (response_text, tool_call_or_none).
+    """
+    global _conversation_history
+
+    # Keep history manageable (last 20 messages)
+    if len(_conversation_history) > 20:
+        _conversation_history = _conversation_history[-20:]
+
+    prompt = _build_conversation_prompt(user_message)
+
+    # Add to history before calling (so next call sees it)
+    _conversation_history.append({"role": "user", "content": user_message})
+
+    env = os.environ.copy()
+    env.pop("CLAUDECODE", None)
+
+    try:
+        proc = await asyncio.get_event_loop().run_in_executor(
+            None,
+            lambda: subprocess.run(
+                ["claude", "-p", prompt],
+                capture_output=True, text=True, timeout=120, cwd=PROJECT, env=env,
+            ),
+        )
+    except subprocess.TimeoutExpired:
+        _conversation_history.append({"role": "assistant", "content": "(timed out)"})
+        return "Sorry, I took too long to respond. Try again.", None
+
+    if proc.returncode != 0:
+        logger.error(f"claude -p failed: {proc.stderr[:300]}")
+        _conversation_history.append({"role": "assistant", "content": "(error)"})
+        return f"Marc encountered an error. stderr: {proc.stderr[:200]}", None
+
+    output = proc.stdout.strip()
+
+    # Parse for START_TASK marker
+    tool_call = None
+    response_text = output
+
+    if "START_TASK:" in output:
+        lines = output.split("\n")
+        text_lines = []
+        for line in lines:
+            if line.strip().startswith("START_TASK:"):
+                json_str = line.strip()[len("START_TASK:"):]
+                try:
+                    task_json = json.loads(json_str)
+                    tool_call = {
+                        "task_description": task_json["task_description"],
+                        "task_type": task_json["task_type"],
+                        "agents_needed": task_json.get("agents_needed", []),
+                        "notes": task_json.get("notes", ""),
+                    }
+                except (json.JSONDecodeError, KeyError) as e:
+                    logger.warning(f"Failed to parse START_TASK JSON: {e}")
+                    text_lines.append(line)
+            else:
+                text_lines.append(line)
+        response_text = "\n".join(text_lines).strip()
+
+    _conversation_history.append({"role": "assistant", "content": response_text})
+
+    return response_text, tool_call
+
+
+# ---------------------------------------------------------------------------
+# Execution Layer (Claude Code Agent Teams)
+# ---------------------------------------------------------------------------
+
+_active_tasks: dict[str, subprocess.Popen] = {}
+_active_tasks_lock = threading.Lock()
+
+
+async def _execute_task(update: Update, task_id: str, tool_call: dict):
+    """Spawn Marc as Agent Teams leader for execution."""
+    task_desc = tool_call["task_description"]
+    task_type = tool_call["task_type"]
+    agents = tool_call.get("agents_needed", [])
+    notes = tool_call.get("notes", "")
+
+    # Write task file (audit trail)
+    task_data = {
+        "task_id": task_id,
+        "description": task_desc,
+        "task_type": task_type,
+        "agents_planned": agents,
+        "notes": notes,
+        "created_at": datetime.now().astimezone().isoformat(),
+        "status": "running",
+    }
+    tasks_dir = os.path.join(DATA_DIR, "tasks")
+    os.makedirs(tasks_dir, exist_ok=True)
+    task_path = os.path.join(tasks_dir, f"task_{task_id}.json")
+    save_json(task_path, task_data)
+
+    # Determine which playbook to reference
+    playbook_ref = {
+        "pipeline": "Read agents/marc_pipeline.md for the Pipeline Playbook.",
+        "publishing": "Read agents/marc_publishing.md for the Publishing Playbook.",
+    }.get(task_type, "")
+
+    prompt = f"""You are Marc, the COO and Team Leader.
+Read agents/marc.md for your full instructions.
+{playbook_ref}
+
+Task from the operator (confirmed via Telegram conversation):
+{task_desc}
+
+Additional context from conversation: {notes}
+Agents the operator discussed using: {', '.join(agents)}
+
+Today's date: {today_iso()}
+Task ID: {task_id}
+
+Execute this task:
+1. Spawn the necessary teammates using the Agent tool
+2. Coordinate their work via the shared task list
+3. Review quality and iterate if needed
+4. Report results to the operator via: python3 scripts/telegram_send.py "message"
+5. For file deliverables: python3 scripts/telegram_send.py --document path/to/file "caption"
+6. If any part cannot be done, report the limitation via Telegram
+7. When finished, clean up the team."""
+
+    env = os.environ.copy()
+    env["CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS"] = "1"
+    env.pop("CLAUDECODE", None)
+
+    proc = subprocess.Popen(
+        ["claude", "-p", prompt, "--dangerously-skip-permissions"],
+        env=env, cwd=PROJECT,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    )
+
+    with _active_tasks_lock:
+        _active_tasks[task_id] = proc
+
+    logger.info(f"Task {task_id} started (PID: {proc.pid})")
+    await update.message.reply_text(f"Task {task_id} started. I'll report results via Telegram when ready.")
+
+    # Monitor process in background thread
+    def _monitor():
+        proc.wait()
+        with _active_tasks_lock:
+            _active_tasks.pop(task_id, None)
+
+        # Update task file
+        try:
+            task_data_updated = load_json(task_path) or task_data
+            task_data_updated["status"] = "completed" if proc.returncode == 0 else "failed"
+            task_data_updated["completed_at"] = datetime.now().astimezone().isoformat()
+            task_data_updated["exit_code"] = proc.returncode
+            save_json(task_path, task_data_updated)
+        except Exception as e:
+            logger.error(f"Failed to update task file: {e}")
+
+        logger.info(f"Task {task_id} finished (exit code: {proc.returncode})")
+
+    thread = threading.Thread(target=_monitor, daemon=True)
+    thread.start()
+
+
+# ---------------------------------------------------------------------------
+# Command Handlers
+# ---------------------------------------------------------------------------
+
+
 async def cmd_approve(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not is_authorized(update):
         return
@@ -96,15 +361,12 @@ async def cmd_approve(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     args = context.args or []
 
     if len(args) == 0:
-        # Approve all posts for both accounts
         accounts = ["EN", "JP"]
         slots = None
     elif len(args) == 1:
-        # /approve EN or /approve JP
         accounts = [args[0].upper()]
         slots = None
     else:
-        # /approve EN 1,3,5
         accounts = [args[0].upper()]
         try:
             slots = [int(s.strip()) for s in args[1].split(",")]
@@ -170,7 +432,7 @@ async def cmd_details(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     if not is_authorized(update):
         return
 
-    lines = [f"Content Plan — {today_iso()}\n"]
+    lines = [f"Content Plan \u2014 {today_iso()}\n"]
     for account in ["EN", "JP"]:
         plan, _ = load_content_plan(account)
         if plan is None:
@@ -214,96 +476,125 @@ async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         return
     msg = (
         "Available commands:\n"
-        "/approve — Approve all posts\n"
-        "/approve EN — Approve all EN posts\n"
-        "/approve EN 1,3 — Approve specific EN slots\n"
-        "/publish — Publish approved posts (both accounts)\n"
-        "/publish EN — Publish approved EN posts only\n"
-        "/status — Pipeline status summary\n"
-        "/details — All posts with statuses\n"
-        "/metrics — View metrics summary\n"
-        "/metrics EN — View EN metrics\n"
-        "/metrics post_id key=value — Input manual metrics\n"
-        "Send photo — Parse metrics from screenshot\n"
-        "/confirm — Save parsed screenshot metrics\n"
-        "/cancel — Discard parsed screenshot metrics\n"
-        "/task <description> — Queue a task for Marc\n"
-        "/pause — Pause pipeline\n"
-        "/resume — Resume pipeline\n"
-        "/help — This message\n"
-        "\nFuture commands (not yet implemented):\n"
-        "/edit, /competitors"
+        "/approve \u2014 Approve all posts\n"
+        "/approve EN \u2014 Approve all EN posts\n"
+        "/approve EN 1,3 \u2014 Approve specific EN slots\n"
+        "/publish \u2014 Publish approved posts (both accounts)\n"
+        "/publish EN \u2014 Publish approved EN posts only\n"
+        "/pipeline \u2014 Run today's daily content pipeline\n"
+        "/task <desc> \u2014 Send a task to Marc\n"
+        "/status \u2014 Pipeline status summary\n"
+        "/details \u2014 All posts with statuses\n"
+        "/metrics \u2014 View metrics summary\n"
+        "/metrics EN \u2014 View EN metrics\n"
+        "/metrics post_id key=value \u2014 Input manual metrics\n"
+        "Send photo \u2014 Parse metrics from screenshot\n"
+        "/confirm \u2014 Save parsed screenshot metrics\n"
+        "/cancel \u2014 Discard parsed screenshot metrics\n"
+        "/running \u2014 Check active tasks\n"
+        "/pause \u2014 Pause pipeline\n"
+        "/resume \u2014 Resume pipeline\n"
+        "/help \u2014 This message\n"
+        "\nOr just send a message \u2014 Marc will respond conversationally."
     )
     await update.message.reply_text(msg)
 
 
 async def cmd_publish(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Run publisher.py post for specified account(s)."""
+    """Route /publish through conversational Marc → execution."""
     if not is_authorized(update):
         return
 
     args = context.args or []
-    accounts = [args[0].upper()] if args else ["EN", "JP"]
+    account_str = args[0].upper() if args else "both EN and JP"
 
-    for account in accounts:
-        if account not in ("EN", "JP"):
-            await update.message.reply_text(f"Invalid account: {account}. Use EN or JP.")
+    response_text, tool_call = await chat_with_marc(
+        f"[PUBLISH] Publish approved posts for {account_str} account(s). "
+        f"Today's date: {today_iso()}."
+    )
+
+    if response_text:
+        await update.message.reply_text(response_text)
+
+    if tool_call:
+        task_id = _generate_task_id()
+        await _execute_task(update, task_id, tool_call)
+
+
+async def cmd_pipeline(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Run today's daily content pipeline via conversational Marc → execution."""
+    if not is_authorized(update):
+        return
+
+    response_text, tool_call = await chat_with_marc(
+        f"[PIPELINE] Run today's daily content pipeline. Today's date: {today_iso()}."
+    )
+
+    if response_text:
+        await update.message.reply_text(response_text)
+
+    if tool_call:
+        task_id = _generate_task_id()
+        await _execute_task(update, task_id, tool_call)
+
+
+async def cmd_task(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Send a task to Marc via conversational layer."""
+    if not is_authorized(update):
+        return
+
+    args = context.args or []
+    if not args:
+        await update.message.reply_text(
+            "Usage: /task <description>\n"
+            "Example: /task Analyze top 5 competitors and recommend content strategy"
+        )
+        return
+
+    description = " ".join(args)
+
+    response_text, tool_call = await chat_with_marc(
+        f"[TASK REQUEST] {description}"
+    )
+
+    if response_text:
+        await update.message.reply_text(response_text)
+
+    if tool_call:
+        task_id = _generate_task_id()
+        await _execute_task(update, task_id, tool_call)
+
+
+async def cmd_running(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Show currently running tasks."""
+    if not is_authorized(update):
+        return
+
+    with _active_tasks_lock:
+        if not _active_tasks:
+            await update.message.reply_text("No active tasks.")
             return
 
-    results = []
-    for account in accounts:
-        # Check if there are approved posts first
-        plan, _ = load_content_plan(account)
-        if plan is None:
-            results.append(f"{account}: No content plan found for today")
-            continue
-        approved = sum(1 for p in plan.get("posts", []) if p.get("status") == "approved")
-        if approved == 0:
-            results.append(f"{account}: No approved posts to publish")
-            continue
+        lines = ["Active tasks:"]
+        for task_id, proc in _active_tasks.items():
+            status = "running" if proc.poll() is None else f"exited ({proc.returncode})"
+            lines.append(f"  {task_id}: PID {proc.pid} \u2014 {status}")
 
-        await update.message.reply_text(f"Publishing {approved} approved post(s) for {account}...")
-
-        try:
-            result = subprocess.run(
-                ["python3", os.path.join(PROJECT, "scripts", "publisher.py"), "post", "--account", account],
-                capture_output=True, text=True, timeout=120, cwd=PROJECT,
-            )
-            if result.returncode == 0:
-                # Re-read plan to get results
-                plan, _ = load_content_plan(account)
-                posted = sum(1 for p in plan.get("posts", []) if p.get("status") == "posted") if plan else 0
-                failed = sum(1 for p in plan.get("posts", []) if p.get("status") == "failed") if plan else 0
-                results.append(f"{account}: {posted} posted, {failed} failed")
-            else:
-                results.append(f"{account}: Publisher error — {result.stderr[:200]}")
-        except subprocess.TimeoutExpired:
-            results.append(f"{account}: Publisher timed out (120s)")
-        except Exception as e:
-            results.append(f"{account}: Error — {str(e)[:200]}")
-
-    await update.message.reply_text("\n".join(results))
+    await update.message.reply_text("\n".join(lines))
 
 
 async def cmd_metrics(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """View metrics or input manual metrics.
-
-    /metrics           — View summary for both accounts
-    /metrics EN        — View summary for EN
-    /metrics EN_20260304_01 impressions=5000 — Input manual metrics
-    """
+    """View metrics or input manual metrics."""
     if not is_authorized(update):
         return
 
     args = context.args or []
 
     if len(args) == 0:
-        # View mode: show both accounts
         await _show_metrics_summary(update)
         return
 
     if len(args) == 1 and args[0].upper() in ("EN", "JP"):
-        # View mode: specific account
         await _show_metrics_summary(update, account=args[0].upper())
         return
 
@@ -329,7 +620,6 @@ async def cmd_metrics(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         import db_manager
         db_manager.init()
 
-        # Derive account from post_id
         account = post_id.split("_")[0] if "_" in post_id else "EN"
         measured_at = datetime.now().astimezone().isoformat()
 
@@ -364,7 +654,7 @@ async def _show_metrics_summary(update: Update, account: str | None = None) -> N
 
         date = today_iso()
         accounts = [account] if account else ["EN", "JP"]
-        lines = [f"Metrics Summary — {date}\n"]
+        lines = [f"Metrics Summary \u2014 {date}\n"]
 
         for acct in accounts:
             summary = db_manager.get_daily_summary(acct, date)
@@ -372,7 +662,6 @@ async def _show_metrics_summary(update: Update, account: str | None = None) -> N
             posts = summary.get("post_metrics", [])
             totals = summary.get("totals", {})
 
-            flag = {"EN": "US", "JP": "JP"}.get(acct, "")
             lines.append(f"\n{acct}:")
 
             if am:
@@ -397,59 +686,44 @@ async def _show_metrics_summary(update: Update, account: str | None = None) -> N
 
 
 async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Handle screenshot photo — parse metrics via Claude Vision API."""
+    """Handle screenshot photo — parse metrics via claude -p with image."""
     if not is_authorized(update):
         return
 
     try:
-        import anthropic
-
-        photo = update.message.photo[-1]  # Highest resolution
+        photo = update.message.photo[-1]
         file = await photo.get_file()
 
-        # Download to temp location
         os.makedirs(os.path.join(PROJECT, "data", "temp"), exist_ok=True)
         temp_path = os.path.join(PROJECT, "data", "temp", f"screenshot_{today_str()}.jpg")
         await file.download_to_drive(temp_path)
 
         await update.message.reply_text("Analyzing screenshot...")
 
-        # Read image and send to Claude Vision
-        import base64
-        with open(temp_path, "rb") as f:
-            image_data = base64.standard_b64encode(f.read()).decode("utf-8")
-
-        client = anthropic.Anthropic()
-        response = client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=1024,
-            messages=[{
-                "role": "user",
-                "content": [
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "base64",
-                            "media_type": "image/jpeg",
-                            "data": image_data,
-                        },
-                    },
-                    {
-                        "type": "text",
-                        "text": (
-                            "This is a screenshot of X (Twitter) Analytics or post metrics. "
-                            "Extract the following metrics as JSON: "
-                            '{"post_id": "if visible", "impressions": number, "likes": number, '
-                            '"retweets": number, "replies": number, "quotes": number, "bookmarks": number}. '
-                            "Return ONLY valid JSON, no commentary. If a metric is not visible, omit it."
-                        ),
-                    },
-                ],
-            }],
+        prompt = (
+            "This is a screenshot of X (Twitter) Analytics or post metrics. "
+            "Extract the following metrics as JSON: "
+            '{"post_id": "if visible", "impressions": number, "likes": number, '
+            '"retweets": number, "replies": number, "quotes": number, "bookmarks": number}. '
+            "Return ONLY valid JSON, no commentary. If a metric is not visible, omit it."
         )
 
-        # Parse Claude's response
-        text = response.content[0].text.strip()
+        env = os.environ.copy()
+        env.pop("CLAUDECODE", None)
+
+        proc = await asyncio.get_event_loop().run_in_executor(
+            None,
+            lambda: subprocess.run(
+                ["claude", "-p", prompt, "-a", temp_path],
+                capture_output=True, text=True, timeout=120, cwd=PROJECT, env=env,
+            ),
+        )
+
+        if proc.returncode != 0:
+            await update.message.reply_text(f"Error analyzing screenshot: {proc.stderr[:200]}")
+            return
+
+        text = proc.stdout.strip()
         if text.startswith("```"):
             lines = text.split("\n")
             lines = [l for l in lines if not l.strip().startswith("```")]
@@ -457,11 +731,9 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
         parsed = json.loads(text)
 
-        # Store in user_data for confirmation
         context.user_data["pending_screenshot_metrics"] = parsed
         context.user_data["pending_screenshot_path"] = temp_path
 
-        # Format for display
         display_lines = ["Parsed metrics from screenshot:"]
         for k, v in parsed.items():
             if v is not None:
@@ -470,10 +742,6 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
         await update.message.reply_text("\n".join(display_lines))
 
-    except ImportError:
-        await update.message.reply_text(
-            "anthropic package not installed. Install with: pip install anthropic"
-        )
     except json.JSONDecodeError:
         await update.message.reply_text(
             "Could not parse metrics from screenshot. Please try a clearer image or use /metrics command."
@@ -517,7 +785,6 @@ async def cmd_confirm(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             source="manual_screenshot",
         )
 
-        # Clear pending
         del context.user_data["pending_screenshot_metrics"]
         context.user_data.pop("pending_screenshot_path", None)
 
@@ -540,64 +807,35 @@ async def cmd_cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         await update.message.reply_text("Nothing to cancel.")
 
 
-def _generate_task_id() -> str:
-    """Generate a unique task ID: YYYYMMDD_NNN."""
-    from zoneinfo import ZoneInfo
-    date_str = datetime.now(ZoneInfo("Asia/Tokyo")).strftime("%Y%m%d")
-    tasks_dir = os.path.join(DATA_DIR, "tasks")
-    os.makedirs(tasks_dir, exist_ok=True)
-
-    # Find next sequence number for today
-    existing = [f for f in os.listdir(tasks_dir) if f.startswith(f"task_{date_str}_")]
-    seq = 1
-    for f in existing:
-        try:
-            n = int(f.replace(f"task_{date_str}_", "").replace(".json", ""))
-            seq = max(seq, n + 1)
-        except ValueError:
-            pass
-    return f"{date_str}_{seq:03d}"
+# ---------------------------------------------------------------------------
+# Default message handler (conversational Marc)
+# ---------------------------------------------------------------------------
 
 
-async def cmd_task(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Queue a task for Marc to execute.
-
-    /task <description> — Create a task for Marc to handle autonomously.
-    """
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Handle free-form text messages — route to conversational Marc."""
     if not is_authorized(update):
         return
 
-    args = context.args or []
-    if not args:
-        await update.message.reply_text(
-            "Usage: /task <description>\n"
-            "Example: /task Analyze top 5 competitors and recommend content strategy for next week"
-        )
+    text = update.message.text
+    if not text:
         return
 
-    description = " ".join(args)
-    task_id = _generate_task_id()
+    try:
+        response_text, tool_call = await chat_with_marc(text)
 
-    task_data = {
-        "task_id": task_id,
-        "status": "pending",
-        "description": description,
-        "created_at": datetime.now().astimezone().isoformat(),
-        "started_at": None,
-        "completed_at": None,
-        "result": None,
-    }
+        if response_text:
+            # Telegram has a 4096 char limit per message
+            for i in range(0, len(response_text), 4000):
+                await update.message.reply_text(response_text[i:i + 4000])
 
-    tasks_dir = os.path.join(DATA_DIR, "tasks")
-    os.makedirs(tasks_dir, exist_ok=True)
-    task_path = os.path.join(tasks_dir, f"task_{task_id}.json")
-    save_json(task_path, task_data)
+        if tool_call:
+            task_id = _generate_task_id()
+            await _execute_task(update, task_id, tool_call)
 
-    await update.message.reply_text(
-        f"Task queued: {task_id}\n"
-        f"Description: {description}\n"
-        f"To execute: ./scripts/run_task.sh {task_id}"
-    )
+    except Exception as e:
+        logger.error(f"Message handling error: {e}")
+        await update.message.reply_text(f"Error processing message: {e}")
 
 
 async def cmd_stub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -607,13 +845,20 @@ async def cmd_stub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f"{cmd} is coming in a future phase.")
 
 
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+
 def main():
-    print(f"Starting Telegram bot (chat_id: {AUTHORIZED_CHAT_ID})...")
+    print(f"Starting Telegram bot with Conversational Marc (chat_id: {AUTHORIZED_CHAT_ID})...")
 
     app = Application.builder().token(BOT_TOKEN).build()
 
+    # Command handlers (registered before the default text handler)
     app.add_handler(CommandHandler("approve", cmd_approve))
     app.add_handler(CommandHandler("publish", cmd_publish))
+    app.add_handler(CommandHandler("pipeline", cmd_pipeline))
     app.add_handler(CommandHandler("status", cmd_status))
     app.add_handler(CommandHandler("details", cmd_details))
     app.add_handler(CommandHandler("metrics", cmd_metrics))
@@ -622,6 +867,7 @@ def main():
     app.add_handler(CommandHandler("pause", cmd_pause))
     app.add_handler(CommandHandler("resume", cmd_resume))
     app.add_handler(CommandHandler("task", cmd_task))
+    app.add_handler(CommandHandler("running", cmd_running))
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
 
@@ -629,14 +875,24 @@ def main():
     for cmd in ["edit", "competitors"]:
         app.add_handler(CommandHandler(cmd, cmd_stub))
 
+    # Default text handler LAST — catches all free-form messages
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+
     def shutdown(signum, frame):
         print("\nShutting down bot...")
+        # Terminate any active tasks
+        with _active_tasks_lock:
+            for task_id, proc in _active_tasks.items():
+                if proc.poll() is None:
+                    logger.info(f"Terminating task {task_id} (PID: {proc.pid})")
+                    proc.terminate()
         sys.exit(0)
 
     signal.signal(signal.SIGINT, shutdown)
     signal.signal(signal.SIGTERM, shutdown)
 
     print("Bot is running. Press Ctrl+C to stop.")
+    print("Marc is listening for messages and commands.")
     app.run_polling(allowed_updates=["message"])
 
 

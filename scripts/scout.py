@@ -6,9 +6,13 @@ Usage:
     python3 scripts/scout.py --max-competitors 5   # limited run
     python3 scripts/scout.py --dry-run             # mock data, no API calls
     python3 scripts/scout.py --force-resolve       # re-resolve all user_ids
+    python3 scripts/scout.py --raw                 # write to scout_raw_{date}.json
+    python3 scripts/scout.py --compact             # additionally write scout_compact_{date}.json
+    python3 scripts/scout.py --raw --compact       # both raw + compact (for Claude Intelligence Mode)
 """
 
 import argparse
+import copy
 import json
 import logging
 import os
@@ -352,7 +356,8 @@ class Scout:
             "new_accounts_discovered": keyword_data.get("new_accounts_discovered", []),
         }
 
-    def run(self, max_competitors: int | None = None, force_resolve: bool = False) -> str:
+    def run(self, max_competitors: int | None = None, force_resolve: bool = False,
+            raw: bool = False, compact: bool = False) -> str:
         """Full scout run. Returns path to output file."""
         logger.info("=" * 60)
         logger.info(f"Scout run started — {datetime.now(JST).isoformat()}")
@@ -385,7 +390,7 @@ class Scout:
         report["competitors_skipped"] = len(skipped)
 
         # Step 5: Save
-        output_path = self.save_report(report)
+        output_path = self.save_report(report, raw=raw, compact=compact)
 
         logger.info("=" * 60)
         logger.info(f"Scout run completed — {datetime.now(JST).isoformat()}")
@@ -396,14 +401,38 @@ class Scout:
 
         return output_path
 
-    def save_report(self, report: dict) -> str:
-        """Save report to data/scout_report_{YYYYMMDD}.json. Returns file path."""
-        date_str = datetime.now(JST).strftime("%Y%m%d")
-        filename = f"scout_report_{date_str}.json"
-        output_path = os.path.join(PROJECT, "data", filename)
+    def save_report(self, report: dict, raw: bool = False, compact: bool = False) -> str:
+        """Save report to appropriate file(s) based on flags.
 
-        with open(output_path, "w") as f:
-            json.dump(report, f, indent=2, ensure_ascii=False)
+        --raw: writes to scout_raw_{date}.json instead of scout_report_{date}.json
+        --compact: additionally writes scout_compact_{date}.json with _pre_analysis
+        No flags: writes to scout_report_{date}.json (original behavior)
+
+        Returns path to the primary output file.
+        """
+        date_str = datetime.now(JST).strftime("%Y%m%d")
+        data_dir = os.path.join(PROJECT, "data")
+
+        # --raw: write full file to scout_raw_{date}.json
+        if raw:
+            raw_path = os.path.join(data_dir, f"scout_raw_{date_str}.json")
+            with open(raw_path, "w") as f:
+                json.dump(report, f, indent=2, ensure_ascii=False)
+            logger.info(f"  Raw report: {raw_path}")
+            output_path = raw_path
+        else:
+            # Default: write to scout_report_{date}.json
+            output_path = os.path.join(data_dir, f"scout_report_{date_str}.json")
+            with open(output_path, "w") as f:
+                json.dump(report, f, indent=2, ensure_ascii=False)
+
+        # --compact: additionally write compact file
+        if compact:
+            compact_data = compact_report(report)
+            compact_path = os.path.join(data_dir, f"scout_compact_{date_str}.json")
+            with open(compact_path, "w") as f:
+                json.dump(compact_data, f, indent=2, ensure_ascii=False)
+            logger.info(f"  Compact report: {compact_path}")
 
         return output_path
 
@@ -532,11 +561,169 @@ class Scout:
         }
 
 
+def compute_pre_analysis(report: dict) -> dict:
+    """Compute statistics from full data before compaction.
+
+    Analyzes the full recent_posts arrays to produce pre-compaction
+    statistics that Claude can use without needing the raw tweet data.
+    This solves the problem of Claude needing analytical results from
+    data too large to fit in its context window.
+
+    Args:
+        report: Full scout report dict with all recent_posts
+
+    Returns:
+        Dict with reply_contamination, impression_engagement,
+        trending, and hashtag_usage statistics
+    """
+    all_tweets = []
+    per_competitor = []
+
+    for comp in report.get("competitors", []):
+        posts = comp.get("recent_posts", [])
+        reply_count = sum(1 for p in posts if p.get("text", "").startswith("@"))
+        total = len(posts)
+
+        # Reply-filtered engagement rate
+        non_reply_posts = [p for p in posts if not p.get("text", "").startswith("@")]
+        followers = comp.get("followers", 0)
+        if non_reply_posts and followers > 0:
+            eng_sum = sum(
+                (p.get("public_metrics", {}).get("like_count", 0) +
+                 p.get("public_metrics", {}).get("retweet_count", 0) +
+                 p.get("public_metrics", {}).get("reply_count", 0) +
+                 p.get("public_metrics", {}).get("quote_count", 0))
+                for p in non_reply_posts
+            )
+            eng_rate_excl_replies = eng_sum / (len(non_reply_posts) * followers)
+        else:
+            eng_rate_excl_replies = 0.0
+
+        # Impression-based engagement (where available)
+        imp_posts = [p for p in posts
+                     if p.get("public_metrics", {}).get("impression_count", 0) > 0]
+        if imp_posts:
+            imp_eng = sum(
+                (p.get("public_metrics", {}).get("like_count", 0) +
+                 p.get("public_metrics", {}).get("retweet_count", 0) +
+                 p.get("public_metrics", {}).get("reply_count", 0) +
+                 p.get("public_metrics", {}).get("quote_count", 0))
+                / p["public_metrics"]["impression_count"]
+                for p in imp_posts
+            ) / len(imp_posts)
+        else:
+            imp_eng = None
+
+        per_competitor.append({
+            "handle": comp.get("handle"),
+            "market": comp.get("market"),
+            "reply_rate": reply_count / total if total > 0 else 0.0,
+            "reply_count": reply_count,
+            "total_sampled": total,
+            "engagement_rate_excl_replies": round(eng_rate_excl_replies, 6),
+            "impression_based_rate": round(imp_eng, 6) if imp_eng else None,
+        })
+
+        all_tweets.extend(posts)
+
+    # Dynamic trending threshold
+    all_likes = [t.get("public_metrics", {}).get("like_count", 0) for t in all_tweets]
+    if all_likes:
+        mean_likes = sum(all_likes) / len(all_likes)
+        variance = sum((x - mean_likes) ** 2 for x in all_likes) / len(all_likes)
+        stddev_likes = variance ** 0.5
+        trending_threshold = mean_likes + 2 * stddev_likes
+    else:
+        trending_threshold = 0
+
+    trending_posts = [
+        {"tweet_id": t.get("tweet_id", ""), "handle": t.get("author_handle", ""),
+         "likes": t.get("public_metrics", {}).get("like_count", 0),
+         "text_preview": t.get("text", "")[:80]}
+        for t in all_tweets
+        if t.get("public_metrics", {}).get("like_count", 0) >= trending_threshold
+    ]
+
+    # Overall contamination
+    total_replies = sum(c["reply_count"] for c in per_competitor)
+    total_sampled = sum(c["total_sampled"] for c in per_competitor)
+
+    # Hashtag usage
+    competitors_list = report.get("competitors", [])
+    comps_with_zero = sum(1 for c in competitors_list
+                          if len(c.get("hashtags_used", {})) == 0)
+
+    return {
+        "reply_contamination": {
+            "overall_rate": round(total_replies / total_sampled, 3) if total_sampled > 0 else 0,
+            "total_replies": total_replies,
+            "total_sampled": total_sampled,
+            "per_competitor": per_competitor,
+        },
+        "impression_engagement": {
+            "per_competitor": [
+                {"handle": c["handle"], "rate": c["impression_based_rate"]}
+                for c in per_competitor if c["impression_based_rate"] is not None
+            ]
+        },
+        "trending": {
+            "threshold": round(trending_threshold, 1),
+            "method": "mean + 2*stddev of all sampled tweet likes",
+            "posts": trending_posts[:20],
+        },
+        "hashtag_usage": {
+            "competitors_with_zero": comps_with_zero,
+            "competitors_with_zero_pct": round(
+                comps_with_zero / max(len(competitors_list), 1) * 100, 1),
+        }
+    }
+
+
+def compact_report(report: dict) -> dict:
+    """Strip large arrays and add pre-analysis stats for Claude.
+
+    1. Computes pre-analysis statistics from full recent_posts data
+    2. Strips recent_posts arrays (~10 tweets per competitor)
+    3. Strips full tweet text from trending_posts
+    4. Trims new_accounts_discovered to summary fields
+    5. Adds _pre_analysis section with computed stats
+
+    Reduces ~457KB to ~30KB for Claude context window compatibility.
+
+    Args:
+        report: Full scout report dict
+
+    Returns:
+        Compact report dict with _pre_analysis section
+    """
+    # Compute stats BEFORE stripping data
+    pre_analysis = compute_pre_analysis(report)
+
+    compact = copy.deepcopy(report)
+    for competitor in compact.get("competitors", []):
+        competitor.pop("recent_posts", None)
+    for topic in compact.get("trending_posts", []):
+        topic.pop("full_text", None)
+    # Trim new_accounts_discovered to essential fields
+    compact["new_accounts_discovered"] = [
+        {k: v for k, v in acc.items()
+         if k in ("handle", "followers", "engagement_rate", "source", "tweet_count")}
+        for acc in compact.get("new_accounts_discovered", [])
+    ]
+
+    compact["_pre_analysis"] = pre_analysis
+    return compact
+
+
 def main():
     parser = argparse.ArgumentParser(description="Scout Agent — Competitor Research")
     parser.add_argument("--max-competitors", type=int, default=None, help="Limit number of competitors to fetch")
     parser.add_argument("--dry-run", action="store_true", help="Generate mock data without API calls")
     parser.add_argument("--force-resolve", action="store_true", help="Re-resolve all user_ids")
+    parser.add_argument("--raw", action="store_true",
+                        help="Write to scout_raw_{date}.json instead of scout_report_{date}.json")
+    parser.add_argument("--compact", action="store_true",
+                        help="Additionally write scout_compact_{date}.json with pre-analysis stats")
     args = parser.parse_args()
 
     # Configure logging
@@ -548,7 +735,12 @@ def main():
 
     config_path = os.path.join(PROJECT, "config", "competitors.json")
     scout = Scout(config_path, dry_run=args.dry_run)
-    output_path = scout.run(max_competitors=args.max_competitors, force_resolve=args.force_resolve)
+    output_path = scout.run(
+        max_competitors=args.max_competitors,
+        force_resolve=args.force_resolve,
+        raw=args.raw,
+        compact=args.compact,
+    )
     print(f"Saved: {output_path}")
 
 

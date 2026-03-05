@@ -1,5 +1,5 @@
 #!/bin/bash
-# scripts/run_task.sh — Invoke Marc to execute an operator task
+# scripts/run_task.sh — Invoke Marc as Team Leader to execute an operator task
 set -euo pipefail
 
 if [ $# -lt 1 ]; then
@@ -11,7 +11,7 @@ fi
 TASK_ID="$1"
 DATE=$(TZ=Asia/Tokyo date +%Y-%m-%d)
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-TASK_FILE="$PROJECT_DIR/data/tasks/task_${TASK_ID}.json"
+TASK_FILE="$PROJECT_DIR/data/tasks/task_${TASK_ID}.md"
 
 cd "$PROJECT_DIR"
 
@@ -21,10 +21,13 @@ if ! command -v claude &> /dev/null; then
     exit 1
 fi
 
-# Check task file exists
+# Check task file exists (support both .md and .json)
 if [ ! -f "$TASK_FILE" ]; then
-    echo "ERROR: Task file not found: $TASK_FILE"
-    exit 1
+    TASK_FILE="$PROJECT_DIR/data/tasks/task_${TASK_ID}.json"
+    if [ ! -f "$TASK_FILE" ]; then
+        echo "ERROR: Task file not found for task: $TASK_ID"
+        exit 1
+    fi
 fi
 
 # Prevent concurrent runs of the same task
@@ -42,13 +45,18 @@ echo "Starting task ${TASK_ID}..."
 echo "Project: ${PROJECT_DIR}"
 echo "Task file: ${TASK_FILE}"
 
-env -u CLAUDECODE claude -p "You are Marc, the COO agent. Read agents/marc.md for your full instructions.
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+env -u CLAUDECODE claude -p "You are Marc, the COO and Team Leader. Read agents/marc.md for your full instructions.
 
 IMPORTANT: You are running in non-interactive mode. Execute ALL scripts directly using your bash tool — do not ask the user to run commands or paste output.
 
 You have received a task from the operator.
-Task file: data/tasks/task_${TASK_ID}.json
+Task file: ${TASK_FILE}
 Today's date: ${DATE}
 Project directory: ${PROJECT_DIR}
 
-Read the task file, plan your approach using the Task Handling protocol from your skill file, and execute. Deliver results via Telegram when done." --dangerously-skip-permissions
+Read the task file, plan your approach using the Task Handling protocol from your skill file, and execute.
+Spawn teammates as needed using the Agent tool. Coordinate via the shared task list.
+Deliver results via Telegram when done:
+  python3 scripts/telegram_send.py \"message\"
+  python3 scripts/telegram_send.py --document path/to/file \"caption\"" --dangerously-skip-permissions

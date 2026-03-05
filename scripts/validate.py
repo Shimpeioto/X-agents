@@ -684,9 +684,303 @@ def validate_analyst_metrics(db_path: str) -> tuple[bool, list[str]]:
     return passed, issues
 
 
+def validate_analyst_report(path: str) -> tuple[bool, list[str]]:
+    """Validate daily_report_{date}.json from Analyst Intelligence Mode.
+
+    Checks:
+    1. Both EN and JP account sections present
+    2. Required fields: followers, followers_change, anomaly (bool), total_likes
+    3. anomaly_detail non-empty when anomaly is true, null when false
+    4. category_breakdown is a dict with at least 1 key
+    5. telegram_report is a non-empty string
+    6. telegram_alerts is an array
+    7. ab_test_status has required fields (variable, verdict)
+    8. best_performing_post has post_id and category (when not null)
+
+    Args:
+        path: Path to daily_report JSON
+
+    Returns:
+        (passed, list of failure messages)
+    """
+    issues = []
+
+    # Load file
+    try:
+        with open(path) as f:
+            content = f.read()
+        if not content.strip():
+            issues.append("file_empty: Daily report file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {path} does not exist")
+        return False, issues
+
+    try:
+        report = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 1: Both EN and JP account sections
+    accounts_section = report.get("accounts", {})
+    if not isinstance(accounts_section, dict):
+        issues.append("missing_accounts: 'accounts' is not a dict")
+        return False, issues
+
+    for account in ["EN", "JP"]:
+        if account not in accounts_section:
+            issues.append(f"missing_account: '{account}' not found in accounts section")
+
+    if any("missing_account" in i for i in issues):
+        return False, issues
+
+    for account in ["EN", "JP"]:
+        section = accounts_section[account]
+
+        # Check 2: Required fields
+        for field in ["followers", "followers_change", "anomaly", "total_likes"]:
+            if field not in section:
+                issues.append(f"missing_field: {account}.{field} not found")
+
+        # anomaly must be boolean
+        anomaly = section.get("anomaly")
+        if not isinstance(anomaly, bool):
+            issues.append(f"anomaly_not_bool: {account}.anomaly is {type(anomaly).__name__}, expected bool")
+
+        # Check 3: anomaly_detail consistency
+        if anomaly is True:
+            detail = section.get("anomaly_detail")
+            if not detail or not isinstance(detail, str) or not detail.strip():
+                issues.append(f"anomaly_detail_empty: {account}.anomaly is true but anomaly_detail is empty or missing")
+        elif anomaly is False:
+            detail = section.get("anomaly_detail")
+            if detail is not None:
+                issues.append(f"anomaly_detail_not_null: {account}.anomaly is false but anomaly_detail is not null")
+
+        # Check 4: category_breakdown
+        cat_breakdown = section.get("category_breakdown")
+        if cat_breakdown is not None:
+            if not isinstance(cat_breakdown, dict):
+                issues.append(f"category_breakdown_not_dict: {account}.category_breakdown is not a dict")
+
+        # Check 7: ab_test_status
+        ab_test = section.get("ab_test_status")
+        if ab_test is not None:
+            if not isinstance(ab_test, dict):
+                issues.append(f"ab_test_not_dict: {account}.ab_test_status is not a dict")
+            else:
+                for field in ["variable", "verdict"]:
+                    if field not in ab_test:
+                        issues.append(f"ab_test_missing_field: {account}.ab_test_status.{field} not found")
+
+        # Check 8: best_performing_post (when not null)
+        best_post = section.get("best_performing_post")
+        if best_post is not None:
+            if not isinstance(best_post, dict):
+                issues.append(f"best_post_not_dict: {account}.best_performing_post is not a dict")
+            else:
+                for field in ["post_id", "category"]:
+                    if field not in best_post:
+                        issues.append(f"best_post_missing: {account}.best_performing_post.{field} not found")
+
+    # Check 5: telegram_report
+    telegram_report = report.get("telegram_report")
+    if not isinstance(telegram_report, str) or not telegram_report.strip():
+        issues.append("telegram_report_empty: telegram_report is missing or empty")
+
+    # Check 6: telegram_alerts
+    telegram_alerts = report.get("telegram_alerts")
+    if not isinstance(telegram_alerts, list):
+        issues.append("telegram_alerts_not_array: telegram_alerts is not an array")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
+def validate_scout_analysis(path: str) -> tuple[bool, list[str]]:
+    """Validate analysis section in enriched scout_report_{date}.json.
+
+    Checks:
+    1. analysis section exists
+    2. data_quality sub-section has reply_contamination_rate (float 0-1)
+    3. engagement_adjusted has EN and JP sub-sections
+    4. executive_summary is an array with >= 3 entries
+    5. new_accounts_filtered is an array
+    6. All existing scout report fields still present (backward compatibility)
+
+    Args:
+        path: Path to enriched scout report JSON
+
+    Returns:
+        (passed, list of failure messages)
+    """
+    issues = []
+
+    # Load file
+    try:
+        with open(path) as f:
+            content = f.read()
+        if not content.strip():
+            issues.append("file_empty: Scout report file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {path} does not exist")
+        return False, issues
+
+    try:
+        report = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 6: Backward compatibility — existing fields must be present
+    for field in ["competitors", "market_comparison", "hashtag_frequency"]:
+        if field not in report:
+            issues.append(f"missing_existing_field: '{field}' not found (backward compatibility)")
+
+    # Check 1: analysis section exists
+    analysis = report.get("analysis")
+    if not isinstance(analysis, dict):
+        issues.append("missing_analysis: 'analysis' section not found or not a dict")
+        return False, issues
+
+    # Check 2: data_quality with reply_contamination_rate
+    dq = analysis.get("data_quality")
+    if not isinstance(dq, dict):
+        issues.append("missing_data_quality: analysis.data_quality not found")
+    else:
+        rcr = dq.get("reply_contamination_rate")
+        if rcr is None or not isinstance(rcr, (int, float)):
+            issues.append("missing_reply_contamination_rate: analysis.data_quality.reply_contamination_rate not found or not a number")
+        elif rcr < 0 or rcr > 1:
+            issues.append(f"reply_contamination_rate_range: value {rcr} not in range [0, 1]")
+
+    # Check 3: engagement_adjusted with EN and JP
+    ea = analysis.get("engagement_adjusted")
+    if not isinstance(ea, dict):
+        issues.append("missing_engagement_adjusted: analysis.engagement_adjusted not found")
+    else:
+        for account in ["EN", "JP"]:
+            if account not in ea:
+                issues.append(f"missing_engagement_adjusted_account: analysis.engagement_adjusted.{account} not found")
+
+    # Check 4: executive_summary >= 3 entries
+    es = analysis.get("executive_summary")
+    if not isinstance(es, list):
+        issues.append("executive_summary_not_array: analysis.executive_summary is not an array")
+    elif len(es) < 3:
+        issues.append(f"executive_summary_count: {len(es)} entries, expected >= 3")
+
+    # Check 5: new_accounts_filtered is an array
+    naf = analysis.get("new_accounts_filtered")
+    if not isinstance(naf, list):
+        issues.append("new_accounts_filtered_not_array: analysis.new_accounts_filtered is not an array")
+
+    # Ensure _pre_analysis is NOT in final report
+    if "_pre_analysis" in report:
+        issues.append("pre_analysis_present: _pre_analysis section should not appear in final report")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
+def validate_outbound_plan(path: str) -> tuple[bool, list[str]]:
+    """Validate outbound_plan_{date}_{account}.json from Publisher Smart Outbound.
+
+    Checks:
+    1. account field matches filename
+    2. targets is a non-empty array
+    3. Each non-skipped target has tweets_to_like (array of strings)
+    4. Each non-skipped target has reply_to with tweet_id, reply_text, reasoning
+    5. No reply_text starts with @
+    6. Each target has handle field
+    7. Skipped targets have skip_reason
+
+    Args:
+        path: Path to outbound plan JSON
+
+    Returns:
+        (passed, list of failure messages)
+    """
+    issues = []
+
+    # Load file
+    try:
+        with open(path) as f:
+            content = f.read()
+        if not content.strip():
+            issues.append("file_empty: Outbound plan file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {path} does not exist")
+        return False, issues
+
+    try:
+        plan = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 1: account field present and matches filename
+    account = plan.get("account")
+    if account not in ("EN", "JP"):
+        issues.append(f"invalid_account: account is '{account}', expected 'EN' or 'JP'")
+    else:
+        # Check filename contains account
+        basename = os.path.basename(path)
+        if f"_{account}." not in basename and not basename.endswith(f"_{account}.json"):
+            issues.append(f"account_filename_mismatch: account is '{account}' but filename is '{basename}'")
+
+    # Check 2: targets is a non-empty array
+    targets = plan.get("targets")
+    if not isinstance(targets, list):
+        issues.append("targets_not_array: 'targets' is not an array")
+        return False, issues
+    if len(targets) == 0:
+        issues.append("targets_empty: 'targets' array is empty")
+
+    for i, target in enumerate(targets):
+        # Check 6: Each target has handle
+        if "handle" not in target:
+            issues.append(f"missing_handle: target[{i}] missing 'handle' field")
+
+        is_skipped = target.get("skip", False)
+
+        if is_skipped:
+            # Check 7: Skipped targets have skip_reason
+            if not target.get("skip_reason"):
+                issues.append(f"missing_skip_reason: target[{i}] ({target.get('handle', '?')}) has skip=true but no skip_reason")
+        else:
+            # Check 3: Non-skipped target has tweets_to_like
+            ttl = target.get("tweets_to_like")
+            if not isinstance(ttl, list):
+                issues.append(f"missing_tweets_to_like: target[{i}] ({target.get('handle', '?')}) missing tweets_to_like array")
+            elif not all(isinstance(t, str) for t in ttl):
+                issues.append(f"tweets_to_like_not_strings: target[{i}] ({target.get('handle', '?')}) tweets_to_like contains non-string entries")
+
+            # Check 4: Non-skipped target has reply_to
+            reply_to = target.get("reply_to")
+            if reply_to is not None:
+                if not isinstance(reply_to, dict):
+                    issues.append(f"reply_to_not_dict: target[{i}] ({target.get('handle', '?')}) reply_to is not a dict")
+                else:
+                    for field in ["tweet_id", "reply_text", "reasoning"]:
+                        if field not in reply_to:
+                            issues.append(f"reply_to_missing: target[{i}] ({target.get('handle', '?')}) reply_to missing '{field}'")
+
+                    # Check 5: reply_text doesn't start with @
+                    reply_text = reply_to.get("reply_text", "")
+                    if isinstance(reply_text, str) and reply_text.lstrip().startswith("@"):
+                        issues.append(f"reply_starts_with_at: target[{i}] ({target.get('handle', '?')}) reply_text starts with '@'")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits|analyst|analyst_metrics} <file1> [<file2>]", file=sys.stderr)
+        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits|analyst|analyst_metrics|analyst_report|scout_analysis|outbound_plan} <file1> [<file2>]", file=sys.stderr)
         sys.exit(2)
 
     mode = sys.argv[1]
@@ -745,12 +1039,30 @@ def main():
             sys.exit(2)
         passed, issues = validate_analyst_metrics(sys.argv[2])
 
+    elif mode == "analyst_report":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py analyst_report <daily_report.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_analyst_report(sys.argv[2])
+
+    elif mode == "scout_analysis":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py scout_analysis <scout_report.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_scout_analysis(sys.argv[2])
+
+    elif mode == "outbound_plan":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py outbound_plan <outbound_plan.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_outbound_plan(sys.argv[2])
+
     else:
-        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', 'publisher_rate_limits', 'analyst', or 'analyst_metrics'.", file=sys.stderr)
+        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', 'publisher_rate_limits', 'analyst', 'analyst_metrics', 'analyst_report', 'scout_analysis', or 'outbound_plan'.", file=sys.stderr)
         sys.exit(2)
 
     # Determine total checks from mode
-    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6}
+    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6, "analyst_report": 8, "scout_analysis": 6, "outbound_plan": 7}
     total_checks = check_counts.get(mode, len(issues) + 1)
 
     if passed:

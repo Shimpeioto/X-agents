@@ -3,7 +3,8 @@
 Usage:
     python3 scripts/publisher.py post --account EN          # Post all approved
     python3 scripts/publisher.py post --account EN --slot 1 # Post specific slot
-    python3 scripts/publisher.py outbound --account EN      # Run outbound engagement
+    python3 scripts/publisher.py outbound --account EN      # Run outbound engagement (legacy)
+    python3 scripts/publisher.py smart-outbound --account EN --plan data/outbound_plan_20260305_EN.json
     python3 scripts/publisher.py --dry-run post --account EN # Log only, no API calls
 
 Exit codes: 0=success, 1=error, 2=usage error
@@ -451,6 +452,163 @@ def _delay_random():
     time.sleep(delay)
 
 
+# --- Smart Outbound Subcommand ---
+
+def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
+    """Execute a Claude-generated outbound engagement plan.
+
+    Reads a pre-computed plan JSON and executes each action
+    (like, reply, follow) with the same rate limiting and delays
+    as the legacy outbound command.
+
+    Args:
+        account: "EN" or "JP"
+        plan_path: Path to outbound_plan_{date}_{account}.json
+        dry_run: If True, log actions without making API calls
+
+    Returns:
+        0 on success, 1 on error
+    """
+    date = today_str()
+
+    # 1. Load the outbound plan
+    plan = load_json(plan_path)
+    if not plan:
+        logger.error(f"Failed to load outbound plan: {plan_path}")
+        return 1
+
+    # 2. Load rate limits for today
+    limits = load_rate_limits(date)
+
+    # Initialize outbound log
+    outbound_log_path = os.path.join(DATA_DIR, f"outbound_log_{date}.json")
+    outbound_log = load_json(outbound_log_path) or {
+        "date": f"{date[:4]}-{date[4:6]}-{date[6:8]}", "actions": []
+    }
+
+    if dry_run:
+        write_client = None
+    else:
+        try:
+            write_client = XApiWriteClient(account)
+        except Exception as e:
+            logger.error(f"Failed to initialize write client for {account}: {e}")
+            return 1
+
+    targets = plan.get("targets", [])
+    logger.info(f"Smart outbound for {account}: {len(targets)} targets from plan")
+
+    # 3. Execute each target's actions
+    for target in targets:
+        handle = target.get("handle", "unknown").lstrip("@")
+
+        if target.get("skip"):
+            logger.info(f"Skipping @{handle}: {target.get('skip_reason', 'no reason')}")
+            continue
+
+        # Use user_id from plan (already resolved by publisher_outbound_data.py)
+        user_id = target.get("user_id")
+        if not user_id:
+            logger.warning(f"No user_id in plan for @{handle}, skipping")
+            continue
+
+        # Like selected tweets
+        for tweet_id in target.get("tweets_to_like", []):
+            if not check_rate_limit(limits, account, "likes"):
+                logger.warning("Daily like limit reached")
+                break
+
+            if dry_run:
+                logger.info(f"[DRY-RUN] Would like tweet {tweet_id} from @{handle}")
+            else:
+                _delay_random()
+                success = write_client.like_tweet(tweet_id)
+                if success:
+                    logger.info(f"Liked tweet {tweet_id} from @{handle}")
+                else:
+                    logger.warning(f"Failed to like tweet {tweet_id}")
+                    continue
+
+            increment_rate_limit(limits, account, "likes")
+            outbound_log["actions"].append({
+                "type": "like",
+                "account": account,
+                "target": f"@{handle}",
+                "tweet_id": tweet_id,
+                "source": "smart_outbound",
+                "timestamp": now_iso(),
+                "dry_run": dry_run,
+            })
+            date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
+            _sqlite_log_outbound(date_iso, account, "like", f"@{handle}", tweet_id, True)
+
+        # Reply to selected tweet
+        reply_info = target.get("reply_to")
+        if reply_info and check_rate_limit(limits, account, "replies"):
+            reply_tweet_id = reply_info.get("tweet_id")
+            reply_text = f"@{handle} {reply_info.get('reply_text', '')}"
+
+            if dry_run:
+                logger.info(f"[DRY-RUN] Would reply to {reply_tweet_id}: {reply_text[:80]}...")
+            else:
+                _delay_random()
+                result = write_client.reply_to_tweet(reply_tweet_id, reply_text)
+                if result:
+                    logger.info(f"Replied to {reply_tweet_id} from @{handle}")
+                else:
+                    logger.warning(f"Failed to reply to {reply_tweet_id}")
+
+            increment_rate_limit(limits, account, "replies")
+            outbound_log["actions"].append({
+                "type": "reply",
+                "account": account,
+                "target": f"@{handle}",
+                "tweet_id": reply_tweet_id,
+                "reply_text": reply_text,
+                "source": "smart_outbound",
+                "timestamp": now_iso(),
+                "dry_run": dry_run,
+            })
+            date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
+            _sqlite_log_outbound(date_iso, account, "reply", f"@{handle}", reply_tweet_id, True)
+
+        # Follow
+        if target.get("follow", False) and check_rate_limit(limits, account, "follows"):
+            if dry_run:
+                logger.info(f"[DRY-RUN] Would follow @{handle}")
+            else:
+                _delay_random()
+                success = write_client.follow_user(user_id)
+                if success:
+                    logger.info(f"Followed @{handle}")
+                else:
+                    logger.warning(f"Failed to follow @{handle}")
+
+            increment_rate_limit(limits, account, "follows")
+            outbound_log["actions"].append({
+                "type": "follow",
+                "account": account,
+                "target": f"@{handle}",
+                "target_user_id": user_id,
+                "source": "smart_outbound",
+                "timestamp": now_iso(),
+                "dry_run": dry_run,
+            })
+            date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
+            _sqlite_log_outbound(date_iso, account, "follow", f"@{handle}", None, True)
+
+    # 4. Save rate limits and outbound log
+    save_rate_limits(date, limits)
+    save_json(outbound_log_path, outbound_log)
+
+    acct_limits = limits.get(account, {})
+    logger.info(f"Smart outbound complete for {account}. "
+                f"Likes: {acct_limits.get('likes', {}).get('used', 0)}/30, "
+                f"Replies: {acct_limits.get('replies', {}).get('used', 0)}/10, "
+                f"Follows: {acct_limits.get('follows', {}).get('used', 0)}/5")
+    return 0
+
+
 # --- CLI ---
 
 def main():
@@ -468,6 +626,11 @@ def main():
     outbound_parser = subparsers.add_parser("outbound", help="Run outbound engagement")
     outbound_parser.add_argument("--account", required=True, choices=["EN", "JP"], help="Account to engage for")
 
+    # smart-outbound subcommand
+    smart_parser = subparsers.add_parser("smart-outbound", help="Execute Claude-generated outbound plan")
+    smart_parser.add_argument("--account", required=True, choices=["EN", "JP"], help="Account to engage for")
+    smart_parser.add_argument("--plan", required=True, help="Path to outbound plan JSON")
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -481,6 +644,8 @@ def main():
         exit_code = run_post(args.account, args.slot, args.dry_run)
     elif args.command == "outbound":
         exit_code = run_outbound(args.account, args.dry_run)
+    elif args.command == "smart-outbound":
+        exit_code = run_smart_outbound(args.account, args.plan, args.dry_run)
     else:
         parser.print_help()
         sys.exit(2)

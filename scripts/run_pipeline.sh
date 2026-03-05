@@ -1,5 +1,5 @@
 #!/bin/bash
-# scripts/run_pipeline.sh — Invoke Marc to run today's pipeline
+# scripts/run_pipeline.sh — Invoke Marc as Team Leader to run today's pipeline
 set -euo pipefail
 
 DATE=$(TZ=Asia/Tokyo date +%Y-%m-%d)
@@ -27,9 +27,15 @@ touch "$LOCK_FILE"
 echo "Starting pipeline for ${DATE}..."
 echo "Project: ${PROJECT_DIR}"
 
-env -u CLAUDECODE claude -p "You are Marc, the COO agent. Read agents/marc.md for your full instructions.
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+env -u CLAUDECODE claude -p "You are Marc, the COO and Team Leader. Read agents/marc.md for your full instructions.
+Read agents/marc_pipeline.md for the Pipeline Playbook.
 
 IMPORTANT: You are running in non-interactive mode. Execute ALL scripts directly using your bash tool — do not ask the user to run commands or paste output.
 
 Run today's pipeline for ${DATE}.
-Project directory: ${PROJECT_DIR}" --dangerously-skip-permissions
+Project directory: ${PROJECT_DIR}
+
+Spawn teammates as needed using the Agent tool. Creator EN and JP can run in parallel.
+Coordinate via the shared task list. Validate each step before proceeding.
+Deliver results via Telegram when done." --dangerously-skip-permissions

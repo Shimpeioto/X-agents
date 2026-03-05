@@ -1,5 +1,18 @@
 # X AI Beauty Growth Agent System
 
+## Architecture
+
+Marc operates as **Team Leader** using Claude Code Agent Teams (experimental).
+The operator communicates with Marc via Telegram through two layers:
+
+1. **Conversational Layer** (Anthropic API) — Fast, responsive. Marc receives messages, reasons about them, asks clarifying questions, and decides when to execute.
+2. **Execution Layer** (Claude Code Agent Teams) — Marc spawns teammates (Scout, Strategist, Creator, Publisher, Analyst) for parallel work with shared task coordination.
+
+Entry points:
+- `scripts/telegram_bot.py` — Main bot (conversational + execution)
+- `scripts/run_pipeline.sh` — Direct pipeline execution (fallback)
+- `scripts/run_task.sh` — Direct task execution (fallback)
+
 ## Global Rules
 @config/global_rules.md
 
@@ -14,15 +27,16 @@
 - Impressions only via Playwright (own account pages)
 - Human approval required before any post goes live
 - All Telegram communication goes through Marc (COO)
-- Task coordination via data/pipeline_state_{date}.json
+- Task coordination via shared task list (Agent Teams) or data/pipeline_state_{date}.json
 
-## Agent Definitions
-- @agents/marc.md — COO / Orchestrator / Reporter
-- @agents/scout.md — Competitor Research
-- @agents/strategist.md — Growth Strategy
-- @agents/creator.md — Content Planning
-- @agents/publisher.md — X API Posting & Outbound
-- @agents/analyst.md — Metrics Collection
+## Agent Definitions (Teammates)
+- @agents/marc.md — COO / Team Leader
+- @agents/marc_conversation.md — Conversational Marc (Anthropic API layer)
+- @agents/scout.md — Competitor Research (teammate)
+- @agents/strategist.md — Growth Strategy (teammate)
+- @agents/creator.md — Content Planning (teammate)
+- @agents/publisher.md — X API Posting & Outbound (teammate)
+- @agents/analyst.md — Metrics Collection (teammate)
 
 ## Shared Conventions
 - Date format: ISO 8601
@@ -36,7 +50,7 @@
 - Creator: File read/write only
 - Publisher: X API write + media upload + rate limit counter
 - Analyst: X API read + Playwright (impressions) + SQLite write
-- Marc: Subagent invocation + file read/write + Telegram send
+- Marc: Teammate spawning + file read/write + Telegram send
 
 ## Preferences
 - Don't try to run scripts with bash tool. Write the script and tell me how to execute it, asking me for its output instead.

@@ -14,7 +14,7 @@ MAX_RETRIES = 3
 RETRY_WAIT = 5  # seconds
 MAX_IMAGE_SIZE = 2 * 1024 * 1024  # 2MB per global rules
 
-USER_FIELDS = ["public_metrics", "description"]
+USER_FIELDS = ["public_metrics", "description", "profile_image_url"]
 TWEET_FIELDS = ["public_metrics", "created_at", "entities"]
 
 
@@ -164,6 +164,7 @@ class XApiClient:
             "name": user.name,
             "description": user.description or "",
             "public_metrics": dict(user.public_metrics) if user.public_metrics else {},
+            "profile_image_url": getattr(user, "profile_image_url", None),
         }
 
     def _normalize_tweet(self, tweet) -> dict | None:
