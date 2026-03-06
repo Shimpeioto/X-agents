@@ -1,0 +1,14 @@
+{
+  "task_id": "20260306_001",
+  "description": "Comprehensive competitor investigation and account strategy development with HTML report output.\n\nPhase 1 (Scout): Run fresh data collection (python3 scripts/scout.py --raw --compact), then perform deep analysis covering: growth patterns of successful accounts, posting frequency and timing patterns, content types and AI beauty characteristics, engagement tactics, hashtag effectiveness, profile/bio analysis. Write enriched scout report to data/scout_report_20260306.json.\n\nPhase 2 (Strategist): Using Scout's deep analysis, build detailed from-scratch account strategies for both EN and JP. Cover: persona definition (what kind of AI beauty), content pillars and style, posting schedule and frequency, image generation direction, engagement playbook, follower growth tactics, impression optimization, hashtag strategy, profile optimization recommendations. Write to data/strategy_20260306.json.\n\nPhase 3 (Report): Compile all findings and strategies into a detailed, polished HTML report at data/strategy_report_20260306.html. Include: competitor landscape overview, key findings from investigation, detailed EN strategy, detailed JP strategy, action items and next steps. Make it visually clean and easy to scan.\n\nOperator wants SPECIFIC, DETAILED strategies — not generic advice. Every recommendation should be backed by competitor data.",
+  "task_type": "custom",
+  "agents_planned": [
+    "scout",
+    "strategist"
+  ],
+  "notes": "Operator wants deep investigation of: characteristics of growing accounts, AI beauty styles, post content/frequency, posting times, image characteristics, engagement measures, profile photos, background images, profile bios. From this, create specific account strategies for EN & JP covering persona, growth tactics, content strategy, image strategy, engagement strategy. Final deliverable is an HTML report.",
+  "created_at": "2026-03-06T02:15:17.500772+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-06T02:16:04.414723+09:00",
+  "exit_code": 0
+}

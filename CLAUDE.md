@@ -53,4 +53,5 @@ Entry points:
 - Marc: Teammate spawning + file read/write + Telegram send
 
 ## Preferences
-- Don't try to run scripts with bash tool. Write the script and tell me how to execute it, asking me for its output instead.
+- In interactive sessions (direct CLI use): Don't try to run scripts with bash tool. Write the script and tell me how to execute it, asking me for its output instead.
+- In non-interactive sessions (telegram bot execution, run_task.sh, run_pipeline.sh): Execute ALL scripts directly using bash tool. The operator is not watching — you must run everything yourself.

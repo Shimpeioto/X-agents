@@ -1,0 +1,13 @@
+{
+  "task_id": "20260306_004",
+  "description": "Investigate competitor image posting patterns and engagement. Step 1: Run Scout to collect fresh competitor data with media/image information (scripts/scout.py --raw --compact). Step 2: Analyze the raw data to identify which posts contain images, categorize image types from tweet text context, and cross-reference with engagement metrics. Step 3: Produce a competitor image analysis report (data/image_analysis_report_20260306.json) covering: top-performing image posts per market (EN/JP), image categories inferred from text, engagement comparison (image vs text-only posts), image URLs for the top performers. Send the final report to the operator via Telegram.",
+  "task_type": "research",
+  "agents_planned": [
+    "scout"
+  ],
+  "notes": "Operator wants to understand what kinds of images competitors post and which images get high engagement. We don't have vision model analysis, so infer image categories from tweet text and context. Include actual image URLs so operator can review visually. Cover both EN and JP markets.",
+  "created_at": "2026-03-06T15:42:05.693592+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-06T15:44:42.502149+09:00",
+  "exit_code": 0
+}

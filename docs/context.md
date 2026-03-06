@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 5, 2026 (Session 24: Agent Teams Migration — Conversational Marc + Teammate Architecture)
+**Last updated**: March 7, 2026 (Session 25: Production Testing — First Real Task Execution + Pipeline Run)
 
 ---
 
@@ -458,6 +458,62 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 
 ---
 
+### Session 25 — Production Testing: First Real Task Execution + Pipeline Run (March 6-7, 2026)
+
+**Goal**: Test the agent system end-to-end with real tasks via Telegram — verify Marc can receive tasks, reason about them, spawn teammates, and deliver results autonomously.
+
+**Tasks Executed** (5 total, via Telegram → Marc):
+
+| Task | Type | Duration | Result |
+|---|---|---|---|
+| 001 | Ad-hoc (competitor strategy) | 47s | Failed — no output (silent completion) |
+| 002 | Ad-hoc (retry of 001) | 73s | Failed — same issue |
+| 003 | Ad-hoc (retry after fix) | 10m | **Success** — 456KB scout report + 86KB HTML strategy report |
+| 004 | Ad-hoc (competitor image analysis) | 2.5m | **Success** — 60KB image analysis JSON with real media URLs |
+| 005 | Daily pipeline | 10m | **Success** — Full pipeline completed, all validations passed, War Room 100/100 |
+
+**Critical Bug Found & Fixed — Non-Interactive Execution**:
+- **Symptom**: Tasks 001-002 completed with exit_code 0 but produced no output files (47s/73s — too fast)
+- **Root cause**: Two issues combined:
+  1. `telegram_bot.py`'s `_execute_task()` was missing the non-interactive instruction that `run_task.sh` already had
+  2. `CLAUDE.md`'s "Don't try to run scripts with bash tool" preference was not scoped — applied in non-interactive mode where the operator isn't watching
+- **Fix 1**: Added `IMPORTANT: You are running in non-interactive mode. Execute ALL scripts directly...` to `_execute_task()` prompt in `telegram_bot.py`
+- **Fix 2**: Scoped CLAUDE.md preferences to differentiate interactive vs non-interactive sessions
+
+**Image/Media Data Collection Added**:
+- **Problem**: Scout collected `profile_image_url` via API but discarded it; tweet media (photos/videos) not collected at all
+- **Fix**: Added `MEDIA_FIELDS` and `expansions=["attachments.media_keys"]` to `x_api.py`'s `get_user_timeline()`, added `profile_image_url` to `scout.py`'s competitor output
+- **Cost**: Zero additional API calls — expansions are free data in the same response
+- **Verified**: Task 004 produced image analysis with real `pbs.twimg.com` URLs for all image posts
+
+**Pipeline Issue — Creator `status: "approved"` instead of `"draft"`**:
+- **Symptom**: Task 005 content plans had all posts as `status: "approved"`, bypassing the human approval gate
+- **Root cause**: Creator agent didn't follow its own validation rule #6. Marc didn't catch it because he validated by reasoning instead of running `validate.py`
+- **Fix**: Added explicit `status: "draft"` reminder in `creator.md` (Step 2) and in `marc_pipeline.md` Creator spawn prompts
+
+**Agent Philosophy Established**:
+- Marc operates like a **human agent with SOP**: daily/repetitive tasks follow the SOP (pipeline playbook) faithfully including running validation scripts; ad-hoc tasks require free reasoning where Marc decides his own approach
+- Marc decides which mode applies — "Is this a daily pipeline → follow SOP" vs "Is this ad-hoc → think freely"
+- Scripts like `validate.py` are **tools Marc uses**, not robotic steps — they serve Marc's reasoning, not replace it
+
+**Files modified** (5):
+- `scripts/telegram_bot.py` — Added non-interactive override to `_execute_task()`
+- `CLAUDE.md` — Scoped preferences for interactive vs non-interactive sessions
+- `scripts/x_api.py` — Added `MEDIA_FIELDS`, media expansions to `get_user_timeline()`, media lookup from response includes
+- `scripts/scout.py` — Added `profile_image_url` to `fetch_competitor()` return dict
+- `agents/creator.md` — Added bold `status: "draft"` reminder at Step 2
+- `agents/marc_pipeline.md` — Added `status: "draft"` instruction to Creator spawn prompts
+
+**Key outputs produced**:
+- `data/scout_report_20260306.json` (538KB) — 41 competitors with media data
+- `data/strategy_report_20260306.html` (86KB) — Professional HTML report with competitor analysis + EN/JP strategies
+- `data/image_analysis_report_20260306.json` (60KB) — Image post analysis with real URLs, category performance, engagement comparison
+- `data/strategy_20260306.json` (7.6KB) — Daily strategy with data-driven insights
+- `data/content_plan_20260306_EN.json` + `_JP.json` — 4 posts each with image prompts, A/B test variants, reply templates
+- `data/pipeline_state_20260306.json` — Full pipeline state, all tasks completed
+
+---
+
 ## 4. Decision Summary
 
 ### Framework-Level Decisions (Apply to All Future Projects)
@@ -856,7 +912,15 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 24 — Agent Teams migration complete (March 5, 2026). Conversational Marc + Teammate architecture live.
+**Latest**: Session 25 — Production testing complete (March 6-7, 2026). 5 real tasks executed via Telegram. Non-interactive execution bug fixed. Media data collection added. Agent philosophy established (SOP for daily tasks, free reasoning for ad-hoc).
+
+Session 25 files modified (6 files):
+- `scripts/telegram_bot.py` — Added non-interactive override to `_execute_task()` prompt
+- `CLAUDE.md` — Scoped preferences: interactive (ask user) vs non-interactive (execute directly)
+- `scripts/x_api.py` — Added `MEDIA_FIELDS`, `expansions=["attachments.media_keys"]` to `get_user_timeline()`, media lookup from response includes
+- `scripts/scout.py` — Added `profile_image_url` to `fetch_competitor()` return dict
+- `agents/creator.md` — Added `status: "draft"` reminder at Step 2 (prevents auto-approval bypass)
+- `agents/marc_pipeline.md` — Added `status: "draft"` instruction to both Creator spawn prompts
 
 Session 24 files added/modified (10 files):
 - `agents/marc.md` — Rewritten as Team Leader (Agent tool teammate spawning replaces nested `claude -p`)
@@ -1036,6 +1100,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Phase 4 | Analyst + Manual Metrics + War Room Upgrade | Local machine | **✅ Complete** — 11 tests passed, E2E Day 1 verified, daily report sent to Telegram. Days 2-3 E2E pending (consecutive calendar days). |
 | Phase 5 | Claude Hybrid Agent Conversion (Analyst, Scout, Publisher intelligence) | Local machine | **✅ Complete** — 10 files modified/created, all 3 sub-phases implemented. 20/20 E2E tests passed. |
 | Session 24 | Agent Teams Migration (Conversational Marc + Teammates) | Local machine | **✅ Complete** — 10 files modified/created, Marc responds conversationally via Telegram, spawns Agent Teams for execution |
+| Session 25 | Production Testing (Real tasks via Telegram) | Local machine | **✅ Complete** — 5 tasks executed (3 ad-hoc + 1 image analysis + 1 daily pipeline), non-interactive bug fixed, media collection added, agent philosophy established |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 

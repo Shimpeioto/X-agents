@@ -99,6 +99,7 @@ Today's date: {YYYY-MM-DD}
 Account: EN
 Strategy path: data/strategy_{YYYYMMDD}.json
 Generate today's content plan for the EN account.
+All posts must have status: 'draft' — human approval happens via Telegram, not here.
 Write the output to: data/content_plan_{YYYYMMDD}_EN.json
 Output ONLY valid JSON — no markdown code fences, no commentary."
 ```
@@ -110,6 +111,7 @@ Today's date: {YYYY-MM-DD}
 Account: JP
 Strategy path: data/strategy_{YYYYMMDD}.json
 Generate today's content plan for the JP account.
+All posts must have status: 'draft' — human approval happens via Telegram, not here.
 Write the output to: data/content_plan_{YYYYMMDD}_JP.json
 Output ONLY valid JSON — no markdown code fences, no commentary."
 ```

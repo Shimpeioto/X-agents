@@ -1,0 +1,14 @@
+{
+  "task_id": "20260306_003",
+  "description": "Deep competitor investigation + full account strategy build for EN & JP, delivered as HTML report.\n\nPhase 1 - Scout Investigation:\n- Run scout.py to collect fresh competitor data\n- Deep analysis of ALL competitors: growth patterns, engagement rates, posting frequency, posting times, content types\n- Analyze post characteristics (AI beauty style, image types, text patterns)\n- Profile analysis (bios, positioning, profile photos, background images)\n- Engagement tactics (hashtags, replies, outbound engagement patterns)\n- Identify what growing accounts do differently\n\nPhase 2 - Strategy Development:\n- Build comprehensive EN account strategy from scratch (persona, content style, posting schedule, growth tactics, engagement approach, image direction)\n- Build comprehensive JP account strategy from scratch (same depth, adapted for Japanese market)\n- Include specific, actionable recommendations backed by competitor data\n\nPhase 3 - HTML Report:\n- Compile all findings and strategies into a detailed, well-formatted HTML report\n- Include competitor analysis section with data visualizations/tables\n- Include EN strategy section and JP strategy section\n- Save to data/strategy_report_20260306.html\n- Send to operator via Telegram\n\nExpected outputs:\n- data/scout_report_20260306.json (fresh competitor data)\n- data/strategy_report_20260306.html (final HTML report)\n\nNotes: Operator wants maximum detail and specificity. This is a from-scratch strategy build, not incremental. Focus on actionable insights about AI beauty accounts.",
+  "task_type": "custom",
+  "agents_planned": [
+    "scout",
+    "strategist"
+  ],
+  "notes": "Operator wants a retry of this task — go deep on investigation and be very specific in strategy recommendations. HTML report is the key deliverable. Cover: AI beauty characteristics, post content/frequency, posting times, image characteristics, engagement measures, profile photos/backgrounds/bios, and detailed growth strategies for both EN and JP.",
+  "created_at": "2026-03-06T14:57:44.120614+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-06T15:07:43.911327+09:00",
+  "exit_code": 0
+}

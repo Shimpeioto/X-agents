@@ -16,6 +16,7 @@ MAX_IMAGE_SIZE = 2 * 1024 * 1024  # 2MB per global rules
 
 USER_FIELDS = ["public_metrics", "description", "profile_image_url"]
 TWEET_FIELDS = ["public_metrics", "created_at", "entities"]
+MEDIA_FIELDS = ["type", "url", "preview_image_url", "alt_text"]
 
 
 def load_bearer_token() -> str:
@@ -82,17 +83,46 @@ class XApiClient:
             max_results: Number of tweets to fetch (5-100)
 
         Returns:
-            List of tweet dicts with text, public_metrics, created_at, entities
+            List of tweet dicts with text, public_metrics, created_at, entities, media
         """
         response = self._api_call_with_retry(
             self.client.get_users_tweets,
             id=user_id,
             max_results=max(5, min(max_results, 100)),
             tweet_fields=TWEET_FIELDS,
+            expansions=["attachments.media_keys"],
+            media_fields=MEDIA_FIELDS,
         )
         if response is None or response.data is None:
             return []
-        return [self._normalize_tweet(t) for t in response.data if t is not None]
+
+        # Build media lookup from includes
+        media_lookup = {}
+        if response.includes and "media" in response.includes:
+            for media in response.includes["media"]:
+                media_lookup[media.media_key] = {
+                    "type": media.type,
+                    "url": getattr(media, "url", None),
+                    "preview_image_url": getattr(media, "preview_image_url", None),
+                    "alt_text": getattr(media, "alt_text", None),
+                }
+
+        tweets = []
+        for t in response.data:
+            if t is None:
+                continue
+            normalized = self._normalize_tweet(t)
+            if normalized:
+                # Attach media from includes
+                tweet_media = []
+                attachments = getattr(t, "attachments", None)
+                if attachments and "media_keys" in attachments:
+                    for key in attachments["media_keys"]:
+                        if key in media_lookup:
+                            tweet_media.append(media_lookup[key])
+                normalized["media"] = tweet_media
+                tweets.append(normalized)
+        return tweets
 
     def get_tweets_batch(self, tweet_ids: list[str]) -> list[dict]:
         """Batch lookup tweets by IDs (up to 100 per request).

@@ -293,6 +293,8 @@ async def _execute_task(update: Update, task_id: str, tool_call: dict):
 Read agents/marc.md for your full instructions.
 {playbook_ref}
 
+IMPORTANT: You are running in non-interactive mode. Execute ALL scripts directly using your bash tool — do not ask the user to run commands or paste output. The operator is NOT watching this session. You must run everything yourself and deliver results via Telegram.
+
 Task from the operator (confirmed via Telegram conversation):
 {task_desc}
 

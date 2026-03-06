@@ -209,6 +209,7 @@ class Scout:
             "following": following,
             "tweet_count": tweet_count,
             "description": user_data.get("description", ""),
+            "profile_image_url": user_data.get("profile_image_url"),
             "recent_posts": tweets,
             "avg_engagement_rate": round(avg_engagement, 6),
             "posting_frequency": posting_frequency,

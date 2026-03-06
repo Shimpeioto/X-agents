@@ -40,7 +40,8 @@ From the strategy, use the account-specific section:
 
 ## Step 2: Generate Posts
 
-For EACH slot in the account's `posting_schedule`, generate one post:
+For EACH slot in the account's `posting_schedule`, generate one post.
+**All posts must have `status: "draft"`** — human approval happens separately via Telegram.
 
 ### Post Text
 - Write engaging, on-brand post text for AI beauty content

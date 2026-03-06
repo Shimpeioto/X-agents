@@ -1,0 +1,1707 @@
+{
+  "date": "2026-03-06",
+  "generated_at": "2026-03-06T15:44:06.643142+09:00",
+  "task_id": "20260306_004",
+  "report_type": "competitor_image_analysis",
+  "data_source": "data/scout_raw_20260306.json",
+  "summary": {
+    "total_competitors_analyzed": 41,
+    "total_original_posts_analyzed": 260,
+    "total_reply_posts_excluded": 140,
+    "image_posts_count": 202,
+    "text_only_posts_count": 39,
+    "video_posts_count": 19,
+    "image_post_ratio": 0.777,
+    "key_finding": "Image posts dominate AI beauty content with significantly higher engagement than text-only posts"
+  },
+  "engagement_comparison": {
+    "EN": {
+      "image_posts": {
+        "count": 160,
+        "avg_likes": 1884.1,
+        "avg_retweets": 54.3,
+        "avg_replies": 124.0,
+        "avg_bookmarks": 244.4,
+        "avg_impressions": 34807.2,
+        "avg_engagement_rate": 0.070419
+      },
+      "text_only_posts": {
+        "count": 21,
+        "avg_likes": 758.6,
+        "avg_retweets": 14.0,
+        "avg_replies": 52.6,
+        "avg_bookmarks": 15.5,
+        "avg_impressions": 36124.4,
+        "avg_engagement_rate": 0.019743
+      },
+      "image_advantage": {
+        "avg_likes": 148.4,
+        "avg_retweets": 287.9,
+        "avg_replies": 135.7,
+        "avg_bookmarks": 1476.8,
+        "avg_engagement_rate": 256.7
+      }
+    },
+    "JP": {
+      "image_posts": {
+        "count": 49,
+        "avg_likes": 431.7,
+        "avg_retweets": 13.6,
+        "avg_replies": 14.4,
+        "avg_bookmarks": 195.5,
+        "avg_impressions": 145019.6,
+        "avg_engagement_rate": 0.007169
+      },
+      "text_only_posts": {
+        "count": 20,
+        "avg_likes": 75.0,
+        "avg_retweets": 3.4,
+        "avg_replies": 5.7,
+        "avg_bookmarks": 5.6,
+        "avg_impressions": 10052.1,
+        "avg_engagement_rate": 0.001067
+      },
+      "image_advantage": {
+        "avg_likes": 475.6,
+        "avg_retweets": 300.0,
+        "avg_replies": 152.6,
+        "avg_bookmarks": 3391.1,
+        "avg_engagement_rate": 571.9
+      }
+    },
+    "overall": {
+      "image_posts": {
+        "count": 202,
+        "avg_likes": 1589.2,
+        "avg_retweets": 45.1,
+        "avg_replies": 101.0,
+        "avg_bookmarks": 240.3,
+        "avg_impressions": 62643.3,
+        "avg_engagement_rate": 0.057417
+      },
+      "text_only_posts": {
+        "count": 39,
+        "avg_likes": 446.9,
+        "avg_retweets": 8.5,
+        "avg_replies": 31.2,
+        "avg_bookmarks": 11.2,
+        "avg_impressions": 24606.5,
+        "avg_engagement_rate": 0.011171
+      }
+    }
+  },
+  "category_performance": {
+    "portrait_selfie": {
+      "total_count": 15,
+      "overall": {
+        "count": 15,
+        "avg_likes": 4233.5,
+        "avg_retweets": 116.5,
+        "avg_replies": 179.9,
+        "avg_bookmarks": 700.7,
+        "avg_impressions": 46682.7,
+        "avg_engagement_rate": 0.288552
+      },
+      "EN": {
+        "count": 15,
+        "avg_likes": 4233.5,
+        "avg_retweets": 116.5,
+        "avg_replies": 179.9,
+        "avg_bookmarks": 700.7,
+        "avg_impressions": 46682.7,
+        "avg_engagement_rate": 0.288552
+      },
+      "JP": {
+        "count": 0,
+        "avg_likes": 0,
+        "avg_retweets": 0,
+        "avg_replies": 0,
+        "avg_engagement_rate": 0,
+        "avg_impressions": 0,
+        "avg_bookmarks": 0
+      }
+    },
+    "engagement_bait": {
+      "total_count": 75,
+      "overall": {
+        "count": 75,
+        "avg_likes": 2319.4,
+        "avg_retweets": 68.7,
+        "avg_replies": 178.9,
+        "avg_bookmarks": 343.3,
+        "avg_impressions": 54628.1,
+        "avg_engagement_rate": 0.088859
+      },
+      "EN": {
+        "count": 60,
+        "avg_likes": 2800.6,
+        "avg_retweets": 83.3,
+        "avg_replies": 220.7,
+        "avg_bookmarks": 383.7,
+        "avg_impressions": 47920.2,
+        "avg_engagement_rate": 0.108919
+      },
+      "JP": {
+        "count": 15,
+        "avg_likes": 394.7,
+        "avg_retweets": 10.5,
+        "avg_replies": 11.7,
+        "avg_bookmarks": 181.8,
+        "avg_impressions": 81460.1,
+        "avg_engagement_rate": 0.008618
+      }
+    },
+    "general_beauty": {
+      "total_count": 96,
+      "overall": {
+        "count": 96,
+        "avg_likes": 1440.0,
+        "avg_retweets": 37.2,
+        "avg_replies": 68.5,
+        "avg_bookmarks": 223.7,
+        "avg_impressions": 85832.3,
+        "avg_engagement_rate": 0.048644
+      },
+      "EN": {
+        "count": 85,
+        "avg_likes": 1512.1,
+        "avg_retweets": 40.8,
+        "avg_replies": 73.7,
+        "avg_bookmarks": 179.9,
+        "avg_impressions": 29407.7,
+        "avg_engagement_rate": 0.053797
+      },
+      "JP": {
+        "count": 14,
+        "avg_likes": 693.6,
+        "avg_retweets": 18.2,
+        "avg_replies": 22.2,
+        "avg_bookmarks": 441.6,
+        "avg_impressions": 410017.6,
+        "avg_engagement_rate": 0.007087
+      }
+    },
+    "new_release": {
+      "total_count": 2,
+      "overall": {
+        "count": 2,
+        "avg_likes": 574.5,
+        "avg_retweets": 21.0,
+        "avg_replies": 79.5,
+        "avg_bookmarks": 39.0,
+        "avg_impressions": 6904.0,
+        "avg_engagement_rate": 0.010623
+      },
+      "EN": {
+        "count": 2,
+        "avg_likes": 574.5,
+        "avg_retweets": 21.0,
+        "avg_replies": 79.5,
+        "avg_bookmarks": 39.0,
+        "avg_impressions": 6904.0,
+        "avg_engagement_rate": 0.010623
+      },
+      "JP": {
+        "count": 1,
+        "avg_likes": 118.0,
+        "avg_retweets": 9.0,
+        "avg_replies": 6.0,
+        "avg_bookmarks": 7.0,
+        "avg_impressions": 1478.0,
+        "avg_engagement_rate": 0.001297
+      }
+    },
+    "fashion": {
+      "total_count": 4,
+      "overall": {
+        "count": 4,
+        "avg_likes": 561.0,
+        "avg_retweets": 24.8,
+        "avg_replies": 68.2,
+        "avg_bookmarks": 57.8,
+        "avg_impressions": 19459.0,
+        "avg_engagement_rate": 0.010818
+      },
+      "EN": {
+        "count": 4,
+        "avg_likes": 561.0,
+        "avg_retweets": 24.8,
+        "avg_replies": 68.2,
+        "avg_bookmarks": 57.8,
+        "avg_impressions": 19459.0,
+        "avg_engagement_rate": 0.010818
+      },
+      "JP": {
+        "count": 0,
+        "avg_likes": 0,
+        "avg_retweets": 0,
+        "avg_replies": 0,
+        "avg_engagement_rate": 0,
+        "avg_impressions": 0,
+        "avg_bookmarks": 0
+      }
+    },
+    "bikini_swimwear": {
+      "total_count": 6,
+      "overall": {
+        "count": 6,
+        "avg_likes": 515.7,
+        "avg_retweets": 17.0,
+        "avg_replies": 18.0,
+        "avg_bookmarks": 105.5,
+        "avg_impressions": 17970.0,
+        "avg_engagement_rate": 0.020973
+      },
+      "EN": {
+        "count": 3,
+        "avg_likes": 777.0,
+        "avg_retweets": 22.3,
+        "avg_replies": 30.3,
+        "avg_bookmarks": 167.0,
+        "avg_impressions": 29406.3,
+        "avg_engagement_rate": 0.028716
+      },
+      "JP": {
+        "count": 4,
+        "avg_likes": 220.2,
+        "avg_retweets": 11.0,
+        "avg_replies": 5.8,
+        "avg_bookmarks": 34.8,
+        "avg_impressions": 5269.8,
+        "avg_engagement_rate": 0.010246
+      }
+    },
+    "artistic": {
+      "total_count": 23,
+      "overall": {
+        "count": 23,
+        "avg_likes": 270.1,
+        "avg_retweets": 11.7,
+        "avg_replies": 9.9,
+        "avg_bookmarks": 39.3,
+        "avg_impressions": 8752.3,
+        "avg_engagement_rate": 0.008598
+      },
+      "EN": {
+        "count": 5,
+        "avg_likes": 349.2,
+        "avg_retweets": 20.2,
+        "avg_replies": 32.6,
+        "avg_bookmarks": 31.6,
+        "avg_impressions": 8379.2,
+        "avg_engagement_rate": 0.003986
+      },
+      "JP": {
+        "count": 21,
+        "avg_likes": 282.8,
+        "avg_retweets": 12.4,
+        "avg_replies": 9.8,
+        "avg_bookmarks": 42.0,
+        "avg_impressions": 8528.5,
+        "avg_engagement_rate": 0.00926
+      }
+    },
+    "greeting": {
+      "total_count": 20,
+      "overall": {
+        "count": 20,
+        "avg_likes": 219.1,
+        "avg_retweets": 11.2,
+        "avg_replies": 14.0,
+        "avg_bookmarks": 19.8,
+        "avg_impressions": 4601.4,
+        "avg_engagement_rate": 0.005892
+      },
+      "EN": {
+        "count": 8,
+        "avg_likes": 266.8,
+        "avg_retweets": 16.4,
+        "avg_replies": 27.2,
+        "avg_bookmarks": 24.0,
+        "avg_impressions": 5396.5,
+        "avg_engagement_rate": 0.006674
+      },
+      "JP": {
+        "count": 15,
+        "avg_likes": 247.9,
+        "avg_retweets": 12.4,
+        "avg_replies": 13.5,
+        "avg_bookmarks": 22.5,
+        "avg_impressions": 4569.7,
+        "avg_engagement_rate": 0.005405
+      }
+    },
+    "cosplay": {
+      "total_count": 1,
+      "overall": {
+        "count": 1,
+        "avg_likes": 30.0,
+        "avg_retweets": 3.0,
+        "avg_replies": 3.0,
+        "avg_bookmarks": 2.0,
+        "avg_impressions": 771.0,
+        "avg_engagement_rate": 0.007525
+      },
+      "EN": {
+        "count": 1,
+        "avg_likes": 30.0,
+        "avg_retweets": 3.0,
+        "avg_replies": 3.0,
+        "avg_bookmarks": 2.0,
+        "avg_impressions": 771.0,
+        "avg_engagement_rate": 0.007525
+      },
+      "JP": {
+        "count": 0,
+        "avg_likes": 0,
+        "avg_retweets": 0,
+        "avg_replies": 0,
+        "avg_engagement_rate": 0,
+        "avg_impressions": 0,
+        "avg_bookmarks": 0
+      }
+    }
+  },
+  "multi_image_analysis": {
+    "multi_image_posts": {
+      "count": 32,
+      "avg_likes": 822.9,
+      "avg_retweets": 23.5,
+      "avg_replies": 23.8,
+      "avg_bookmarks": 377.7,
+      "avg_impressions": 232185.8,
+      "avg_engagement_rate": 0.008575
+    },
+    "single_image_posts": {
+      "count": 170,
+      "avg_likes": 1733.5,
+      "avg_retweets": 49.2,
+      "avg_replies": 115.6,
+      "avg_bookmarks": 214.5,
+      "avg_impressions": 30729.4,
+      "avg_engagement_rate": 0.066611
+    }
+  },
+  "top_image_posts": {
+    "EN": [
+      {
+        "rank": 1,
+        "handle": "@leahyunaxo",
+        "display_name": "Leah Yuna",
+        "tweet_id": "2029302462545310078",
+        "tweet_url": "https://x.com/leahyunaxo/status/2029302462545310078",
+        "text": "wifey material? https://t.co/vZjBtRDcHR",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCmH1S9XAAIKJDG.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "portrait_selfie",
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 35928,
+          "retweets": 1020,
+          "replies": 788,
+          "quotes": 7,
+          "bookmarks": 7510,
+          "impressions": 366338,
+          "total_engagement": 37743
+        },
+        "engagement_rate": 0.499583,
+        "followers": 75549,
+        "created_at": "2026-03-04T21:06:24+00:00"
+      },
+      {
+        "rank": 2,
+        "handle": "@IsabellaCruz_47",
+        "display_name": "Isabella Cruz 💞",
+        "tweet_id": "2024279270634201103",
+        "tweet_url": "https://x.com/IsabellaCruz_47/status/2024279270634201103",
+        "text": "Rate me from 1 to 10 🤍 https://t.co/eEuJDX1OBg",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HBevQ6xWIAAKSEg.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 20693,
+          "retweets": 433,
+          "replies": 1436,
+          "quotes": 23,
+          "bookmarks": 2305,
+          "impressions": 696847,
+          "total_engagement": 22585
+        },
+        "engagement_rate": 0.245925,
+        "followers": 91837,
+        "created_at": "2026-02-19T00:26:02+00:00"
+      },
+      {
+        "rank": 3,
+        "handle": "@leahyunaxo",
+        "display_name": "Leah Yuna",
+        "tweet_id": "2028941945234415772",
+        "tweet_url": "https://x.com/leahyunaxo/status/2028941945234415772",
+        "text": "be honest.. am I attractive? https://t.co/OgZpH6S3V3",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCg_8QtXMAAc-Nl.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 16243,
+          "retweets": 493,
+          "replies": 373,
+          "quotes": 8,
+          "bookmarks": 3123,
+          "impressions": 180968,
+          "total_engagement": 17117
+        },
+        "engagement_rate": 0.226568,
+        "followers": 75549,
+        "created_at": "2026-03-03T21:13:50+00:00"
+      },
+      {
+        "rank": 4,
+        "handle": "@yuumispm",
+        "display_name": "yuumi 🌸",
+        "tweet_id": "2028230833274834948",
+        "tweet_url": "https://x.com/yuumispm/status/2028230833274834948",
+        "text": "https://t.co/rIVhO4kg9z",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCW5MKiWEAAYsml.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 16182,
+          "retweets": 382,
+          "replies": 158,
+          "quotes": 3,
+          "bookmarks": 2303,
+          "impressions": 251648,
+          "total_engagement": 16725
+        },
+        "engagement_rate": 1.388543,
+        "followers": 12045,
+        "created_at": "2026-03-01T22:08:08+00:00"
+      },
+      {
+        "rank": 5,
+        "handle": "@IsabellaCruz_47",
+        "display_name": "Isabella Cruz 💞",
+        "tweet_id": "2022475837237530680",
+        "tweet_url": "https://x.com/IsabellaCruz_47/status/2022475837237530680",
+        "text": "Rate my body shape from 1-10 🤍 https://t.co/NqYhAIzDUg",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HBFHDL7akAEjQXd.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 9363,
+          "retweets": 237,
+          "replies": 966,
+          "quotes": 15,
+          "bookmarks": 933,
+          "impressions": 161920,
+          "total_engagement": 10581
+        },
+        "engagement_rate": 0.115215,
+        "followers": 91837,
+        "created_at": "2026-02-14T00:59:50+00:00"
+      },
+      {
+        "rank": 6,
+        "handle": "@tanarainw",
+        "display_name": "Tana Rain",
+        "tweet_id": "2029252275089072433",
+        "tweet_url": "https://x.com/tanarainw/status/2029252275089072433",
+        "text": "🦜 https://t.co/GEylftkTm0",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HClaMC9WoAAITcv.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 7240,
+          "retweets": 149,
+          "replies": 253,
+          "quotes": 2,
+          "bookmarks": 1246,
+          "impressions": 129713,
+          "total_engagement": 7644
+        },
+        "engagement_rate": 0.039877,
+        "followers": 191690,
+        "created_at": "2026-03-04T17:46:58+00:00"
+      },
+      {
+        "rank": 7,
+        "handle": "@IsabellaCruz_47",
+        "display_name": "Isabella Cruz 💞",
+        "tweet_id": "2020678840910057867",
+        "tweet_url": "https://x.com/IsabellaCruz_47/status/2020678840910057867",
+        "text": "Would you kiss every inch of me if I asked you to? 💕 https://t.co/DUR8hqIGWd",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HArksBhbYAAJNJV.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 5315,
+          "retweets": 138,
+          "replies": 1047,
+          "quotes": 9,
+          "bookmarks": 298,
+          "impressions": 136683,
+          "total_engagement": 6509
+        },
+        "engagement_rate": 0.070876,
+        "followers": 91837,
+        "created_at": "2026-02-09T01:59:12+00:00"
+      },
+      {
+        "rank": 8,
+        "handle": "@yuumi005",
+        "display_name": "yuumi 🌸 優美",
+        "tweet_id": "2026422506114969603",
+        "tweet_url": "https://x.com/yuumi005/status/2026422506114969603",
+        "text": "left or right? https://t.co/eSY1h3NVXv",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HB9Mh1CXMAAaRGF.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 5615,
+          "retweets": 127,
+          "replies": 93,
+          "quotes": 2,
+          "bookmarks": 587,
+          "impressions": 68115,
+          "total_engagement": 5837
+        },
+        "engagement_rate": 0.071418,
+        "followers": 81730,
+        "created_at": "2026-02-24T22:22:29+00:00"
+      },
+      {
+        "rank": 9,
+        "handle": "@sessypuuh",
+        "display_name": "Sessy",
+        "tweet_id": "2026011945380245928",
+        "tweet_url": "https://x.com/sessypuuh/status/2026011945380245928",
+        "text": "Am I ur type 👀 https://t.co/jmrJ4dWaMq",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HB3XH5CXkAE0eA2.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "portrait_selfie",
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 5437,
+          "retweets": 156,
+          "replies": 202,
+          "quotes": 0,
+          "bookmarks": 821,
+          "impressions": 58449,
+          "total_engagement": 5795
+        },
+        "engagement_rate": 0.754754,
+        "followers": 7678,
+        "created_at": "2026-02-23T19:11:03+00:00"
+      },
+      {
+        "rank": 10,
+        "handle": "@yuumispm",
+        "display_name": "yuumi 🌸",
+        "tweet_id": "2026788488545230976",
+        "tweet_url": "https://x.com/yuumispm/status/2026788488545230976",
+        "text": "https://t.co/hW2q35dIEp",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCCZYulXoAAgsfY.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 5333,
+          "retweets": 104,
+          "replies": 36,
+          "quotes": 1,
+          "bookmarks": 579,
+          "impressions": 89261,
+          "total_engagement": 5474
+        },
+        "engagement_rate": 0.454462,
+        "followers": 12045,
+        "created_at": "2026-02-25T22:36:46+00:00"
+      },
+      {
+        "rank": 11,
+        "handle": "@IsabellaCruz_47",
+        "display_name": "Isabella Cruz 💞",
+        "tweet_id": "2028979307901579603",
+        "tweet_url": "https://x.com/IsabellaCruz_47/status/2028979307901579603",
+        "text": "Squeeze, kiss or pass? 🤍 https://t.co/ycDFEUKkV7",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HChh7HvXIAAfXZB.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 4530,
+          "retweets": 147,
+          "replies": 718,
+          "quotes": 5,
+          "bookmarks": 286,
+          "impressions": 55479,
+          "total_engagement": 5400
+        },
+        "engagement_rate": 0.0588,
+        "followers": 91837,
+        "created_at": "2026-03-03T23:42:18+00:00"
+      },
+      {
+        "rank": 12,
+        "handle": "@Ava_starz",
+        "display_name": "Ava Starz",
+        "tweet_id": "2029364772584456404",
+        "tweet_url": "https://x.com/Ava_starz/status/2029364772584456404",
+        "text": "I get so lonely when i'm home alone https://t.co/rQIvyjDOyl",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HBVC4UobcAISmSz.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 4600,
+          "retweets": 142,
+          "replies": 413,
+          "quotes": 5,
+          "bookmarks": 454,
+          "impressions": 97214,
+          "total_engagement": 5160
+        },
+        "engagement_rate": 0.084518,
+        "followers": 61052,
+        "created_at": "2026-03-05T01:14:00+00:00"
+      },
+      {
+        "rank": 13,
+        "handle": "@sessypuuh",
+        "display_name": "Sessy",
+        "tweet_id": "2028232378582270441",
+        "tweet_url": "https://x.com/sessypuuh/status/2028232378582270441",
+        "text": "Am I ur type? https://t.co/heicwIDr0F",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCW6mNeaIAA7JeX.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "portrait_selfie",
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 4603,
+          "retweets": 82,
+          "replies": 414,
+          "quotes": 6,
+          "bookmarks": 372,
+          "impressions": 64868,
+          "total_engagement": 5105
+        },
+        "engagement_rate": 0.664887,
+        "followers": 7678,
+        "created_at": "2026-03-01T22:14:16+00:00"
+      },
+      {
+        "rank": 14,
+        "handle": "@yogana_19",
+        "display_name": "Ana Sakura 🌸",
+        "tweet_id": "2029121671941304668",
+        "tweet_url": "https://x.com/yogana_19/status/2029121671941304668",
+        "text": "wyd if you see me in person 🤫 https://t.co/eCktjlfTz2",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HChd4N1W8AAUDD9.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 4443,
+          "retweets": 109,
+          "replies": 505,
+          "quotes": 3,
+          "bookmarks": 448,
+          "impressions": 54710,
+          "total_engagement": 5060
+        },
+        "engagement_rate": 0.187804,
+        "followers": 26943,
+        "created_at": "2026-03-04T09:08:00+00:00"
+      },
+      {
+        "rank": 15,
+        "handle": "@Estherbron1",
+        "display_name": "esterbby",
+        "tweet_id": "2024196085774721228",
+        "tweet_url": "https://x.com/Estherbron1/status/2024196085774721228",
+        "text": "Front or back? https://t.co/tCNK57M7b3",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HBdjnIXWcAAjTF-.jpg",
+          "https://pbs.twimg.com/media/HBdjnIXXwAI1Q3N.jpg"
+        ],
+        "image_count": 2,
+        "inferred_categories": [
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 4642,
+          "retweets": 214,
+          "replies": 114,
+          "quotes": 2,
+          "bookmarks": 1350,
+          "impressions": 98463,
+          "total_engagement": 4972
+        },
+        "engagement_rate": 0.004009,
+        "followers": 1240269,
+        "created_at": "2026-02-18T18:55:29+00:00"
+      }
+    ],
+    "JP": [
+      {
+        "rank": 1,
+        "handle": "@ai_hyk",
+        "display_name": "Hiyoko🐣",
+        "tweet_id": "2028926600109244628",
+        "tweet_url": "https://x.com/ai_hyk/status/2028926600109244628",
+        "text": ".@grok タップして4枚の画像を1つに結合して https://t.co/uKR0hSDyDP",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCgxt71bEAEis0v.jpg",
+          "https://pbs.twimg.com/media/HCgxu1zaMAAkqTb.jpg",
+          "https://pbs.twimg.com/media/HCgxu1vbcAAOPaS.jpg",
+          "https://pbs.twimg.com/media/HCgxu1tbsAAM2q3.jpg"
+        ],
+        "image_count": 4,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 7858,
+          "retweets": 34,
+          "replies": 155,
+          "quotes": 5,
+          "bookmarks": 5995,
+          "impressions": 5579475,
+          "total_engagement": 8052
+        },
+        "engagement_rate": 0.064876,
+        "followers": 124114,
+        "created_at": "2026-03-03T20:12:51+00:00"
+      },
+      {
+        "rank": 2,
+        "handle": "@ai_hyk",
+        "display_name": "Hiyoko🐣",
+        "tweet_id": "2029658781198733579",
+        "tweet_url": "https://x.com/ai_hyk/status/2029658781198733579",
+        "text": "タップして縦長に出来てる？ https://t.co/sgDAPr1QMH",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCrLzkBaMAAOkVY.jpg",
+          "https://pbs.twimg.com/media/HCrLzkQaUAAiMWv.jpg",
+          "https://pbs.twimg.com/media/HCrLzkEakAAuJW_.jpg",
+          "https://pbs.twimg.com/media/HCrLzkEboAAv3bJ.jpg"
+        ],
+        "image_count": 4,
+        "inferred_categories": [
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 3147,
+          "retweets": 27,
+          "replies": 105,
+          "quotes": 0,
+          "bookmarks": 2157,
+          "impressions": 1048553,
+          "total_engagement": 3279
+        },
+        "engagement_rate": 0.026419,
+        "followers": 124114,
+        "created_at": "2026-03-05T20:42:17+00:00"
+      },
+      {
+        "rank": 3,
+        "handle": "@ai_hyk",
+        "display_name": "Hiyoko🐣",
+        "tweet_id": "2027855250817003543",
+        "tweet_url": "https://x.com/ai_hyk/status/2027855250817003543",
+        "text": "どの色がベスト？ https://t.co/Eq6aksztYu",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCRjDUcbEAIwIkh.jpg",
+          "https://pbs.twimg.com/media/HCRjDtJbEAMUMHz.jpg",
+          "https://pbs.twimg.com/media/HCRjFjyaQAAjsvV.jpg",
+          "https://pbs.twimg.com/media/HCRje87b0AAtZNK.jpg"
+        ],
+        "image_count": 4,
+        "inferred_categories": [
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 813,
+          "retweets": 31,
+          "replies": 38,
+          "quotes": 0,
+          "bookmarks": 281,
+          "impressions": 112654,
+          "total_engagement": 882
+        },
+        "engagement_rate": 0.007106,
+        "followers": 124114,
+        "created_at": "2026-02-28T21:15:42+00:00"
+      },
+      {
+        "rank": 4,
+        "handle": "@AIart_yama94",
+        "display_name": "AINA@AIart",
+        "tweet_id": "2029519874356113648",
+        "tweet_url": "https://x.com/AIart_yama94/status/2029519874356113648",
+        "text": "人多かった\n#SFW #Fictional #digitalart https://t.co/CYshQ3N6aP",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCpNkgNW8AAPbgH.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "artistic"
+        ],
+        "metrics": {
+          "likes": 653,
+          "retweets": 23,
+          "replies": 6,
+          "quotes": 3,
+          "bookmarks": 71,
+          "impressions": 11221,
+          "total_engagement": 685
+        },
+        "engagement_rate": 0.018516,
+        "followers": 36996,
+        "created_at": "2026-03-05T11:30:19+00:00"
+      },
+      {
+        "rank": 5,
+        "handle": "@AIart_yama94",
+        "display_name": "AINA@AIart",
+        "tweet_id": "2029157511928934470",
+        "tweet_url": "https://x.com/AIart_yama94/status/2029157511928934470",
+        "text": "赤いコートで華麗に決めてみた\n#SFW #Fictional #digitalart https://t.co/USIELYQMXT",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCkEAQXWYAAv7oZ.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "artistic"
+        ],
+        "metrics": {
+          "likes": 659,
+          "retweets": 12,
+          "replies": 2,
+          "quotes": 5,
+          "bookmarks": 148,
+          "impressions": 29737,
+          "total_engagement": 678
+        },
+        "engagement_rate": 0.018326,
+        "followers": 36996,
+        "created_at": "2026-03-04T11:30:25+00:00"
+      },
+      {
+        "rank": 6,
+        "handle": "@Lux_aeterna_",
+        "display_name": "Luna(ルナ)✵AIart",
+        "tweet_id": "2029648391979028515",
+        "tweet_url": "https://x.com/Lux_aeterna_/status/2029648391979028515",
+        "text": "Good morning (ฅ&gt;ω&lt;ฅ)♡\n\nおはようございます (ฅ&gt;ω&lt;ฅ)♡\n\n#16 ＆ #5 \nSFW AI-generated illustrations. https://t.co/MBY9aZDFDc",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCprjeZaYAAi2xR.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "artistic",
+          "greeting"
+        ],
+        "metrics": {
+          "likes": 549,
+          "retweets": 32,
+          "replies": 49,
+          "quotes": 1,
+          "bookmarks": 56,
+          "impressions": 6015,
+          "total_engagement": 631
+        },
+        "engagement_rate": 0.006154,
+        "followers": 102534,
+        "created_at": "2026-03-05T20:01:00+00:00"
+      },
+      {
+        "rank": 7,
+        "handle": "@Lux_aeterna_",
+        "display_name": "Luna(ルナ)✵AIart",
+        "tweet_id": "2029286003635306814",
+        "tweet_url": "https://x.com/Lux_aeterna_/status/2029286003635306814",
+        "text": "Good morning (´,,•ω•,,)\n\nおはようございます (´,,•ω•,,)\n\n#16 ＆ #5\nSFW AI-generated illustrations. https://t.co/CdjIKVmRcp",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCk3oY6awAER827.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "artistic",
+          "greeting"
+        ],
+        "metrics": {
+          "likes": 564,
+          "retweets": 24,
+          "replies": 43,
+          "quotes": 0,
+          "bookmarks": 50,
+          "impressions": 8299,
+          "total_engagement": 631
+        },
+        "engagement_rate": 0.006154,
+        "followers": 102534,
+        "created_at": "2026-03-04T20:01:00+00:00"
+      },
+      {
+        "rank": 8,
+        "handle": "@ai_hyk",
+        "display_name": "Hiyoko🐣",
+        "tweet_id": "2027089536468320335",
+        "tweet_url": "https://x.com/ai_hyk/status/2027089536468320335",
+        "text": ".@grok リブニットを消して https://t.co/PKdJNzQ5AA",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCGq-vcbYAE7pav.jpg",
+          "https://pbs.twimg.com/media/HCGq_w4akAACEfP.jpg",
+          "https://pbs.twimg.com/media/HCGrAM4aoAAdaoB.jpg",
+          "https://pbs.twimg.com/media/HCGrAi_bQAEtEjF.jpg"
+        ],
+        "image_count": 4,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 475,
+          "retweets": 13,
+          "replies": 66,
+          "quotes": 1,
+          "bookmarks": 94,
+          "impressions": 77950,
+          "total_engagement": 555
+        },
+        "engagement_rate": 0.004472,
+        "followers": 124114,
+        "created_at": "2026-02-26T18:33:01+00:00"
+      },
+      {
+        "rank": 9,
+        "handle": "@AI_MIKENEKO",
+        "display_name": "AI_三毛猫",
+        "tweet_id": "2029648139989266835",
+        "tweet_url": "https://x.com/AI_MIKENEKO/status/2029648139989266835",
+        "text": "今日も応援するね   \n I'll cheer you on today too.  \n Hoy también te animaré. https://t.co/1tRtwkx58R",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCp9cmUbUAAhp8O.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 393,
+          "retweets": 13,
+          "replies": 36,
+          "quotes": 2,
+          "bookmarks": 31,
+          "impressions": 3169,
+          "total_engagement": 444
+        },
+        "engagement_rate": 0.003304,
+        "followers": 134377,
+        "created_at": "2026-03-05T20:00:00+00:00"
+      },
+      {
+        "rank": 10,
+        "handle": "@Lux_aeterna_",
+        "display_name": "Luna(ルナ)✵AIart",
+        "tweet_id": "2028923616025559329",
+        "tweet_url": "https://x.com/Lux_aeterna_/status/2028923616025559329",
+        "text": "Good morning (*´ч`*)\n\nおはようございます (*´ч`*)\n\n#16\nSFW AI-generated illustrations. https://t.co/YTtpBvVMtX",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCgCJXtbcAAWUPw.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "artistic",
+          "greeting"
+        ],
+        "metrics": {
+          "likes": 358,
+          "retweets": 36,
+          "replies": 48,
+          "quotes": 1,
+          "bookmarks": 28,
+          "impressions": 5376,
+          "total_engagement": 443
+        },
+        "engagement_rate": 0.004321,
+        "followers": 102534,
+        "created_at": "2026-03-03T20:01:00+00:00"
+      },
+      {
+        "rank": 11,
+        "handle": "@ai_nontan_room",
+        "display_name": "－TAKATO－AI_room",
+        "tweet_id": "2029712623370129537",
+        "tweet_url": "https://x.com/ai_nontan_room/status/2029712623370129537",
+        "text": "SFW Fictional digitalart #ZImage https://t.co/H1p6VCLOEA",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCr8cOabcAA6e7h.jpg",
+          "https://pbs.twimg.com/media/HCr8fLTaUAAop5X.jpg",
+          "https://pbs.twimg.com/media/HCr8oABbMAA3aVk.jpg",
+          "https://pbs.twimg.com/media/HCr8sD-aUAEGiUL.jpg"
+        ],
+        "image_count": 4,
+        "inferred_categories": [
+          "artistic"
+        ],
+        "metrics": {
+          "likes": 337,
+          "retweets": 16,
+          "replies": 4,
+          "quotes": 0,
+          "bookmarks": 100,
+          "impressions": 15570,
+          "total_engagement": 357
+        },
+        "engagement_rate": 0.010457,
+        "followers": 34141,
+        "created_at": "2026-03-06T00:16:14+00:00"
+      },
+      {
+        "rank": 12,
+        "handle": "@ai_hyk",
+        "display_name": "Hiyoko🐣",
+        "tweet_id": "2027466218630717575",
+        "tweet_url": "https://x.com/ai_hyk/status/2027466218630717575",
+        "text": "https://t.co/qzpjmwgqE4",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCMBoysaYAAUcLv.jpg",
+          "https://pbs.twimg.com/media/HCMBo9wWEAAPvU6.jpg",
+          "https://pbs.twimg.com/media/HCMBpfoaYAAp9OM.jpg",
+          "https://pbs.twimg.com/media/HCMBpfXbEAMU1O2.jpg"
+        ],
+        "image_count": 4,
+        "inferred_categories": [
+          "general_beauty"
+        ],
+        "metrics": {
+          "likes": 315,
+          "retweets": 11,
+          "replies": 28,
+          "quotes": 0,
+          "bookmarks": 33,
+          "impressions": 51662,
+          "total_engagement": 354
+        },
+        "engagement_rate": 0.002852,
+        "followers": 124114,
+        "created_at": "2026-02-27T19:29:49+00:00"
+      },
+      {
+        "rank": 13,
+        "handle": "@AI_MIKENEKO",
+        "display_name": "AI_三毛猫",
+        "tweet_id": "2029549779651568012",
+        "tweet_url": "https://x.com/AI_MIKENEKO/status/2029549779651568012",
+        "text": "今日もお疲れさまでした\nおやすみなさい https://t.co/SsGiZ8ViVh",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCpov09akAEahLL.jpg"
+        ],
+        "image_count": 1,
+        "inferred_categories": [
+          "greeting"
+        ],
+        "metrics": {
+          "likes": 295,
+          "retweets": 13,
+          "replies": 16,
+          "quotes": 0,
+          "bookmarks": 13,
+          "impressions": 3021,
+          "total_engagement": 324
+        },
+        "engagement_rate": 0.002411,
+        "followers": 134377,
+        "created_at": "2026-03-05T13:29:09+00:00"
+      },
+      {
+        "rank": 14,
+        "handle": "@yunaelegant",
+        "display_name": "YUNA",
+        "tweet_id": "2029144807621444001",
+        "tweet_url": "https://x.com/yunaelegant/status/2029144807621444001",
+        "text": "おつかれさま〜！💦 \n今日の練習、みんな本気出してたよねっ♡  \n\nロッカールームでちょっとだけ息抜き…\nこの水着、まだちょっとドキドキしちゃうな〜\n\nSFW Fictional digitalart https://t.co/7cg2CDQS88",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCj4WQqawAIaBRg.jpg",
+          "https://pbs.twimg.com/media/HCj4WQga8AE3DS5.jpg",
+          "https://pbs.twimg.com/media/HCj4WQiaEAERGM_.jpg",
+          "https://pbs.twimg.com/media/HCj4WQjawAQbuXK.jpg"
+        ],
+        "image_count": 4,
+        "inferred_categories": [
+          "artistic",
+          "bikini_swimwear"
+        ],
+        "metrics": {
+          "likes": 287,
+          "retweets": 17,
+          "replies": 6,
+          "quotes": 0,
+          "bookmarks": 55,
+          "impressions": 6312,
+          "total_engagement": 310
+        },
+        "engagement_rate": 0.015096,
+        "followers": 20535,
+        "created_at": "2026-03-04T10:39:56+00:00"
+      },
+      {
+        "rank": 15,
+        "handle": "@yunaelegant",
+        "display_name": "YUNA",
+        "tweet_id": "2028787927787163892",
+        "tweet_url": "https://x.com/yunaelegant/status/2028787927787163892",
+        "text": "おつかれさま〜♡\n\n今日もいっぱい頑張ったでしょ？\n\n私、こうやってお花に囲まれて待ってたんだから…\nふふっ、ちゃんと見ててね？  \n\nSFW Fictional digitalart https://t.co/GY7B2MO8ez",
+        "image_urls": [
+          "https://pbs.twimg.com/media/HCezz2GbYAIKRGF.jpg",
+          "https://pbs.twimg.com/media/HCezz1_bgAAYfMU.jpg",
+          "https://pbs.twimg.com/media/HCezz2IbAAEVizj.jpg",
+          "https://pbs.twimg.com/media/HCezz2BbUAE-zO_.jpg"
+        ],
+        "image_count": 4,
+        "inferred_categories": [
+          "artistic",
+          "engagement_bait"
+        ],
+        "metrics": {
+          "likes": 291,
+          "retweets": 10,
+          "replies": 3,
+          "quotes": 0,
+          "bookmarks": 48,
+          "impressions": 9494,
+          "total_engagement": 304
+        },
+        "engagement_rate": 0.014804,
+        "followers": 20535,
+        "created_at": "2026-03-03T11:01:49+00:00"
+      }
+    ]
+  },
+  "competitor_image_usage": [
+    {
+      "handle": "@sessypuuh",
+      "market": "EN",
+      "followers": 7678,
+      "total_original_posts": 10,
+      "image_posts": 10,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.380268,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@Angelwithcakee",
+      "market": "EN",
+      "followers": 35193,
+      "total_original_posts": 10,
+      "image_posts": 10,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.044878,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@Estherbron1",
+      "market": "EN",
+      "followers": 1240269,
+      "total_original_posts": 10,
+      "image_posts": 10,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.001993,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@yuumi005",
+      "market": "EN",
+      "followers": 81730,
+      "total_original_posts": 10,
+      "image_posts": 10,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.027148,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@marylivbrown",
+      "market": "EN",
+      "followers": 13812,
+      "total_original_posts": 10,
+      "image_posts": 10,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.028367,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@yuumispm",
+      "market": "EN",
+      "followers": 12045,
+      "total_original_posts": 10,
+      "image_posts": 10,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.258796,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@IsabellaCruz_47",
+      "market": "EN",
+      "followers": 91837,
+      "total_original_posts": 10,
+      "image_posts": 10,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.059581,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@yunaelegant",
+      "market": "JP",
+      "followers": 20535,
+      "total_original_posts": 10,
+      "image_posts": 10,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.011001,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@ai_nontan_room",
+      "market": "JP",
+      "followers": 34141,
+      "total_original_posts": 4,
+      "image_posts": 4,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.005133,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@AI_Girls_Studio",
+      "market": "JP",
+      "followers": 61446,
+      "total_original_posts": 10,
+      "image_posts": 10,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.002648,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@AIart_yama94",
+      "market": "JP",
+      "followers": 36996,
+      "total_original_posts": 5,
+      "image_posts": 5,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.009515,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@nene__chandayo",
+      "market": "JP",
+      "followers": 7609,
+      "total_original_posts": 1,
+      "image_posts": 1,
+      "text_only_posts": 0,
+      "image_ratio": 1.0,
+      "avg_engagement_rate_image": 0.000526,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@IvoryLane_plus",
+      "market": "EN",
+      "followers": 253284,
+      "total_original_posts": 10,
+      "image_posts": 9,
+      "text_only_posts": 0,
+      "image_ratio": 0.9,
+      "avg_engagement_rate_image": 0.006585,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@katekarsyn",
+      "market": "EN",
+      "followers": 104390,
+      "total_original_posts": 10,
+      "image_posts": 9,
+      "text_only_posts": 1,
+      "image_ratio": 0.9,
+      "avg_engagement_rate_image": 0.010699,
+      "avg_engagement_rate_text": 0.003602
+    },
+    {
+      "handle": "@baharaykin",
+      "market": "EN",
+      "followers": 12484,
+      "total_original_posts": 10,
+      "image_posts": 9,
+      "text_only_posts": 1,
+      "image_ratio": 0.9,
+      "avg_engagement_rate_image": 0.055529,
+      "avg_engagement_rate_text": 8e-05
+    },
+    {
+      "handle": "@leahyunaxo",
+      "market": "EN",
+      "followers": 75549,
+      "total_original_posts": 9,
+      "image_posts": 8,
+      "text_only_posts": 1,
+      "image_ratio": 0.89,
+      "avg_engagement_rate_image": 0.094505,
+      "avg_engagement_rate_text": 0.001813
+    },
+    {
+      "handle": "@NotjustRen00",
+      "market": "EN",
+      "followers": 16716,
+      "total_original_posts": 8,
+      "image_posts": 7,
+      "text_only_posts": 1,
+      "image_ratio": 0.88,
+      "avg_engagement_rate_image": 0.002658,
+      "avg_engagement_rate_text": 0.000359
+    },
+    {
+      "handle": "@HannaJonso",
+      "market": "EN",
+      "followers": 18767,
+      "total_original_posts": 8,
+      "image_posts": 7,
+      "text_only_posts": 1,
+      "image_ratio": 0.88,
+      "avg_engagement_rate_image": 0.08381,
+      "avg_engagement_rate_text": 0.019023
+    },
+    {
+      "handle": "@Lux_aeterna_",
+      "market": "both",
+      "followers": 102534,
+      "total_original_posts": 6,
+      "image_posts": 5,
+      "text_only_posts": 1,
+      "image_ratio": 0.83,
+      "avg_engagement_rate_image": 0.003642,
+      "avg_engagement_rate_text": 0.000234
+    },
+    {
+      "handle": "@ai_hyk",
+      "market": "JP",
+      "followers": 124114,
+      "total_original_posts": 6,
+      "image_posts": 5,
+      "text_only_posts": 0,
+      "image_ratio": 0.83,
+      "avg_engagement_rate_image": 0.021145,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@KissofStarova",
+      "market": "EN",
+      "followers": 4784,
+      "total_original_posts": 10,
+      "image_posts": 8,
+      "text_only_posts": 0,
+      "image_ratio": 0.8,
+      "avg_engagement_rate_image": 0.033079,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@Ava_starz",
+      "market": "EN",
+      "followers": 61052,
+      "total_original_posts": 4,
+      "image_posts": 3,
+      "text_only_posts": 0,
+      "image_ratio": 0.75,
+      "avg_engagement_rate_image": 0.042761,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@yogana_19",
+      "market": "EN",
+      "followers": 26943,
+      "total_original_posts": 10,
+      "image_posts": 7,
+      "text_only_posts": 2,
+      "image_ratio": 0.7,
+      "avg_engagement_rate_image": 0.096107,
+      "avg_engagement_rate_text": 0.025869
+    },
+    {
+      "handle": "@ai_hiyo_",
+      "market": "EN",
+      "followers": 387325,
+      "total_original_posts": 3,
+      "image_posts": 2,
+      "text_only_posts": 1,
+      "image_ratio": 0.67,
+      "avg_engagement_rate_image": 0.003256,
+      "avg_engagement_rate_text": 0.000106
+    },
+    {
+      "handle": "@PinUpGirl_AI",
+      "market": "both",
+      "followers": 66105,
+      "total_original_posts": 3,
+      "image_posts": 2,
+      "text_only_posts": 1,
+      "image_ratio": 0.67,
+      "avg_engagement_rate_image": 0.000907,
+      "avg_engagement_rate_text": 4.5e-05
+    },
+    {
+      "handle": "@AI_MIKENEKO",
+      "market": "JP",
+      "followers": 134377,
+      "total_original_posts": 3,
+      "image_posts": 2,
+      "text_only_posts": 1,
+      "image_ratio": 0.67,
+      "avg_engagement_rate_image": 0.002857,
+      "avg_engagement_rate_text": 0.000767
+    },
+    {
+      "handle": "@iiCoraMaay",
+      "market": "EN",
+      "followers": 17424,
+      "total_original_posts": 5,
+      "image_posts": 3,
+      "text_only_posts": 1,
+      "image_ratio": 0.6,
+      "avg_engagement_rate_image": 0.016242,
+      "avg_engagement_rate_text": 0.001148
+    },
+    {
+      "handle": "@itsluna_baby",
+      "market": "EN",
+      "followers": 50035,
+      "total_original_posts": 10,
+      "image_posts": 6,
+      "text_only_posts": 0,
+      "image_ratio": 0.6,
+      "avg_engagement_rate_image": 0.001052,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@tanarainw",
+      "market": "EN",
+      "followers": 191690,
+      "total_original_posts": 8,
+      "image_posts": 4,
+      "text_only_posts": 0,
+      "image_ratio": 0.5,
+      "avg_engagement_rate_image": 0.019945,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@BoobistR",
+      "market": "JP",
+      "followers": 20880,
+      "total_original_posts": 2,
+      "image_posts": 1,
+      "text_only_posts": 0,
+      "image_ratio": 0.5,
+      "avg_engagement_rate_image": 0.01432,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@seisei_ai_1st",
+      "market": "JP",
+      "followers": 21905,
+      "total_original_posts": 4,
+      "image_posts": 1,
+      "text_only_posts": 1,
+      "image_ratio": 0.25,
+      "avg_engagement_rate_image": 9.1e-05,
+      "avg_engagement_rate_text": 0.000959
+    },
+    {
+      "handle": "@honoka_shiri",
+      "market": "JP",
+      "followers": 36536,
+      "total_original_posts": 10,
+      "image_posts": 2,
+      "text_only_posts": 7,
+      "image_ratio": 0.2,
+      "avg_engagement_rate_image": 0.000123,
+      "avg_engagement_rate_text": 0.001568
+    },
+    {
+      "handle": "@ganbarukaisyain",
+      "market": "JP",
+      "followers": 337478,
+      "total_original_posts": 9,
+      "image_posts": 1,
+      "text_only_posts": 8,
+      "image_ratio": 0.11,
+      "avg_engagement_rate_image": 3.9e-05,
+      "avg_engagement_rate_text": 0.000397
+    },
+    {
+      "handle": "@lucidevlinxyz",
+      "market": "EN",
+      "followers": 44328,
+      "total_original_posts": 10,
+      "image_posts": 1,
+      "text_only_posts": 9,
+      "image_ratio": 0.1,
+      "avg_engagement_rate_image": 0.013084,
+      "avg_engagement_rate_text": 0.037361
+    },
+    {
+      "handle": "@JosephinaM3131",
+      "market": "EN",
+      "followers": 38706,
+      "total_original_posts": 0,
+      "image_posts": 0,
+      "text_only_posts": 0,
+      "image_ratio": 0,
+      "avg_engagement_rate_image": 0,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@LeahSunkissed",
+      "market": "EN",
+      "followers": 11709,
+      "total_original_posts": 0,
+      "image_posts": 0,
+      "text_only_posts": 0,
+      "image_ratio": 0,
+      "avg_engagement_rate_image": 0,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@imrubyreid",
+      "market": "EN",
+      "followers": 690537,
+      "total_original_posts": 1,
+      "image_posts": 0,
+      "text_only_posts": 1,
+      "image_ratio": 0.0,
+      "avg_engagement_rate_image": 0,
+      "avg_engagement_rate_text": 0.000203
+    },
+    {
+      "handle": "@tororo_223",
+      "market": "JP",
+      "followers": 10990,
+      "total_original_posts": 1,
+      "image_posts": 0,
+      "text_only_posts": 1,
+      "image_ratio": 0.0,
+      "avg_engagement_rate_image": 0,
+      "avg_engagement_rate_text": 0.005187
+    },
+    {
+      "handle": "@hakoirikumatan",
+      "market": "JP",
+      "followers": 100853,
+      "total_original_posts": 0,
+      "image_posts": 0,
+      "text_only_posts": 0,
+      "image_ratio": 0,
+      "avg_engagement_rate_image": 0,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@2nd_karen_AI",
+      "market": "JP",
+      "followers": 13771,
+      "total_original_posts": 0,
+      "image_posts": 0,
+      "text_only_posts": 0,
+      "image_ratio": 0,
+      "avg_engagement_rate_image": 0,
+      "avg_engagement_rate_text": 0
+    },
+    {
+      "handle": "@Shizuku_AItuber",
+      "market": "JP",
+      "followers": 12863,
+      "total_original_posts": 0,
+      "image_posts": 0,
+      "text_only_posts": 0,
+      "image_ratio": 0,
+      "avg_engagement_rate_image": 0,
+      "avg_engagement_rate_text": 0
+    }
+  ],
+  "insights": {
+    "EN": [
+      "Image posts average 1884.1 likes vs 758.6 for text-only (148.4% advantage)",
+      "Top categories by engagement: portrait_selfie, engagement_bait, general_beauty",
+      "EN market has 160 image posts vs 21 text-only",
+      "Top EN performer: @leahyunaxo with 37743 total engagement"
+    ],
+    "JP": [
+      "Image posts average 431.7 likes vs 75.0 for text-only (475.6% advantage)",
+      "Top categories by engagement: general_beauty, engagement_bait, artistic",
+      "JP market has 49 image posts vs 20 text-only",
+      "Top JP performer: @ai_hyk with 8052 total engagement"
+    ],
+    "cross_market": [
+      "Overall image post ratio: 77.7% of all original posts contain images",
+      "Multi-image posts (32) vs single-image (170): multi-image avg likes 822.9 vs 1733.5",
+      "Engagement bait category (questions + image) drives high reply counts across both markets",
+      "Most competitors post images in >70% of their original tweets — pure text posts are rare in this niche"
+    ]
+  }
+}
