@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 7, 2026 (Session 25: Production Testing — First Real Task Execution + Pipeline Run)
+**Last updated**: March 7, 2026 (Session 26: HTML Report Generation for Telegram Review)
 
 ---
 
@@ -512,6 +512,31 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 - `data/content_plan_20260306_EN.json` + `_JP.json` — 4 posts each with image prompts, A/B test variants, reply templates
 - `data/pipeline_state_20260306.json` — Full pipeline state, all tasks completed
 
+### Session 26 — HTML Report Generation for Telegram Review (March 7, 2026)
+
+**Goal**: Generate HTML versions of all reports Marc sends to Telegram, so the operator can review them in a mobile browser instead of reading truncated JSON in chat.
+
+**Problem**: Telegram's 4096 character limit truncates inline previews. JSON files are hard to read on mobile. The strategy report HTML from task 003 (86KB, dark theme) proved HTML works well for review.
+
+**Solution**: Created `scripts/generate_html_report.py` with 3 report types:
+
+| Report Type | CLI Command | JSON Input | HTML Output |
+|---|---|---|---|
+| `content_preview` | `generate_html_report.py content_preview <EN> <JP> --strategy <path> [--pipeline-state <path>]` | Content plans + strategy + pipeline state | `data/content_preview_{date}.html` |
+| `daily_report` | `generate_html_report.py daily_report <report.json>` | Daily report JSON | `data/daily_report_{date}.html` |
+| `publish_report` | `generate_html_report.py publish_report <EN> <JP> [--outbound-log <path>] [--rate-limits <path>]` | Content plans (posted) + outbound log + rate limits | `data/publish_report_{date}.html` |
+
+**Design**: Reuses CSS design system from `data/strategy_report_20260306.html` (dark theme, cards, stat boxes, tags, bar charts, responsive). Standard library only — no external dependencies.
+
+**HTML reports are read-only visualization** — they consume existing JSON, never create or modify it. Agents continue to produce and consume JSON; HTML is purely for human review on mobile.
+
+**Files created/modified** (3):
+- `scripts/generate_html_report.py` — **New** HTML report generator (~550 lines, 3 report types)
+- `agents/marc_pipeline.md` — Step 9 updated: generates `content_preview_{date}.html` and sends via `telegram_send.py --document`
+- `agents/marc_publishing.md` — Steps 4 and 8 updated: generates `publish_report_{date}.html` and `daily_report_{date}.html`
+
+**Verified**: Content preview (31KB) and daily report (22KB) generated from existing March 6 data and opened in browser.
+
 ---
 
 ## 4. Decision Summary
@@ -912,7 +937,12 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 25 — Production testing complete (March 6-7, 2026). 5 real tasks executed via Telegram. Non-interactive execution bug fixed. Media data collection added. Agent philosophy established (SOP for daily tasks, free reasoning for ad-hoc).
+**Latest**: Session 26 — HTML report generation for Telegram review (March 7, 2026). Created `generate_html_report.py` with 3 report types (content_preview, daily_report, publish_report). Updated pipeline and publishing playbooks to generate + send HTML documents.
+
+Session 26 files created/modified (3 files):
+- `scripts/generate_html_report.py` — **New** HTML report generator (3 report types, dark theme, responsive)
+- `agents/marc_pipeline.md` — Step 9: added HTML generation + `--document` send for content preview
+- `agents/marc_publishing.md` — Steps 4 and 8: added HTML generation + `--document` send for publish/daily reports
 
 Session 25 files modified (6 files):
 - `scripts/telegram_bot.py` — Added non-interactive override to `_execute_task()` prompt
@@ -1101,6 +1131,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Phase 5 | Claude Hybrid Agent Conversion (Analyst, Scout, Publisher intelligence) | Local machine | **✅ Complete** — 10 files modified/created, all 3 sub-phases implemented. 20/20 E2E tests passed. |
 | Session 24 | Agent Teams Migration (Conversational Marc + Teammates) | Local machine | **✅ Complete** — 10 files modified/created, Marc responds conversationally via Telegram, spawns Agent Teams for execution |
 | Session 25 | Production Testing (Real tasks via Telegram) | Local machine | **✅ Complete** — 5 tasks executed (3 ad-hoc + 1 image analysis + 1 daily pipeline), non-interactive bug fixed, media collection added, agent philosophy established |
+| Session 26 | HTML Report Generation for Telegram Review | Local machine | **✅ Complete** — `generate_html_report.py` with 3 report types, pipeline + publishing playbooks updated |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 

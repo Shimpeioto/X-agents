@@ -79,6 +79,15 @@ python3 scripts/telegram_send.py "<formatted publish report>"
 
 See [marc_schemas.md](marc_schemas.md) for the Publish Report Format.
 
+Then generate and send the HTML version for mobile-friendly review:
+
+```bash
+python3 scripts/generate_html_report.py publish_report \
+  data/content_plan_{YYYYMMDD}_EN.json data/content_plan_{YYYYMMDD}_JP.json \
+  --outbound-log data/outbound_log_{YYYYMMDD}.json --rate-limits data/rate_limits_{YYYYMMDD}.json
+python3 scripts/telegram_send.py --document data/publish_report_{YYYYMMDD}.html "Publish Report — {YYYY-MM-DD}"
+```
+
 ### 5. Collect Metrics
 
 Check if at least 1 hour has passed since the latest `posted_at` timestamp. If not, log a warning and skip.
@@ -136,6 +145,11 @@ If validation fails: fall back to composing a basic Telegram message from the ra
 3. For each entry in `telegram_alerts`:
    ```bash
    python3 scripts/telegram_send.py "<alert content>"
+   ```
+4. Generate and send the HTML version for mobile-friendly review:
+   ```bash
+   python3 scripts/generate_html_report.py daily_report data/daily_report_{YYYYMMDD}.json
+   python3 scripts/telegram_send.py --document data/daily_report_{YYYYMMDD}.html "Daily Report — {YYYY-MM-DD}"
    ```
 
 ## Error Recovery

@@ -161,6 +161,15 @@ python3 scripts/telegram_send.py "<formatted preview message>"
 
 See [marc_schemas.md](marc_schemas.md) for the Content Preview Format.
 
+Then generate and send the HTML version for mobile-friendly review:
+
+```bash
+python3 scripts/generate_html_report.py content_preview \
+  data/content_plan_{YYYYMMDD}_EN.json data/content_plan_{YYYYMMDD}_JP.json \
+  --strategy data/strategy_{YYYYMMDD}.json --pipeline-state data/pipeline_state_{YYYYMMDD}.json
+python3 scripts/telegram_send.py --document data/content_preview_{YYYYMMDD}.html "Content Preview — {YYYY-MM-DD}"
+```
+
 If `telegram_send.py` fails: log as warning, do NOT fail the pipeline.
 
 ### 10. Finalize
