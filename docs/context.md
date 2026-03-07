@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 7, 2026 (Session 26: HTML Report Generation for Telegram Review)
+**Last updated**: March 7, 2026 (Session 27: Remove Mar 6 Pipeline Test Output)
 
 ---
 
@@ -504,7 +504,7 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 - `agents/creator.md` — Added bold `status: "draft"` reminder at Step 2
 - `agents/marc_pipeline.md` — Added `status: "draft"` instruction to Creator spawn prompts
 
-**Key outputs produced**:
+**Key outputs produced** (verified end-to-end, later cleaned up in Session 27):
 - `data/scout_report_20260306.json` (538KB) — 41 competitors with media data
 - `data/strategy_report_20260306.html` (86KB) — Professional HTML report with competitor analysis + EN/JP strategies
 - `data/image_analysis_report_20260306.json` (60KB) — Image post analysis with real URLs, category performance, engagement comparison
@@ -526,7 +526,7 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 | `daily_report` | `generate_html_report.py daily_report <report.json>` | Daily report JSON | `data/daily_report_{date}.html` |
 | `publish_report` | `generate_html_report.py publish_report <EN> <JP> [--outbound-log <path>] [--rate-limits <path>]` | Content plans (posted) + outbound log + rate limits | `data/publish_report_{date}.html` |
 
-**Design**: Reuses CSS design system from `data/strategy_report_20260306.html` (dark theme, cards, stat boxes, tags, bar charts, responsive). Standard library only — no external dependencies.
+**Design**: Reuses CSS design system from the Session 25 strategy report (dark theme, cards, stat boxes, tags, bar charts, responsive). Standard library only — no external dependencies.
 
 **HTML reports are read-only visualization** — they consume existing JSON, never create or modify it. Agents continue to produce and consume JSON; HTML is purely for human review on mobile.
 
@@ -536,6 +536,27 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 - `agents/marc_publishing.md` — Steps 4 and 8 updated: generates `publish_report_{date}.html` and `daily_report_{date}.html`
 
 **Verified**: Content preview (31KB) and daily report (22KB) generated from existing March 6 data and opened in browser.
+
+### Session 27 — Remove Mar 6 Pipeline Test Output (March 7, 2026)
+
+**Goal**: Clean up test output files from the Mar 6 pipeline run (Session 25, task 005) now that end-to-end verification is complete.
+
+**Rationale**: The Mar 6 pipeline was a production test to verify the system works. With that confirmed, the test output is no longer needed and was cluttering the `data/` directory. Mar 3-5 data (earlier test runs) is retained.
+
+**Files removed** (11):
+- `data/content_plan_20260306_EN.json` — Test content plan (EN)
+- `data/content_plan_20260306_JP.json` — Test content plan (JP)
+- `data/content_preview_20260306.html` — Session 26 HTML report derived from Mar 6 test data
+- `data/image_analysis_report_20260306.json` — Image analysis from test run
+- `data/pipeline_state_20260306.json` — Pipeline state from test run
+- `data/scout_compact_20260306.json` — Compact scout data
+- `data/scout_raw_20260306.json` — Raw scout data
+- `data/scout_report_20260306.json` — Enriched scout report
+- `data/strategy_20260306.json` — Strategy from test run
+- `data/strategy_report_20260306.html` — Strategy HTML report from test run
+- `data/strategy_current.json` — Copy of strategy_20260306.json (will regenerate on next real pipeline run)
+
+**Note**: No posts were published to X from the Mar 6 pipeline — all posts stayed at `approved` status locally, so no X API cleanup was needed.
 
 ---
 
@@ -937,7 +958,11 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 26 — HTML report generation for Telegram review (March 7, 2026). Created `generate_html_report.py` with 3 report types (content_preview, daily_report, publish_report). Updated pipeline and publishing playbooks to generate + send HTML documents.
+**Latest**: Session 27 — Removed Mar 6 pipeline test output (March 7, 2026). Cleaned up 11 test files from the `data/` directory after end-to-end verification was confirmed in Session 25.
+
+Session 27 files removed (11 files):
+- `data/*20260306*` (9 files) — All Mar 6 pipeline test outputs (scout, strategy, content plans, HTML reports, pipeline state, image analysis)
+- `data/strategy_current.json` — Copy of Mar 6 strategy (regenerates on next pipeline run)
 
 Session 26 files created/modified (3 files):
 - `scripts/generate_html_report.py` — **New** HTML report generator (3 report types, dark theme, responsive)
