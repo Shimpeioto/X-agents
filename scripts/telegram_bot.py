@@ -33,6 +33,7 @@ import asyncio
 import json
 import logging
 import os
+import re
 import signal
 import subprocess
 import sys
@@ -130,6 +131,46 @@ def _generate_task_id() -> str:
         except ValueError:
             pass
     return f"{date_str}_{seq:03d}"
+
+
+# ---------------------------------------------------------------------------
+# URL Detection & Fetching
+# ---------------------------------------------------------------------------
+
+_URL_PATTERN = re.compile(r'https?://[^\s<>\"]+')
+
+
+def _extract_urls(text: str) -> list[str]:
+    """Extract URLs from message text."""
+    return _URL_PATTERN.findall(text)
+
+
+def _fetch_url_content(url: str, max_chars: int = 5000) -> str | None:
+    """Fetch URL content using fetch_url module. Returns text or None on failure."""
+    try:
+        from fetch_url import fetch_url
+        return fetch_url(url, max_chars=max_chars)
+    except Exception as e:
+        logger.warning(f"Failed to fetch URL {url}: {e}")
+        return None
+
+
+def _enrich_message_with_urls(text: str) -> str:
+    """If message contains URLs, fetch their content and append to the message."""
+    urls = _extract_urls(text)
+    if not urls:
+        return text
+
+    fetched_parts = []
+    for url in urls[:3]:  # Limit to 3 URLs per message
+        logger.info(f"Fetching URL: {url}")
+        content = _fetch_url_content(url)
+        if content:
+            fetched_parts.append(f"--- Content from {url} ---\n{content}\n--- End of content ---")
+        else:
+            fetched_parts.append(f"--- Could not fetch content from {url} ---")
+
+    return text + "\n\n" + "\n\n".join(fetched_parts)
 
 
 # ---------------------------------------------------------------------------
@@ -824,7 +865,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         return
 
     try:
-        response_text, tool_call = await chat_with_marc(text)
+        # Fetch content from any URLs in the message
+        enriched_text = await asyncio.get_event_loop().run_in_executor(
+            None, _enrich_message_with_urls, text
+        )
+        response_text, tool_call = await chat_with_marc(enriched_text)
 
         if response_text:
             # Telegram has a 4096 char limit per message

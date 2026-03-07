@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 7, 2026 (Session 27: Remove Mar 6 Pipeline Test Output)
+**Last updated**: March 7, 2026 (Session 28: URL Reading for Conversational Marc)
 
 ---
 
@@ -558,6 +558,25 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 
 **Note**: No posts were published to X from the Mar 6 pipeline — all posts stayed at `approved` status locally, so no X API cleanup was needed.
 
+### Session 28 — URL Reading for Conversational Marc (March 7, 2026)
+
+**Goal**: Enable Marc to read web page content when the operator shares URLs via Telegram.
+
+**Problem**: When the operator shared a URL in Telegram, Marc only saw the raw URL text — he couldn't read the content behind it. This prevented the operator from sharing articles, references, or competitor pages for Marc to analyze.
+
+**Solution**: Added automatic URL detection and content fetching in the Telegram bot's message handler. When a message contains URLs, the bot fetches each page's content and appends it to the message before sending to Marc.
+
+**How it works**:
+1. `handle_message` detects URLs in incoming text (regex, up to 3 URLs per message)
+2. Fetches each URL via `scripts/fetch_url.py` (async via executor to avoid blocking)
+3. Appends extracted text between `--- Content from <url> ---` markers
+4. Marc receives the enriched message and can reason about the page content
+
+**Files created/modified** (3):
+- `scripts/fetch_url.py` — **New** URL fetcher using `requests` + stdlib `html.parser` (~100 lines). Extracts readable text from HTML, handles plain text/JSON directly. Truncates at 5000 chars. Also works as CLI.
+- `scripts/telegram_bot.py` — Added `_extract_urls()`, `_fetch_url_content()`, `_enrich_message_with_urls()` helpers; modified `handle_message` to enrich messages with URL content before sending to Marc
+- `agents/marc_conversation.md` — Added "URL Reading" section documenting the content markers and how to use fetched content
+
 ---
 
 ## 4. Decision Summary
@@ -830,8 +849,9 @@ As of Session 24, all agents operate as **teammates** within Claude Code Agent T
 │   ├── publisher.py                       ← Publisher agent script (Phase 5: smart-outbound subcommand)
 │   ├── publisher_outbound_data.py         ← Outbound data fetcher for Claude analysis (Phase 5)
 │   ├── analyst.py                         ← Analyst agent script (collect + summary + import) (Phase 4)
+│   ├── fetch_url.py                       ← URL fetcher — extracts readable text from web pages (Session 28)
 │   ├── telegram_send.py                   ← Telegram send helper (Phase 2)
-│   ├── telegram_bot.py                    ← Telegram bot daemon (conversational Marc + Agent Teams execution + commands) (Session 24)
+│   ├── telegram_bot.py                    ← Telegram bot daemon (conversational Marc + Agent Teams execution + commands + URL enrichment) (Session 24, 28)
 │   ├── run_phase5_tests.sh               ← Phase 5 E2E test runner — Phase A+B (dry-run + API)
 │   ├── run_phase5_tests_c.sh             ← Phase 5 E2E test runner — Phase C (Claude subagents)
 │   └── run_phase5_tests_d.sh             ← Phase 5 E2E test runner — Phase D (full E2E + live posting)
@@ -958,7 +978,12 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 27 — Removed Mar 6 pipeline test output (March 7, 2026). Cleaned up 11 test files from the `data/` directory after end-to-end verification was confirmed in Session 25.
+**Latest**: Session 28 — URL reading for conversational Marc (March 7, 2026). Added automatic URL detection and content fetching so Marc can read web pages shared via Telegram.
+
+Session 28 files created/modified (3 files):
+- `scripts/fetch_url.py` — **New** URL fetcher (requests + stdlib html.parser, CLI-compatible)
+- `scripts/telegram_bot.py` — URL detection + async content fetching in `handle_message`
+- `agents/marc_conversation.md` — Added "URL Reading" section
 
 Session 27 files removed (11 files):
 - `data/*20260306*` (9 files) — All Mar 6 pipeline test outputs (scout, strategy, content plans, HTML reports, pipeline state, image analysis)
