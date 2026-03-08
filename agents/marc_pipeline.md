@@ -26,7 +26,7 @@ If paused, log the event and **STOP**.
 ## Task Dependencies
 
 ```
-scout_data → strategist → [creator_en, creator_jp] (parallel) → war_room → preview
+scout_data → [image_analysis (optional), strategist] → [creator_en, creator_jp] (parallel) → war_room → preview
 ```
 
 Each step must validate before the next begins. Creator EN and JP can run in parallel.
@@ -59,6 +59,27 @@ python3 scripts/validate.py scout data/scout_report_{YYYYMMDD}.json
 ```
 
 If FAIL: log, update pipeline state, **STOP**.
+
+### 3.5. Image Analysis (Visual Intelligence)
+
+Analyze top-performing competitor images for Creator visual references.
+
+```bash
+python3 scripts/image_analyzer.py data/scout_report_{YYYYMMDD}.json
+```
+
+- Input: `data/scout_report_{YYYYMMDD}.json` (must exist from Step 2)
+- Output: `data/image_references_{YYYYMMDD}.json`
+- Analyzes top 5 competitor images by engagement using Claude Vision
+- This step is **optional** — if it fails, pipeline continues without image references
+- Creator will use references if available, fall back to templates if not
+
+Validate (best-effort, do NOT stop pipeline on failure):
+```bash
+python3 scripts/validate.py image_references data/image_references_{YYYYMMDD}.json
+```
+
+Update pipeline state with `image_analysis` step status.
 
 ### 4. Spawn Strategist Teammate
 
@@ -98,6 +119,7 @@ Spawn **both** at the same time:
 Today's date: {YYYY-MM-DD}
 Account: EN
 Strategy path: data/strategy_{YYYYMMDD}.json
+Image references path (if exists): data/image_references_{YYYYMMDD}.json
 Generate today's content plan for the EN account.
 All posts must have status: 'draft' — human approval happens via Telegram, not here.
 Write the output to: data/content_plan_{YYYYMMDD}_EN.json
@@ -110,6 +132,7 @@ Output ONLY valid JSON — no markdown code fences, no commentary."
 Today's date: {YYYY-MM-DD}
 Account: JP
 Strategy path: data/strategy_{YYYYMMDD}.json
+Image references path (if exists): data/image_references_{YYYYMMDD}.json
 Generate today's content plan for the JP account.
 All posts must have status: 'draft' — human approval happens via Telegram, not here.
 Write the output to: data/content_plan_{YYYYMMDD}_JP.json

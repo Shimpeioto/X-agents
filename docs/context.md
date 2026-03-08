@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 7, 2026 (Session 28: URL Reading for Conversational Marc)
+**Last updated**: March 8, 2026 (Session 29: Competitor Image Analysis Pipeline)
 
 ---
 
@@ -577,6 +577,24 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 - `scripts/telegram_bot.py` — Added `_extract_urls()`, `_fetch_url_content()`, `_enrich_message_with_urls()` helpers; modified `handle_message` to enrich messages with URL content before sending to Marc
 - `agents/marc_conversation.md` — Added "URL Reading" section documenting the content markers and how to use fetched content
 
+### Session 29 — Competitor Image Analysis Pipeline (March 8, 2026)
+
+**Goal**: Give Creator visual intelligence by analyzing top-performing competitor images via Claude Vision and converting them into Higgsfield-format reference prompts.
+
+**Problem**: Scout already collects media URLs from competitor tweets (`recent_posts[].media[].url`), but Creator generates image prompts purely from templates with zero insight into what competitor images actually look like. Top-performing visual styles are invisible to the content creation process.
+
+**Solution**: New `image_analyzer.py` script that reads the scout report, picks top 5 posts with images by engagement (like_count), calls Anthropic Vision API (Claude Sonnet) to analyze each image into structured Higgsfield-format JSON, generates a visual patterns summary, and writes `data/image_references_{YYYYMMDD}.json`. Creator uses these as both (a) a summary of winning visual patterns and (b) individual style-matching references per post.
+
+**Pipeline integration**: Added as Step 3.5 (between Scout validation and Strategist), marked as **optional** — if image analysis fails, pipeline continues and Creator falls back to templates.
+
+**Files created/modified** (4):
+- `scripts/image_analyzer.py` — **New** Image analysis script (~300 lines). Loads scout report, ranks image posts by likes, calls Anthropic Vision API, generates visual pattern summary, writes structured output. Supports `--top N` and `--dry-run` flags. Error handling: rate limits (retry), unavailable images (skip), invalid JSON responses (skip).
+- `agents/creator.md` — Added input step #5 (read image references if available), added "Using Image References" section with two modes: Visual Pattern Awareness (overall style trends) and Reference Style Matching (per-post reference adaptation)
+- `agents/marc_pipeline.md` — Added Step 3.5 (Image Analysis), updated task dependency diagram, updated Creator spawn prompts to include image references path
+- `scripts/validate.py` — Added `validate_image_references()` function (6 checks: valid JSON, required fields, source/analysis structure, visual_patterns with style_summary, count consistency) and `image_references` mode in CLI dispatch
+
+**Verification**: Dry-run with `data/scout_report_20260308.json` found 206 posts with images, analyzed top 5 with mock data, validator passed all 6 checks. Existing validations unaffected.
+
 ---
 
 ## 4. Decision Summary
@@ -978,7 +996,13 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 28 — URL reading for conversational Marc (March 7, 2026). Added automatic URL detection and content fetching so Marc can read web pages shared via Telegram.
+**Latest**: Session 29 — Competitor image analysis pipeline (March 8, 2026). New `image_analyzer.py` analyzes top competitor images via Claude Vision, Creator uses structured references for visual intelligence.
+
+Session 29 files created/modified (4 files):
+- `scripts/image_analyzer.py` — **New** Image analysis via Anthropic Vision API (--top N, --dry-run)
+- `agents/creator.md` — Added image references input + "Using Image References" section (2 modes)
+- `agents/marc_pipeline.md` — Added Step 3.5 (Image Analysis, optional), updated Creator spawn prompts
+- `scripts/validate.py` — Added `image_references` validation mode (6 checks)
 
 Session 28 files created/modified (3 files):
 - `scripts/fetch_url.py` — **New** URL fetcher (requests + stdlib html.parser, CLI-compatible)

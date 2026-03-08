@@ -1,4 +1,4 @@
-"""Unified validation script for Scout, Strategist, Creator, Analyst, and cross-validation.
+"""Unified validation script for Scout, Strategist, Creator, Analyst, Image References, and cross-validation.
 
 Usage:
     python3 scripts/validate.py scout data/scout_report_20260303.json
@@ -8,6 +8,7 @@ Usage:
     python3 scripts/validate.py creator_cross data/content_plan_20260304_EN.json data/strategy_20260304.json
     python3 scripts/validate.py analyst data/metrics_20260304_EN.json
     python3 scripts/validate.py analyst_metrics data/metrics_history.db
+    python3 scripts/validate.py image_references data/image_references_20260308.json
 
 Exit codes: 0=pass, 1=fail, 2=usage error
 """
@@ -332,16 +333,30 @@ def validate_creator(plan_path: str) -> tuple[bool, list[str]]:
         if isinstance(text, str) and text.lstrip().startswith("@"):
             issues.append(f"text_starts_with_at: post[{i}] text starts with '@' (hidden from feeds)")
 
-    # Check 10: Image prompts have tool + prompt + aspect_ratio
+    # Check 10: Image prompts have required fields
+    valid_tools = {"higgsfield", "midjourney", "stable_diffusion", "dall_e"}
+    ip_extended_fields = ["meta", "subject", "outfit", "pose", "scene", "camera", "lighting"]
     for i, post in enumerate(posts):
         ip = post.get("image_prompt", {})
         if not isinstance(ip, dict):
             issues.append(f"invalid_image_prompt: post[{i}] image_prompt is not a dict")
         else:
-            ip_required = ["tool", "prompt", "aspect_ratio"]
+            ip_required = ["tool", "prompt", "negative_prompt", "aspect_ratio"]
             ip_missing = [f for f in ip_required if f not in ip]
             if ip_missing:
                 issues.append(f"image_prompt_missing: post[{i}] image_prompt missing {ip_missing}")
+            # Validate tool value
+            tool_val = ip.get("tool", "")
+            if tool_val and tool_val not in valid_tools:
+                issues.append(f"invalid_image_tool: post[{i}] image_prompt tool '{tool_val}' not in {valid_tools}")
+            # Validate negative_prompt is non-empty
+            neg = ip.get("negative_prompt", "")
+            if isinstance(neg, str) and not neg.strip():
+                issues.append(f"empty_negative_prompt: post[{i}] image_prompt negative_prompt is empty")
+            # Warn (not fail) for missing extended fields
+            ip_ext_missing = [f for f in ip_extended_fields if f not in ip]
+            if ip_ext_missing:
+                print(f"  WARNING: post[{i}] image_prompt missing extended fields {ip_ext_missing} (recommended by image prompt guide)", file=sys.stderr)
 
     # Check 11: 5-10 reply templates, no duplicates
     templates = plan.get("reply_templates", [])
@@ -978,9 +993,81 @@ def validate_outbound_plan(path: str) -> tuple[bool, list[str]]:
     return passed, issues
 
 
+def validate_image_references(path: str) -> tuple[bool, list[str]]:
+    """Validate image_references output. Returns (passed, list_of_issues)."""
+    issues = []
+
+    # Check 1: File exists and is valid JSON
+    try:
+        with open(path) as f:
+            content = f.read()
+        if not content.strip():
+            issues.append("file_empty: Image references file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {path} does not exist")
+        return False, issues
+
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 2: Required top-level fields
+    required_top = ["date", "generated_at", "scout_report_used", "images_analyzed", "references"]
+    for field in required_top:
+        if field not in data:
+            issues.append(f"missing_field: top-level '{field}' not found")
+
+    # Check 3: references is an array
+    references = data.get("references", None)
+    if not isinstance(references, list):
+        issues.append("references_not_array: 'references' must be an array")
+        return len(issues) == 0, issues
+
+    # Check 4: Each reference has source and analysis with required fields
+    required_source_fields = ["handle", "tweet_id", "likes", "image_url"]
+    required_analysis_fields = ["scene_type", "subject", "outfit", "pose", "scene", "camera", "lighting", "mood"]
+    for i, ref in enumerate(references):
+        if not isinstance(ref.get("source"), dict):
+            issues.append(f"reference[{i}]_missing_source: 'source' must be a dict")
+        else:
+            for field in required_source_fields:
+                if field not in ref["source"]:
+                    issues.append(f"reference[{i}]_source_missing: '{field}'")
+                    break
+
+        if not isinstance(ref.get("analysis"), dict):
+            issues.append(f"reference[{i}]_missing_analysis: 'analysis' must be a dict")
+        else:
+            for field in required_analysis_fields:
+                if field not in ref["analysis"]:
+                    issues.append(f"reference[{i}]_analysis_missing: '{field}'")
+                    break
+
+    # Check 5: visual_patterns section exists with style_summary
+    patterns = data.get("visual_patterns")
+    if not isinstance(patterns, dict):
+        issues.append("missing_visual_patterns: 'visual_patterns' section not found or not a dict")
+    else:
+        style_summary = patterns.get("style_summary", "")
+        if not isinstance(style_summary, str) or not style_summary.strip():
+            issues.append("empty_style_summary: visual_patterns.style_summary must be a non-empty string")
+
+    # Check 6: images_analyzed matches references length
+    images_analyzed = data.get("images_analyzed", -1)
+    if isinstance(images_analyzed, int) and isinstance(references, list):
+        if images_analyzed != len(references):
+            issues.append(f"count_mismatch: images_analyzed ({images_analyzed}) != len(references) ({len(references)})")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits|analyst|analyst_metrics|analyst_report|scout_analysis|outbound_plan} <file1> [<file2>]", file=sys.stderr)
+        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits|analyst|analyst_metrics|analyst_report|scout_analysis|outbound_plan|image_references} <file1> [<file2>]", file=sys.stderr)
         sys.exit(2)
 
     mode = sys.argv[1]
@@ -1057,12 +1144,18 @@ def main():
             sys.exit(2)
         passed, issues = validate_outbound_plan(sys.argv[2])
 
+    elif mode == "image_references":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py image_references <image_references.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_image_references(sys.argv[2])
+
     else:
-        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', 'publisher_rate_limits', 'analyst', 'analyst_metrics', 'analyst_report', 'scout_analysis', or 'outbound_plan'.", file=sys.stderr)
+        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', 'publisher_rate_limits', 'analyst', 'analyst_metrics', 'analyst_report', 'scout_analysis', 'outbound_plan', or 'image_references'.", file=sys.stderr)
         sys.exit(2)
 
     # Determine total checks from mode
-    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6, "analyst_report": 8, "scout_analysis": 6, "outbound_plan": 7}
+    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6, "analyst_report": 8, "scout_analysis": 6, "outbound_plan": 7, "image_references": 6}
     total_checks = check_counts.get(mode, len(issues) + 1)
 
     if passed:
