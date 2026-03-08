@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 8, 2026 (Session 29: Competitor Image Analysis Pipeline)
+**Last updated**: March 8, 2026 (Session 30: Outbound Agent — Separate Engagement from Publishing)
 
 ---
 
@@ -29,7 +29,7 @@ To validate the architecture in a real-world scenario, the first demonstration p
 
 | Framework Capability | How the Demo Exercises It |
 |---|---|
-| Multi-agent coordination | 6 agents with dependency chains (Scout → Strategist → Creator) |
+| Multi-agent coordination | 7 agents with dependency chains (Scout → Strategist → Creator) |
 | External API integration | X API v2 for posting, engagement, and metrics |
 | Scheduled autonomous operation | Overnight pipeline + distributed daytime posting |
 | Human-in-the-loop at decision points | Content approval via Telegram before posting |
@@ -177,7 +177,7 @@ This was explicitly framed as a demonstration — a real-world test of the auton
 | Media type? | Static AI images only (no video) |
 | Competitor accounts? | Already has benchmark candidates |
 
-**Design delivered**: 6-agent system (Scout, Strategist, Creator, Publisher, Analyst, Commander) applying all 8 architectural principles from the framework research. Included pipeline schedule, shared state architecture, and 5-phase implementation plan.
+**Design delivered**: 6-agent system (Scout, Strategist, Creator, Publisher, Analyst, Commander) applying all 8 architectural principles from the framework research. Later expanded to 7 agents (Session 30: Outbound extracted from Publisher). Included pipeline schedule, shared state architecture, and 5-phase implementation plan.
 
 **Deliverable**: `x-ai-beauty-agent-config.md` (v1.0)
 
@@ -606,6 +606,42 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 
 **Verification**: Dry-run found 206 images, analyzed top 5 with mock data, validator passed 6/6 checks. Content plan validator passed 12/12 checks for both EN and JP. Character profile review passed all checks after fixes.
 
+### Session 30 — Outbound Agent: Separate Engagement from Publishing (March 8, 2026)
+
+**Goal**: Extract outbound engagement (likes, replies, follows) from Publisher into a dedicated Outbound agent with safety reasoning, cooldown enforcement, and history awareness.
+
+**Problem**: Publisher owned both posting (mechanical script execution) and outbound planning (strategic reasoning about who to engage, what to say, when to hold back). These are fundamentally different jobs. Posting is deterministic; outbound requires safety reasoning, cooldown checks, and contextual reply crafting.
+
+**Solution**: Created a new **Outbound agent** that owns the full outbound engagement lifecycle. Publisher stays lean for posting only. The Outbound agent adds safety layers that the old Publisher Smart Outbound Mode lacked:
+1. **History awareness** — queries SQLite + JSON logs for past engagement before planning
+2. **Cooldown enforcement** — 7-day follow, 3-day reply, 2-day like cooldowns per target
+3. **Follow deduplication** — never re-follows already-followed accounts
+4. **Tweet deduplication** — never re-likes already-liked tweets
+5. **Volume budgets** — conservative safety margins below global API limits (EN: 20 likes, 5 replies, 3 follows; JP: 15 likes, 5 replies, 2 follows)
+6. **Target rotation** — Strategist now rotates targets from the full 31+ competitor pool
+
+**Architecture change**:
+```
+Before: Strategist → strategy.json → Publisher (plans + executes outbound)
+After:  Strategist → strategy.json → Outbound agent (plans with safety reasoning) → publisher.py smart-outbound (executes)
+```
+
+**Files created** (3):
+- `agents/outbound.md` — Full agent definition with 6-step workflow (read inputs → safety reasoning → fetch targets → analyze/plan → write plan → execute)
+- `scripts/outbound_history.py` — History query tool; reads from SQLite + JSON logs; outputs human-readable summaries with per-target engagement counts, follow status, liked tweet IDs, and budget usage. Three CLI modes: `--days N`, `--target @handle`, `--check-tweets "id1,id2"`
+- `config/outbound_rules.json` — Safety parameters (margins per account, cooldown periods, target rotation rules)
+
+**Files modified** (7):
+- `agents/publisher.md` — Removed Smart Outbound Mode section, added brief execution-only note pointing to Outbound agent
+- `agents/strategist.md` — Added Target Rotation Rules subsection (draw from full pool, check recent logs, market matching, mix sizes, target count per account)
+- `agents/marc_publishing.md` — Step 3 now spawns Outbound agent instead of Publisher; error recovery updated
+- `agents/marc.md` — Updated team table, publishing flow, logging agents, dependencies
+- `agents/marc_conversation.md` — Updated team table and task types to separate Publisher/Outbound
+- `agents/creator.md` — Reply templates now reference Outbound agent
+- `CLAUDE.md` — Added Outbound to agent definitions and tool assignments
+
+**Verification**: Python syntax check passed. JSON validation passed. All 3 CLI modes of `outbound_history.py` tested against live data (EN: 54 actions across 5 targets found; JP: no history, fresh-run path verified; tweet dedup correctly identifies already-liked tweets). Cross-reference check found and fixed 2 additional stale references in `marc_conversation.md` and `creator.md`.
+
 ---
 
 ## 4. Decision Summary
@@ -718,7 +754,8 @@ Human (Shimpei)
             ├── 🔍 Scout ──────── Competitor research & trend analysis      [Teammate + X API v2 + Claude Intelligence]
             ├── 📊 Strategist ─── Data-driven growth strategy               [Teammate + Claude Code]
             ├── ✍️ Creator ─────── Content drafting & image prompts          [Teammate + Claude Code]
-            ├── 📢 Publisher ──── Posting [X API v2] + Smart outbound       [Teammate + X API v2 + Claude Intelligence ⚠️]
+            ├── 📢 Publisher ──── Posting approved content to X              [Teammate + X API v2]
+            ├── 🤝 Outbound ───── Community engagement (likes/replies/follows) [Teammate + Claude Intelligence ⚠️]
             └── 📈 Analyst ────── Metrics collection + daily reporting      [Teammate + X API + Claude Intelligence]
 ```
 
@@ -726,7 +763,7 @@ Human (Shimpei)
 
 #### 6.1.1 Hybrid Agent Pattern (Phase 5) + Agent Teams (Session 24)
 
-Three agents operate as "Claude Brain, Python Hands" hybrids. Python scripts handle all API calls, rate limiting, and data storage. Claude subagents add intelligence: anomaly detection (Analyst), reply filtering & executive summaries (Scout), contextual engagement planning (Publisher outbound). If Claude fails, each agent falls back to Phase 4 Python-only behavior. Post publishing remains Python-only (safety-critical, human-gated). See `docs/specs/phase-5-spec.md` §4.1 for the full pattern.
+Four agents operate as "Claude Brain, Python Hands" hybrids. Python scripts handle all API calls, rate limiting, and data storage. Claude subagents add intelligence: anomaly detection (Analyst), reply filtering & executive summaries (Scout), contextual engagement planning with safety reasoning (Outbound). If Claude fails, each agent falls back to Phase 4 Python-only behavior. Post publishing remains Python-only via Publisher (safety-critical, human-gated). Outbound engagement was extracted from Publisher into a dedicated Outbound agent (Session 30) to add safety layers: cooldown enforcement, follow/tweet deduplication, and history-aware volume budgets. See `docs/specs/phase-5-spec.md` §4.1 for the original pattern.
 
 As of Session 24, all agents operate as **teammates** within Claude Code Agent Teams. Marc spawns them via the Agent tool with shared task lists and messaging. This adds a coordination layer on top of the hybrid pattern — agents can now work in parallel (e.g., Creator EN + JP simultaneously), message each other, and claim tasks from a shared list. The conversational layer (Conversational Marc via `claude -p`) handles task intake and reasoning before spawning the heavier Agent Teams execution layer.
 
@@ -854,7 +891,8 @@ As of Session 24, all agents operate as **teammates** within Claude Code Agent T
 │   ├── competitors.json                    ← COMPETITOR DATA (machine-readable)
 │   │   Contains: 41 accounts with handle, category, market, priority
 │   │   user_id resolved by Scout on first run
-│   └── global_rules.md                     ← BEHAVIORAL RULES
+│   ├── global_rules.md                     ← BEHAVIORAL RULES
+│   └── outbound_rules.json                ← OUTBOUND SAFETY PARAMETERS (Session 30: margins, cooldowns, rotation)
 │
 ├── agents/                                 ← AGENT SKILL FILES
 │   ├── marc.md                            ← COO / Team Leader (Session 24: Agent Teams)
@@ -865,7 +903,8 @@ As of Session 24, all agents operate as **teammates** within Claude Code Agent T
 │   ├── scout.md                           ← Competitor Research (Phase 5: Daily Intelligence Mode, Session 24: Teammate Mode added)
 │   ├── strategist.md                      ← Growth Strategy (Session 24: Teammate Mode added)
 │   ├── creator.md                         ← Content Planning & Image Prompts (Phase 2, Session 24: Teammate Mode added)
-│   ├── publisher.md                       ← X API Posting & Outbound Engagement (Phase 5: Smart Outbound Mode, Session 24: Teammate Mode added)
+│   ├── publisher.md                       ← X API Posting (Session 30: Smart Outbound Mode moved to outbound.md)
+│   ├── outbound.md                        ← Community Engagement & Growth (Session 30: extracted from publisher.md with safety reasoning)
 │   └── analyst.md                         ← Metrics Collection & Data Storage (Phase 5: Intelligence Mode, Session 24: Teammate Mode added)
 │
 ├── scripts/                                ← PIPELINE & UTILITY SCRIPTS
@@ -877,6 +916,7 @@ As of Session 24, all agents operate as **teammates** within Claude Code Agent T
 │   ├── scout.py                           ← Scout agent script (Phase 5: --raw/--compact + pre-analysis)
 │   ├── publisher.py                       ← Publisher agent script (Phase 5: smart-outbound subcommand)
 │   ├── publisher_outbound_data.py         ← Outbound data fetcher for Claude analysis (Phase 5)
+│   ├── outbound_history.py               ← Outbound history query tool (Session 30: SQLite + JSON, 3 CLI modes)
 │   ├── analyst.py                         ← Analyst agent script (collect + summary + import) (Phase 4)
 │   ├── fetch_url.py                       ← URL fetcher — extracts readable text from web pages (Session 28)
 │   ├── telegram_send.py                   ← Telegram send helper (Phase 2)
@@ -1007,7 +1047,19 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 29 — Competitor image analysis pipeline + Higgsfield prompt upgrade (March 8, 2026). New `image_analyzer.py` analyzes top competitor images via Claude Vision. All content plan image prompts upgraded to full Higgsfield schema. HTML preview now renders structured fields with copy-to-clipboard.
+**Latest**: Session 30 — Outbound Agent: Separate engagement from publishing (March 8, 2026). New dedicated Outbound agent with safety reasoning, cooldown enforcement, follow/tweet deduplication, and history-aware volume budgets. Publisher now handles posting only.
+
+Session 30 files created/modified (10 files):
+- `agents/outbound.md` — **New** Outbound agent definition (6-step workflow: read → safety reasoning → fetch → plan → write → execute)
+- `scripts/outbound_history.py` — **New** History query tool (SQLite + JSON, 3 CLI modes: --days, --target, --check-tweets)
+- `config/outbound_rules.json` — **New** Safety parameters (per-account margins, cooldown periods, rotation rules)
+- `agents/publisher.md` — Removed Smart Outbound Mode, added execution-only note
+- `agents/strategist.md` — Added Target Rotation Rules (full pool, recent log check, market match, size mix)
+- `agents/marc_publishing.md` — Step 3 spawns Outbound agent instead of Publisher
+- `agents/marc.md` — Updated team table, flow, logging, dependencies
+- `agents/marc_conversation.md` — Updated team table, task types
+- `agents/creator.md` — Reply templates reference Outbound agent
+- `CLAUDE.md` — Added Outbound to agent definitions and tool assignments
 
 Session 29 files created/modified (7 files):
 - `scripts/image_analyzer.py` — **New** Image analysis via Anthropic Vision API (--top N, --dry-run)
@@ -1053,9 +1105,9 @@ Session 24 files added/modified (10 files):
 Phase 5 files added/modified (10 files):
 - `agents/analyst.md` — Added "Intelligence Mode" section (anomaly detection, category breakdown, A/B test evaluation, trend comparison, report composition)
 - `agents/scout.md` — Added "Daily Intelligence Mode" section + updated CLI usage with `--raw`/`--compact` flags
-- `agents/publisher.md` — Added "Smart Outbound Mode" section (relevance check, tweet selection, contextual reply crafting, outbound plan)
+- `agents/publisher.md` — Added "Smart Outbound Mode" section (later moved to `agents/outbound.md` in Session 30)
 - `agents/marc_pipeline.md` — Step 2 replaced with Claude Scout subagent invocation + fallback
-- `agents/marc_publishing.md` — Step P4 replaced with smart outbound flow (P4a-P4c), Step P8 replaced with analyst intelligence flow (P8a-P8c)
+- `agents/marc_publishing.md` — Step P4 replaced with smart outbound flow (later replaced with Outbound agent in Session 30), Step P8 replaced with analyst intelligence flow (P8a-P8c)
 - `scripts/scout.py` — Added `--raw`/`--compact` flags, `compute_pre_analysis()`, `compact_report()` functions
 - `scripts/publisher.py` — Added `smart-outbound` subcommand and `run_smart_outbound()` function
 - `scripts/publisher_outbound_data.py` — **New** OutboundDataFetcher (~120 lines): fetch target account data for Claude analysis

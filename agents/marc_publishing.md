@@ -40,36 +40,34 @@ python3 scripts/validate.py publisher_rate_limits data/rate_limits_{YYYYMMDD}.js
 
 Log failures as warnings. Posts may have partially succeeded.
 
-### 3. Smart Outbound Engagement
+### 3. Outbound Engagement (Outbound Agent)
 
-For each account, spawn a Publisher teammate for outbound planning:
-
-**3a. Generate Outbound Plan:**
+Spawn the Outbound agent for each account:
 
 ```
-"You are Publisher. Read agents/publisher.md, section 'Smart Outbound Mode' for your instructions.
+"You are Outbound. Read agents/outbound.md for your full instructions.
 Today's date: {YYYY-MM-DD}
 Account: {EN|JP}
 Strategy path: data/strategy_{YYYYMMDD}.json
 Content plan path: data/content_plan_{YYYYMMDD}_{account}.json
-Generate a smart outbound engagement plan.
-Write plan to: data/outbound_plan_{YYYYMMDD}_{account}.json
-Output ONLY valid JSON — no markdown code fences, no commentary."
+Safety rules: config/outbound_rules.json
+
+Execute your full workflow:
+1. Check outbound history
+2. Safety reasoning
+3. Fetch target data
+4. Plan engagement
+5. Write plan to data/outbound_plan_{YYYYMMDD}_{account}.json
+6. Execute via publisher.py smart-outbound"
 ```
 
-**3b. Validate Outbound Plan:**
-
+Validate after completion:
 ```bash
 python3 scripts/validate.py outbound_plan data/outbound_plan_{YYYYMMDD}_{account}.json
 ```
 
-If validation fails: fall back to legacy outbound (`python3 scripts/publisher.py outbound --account {account}`)
-
-**3c. Execute Outbound Plan:**
-
-```bash
-python3 scripts/publisher.py smart-outbound --account {account} --plan data/outbound_plan_{YYYYMMDD}_{account}.json
-```
+If Outbound agent fails: log error, skip outbound for this account.
+Do NOT fall back to legacy `publisher.py outbound` without safety reasoning.
 
 ### 4. Send Publish Report to Telegram
 
@@ -155,7 +153,7 @@ If validation fails: fall back to composing a basic Telegram message from the ra
 ## Error Recovery
 
 - Publisher post failure: log, continue to next account
-- Outbound plan failure: fall back to legacy `publisher.py outbound`
+- Outbound agent failure: log error, skip outbound (do NOT fall back without safety reasoning)
 - Analyst failure: log as warning, skip metrics (can re-run later)
 - Daily report failure: compose basic report from raw metrics
 - Telegram send failure: log as warning, never fail the workflow

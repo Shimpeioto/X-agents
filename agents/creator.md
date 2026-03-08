@@ -194,7 +194,7 @@ in `config/image_prompt_guide.md` as before.
 
 ## Step 3: Generate Reply Templates
 
-Create 5-10 reply templates the Publisher agent can use for outbound engagement:
+Create 5-10 reply templates the Outbound agent can use for outbound engagement:
 - Varied tone: some enthusiastic, some thoughtful, some curious
 - EN account: English replies
 - JP account: Japanese replies (日本語)

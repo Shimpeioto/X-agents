@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "safety_margins": {
+    "EN": {
+      "max_likes_per_day": 20,
+      "max_replies_per_day": 5,
+      "max_follows_per_day": 3,
+      "max_targets_per_day": 4
+    },
+    "JP": {
+      "max_likes_per_day": 15,
+      "max_replies_per_day": 5,
+      "max_follows_per_day": 2,
+      "max_targets_per_day": 3
+    }
+  },
+  "cooldowns": {
+    "follow_cooldown_days": 7,
+    "reply_cooldown_days": 3,
+    "like_same_account_cooldown_days": 2,
+    "min_delay_seconds": 30,
+    "max_delay_seconds": 120
+  },
+  "target_rotation": {
+    "max_repeat_within_days": 3,
+    "prefer_accounts_not_engaged_recently": true
+  }
+}

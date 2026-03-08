@@ -35,7 +35,8 @@ Entry points:
 - @agents/scout.md — Competitor Research (teammate)
 - @agents/strategist.md — Growth Strategy (teammate)
 - @agents/creator.md — Content Planning (teammate)
-- @agents/publisher.md — X API Posting & Outbound (teammate)
+- @agents/publisher.md — X API Posting (teammate)
+- @agents/outbound.md — Community Engagement & Growth (teammate)
 - @agents/analyst.md — Metrics Collection (teammate)
 
 ## Shared Conventions
@@ -49,6 +50,7 @@ Entry points:
 - Strategist: File read/write only
 - Creator: File read/write only
 - Publisher: X API write + media upload + rate limit counter
+- Outbound: X API read (target data) + X API write (via publisher.py smart-outbound) + SQLite read (history)
 - Analyst: X API read + Playwright (impressions) + SQLite write
 - Marc: Teammate spawning + file read/write + Telegram send
 
