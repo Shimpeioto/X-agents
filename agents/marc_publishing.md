@@ -10,39 +10,41 @@ Publish approved content to X, run outbound engagement, collect metrics, and del
 
 ## Prerequisites
 
-Content plans must have approved posts (`status == "approved"`). Check both:
-- `data/content_plan_{YYYYMMDD}_EN.json`
-- `data/content_plan_{YYYYMMDD}_JP.json`
+Read `config/account_status.json`. Only publish and run outbound for **active accounts**.
+Skip suspended accounts with a log message.
 
-If no approved posts exist for either account: log and **STOP**.
+Content plans must have approved posts (`status == "approved"`). Check active accounts:
+- For each active account: `data/content_plan_{YYYYMMDD}_{account}.json`
+
+If no approved posts exist for any active account: log and **STOP**.
 
 ## Execution
 
-### 1. Publish Approved Posts
+### 1. Publish Approved Posts (Active Accounts Only)
 
-For each account with approved posts, run directly:
+For each **active** account with approved posts, run directly:
 
 ```bash
+# Only run for active accounts (check config/account_status.json)
 python3 scripts/publisher.py post --account EN
-python3 scripts/publisher.py post --account JP
 ```
 
 Expected: Content plan updated with `status: "posted"`, `tweet_id`, `post_url`, `posted_at`.
 If Publisher exits non-zero: log error, continue to next account (do NOT stop).
 
-### 2. Validate Publisher Output
+### 2. Validate Publisher Output (Active Accounts Only)
 
+For each **active** account:
 ```bash
-python3 scripts/validate.py publisher data/content_plan_{YYYYMMDD}_EN.json
-python3 scripts/validate.py publisher data/content_plan_{YYYYMMDD}_JP.json
+python3 scripts/validate.py publisher data/content_plan_{YYYYMMDD}_{account}.json
 python3 scripts/validate.py publisher_rate_limits data/rate_limits_{YYYYMMDD}.json
 ```
 
 Log failures as warnings. Posts may have partially succeeded.
 
-### 3. Outbound Engagement (Outbound Agent)
+### 3. Outbound Engagement (Active Accounts Only)
 
-Spawn the Outbound agent for each account:
+Spawn the Outbound agent for each **active** account only:
 
 ```
 "You are Outbound. Read agents/outbound.md for your full instructions.
@@ -77,34 +79,36 @@ python3 scripts/telegram_send.py "<formatted publish report>"
 
 See [marc_schemas.md](marc_schemas.md) for the Publish Report Format.
 
-Then generate and send the HTML version for mobile-friendly review:
+Then generate and send the HTML version for mobile-friendly review.
+Only pass **active account** content plan files to the report generator:
 
 ```bash
+# Example with only EN active:
 python3 scripts/generate_html_report.py publish_report \
-  data/content_plan_{YYYYMMDD}_EN.json data/content_plan_{YYYYMMDD}_JP.json \
+  data/content_plan_{YYYYMMDD}_EN.json \
   --outbound-log data/outbound_log_{YYYYMMDD}.json --rate-limits data/rate_limits_{YYYYMMDD}.json
 python3 scripts/telegram_send.py --document data/publish_report_{YYYYMMDD}.html "Publish Report — {YYYY-MM-DD}"
 ```
 
-### 5. Collect Metrics
+### 5. Collect Metrics (Active Accounts Only)
 
 Check if at least 1 hour has passed since the latest `posted_at` timestamp. If not, log a warning and skip.
 
+For each **active** account:
 ```bash
-python3 scripts/analyst.py collect
+python3 scripts/analyst.py collect --account {account}
 ```
 
-### 6. Generate Metric Summaries
+### 6. Generate Metric Summaries (Active Accounts Only)
 
+For each **active** account:
 ```bash
-python3 scripts/analyst.py summary --account EN
-python3 scripts/analyst.py summary --account JP
+python3 scripts/analyst.py summary --account {account}
 ```
 
 Validate:
 ```bash
-python3 scripts/validate.py analyst data/metrics_{YYYYMMDD}_EN.json
-python3 scripts/validate.py analyst data/metrics_{YYYYMMDD}_JP.json
+python3 scripts/validate.py analyst data/metrics_{YYYYMMDD}_{account}.json
 python3 scripts/validate.py analyst_metrics data/metrics_history.db
 ```
 

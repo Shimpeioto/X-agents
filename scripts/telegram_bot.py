@@ -46,6 +46,8 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(PROJECT, "scripts"))
 
+from x_api import get_active_accounts
+
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s",
@@ -404,7 +406,7 @@ async def cmd_approve(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     args = context.args or []
 
     if len(args) == 0:
-        accounts = ["EN", "JP"]
+        accounts = get_active_accounts()
         slots = None
     elif len(args) == 1:
         accounts = [args[0].upper()]
@@ -476,7 +478,7 @@ async def cmd_details(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         return
 
     lines = [f"Content Plan \u2014 {today_iso()}\n"]
-    for account in ["EN", "JP"]:
+    for account in get_active_accounts():
         plan, _ = load_content_plan(account)
         if plan is None:
             lines.append(f"\n{account}: No plan found")
@@ -696,7 +698,7 @@ async def _show_metrics_summary(update: Update, account: str | None = None) -> N
         db_manager.init()
 
         date = today_iso()
-        accounts = [account] if account else ["EN", "JP"]
+        accounts = [account] if account else get_active_accounts()
         lines = [f"Metrics Summary \u2014 {date}\n"]
 
         for acct in accounts:

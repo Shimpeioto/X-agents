@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 8, 2026 (Session 30: Outbound Agent — Separate Engagement from Publishing)
+**Last updated**: March 8, 2026 (Session 31: Account Status Management — EN Sub-account + JP Suspension)
 
 ---
 
@@ -1047,7 +1047,17 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 30 — Outbound Agent: Separate engagement from publishing (March 8, 2026). New dedicated Outbound agent with safety reasoning, cooldown enforcement, follow/tweet deduplication, and history-aware volume budgets. Publisher now handles posting only.
+**Latest**: Session 31 — Account Status Management: EN sub-account + JP suspension (March 8, 2026). EN main account (@iammeruru) shadowbanned — switched to sub-account @meruru_tcbn via config swap. JP account not yet created — suspended via account status file. Two-layer approach: config swap for EN (zero code changes in scripts), account status file for JP (Marc/bot skip inactive accounts).
+
+Session 31 files created/modified (8 files):
+- `config/account_status.json` — **New** Account active/suspended status (EN active, JP suspended)
+- `config/accounts.json` — Added `"EN"` key pointing to @meruru_tcbn sub-account, renamed `EN-shadowbanne` → `EN-shadowbanned`
+- `scripts/x_api.py` — Added `get_active_accounts()` helper (reads account_status.json, fallback to ["EN", "JP"])
+- `scripts/telegram_bot.py` — Imported `get_active_accounts()`, replaced hardcoded `["EN", "JP"]` in cmd_approve, cmd_details, _show_metrics_summary
+- `agents/marc_pipeline.md` — Added Step 0 (check account status), gated Steps 6-9 on active accounts only
+- `agents/marc_publishing.md` — Added account status check in prerequisites, gated Steps 1-6 on active accounts
+- `agents/marc_conversation.md` — Added Account Status section, updated Known Limitations with shadowban/JP status
+- `CLAUDE.md` — Added account status tracking to Project Context
 
 Session 30 files created/modified (10 files):
 - `agents/outbound.md` — **New** Outbound agent definition (6-step workflow: read → safety reasoning → fetch → plan → write → execute)

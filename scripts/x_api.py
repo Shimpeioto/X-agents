@@ -245,6 +245,16 @@ class XApiClient:
         return None
 
 
+def get_active_accounts() -> list:
+    """Return list of active account keys from config/account_status.json."""
+    path = os.path.join(PROJECT, "config", "account_status.json")
+    if not os.path.exists(path):
+        return ["EN", "JP"]  # Default fallback
+    with open(path) as f:
+        status = json.load(f)
+    return [k for k, v in status.get("accounts", {}).items() if v.get("active", True)]
+
+
 def load_account_credentials(account: str) -> dict:
     """Load OAuth 1.0a credentials for a specific account (EN or JP).
 

@@ -23,6 +23,8 @@ Entry points:
 
 ## Project Context
 - Two accounts: EN (global) and JP (日本市場)
+- Account status tracked in `config/account_status.json` (EN active via sub-account @meruru_tcbn, JP suspended)
+- When account status changes, update `config/account_status.json`
 - All X operations use X API v2 Basic plan ($200/month)
 - Impressions only via Playwright (own account pages)
 - Human approval required before any post goes live

@@ -33,6 +33,22 @@ Each step must validate before the next begins. Creator EN and JP can run in par
 
 ## Execution
 
+### 0. Check Account Status
+
+Read `config/account_status.json` to determine which accounts are active today.
+
+```bash
+python3 -c "import json; data=json.load(open('config/account_status.json')); print(json.dumps({k:v['active'] for k,v in data['accounts'].items()}))"
+```
+
+Only generate content plans and spawn Creator teammates for **active accounts**.
+Strategist still generates strategy for all accounts (validator expects both EN and JP sections).
+
+If NO accounts are active: send Telegram notification and **STOP**:
+```bash
+python3 scripts/telegram_send.py "Pipeline skipped — no active accounts in config/account_status.json"
+```
+
 ### 1. Initialize Pipeline State
 
 Create `data/pipeline_state_{YYYYMMDD}.json` — see [marc_schemas.md](marc_schemas.md) for the initial state template.
@@ -109,39 +125,28 @@ Apply your own semantic judgment:
 - Are there contradictions?
 - Are the recommendations actionable and specific?
 
-### 6. Spawn Creator EN + Creator JP Teammates IN PARALLEL
+### 6. Spawn Creator Teammates for Active Accounts
 
-Spawn **both** at the same time:
+Only spawn Creator for **active accounts** (from Step 0). If both are active, spawn in parallel.
 
-**Creator EN:**
+For each active account (`{account}` = EN or JP):
 ```
 "You are Creator. Read agents/creator.md for your instructions.
 Today's date: {YYYY-MM-DD}
-Account: EN
+Account: {account}
 Strategy path: data/strategy_{YYYYMMDD}.json
 Image references path (if exists): data/image_references_{YYYYMMDD}.json
-Generate today's content plan for the EN account.
+Generate today's content plan for the {account} account.
 All posts must have status: 'draft' — human approval happens via Telegram, not here.
-Write the output to: data/content_plan_{YYYYMMDD}_EN.json
+Write the output to: data/content_plan_{YYYYMMDD}_{account}.json
 Output ONLY valid JSON — no markdown code fences, no commentary."
 ```
 
-**Creator JP:**
-```
-"You are Creator. Read agents/creator.md for your instructions.
-Today's date: {YYYY-MM-DD}
-Account: JP
-Strategy path: data/strategy_{YYYYMMDD}.json
-Image references path (if exists): data/image_references_{YYYYMMDD}.json
-Generate today's content plan for the JP account.
-All posts must have status: 'draft' — human approval happens via Telegram, not here.
-Write the output to: data/content_plan_{YYYYMMDD}_JP.json
-Output ONLY valid JSON — no markdown code fences, no commentary."
-```
+Skip inactive accounts — do not spawn Creator for them.
 
-### 7. Validate Both Content Plans
+### 7. Validate Content Plans (Active Accounts Only)
 
-For each account (EN, JP):
+For each **active** account:
 ```bash
 python3 scripts/validate.py creator data/content_plan_{YYYYMMDD}_{account}.json
 python3 scripts/validate.py creator_cross data/content_plan_{YYYYMMDD}_{account}.json data/strategy_{YYYYMMDD}.json
@@ -149,12 +154,13 @@ python3 scripts/validate.py creator_cross data/content_plan_{YYYYMMDD}_{account}
 
 Creator validation FAIL: log, update pipeline state, **STOP**.
 Cross-validation FAIL: log as warning (Creator may have made reasonable deviations).
+Skip validation for inactive accounts (no content plan was generated).
 
-### 8. War Room (Scored Evaluation)
+### 8. War Room (Scored Evaluation — Active Accounts Only)
 
-Perform a **scored evaluation** (0-100 points) of each account's content plan against the strategy.
+Perform a **scored evaluation** (0-100 points) of each **active** account's content plan against the strategy.
 
-For EACH account (EN, JP), apply the 6-criterion rubric:
+For EACH **active** account, apply the 6-criterion rubric:
 
 | # | Criterion | Max | Scoring Logic |
 |---|---|---|---|
@@ -184,11 +190,13 @@ python3 scripts/telegram_send.py "<formatted preview message>"
 
 See [marc_schemas.md](marc_schemas.md) for the Content Preview Format.
 
-Then generate and send the HTML version for mobile-friendly review:
+Then generate and send the HTML version for mobile-friendly review.
+Only pass **active account** content plan files to the report generator:
 
 ```bash
+# Example with only EN active:
 python3 scripts/generate_html_report.py content_preview \
-  data/content_plan_{YYYYMMDD}_EN.json data/content_plan_{YYYYMMDD}_JP.json \
+  data/content_plan_{YYYYMMDD}_EN.json \
   --strategy data/strategy_{YYYYMMDD}.json --pipeline-state data/pipeline_state_{YYYYMMDD}.json
 python3 scripts/telegram_send.py --document data/content_preview_{YYYYMMDD}.html "Content Preview — {YYYY-MM-DD}"
 ```

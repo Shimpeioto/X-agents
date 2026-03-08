@@ -1,0 +1,12 @@
+{
+  "accounts": {
+    "EN": {
+      "active": true,
+      "notes": "Sub-account @meruru_tcbn active while main @iammeruru is shadowbanned"
+    },
+    "JP": {
+      "active": false,
+      "notes": "Suspended — JP account not yet created"
+    }
+  }
+}
