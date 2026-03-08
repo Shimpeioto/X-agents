@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Preview — 2026-03-08</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Content Preview</h1>
+  <div class="subtitle">4 Posts Ready for Review | EN (2) + JP (2)</div>
+  <div class="date">2026-03-08</div>
+</div>
+<nav class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#strategy">Strategy</a>
+  <a href="#en-posts">EN Posts</a>
+  <a href="#jp-posts">JP Posts</a>
+  <a href="#reply-templates">Reply Templates</a>
+</nav>
+<div class="container">
+<section id="overview">
+<h2>Overview</h2>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">4</div>
+    <div class="label">Total Posts</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">2</div>
+    <div class="label">EN Posts</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">2</div>
+    <div class="label">JP Posts</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">—</div>
+    <div class="label">EN War Room</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">—</div>
+    <div class="label">JP War Room</div>
+  </div>
+</div>
+</section>
+<section id="strategy">
+<h2>Strategy Highlights</h2>
+<h3><span class="tag tag-en">EN</span> Key Insights</h3>
+<div class="insight">Ultra-short captions (&lt;30 chars) continue to dominate EN: all 14 EN trending posts use sub-30-char text. @imrubyreid&#x27;s &#x27;lord have mercy...&#x27; hit 11,253 likes and &#x27;single btw&#x27; hit 9,625 likes — proving the ambient confidence statement can rival direct questions.</div>
+<div class="insight">@yuumispm (12K followers, 26.4% ER) reached 16,143 likes on a single image-only post — highest in the dataset. Confirms that at our early growth stage, one viral image can transform trajectory. Prioritize exceptional image quality for the image_showcase slot.</div>
+<div class="insight">Grok integration remains massively underutilized in EN — only @ai_hiyo_ (387K) actively uses it among EN competitors. First-mover advantage is still wide open. Slot 2 as grok_interactive at 22:00 UTC (US prime evening) maximizes reach for this experimental format.</div>
+<h4>A/B Test: Caption style: provocative question vs ambient statement</h4>
+<div class="card">
+  <div><strong class="text-green">Variant A:</strong> Provocative question format — e.g., &#x27;Am I ur type?&#x27;, &#x27;Smash or pass?&#x27;, &#x27;Rate me 1-10&#x27; — direct audience engagement prompt</div>
+  <div class="mt-2"><strong class="text-pink">Variant B:</strong> Ambient statement format — e.g., &#x27;single btw&#x27;, &#x27;lord have mercy...&#x27;, &#x27;built like this&#x27; — indirect confidence signaling without a question</div>
+  <div class="text-sm text-muted mt-2">5 days starting 2026-03-08</div>
+</div>
+<div class="insight warning"><strong>Risk:</strong> EN market saturation is increasing — @24wisher (251K) and @AiMilkers (97K) are large accounts we were not previously tracking. Competition for the algorithmic For You feed is intensifying.</div>
+<div class="insight warning"><strong>Risk:</strong> Over-reliance on the short provocative question format risks becoming formulaic. The A/B test between questions and ambient statements will diversify our caption approach while maintaining the &lt;30 char rule.</div>
+<h3><span class="tag tag-jp">JP</span> Key Insights</h3>
+<div class="insight">@ai_hyk continues to dominate JP with 28.1% impression ER — two trending posts at 7,872 and 6,834 likes. The Grok combination format (&#x27;.@grok タップして4枚の画像を1つに結合して&#x27;) specifically outperformed at 7,872 likes with 5,945 bookmarks (75% bookmark-to-like ratio). This is the single most important format to master for JP growth.</div>
+<div class="insight">JP reply contamination is severe — 10 of 15 JP competitors have &gt;50% reply rates. Only @yunaelegant (1% ER, zero contamination), @honoka_shiri, @AI_Girls_Studio, and @ganbarukaisyain have clean timelines. Our outbound targeting focuses on clean-timeline accounts for maximum visibility benefit.</div>
+<div class="insight">@nene__chandayo (7.6K followers, 17.6% impression ER) demonstrates that the intimate persona approach (28-year-old character with warm daily interactions) drives exceptional engagement at small scale. This validates our persona_dialogue pillar — warm, character-consistent Japanese text outperforms generic art captions.</div>
+<h4>A/B Test: Grok post request type: transformation vs combination</h4>
+<div class="card">
+  <div><strong class="text-green">Variant A:</strong> Single-image transformation — e.g., &#x27;.@grok この画像をアニメ風にして&#x27;, &#x27;.@grok 服を変えて&#x27; — simple visual transformation of one image</div>
+  <div class="mt-2"><strong class="text-pink">Variant B:</strong> Multi-image combination — e.g., &#x27;.@grok タップして4枚の画像を1つに結合して&#x27; — combining multiple images into a single composition (ai_hyk&#x27;s 7,872-like format)</div>
+  <div class="text-sm text-muted mt-2">5 days starting 2026-03-08</div>
+</div>
+<div class="insight warning"><strong>Risk:</strong> JP outbound monitoring is reportedly stricter per @seisei_ai_1st&#x27;s expert guidance. Maintaining 15 likes (50% below 30 limit) and 2 follows (60% below 5 limit) is the most conservative approach to avoid shadow ban in JP.</div>
+<div class="insight warning"><strong>Risk:</strong> The gap between @ai_hyk (124K followers) and the next JP competitor is enormous. Attempting to replicate ai_hyk&#x27;s Grok strategy without their established audience may yield slower initial results — patience and consistency are required.</div>
+</section>
+<section id="en-posts">
+<h2>EN Posts</h2>
+<div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 1</span> <span class="tag">14:00 UTC</span> <span class="tag tag-en">engagement_questions</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-green">Variant A</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260308_01</div>
+    <div class="post-text">Am I ur type?</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone mirror selfie of a young woman in her early 20s standing in a modern minimalist bedroom. She has long honey blonde hair falling past her shoulders in loose natural waves with subtle sun-kissed highlights. Hourglass athletic-toned curvaceous figure with natural skin texture and visible pores. She wears a fitted dusty rose ribbed crop top that hugs her curves and high-waisted black leggings. One hand holds an iPhone 15 Pro Max at chest height, the other rests casually on her hip with fingers slightly spread. Her weight shifts to her left leg creating a subtle hip tilt to the right. She gazes at the phone screen with a confident playful expression and soft natural smile, lips slightly parted. Slight head tilt to the right. The room has a clean white wall behind a large black-framed full-length mirror, light wood flooring, and a neatly made bed with cream linen sheets visible in the background. Natural golden hour sunlight streams from a window to the left, casting warm highlights across her skin and soft directional shadows on the wall. The lighting creates a warm golden glow on her face and arms with subtle rim light on her hair. Soft pink, warm cream, golden amber color palette. Casual everyday influencer aesthetic. Shot at eye-level in portrait orientation, centered composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: raw iphone mirror selfie</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260308_01')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260308_01" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone mirror selfie of a young woman in her early 20s standing in a modern minimalist bedroom. She has long honey blonde hair falling past her shoulders in loose natural waves with subtle sun-kissed highlights. Hourglass athletic-toned curvaceous figure with natural skin texture and visible pores. She wears a fitted dusty rose ribbed crop top that hugs her curves and high-waisted black leggings. One hand holds an iPhone 15 Pro Max at chest height, the other rests casually on her hip with fingers slightly spread. Her weight shifts to her left leg creating a subtle hip tilt to the right. She gazes at the phone screen with a confident playful expression and soft natural smile, lips slightly parted. Slight head tilt to the right. The room has a clean white wall behind a large black-framed full-length mirror, light wood flooring, and a neatly made bed with cream linen sheets visible in the background. Natural golden hour sunlight streams from a window to the left, casting warm highlights across her skin and soft directional shadows on the wall. The lighting creates a warm golden glow on her face and arms with subtle rim light on her hair. Soft pink, warm cream, golden amber color palette. Casual everyday influencer aesthetic. Shot at eye-level in portrait orientation, centered composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;raw iphone mirror selfie&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;honey blonde with sun-kissed highlights&quot;,
+      &quot;style&quot;: &quot;long loose natural waves&quot;
+    },
+    &quot;body_type&quot;: &quot;hourglass, athletic-toned, curvaceous&quot;,
+    &quot;skin&quot;: &quot;natural texture, visible pores&quot;,
+    &quot;expression&quot;: &quot;confident playful, soft natural smile, lips slightly parted&quot;,
+    &quot;makeup&quot;: &quot;natural dewy, subtle bronzer, soft nude lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;ribbed crop top&quot;,
+      &quot;color&quot;: &quot;dusty rose&quot;,
+      &quot;material&quot;: &quot;ribbed cotton&quot;,
+      &quot;fit&quot;: &quot;fitted&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;leggings&quot;,
+      &quot;color&quot;: &quot;black&quot;,
+      &quot;fit&quot;: &quot;high-waisted, fitted&quot;
+    },
+    &quot;accessories&quot;: [
+      &quot;iPhone 15 Pro Max&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing&quot;,
+    &quot;stance&quot;: &quot;weight on left leg, subtle hip tilt right&quot;,
+    &quot;hands&quot;: &quot;right hand holding phone at chest height, left hand on hip&quot;,
+    &quot;head_gaze&quot;: &quot;slight right tilt, eyes at phone screen&quot;,
+    &quot;vibe&quot;: &quot;effortless confidence&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;modern minimalist bedroom&quot;,
+    &quot;time&quot;: &quot;golden hour&quot;,
+    &quot;atmosphere&quot;: &quot;warm, clean, domestic&quot;,
+    &quot;background&quot;: &quot;white wall, black-framed full-length mirror, light wood floor, cream linen bed&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;mirror selfie&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;full body&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;natural golden hour sunlight from left window&quot;,
+    &quot;effect&quot;: &quot;warm highlights on skin, soft directional shadows on wall, subtle rim light on hair&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;confident, playful&quot;,
+    &quot;color_palette&quot;: &quot;soft pink, warm cream, golden amber&quot;,
+    &quot;aesthetic&quot;: &quot;casual everyday influencer&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;raw iphone mirror selfie&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;honey blonde with sun-kissed highlights&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long loose natural waves&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;hourglass, athletic-toned, curvaceous&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;natural texture, visible pores&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;confident playful, soft natural smile, lips slightly parted&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;natural dewy, subtle bronzer, soft nude lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;ribbed crop top&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dusty rose&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;ribbed cotton&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;fitted&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;leggings&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;high-waisted, fitted&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;weight on left leg, subtle hip tilt right&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;right hand holding phone at chest height, left hand on hip&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;slight right tilt, eyes at phone screen&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;effortless confidence&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;modern minimalist bedroom&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;golden hour&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;warm, clean, domestic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;white wall, black-framed full-length mirror, light wood floor, cream linen bed&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;mirror selfie&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;full body&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;natural golden hour sunlight from left window&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;warm highlights on skin, soft directional shadows on wall, subtle rim light on hair&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;confident, playful&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;soft pink, warm cream, golden amber&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;casual everyday influencer&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Variant A: provocative question format. Short, direct engagement prompt. Mirror selfie with golden hour lighting — top-performing visual style per competitor analysis.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 2</span> <span class="tag">22:00 UTC</span> <span class="tag tag-en">grok_interactive</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260308_02</div>
+    <div class="post-text">.@grok turn me into a mermaid</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic photo of a young woman in her early 20s standing ankle-deep in crystal clear turquoise ocean water on a pristine tropical beach at golden hour. She has long wavy dark auburn hair flowing behind her in the ocean breeze, catching warm sunlight. Athletic-toned curvaceous hourglass figure with natural sun-kissed skin showing real texture and a light golden tan. She wears a white flowing midi sundress with thin spaghetti straps, the lightweight cotton fabric pressing against her body in the wind, the hem getting slightly wet from the surf. Her skin glistens with a light sheen of salt water spray. She stands facing the camera in a relaxed confident pose, weight shifted to her right leg, left hand reaching up to hold her hair back from the wind, right arm hanging naturally at her side. She looks directly at the camera with a warm radiant smile, chin slightly up, bright eyes reflecting the golden light. Behind her the ocean stretches to the horizon with gentle rolling waves, the sky painted in warm peach and soft lavender sunset gradients. Wet sand reflects the sky colors beneath her feet. Bright golden hour sunlight from the left creates a warm backlight halo effect on her hair and body, long soft shadows stretching across the wet sand, and a warm amber glow illuminating her face. Warm gold, ocean turquoise, sunset peach, clean white color palette. Beach golden hour lifestyle aesthetic. Third-person shot, eye-level, full body framing, centered vertical composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 9:16</span> <span>Camera: Sony A7R IV</span> <span>Lens: 35mm f/1.4</span> <span>Style: beach golden hour lifestyle</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260308_02')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260308_02" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic photo of a young woman in her early 20s standing ankle-deep in crystal clear turquoise ocean water on a pristine tropical beach at golden hour. She has long wavy dark auburn hair flowing behind her in the ocean breeze, catching warm sunlight. Athletic-toned curvaceous hourglass figure with natural sun-kissed skin showing real texture and a light golden tan. She wears a white flowing midi sundress with thin spaghetti straps, the lightweight cotton fabric pressing against her body in the wind, the hem getting slightly wet from the surf. Her skin glistens with a light sheen of salt water spray. She stands facing the camera in a relaxed confident pose, weight shifted to her right leg, left hand reaching up to hold her hair back from the wind, right arm hanging naturally at her side. She looks directly at the camera with a warm radiant smile, chin slightly up, bright eyes reflecting the golden light. Behind her the ocean stretches to the horizon with gentle rolling waves, the sky painted in warm peach and soft lavender sunset gradients. Wet sand reflects the sky colors beneath her feet. Bright golden hour sunlight from the left creates a warm backlight halo effect on her hair and body, long soft shadows stretching across the wet sand, and a warm amber glow illuminating her face. Warm gold, ocean turquoise, sunset peach, clean white color palette. Beach golden hour lifestyle aesthetic. Third-person shot, eye-level, full body framing, centered vertical composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;Sony A7R IV&quot;,
+    &quot;lens&quot;: &quot;35mm f/1.4&quot;,
+    &quot;style&quot;: &quot;beach golden hour lifestyle&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;dark auburn&quot;,
+      &quot;style&quot;: &quot;long wavy, flowing in ocean breeze&quot;
+    },
+    &quot;body_type&quot;: &quot;athletic-toned hourglass, curvaceous&quot;,
+    &quot;skin&quot;: &quot;sun-kissed golden tan, natural texture, light salt water sheen&quot;,
+    &quot;expression&quot;: &quot;warm radiant smile, chin slightly up, bright eyes&quot;,
+    &quot;makeup&quot;: &quot;minimal natural, waterproof mascara, sun-flushed glow&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;sundress&quot;,
+      &quot;color&quot;: &quot;white&quot;,
+      &quot;material&quot;: &quot;lightweight cotton&quot;,
+      &quot;fit&quot;: &quot;flowing midi, thin spaghetti straps&quot;
+    },
+    &quot;accessories&quot;: []
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing ankle-deep in surf&quot;,
+    &quot;stance&quot;: &quot;weight on right leg, relaxed confident&quot;,
+    &quot;hands&quot;: &quot;left hand holding hair back from wind, right arm hanging naturally&quot;,
+    &quot;head_gaze&quot;: &quot;looking directly at camera, chin slightly up&quot;,
+    &quot;vibe&quot;: &quot;effortless beach beauty&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;pristine tropical beach&quot;,
+    &quot;time&quot;: &quot;golden hour sunset&quot;,
+    &quot;atmosphere&quot;: &quot;warm, breezy, golden&quot;,
+    &quot;background&quot;: &quot;crystal ocean to horizon, gentle waves, peach and lavender sunset sky, wet sand reflecting sky&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;third-person&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;full body&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;golden hour sunlight from left, warm backlight&quot;,
+    &quot;effect&quot;: &quot;warm halo on hair and body, long soft shadows on wet sand, amber glow on face&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;warm, radiant, free&quot;,
+    &quot;color_palette&quot;: &quot;warm gold, ocean turquoise, sunset peach, clean white&quot;,
+    &quot;aesthetic&quot;: &quot;beach golden hour lifestyle&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;Sony A7R IV&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;35mm f/1.4&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;beach golden hour lifestyle&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark auburn&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long wavy, flowing in ocean breeze&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;athletic-toned hourglass, curvaceous&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;sun-kissed golden tan, natural texture, light salt water sheen&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;warm radiant smile, chin slightly up, bright eyes&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural, waterproof mascara, sun-flushed glow&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;sundress&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;white&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;lightweight cotton&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;flowing midi, thin spaghetti straps&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: []
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing ankle-deep in surf&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;weight on right leg, relaxed confident&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;left hand holding hair back from wind, right arm hanging naturally&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;looking directly at camera, chin slightly up&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;effortless beach beauty&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;pristine tropical beach&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;golden hour sunset&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;warm, breezy, golden&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;crystal ocean to horizon, gentle waves, peach and lavender sunset sky, wet sand reflecting sky&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;third-person&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;full body&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;golden hour sunlight from left, warm backlight&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;warm halo on hair and body, long soft shadows on wet sand, amber glow on face&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;warm, radiant, free&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;warm gold, ocean turquoise, sunset peach, clean white&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;beach golden hour lifestyle&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Grok interactive post — beach/ocean base image makes the mermaid transformation natural and playful. The .@grok prefix with leading dot is critical. Posted at 22:00 UTC for US prime evening reach.</div>
+  </div></section>
+<section id="jp-posts">
+<h2>JP Posts</h2>
+<div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 1</span> <span class="tag">12:30 JST</span> <span class="tag tag-jp">grok_interactive</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-green">Variant A</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">JP_20260308_01</div>
+    <div class="post-text">.@grok この画像の髪色をピンクに変えて</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic photo of a young Japanese woman in her early 20s sitting at a charming outdoor cafe table during a warm spring lunchtime. She has long straight black hair draped smoothly over both shoulders with a soft center part, catching the midday sunlight. Fair porcelain skin with a natural dewy glow, smooth with delicate features and almond-shaped eyes. Natural Korean-style makeup with defined soft brows, subtle peach eyeshadow, light mascara, glass-skin finish, and a soft coral lip tint. Hourglass figure with large full chest, slim waist, and wide full hips visible through her outfit. She wears a fitted cream-colored ribbed knit cardigan with small pearl buttons, slightly unbuttoned at the top revealing a delicate gold necklace, paired with a light beige pleated mini skirt. She sits with her legs crossed, leaning slightly forward on the cafe table with both hands wrapped around a ceramic latte cup, elbows resting lightly on the table edge. She looks directly at the camera with a warm inviting smile, soft eyes, head tilted gently to the left. The cafe has a rustic wooden table and a woven rattan chair, pale pink cherry blossom trees visible in soft focus behind her, a small potted plant on the table, and warm-toned brick building facade across the quiet street. Bright natural midday spring sunlight from above and slightly behind creates soft even illumination on her face, gentle highlights on her hair, and dappled tree shadows on the table surface. Warm cream, soft pink cherry blossom, natural green, light gold color palette. Spring cafe lifestyle aesthetic. Third-person shot at eye-level, medium shot from waist up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 4:5</span> <span>Camera: Canon EOS R5</span> <span>Lens: 50mm f/1.8</span> <span>Style: spring cafe lifestyle portrait</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-JP_20260308_01')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-JP_20260308_01" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic photo of a young Japanese woman in her early 20s sitting at a charming outdoor cafe table during a warm spring lunchtime. She has long straight black hair draped smoothly over both shoulders with a soft center part, catching the midday sunlight. Fair porcelain skin with a natural dewy glow, smooth with delicate features and almond-shaped eyes. Natural Korean-style makeup with defined soft brows, subtle peach eyeshadow, light mascara, glass-skin finish, and a soft coral lip tint. Hourglass figure with large full chest, slim waist, and wide full hips visible through her outfit. She wears a fitted cream-colored ribbed knit cardigan with small pearl buttons, slightly unbuttoned at the top revealing a delicate gold necklace, paired with a light beige pleated mini skirt. She sits with her legs crossed, leaning slightly forward on the cafe table with both hands wrapped around a ceramic latte cup, elbows resting lightly on the table edge. She looks directly at the camera with a warm inviting smile, soft eyes, head tilted gently to the left. The cafe has a rustic wooden table and a woven rattan chair, pale pink cherry blossom trees visible in soft focus behind her, a small potted plant on the table, and warm-toned brick building facade across the quiet street. Bright natural midday spring sunlight from above and slightly behind creates soft even illumination on her face, gentle highlights on her hair, and dappled tree shadows on the table surface. Warm cream, soft pink cherry blossom, natural green, light gold color palette. Spring cafe lifestyle aesthetic. Third-person shot at eye-level, medium shot from waist up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;4:5&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;Canon EOS R5&quot;,
+    &quot;lens&quot;: &quot;50mm f/1.8&quot;,
+    &quot;style&quot;: &quot;spring cafe lifestyle portrait&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;black&quot;,
+      &quot;style&quot;: &quot;long straight, smooth, draped over shoulders, center part&quot;
+    },
+    &quot;body_type&quot;: &quot;hourglass figure, large full chest, slim waist, wide full hips&quot;,
+    &quot;skin&quot;: &quot;fair porcelain, natural dewy glow&quot;,
+    &quot;expression&quot;: &quot;warm inviting smile, soft eyes, gentle left head tilt&quot;,
+    &quot;makeup&quot;: &quot;natural Korean-style, soft brows, subtle peach eyeshadow, glass-skin, soft coral lip tint&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;ribbed knit cardigan&quot;,
+      &quot;color&quot;: &quot;cream&quot;,
+      &quot;material&quot;: &quot;soft ribbed knit&quot;,
+      &quot;fit&quot;: &quot;fitted, slightly unbuttoned at top&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;pleated mini skirt&quot;,
+      &quot;color&quot;: &quot;light beige&quot;,
+      &quot;fit&quot;: &quot;mini, pleated&quot;
+    },
+    &quot;accessories&quot;: [
+      &quot;delicate gold necklace&quot;,
+      &quot;ceramic latte cup&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;sitting at cafe table&quot;,
+    &quot;stance&quot;: &quot;legs crossed, leaning slightly forward&quot;,
+    &quot;hands&quot;: &quot;both hands wrapped around ceramic latte cup, elbows on table edge&quot;,
+    &quot;head_gaze&quot;: &quot;facing camera, warm inviting gaze, gentle left tilt&quot;,
+    &quot;vibe&quot;: &quot;warm approachable charm&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;charming outdoor cafe&quot;,
+    &quot;time&quot;: &quot;midday spring&quot;,
+    &quot;atmosphere&quot;: &quot;warm, bright, fresh spring&quot;,
+    &quot;background&quot;: &quot;rustic wooden table, woven rattan chair, cherry blossom trees in soft focus, small potted plant, warm brick building facade&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;third-person&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;medium shot, waist-up&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;bright natural midday spring sunlight from above and slightly behind&quot;,
+    &quot;effect&quot;: &quot;soft even illumination on face, gentle hair highlights, dappled tree shadows on table&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;warm, bright, approachable&quot;,
+    &quot;color_palette&quot;: &quot;warm cream, soft pink cherry blossom, natural green, light gold&quot;,
+    &quot;aesthetic&quot;: &quot;spring cafe lifestyle&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;Canon EOS R5&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;50mm f/1.8&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;spring cafe lifestyle portrait&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long straight, smooth, draped over shoulders, center part&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;hourglass figure, large full chest, slim waist, wide full hips&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;fair porcelain, natural dewy glow&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;warm inviting smile, soft eyes, gentle left head tilt&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;natural Korean-style, soft brows, subtle peach eyeshadow, glass-skin, soft coral lip tint&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;ribbed knit cardigan&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;cream&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;soft ribbed knit&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;fitted, slightly unbuttoned at top&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;pleated mini skirt&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;light beige&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;mini, pleated&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;delicate gold necklace&quot;</span>,
+      <span class="json-str">&quot;ceramic latte cup&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;sitting at cafe table&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;legs crossed, leaning slightly forward&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;both hands wrapped around ceramic latte cup, elbows on table edge&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;facing camera, warm inviting gaze, gentle left tilt&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;warm approachable charm&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;charming outdoor cafe&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;midday spring&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;warm, bright, fresh spring&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;rustic wooden table, woven rattan chair, cherry blossom trees in soft focus, small potted plant, warm brick building facade&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;third-person&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;medium shot, waist-up&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;bright natural midday spring sunlight from above and slightly behind&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;soft even illumination on face, gentle hair highlights, dappled tree shadows on table&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;warm, bright, approachable&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;warm cream, soft pink cherry blossom, natural green, light gold&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;spring cafe lifestyle&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">A/B test variant A: single-image transformation request. Hair color change is visually striking for Grok transformation. Spring cafe scene provides warm, inviting base.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 2</span> <span class="tag">21:00 JST</span> <span class="tag tag-jp">persona_dialogue</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">JP_20260308_02</div>
+    <div class="post-text">今日も一日おつかれさま♡ 頑張った自分にたっぷりご褒美あげてね✨</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic photo of a young Japanese woman in her early 20s sitting casually on an unmade bed in a cozy modern apartment bedroom at evening. She has long straight dark brown hair falling softly over one shoulder with a few loose strands framing her face. Fair porcelain skin with a natural warm glow from the lamp light, smooth with delicate features and almond-shaped eyes. Natural Korean-style makeup with defined soft brows, subtle brown eyeshadow, light mascara, dewy glass-skin finish, and a soft peach lip tint. Hourglass figure with large full chest, slim waist, and wide full hips visible through her loungewear. She wears an oversized soft lavender knit sweater that hangs off one shoulder revealing a bare collarbone and thin white camisole strap, paired with comfortable light grey cotton shorts barely visible beneath the oversized sweater. She sits with her legs tucked to one side on rumpled white sheets and a chunky cream knit throw blanket, leaning back slightly on one hand, the other hand gently holding a warm mug of tea resting on her thigh. She looks at the camera with a warm intimate expression, soft sleepy eyes, gentle closed-lip smile as if greeting someone she cares about. The bedroom has warm-toned light wood furniture, a bedside table with a small brass lamp casting warm amber light, a potted succulent, a few books stacked beside the lamp, and a softly lit string of warm white fairy lights draped along the wooden headboard. Warm lamplight from the bedside creates intimate golden tones across her face and sweater, soft shadows on the far wall, and a gentle highlight on her exposed shoulder and collarbone. Warm lavender, soft cream, cozy amber gold, muted wood brown color palette. Cozy intimate evening bedroom aesthetic. Third-person shot at eye-level, medium shot from waist up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 4:5</span> <span>Camera: Canon EOS R5</span> <span>Lens: 50mm f/1.8</span> <span>Style: cozy intimate bedroom portrait</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-JP_20260308_02')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-JP_20260308_02" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic photo of a young Japanese woman in her early 20s sitting casually on an unmade bed in a cozy modern apartment bedroom at evening. She has long straight dark brown hair falling softly over one shoulder with a few loose strands framing her face. Fair porcelain skin with a natural warm glow from the lamp light, smooth with delicate features and almond-shaped eyes. Natural Korean-style makeup with defined soft brows, subtle brown eyeshadow, light mascara, dewy glass-skin finish, and a soft peach lip tint. Hourglass figure with large full chest, slim waist, and wide full hips visible through her loungewear. She wears an oversized soft lavender knit sweater that hangs off one shoulder revealing a bare collarbone and thin white camisole strap, paired with comfortable light grey cotton shorts barely visible beneath the oversized sweater. She sits with her legs tucked to one side on rumpled white sheets and a chunky cream knit throw blanket, leaning back slightly on one hand, the other hand gently holding a warm mug of tea resting on her thigh. She looks at the camera with a warm intimate expression, soft sleepy eyes, gentle closed-lip smile as if greeting someone she cares about. The bedroom has warm-toned light wood furniture, a bedside table with a small brass lamp casting warm amber light, a potted succulent, a few books stacked beside the lamp, and a softly lit string of warm white fairy lights draped along the wooden headboard. Warm lamplight from the bedside creates intimate golden tones across her face and sweater, soft shadows on the far wall, and a gentle highlight on her exposed shoulder and collarbone. Warm lavender, soft cream, cozy amber gold, muted wood brown color palette. Cozy intimate evening bedroom aesthetic. Third-person shot at eye-level, medium shot from waist up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;4:5&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;Canon EOS R5&quot;,
+    &quot;lens&quot;: &quot;50mm f/1.8&quot;,
+    &quot;style&quot;: &quot;cozy intimate bedroom portrait&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;dark brown&quot;,
+      &quot;style&quot;: &quot;long straight, falling over one shoulder, loose strands framing face&quot;
+    },
+    &quot;body_type&quot;: &quot;hourglass figure, large full chest, slim waist, wide full hips&quot;,
+    &quot;skin&quot;: &quot;fair porcelain, natural warm glow from lamp light&quot;,
+    &quot;expression&quot;: &quot;warm intimate, soft sleepy eyes, gentle closed-lip smile&quot;,
+    &quot;makeup&quot;: &quot;natural Korean-style, defined soft brows, subtle brown eyeshadow, glass-skin finish, soft peach lip tint&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;oversized knit sweater&quot;,
+      &quot;color&quot;: &quot;soft lavender&quot;,
+      &quot;material&quot;: &quot;soft knit&quot;,
+      &quot;fit&quot;: &quot;oversized, off-one-shoulder&quot;,
+      &quot;details&quot;: &quot;reveals bare collarbone and thin white camisole strap&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;cotton shorts&quot;,
+      &quot;color&quot;: &quot;light grey&quot;,
+      &quot;fit&quot;: &quot;comfortable, barely visible beneath sweater&quot;
+    },
+    &quot;accessories&quot;: [
+      &quot;warm mug of tea&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;sitting on bed, legs tucked to one side&quot;,
+    &quot;stance&quot;: &quot;leaning back slightly on one hand&quot;,
+    &quot;hands&quot;: &quot;left hand supporting weight behind, right hand holding warm mug on thigh&quot;,
+    &quot;head_gaze&quot;: &quot;facing camera, warm intimate gaze, gentle greeting expression&quot;,
+    &quot;vibe&quot;: &quot;cozy evening warmth&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;cozy modern apartment bedroom&quot;,
+    &quot;time&quot;: &quot;evening&quot;,
+    &quot;atmosphere&quot;: &quot;warm, intimate, cozy&quot;,
+    &quot;background&quot;: &quot;warm-toned wood furniture, bedside table with brass lamp, potted succulent, stacked books, fairy lights on wooden headboard, rumpled white sheets, cream knit throw&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;third-person&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;medium shot, waist-up&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;warm lamplight from bedside table&quot;,
+    &quot;effect&quot;: &quot;intimate golden tones on face and sweater, soft shadows on far wall, gentle highlight on exposed shoulder and collarbone&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;quiet, intimate, caring&quot;,
+    &quot;color_palette&quot;: &quot;warm lavender, soft cream, cozy amber gold, muted wood brown&quot;,
+    &quot;aesthetic&quot;: &quot;cozy intimate evening bedroom&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;Canon EOS R5&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;50mm f/1.8&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;cozy intimate bedroom portrait&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark brown&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long straight, falling over one shoulder, loose strands framing face&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;hourglass figure, large full chest, slim waist, wide full hips&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;fair porcelain, natural warm glow from lamp light&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;warm intimate, soft sleepy eyes, gentle closed-lip smile&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;natural Korean-style, defined soft brows, subtle brown eyeshadow, glass-skin finish, soft peach lip tint&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;oversized knit sweater&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;soft lavender&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;soft knit&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;oversized, off-one-shoulder&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;details&quot;</span></span>: <span class="json-str">&quot;reveals bare collarbone and thin white camisole strap&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;cotton shorts&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;light grey&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;comfortable, barely visible beneath sweater&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;warm mug of tea&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;sitting on bed, legs tucked to one side&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;leaning back slightly on one hand&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;left hand supporting weight behind, right hand holding warm mug on thigh&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;facing camera, warm intimate gaze, gentle greeting expression&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;cozy evening warmth&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;cozy modern apartment bedroom&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;evening&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;warm, intimate, cozy&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;warm-toned wood furniture, bedside table with brass lamp, potted succulent, stacked books, fairy lights on wooden headboard, rumpled white sheets, cream knit throw&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;third-person&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;medium shot, waist-up&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;warm lamplight from bedside table&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;intimate golden tones on face and sweater, soft shadows on far wall, gentle highlight on exposed shoulder and collarbone&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;quiet, intimate, caring&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;warm lavender, soft cream, cozy amber gold, muted wood brown&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;cozy intimate evening bedroom&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Evening persona post. Warm greeting that builds character consistency — caring, gentle personality. Cozy bedroom setting with intimate lamp light matches the wind-down mood. 21:00 JST captures evening audience.</div>
+  </div></section>
+<section id="reply-templates">
+<h2>Reply Templates</h2>
+<h3><span class="tag tag-en">EN</span> Reply Templates</h3>
+<div class="reply-grid">
+  <div class="reply-item">the lighting in this is unreal</div>
+  <div class="reply-item">okay this might be your best one yet</div>
+  <div class="reply-item">how do you get the colors like that</div>
+  <div class="reply-item">this is so pretty it hurts</div>
+  <div class="reply-item">the vibes here are immaculate</div>
+  <div class="reply-item">obsessed with this aesthetic</div>
+  <div class="reply-item">you always nail the mood</div>
+  <div class="reply-item">genuinely stunning work</div>
+</div>
+<h3><span class="tag tag-jp">JP</span> Reply Templates</h3>
+<div class="reply-grid">
+  <div class="reply-item">めっちゃ綺麗✨ 雰囲気が素敵すぎる</div>
+  <div class="reply-item">このクオリティすごい！どうやって作ってるの？</div>
+  <div class="reply-item">光の使い方がほんと上手...見惚れちゃった</div>
+  <div class="reply-item">わぁ、すごく好みの雰囲気♡</div>
+  <div class="reply-item">美しすぎて保存した！</div>
+  <div class="reply-item">色合いがめちゃくちゃ良い〜センス抜群</div>
+  <div class="reply-item">このスタイル最高！もっと見たい</div>
+  <div class="reply-item">ため息出るくらい綺麗...</div>
+</div>
+</section>
+</div>
+
+<div class="footer">
+  <div class="cta">Use /approve in Telegram to approve this content</div>
+  <div>Generated 2026-03-08 18:10 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

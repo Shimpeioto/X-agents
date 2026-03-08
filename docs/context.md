@@ -577,23 +577,34 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 - `scripts/telegram_bot.py` — Added `_extract_urls()`, `_fetch_url_content()`, `_enrich_message_with_urls()` helpers; modified `handle_message` to enrich messages with URL content before sending to Marc
 - `agents/marc_conversation.md` — Added "URL Reading" section documenting the content markers and how to use fetched content
 
-### Session 29 — Competitor Image Analysis Pipeline (March 8, 2026)
+### Session 29 — Competitor Image Analysis Pipeline + Higgsfield Prompt Upgrade (March 8, 2026)
 
-**Goal**: Give Creator visual intelligence by analyzing top-performing competitor images via Claude Vision and converting them into Higgsfield-format reference prompts.
+**Goal**: (1) Give Creator visual intelligence by analyzing top competitor images via Claude Vision. (2) Upgrade all content plan image prompts to full Higgsfield schema. (3) Show structured prompt fields in HTML preview with one-click copy.
 
-**Problem**: Scout already collects media URLs from competitor tweets (`recent_posts[].media[].url`), but Creator generates image prompts purely from templates with zero insight into what competitor images actually look like. Top-performing visual styles are invisible to the content creation process.
+**Problem**: Scout collects media URLs but Creator had zero insight into competitor visuals. Existing content plan prompts used old midjourney/stable_diffusion format (short generic text, no structured fields). HTML preview only showed flat prompt text — structured fields were invisible and required per-section copy-paste.
 
-**Solution**: New `image_analyzer.py` script that reads the scout report, picks top 5 posts with images by engagement (like_count), calls Anthropic Vision API (Claude Sonnet) to analyze each image into structured Higgsfield-format JSON, generates a visual patterns summary, and writes `data/image_references_{YYYYMMDD}.json`. Creator uses these as both (a) a summary of winning visual patterns and (b) individual style-matching references per post.
+**Solution**:
+1. New `image_analyzer.py` script — reads scout report, picks top 5 images by likes, calls Anthropic Vision API (Claude Sonnet), outputs Higgsfield-format references + visual patterns summary to `data/image_references_{YYYYMMDD}.json`. Creator uses these as (a) pattern awareness and (b) per-post style matching.
+2. Rewrote all 4 content plan image prompts (EN_01, EN_02, JP_01, JP_02) to full Higgsfield schema: 150+ word prompts, standard negative prompts, all structured fields (meta, subject, outfit, pose, scene, camera, lighting, mood), locked character profiles.
+3. Updated HTML report generator to render structured fields as syntax-highlighted JSON with "Copy JSON" button — one click copies the entire image_prompt object.
 
-**Pipeline integration**: Added as Step 3.5 (between Scout validation and Strategist), marked as **optional** — if image analysis fails, pipeline continues and Creator falls back to templates.
+**Character profile compliance review**: Fixed 3 issues found during review:
+- EN body_type was missing "curvaceous" from locked profile → added
+- JP body_type used generic "full curves" instead of locked "large full chest, slim waist, wide full hips" → fixed
+- EN_01 skin had unlocked "light warm tan" addition → removed
 
-**Files created/modified** (4):
-- `scripts/image_analyzer.py` — **New** Image analysis script (~300 lines). Loads scout report, ranks image posts by likes, calls Anthropic Vision API, generates visual pattern summary, writes structured output. Supports `--top N` and `--dry-run` flags. Error handling: rate limits (retry), unavailable images (skip), invalid JSON responses (skip).
-- `agents/creator.md` — Added input step #5 (read image references if available), added "Using Image References" section with two modes: Visual Pattern Awareness (overall style trends) and Reference Style Matching (per-post reference adaptation)
-- `agents/marc_pipeline.md` — Added Step 3.5 (Image Analysis), updated task dependency diagram, updated Creator spawn prompts to include image references path
-- `scripts/validate.py` — Added `validate_image_references()` function (6 checks: valid JSON, required fields, source/analysis structure, visual_patterns with style_summary, count consistency) and `image_references` mode in CLI dispatch
+**Pipeline integration**: Image analysis added as Step 3.5 (optional — pipeline continues on failure).
 
-**Verification**: Dry-run with `data/scout_report_20260308.json` found 206 posts with images, analyzed top 5 with mock data, validator passed all 6 checks. Existing validations unaffected.
+**Files created/modified** (7):
+- `scripts/image_analyzer.py` — **New** (~300 lines). Vision API analysis, `--top N`, `--dry-run`, rate limit retry, structured output.
+- `agents/creator.md` — Added image references input step #5, "Using Image References" section (2 modes)
+- `agents/marc_pipeline.md` — Added Step 3.5, updated dependency diagram and Creator spawn prompts
+- `scripts/validate.py` — Added `image_references` validation mode (6 checks)
+- `scripts/generate_html_report.py` — Structured Higgsfield fields rendered as syntax-highlighted JSON block with "Copy JSON" button
+- `data/content_plan_20260308_EN.json` — Full Higgsfield rewrite (was midjourney)
+- `data/content_plan_20260308_JP.json` — Full Higgsfield rewrite (was stable_diffusion)
+
+**Verification**: Dry-run found 206 images, analyzed top 5 with mock data, validator passed 6/6 checks. Content plan validator passed 12/12 checks for both EN and JP. Character profile review passed all checks after fixes.
 
 ---
 
@@ -996,13 +1007,16 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 29 — Competitor image analysis pipeline (March 8, 2026). New `image_analyzer.py` analyzes top competitor images via Claude Vision, Creator uses structured references for visual intelligence.
+**Latest**: Session 29 — Competitor image analysis pipeline + Higgsfield prompt upgrade (March 8, 2026). New `image_analyzer.py` analyzes top competitor images via Claude Vision. All content plan image prompts upgraded to full Higgsfield schema. HTML preview now renders structured fields with copy-to-clipboard.
 
-Session 29 files created/modified (4 files):
+Session 29 files created/modified (7 files):
 - `scripts/image_analyzer.py` — **New** Image analysis via Anthropic Vision API (--top N, --dry-run)
 - `agents/creator.md` — Added image references input + "Using Image References" section (2 modes)
 - `agents/marc_pipeline.md` — Added Step 3.5 (Image Analysis, optional), updated Creator spawn prompts
 - `scripts/validate.py` — Added `image_references` validation mode (6 checks)
+- `scripts/generate_html_report.py` — Image prompt section now renders all structured Higgsfield fields (meta, subject, outfit, pose, scene, camera, lighting, mood) as syntax-highlighted JSON with "Copy JSON" button for one-click copy of entire prompt
+- `data/content_plan_20260308_EN.json` — Rewrote image prompts from old midjourney format to full Higgsfield schema (150+ word prompts, structured fields, standard negative prompts, fixed character profiles with curvaceous body type)
+- `data/content_plan_20260308_JP.json` — Rewrote image prompts from old stable_diffusion format to full Higgsfield schema (150+ word prompts, structured fields, locked JP character profile with specific body measurements)
 
 Session 28 files created/modified (3 files):
 - `scripts/fetch_url.py` — **New** URL fetcher (requests + stdlib html.parser, CLI-compatible)

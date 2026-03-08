@@ -1,0 +1,145 @@
+{
+  "date": "2026-03-08",
+  "account": "JP",
+  "generated_at": "2026-03-08T13:30:00+09:00",
+  "strategy_used": "data/strategy_20260308.json",
+  "total_posts": 2,
+  "posts": [
+    {
+      "id": "JP_20260308_01",
+      "slot": 1,
+      "scheduled_time": "12:30 JST",
+      "category": "grok_interactive",
+      "priority": "high",
+      "status": "draft",
+      "text": ".@grok この画像の髪色をピンクに変えて",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic photo of a young Japanese woman in her early 20s sitting at a charming outdoor cafe table during a warm spring lunchtime. She has long straight black hair draped smoothly over both shoulders with a soft center part, catching the midday sunlight. Fair porcelain skin with a natural dewy glow, smooth with delicate features and almond-shaped eyes. Natural Korean-style makeup with defined soft brows, subtle peach eyeshadow, light mascara, glass-skin finish, and a soft coral lip tint. Hourglass figure with large full chest, slim waist, and wide full hips visible through her outfit. She wears a fitted cream-colored ribbed knit cardigan with small pearl buttons, slightly unbuttoned at the top revealing a delicate gold necklace, paired with a light beige pleated mini skirt. She sits with her legs crossed, leaning slightly forward on the cafe table with both hands wrapped around a ceramic latte cup, elbows resting lightly on the table edge. She looks directly at the camera with a warm inviting smile, soft eyes, head tilted gently to the left. The cafe has a rustic wooden table and a woven rattan chair, pale pink cherry blossom trees visible in soft focus behind her, a small potted plant on the table, and warm-toned brick building facade across the quiet street. Bright natural midday spring sunlight from above and slightly behind creates soft even illumination on her face, gentle highlights on her hair, and dappled tree shadows on the table surface. Warm cream, soft pink cherry blossom, natural green, light gold color palette. Spring cafe lifestyle aesthetic. Third-person shot at eye-level, medium shot from waist up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Canon EOS R5",
+          "lens": "50mm f/1.8",
+          "style": "spring cafe lifestyle portrait"
+        },
+        "subject": {
+          "hair": {"color": "black", "style": "long straight, smooth, draped over shoulders, center part"},
+          "body_type": "hourglass figure, large full chest, slim waist, wide full hips",
+          "skin": "fair porcelain, natural dewy glow",
+          "expression": "warm inviting smile, soft eyes, gentle left head tilt",
+          "makeup": "natural Korean-style, soft brows, subtle peach eyeshadow, glass-skin, soft coral lip tint"
+        },
+        "outfit": {
+          "top": {"type": "ribbed knit cardigan", "color": "cream", "material": "soft ribbed knit", "fit": "fitted, slightly unbuttoned at top"},
+          "bottom": {"type": "pleated mini skirt", "color": "light beige", "fit": "mini, pleated"},
+          "accessories": ["delicate gold necklace", "ceramic latte cup"]
+        },
+        "pose": {
+          "position": "sitting at cafe table",
+          "stance": "legs crossed, leaning slightly forward",
+          "hands": "both hands wrapped around ceramic latte cup, elbows on table edge",
+          "head_gaze": "facing camera, warm inviting gaze, gentle left tilt",
+          "vibe": "warm approachable charm"
+        },
+        "scene": {
+          "location": "charming outdoor cafe",
+          "time": "midday spring",
+          "atmosphere": "warm, bright, fresh spring",
+          "background": "rustic wooden table, woven rattan chair, cherry blossom trees in soft focus, small potted plant, warm brick building facade"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "eye-level",
+          "framing": "medium shot, waist-up"
+        },
+        "lighting": {
+          "type": "bright natural midday spring sunlight from above and slightly behind",
+          "effect": "soft even illumination on face, gentle hair highlights, dappled tree shadows on table"
+        },
+        "mood": {
+          "energy": "warm, bright, approachable",
+          "color_palette": "warm cream, soft pink cherry blossom, natural green, light gold",
+          "aesthetic": "spring cafe lifestyle"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "A/B test variant A: single-image transformation request. Hair color change is visually striking for Grok transformation. Spring cafe scene provides warm, inviting base."
+    },
+    {
+      "id": "JP_20260308_02",
+      "slot": 2,
+      "scheduled_time": "21:00 JST",
+      "category": "persona_dialogue",
+      "priority": "high",
+      "status": "draft",
+      "text": "今日も一日おつかれさま♡ 頑張った自分にたっぷりご褒美あげてね✨",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic photo of a young Japanese woman in her early 20s sitting casually on an unmade bed in a cozy modern apartment bedroom at evening. She has long straight dark brown hair falling softly over one shoulder with a few loose strands framing her face. Fair porcelain skin with a natural warm glow from the lamp light, smooth with delicate features and almond-shaped eyes. Natural Korean-style makeup with defined soft brows, subtle brown eyeshadow, light mascara, dewy glass-skin finish, and a soft peach lip tint. Hourglass figure with large full chest, slim waist, and wide full hips visible through her loungewear. She wears an oversized soft lavender knit sweater that hangs off one shoulder revealing a bare collarbone and thin white camisole strap, paired with comfortable light grey cotton shorts barely visible beneath the oversized sweater. She sits with her legs tucked to one side on rumpled white sheets and a chunky cream knit throw blanket, leaning back slightly on one hand, the other hand gently holding a warm mug of tea resting on her thigh. She looks at the camera with a warm intimate expression, soft sleepy eyes, gentle closed-lip smile as if greeting someone she cares about. The bedroom has warm-toned light wood furniture, a bedside table with a small brass lamp casting warm amber light, a potted succulent, a few books stacked beside the lamp, and a softly lit string of warm white fairy lights draped along the wooden headboard. Warm lamplight from the bedside creates intimate golden tones across her face and sweater, soft shadows on the far wall, and a gentle highlight on her exposed shoulder and collarbone. Warm lavender, soft cream, cozy amber gold, muted wood brown color palette. Cozy intimate evening bedroom aesthetic. Third-person shot at eye-level, medium shot from waist up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Canon EOS R5",
+          "lens": "50mm f/1.8",
+          "style": "cozy intimate bedroom portrait"
+        },
+        "subject": {
+          "hair": {"color": "dark brown", "style": "long straight, falling over one shoulder, loose strands framing face"},
+          "body_type": "hourglass figure, large full chest, slim waist, wide full hips",
+          "skin": "fair porcelain, natural warm glow from lamp light",
+          "expression": "warm intimate, soft sleepy eyes, gentle closed-lip smile",
+          "makeup": "natural Korean-style, defined soft brows, subtle brown eyeshadow, glass-skin finish, soft peach lip tint"
+        },
+        "outfit": {
+          "top": {"type": "oversized knit sweater", "color": "soft lavender", "material": "soft knit", "fit": "oversized, off-one-shoulder", "details": "reveals bare collarbone and thin white camisole strap"},
+          "bottom": {"type": "cotton shorts", "color": "light grey", "fit": "comfortable, barely visible beneath sweater"},
+          "accessories": ["warm mug of tea"]
+        },
+        "pose": {
+          "position": "sitting on bed, legs tucked to one side",
+          "stance": "leaning back slightly on one hand",
+          "hands": "left hand supporting weight behind, right hand holding warm mug on thigh",
+          "head_gaze": "facing camera, warm intimate gaze, gentle greeting expression",
+          "vibe": "cozy evening warmth"
+        },
+        "scene": {
+          "location": "cozy modern apartment bedroom",
+          "time": "evening",
+          "atmosphere": "warm, intimate, cozy",
+          "background": "warm-toned wood furniture, bedside table with brass lamp, potted succulent, stacked books, fairy lights on wooden headboard, rumpled white sheets, cream knit throw"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "eye-level",
+          "framing": "medium shot, waist-up"
+        },
+        "lighting": {
+          "type": "warm lamplight from bedside table",
+          "effect": "intimate golden tones on face and sweater, soft shadows on far wall, gentle highlight on exposed shoulder and collarbone"
+        },
+        "mood": {
+          "energy": "quiet, intimate, caring",
+          "color_palette": "warm lavender, soft cream, cozy amber gold, muted wood brown",
+          "aesthetic": "cozy intimate evening bedroom"
+        }
+      },
+      "ab_test_variant": null,
+      "notes": "Evening persona post. Warm greeting that builds character consistency — caring, gentle personality. Cozy bedroom setting with intimate lamp light matches the wind-down mood. 21:00 JST captures evening audience."
+    }
+  ],
+  "reply_templates": [
+    "めっちゃ綺麗✨ 雰囲気が素敵すぎる",
+    "このクオリティすごい！どうやって作ってるの？",
+    "光の使い方がほんと上手...見惚れちゃった",
+    "わぁ、すごく好みの雰囲気♡",
+    "美しすぎて保存した！",
+    "色合いがめちゃくちゃ良い〜センス抜群",
+    "このスタイル最高！もっと見たい",
+    "ため息出るくらい綺麗..."
+  ]
+}

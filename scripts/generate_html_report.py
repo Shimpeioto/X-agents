@@ -16,6 +16,7 @@ Usage:
 import argparse
 import json
 import html
+import re
 import sys
 import os
 from datetime import datetime
@@ -254,6 +255,49 @@ def base_css():
   }
   .prompt-meta span { white-space: nowrap; }
 
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
   /* Bar chart */
   .bar-chart { margin: 12px 0; }
   .bar-row {
@@ -414,6 +458,18 @@ def html_footer(cta_text=None):
   {cta}<div>Generated {now} by Marc COO Agent</div>
 </div>
 
+<script>
+function copyPrompt(btn, id) {{
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {{
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {{ btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }}, 2000);
+  }});
+}}
+</script>
 </body>
 </html>
 """
@@ -473,6 +529,26 @@ def try_load_json(path):
 # Content Preview Report
 # ─────────────────────────────────────────────
 
+def _syntax_highlight_json(json_str: str) -> str:
+    """Add syntax highlighting spans to a JSON string for HTML display."""
+    import re as _re
+    # Escape HTML first
+    escaped = h(json_str)
+    # Highlight keys: "key":
+    escaped = _re.sub(
+        r'(&quot;)([^&]+?)(&quot;)(\s*:)',
+        r'<span class="json-key">\1\2\3</span>\4',
+        escaped,
+    )
+    # Highlight string values: "value" (not followed by :)
+    escaped = _re.sub(
+        r'(&quot;)([^&]*?)(&quot;)(?!\s*:)',
+        r'<span class="json-str">\1\2\3</span>',
+        escaped,
+    )
+    return escaped
+
+
 def render_post_card(post, account):
     """Render a single post as an HTML card."""
     pid = post.get("id", "?")
@@ -505,12 +581,19 @@ def render_post_card(post, account):
         tool = img.get("tool", "?")
         prompt = img.get("prompt", "")
         neg = img.get("negative_prompt", "")
-        style_ref = img.get("style_reference", "")
         aspect = img.get("aspect_ratio", "?")
+        meta_obj = img.get("meta", {})
 
         meta_parts = [f"Tool: {h(tool)}", f"Aspect: {h(aspect)}"]
-        if style_ref:
-            meta_parts.append(f"Style: {h(style_ref)}")
+        if meta_obj.get("camera"):
+            meta_parts.append(f"Camera: {h(meta_obj['camera'])}")
+        if meta_obj.get("lens"):
+            meta_parts.append(f"Lens: {h(meta_obj['lens'])}")
+        if meta_obj.get("style"):
+            meta_parts.append(f"Style: {h(meta_obj['style'])}")
+        # Fallback for old-format style_reference
+        elif img.get("style_reference"):
+            meta_parts.append(f"Style: {h(img['style_reference'])}")
         meta_html = " ".join(f"<span>{p}</span>" for p in meta_parts)
 
         img_html = f"""<div class="image-prompt">
@@ -521,7 +604,35 @@ def render_post_card(post, account):
       <div class="prompt-label mt-2">Negative Prompt</div>
       <div class="prompt-text">{h(neg)}</div>"""
         img_html += f"""
-      <div class="prompt-meta">{meta_html}</div>
+      <div class="prompt-meta">{meta_html}</div>"""
+
+        # Render full structured JSON block with copy button
+        structured_keys = ["meta", "subject", "outfit", "pose", "scene", "camera", "lighting", "mood"]
+        structured_obj = {k: img[k] for k in structured_keys if k in img and isinstance(img[k], dict)}
+
+        if structured_obj:
+            import json as _json
+            # Full image_prompt JSON for copy (includes prompt, negative_prompt, aspect_ratio + all structured)
+            copy_obj = {"tool": tool, "prompt": prompt, "negative_prompt": neg, "aspect_ratio": aspect}
+            copy_obj.update(structured_obj)
+            copy_json = _json.dumps(copy_obj, indent=2, ensure_ascii=False)
+            # Escaped for data attribute
+            copy_json_attr = h(copy_json)
+            # Pretty-printed for display with syntax highlighting
+            display_json = _json.dumps(structured_obj, indent=2, ensure_ascii=False)
+            display_html = _syntax_highlight_json(display_json)
+
+            block_id = f"prompt-json-{h(pid)}"
+            img_html += f"""
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, '{block_id}')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="{block_id}" data-json="{copy_json_attr}">{display_html}</div>
+      </div>"""
+
+        img_html += """
     </div>"""
 
     notes_html = f'<div class="text-sm text-dim mt-2">{h(notes)}</div>' if notes else ""
@@ -1056,6 +1167,260 @@ def render_publish_post_card(post, account):
 
 
 # ─────────────────────────────────────────────
+# Generic JSON-to-HTML Report
+# ─────────────────────────────────────────────
+
+# Keys to show in the header metadata area rather than as sections
+METADATA_KEYS = {
+    "document_type", "version", "created_date", "last_updated", "date",
+    "generated_at", "report_type", "title", "analysis_type",
+}
+
+
+def humanize_key(key):
+    """Convert snake_case or camelCase key to Title Case header."""
+    # Insert space before uppercase letters (camelCase)
+    key = re.sub(r'([a-z])([A-Z])', r'\1 \2', key)
+    # Replace underscores/hyphens with spaces
+    key = key.replace("_", " ").replace("-", " ")
+    return key.title()
+
+
+def _is_table_list(items):
+    """Check if a list of dicts is suitable for table rendering."""
+    if not items or not isinstance(items[0], dict):
+        return False
+    # All items should be dicts with mostly scalar values
+    first_keys = set(items[0].keys())
+    return all(
+        isinstance(item, dict) and len(set(item.keys()) & first_keys) > 0
+        for item in items
+    )
+
+
+def render_generic_value(key, value, depth=0):
+    """Recursively render a JSON value to HTML."""
+    if value is None:
+        return ""
+
+    # String
+    if isinstance(value, str):
+        escaped = h(value)
+        # Long strings get a card, short ones inline
+        if len(value) > 150:
+            return f'<div class="card"><p>{escaped}</p></div>\n'
+        return f'<p>{escaped}</p>\n'
+
+    # Number
+    if isinstance(value, (int, float)):
+        return f'<p class="font-mono">{h(str(value))}</p>\n'
+
+    # Boolean
+    if isinstance(value, bool):
+        color = "text-green" if value else "text-danger"
+        return f'<p class="{color} font-bold">{h(str(value))}</p>\n'
+
+    # List
+    if isinstance(value, list):
+        return render_generic_list(key, value)
+
+    # Dict — check for EN/JP account pattern
+    if isinstance(value, dict):
+        if set(value.keys()) & {"EN", "JP"}:
+            return render_account_sections(value, depth)
+        return render_generic_dict(value, depth + 1)
+
+    return f'<p>{h(str(value))}</p>\n'
+
+
+def render_account_sections(data, depth):
+    """Render a dict that has EN/JP keys with account tags."""
+    out = ""
+    for acct_key in ["EN", "JP"]:
+        if acct_key not in data:
+            continue
+        out += f'<div class="card">\n'
+        out += f'  <h3>{account_tag(acct_key)} {acct_key} Account</h3>\n'
+        out += render_generic_value(acct_key, data[acct_key], depth + 1)
+        out += '</div>\n'
+    # Render remaining non-EN/JP keys
+    for k, v in data.items():
+        if k not in ("EN", "JP"):
+            out += render_generic_value(k, v, depth)
+    return out
+
+
+def render_generic_list(key, items):
+    """Render a list as table, bullet list, or insight boxes."""
+    if not items:
+        return '<p class="text-muted">None</p>\n'
+
+    # List of strings → insight boxes or bullet list
+    if all(isinstance(item, str) for item in items):
+        if len(items) <= 10 and all(len(item) > 30 for item in items):
+            # Longer strings → insight boxes
+            out = ""
+            for item in items:
+                out += f'<div class="insight">{h(item)}</div>\n'
+            return out
+        # Short strings → bullet list
+        out = '<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">\n'
+        for item in items:
+            out += f'  <li style="margin: 4px 0">{h(item)}</li>\n'
+        out += '</ul>\n'
+        return out
+
+    # List of dicts → table
+    if _is_table_list(items):
+        # Collect all keys from all items
+        all_keys = []
+        seen = set()
+        for item in items:
+            for k in item.keys():
+                if k not in seen:
+                    all_keys.append(k)
+                    seen.add(k)
+
+        out = '<div class="table-wrap"><table>\n<tr>'
+        for k in all_keys:
+            out += f'<th>{h(humanize_key(k))}</th>'
+        out += '</tr>\n'
+        for item in items:
+            out += '<tr>'
+            for k in all_keys:
+                val = item.get(k, "")
+                if isinstance(val, (list, dict)):
+                    cell = h(json.dumps(val, ensure_ascii=False)[:100])
+                else:
+                    cell = h(str(val)) if val is not None else ""
+                out += f'<td>{cell}</td>'
+            out += '</tr>\n'
+        out += '</table></div>\n'
+        return out
+
+    # Mixed list → render each item
+    out = ""
+    for item in items:
+        out += render_generic_value("", item)
+    return out
+
+
+def render_generic_dict(data, depth=0):
+    """Render a dict as sections with cards."""
+    if not data:
+        return ""
+
+    # If all values are scalars and there are few of them → stat boxes
+    scalar_items = {k: v for k, v in data.items() if isinstance(v, (str, int, float, bool)) and not isinstance(v, bool)}
+    if len(scalar_items) == len(data) and 1 < len(data) <= 6:
+        out = '<div class="stat-row">\n'
+        styles = ["", "pink", "green", "warning", "", "pink"]
+        for i, (k, v) in enumerate(data.items()):
+            style = styles[i % len(styles)]
+            display_val = v
+            if isinstance(v, float):
+                display_val = f"{v:.4f}" if v < 1 else f"{v:,.1f}"
+            out += f'  {stat_box(display_val, humanize_key(k), style)}\n'
+        out += '</div>\n'
+        return out
+
+    # Mix of scalars and complex → key-value card for scalars, then sections for complex
+    out = ""
+    scalar_pairs = []
+    complex_pairs = []
+
+    for k, v in data.items():
+        if isinstance(v, (str, int, float, bool)) and not isinstance(v, dict):
+            scalar_pairs.append((k, v))
+        else:
+            complex_pairs.append((k, v))
+
+    # Render scalars as a key-value card
+    if scalar_pairs:
+        out += '<div class="card">\n'
+        for k, v in scalar_pairs:
+            display_val = v
+            if isinstance(v, float):
+                display_val = f"{v:.4f}" if abs(v) < 1 else f"{v:,.2f}"
+            out += f'  <div style="margin: 6px 0"><strong class="text-accent">{h(humanize_key(k))}:</strong> <span class="text-muted">{h(str(display_val))}</span></div>\n'
+        out += '</div>\n'
+
+    # Render complex values as sub-sections
+    tag_name = "h3" if depth <= 1 else "h4"
+    for k, v in complex_pairs:
+        out += f'<{tag_name}>{h(humanize_key(k))}</{tag_name}>\n'
+        out += render_generic_value(k, v, depth)
+
+    return out
+
+
+def generate_generic_report(json_path, title=None, output_path=None):
+    """Generate an HTML report from any JSON file."""
+    data = load_json(json_path)
+    filename = os.path.basename(json_path)
+
+    # Auto-detect title
+    if not title:
+        title = (
+            data.get("document_type")
+            or data.get("title")
+            or data.get("report_type")
+            or data.get("analysis_type")
+            or os.path.splitext(filename)[0]
+        )
+        title = humanize_key(str(title))
+
+    # Auto-detect date
+    date_str = (
+        data.get("date")
+        or data.get("created_date")
+        or data.get("generated_at", "")[:10]
+        or "—"
+    )
+
+    # Build nav from top-level keys (skip metadata)
+    nav_keys = [k for k in data.keys() if k not in METADATA_KEYS]
+    nav_links = [(k, humanize_key(k)) for k in nav_keys]
+
+    # Collect metadata
+    meta = {k: data[k] for k in data if k in METADATA_KEYS and data[k] is not None}
+
+    out = html_head(title, f"Generated from {filename}", date_str)
+    if nav_links:
+        out += html_nav(nav_links)
+    out += '<div class="container">\n'
+
+    # Metadata section
+    if meta:
+        out += '<section id="metadata">\n<h2>Report Info</h2>\n'
+        out += '<div class="card">\n'
+        for k, v in meta.items():
+            out += f'  <div style="margin: 4px 0"><strong class="text-accent">{h(humanize_key(k))}:</strong> <span class="text-muted">{h(str(v))}</span></div>\n'
+        out += '</div>\n</section>\n'
+
+    # Render each top-level section
+    for key in nav_keys:
+        value = data[key]
+        out += f'<section id="{h(key)}">\n'
+        out += f'<h2>{h(humanize_key(key))}</h2>\n'
+        out += render_generic_value(key, value, depth=0)
+        out += '</section>\n'
+
+    out += '</div>\n'  # container
+    out += html_footer()
+
+    # Determine output path
+    if not output_path:
+        base = os.path.splitext(json_path)[0]
+        output_path = base + ".html"
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(out)
+    print(f"[{datetime.now(JST).isoformat()}] [MARC] [INFO] Generic HTML report written to {output_path}")
+    return output_path
+
+
+# ─────────────────────────────────────────────
 # Main
 # ─────────────────────────────────────────────
 
@@ -1081,6 +1446,12 @@ def main():
     pr.add_argument("--outbound-log", help="Path to outbound log JSON")
     pr.add_argument("--rate-limits", help="Path to rate limits JSON")
 
+    # generic
+    gen = subparsers.add_parser("generic", help="Generate HTML from any JSON file")
+    gen.add_argument("json_path", help="Path to JSON file")
+    gen.add_argument("--title", help="Report title (auto-detected if omitted)")
+    gen.add_argument("--output", help="Output HTML path (auto-generated if omitted)")
+
     args = parser.parse_args()
 
     if args.report_type == "content_preview":
@@ -1095,6 +1466,12 @@ def main():
             args.en_plan, args.jp_plan,
             getattr(args, "outbound_log", None),
             getattr(args, "rate_limits", None)
+        )
+    elif args.report_type == "generic":
+        path = generate_generic_report(
+            args.json_path,
+            title=args.title,
+            output_path=args.output,
         )
     else:
         print(f"Unknown report type: {args.report_type}", file=sys.stderr)

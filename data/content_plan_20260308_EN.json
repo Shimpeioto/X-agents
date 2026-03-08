@@ -1,0 +1,144 @@
+{
+  "date": "2026-03-08",
+  "account": "EN",
+  "generated_at": "2026-03-08T13:45:00+09:00",
+  "strategy_used": "data/strategy_20260308.json",
+  "total_posts": 2,
+  "posts": [
+    {
+      "id": "EN_20260308_01",
+      "slot": 1,
+      "scheduled_time": "14:00 UTC",
+      "category": "engagement_questions",
+      "priority": "high",
+      "status": "draft",
+      "text": "Am I ur type?",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young woman in her early 20s standing in a modern minimalist bedroom. She has long honey blonde hair falling past her shoulders in loose natural waves with subtle sun-kissed highlights. Hourglass athletic-toned curvaceous figure with natural skin texture and visible pores. She wears a fitted dusty rose ribbed crop top that hugs her curves and high-waisted black leggings. One hand holds an iPhone 15 Pro Max at chest height, the other rests casually on her hip with fingers slightly spread. Her weight shifts to her left leg creating a subtle hip tilt to the right. She gazes at the phone screen with a confident playful expression and soft natural smile, lips slightly parted. Slight head tilt to the right. The room has a clean white wall behind a large black-framed full-length mirror, light wood flooring, and a neatly made bed with cream linen sheets visible in the background. Natural golden hour sunlight streams from a window to the left, casting warm highlights across her skin and soft directional shadows on the wall. The lighting creates a warm golden glow on her face and arms with subtle rim light on her hair. Soft pink, warm cream, golden amber color palette. Casual everyday influencer aesthetic. Shot at eye-level in portrait orientation, centered composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "raw iphone mirror selfie"
+        },
+        "subject": {
+          "hair": {"color": "honey blonde with sun-kissed highlights", "style": "long loose natural waves"},
+          "body_type": "hourglass, athletic-toned, curvaceous",
+          "skin": "natural texture, visible pores",
+          "expression": "confident playful, soft natural smile, lips slightly parted",
+          "makeup": "natural dewy, subtle bronzer, soft nude lip"
+        },
+        "outfit": {
+          "top": {"type": "ribbed crop top", "color": "dusty rose", "material": "ribbed cotton", "fit": "fitted"},
+          "bottom": {"type": "leggings", "color": "black", "fit": "high-waisted, fitted"},
+          "accessories": ["iPhone 15 Pro Max"]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "weight on left leg, subtle hip tilt right",
+          "hands": "right hand holding phone at chest height, left hand on hip",
+          "head_gaze": "slight right tilt, eyes at phone screen",
+          "vibe": "effortless confidence"
+        },
+        "scene": {
+          "location": "modern minimalist bedroom",
+          "time": "golden hour",
+          "atmosphere": "warm, clean, domestic",
+          "background": "white wall, black-framed full-length mirror, light wood floor, cream linen bed"
+        },
+        "camera": {
+          "pov": "mirror selfie",
+          "angle": "eye-level",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "natural golden hour sunlight from left window",
+          "effect": "warm highlights on skin, soft directional shadows on wall, subtle rim light on hair"
+        },
+        "mood": {
+          "energy": "confident, playful",
+          "color_palette": "soft pink, warm cream, golden amber",
+          "aesthetic": "casual everyday influencer"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "Variant A: provocative question format. Short, direct engagement prompt. Mirror selfie with golden hour lighting — top-performing visual style per competitor analysis."
+    },
+    {
+      "id": "EN_20260308_02",
+      "slot": 2,
+      "scheduled_time": "22:00 UTC",
+      "category": "grok_interactive",
+      "priority": "high",
+      "status": "draft",
+      "text": ".@grok turn me into a mermaid",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic photo of a young woman in her early 20s standing ankle-deep in crystal clear turquoise ocean water on a pristine tropical beach at golden hour. She has long wavy dark auburn hair flowing behind her in the ocean breeze, catching warm sunlight. Athletic-toned curvaceous hourglass figure with natural sun-kissed skin showing real texture and a light golden tan. She wears a white flowing midi sundress with thin spaghetti straps, the lightweight cotton fabric pressing against her body in the wind, the hem getting slightly wet from the surf. Her skin glistens with a light sheen of salt water spray. She stands facing the camera in a relaxed confident pose, weight shifted to her right leg, left hand reaching up to hold her hair back from the wind, right arm hanging naturally at her side. She looks directly at the camera with a warm radiant smile, chin slightly up, bright eyes reflecting the golden light. Behind her the ocean stretches to the horizon with gentle rolling waves, the sky painted in warm peach and soft lavender sunset gradients. Wet sand reflects the sky colors beneath her feet. Bright golden hour sunlight from the left creates a warm backlight halo effect on her hair and body, long soft shadows stretching across the wet sand, and a warm amber glow illuminating her face. Warm gold, ocean turquoise, sunset peach, clean white color palette. Beach golden hour lifestyle aesthetic. Third-person shot, eye-level, full body framing, centered vertical composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Sony A7R IV",
+          "lens": "35mm f/1.4",
+          "style": "beach golden hour lifestyle"
+        },
+        "subject": {
+          "hair": {"color": "dark auburn", "style": "long wavy, flowing in ocean breeze"},
+          "body_type": "athletic-toned hourglass, curvaceous",
+          "skin": "sun-kissed golden tan, natural texture, light salt water sheen",
+          "expression": "warm radiant smile, chin slightly up, bright eyes",
+          "makeup": "minimal natural, waterproof mascara, sun-flushed glow"
+        },
+        "outfit": {
+          "top": {"type": "sundress", "color": "white", "material": "lightweight cotton", "fit": "flowing midi, thin spaghetti straps"},
+          "accessories": []
+        },
+        "pose": {
+          "position": "standing ankle-deep in surf",
+          "stance": "weight on right leg, relaxed confident",
+          "hands": "left hand holding hair back from wind, right arm hanging naturally",
+          "head_gaze": "looking directly at camera, chin slightly up",
+          "vibe": "effortless beach beauty"
+        },
+        "scene": {
+          "location": "pristine tropical beach",
+          "time": "golden hour sunset",
+          "atmosphere": "warm, breezy, golden",
+          "background": "crystal ocean to horizon, gentle waves, peach and lavender sunset sky, wet sand reflecting sky"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "eye-level",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "golden hour sunlight from left, warm backlight",
+          "effect": "warm halo on hair and body, long soft shadows on wet sand, amber glow on face"
+        },
+        "mood": {
+          "energy": "warm, radiant, free",
+          "color_palette": "warm gold, ocean turquoise, sunset peach, clean white",
+          "aesthetic": "beach golden hour lifestyle"
+        }
+      },
+      "ab_test_variant": null,
+      "notes": "Grok interactive post — beach/ocean base image makes the mermaid transformation natural and playful. The .@grok prefix with leading dot is critical. Posted at 22:00 UTC for US prime evening reach."
+    }
+  ],
+  "reply_templates": [
+    "the lighting in this is unreal",
+    "okay this might be your best one yet",
+    "how do you get the colors like that",
+    "this is so pretty it hurts",
+    "the vibes here are immaculate",
+    "obsessed with this aesthetic",
+    "you always nail the mood",
+    "genuinely stunning work"
+  ]
+}
