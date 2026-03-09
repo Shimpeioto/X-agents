@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 9, 2026 (Session 32: First Production Outbound — OAuth Fix, Follow Verification, Agent Escalation Pattern)
+**Last updated**: March 10, 2026 (Session 32: First Production Outbound, OAuth Fix, Agent Escalation, Telegram Image Support)
 
 ---
 
@@ -679,6 +679,15 @@ Accounts engaged: @Angelwithcakee, @yogana_19, @IvoryLane_plus, @HannaJonso (Rou
 
 **Key lesson**: The distinction between an agent and a script is not the technology — it's the behavior when blocked. A script fails and reports. An agent reasons about alternatives and finds a path to the goal, even if that path involves escalating to a human with exact instructions.
 
+**Also in this session — Telegram Image Support Fix**:
+
+The operator shared an AI-generated image via Telegram with a caption asking Marc to evaluate it. The bot's `handle_photo` function failed with `"error: unknown option '-a'"` — it was using a non-existent `-a` flag on `claude -p` and was hardcoded to only parse metrics screenshots.
+
+**Fix**: Rewrote `handle_photo` to route images through conversational Marc via `claude -p --dangerously-skip-permissions`. The image is saved locally and its path is embedded in the prompt so Claude reads it via the Read tool (which supports images). The caption becomes the user's message. This uses the same Max subscription auth as the text conversation — no API key needed.
+
+**Additional file modified** (1):
+- `scripts/telegram_bot.py` — `handle_photo` rewritten: general-purpose image + caption → conversational Marc (was: hardcoded metrics screenshot parser with broken `-a` flag)
+
 ---
 
 ## 4. Decision Summary
@@ -957,7 +966,7 @@ As of Session 24, all agents operate as **teammates** within Claude Code Agent T
 │   ├── analyst.py                         ← Analyst agent script (collect + summary + import) (Phase 4)
 │   ├── fetch_url.py                       ← URL fetcher — extracts readable text from web pages (Session 28)
 │   ├── telegram_send.py                   ← Telegram send helper (Phase 2)
-│   ├── telegram_bot.py                    ← Telegram bot daemon (conversational Marc + Agent Teams execution + commands + URL enrichment) (Session 24, 28)
+│   ├── telegram_bot.py                    ← Telegram bot daemon (conversational Marc + Agent Teams execution + commands + URL enrichment + image vision) (Session 24, 28, 32)
 │   ├── run_phase5_tests.sh               ← Phase 5 E2E test runner — Phase A+B (dry-run + API)
 │   ├── run_phase5_tests_c.sh             ← Phase 5 E2E test runner — Phase C (Claude subagents)
 │   └── run_phase5_tests_d.sh             ← Phase 5 E2E test runner — Phase D (full E2E + live posting)

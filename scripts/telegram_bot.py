@@ -731,7 +731,7 @@ async def _show_metrics_summary(update: Update, account: str | None = None) -> N
 
 
 async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Handle screenshot photo — parse metrics via claude -p with image."""
+    """Handle photo messages — send image + caption to conversational Marc via Anthropic Vision API."""
     if not is_authorized(update):
         return
 
@@ -740,60 +740,68 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         file = await photo.get_file()
 
         os.makedirs(os.path.join(PROJECT, "data", "temp"), exist_ok=True)
-        temp_path = os.path.join(PROJECT, "data", "temp", f"screenshot_{today_str()}.jpg")
+        temp_path = os.path.join(PROJECT, "data", "temp", f"photo_{today_str()}.jpg")
         await file.download_to_drive(temp_path)
 
-        await update.message.reply_text("Analyzing screenshot...")
+        caption = update.message.caption or "Please analyze this image."
 
-        prompt = (
-            "This is a screenshot of X (Twitter) Analytics or post metrics. "
-            "Extract the following metrics as JSON: "
-            '{"post_id": "if visible", "impressions": number, "likes": number, '
-            '"retweets": number, "replies": number, "quotes": number, "bookmarks": number}. '
-            "Return ONLY valid JSON, no commentary. If a metric is not visible, omit it."
+        await update.message.reply_text("Analyzing image...")
+
+        response_text = await asyncio.get_event_loop().run_in_executor(
+            None, _chat_with_marc_vision, caption, temp_path
         )
 
-        env = os.environ.copy()
-        env.pop("CLAUDECODE", None)
+        if response_text:
+            for i in range(0, len(response_text), 4000):
+                await update.message.reply_text(response_text[i:i + 4000])
 
-        proc = await asyncio.get_event_loop().run_in_executor(
-            None,
-            lambda: subprocess.run(
-                ["claude", "-p", prompt, "-a", temp_path],
-                capture_output=True, text=True, timeout=120, cwd=PROJECT, env=env,
-            ),
-        )
-
-        if proc.returncode != 0:
-            await update.message.reply_text(f"Error analyzing screenshot: {proc.stderr[:200]}")
-            return
-
-        text = proc.stdout.strip()
-        if text.startswith("```"):
-            lines = text.split("\n")
-            lines = [l for l in lines if not l.strip().startswith("```")]
-            text = "\n".join(lines)
-
-        parsed = json.loads(text)
-
-        context.user_data["pending_screenshot_metrics"] = parsed
-        context.user_data["pending_screenshot_path"] = temp_path
-
-        display_lines = ["Parsed metrics from screenshot:"]
-        for k, v in parsed.items():
-            if v is not None:
-                display_lines.append(f"  {k}: {v}")
-        display_lines.append("\nUse /confirm to save or /cancel to discard.")
-
-        await update.message.reply_text("\n".join(display_lines))
-
-    except json.JSONDecodeError:
-        await update.message.reply_text(
-            "Could not parse metrics from screenshot. Please try a clearer image or use /metrics command."
-        )
     except Exception as e:
-        logger.error(f"Screenshot processing error: {e}")
-        await update.message.reply_text(f"Error processing screenshot: {e}")
+        logger.error(f"Photo processing error: {e}")
+        await update.message.reply_text(f"Error processing image: {e}")
+
+
+def _chat_with_marc_vision(user_message: str, image_path: str) -> str:
+    """Send message + image to conversational Marc via claude -p.
+
+    Embeds the image path in the prompt so Claude reads it via Read tool.
+    Uses the same claude -p auth as chat_with_marc (Max subscription).
+    """
+    global _conversation_history
+
+    # Build prompt that instructs Claude to read the image
+    abs_image_path = os.path.abspath(image_path)
+    enriched_message = (
+        f"[The operator sent a photo. Read the image at: {abs_image_path}]\n\n"
+        f"{user_message}"
+    )
+
+    # Reuse the standard chat_with_marc flow (handles history, system prompt, etc.)
+    # But we need to call it synchronously since we're in an executor
+    prompt = _build_conversation_prompt(enriched_message)
+
+    _conversation_history.append({"role": "user", "content": f"[Image attached] {user_message}"})
+
+    env = os.environ.copy()
+    env.pop("CLAUDECODE", None)
+
+    try:
+        proc = subprocess.run(
+            ["claude", "-p", prompt, "--dangerously-skip-permissions"],
+            capture_output=True, text=True, timeout=120, cwd=PROJECT, env=env,
+        )
+    except subprocess.TimeoutExpired:
+        _conversation_history.append({"role": "assistant", "content": "(timed out)"})
+        return "Sorry, image analysis took too long. Try again."
+
+    if proc.returncode != 0:
+        logger.error(f"claude -p vision failed: {proc.stderr[:300]}")
+        _conversation_history.append({"role": "assistant", "content": "(error)"})
+        return f"Marc encountered an error analyzing the image: {proc.stderr[:200]}"
+
+    response_text = proc.stdout.strip()
+    _conversation_history.append({"role": "assistant", "content": response_text})
+
+    return response_text
 
 
 async def cmd_confirm(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
