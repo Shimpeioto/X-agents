@@ -547,6 +547,7 @@ def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
         if reply_info and check_rate_limit(limits, account, "replies"):
             reply_tweet_id = reply_info.get("tweet_id")
             reply_text = f"@{handle} {reply_info.get('reply_text', '')}"
+            reply_success = True
 
             if dry_run:
                 logger.info(f"[DRY-RUN] Would reply to {reply_tweet_id}: {reply_text[:80]}...")
@@ -557,6 +558,17 @@ def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
                     logger.info(f"Replied to {reply_tweet_id} from @{handle}")
                 else:
                     logger.warning(f"Failed to reply to {reply_tweet_id}")
+                    reply_success = False
+                    # Track for human escalation
+                    if "failed_replies" not in outbound_log:
+                        outbound_log["failed_replies"] = []
+                    outbound_log["failed_replies"].append({
+                        "target": f"@{handle}",
+                        "tweet_id": reply_tweet_id,
+                        "tweet_url": f"https://x.com/{handle}/status/{reply_tweet_id}",
+                        "reply_text": reply_info.get("reply_text", ""),
+                        "reason": "API 403 — reply restricted (account not mentioned/engaged by author)",
+                    })
 
             increment_rate_limit(limits, account, "replies")
             outbound_log["actions"].append({
@@ -565,6 +577,7 @@ def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
                 "target": f"@{handle}",
                 "tweet_id": reply_tweet_id,
                 "reply_text": reply_text,
+                "success": reply_success,
                 "source": "smart_outbound",
                 "timestamp": now_iso(),
                 "dry_run": dry_run,

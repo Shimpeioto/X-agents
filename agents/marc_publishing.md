@@ -71,6 +71,18 @@ python3 scripts/validate.py outbound_plan data/outbound_plan_{YYYYMMDD}_{account
 If Outbound agent fails: log error, skip outbound for this account.
 Do NOT fall back to legacy `publisher.py outbound` without safety reasoning.
 
+After outbound completes, read `data/outbound_log_{YYYYMMDD}.json`. If it contains a `failed_replies` array, escalate to the operator via Telegram with exact instructions for manual replies:
+
+```bash
+python3 scripts/telegram_send.py "Replies that need manual posting from @{handle}:
+
+1. Reply to @{target}: \"{reply_text}\"
+   → {tweet_url}
+..."
+```
+
+Don't just report failures — provide the alternative path for the human to complete the goal.
+
 ### 4. Send Publish Report to Telegram
 
 ```bash

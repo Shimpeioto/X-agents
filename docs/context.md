@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 8, 2026 (Session 31: Account Status Management — EN Sub-account + JP Suspension)
+**Last updated**: March 9, 2026 (Session 32: First Production Outbound — OAuth Fix, Follow Verification, Agent Escalation Pattern)
 
 ---
 
@@ -642,6 +642,43 @@ After:  Strategist → strategy.json → Outbound agent (plans with safety reaso
 
 **Verification**: Python syntax check passed. JSON validation passed. All 3 CLI modes of `outbound_history.py` tested against live data (EN: 54 actions across 5 targets found; JP: no history, fresh-run path verified; tweet dedup correctly identifies already-liked tweets). Cross-reference check found and fixed 2 additional stale references in `marc_conversation.md` and `creator.md`.
 
+### Session 32 — First Production Outbound: OAuth Fix, Follow Verification, Agent Escalation Pattern (March 9, 2026)
+
+**Goal**: Execute the first production outbound engagement run for EN (@meruru_tcbn sub-account) using the full Outbound agent workflow built in Session 30.
+
+**Problem 1 — Wrong OAuth tokens**: All accounts in `config/accounts.json` shared the same `access_token` (prefix `777944572160724996-`), which belonged to the app owner's personal account — not @meruru_tcbn (`1962081689238491136`). The X API returned success for likes/follows/replies, but actions were applied to the wrong account. No activity appeared on @meruru_tcbn.
+
+**Fix**: Ran PIN-based OAuth 1.0a 3-legged flow (`tweepy.OAuth1UserHandler` with `callback='oob'`) while logged into X as @meruru_tcbn. Generated new tokens with correct prefix `1962081689238491136-`. Updated EN and EN-subaccount entries in `config/accounts.json`.
+
+**Verification method**: To confirm follows actually work, the system must query the authenticated user's following list via API (`client.get_users_following` with bearer token) rather than trusting the follow API's success response. Tested by following @JosephinaM3131 (confirmed not in following list), then re-querying — following count went from 22 to 23 with the account present.
+
+**Problem 2 — Reply 403 restriction**: All reply attempts failed with `"Reply to this conversation is not allowed because you have not been mentioned or otherwise engaged by the author"`. This is an X platform restriction on newer/low-follower accounts, not a credentials issue.
+
+**Problem 3 — Agent philosophy gap**: The original implementation just logged reply failures and stopped. The operator's feedback: *"An agent should think autonomously and make every effort to achieve the goal. If it can't reply via API, it should ask a human to reply — specifying which account, which post, and what text."* Reporting a blocker and stopping is script behavior, not agent behavior.
+
+**Solution**: Implemented a **failed action escalation pattern** — when API actions fail, the system collects them with exact actionable instructions (tweet URL + reply text) for the human operator to complete manually.
+
+**Production results** (2 outbound rounds):
+
+| Action | Round 1 (API) | Round 2 (API) | Manual | Total |
+|---|---|---|---|---|
+| Likes | 12 | 8 | — | 20 |
+| Follows | 3 | 1 | — | 4 (+1 test) |
+| Replies | 0 (all 403) | 0 (403) | 5 | 5 |
+
+Accounts engaged: @Angelwithcakee, @yogana_19, @IvoryLane_plus, @HannaJonso (Round 1), @IsabellaCruz_47, @Estherbron1 (Round 2), @JosephinaM3131 (test follow kept).
+
+**Files modified** (4):
+- `config/accounts.json` — EN and EN-subaccount tokens updated to @meruru_tcbn's OAuth tokens
+- `scripts/publisher.py` — Smart-outbound reply failure now tracks `failed_replies` array in outbound log with tweet URL and reply text for human escalation
+- `agents/outbound.md` — Added Step 7: after execution, check `failed_replies` and escalate to Marc with actionable instructions for manual posting
+- `agents/marc_publishing.md` — After outbound, check outbound log for `failed_replies` and send Telegram message with manual reply instructions
+
+**Rules added** (1):
+- `config/global_rules.md` — "When an API action fails, don't just report and stop — find an alternative path. Agents think and adapt; scripts just fail."
+
+**Key lesson**: The distinction between an agent and a script is not the technology — it's the behavior when blocked. A script fails and reports. An agent reasons about alternatives and finds a path to the goal, even if that path involves escalating to a human with exact instructions.
+
 ---
 
 ## 4. Decision Summary
@@ -1047,7 +1084,16 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 31 — Account Status Management: EN sub-account + JP suspension (March 8, 2026). EN main account (@iammeruru) shadowbanned — switched to sub-account @meruru_tcbn via config swap. JP account not yet created — suspended via account status file. Two-layer approach: config swap for EN (zero code changes in scripts), account status file for JP (Marc/bot skip inactive accounts).
+**Latest**: Session 32 — First Production Outbound: OAuth fix, follow verification, agent escalation pattern (March 9, 2026). Fixed wrong OAuth tokens (all accounts shared app owner's personal token). Ran 2 outbound rounds for EN: 20 likes + 5 follows succeeded via API, 5 replies failed (X restriction on new accounts) → escalated to human with exact tweet URLs and reply text. Established agent escalation pattern: when API fails, find alternative path (human escalation with actionable instructions) instead of just reporting failure.
+
+Session 32 files modified (4 files):
+- `config/accounts.json` — EN and EN-subaccount tokens updated to @meruru_tcbn's OAuth tokens
+- `scripts/publisher.py` — Smart-outbound tracks `failed_replies` in outbound log for human escalation
+- `agents/outbound.md` — Added Step 7 (failed action escalation to Marc)
+- `agents/marc_publishing.md` — Check outbound log for `failed_replies`, send manual reply instructions via Telegram
+
+Session 32 rules added (1 file):
+- `config/global_rules.md` — Agent escalation rule: when API fails, find alternative path instead of stopping
 
 Session 31 files created/modified (8 files):
 - `config/account_status.json` — **New** Account active/suspended status (EN active, JP suspended)
@@ -1282,6 +1328,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Session 24 | Agent Teams Migration (Conversational Marc + Teammates) | Local machine | **✅ Complete** — 10 files modified/created, Marc responds conversationally via Telegram, spawns Agent Teams for execution |
 | Session 25 | Production Testing (Real tasks via Telegram) | Local machine | **✅ Complete** — 5 tasks executed (3 ad-hoc + 1 image analysis + 1 daily pipeline), non-interactive bug fixed, media collection added, agent philosophy established |
 | Session 26 | HTML Report Generation for Telegram Review | Local machine | **✅ Complete** — `generate_html_report.py` with 3 report types, pipeline + publishing playbooks updated |
+| Session 32 | First Production Outbound + OAuth Fix + Agent Escalation | Local machine | **✅ Complete** — OAuth tokens fixed, 20 likes + 5 follows via API, 5 replies escalated to human. Agent escalation pattern established. |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 

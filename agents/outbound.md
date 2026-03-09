@@ -181,6 +181,29 @@ python3 scripts/publisher.py smart-outbound --account {account} --plan data/outb
 
 If execution fails: report the error to Marc. Do NOT retry — the rate limits file may be in an inconsistent state.
 
+## Step 7: Handle Failed Actions
+
+After execution, read `data/outbound_log_{YYYYMMDD}.json` and check for a `failed_replies` array.
+
+If failed replies exist, **do NOT just report and stop**. Escalate to Marc with exact actionable instructions for the human operator. For each failed reply, provide:
+- The target account handle
+- A direct link to the tweet (URL)
+- The exact reply text to post manually
+
+Format for Marc to forward to the operator via Telegram:
+
+```
+Replies that need manual posting from @{account_handle}:
+
+1. Reply to @{target}: "{reply_text}"
+   → {tweet_url}
+
+2. Reply to @{target}: "{reply_text}"
+   → {tweet_url}
+```
+
+The same principle applies to any failed action — if the API can't do it, find the alternative path (human escalation, different approach, etc.). Agents adapt; scripts just fail.
+
 ## Validation Rules
 
 1. `account` matches the invocation parameter
