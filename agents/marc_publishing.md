@@ -44,7 +44,7 @@ Log failures as warnings. Posts may have partially succeeded.
 
 ### 3. Outbound Engagement (Active Accounts Only)
 
-Spawn the Outbound agent for each **active** account only:
+Spawn the Outbound agent for each **active** account only, with **model: sonnet**:
 
 ```
 "You are Outbound. Read agents/outbound.md for your full instructions.
@@ -126,7 +126,7 @@ python3 scripts/validate.py analyst_metrics data/metrics_history.db
 
 ### 7. Daily Report (Analyst Intelligence Mode)
 
-Spawn an Analyst teammate:
+Spawn an Analyst teammate with **model: haiku**:
 
 ```
 "You are Analyst. Read agents/analyst.md, section 'Intelligence Mode' for your instructions.

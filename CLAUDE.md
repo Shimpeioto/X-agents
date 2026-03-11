@@ -32,14 +32,14 @@ Entry points:
 - Task coordination via shared task list (Agent Teams) or data/pipeline_state_{date}.json
 
 ## Agent Definitions (Teammates)
-- @agents/marc.md — COO / Team Leader
-- @agents/marc_conversation.md — Conversational Marc (Anthropic API layer)
-- @agents/scout.md — Competitor Research (teammate)
-- @agents/strategist.md — Growth Strategy (teammate)
-- @agents/creator.md — Content Planning (teammate)
-- @agents/publisher.md — X API Posting (teammate)
-- @agents/outbound.md — Community Engagement & Growth (teammate)
-- @agents/analyst.md — Metrics Collection (teammate)
+- @agents/marc.md — COO / Team Leader (Opus)
+- @agents/marc_conversation.md — Conversational Marc / Anthropic API layer (Opus)
+- @agents/scout.md — Competitor Research / teammate (Sonnet)
+- @agents/strategist.md — Growth Strategy / teammate (Sonnet)
+- @agents/creator.md — Content Planning / teammate (Sonnet)
+- @agents/publisher.md — X API Posting / teammate (script only, no LLM)
+- @agents/outbound.md — Community Engagement & Growth / teammate (Sonnet)
+- @agents/analyst.md — Metrics Collection / teammate (Haiku)
 
 ## Shared Conventions
 - Date format: ISO 8601

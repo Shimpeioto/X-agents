@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 10, 2026 (Session 32: First Production Outbound, OAuth Fix, Agent Escalation, Telegram Image Support)
+**Last updated**: March 11, 2026 (Session 33: Third Outbound Run, Scheduling Decision, Model Assignment)
 
 ---
 
@@ -688,6 +688,53 @@ The operator shared an AI-generated image via Telegram with a caption asking Mar
 **Additional file modified** (1):
 - `scripts/telegram_bot.py` — `handle_photo` rewritten: general-purpose image + caption → conversational Marc (was: hardcoded metrics screenshot parser with broken `-a` flag)
 
+### Session 33 — Third Outbound Run + Scheduling Architecture Decision (March 10-11, 2026)
+
+**Goal**: Run daily outbound engagement for EN, evaluate Claude Code's new scheduled tasks feature for pipeline scheduling.
+
+**Outbound run (Round 3)**: Used strategy from `data/strategy_20260309.json` with 4 targets: @tanarainw (191K), @iiCoraMaay (17.8K), @baharaykin (12.6K), @NotjustRen00 (16.7K).
+
+Before planning, verified @meruru_tcbn's actual following list via bearer token API (`get_users_following`) — found 3 of 4 targets already followed (likely manually by operator), only @baharaykin not followed. This programmatic check prevented wasting 3 follow attempts.
+
+| Action | Result |
+|---|---|
+| Likes | 12/12 succeeded |
+| Follows | 1/1 succeeded (@baharaykin) |
+| Replies | 0/4 (all 403 — reply restriction still active on new account) |
+
+Failed replies escalated to operator with tweet URLs and reply text per the escalation pattern established in Session 32.
+
+**Files created** (2):
+- `data/outbound_plan_20260310_EN.json` — Outbound plan with safety checks (API-verified follow status)
+- `data/outbound_log_20260310.json` — Execution log with 4 `failed_replies` entries
+
+**Scheduling architecture decision**: Evaluated Claude Code's new scheduled tasks feature (`/loop` CLI and Desktop Scheduled Tasks) against system cron for our pipeline scheduling needs.
+
+- **CLI `/loop`**: Session-scoped (dies on exit), 3-day auto-expiry. Not viable for unattended operation.
+- **Desktop Scheduled Tasks**: Persistent, catches up missed runs, but requires Desktop GUI app open + computer awake. Agent teams explicitly not available in Desktop.
+- **System cron**: Fully headless, survives restarts, proven reliability.
+
+**Decision**: System cron remains the right choice. Claude Code's scheduling features are designed for developer-in-the-loop workflows (build polling, PR monitoring), not unattended agent pipelines. Our Telegram bot daemon + cron (or Python APScheduler inside the bot) provides the reliability our system needs.
+
+**Model assignment per agent**: Previously all agents ran on Opus (inherited from parent). Implemented cost-optimized model selection:
+
+| Agent | Model | Rationale |
+|---|---|---|
+| Marc (team leader + conversation) | **Opus** | Complex coordination, judgment, multi-step reasoning |
+| Scout | **Sonnet** | Structured data analysis and pattern detection |
+| Strategist | **Sonnet** | Strategy development — strong reasoning, doesn't need Opus |
+| Creator | **Sonnet** | Creative writing + structured JSON output |
+| Outbound | **Sonnet** | Safety reasoning + contextual reply crafting |
+| Analyst | **Haiku** | Structured data summarization — lightest task |
+| Publisher | — | Script only, no LLM |
+
+**Files modified** (5):
+- `agents/marc.md` — Agent team table with model column + rationale
+- `agents/marc_pipeline.md` — Scout (sonnet), Strategist (sonnet), Creator (sonnet) spawn prompts
+- `agents/marc_publishing.md` — Outbound (sonnet), Analyst (haiku) spawn prompts
+- `agents/marc_conversation.md` — Team table with model column
+- `CLAUDE.md` — Agent definitions with model annotations
+
 ---
 
 ## 4. Decision Summary
@@ -1093,7 +1140,11 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 32 — First Production Outbound: OAuth fix, follow verification, agent escalation pattern (March 9, 2026). Fixed wrong OAuth tokens (all accounts shared app owner's personal token). Ran 2 outbound rounds for EN: 20 likes + 5 follows succeeded via API, 5 replies failed (X restriction on new accounts) → escalated to human with exact tweet URLs and reply text. Established agent escalation pattern: when API fails, find alternative path (human escalation with actionable instructions) instead of just reporting failure.
+**Latest**: Session 33 — Third outbound run + scheduling decision + model assignment (March 10-11, 2026). 12 likes + 1 follow succeeded, 4 replies failed (escalated). Cron confirmed over Claude Code scheduled tasks. Implemented per-agent model selection: Marc on Opus, teammates on Sonnet, Analyst on Haiku.
+
+Session 33 files created (2 files):
+- `data/outbound_plan_20260310_EN.json` — Outbound plan with API-verified follow status
+- `data/outbound_log_20260310.json` — Execution log with `failed_replies` for human escalation
 
 Session 32 files modified (4 files):
 - `config/accounts.json` — EN and EN-subaccount tokens updated to @meruru_tcbn's OAuth tokens

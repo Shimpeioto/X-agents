@@ -55,7 +55,7 @@ Create `data/pipeline_state_{YYYYMMDD}.json` — see [marc_schemas.md](marc_sche
 
 ### 2. Spawn Scout Teammate
 
-Spawn a Scout teammate:
+Spawn a Scout teammate with **model: sonnet**:
 ```
 "You are Scout. Read agents/scout.md, section 'Daily Intelligence Mode' for your instructions.
 Today's date: {YYYY-MM-DD}
@@ -99,6 +99,7 @@ Update pipeline state with `image_analysis` step status.
 
 ### 4. Spawn Strategist Teammate
 
+Spawn with **model: sonnet**:
 ```
 "You are Strategist. Read agents/strategist.md, section 'Daily Strategy Mode' for your instructions.
 Today's date: {YYYY-MM-DD}
@@ -129,7 +130,7 @@ Apply your own semantic judgment:
 
 Only spawn Creator for **active accounts** (from Step 0). If both are active, spawn in parallel.
 
-For each active account (`{account}` = EN or JP):
+For each active account (`{account}` = EN or JP), spawn with **model: sonnet**:
 ```
 "You are Creator. Read agents/creator.md for your instructions.
 Today's date: {YYYY-MM-DD}
