@@ -35,11 +35,11 @@ Entry points:
 - @agents/marc.md — COO / Team Leader (Opus)
 - @agents/marc_conversation.md — Conversational Marc / Anthropic API layer (Opus)
 - @agents/scout.md — Competitor Research / teammate (Sonnet)
-- @agents/strategist.md — Growth Strategy / teammate (Sonnet)
+- @agents/strategist.md — Growth Strategy / teammate (Opus)
 - @agents/creator.md — Content Planning / teammate (Sonnet)
 - @agents/publisher.md — X API Posting / teammate (script only, no LLM)
 - @agents/outbound.md — Community Engagement & Growth / teammate (Sonnet)
-- @agents/analyst.md — Metrics Collection / teammate (Haiku)
+- @agents/analyst.md — Metrics Collection / teammate (Sonnet)
 
 ## Shared Conventions
 - Date format: ISO 8601

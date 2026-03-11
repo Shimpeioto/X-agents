@@ -99,7 +99,7 @@ Update pipeline state with `image_analysis` step status.
 
 ### 4. Spawn Strategist Teammate
 
-Spawn with **model: sonnet**:
+Spawn with **model: opus**:
 ```
 "You are Strategist. Read agents/strategist.md, section 'Daily Strategy Mode' for your instructions.
 Today's date: {YYYY-MM-DD}

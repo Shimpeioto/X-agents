@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 11, 2026 (Session 33: Third Outbound Run, Scheduling Decision, Model Assignment)
+**Last updated**: March 11, 2026 (Session 33: Outbound, Scheduling, Model Assignment, Cron Implementation)
 
 ---
 
@@ -716,24 +716,41 @@ Failed replies escalated to operator with tweet URLs and reply text per the esca
 
 **Decision**: System cron remains the right choice. Claude Code's scheduling features are designed for developer-in-the-loop workflows (build polling, PR monitoring), not unattended agent pipelines. Our Telegram bot daemon + cron (or Python APScheduler inside the bot) provides the reliability our system needs.
 
-**Model assignment per agent**: Previously all agents ran on Opus (inherited from parent). Implemented cost-optimized model selection:
+**Model assignment per agent**: Previously all agents ran on Opus (inherited from parent). Implemented per-agent model selection — Strategist elevated to Opus because strategy is the foundation all downstream agents depend on:
 
 | Agent | Model | Rationale |
 |---|---|---|
 | Marc (team leader + conversation) | **Opus** | Complex coordination, judgment, multi-step reasoning |
+| Strategist | **Opus** | Core strategy — everything downstream depends on it |
 | Scout | **Sonnet** | Structured data analysis and pattern detection |
-| Strategist | **Sonnet** | Strategy development — strong reasoning, doesn't need Opus |
 | Creator | **Sonnet** | Creative writing + structured JSON output |
 | Outbound | **Sonnet** | Safety reasoning + contextual reply crafting |
-| Analyst | **Haiku** | Structured data summarization — lightest task |
+| Analyst | **Sonnet** | Metrics analysis + daily report generation |
 | Publisher | — | Script only, no LLM |
 
-**Files modified** (5):
+**Cron scheduling implemented**: 3 daily cron jobs for autonomous pipeline operation.
+
+| Time (JST) | Task | Script |
+|---|---|---|
+| 06:00 | Pipeline (Scout → Strategist → Creator → Preview) | `cron_wrapper.sh pipeline` |
+| 14:00 | Outbound (likes, replies, follows) | `cron_wrapper.sh outbound` |
+| 22:00 | Metrics (collection + daily report) | `cron_wrapper.sh metrics` |
+
+Publishing remains manual (requires human approval via Telegram).
+
+**Files created** (4):
+- `scripts/cron_wrapper.sh` — Cron entry point (environment setup, logging, Telegram error notification)
+- `scripts/run_outbound.sh` — Daily outbound engagement for active accounts
+- `scripts/run_metrics.sh` — Metrics collection + daily report
+- `scripts/install_cron.sh` — Install/remove/show cron schedule
+
+**Files modified** (6):
 - `agents/marc.md` — Agent team table with model column + rationale
-- `agents/marc_pipeline.md` — Scout (sonnet), Strategist (sonnet), Creator (sonnet) spawn prompts
-- `agents/marc_publishing.md` — Outbound (sonnet), Analyst (haiku) spawn prompts
+- `agents/marc_pipeline.md` — Scout (sonnet), Strategist (opus), Creator (sonnet) spawn prompts
+- `agents/marc_publishing.md` — Outbound (sonnet), Analyst (sonnet) spawn prompts
 - `agents/marc_conversation.md` — Team table with model column
 - `CLAUDE.md` — Agent definitions with model annotations
+- `docs/context.md` — Session 33 updates
 
 ---
 
@@ -1140,7 +1157,7 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 33 — Third outbound run + scheduling decision + model assignment (March 10-11, 2026). 12 likes + 1 follow succeeded, 4 replies failed (escalated). Cron confirmed over Claude Code scheduled tasks. Implemented per-agent model selection: Marc on Opus, teammates on Sonnet, Analyst on Haiku.
+**Latest**: Session 33 — Third outbound run, cron scheduling, per-agent model assignment (March 10-11, 2026). 12 likes + 1 follow succeeded, 4 replies failed (escalated). Cron confirmed over Claude Code scheduled tasks. Implemented 3 daily cron jobs (pipeline 06:00, outbound 14:00, metrics 22:00 JST). Per-agent model selection: Marc + Strategist on Opus, Scout/Creator/Outbound/Analyst on Sonnet.
 
 Session 33 files created (2 files):
 - `data/outbound_plan_20260310_EN.json` — Outbound plan with API-verified follow status

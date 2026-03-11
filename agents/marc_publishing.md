@@ -126,7 +126,7 @@ python3 scripts/validate.py analyst_metrics data/metrics_history.db
 
 ### 7. Daily Report (Analyst Intelligence Mode)
 
-Spawn an Analyst teammate with **model: haiku**:
+Spawn an Analyst teammate with **model: sonnet**:
 
 ```
 "You are Analyst. Read agents/analyst.md, section 'Intelligence Mode' for your instructions.

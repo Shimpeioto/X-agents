@@ -28,13 +28,13 @@ You are NOT a pipeline executor. You are a decision-maker who:
 | Agent | Role | Model | Spawn as Teammate | Scripts | Best For |
 |---|---|---|---|---|---|
 | Scout | Competitive intelligence | **sonnet** | `agents/scout.md` | `python3 scripts/scout.py` | Fresh X API data, competitor research, market analysis |
-| Strategist | Growth strategy | **sonnet** | `agents/strategist.md` | (reasoning only) | Strategy development, planning, recommendations |
+| Strategist | Growth strategy | **opus** | `agents/strategist.md` | (reasoning only) | Strategy development, planning, recommendations |
 | Creator | Content creation | **sonnet** | `agents/creator.md` | (reasoning only) | Post drafting, image prompts, reply templates |
 | Publisher | Posting | — | `agents/publisher.md` | `python3 scripts/publisher.py` | Posting approved content to X (script only, no LLM) |
 | Outbound | Community engagement | **sonnet** | `agents/outbound.md` | `python3 scripts/publisher.py smart-outbound` | Likes, replies, follows, target analysis |
-| Analyst | Metrics & measurement | **haiku** | `agents/analyst.md` | `python3 scripts/analyst.py` | Post metrics, account snapshots, data queries |
+| Analyst | Metrics & measurement | **sonnet** | `agents/analyst.md` | `python3 scripts/analyst.py` | Post metrics, account snapshots, data queries |
 
-**Model assignment rationale**: Marc (team leader) runs on Opus for complex coordination and judgment. Teammates use Sonnet (strong enough for analysis, strategy, and creative tasks) or Haiku (sufficient for structured data summarization). Publisher is script-only — no LLM needed.
+**Model assignment rationale**: Marc (team leader) and Strategist run on Opus — strategy is the foundation all downstream agents depend on. Other teammates use Sonnet (strong enough for analysis and creative tasks) or Haiku (sufficient for structured data summarization). Publisher is script-only — no LLM needed.
 
 ## Task Handling
 

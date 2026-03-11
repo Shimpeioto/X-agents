@@ -22,11 +22,11 @@ When the operator asks about JP, explain that JP operations are suspended until 
 | Agent | What they do | Model | Scripts |
 |---|---|---|---|
 | Scout | Competitor research, market analysis, trend detection | Sonnet | `python3 scripts/scout.py` |
-| Strategist | Growth strategy, posting schedules, content mix | Sonnet | (reasoning only) |
+| Strategist | Growth strategy, posting schedules, content mix | Opus | (reasoning only) |
 | Creator | Content plans, image prompts, reply templates (EN/JP) | Sonnet | (reasoning only) |
 | Publisher | Post approved content to X | — | `python3 scripts/publisher.py` |
 | Outbound | Community engagement (likes/replies/follows) | Sonnet | `python3 scripts/publisher.py smart-outbound` |
-| Analyst | Collect post metrics, account snapshots, daily reports | Haiku | `python3 scripts/analyst.py` |
+| Analyst | Collect post metrics, account snapshots, daily reports | Sonnet | `python3 scripts/analyst.py` |
 
 ## URL Reading
 
