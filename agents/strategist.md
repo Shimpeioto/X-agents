@@ -69,6 +69,33 @@ From the Scout report, pay attention to:
 - `trending_topics` and `trending_posts` — what's trending right now
 - `new_accounts_discovered` — potential new competitors or collaboration targets
 
+## Step 1.5: Read strategy feedback if available (PDCA loop)
+
+- IF `data/strategy_feedback_{yesterday_YYYYMMDD}.json` exists → read it for performance-based adjustments. This file is produced by the evening war room and contains category performance rankings, A/B test evaluations, posting time effectiveness, and outbound target analysis.
+
+**How to apply feedback (confidence-based rules):**
+
+1. **Category adjustments** (`type: "content_mix"`):
+   - `confidence: "high"` → Apply directly. Shift content_mix by the recommended amount (typically 5-10%).
+   - `confidence: "medium"` → Apply conservatively. Shift content_mix by half the recommended amount (2-5%).
+   - `confidence: "low"` → Note in `key_insights` but do NOT change content_mix.
+   - **Core strategy bounds are inviolable**: Never move a category below its minimum or above its maximum. EN `grok_interactive` must stay 15-30%, JP `grok_interactive` must stay 20-35%. Total must still equal 100.
+
+2. **A/B test conclusions** (`type: "ab_test"`):
+   - If `ab_test_evaluation.status == "concluded"` and `confidence == "high"` → Adopt the winner as the new default. Design a NEW A/B test on a DIFFERENT variable.
+   - If `status == "running"` → Maintain the current test. Do NOT change variants mid-test.
+   - If `status == "insufficient_data"` → Extend the test duration by 2 days (max 10 days total).
+
+3. **Posting time adjustments** (`type: "posting_time"`):
+   - `confidence: "high"` → Swap underperforming time slots with the recommended better windows.
+   - `confidence: "medium"` or `"low"` → Keep current schedule, note observation in `key_insights`.
+
+4. **Outbound target rotation** (`type: "outbound_target"`):
+   - `effective_targets` → Keep in `target_accounts` for continued engagement.
+   - `ineffective_targets` (no response after 3+ days) → Drop from `target_accounts`, replace with fresh targets from the competitor pool.
+
+- IF the file does not exist → skip this step (same as before — no feedback available yet).
+
 ## Step 2: Read context if available (conditional)
 
 - IF `data/strategy_current.json` exists → read it for continuity with yesterday's strategy. Consider what worked, maintain active A/B tests, evolve recommendations rather than starting from scratch.
@@ -109,7 +136,7 @@ These rules are MANDATORY and override any conflicting analysis from competitor 
 - Post text guidelines should specify: casual lowercase, playful, confident, max 1-2 emoji
 
 ### Posting Cadence
-- Both accounts: 1-3 posts/day (optimal: 2). NEVER recommend >3 posts/day.
+- Both accounts: 2-5 posts/day (optimal: 4 during launch phase). Cap at 5 posts/day.
 - Minimum 4 hours between posts.
 - EN optimal times: 13:00-14:00 UTC, 21:00-23:00 UTC, 00:00-01:00 UTC
 - JP optimal times: 09:00 JST, 12:00-13:00 JST, 20:00-21:00 JST, 23:00-00:00 JST
@@ -213,7 +240,7 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
 ## Validation Rules (your output MUST satisfy all of these)
 
 1. Both `EN` and `JP` top-level keys must be present
-2. `posting_schedule` must have 2-3 slots per account (core strategy: optimal 2, max 3)
+2. `posting_schedule` must have 3-5 slots per account (core strategy: optimal 4, max 5)
 3. `content_mix` values must sum to exactly 100 per account
 4. **EN hashtag_strategy**: `always_use` MUST be `[]`, `rotate` MUST be `[]`, `trending_today` MUST be `[]`, `max_per_post` MUST be `0` (ZERO hashtags for EN)
 5. **JP hashtag_strategy**: `always_use` MUST be `[]`, `rotate` MUST be `[]`, `trending_today` MUST be `[]`, `max_per_post` MUST be `2`. Only tags from `["#SFW", "#Fictional", "#AIart", "#digitalart"]` are allowed anywhere in the strategy

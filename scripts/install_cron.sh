@@ -16,9 +16,10 @@ show_schedule() {
     crontab -l 2>/dev/null | grep "$MARKER" || echo "(no X-agents jobs found)"
     echo ""
     echo "=== Schedule explained ==="
-    echo "Pipeline : 06:00 JST daily — Scout → Strategist → Creator → Preview"
+    echo "Morning  : 05:30 JST daily — Review yesterday, send operator briefing"
+    echo "Pipeline : 06:00 JST daily — Scout → Strategist (reads feedback) → Creator → Preview"
     echo "Outbound : 14:00 JST daily — Likes, replies, follows for active accounts"
-    echo "Metrics  : 22:00 JST daily — Collect post metrics, generate daily report"
+    echo "Evening  : 22:00 JST daily — Metrics collection, daily report, strategy feedback"
 }
 
 remove_jobs() {
@@ -33,22 +34,28 @@ install_jobs() {
 
     # Schedule (all times in JST = UTC+9):
     #
+    # Morning War Room at 05:30 JST (20:30 UTC previous day)
+    #   - Review yesterday's results, send operator briefing
+    #   - Operator sees summary before pipeline runs
+    #
     # Pipeline at 06:00 JST (21:00 UTC previous day)
-    #   - Runs overnight content generation
-    #   - Operator reviews content preview over morning coffee
+    #   - Strategist reads strategy_feedback from evening war room
+    #   - Scout → Strategist → Creator → Preview
     #
     # Outbound at 14:00 JST (05:00 UTC)
     #   - Midday engagement when targets are active
     #   - After operator has had time to approve content
     #
-    # Metrics at 22:00 JST (13:00 UTC)
-    #   - Evening collection, 8+ hours after typical posting
+    # Evening War Room at 22:00 JST (13:00 UTC)
+    #   - Collect metrics, generate daily report
+    #   - Produce strategy_feedback for tomorrow's Strategist (PDCA bridge)
     #   - Daily report delivered before operator sleeps
 
     NEW_JOBS="
+30 20 * * * ${PROJECT_DIR}/scripts/cron_wrapper.sh morning_warroom ${MARKER}
 0 21 * * * ${PROJECT_DIR}/scripts/cron_wrapper.sh pipeline ${MARKER}
 0 5 * * * ${PROJECT_DIR}/scripts/cron_wrapper.sh outbound ${MARKER}
-0 13 * * * ${PROJECT_DIR}/scripts/cron_wrapper.sh metrics ${MARKER}
+0 13 * * * ${PROJECT_DIR}/scripts/cron_wrapper.sh evening_warroom ${MARKER}
 "
 
     echo "${EXISTING}${NEW_JOBS}" | crontab -

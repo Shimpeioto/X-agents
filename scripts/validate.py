@@ -141,14 +141,10 @@ def validate_strategist(strategy_path: str) -> tuple[bool, list[str]]:
         else:
             issues.append(f"content_mix_missing: {account} content_mix is not a dict")
 
-        # Check 6: hashtag_strategy present with always_use
+        # Check 6: hashtag_strategy present (always_use may be empty per core strategy)
         hs = section.get("hashtag_strategy", {})
         if not isinstance(hs, dict):
             issues.append(f"hashtag_strategy_missing: {account} hashtag_strategy not found")
-        else:
-            always_use = hs.get("always_use", [])
-            if not isinstance(always_use, list) or len(always_use) < 1:
-                issues.append(f"always_use_empty: {account} hashtag_strategy.always_use has no entries")
 
         # Check 7: outbound_strategy within limits
         os_section = section.get("outbound_strategy", {})
@@ -1065,9 +1061,186 @@ def validate_image_references(path: str) -> tuple[bool, list[str]]:
     return passed, issues
 
 
+def validate_strategy_feedback(path: str) -> tuple[bool, list[str]]:
+    """Validate strategy_feedback_{date}.json from evening war room.
+
+    Checks:
+    1. Required top-level fields: date, generated_at, daily_report_used, strategy_used, accounts
+    2. accounts is a dict with at least one account key (EN or JP)
+    3. Each account has category_performance (array), ab_test_evaluation (dict),
+       posting_time_effectiveness (array), outbound_effectiveness (dict),
+       recommended_adjustments (array)
+    4. ab_test_evaluation has required fields: variable, status, confidence
+    5. ab_test_evaluation.status is one of: running, concluded, insufficient_data
+    6. ab_test_evaluation.confidence is one of: low, medium, high
+    7. Each recommended_adjustment has type, confidence, description, rationale
+    8. recommended_adjustment.confidence is one of: low, medium, high
+
+    Args:
+        path: Path to strategy feedback JSON
+
+    Returns:
+        (passed, list of failure messages)
+    """
+    issues = []
+
+    # Load file
+    try:
+        with open(path) as f:
+            content = f.read()
+        if not content.strip():
+            issues.append("file_empty: Strategy feedback file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {path} does not exist")
+        return False, issues
+
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 1: Required top-level fields
+    for field in ["date", "generated_at", "daily_report_used", "strategy_used", "accounts"]:
+        if field not in data:
+            issues.append(f"missing_field: top-level '{field}' not found")
+
+    # Check 2: accounts is a dict with at least one account
+    accounts = data.get("accounts")
+    if not isinstance(accounts, dict):
+        issues.append("accounts_not_dict: 'accounts' is not a dict")
+        return False, issues
+    if len(accounts) == 0:
+        issues.append("accounts_empty: 'accounts' has no entries")
+        return False, issues
+
+    valid_statuses = {"running", "concluded", "insufficient_data"}
+    valid_confidences = {"low", "medium", "high"}
+
+    for account_key, section in accounts.items():
+        if not isinstance(section, dict):
+            issues.append(f"account_not_dict: accounts.{account_key} is not a dict")
+            continue
+
+        # Check 3: Required sub-sections
+        if not isinstance(section.get("category_performance"), list):
+            issues.append(f"missing_category_performance: accounts.{account_key}.category_performance not found or not an array")
+
+        ab_test = section.get("ab_test_evaluation")
+        if not isinstance(ab_test, dict):
+            issues.append(f"missing_ab_test_evaluation: accounts.{account_key}.ab_test_evaluation not found or not a dict")
+        else:
+            # Check 4: ab_test required fields
+            for field in ["variable", "status", "confidence"]:
+                if field not in ab_test:
+                    issues.append(f"ab_test_missing_field: accounts.{account_key}.ab_test_evaluation.{field} not found")
+
+            # Check 5: status value
+            status_val = ab_test.get("status")
+            if isinstance(status_val, str) and status_val not in valid_statuses:
+                issues.append(f"ab_test_invalid_status: accounts.{account_key}.ab_test_evaluation.status is '{status_val}', expected one of {valid_statuses}")
+
+            # Check 6: confidence value
+            conf_val = ab_test.get("confidence")
+            if isinstance(conf_val, str) and conf_val not in valid_confidences:
+                issues.append(f"ab_test_invalid_confidence: accounts.{account_key}.ab_test_evaluation.confidence is '{conf_val}', expected one of {valid_confidences}")
+
+        if not isinstance(section.get("posting_time_effectiveness"), list):
+            issues.append(f"missing_posting_time_effectiveness: accounts.{account_key}.posting_time_effectiveness not found or not an array")
+
+        if not isinstance(section.get("outbound_effectiveness"), dict):
+            issues.append(f"missing_outbound_effectiveness: accounts.{account_key}.outbound_effectiveness not found or not a dict")
+
+        # Check 7-8: recommended_adjustments
+        adjustments = section.get("recommended_adjustments")
+        if not isinstance(adjustments, list):
+            issues.append(f"missing_recommended_adjustments: accounts.{account_key}.recommended_adjustments not found or not an array")
+        else:
+            for i, adj in enumerate(adjustments):
+                if not isinstance(adj, dict):
+                    issues.append(f"adjustment_not_dict: accounts.{account_key}.recommended_adjustments[{i}] is not a dict")
+                    continue
+                for field in ["type", "confidence", "description", "rationale"]:
+                    if field not in adj:
+                        issues.append(f"adjustment_missing_field: accounts.{account_key}.recommended_adjustments[{i}].{field} not found")
+                adj_conf = adj.get("confidence")
+                if isinstance(adj_conf, str) and adj_conf not in valid_confidences:
+                    issues.append(f"adjustment_invalid_confidence: accounts.{account_key}.recommended_adjustments[{i}].confidence is '{adj_conf}', expected one of {valid_confidences}")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
+def validate_morning_briefing(path: str) -> tuple[bool, list[str]]:
+    """Validate morning_briefing_{date}.json from morning war room.
+
+    Checks:
+    1. Required top-level fields: date, generated_at, type, accounts, summary, telegram_message
+    2. type is "morning_briefing"
+    3. accounts is a dict with at least one account
+    4. summary is a non-empty string
+    5. telegram_message is a non-empty string
+
+    Args:
+        path: Path to morning briefing JSON
+
+    Returns:
+        (passed, list of failure messages)
+    """
+    issues = []
+
+    # Load file
+    try:
+        with open(path) as f:
+            content = f.read()
+        if not content.strip():
+            issues.append("file_empty: Morning briefing file is empty")
+            return False, issues
+    except FileNotFoundError:
+        issues.append(f"file_not_found: {path} does not exist")
+        return False, issues
+
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        issues.append(f"invalid_json: {e}")
+        return False, issues
+
+    # Check 1: Required top-level fields
+    for field in ["date", "generated_at", "type", "accounts", "summary", "telegram_message"]:
+        if field not in data:
+            issues.append(f"missing_field: top-level '{field}' not found")
+
+    # Check 2: type is "morning_briefing"
+    briefing_type = data.get("type")
+    if briefing_type != "morning_briefing":
+        issues.append(f"wrong_type: type is '{briefing_type}', expected 'morning_briefing'")
+
+    # Check 3: accounts is a dict with at least one account
+    accounts = data.get("accounts")
+    if not isinstance(accounts, dict):
+        issues.append("accounts_not_dict: 'accounts' is not a dict")
+    elif len(accounts) == 0:
+        issues.append("accounts_empty: 'accounts' has no entries")
+
+    # Check 4: summary is non-empty string
+    summary = data.get("summary")
+    if not isinstance(summary, str) or not summary.strip():
+        issues.append("summary_empty: 'summary' is missing or empty")
+
+    # Check 5: telegram_message is non-empty string
+    telegram_msg = data.get("telegram_message")
+    if not isinstance(telegram_msg, str) or not telegram_msg.strip():
+        issues.append("telegram_message_empty: 'telegram_message' is missing or empty")
+
+    passed = len(issues) == 0
+    return passed, issues
+
+
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits|analyst|analyst_metrics|analyst_report|scout_analysis|outbound_plan|image_references} <file1> [<file2>]", file=sys.stderr)
+        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits|analyst|analyst_metrics|analyst_report|scout_analysis|outbound_plan|image_references|strategy_feedback|morning_briefing} <file1> [<file2>]", file=sys.stderr)
         sys.exit(2)
 
     mode = sys.argv[1]
@@ -1150,12 +1323,24 @@ def main():
             sys.exit(2)
         passed, issues = validate_image_references(sys.argv[2])
 
+    elif mode == "strategy_feedback":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py strategy_feedback <strategy_feedback.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_strategy_feedback(sys.argv[2])
+
+    elif mode == "morning_briefing":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py morning_briefing <morning_briefing.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_morning_briefing(sys.argv[2])
+
     else:
-        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', 'publisher_rate_limits', 'analyst', 'analyst_metrics', 'analyst_report', 'scout_analysis', 'outbound_plan', or 'image_references'.", file=sys.stderr)
+        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', 'publisher_rate_limits', 'analyst', 'analyst_metrics', 'analyst_report', 'scout_analysis', 'outbound_plan', 'image_references', 'strategy_feedback', or 'morning_briefing'.", file=sys.stderr)
         sys.exit(2)
 
     # Determine total checks from mode
-    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6, "analyst_report": 8, "scout_analysis": 6, "outbound_plan": 7, "image_references": 6}
+    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6, "analyst_report": 8, "scout_analysis": 6, "outbound_plan": 7, "image_references": 6, "strategy_feedback": 8, "morning_briefing": 5}
     total_checks = check_counts.get(mode, len(issues) + 1)
 
     if passed:

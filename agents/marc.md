@@ -131,7 +131,17 @@ Pipeline flow: Scout → validate → Strategist → validate → cross-check �
 
 Full publishing playbook: see [marc_publishing.md](marc_publishing.md)
 
-Flow: Check approval → Publisher post → validate → Outbound engagement → Analyst collect → summaries → anomaly check → daily report
+Flow: Check approval → Publisher post → validate → Outbound engagement → publish report
+
+### War Rooms (PDCA loop)
+
+Full war room playbook: see [marc_warroom.md](marc_warroom.md)
+
+Two sessions per day:
+- **Morning (05:30 JST)**: Review yesterday's results, send operator briefing
+- **Evening (22:00 JST)**: Collect metrics, daily report, generate `strategy_feedback` for tomorrow's Strategist
+
+The evening war room produces `data/strategy_feedback_{YYYYMMDD}.json` — the bridge from Check to Act. Tomorrow's Strategist reads this file and adjusts content_mix, A/B tests, posting times, and outbound targets based on actual performance data.
 
 ### Schemas & Formats
 

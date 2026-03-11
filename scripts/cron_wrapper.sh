@@ -6,6 +6,8 @@
 #   ./scripts/cron_wrapper.sh pipeline
 #   ./scripts/cron_wrapper.sh outbound
 #   ./scripts/cron_wrapper.sh metrics
+#   ./scripts/cron_wrapper.sh morning_warroom
+#   ./scripts/cron_wrapper.sh evening_warroom
 #
 set -euo pipefail
 
@@ -51,7 +53,16 @@ run_task() {
             ;;
         metrics)
             # Collect metrics for posted tweets (run 1h+ after publishing)
+            # DEPRECATED: Use evening_warroom instead (metrics absorbed into evening war room)
             ./scripts/run_metrics.sh >> "$LOG_FILE" 2>&1
+            ;;
+        morning_warroom)
+            # Morning briefing: review yesterday's results, send operator briefing
+            ./scripts/run_warroom.sh morning >> "$LOG_FILE" 2>&1
+            ;;
+        evening_warroom)
+            # Evening war room: collect metrics, daily report, strategy feedback
+            ./scripts/run_warroom.sh evening >> "$LOG_FILE" 2>&1
             ;;
         *)
             echo "[$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S')] [CRON] [ERROR] Unknown task: ${TASK}" >> "$LOG_FILE"

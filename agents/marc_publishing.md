@@ -6,7 +6,7 @@ Today's date is provided in the invocation prompt as YYYY-MM-DD. For file paths,
 
 ## Goal
 
-Publish approved content to X, run outbound engagement, collect metrics, and deliver a daily performance report.
+Publish approved content to X and run outbound engagement. Metrics collection and daily reporting are handled by the evening war room (see [marc_warroom.md](marc_warroom.md)).
 
 ## Prerequisites
 
@@ -102,74 +102,11 @@ python3 scripts/generate_html_report.py publish_report \
 python3 scripts/telegram_send.py --document data/publish_report_{YYYYMMDD}.html "Publish Report — {YYYY-MM-DD}"
 ```
 
-### 5. Collect Metrics (Active Accounts Only)
-
-Check if at least 1 hour has passed since the latest `posted_at` timestamp. If not, log a warning and skip.
-
-For each **active** account:
-```bash
-python3 scripts/analyst.py collect --account {account}
-```
-
-### 6. Generate Metric Summaries (Active Accounts Only)
-
-For each **active** account:
-```bash
-python3 scripts/analyst.py summary --account {account}
-```
-
-Validate:
-```bash
-python3 scripts/validate.py analyst data/metrics_{YYYYMMDD}_{account}.json
-python3 scripts/validate.py analyst_metrics data/metrics_history.db
-```
-
-### 7. Daily Report (Analyst Intelligence Mode)
-
-Spawn an Analyst teammate with **model: sonnet**:
-
-```
-"You are Analyst. Read agents/analyst.md, section 'Intelligence Mode' for your instructions.
-Today's date: {YYYY-MM-DD}
-Raw metrics: data/metrics_{YYYYMMDD}_EN.json, data/metrics_{YYYYMMDD}_JP.json
-Strategy: data/strategy_{YYYYMMDD}.json
-Pipeline state: data/pipeline_state_{YYYYMMDD}.json
-Outbound log: data/outbound_log_{YYYYMMDD}.json
-Content plans: data/content_plan_{YYYYMMDD}_EN.json, data/content_plan_{YYYYMMDD}_JP.json
-Yesterday's report (if exists): data/daily_report_{prev_YYYYMMDD}.json
-Analyze all data, detect anomalies, evaluate A/B tests, and produce the daily report.
-Write output to: data/daily_report_{YYYYMMDD}.json
-Output ONLY valid JSON — no markdown code fences, no commentary."
-```
-
-Validate:
-```bash
-python3 scripts/validate.py analyst_report data/daily_report_{YYYYMMDD}.json
-```
-
-If validation fails: fall back to composing a basic Telegram message from the raw metrics summaries.
-
-### 8. Send Daily Report + Alerts
-
-1. Read `daily_report_{YYYYMMDD}.json`
-2. Send `telegram_report` field:
-   ```bash
-   python3 scripts/telegram_send.py "<telegram_report content>"
-   ```
-3. For each entry in `telegram_alerts`:
-   ```bash
-   python3 scripts/telegram_send.py "<alert content>"
-   ```
-4. Generate and send the HTML version for mobile-friendly review:
-   ```bash
-   python3 scripts/generate_html_report.py daily_report data/daily_report_{YYYYMMDD}.json
-   python3 scripts/telegram_send.py --document data/daily_report_{YYYYMMDD}.html "Daily Report — {YYYY-MM-DD}"
-   ```
+**Note**: Steps 5-8 (metrics collection, summaries, daily report, alerts) have moved to the evening war room.
+See [marc_warroom.md](marc_warroom.md) for the full metrics and reporting workflow.
 
 ## Error Recovery
 
 - Publisher post failure: log, continue to next account
 - Outbound agent failure: log error, skip outbound (do NOT fall back without safety reasoning)
-- Analyst failure: log as warning, skip metrics (can re-run later)
-- Daily report failure: compose basic report from raw metrics
 - Telegram send failure: log as warning, never fail the workflow

@@ -1,5 +1,10 @@
 #!/bin/bash
 # scripts/run_metrics.sh — Collect metrics for posted tweets and generate daily report
+#
+# DEPRECATED: Metrics collection and daily reporting are now handled by the evening war room.
+# Use: ./scripts/run_warroom.sh evening
+# This script is kept for manual re-runs only.
+#
 set -euo pipefail
 
 DATE=$(TZ=Asia/Tokyo date +%Y-%m-%d)

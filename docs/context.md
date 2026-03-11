@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 11, 2026 (Session 33: Outbound, Scheduling, Model Assignment, Cron Implementation)
+**Last updated**: March 12, 2026 (Session 34: PDCA War Rooms — Morning/Evening Briefings with Feedback Loop)
 
 ---
 
@@ -754,6 +754,48 @@ Publishing remains manual (requires human approval via Telegram).
 
 ---
 
+### Session 34 — PDCA War Rooms: Morning/Evening Briefings with Feedback Loop (March 12, 2026)
+
+**Goal**: Close the PDCA loop. The system did Plan (strategy/content) and Do (publish/outbound) but the Check→Act transition was broken — Analyst collected metrics but insights never fed back to Strategist. A/B tests ran indefinitely without auto-concluding. Category performance never adjusted content mix.
+
+**Solution**: Two autonomous War Room sessions per day:
+- **Morning War Room (05:30 JST)** — Marc reviews yesterday's results, sends operator briefing via Telegram before the pipeline runs
+- **Evening War Room (22:00 JST)** — Marc collects metrics, generates daily report, produces `strategy_feedback_{date}.json` for tomorrow's Strategist
+
+The key new artifact is `data/strategy_feedback_{YYYYMMDD}.json` — the missing bridge from Check to Act. It contains category performance rankings, A/B test evaluations (with auto-conclusion at high confidence), posting time effectiveness, outbound effectiveness, and recommended adjustments with confidence levels.
+
+**Strategist PDCA integration** (new Step 1.5): Strategist now reads yesterday's strategy feedback before generating today's strategy. Confidence-based rules control how aggressively adjustments are applied:
+- `high` confidence → apply directly (shift content_mix 5-10%, swap time slots, conclude A/B test)
+- `medium` confidence → apply conservatively (shift 2-5%)
+- `low` confidence → note in key_insights only, no changes
+- Core strategy constraints (grok_interactive minimums, zero EN hashtags) are inviolable
+
+**Cron schedule updated**: 4 daily jobs (was 3). Standalone `metrics` job removed (absorbed into evening war room).
+
+| Time (JST) | Task | Script |
+|---|---|---|
+| 05:30 | Morning War Room | `cron_wrapper.sh morning_warroom` |
+| 06:00 | Pipeline (Strategist reads feedback) | `cron_wrapper.sh pipeline` |
+| 14:00 | Outbound (likes, replies, follows) | `cron_wrapper.sh outbound` |
+| 22:00 | Evening War Room (metrics + feedback) | `cron_wrapper.sh evening_warroom` |
+
+**Publishing workflow trimmed**: Steps 5-8 (metrics, summaries, daily report, alerts) moved from `marc_publishing.md` to `marc_warroom.md`. Publishing is now steps 1-4 only (post → validate → outbound → publish report).
+
+**Files created** (2):
+- `agents/marc_warroom.md` — War room playbook (morning briefing + evening metrics/feedback workflow)
+- `scripts/run_warroom.sh` — War room entry point (accepts `morning` or `evening` arg)
+
+**Files modified** (7):
+- `agents/strategist.md` — Added Step 1.5 (read strategy_feedback, confidence-based adjustment rules)
+- `agents/marc.md` — Added War Rooms workflow reference
+- `agents/marc_publishing.md` — Removed steps 5-8 (moved to evening war room)
+- `scripts/cron_wrapper.sh` — Added `morning_warroom` and `evening_warroom` cases
+- `scripts/install_cron.sh` — New 4-job schedule, updated `show_schedule()`
+- `scripts/validate.py` — Added `validate_strategy_feedback()` (8 checks) and `validate_morning_briefing()` (5 checks)
+- `scripts/run_metrics.sh` — Added deprecation header (kept functional for manual re-runs)
+
+---
+
 ## 4. Decision Summary
 
 ### Framework-Level Decisions (Apply to All Future Projects)
@@ -1157,7 +1199,20 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 33 — Third outbound run, cron scheduling, per-agent model assignment (March 10-11, 2026). 12 likes + 1 follow succeeded, 4 replies failed (escalated). Cron confirmed over Claude Code scheduled tasks. Implemented 3 daily cron jobs (pipeline 06:00, outbound 14:00, metrics 22:00 JST). Per-agent model selection: Marc + Strategist on Opus, Scout/Creator/Outbound/Analyst on Sonnet.
+**Latest**: Session 34 — PDCA War Rooms (March 12, 2026). Closed the Check→Act gap: morning war room (05:30 JST) sends operator briefing, evening war room (22:00 JST) collects metrics and produces `strategy_feedback` that tomorrow's Strategist reads. Cron updated to 4 jobs. Metrics absorbed into evening war room.
+
+Session 34 files created (2 files):
+- `agents/marc_warroom.md` — War room playbook (morning briefing + evening metrics/feedback)
+- `scripts/run_warroom.sh` — War room entry point (`morning` or `evening` arg)
+
+Session 34 files modified (7 files):
+- `agents/strategist.md` — Step 1.5: read strategy_feedback with confidence-based rules
+- `agents/marc.md` — War Rooms workflow reference
+- `agents/marc_publishing.md` — Steps 5-8 moved to evening war room
+- `scripts/cron_wrapper.sh` — Added morning_warroom, evening_warroom cases
+- `scripts/install_cron.sh` — 4-job schedule (morning 05:30, pipeline 06:00, outbound 14:00, evening 22:00)
+- `scripts/validate.py` — Added strategy_feedback (8 checks) and morning_briefing (5 checks) validators
+- `scripts/run_metrics.sh` — Deprecation header (kept for manual re-runs)
 
 Session 33 files created (2 files):
 - `data/outbound_plan_20260310_EN.json` — Outbound plan with API-verified follow status
