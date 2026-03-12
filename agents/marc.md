@@ -104,15 +104,26 @@ When a teammate completes work:
 
 ### Reporting to Operator
 
-When delivering any JSON output to the operator, always generate an HTML report first for mobile-friendly review:
+When delivering any JSON output to the operator, use the **correct report type** for rich rendering. Fall back to `generic` only for report types without a dedicated renderer.
 
 ```bash
-# Generate HTML from any JSON result
+# Content plans — use content_plan mode (full structured image prompts with Copy JSON)
+python3 scripts/generate_html_report.py content_plan data/content_plan_{YYYYMMDD}_{account}.json
+
+# Daily reports
+python3 scripts/generate_html_report.py daily_report data/daily_report_{YYYYMMDD}.json
+
+# Pipeline content preview (both accounts combined)
+python3 scripts/generate_html_report.py content_preview data/content_plan_{YYYYMMDD}_EN.json --strategy data/strategy_{YYYYMMDD}.json
+
+# Fallback for other JSON (scout reports, strategy, etc.)
 python3 scripts/generate_html_report.py generic <json_path> --title "<Title>"
 
 # Send as document via Telegram
 python3 scripts/telegram_send.py --document <html_path> "<caption>"
 ```
+
+**IMPORTANT**: Never use `generic` for content plans — it truncates image prompts. Always use `content_plan` or `content_preview`.
 
 For plain text messages:
 ```bash

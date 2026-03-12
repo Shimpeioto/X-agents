@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 12, 2026 (Session 34: PDCA War Rooms — Morning/Evening Briefings with Feedback Loop)
+**Last updated**: March 12, 2026 (Session 34 continued: Telegram bot fix, cron execution, content plan HTML fix, Creator meruru_concept integration)
 
 ---
 
@@ -794,6 +794,31 @@ The key new artifact is `data/strategy_feedback_{YYYYMMDD}.json` — the missing
 - `scripts/validate.py` — Added `validate_strategy_feedback()` (8 checks) and `validate_morning_briefing()` (5 checks)
 - `scripts/run_metrics.sh` — Added deprecation header (kept functional for manual re-runs)
 
+**Session 34 continued — Telegram bot performance fix, cron execution, content plan HTML fix**:
+
+**Telegram bot timeout fix** (4 iterations):
+- Problem: `claude -p` in conversational layer took >120s, causing "Sorry, I took too long to respond" errors
+- Root cause: Running `claude -p` from the project directory loaded all CLAUDE.md files (massive context), making even simple responses take 120s+
+- Fix: Changed `cwd` to `$HOME` to avoid loading project context files. Added `--allowedTools ""` and `--no-session-persistence` flags. Response time dropped from 120s → 37s.
+- Also: truncated history (500 chars/msg, max 10 messages), added `--model sonnet` for faster responses
+
+**Cron execution**: All 4 daily jobs installed and executed successfully (morning war room, pipeline, outbound, evening war room).
+
+**Content plan HTML rendering fix**:
+- Problem: `content_plan_20260312_EN.html` showed truncated image prompts — operator couldn't verify character lock compliance
+- Root cause: Marc used `generic` report type which dumps JSON as flat tables, truncating image_prompt. A dedicated `content_plan` report type already existed with full structured rendering (meta, subject, outfit, pose, scene, camera, lighting, mood + Copy JSON buttons)
+- Fix: Updated `marc.md` and `marc_conversation.md` "Reporting to Operator" sections to list correct report types. Added warning: "Never use `generic` for content plans"
+
+**Creator + Meruru concept integration**:
+- Problem: `agents/creator.md` didn't reference `config/meruru_concept.md` — Creator relied only on `image_prompt_guide.md` for character info, missing voice rules, NG list, and content pillar definitions
+- Fix: Added `config/meruru_concept.md` as required input in Creator Step 5. Creator now reads character lock (physical traits), voice rules (casual lowercase, never starts with "I"), content pillars, and NG list (no body comparisons, no political opinions, etc.)
+
+**Files modified** (4):
+- `agents/marc.md` — Updated "Reporting to Operator" with correct report types (content_plan, daily_report, content_preview, generic)
+- `agents/marc_conversation.md` — Updated "Delivery Format" with correct report types
+- `agents/creator.md` — Added `config/meruru_concept.md` as required input (Step 5 + metadata)
+- `scripts/telegram_bot.py` — Performance fix: cwd=$HOME, --allowedTools "", --no-session-persistence, history truncation
+
 ---
 
 ## 4. Decision Summary
@@ -1199,20 +1224,23 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 34 — PDCA War Rooms (March 12, 2026). Closed the Check→Act gap: morning war room (05:30 JST) sends operator briefing, evening war room (22:00 JST) collects metrics and produces `strategy_feedback` that tomorrow's Strategist reads. Cron updated to 4 jobs. Metrics absorbed into evening war room.
+**Latest**: Session 34 — PDCA War Rooms + Fixes (March 12, 2026). Closed the Check→Act gap with morning/evening war rooms. Fixed Telegram bot timeout (cwd=$HOME, 120s→37s). Fixed content plan HTML rendering (generic→content_plan report type). Integrated meruru_concept.md into Creator agent. Cron 4-job schedule installed and executed.
 
 Session 34 files created (2 files):
 - `agents/marc_warroom.md` — War room playbook (morning briefing + evening metrics/feedback)
 - `scripts/run_warroom.sh` — War room entry point (`morning` or `evening` arg)
 
-Session 34 files modified (7 files):
+Session 34 files modified (11 files):
 - `agents/strategist.md` — Step 1.5: read strategy_feedback with confidence-based rules
-- `agents/marc.md` — War Rooms workflow reference
+- `agents/marc.md` — War Rooms workflow reference + correct report types for content plans
 - `agents/marc_publishing.md` — Steps 5-8 moved to evening war room
+- `agents/marc_conversation.md` — Updated delivery format with correct report types
+- `agents/creator.md` — Added meruru_concept.md as required input (character lock, voice, NG list)
 - `scripts/cron_wrapper.sh` — Added morning_warroom, evening_warroom cases
 - `scripts/install_cron.sh` — 4-job schedule (morning 05:30, pipeline 06:00, outbound 14:00, evening 22:00)
 - `scripts/validate.py` — Added strategy_feedback (8 checks) and morning_briefing (5 checks) validators
 - `scripts/run_metrics.sh` — Deprecation header (kept for manual re-runs)
+- `scripts/telegram_bot.py` — Performance fix: cwd=$HOME, --allowedTools "", history truncation
 
 Session 33 files created (2 files):
 - `data/outbound_plan_20260310_EN.json` — Outbound plan with API-verified follow status
