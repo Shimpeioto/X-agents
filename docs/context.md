@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 12, 2026 (Session 34 continued: Telegram bot fix, cron execution, content plan HTML fix, Creator meruru_concept integration)
+**Last updated**: March 12, 2026 (Session 35: War Room multi-agent discussion with cross-examination protocol)
 
 ---
 
@@ -819,6 +819,42 @@ The key new artifact is `data/strategy_feedback_{YYYYMMDD}.json` — the missing
 - `agents/creator.md` — Added `config/meruru_concept.md` as required input (Step 5 + metadata)
 - `scripts/telegram_bot.py` — Performance fix: cwd=$HOME, --allowedTools "", --no-session-persistence, history truncation
 
+### Session 35 — War Room Multi-Agent Discussion: Cross-Examination Protocol (March 12, 2026)
+
+**Goal**: Convert war rooms from solo-Marc operations (reads data alone, composes briefings) into real-time multi-agent discussions. The previous output was just facts — follower counts, posts published — with no strategic debate. The operator wanted agents to actively discuss, challenge each other, and surface disagreements.
+
+**Solution**: Both morning and evening war rooms now spawn a 3-agent discussion team:
+- **Marc (Opus)** — Moderator. Sets agenda, asks probing questions, synthesizes conclusions.
+- **Analyst (Sonnet)** — Data advocate. Presents numbers, challenges unsupported claims with data.
+- **Strategist (Opus)** — Strategy advocate. Proposes changes, defends decisions, admits failures.
+
+**3-Round Discussion Protocol**:
+1. **Round 1 — Independent Briefings** (parallel): Analyst prepares KPI report; Strategist prepares strategy assessment. Both work simultaneously.
+2. **Round 2 — Cross-Examination**: Marc sends each agent's findings to the other for challenge. Analyst asks "where's the data?" Strategist asks "is this noise or signal?"
+3. **Round 3 — Recommendations**: Both agents propose top 3 actionable recommendations. Marc merges them.
+
+**Early termination**: If Round 2 shows clear consensus, Marc skips Round 3 to save cost.
+
+**Fallback**: If a teammate fails to respond within 2 minutes, Marc falls back to solo briefing. Output still passes validation (`discussion` is a soft check).
+
+**Output schema enhanced**: Both `morning_briefing_{date}.json` and `strategy_feedback_{date}.json` now include an optional `discussion` section with:
+- `participants` — who was in the discussion
+- `rounds` — summary of each round's contributions/exchanges
+- `key_debates` — topics where agents disagreed, with positions and resolutions
+- `consensus_points` — what both agents agreed on
+- `unresolved` — disagreements flagged for operator
+
+**Telegram messages enhanced**: Now include "Discussion Highlights" section showing key agent quotes, debates, and consensus points.
+
+**Cost controls**: Max 3 rounds, each agent message < 1000 words, morning target < 10 min, evening < 15 min.
+
+**Files modified** (5):
+- `agents/marc_warroom.md` — Full rewrite: solo-Marc → 3-round discussion protocol with spawn prompts, cross-examination templates, and synthesis workflow
+- `agents/analyst.md` — Added "War Room Discussion Mode" section: DATA ADVOCATE role, behavior rules, prep checklists, cross-examination guidelines
+- `agents/strategist.md` — Added "War Room Discussion Mode" section: STRATEGY ADVOCATE role, signal vs noise rules, pivot willingness, prep checklists
+- `scripts/run_warroom.sh` — Updated both morning/evening `claude -p` prompts to explicitly require multi-agent discussion ("You MUST spawn Analyst and Strategist as teammates")
+- `scripts/validate.py` — Added soft-check `discussion` validation to both `validate_morning_briefing()` and `validate_strategy_feedback()` (warns but doesn't fail — backward compatible with solo-Marc fallback)
+
 ---
 
 ## 4. Decision Summary
@@ -1224,7 +1260,14 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 34 — PDCA War Rooms + Fixes (March 12, 2026). Closed the Check→Act gap with morning/evening war rooms. Fixed Telegram bot timeout (cwd=$HOME, 120s→37s). Fixed content plan HTML rendering (generic→content_plan report type). Integrated meruru_concept.md into Creator agent. Cron 4-job schedule installed and executed.
+**Latest**: Session 35 — War Room Multi-Agent Discussion (March 12, 2026). Converted solo-Marc war rooms into 3-agent discussions (Marc + Analyst + Strategist) with structured cross-examination protocol. Both morning and evening war rooms now spawn teammates for debate.
+
+Session 35 files modified (5 files):
+- `agents/marc_warroom.md` — Full rewrite: solo-Marc → 3-round discussion protocol
+- `agents/analyst.md` — Added War Room Discussion Mode (DATA ADVOCATE role)
+- `agents/strategist.md` — Added War Room Discussion Mode (STRATEGY ADVOCATE role)
+- `scripts/run_warroom.sh` — Updated prompts to require multi-agent discussion
+- `scripts/validate.py` — Added soft-check discussion validation to morning_briefing and strategy_feedback
 
 Session 34 files created (2 files):
 - `agents/marc_warroom.md` — War room playbook (morning briefing + evening metrics/feedback)

@@ -1168,6 +1168,23 @@ def validate_strategy_feedback(path: str) -> tuple[bool, list[str]]:
                 if isinstance(adj_conf, str) and adj_conf not in valid_confidences:
                     issues.append(f"adjustment_invalid_confidence: accounts.{account_key}.recommended_adjustments[{i}].confidence is '{adj_conf}', expected one of {valid_confidences}")
 
+    # Soft check: discussion section (warn only, does not cause failure)
+    warnings = []
+    discussion = data.get("discussion")
+    if discussion is not None:
+        for field in ["participants", "rounds", "consensus_points"]:
+            if field not in discussion:
+                warnings.append(f"discussion_missing_{field}: discussion.{field} not found (soft check)")
+        participants = discussion.get("participants", [])
+        if isinstance(participants, list) and len(participants) < 3:
+            warnings.append(f"discussion_insufficient_participants: expected 3 participants, found {len(participants)} (soft check)")
+    else:
+        warnings.append("discussion_absent: no discussion section — solo-Marc fallback? (soft check)")
+
+    # Print warnings but don't fail
+    for w in warnings:
+        print(f"  WARN: {w}")
+
     passed = len(issues) == 0
     return passed, issues
 
@@ -1179,8 +1196,11 @@ def validate_morning_briefing(path: str) -> tuple[bool, list[str]]:
     1. Required top-level fields: date, generated_at, type, accounts, summary, telegram_message
     2. type is "morning_briefing"
     3. accounts is a dict with at least one account
-    4. summary is a non-empty string
-    5. telegram_message is a non-empty string
+    4. Each account has kpi_dashboard, strategy_assessment, recommendations, action_items
+    5. strategy_assessment has overall_verdict, whats_working, whats_not_working
+    6. recommendations is a non-empty list
+    7. summary is a non-empty string
+    8. telegram_message is a non-empty string
 
     Args:
         path: Path to morning briefing JSON
@@ -1223,16 +1243,57 @@ def validate_morning_briefing(path: str) -> tuple[bool, list[str]]:
         issues.append("accounts_not_dict: 'accounts' is not a dict")
     elif len(accounts) == 0:
         issues.append("accounts_empty: 'accounts' has no entries")
+    else:
+        # Check 4: Each account has strategic sections
+        for acct_key, acct_data in accounts.items():
+            if not isinstance(acct_data, dict):
+                issues.append(f"account_{acct_key}_not_dict: account data is not a dict")
+                continue
+            for section in ["kpi_dashboard", "strategy_assessment", "recommendations", "action_items"]:
+                if section not in acct_data:
+                    issues.append(f"missing_section: {acct_key}.{section} not found")
 
-    # Check 4: summary is non-empty string
+            # Check 5: strategy_assessment has required sub-fields
+            assessment = acct_data.get("strategy_assessment", {})
+            if isinstance(assessment, dict):
+                for field in ["overall_verdict", "whats_working", "whats_not_working"]:
+                    if field not in assessment:
+                        issues.append(f"missing_assessment_field: {acct_key}.strategy_assessment.{field} not found")
+                verdict = assessment.get("overall_verdict", "")
+                if isinstance(verdict, str) and len(verdict) < 20:
+                    issues.append(f"shallow_verdict: {acct_key}.strategy_assessment.overall_verdict is too short ({len(verdict)} chars) — needs substantive analysis")
+
+            # Check 6: recommendations is a non-empty list
+            recs = acct_data.get("recommendations", [])
+            if not isinstance(recs, list) or len(recs) == 0:
+                issues.append(f"recommendations_empty: {acct_key}.recommendations is missing or empty")
+
+    # Check 7: summary is non-empty string
     summary = data.get("summary")
     if not isinstance(summary, str) or not summary.strip():
         issues.append("summary_empty: 'summary' is missing or empty")
 
-    # Check 5: telegram_message is non-empty string
+    # Check 8: telegram_message is non-empty string
     telegram_msg = data.get("telegram_message")
     if not isinstance(telegram_msg, str) or not telegram_msg.strip():
         issues.append("telegram_message_empty: 'telegram_message' is missing or empty")
+
+    # Soft check: discussion section (warn only, does not cause failure)
+    warnings = []
+    discussion = data.get("discussion")
+    if discussion is not None:
+        for field in ["participants", "rounds", "consensus_points"]:
+            if field not in discussion:
+                warnings.append(f"discussion_missing_{field}: discussion.{field} not found (soft check)")
+        participants = discussion.get("participants", [])
+        if isinstance(participants, list) and len(participants) < 3:
+            warnings.append(f"discussion_insufficient_participants: expected 3 participants, found {len(participants)} (soft check)")
+    else:
+        warnings.append("discussion_absent: no discussion section — solo-Marc fallback? (soft check)")
+
+    # Print warnings but don't fail
+    for w in warnings:
+        print(f"  WARN: {w}")
 
     passed = len(issues) == 0
     return passed, issues
@@ -1340,7 +1401,7 @@ def main():
         sys.exit(2)
 
     # Determine total checks from mode
-    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6, "analyst_report": 8, "scout_analysis": 6, "outbound_plan": 7, "image_references": 6, "strategy_feedback": 8, "morning_briefing": 5}
+    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6, "analyst_report": 8, "scout_analysis": 6, "outbound_plan": 7, "image_references": 6, "strategy_feedback": 8, "morning_briefing": 8}
     total_checks = check_counts.get(mode, len(issues) + 1)
 
     if passed:
