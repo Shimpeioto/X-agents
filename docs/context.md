@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 12, 2026 (Session 35: War Room multi-agent discussion with cross-examination protocol)
+**Last updated**: March 13, 2026 (Session 36: War Room subagent redesign, API replies disabled)
 
 ---
 
@@ -855,6 +855,41 @@ The key new artifact is `data/strategy_feedback_{YYYYMMDD}.json` — the missing
 - `scripts/run_warroom.sh` — Updated both morning/evening `claude -p` prompts to explicitly require multi-agent discussion ("You MUST spawn Analyst and Strategist as teammates")
 - `scripts/validate.py` — Added soft-check `discussion` validation to both `validate_morning_briefing()` and `validate_strategy_feedback()` (warns but doesn't fail — backward compatible with solo-Marc fallback)
 
+### Session 36 — War Room Subagent Redesign + API Replies Disabled (March 13, 2026)
+
+**Problem**: Session 35's Agent Teams implementation failed in practice. Both war room runs got stuck — teammates completed work and called SendMessage successfully, but Marc never received the messages. Root cause: Agent Teams async messaging doesn't reliably work in `claude -p` non-interactive mode. Marc's turn ended after spawning teammates, and the async message delivery never woke him up.
+
+**Investigation**: Traced through session transcripts. Both Analyst and Strategist completed their tasks and sent messages with `success: true`, but Marc's transcript ended at "Waiting for their briefings..." with no further entries. Consulted Agent Teams docs at https://code.claude.com/docs/en/agent-teams — confirmed that subagents (blocking Agent tool calls) are the correct pattern for this use case, not Agent Teams (designed for inter-agent peer communication).
+
+**Solution**: Replaced Agent Teams with **subagents** (Agent tool without `team_name`):
+- Each subagent call **blocks** until the agent completes and **returns results directly** to Marc
+- No async messaging, no `TeamCreate`, no `SendMessage`, no `shutdown_request`
+- Round 1: Spawn Analyst + Strategist as **parallel subagents** (`run_in_background: true`)
+- Rounds 2-3: Same pattern — parallel blocking subagent calls with cross-examination context
+- Marc has all results directly from return values — no message coordination needed
+
+**Result**: Evening war room ran successfully. Produced both `daily_report_20260313.json` and `strategy_feedback_20260313.json` with full 3-round discussion (3 participants, 3 rounds, 7 consensus points, 3 key debates). Both files passed validation.
+
+**Discussion quality highlights**:
+- Strategist self-graded D — strategy irrelevant for 4 consecutive days
+- Analyst challenged Strategist's proposed content mix change as "no data basis" — Strategist walked it back
+- Both converged on #1 priority: fix measurement gap before optimizing
+- Consensus: stop API replies (100% failure for 5 days), max likes to 30/day, retire A/B test
+
+**Operator decisions from war room output**:
+- **API replies disabled**: Set `max_replies_per_day: 0` for both EN and JP in `config/outbound_rules.json`. All API reply attempts have failed with 403 for 5 consecutive days (X spam prevention for new/low-follower accounts). Outbound now likes-only. Updated `config/global_rules.md`.
+
+**Key architectural lesson**: Agent Teams vs Subagents:
+- **Agent Teams** = peer-to-peer async messaging between teammates. Best for long-running collaborative work where agents need to talk to each other.
+- **Subagents** = blocking calls that return results to the caller. Best for focused tasks where agents report back to a coordinator (our war room pattern).
+- In `claude -p` mode, subagents are more reliable because they block and return — no dependency on async message delivery.
+
+**Files modified** (3):
+- `agents/marc_warroom.md` — Rewrite: Agent Teams → subagents. Added "How Subagents Work" section. All spawn prompts changed from teammate messaging to blocking Agent tool calls with `run_in_background: true` for parallelism.
+- `scripts/run_warroom.sh` — Removed `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. Updated prompts: "spawn as SUBAGENTS using the Agent tool" instead of "spawn as teammates". Explicit instructions to use blocking calls.
+- `config/outbound_rules.json` — `max_replies_per_day: 0` for both EN and JP
+- `config/global_rules.md` — Updated outbound limits: "0 replies" with reason (403 blocked for new accounts)
+
 ---
 
 ## 4. Decision Summary
@@ -867,7 +902,7 @@ The key new artifact is `data/strategy_feedback_{YYYYMMDD}.json` — the missing
 | D2 | VPS for always-on compute (Phase 6 deployment) | Cheaper than hardware ($12/mo Vultr Tokyo); only needed for autonomous operation |
 | D3 | Telegram Bot for human-agent communication | Simple (~50 lines Python), free, feature-rich; universal across any project |
 | D8 | CLAUDE.md for persistent behavioral memory | Native auto-loading; rules persist across sessions; no custom code needed |
-| D16 | Agent Teams for multi-agent coordination | Enables shared task lists, teammate messaging, and parallel execution — replacing isolated `claude -p` subagents |
+| D16 | Agent Teams for pipeline coordination; Subagents for war rooms | Agent Teams for long-running peer collaboration (pipeline). Subagents (blocking Agent calls) for coordinator patterns like war rooms — more reliable in `claude -p` mode (Session 36) |
 
 ### Demo-Specific Decisions (X Beauty Project)
 
@@ -1260,7 +1295,13 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 35 — War Room Multi-Agent Discussion (March 12, 2026). Converted solo-Marc war rooms into 3-agent discussions (Marc + Analyst + Strategist) with structured cross-examination protocol. Both morning and evening war rooms now spawn teammates for debate.
+**Latest**: Session 36 — War Room Subagent Redesign (March 13, 2026). Fixed Agent Teams failure by switching to blocking subagent calls. Evening war room ran successfully with 3-round discussion. API replies disabled (0 for both accounts).
+
+Session 36 files modified (4 files):
+- `agents/marc_warroom.md` — Rewrite: Agent Teams → subagents (blocking Agent tool calls)
+- `scripts/run_warroom.sh` — Removed Agent Teams env var, updated prompts for subagent pattern
+- `config/outbound_rules.json` — `max_replies_per_day: 0` for both EN and JP
+- `config/global_rules.md` — Updated outbound limits to reflect 0 replies
 
 Session 35 files modified (5 files):
 - `agents/marc_warroom.md` — Full rewrite: solo-Marc → 3-round discussion protocol

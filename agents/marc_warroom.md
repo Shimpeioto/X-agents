@@ -1,6 +1,6 @@
 # Marc — War Room Playbook
 
-Reference file for the PDCA war room sessions. War rooms are **multi-agent discussions** — Marc moderates a structured debate between Analyst and Strategist.
+Reference file for the PDCA war room sessions. War rooms are **multi-agent discussions** — Marc moderates a structured debate between Analyst and Strategist using **subagent calls**.
 
 Today's date is provided in the invocation prompt as YYYY-MM-DD. For file paths, strip dashes (YYYYMMDD).
 Yesterday's date: subtract 1 day for file lookups.
@@ -10,7 +10,7 @@ Yesterday's date: subtract 1 day for file lookups.
 Close the PDCA loop: Check yesterday's results (morning) and generate strategy feedback (evening) so that insights flow back into tomorrow's Strategist run.
 
 War rooms are NOT solo-Marc operations. They are **structured discussions** between three participants:
-- **Marc (COO)** — Moderator. Sets agenda, asks probing questions, synthesizes conclusions.
+- **Marc (COO)** — Moderator. Sets agenda, relays findings between agents, synthesizes conclusions.
 - **Analyst (Sonnet)** — Data advocate. Presents numbers, challenges unsupported claims.
 - **Strategist (Opus)** — Strategy advocate. Proposes changes, defends/revises strategy based on data.
 
@@ -20,37 +20,55 @@ Read `config/account_status.json`. Only report on and collect metrics for **acti
 
 ---
 
+## How Subagents Work
+
+Use the **Agent tool** (NOT Agent Teams) to spawn Analyst and Strategist. Each subagent call:
+- **Blocks** until the agent completes its work
+- **Returns** the agent's response directly to you (no messaging needed)
+- **Terminates** automatically when done (no shutdown needed)
+
+Key rules:
+- Use `subagent_type: "general-purpose"` for all spawns
+- Use `model: "sonnet"` for Analyst, `model: "opus"` for Strategist
+- For Round 1: spawn both with `run_in_background: true` so they work in parallel, then collect results
+- For Round 2+: can run in parallel too (they're independent)
+- Each subagent prompt must be **self-contained** — include all file paths and context the agent needs
+- Subagents can read files and run scripts directly — they have full tool access
+
+---
+
 ## Discussion Protocol (Both War Rooms)
 
 Every war room follows this 3-round protocol:
 
 ### Round 1 — Independent Briefings (parallel)
 
-Create 2 tasks and spawn both agents as teammates:
-- **Analyst task**: Read metrics/data files, prepare KPI report with numbers and interpretations
-- **Strategist task**: Read strategy files, prepare assessment (what's working, what's not)
+Spawn both agents as **parallel subagents** (both with `run_in_background: true`):
+- **Analyst subagent**: Read metrics/data files, return KPI report with numbers and interpretations
+- **Strategist subagent**: Read strategy files, return assessment (what's working, what's not)
 
-Both work in parallel and message Marc when ready.
+Wait for both to complete, then read their results.
 
-### Round 2 — Cross-Examination
+### Round 2 — Cross-Examination (parallel)
 
-Marc sends each agent's findings to the other for challenge:
-- Send Analyst's data summary to Strategist: "Do you agree with these numbers? Where does the data contradict your strategy assumptions?"
-- Send Strategist's assessment to Analyst: "Do the numbers support these claims? What data is missing?"
+Spawn two new subagents, each with the OTHER agent's Round 1 output:
+- **Strategist subagent**: receives Analyst's data → challenges/agrees with data interpretation
+- **Analyst subagent**: receives Strategist's assessment → validates/challenges with data
 
-Both respond with challenges, agreements, and counter-arguments.
+Both can run in parallel (they're independent).
 
 **Early termination**: If Round 2 shows clear consensus (both agents agree on all key points), Marc may skip Round 3 and proceed to synthesis.
 
-### Round 3 — Recommendations
+### Round 3 — Recommendations (parallel)
 
-Marc asks both: "Top 3 actionable recommendations for today/tomorrow"
-- **Analyst**: What metrics define success, what to watch, what data signals to act on
-- **Strategist**: What strategy changes to make, what Creator should prioritize, what experiments to run
+Spawn two new subagents, each with the full discussion context:
+- **Analyst subagent**: What metrics define success, what to watch, what data signals to act on
+- **Strategist subagent**: What strategy changes to make, what Creator should prioritize, what experiments to run
 
 ### Synthesis — Marc Compiles
 
-After all rounds:
+After all rounds, Marc directly has ALL results (returned from subagent calls). No messaging or file coordination needed.
+
 1. Extract consensus points (both agents agreed)
 2. Document key debates (they disagreed — capture both positions and resolution)
 3. Note unresolved disagreements (flagged for operator)
@@ -61,16 +79,16 @@ After all rounds:
 ### Cost Controls
 
 - Max 3 rounds (hard limit — no Round 4)
-- Each agent message < 1000 words
+- Each agent response < 1000 words
 - Marc can terminate early if consensus reached in Round 2
 - Morning target: < 10 min (before pipeline at 06:00)
 - Evening: up to 15 min
 
 ### Fallback
 
-If a teammate fails to respond or errors out:
-- Wait up to 2 minutes for the response
-- If still no response: fall back to solo-Marc briefing (read data yourself, compose output)
+If a subagent call fails or returns an error:
+- Log the error
+- Fall back to solo-Marc briefing (read data yourself, compose output)
 - Note in output: `"discussion": null` with a `"discussion_fallback_reason"` field
 - Solo-Marc output still passes validation (discussion is a soft check)
 
@@ -93,11 +111,11 @@ Read data files to prepare file paths for the agents. For each **active** accoun
 
 If `daily_report` does not exist: note this for the agents — they should work with whatever data is available.
 
-### 2. Spawn Discussion Team
+### 2. Round 1: Spawn Parallel Subagents
 
-Spawn **Analyst** (model: sonnet) and **Strategist** (model: opus) as teammates.
+Spawn **Analyst** (model: sonnet) and **Strategist** (model: opus) as parallel subagents.
 
-**Analyst spawn prompt:**
+**Analyst subagent prompt:**
 ```
 You are Analyst. Read agents/analyst.md for your full instructions, especially the 'War Room Discussion Mode' section.
 Today: {YYYY-MM-DD}. Yesterday: {YESTERDAY}.
@@ -105,7 +123,7 @@ Active accounts: {ACTIVE_ACCOUNTS}
 
 MORNING WAR ROOM — Round 1: Data Briefing
 
-Read these files and prepare a KPI briefing for the team:
+Read these files and prepare a KPI briefing:
 - data/daily_report_{yesterday_YYYYMMDD}.json
 - data/content_plan_{yesterday_YYYYMMDD}_{account}.json (for each active account)
 - data/outbound_log_{yesterday_YYYYMMDD}.json
@@ -120,10 +138,10 @@ Cover for each active account:
 5. Comparison against KPI targets from core_strategy.json
 
 Lead with numbers. Be specific. Flag anything that doesn't add up.
-Message Marc when your briefing is ready.
+Return your briefing as text (do NOT write to a file). Keep under 1000 words.
 ```
 
-**Strategist spawn prompt:**
+**Strategist subagent prompt:**
 ```
 You are Strategist. Read agents/strategist.md for your full instructions, especially the 'War Room Discussion Mode' section.
 Today: {YYYY-MM-DD}. Yesterday: {YESTERDAY}.
@@ -146,55 +164,80 @@ Cover for each active account:
 5. Competitor context — how do our numbers compare at this stage
 
 Lead with strategic reasoning, back with data. Be willing to admit failures.
-Message Marc when your assessment is ready.
+Return your assessment as text (do NOT write to a file). Keep under 1000 words.
 ```
 
-### 3. Run Cross-Examination (Round 2)
+Collect both results before proceeding.
 
-When both agents have sent their Round 1 messages:
+### 3. Round 2: Cross-Examination (parallel subagents)
 
-**To Strategist:**
+Spawn two new subagents, each receiving the OTHER agent's Round 1 output:
+
+**Strategist subagent (receives Analyst's data):**
 ```
+You are Strategist. Read agents/strategist.md, especially 'War Room Discussion Mode'.
+
 Round 2 — Cross-Examination. Here is Analyst's data briefing:
 
-{paste Analyst's Round 1 message}
+{paste Analyst's Round 1 result}
 
 Questions:
 - Do you agree with these numbers? Anything surprising?
 - Where does this data contradict or support your strategy?
 - What would you change based on these findings?
-Keep your response under 1000 words.
+Keep your response under 1000 words. Return as text.
 ```
 
-**To Analyst:**
+**Analyst subagent (receives Strategist's assessment):**
 ```
+You are Analyst. Read agents/analyst.md, especially 'War Room Discussion Mode'.
+
 Round 2 — Cross-Examination. Here is Strategist's assessment:
 
-{paste Strategist's Round 1 message}
+{paste Strategist's Round 1 result}
 
 Questions:
 - Do the numbers support these claims?
 - What data is missing from Strategist's analysis?
 - Where is the Strategist making assumptions without data backing?
-Keep your response under 1000 words.
+Keep your response under 1000 words. Return as text.
 ```
 
-### 4. Run Recommendations (Round 3)
+### 4. Round 3: Recommendations (parallel subagents, if needed)
 
 If consensus is NOT yet clear after Round 2:
 
-**To both agents (separate messages):**
+**Analyst subagent:**
 ```
-Round 3 — Final Recommendations.
+You are Analyst. Round 3 — Final Recommendations.
 
-Based on the discussion so far, give me your top 3 actionable recommendations for today.
+Discussion context so far:
+- Your Round 1 briefing: {summary}
+- Strategist's Round 1 assessment: {summary}
+- Cross-examination highlights: {key points}
+
+Give me your top 3 actionable recommendations for today.
 For each: what to do, why, and how to measure success.
-Keep your response under 500 words.
+Keep under 500 words. Return as text.
+```
+
+**Strategist subagent:**
+```
+You are Strategist. Round 3 — Final Recommendations.
+
+Discussion context so far:
+- Analyst's Round 1 briefing: {summary}
+- Your Round 1 assessment: {summary}
+- Cross-examination highlights: {key points}
+
+Give me your top 3 actionable recommendations for today.
+For each: what to do, why, and how to measure success.
+Keep under 500 words. Return as text.
 ```
 
 ### 5. Synthesize and Write Morning Briefing
 
-Compile all discussion rounds into the output. Build three sections from the discussion:
+Compile all subagent results into the output. Build three sections:
 
 #### Section A: KPI Dashboard (from Analyst's data)
 - Followers, delta, growth trend
@@ -325,10 +368,6 @@ python3 scripts/generate_html_report.py generic data/morning_briefing_{YYYYMMDD}
 python3 scripts/telegram_send.py --document data/morning_briefing_{YYYYMMDD}.html "Morning Briefing — {YYYY-MM-DD}"
 ```
 
-### 8. Shutdown Teammates
-
-Send shutdown requests to both Analyst and Strategist after synthesis is complete.
-
 ---
 
 ## Evening War Room (22:00 JST)
@@ -355,20 +394,20 @@ python3 scripts/validate.py analyst data/metrics_{YYYYMMDD}_{account}.json
 python3 scripts/validate.py analyst_metrics data/metrics_history.db
 ```
 
-### 2. Spawn Discussion Team
+### 2. Round 1: Spawn Parallel Subagents
 
-Spawn **Analyst** (model: sonnet) and **Strategist** (model: opus) as teammates.
+Spawn **Analyst** (model: sonnet) and **Strategist** (model: opus) as parallel subagents.
 
-**Analyst spawn prompt:**
+**Analyst subagent prompt:**
 ```
-You are Analyst. Read agents/analyst.md for your full instructions, especially the 'War Room Discussion Mode' section.
+You are Analyst. Read agents/analyst.md for your full instructions, especially the 'War Room Discussion Mode' section AND the 'Intelligence Mode' section.
 Today: {YYYY-MM-DD}.
 Active accounts: {ACTIVE_ACCOUNTS}
 
-EVENING WAR ROOM — Round 1: Post-Mortem Data
+EVENING WAR ROOM — Round 1: Daily Report + Post-Mortem Data
 
-FIRST: Produce the daily report. Read agents/analyst.md, section 'Intelligence Mode' for instructions.
-Write output to: data/daily_report_{YYYYMMDD}.json
+FIRST: Produce the daily report. Follow agents/analyst.md 'Intelligence Mode' instructions.
+Write the daily report to: data/daily_report_{YYYYMMDD}.json
 Output ONLY valid JSON — no markdown code fences, no commentary.
 
 Input files:
@@ -387,10 +426,10 @@ Cover for each active account:
 4. Outbound effectiveness — actions taken vs results
 5. Anomalies — anything unexpected
 
-Message Marc when BOTH the daily report file and your briefing are ready.
+Return your briefing as text after writing the daily report file. Keep under 1000 words.
 ```
 
-**Strategist spawn prompt:**
+**Strategist subagent prompt:**
 ```
 You are Strategist. Read agents/strategist.md for your full instructions, especially the 'War Room Discussion Mode' section.
 Today: {YYYY-MM-DD}.
@@ -413,64 +452,89 @@ Cover for each active account:
 5. Proposed adjustments for tomorrow
 
 Be willing to admit failures. Propose pivots where data supports them.
-Message Marc when your assessment is ready.
+Return your assessment as text (do NOT write to a file). Keep under 1000 words.
 ```
+
+Collect both results before proceeding.
 
 ### 3. Validate Daily Report
 
-After Analyst completes Round 1, validate the daily report:
+After Analyst subagent completes, validate the daily report:
 ```bash
 python3 scripts/validate.py analyst_report data/daily_report_{YYYYMMDD}.json
 ```
 
 If validation fails: fall back to composing a basic Telegram message from the raw metrics summaries.
 
-### 4. Run Cross-Examination (Round 2)
+### 4. Round 2: Cross-Examination (parallel subagents)
 
-Same protocol as morning — send each agent's findings to the other with challenge questions.
+Same protocol as morning — spawn two subagents, each receiving the OTHER agent's Round 1 output.
 
-**To Strategist:**
+**Strategist subagent (receives Analyst's post-mortem data):**
 ```
+You are Strategist. Read agents/strategist.md, especially 'War Room Discussion Mode'.
+
 Round 2 — Cross-Examination. Here is Analyst's post-mortem data:
 
-{paste Analyst's Round 1 message}
+{paste Analyst's Round 1 result}
 
 Questions:
 - Does this data validate or invalidate your strategy assumptions?
 - What should we change for tomorrow based on these results?
 - Any category performance surprises?
-Keep your response under 1000 words.
+Keep your response under 1000 words. Return as text.
 ```
 
-**To Analyst:**
+**Analyst subagent (receives Strategist's post-mortem):**
 ```
+You are Analyst. Read agents/analyst.md, especially 'War Room Discussion Mode'.
+
 Round 2 — Cross-Examination. Here is Strategist's post-mortem:
 
-{paste Strategist's Round 1 message}
+{paste Strategist's Round 1 result}
 
 Questions:
 - Are the Strategist's self-grades accurate? Where are they being too kind or too harsh?
 - Does the data support the proposed adjustments?
 - What metrics should we track differently tomorrow?
-Keep your response under 1000 words.
+Keep your response under 1000 words. Return as text.
 ```
 
-### 5. Run Recommendations (Round 3)
+### 5. Round 3: Recommendations (parallel subagents, if needed)
 
-**To both agents (separate messages):**
+**Analyst subagent:**
 ```
-Round 3 — Recommendations for Tomorrow.
+You are Analyst. Round 3 — Recommendations for Tomorrow.
 
-Based on today's results and this discussion:
+Discussion context:
+- Your post-mortem data: {summary}
+- Strategist's post-mortem: {summary}
+- Cross-examination highlights: {key points}
+
 1. Top 3 strategy adjustments for tomorrow (with confidence: high/medium/low)
 2. What should Creator prioritize?
 3. Any experiments to run?
-Keep your response under 500 words.
+Keep under 500 words. Return as text.
+```
+
+**Strategist subagent:**
+```
+You are Strategist. Round 3 — Recommendations for Tomorrow.
+
+Discussion context:
+- Analyst's post-mortem data: {summary}
+- Your post-mortem: {summary}
+- Cross-examination highlights: {key points}
+
+1. Top 3 strategy adjustments for tomorrow (with confidence: high/medium/low)
+2. What should Creator prioritize?
+3. Any experiments to run?
+Keep under 500 words. Return as text.
 ```
 
 ### 6. Synthesize and Generate Strategy Feedback
 
-Compile the discussion into strategy feedback. This is the PDCA bridge.
+Compile all subagent results into strategy feedback. This is the PDCA bridge.
 
 For EACH **active** account, extract from the discussion:
 
@@ -611,16 +675,12 @@ python3 scripts/validate.py strategy_feedback data/strategy_feedback_{YYYYMMDD}.
    python3 scripts/telegram_send.py --document data/daily_report_{YYYYMMDD}.html "Daily Report — {YYYY-MM-DD}"
    ```
 
-### 8. Shutdown Teammates
-
-Send shutdown requests to both Analyst and Strategist after synthesis is complete.
-
 ---
 
 ## Error Recovery
 
-- **Teammate spawn failure**: Fall back to solo-Marc briefing, set `"discussion": null`
-- **Teammate unresponsive**: Wait 2 min max, then proceed with available responses. Note partial discussion in output.
+- **Subagent spawn failure**: Fall back to solo-Marc briefing, set `"discussion": null`
+- **Subagent returns error or empty result**: Log and proceed with available responses. Note partial discussion in output.
 - **Missing daily report**: Compose minimal briefing from raw metrics, note unavailability
 - **Analyst collection failure**: Log as warning, proceed with strategy feedback using available data
 - **Strategy feedback generation failure**: Log error, skip feedback (tomorrow's Strategist will run without it)

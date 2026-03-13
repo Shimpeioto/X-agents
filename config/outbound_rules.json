@@ -3,14 +3,14 @@
   "safety_margins": {
     "EN": {
       "max_likes_per_day": 20,
-      "max_replies_per_day": 5,
-      "max_follows_per_day": 3,
+      "max_replies_per_day": 0,
+      "max_follows_per_day": 0,
       "max_targets_per_day": 4
     },
     "JP": {
       "max_likes_per_day": 15,
-      "max_replies_per_day": 5,
-      "max_follows_per_day": 2,
+      "max_replies_per_day": 0,
+      "max_follows_per_day": 0,
       "max_targets_per_day": 3
     }
   },
