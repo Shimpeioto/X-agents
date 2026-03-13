@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 14, 2026 (Session 37: Cron auth failure fix — setup-token for headless auth)
+**Last updated**: March 14, 2026 (Session 38: Auto-schedule slot publishing on approval)
 
 ---
 
@@ -914,6 +914,41 @@ Meanwhile, the same commands worked fine in interactive terminals.
 **No code changes required** — the shell scripts and telegram bot were correct all along. The fix was purely an auth credential setup.
 
 **Key lesson**: `claude -p` in cron requires `claude setup-token` for long-lived auth. The default OAuth flow (`claude auth login`) produces tokens that expire and need interactive refresh — unsuitable for headless/cron use. This is documented in Claude Code's headless mode docs.
+
+### Session 38 — Auto-Schedule Slot Publishing on Approval (March 14, 2026)
+
+**Problem**: When the operator approved all posts via `/approve EN`, then called `/publish EN`, all approved posts were published simultaneously because all `scheduled_time` values had already passed. The operator wanted each slot to publish automatically at its designated time — triggered by approval itself, not a separate `/publish` call.
+
+Previously, per-slot cron entries were manually added (March 13) to work around this:
+```
+0 6 13 3 * cd /path && python3 scripts/publisher.py post --account EN --slot 3 # X-AGENTS-PUBLISH-SLOT3
+```
+
+**Solution**: Automated per-slot cron scheduling triggered by `/approve`.
+
+**New file — `scripts/schedule_slots.py`**:
+- Accepts `--account EN [--date YYYYMMDD]`
+- Loads the content plan, finds approved posts with future `scheduled_time`
+- Removes all existing `# X-AGENTS-PUBLISH-SLOT` cron entries (clean slate)
+- Adds date-specific cron entries (`{min} {hour} {day} {month} *`) that fire once at each slot's UTC time
+- Handles both UTC and JST time formats (converts JST → UTC for cron)
+- Skips past times with a warning; prints summary for Telegram
+
+**Modified — `scripts/telegram_bot.py` (`cmd_approve`)**:
+- After saving approved content plan, calls `schedule_slots.py`
+- Operator sees both "3 post(s) approved" AND scheduled times in the Telegram response
+- Re-approval automatically clears old entries (clean slate logic)
+
+**Also in this session**:
+- Rescheduled March 13 slots 02-04 to March 14 (slot 01 was already posted, 02-04 were deleted after the simultaneous publish issue)
+- Created `content_plan_20260314_EN.json` with slots 02-04 as approved
+- Copied images from `media/posted/` back to `media/pending/` with updated `EN_20260314_*` IDs
+- Morning warroom cron at 05:30 failed again with "Not logged in" — confirmed this was a timing issue (the `setup-token` from Session 37 was applied around the same time; manual `run_warroom.sh morning` succeeded afterward)
+
+**Artifacts**:
+- `scripts/schedule_slots.py` — new helper
+- `scripts/telegram_bot.py` — modified `cmd_approve` (~line 452)
+- `data/content/content_plan_20260314_EN.json` — rescheduled slots 02-04
 
 ---
 

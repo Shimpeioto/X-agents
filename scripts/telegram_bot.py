@@ -449,6 +449,17 @@ async def cmd_approve(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         save_json(path, plan)
         results.append(f"{account}: {count} post(s) approved")
 
+        # Schedule per-slot cron entries for approved posts
+        if count > 0:
+            proc = subprocess.run(
+                ["python3", "scripts/schedule_slots.py", "--account", account],
+                capture_output=True, text=True, cwd=PROJECT,
+            )
+            if proc.returncode == 0 and proc.stdout.strip():
+                results.append(proc.stdout.strip())
+            elif proc.returncode != 0:
+                results.append(f"Failed to schedule slots: {proc.stderr.strip()}")
+
     await update.message.reply_text("\n".join(results))
 
 

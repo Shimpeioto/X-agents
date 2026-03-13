@@ -1,0 +1,252 @@
+{
+  "date": "2026-03-14",
+  "account": "EN",
+  "generated_at": "2026-03-13T18:30:00+09:00",
+  "strategy_used": "data/strategy_20260313.json",
+  "total_posts": 3,
+  "posts": [
+    {
+      "id": "EN_20260314_02",
+      "slot": 2,
+      "scheduled_time": "17:00 UTC",
+      "category": "engagement_questions",
+      "priority": "high",
+      "status": "approved",
+      "text": "ur type? 👀",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic fashion lifestyle photo of a young Japanese woman in her early 20s standing confidently at the edge of a sunlit rooftop terrace in a modern urban setting. She has long dark brown hair styled in a sleek low ponytail tied with a thin black ribbon, face fully framed. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs visible through her outfit. Light-medium neutral smooth skin, naturally expressive features. She wears a structured caramel-colored leather blazer over a simple thin white ribbed turtleneck, tailored black high-waisted straight-leg trousers, and pointed black ankle boots. A minimal gold watch on her left wrist. She stands in a relaxed but intentional contrapposto pose — right hip pushed out slightly, left foot stepped forward, both hands loosely in blazer pockets. She looks directly into the camera with a steady, quietly confident expression — chin level, lips lightly pressed together in a natural closed-lip expression, eyes holding strong contact. The rooftop has a clean concrete railing behind her with an open city skyline stretching in the distance, glass and steel buildings catching the late-afternoon light. Potted olive trees in matte white planters flank her on each side. Golden afternoon sunlight from the left side casts warm side lighting across her face and jacket, a sharp shadow falling to her right, and a warm ambient glow in the cityscape background. Caramel brown, crisp white, deep black, muted gold, sky grey color palette. Modern editorial lifestyle aesthetic. Third-person shot at eye-level, three-quarter body framing, vertical portrait composition centered with slight negative space above. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Sony A7R IV",
+          "lens": "85mm prime f/1.4",
+          "style": "modern editorial lifestyle"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown",
+            "style": "sleek low ponytail, black ribbon tie"
+          },
+          "body_type": "fitness hourglass, ample chest, toned core, wide hips, thick thighs",
+          "skin": "light-medium neutral, smooth, naturally expressive",
+          "expression": "steady quietly confident, chin level, lips lightly pressed, strong eye contact",
+          "makeup": "minimal natural brows, soft nude-pink lip, clean skin finish"
+        },
+        "outfit": {
+          "top": {
+            "type": "structured blazer over turtleneck",
+            "color": "caramel over white",
+            "material": "leather blazer, ribbed cotton turtleneck",
+            "fit": "structured, fitted"
+          },
+          "bottom": {
+            "type": "straight-leg trousers",
+            "color": "black",
+            "fit": "tailored high-waisted, straight"
+          },
+          "footwear": "pointed black ankle boots",
+          "accessories": [
+            "minimal gold watch"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "contrapposto, right hip slightly out, left foot forward",
+          "hands": "both hands loosely in blazer pockets",
+          "head_gaze": "facing camera directly, chin level, strong eye contact",
+          "vibe": "quiet confidence"
+        },
+        "scene": {
+          "location": "sunlit rooftop terrace, modern urban setting",
+          "time": "late afternoon",
+          "atmosphere": "clean, polished, open air",
+          "background": "clean concrete railing, city skyline in distance, potted olive trees in matte white planters"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "eye-level",
+          "framing": "three-quarter body, slight negative space above"
+        },
+        "lighting": {
+          "type": "golden afternoon sunlight from left side",
+          "effect": "warm side lighting on face and jacket, sharp shadow to right, warm ambient glow in cityscape"
+        },
+        "mood": {
+          "energy": "confident, bold",
+          "color_palette": "caramel brown, crisp white, deep black, muted gold, sky grey",
+          "aesthetic": "modern editorial lifestyle"
+        }
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B: editorial/lifestyle style — outdoor rooftop setting, no phone in hand, professional natural lighting. engagement_questions — short question under 30 chars designed to drive replies."
+    },
+    {
+      "id": "EN_20260314_03",
+      "slot": 3,
+      "scheduled_time": "21:00 UTC",
+      "category": "grok_interactive",
+      "priority": "high",
+      "status": "approved",
+      "text": "hey @grok change my outfit to something red",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a sleek modern bathroom with a wide frameless mirror above a white floating vanity. She has long dark brown hair loosely half-up — the top half clipped back in a tortoiseshell claw clip, the bottom half falling in soft natural waves past her shoulders. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs. Light-medium neutral smooth skin with natural texture. She wears a fitted dark sage green zip-up athletic set — a cropped zip-up hoodie with the zipper pulled halfway down, and matching high-waisted biker shorts. White no-show ankle socks visible at the bottom. She stands slightly angled away from the vanity, using its mirror to take the selfie — left hand holding the iPhone at shoulder height angled slightly down to capture full body, right hand on the countertop edge. She looks at her phone screen with a playful, just-rolled-out-of-bed casual expression — lips pressed in a relaxed smirk, one brow subtly raised. The bathroom has white subway tile walls, chrome fixtures, a white floating vanity with a small round succulent in a terracotta pot and a neatly folded off-white hand towel on the counter edge. Warm overhead recessed lighting gives a clean bright fill, with a secondary warm accent light from a small LED vanity light strip above the mirror adding soft warmth to her face. Clean white, sage green, warm chrome, off-white linen color palette. Casual athleisure morning routine aesthetic. Shot at eye-level in portrait orientation, mirror selfie POV, full body framing. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "raw iphone mirror selfie"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown",
+            "style": "half-up with tortoiseshell claw clip, bottom half in soft waves"
+          },
+          "body_type": "fitness hourglass, ample chest, toned core, wide hips, thick thighs",
+          "skin": "light-medium neutral, smooth, natural texture",
+          "expression": "playful casual, relaxed smirk, one brow subtly raised",
+          "makeup": "minimal, natural brows, bare-faced look, soft lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "cropped zip-up hoodie",
+            "color": "dark sage green",
+            "material": "athletic fabric",
+            "fit": "cropped, fitted",
+            "details": "zipper pulled halfway down"
+          },
+          "bottom": {
+            "type": "biker shorts",
+            "color": "dark sage green matching set",
+            "fit": "high-waisted, fitted"
+          },
+          "footwear": "white no-show ankle socks",
+          "accessories": [
+            "tortoiseshell claw clip",
+            "iPhone 15 Pro Max"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "slightly angled away from vanity, relaxed weight distribution",
+          "hands": "left hand holding iPhone at shoulder height angled slightly down, right hand on countertop edge",
+          "head_gaze": "looking at phone screen, playful expression",
+          "vibe": "casual playful energy"
+        },
+        "scene": {
+          "location": "modern bathroom with floating vanity",
+          "time": "morning",
+          "atmosphere": "clean, bright, casual",
+          "background": "white subway tile walls, chrome fixtures, white floating vanity, small succulent in terracotta pot, folded off-white hand towel"
+        },
+        "camera": {
+          "pov": "mirror selfie via bathroom vanity mirror",
+          "angle": "eye-level",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "warm overhead recessed lighting plus LED vanity strip above mirror",
+          "effect": "clean bright fill overall, soft warm accent light on face from vanity strip"
+        },
+        "mood": {
+          "energy": "playful, casual",
+          "color_palette": "clean white, dark sage green, warm chrome, off-white linen",
+          "aesthetic": "casual athleisure morning routine"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "Variant A: mirror selfie style — casual bathroom mirror shot, athleisure outfit, natural morning setting. grok_interactive post at US evening prime (21:00 UTC). Grok request asks to swap outfit to red — drives visual transformation engagement. Sage green outfit makes the color contrast with hypothetical red version striking."
+    },
+    {
+      "id": "EN_20260314_04",
+      "slot": 4,
+      "scheduled_time": "00:30 UTC",
+      "category": "self_quote_chains",
+      "priority": "medium",
+      "status": "approved",
+      "text": "which look tho 🖤",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic lifestyle photo of a young Japanese woman in her early 20s standing in a bright modern walk-in closet trying on an outfit. She has long jet-black hair styled in a sleek high bun with a few face-framing strands left loose at her temples. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs. Light-medium neutral smooth skin. She wears a fitted sleeveless charcoal grey ribbed midi dress with a slight cowl neckline that drapes softly over her chest, the fabric falling close to her curves down to mid-calf. Minimal thin gold chain anklet on her right ankle. She stands facing a rod of hanging clothes with her body turned three-quarters toward the camera, right arm extended reaching toward the clothes rack and lightly pulling at a hanger with two fingers, left arm hanging naturally at her side. She glances over her left shoulder directly at the camera with a slightly amused look — lips barely parted in a quiet smirk, eyes wide and direct. The closet has clean white painted walls, a double clothing rod filled with neatly organized garments sorted by color, open white shelving on the left side with folded knitwear and stacked shoe boxes, a full-length mirror on the far wall reflecting the back of her outfit, and a plush round cream ottoman in the center of the floor. Soft natural daylight from a frosted glass ceiling panel diffuses evenly throughout the space. Charcoal grey, clean white, muted warm cream, minimal gold color palette. Effortless closet styling aesthetic. Third-person shot at eye-level, three-quarter body framing, vertical portrait composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Canon EOS R5",
+          "lens": "35mm f/1.4",
+          "style": "lifestyle editorial"
+        },
+        "subject": {
+          "hair": {
+            "color": "jet black",
+            "style": "sleek high bun, loose face-framing strands at temples"
+          },
+          "body_type": "fitness hourglass, ample chest, toned core, wide hips, thick thighs",
+          "skin": "light-medium neutral, smooth",
+          "expression": "quietly amused, lips barely parted in a soft smirk, wide direct eyes",
+          "makeup": "minimal natural brows, soft nude lip, clean skin finish"
+        },
+        "outfit": {
+          "top": {
+            "type": "sleeveless ribbed midi dress",
+            "color": "charcoal grey",
+            "material": "ribbed fabric",
+            "fit": "fitted, cowl neckline",
+            "details": "drapes over chest, falls to mid-calf"
+          },
+          "accessories": [
+            "thin gold chain anklet on right ankle"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "three-quarter toward camera, slight lean toward clothing rack",
+          "hands": "right hand lightly pulling at a hanger, left arm hanging naturally at side",
+          "head_gaze": "glancing over left shoulder at camera",
+          "vibe": "effortless casual styling"
+        },
+        "scene": {
+          "location": "bright modern walk-in closet",
+          "time": "daytime",
+          "atmosphere": "clean, organized, aspirational",
+          "background": "white walls, double clothing rod with color-sorted garments, open white shelving with knitwear and shoe boxes, full-length mirror reflecting back of outfit, plush cream ottoman"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "eye-level",
+          "framing": "three-quarter body"
+        },
+        "lighting": {
+          "type": "soft natural daylight from frosted glass ceiling panel",
+          "effect": "even diffused illumination throughout closet, clean soft shadows"
+        },
+        "mood": {
+          "energy": "confident, casual",
+          "color_palette": "charcoal grey, clean white, muted warm cream, minimal gold",
+          "aesthetic": "effortless closet styling"
+        }
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B: editorial/lifestyle style — walk-in closet setting, no phone in hand, professional lifestyle lighting. self_quote_chains — chain_start. Will be quote-tweeted to an earlier post by Publisher. Short ambiguous question 'which look tho' invites audience to engage and compare looks."
+    }
+  ],
+  "reply_templates": [
+    "okay this is everything, love this",
+    "the vibe here is immaculate honestly",
+    "not me stopping mid-scroll for this 😭",
+    "this lighting tho... genuinely stunning",
+    "okay but why does this hit so hard",
+    "literally obsessed with this aesthetic",
+    "you have no business looking this good",
+    "the fit is perfect, love the color choice",
+    "this is giving everything it was supposed to give",
+    "can't stop looking at this, seriously"
+  ]
+}
