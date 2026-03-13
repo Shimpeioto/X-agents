@@ -1,0 +1,460 @@
+{
+  "meeting_type": "agent_meeting",
+  "date": "2026-03-09",
+  "generated_at": "2026-03-09T15:15:00+09:00",
+  "version": "corrected_v2",
+  "account": "EN",
+  "handle": "@meruru_tcbn",
+  "data_sources": {
+    "tweets": "X API v2 — batch fetch of all 13 tweets + individual verification of 6 posts",
+    "scout": "data/scout_compact_20260309.json (fresh run, 41 competitors)",
+    "user_profile": "X API v2 — resolve_user_id(@meruru_tcbn)"
+  },
+
+  "section_1_progress_audit": {
+    "title": "Progress Audit — @meruru_tcbn (EN Sub-Account)",
+    "account_snapshot": {
+      "handle": "@meruru_tcbn",
+      "display_name": "meruru",
+      "bio": "22 yo Japanese girl🌙 addicted SNS 📱",
+      "followers": 3,
+      "following": 25,
+      "total_tweet_count_api": 13,
+      "media_count": 4,
+      "likes_given": 20,
+      "listed_count": 0
+    },
+    "content_breakdown": {
+      "total_real_posts": 6,
+      "image_posts": 4,
+      "grok_quote_reposts": 2,
+      "outbound_replies": 7,
+      "total_api_tweet_count": 13,
+      "posts_detail": [
+        {
+          "tweet_id": "2029772027805233533",
+          "date": "2026-03-06",
+          "text": "(image only, no caption)",
+          "type": "image_post",
+          "has_media": true,
+          "impressions": 96,
+          "likes": 2,
+          "retweets": 2,
+          "replies": 1,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 5,
+          "engagement_rate_impression": 0.0521
+        },
+        {
+          "tweet_id": "2030124949277659480",
+          "date": "2026-03-07",
+          "text": "Hi",
+          "type": "image_post",
+          "has_media": true,
+          "impressions": 283,
+          "likes": 2,
+          "retweets": 2,
+          "replies": 0,
+          "quotes": 1,
+          "bookmarks": 0,
+          "total_engagement": 5,
+          "engagement_rate_impression": 0.0177
+        },
+        {
+          "tweet_id": "2030198335928463563",
+          "date": "2026-03-07",
+          "text": "hey @grok remove white",
+          "type": "grok_quote_repost",
+          "has_media": false,
+          "quoted_tweet": "2030124949277659480",
+          "impressions": 120,
+          "likes": 0,
+          "retweets": 0,
+          "replies": 1,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 1,
+          "engagement_rate_impression": 0.0083
+        },
+        {
+          "tweet_id": "2030482742711066764",
+          "date": "2026-03-08",
+          "text": "hey @grok are you hungry?",
+          "type": "grok_image_post",
+          "has_media": true,
+          "impressions": 104,
+          "likes": 2,
+          "retweets": 0,
+          "replies": 1,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 3,
+          "engagement_rate_impression": 0.0288
+        },
+        {
+          "tweet_id": "2030566404966211835",
+          "date": "2026-03-08",
+          "text": "Sleepy",
+          "type": "image_post",
+          "has_media": true,
+          "impressions": 133,
+          "likes": 3,
+          "retweets": 1,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 2,
+          "total_engagement": 6,
+          "engagement_rate_impression": 0.0451
+        },
+        {
+          "tweet_id": "2030834019429229026",
+          "date": "2026-03-09",
+          "text": "hey @grok remove white",
+          "type": "grok_quote_repost",
+          "has_media": false,
+          "quoted_tweet": "2030566404966211835",
+          "impressions": 40,
+          "likes": 0,
+          "retweets": 0,
+          "replies": 1,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 1,
+          "engagement_rate_impression": 0.025
+        }
+      ],
+      "outbound_replies_detail": [
+        {"tweet_id": "2026502600947020205", "date": "2026-02-25", "to": "@iammeruru", "text": "@iammeruru @grok So beauty"},
+        {"tweet_id": "2030130991269040587", "date": "2026-03-07", "to": "@xx10x14xx", "text": "@xx10x14xx 🤍"},
+        {"tweet_id": "2030863180310905130", "date": "2026-03-09", "to": "@IsabellaCruz_47", "text": "the vibes here are immaculate"},
+        {"tweet_id": "2030863659984130086", "date": "2026-03-09", "to": "@Angelwithcakee", "text": "the glow is unreal in this one ✨"},
+        {"tweet_id": "2030863924468617451", "date": "2026-03-09", "to": "@yogana_19", "text": "@grok ❤️"},
+        {"tweet_id": "2030864294561386954", "date": "2026-03-09", "to": "@IvoryLane_plus", "text": "So beauty ♡"},
+        {"tweet_id": "2030864414929531014", "date": "2026-03-09", "to": "@HannaJonso", "text": "genuinely stunning work"}
+      ]
+    },
+    "aggregate_metrics": {
+      "total_posts": 6,
+      "total_impressions": 776,
+      "total_likes": 9,
+      "total_retweets": 5,
+      "total_replies": 4,
+      "total_quotes": 1,
+      "total_bookmarks": 2,
+      "total_engagement": 21,
+      "avg_impressions_per_post": 129.3,
+      "avg_likes_per_post": 1.5,
+      "avg_engagement_per_post": 3.5,
+      "impression_based_engagement_rate": 0.0271,
+      "image_posts_metrics": {
+        "count": 4,
+        "total_impressions": 616,
+        "total_engagement": 19,
+        "avg_impressions": 154.0,
+        "avg_engagement": 4.75,
+        "engagement_rate": 0.0308
+      },
+      "grok_quote_reposts_metrics": {
+        "count": 2,
+        "total_impressions": 160,
+        "total_engagement": 2,
+        "avg_impressions": 80.0,
+        "avg_engagement": 1.0,
+        "engagement_rate": 0.0125
+      },
+      "best_performing_post": {
+        "tweet_id": "2030566404966211835",
+        "text": "Sleepy",
+        "total_engagement": 6,
+        "impressions": 133,
+        "engagement_rate": 0.0451,
+        "reason": "Highest engagement (3 likes, 1 RT, 2 bookmarks). Short one-word caption + quality image. Bookmarks signal save-worthy content."
+      },
+      "highest_reach_post": {
+        "tweet_id": "2030124949277659480",
+        "text": "Hi",
+        "impressions": 283,
+        "total_engagement": 5,
+        "engagement_rate": 0.0177,
+        "reason": "Highest impressions by far (283 vs avg 129). Ultra-short 2-char caption. Got 1 quote retweet which amplified reach."
+      }
+    },
+    "posting_consistency": {
+      "first_activity": "2026-02-25 (1 outbound reply only)",
+      "first_real_post": "2026-03-06",
+      "last_post": "2026-03-09",
+      "days_since_account_active": 12,
+      "days_actually_posting": 4,
+      "gap_feb25_to_mar06": "9 days with zero posts after account creation",
+      "recent_streak": "4 consecutive days posting (Mar 6-9)",
+      "avg_posts_per_day_overall": 0.5,
+      "avg_posts_per_day_since_mar06": 1.5,
+      "assessment": "IMPROVING — 9-day initial gap was costly, but 4-day streak at 1.5 posts/day shows momentum. Need to reach 2 posts/day consistently."
+    }
+  },
+
+  "section_2_competitor_benchmark": {
+    "title": "Competitor Benchmark — Fresh Data (41 Competitors Tracked)",
+    "scout_run": "2026-03-09T15:08:58+09:00",
+    "en_market_overview": {
+      "competitors_tracked": 26,
+      "avg_followers": 141055,
+      "median_followers_approx": 50000,
+      "avg_engagement_rate": 0.0371,
+      "avg_posting_frequency": 4.6
+    },
+    "meruru_position": {
+      "followers_rank": "Last (3 followers vs field avg 141K)",
+      "engagement_rate_comparison": "2.71% impression-based ER — competitive quality when content is seen",
+      "posting_frequency": "0.5 posts/day vs field avg 4.6 — 9x below average",
+      "content_volume": "6 total posts vs top performers with 50-300+ posts"
+    },
+    "role_models": [
+      {
+        "handle": "@sessypuuh",
+        "followers": 7639,
+        "total_posts": 51,
+        "engagement_rate": 0.3803,
+        "posting_freq": 0.7,
+        "top_post_likes": 5413,
+        "lesson": "Quality-first growth. 51 posts → 7.6K followers → 38% ER. Zero hashtags. One viral image can change everything."
+      },
+      {
+        "handle": "@Angelwithcakee",
+        "followers": 35139,
+        "total_posts": 56,
+        "engagement_rate": 0.0448,
+        "posting_freq": 1.2,
+        "lesson": "35K from 56 posts. Short captions, zero hashtags, consistently stunning images. Our direct blueprint."
+      },
+      {
+        "handle": "@yuumispm",
+        "followers": 12025,
+        "engagement_rate": 0.1754,
+        "posting_freq": 1.0,
+        "lesson": "12K followers with just 1 post/day. Consistency + quality at moderate frequency works."
+      },
+      {
+        "handle": "@IsabellaCruz_47",
+        "followers": 91682,
+        "engagement_rate": 0.0582,
+        "posting_freq": 0.3,
+        "lesson": "91K followers, posts rarely (0.3/day). Quality so high that low frequency still works at scale."
+      }
+    ],
+    "key_competitive_patterns": [
+      "92.7% of top EN performers use ZERO hashtags",
+      "Ultra-short captions (<30 chars) correlate with 12x more likes in this niche",
+      "Top 5 performers average 1.0 posts/day — NOT 5-10/day",
+      "Grok interactive is an emerging engagement format among top performers",
+      "First 50 posts are the trust-building phase — X algorithm needs signal history"
+    ]
+  },
+
+  "section_3_gap_analysis": {
+    "title": "Gap Analysis — Honest Assessment",
+    "is_progress_being_made": {
+      "verdict": "YES, slow but real",
+      "evidence": [
+        "Content quality is proven: 2.71% impression ER is competitive",
+        "Bookmarks on 'Sleepy' post = people saving our content",
+        "283 impressions on 'Hi' proves reach can happen",
+        "4-day posting streak shows improving discipline",
+        "Outbound engagement started (7 replies, 20 likes given)"
+      ],
+      "concern": "Growth is bottlenecked by reach, not quality. 3 followers after 12 days means nobody sees the content."
+    },
+    "strengths": [
+      {
+        "strength": "Content quality competitive at 2.71% ER",
+        "evidence": "'Sleepy' (4.51% ER), image-only post (5.21% ER). When people see the content, they engage.",
+        "implication": "Do NOT change the creative approach. It works."
+      },
+      {
+        "strength": "Zero-hashtag strategy is correct",
+        "evidence": "All 6 posts zero hashtags, matching 92.7% of top competitors",
+        "implication": "Maintain this — it signals authenticity"
+      },
+      {
+        "strength": "Short captions work",
+        "evidence": "'Hi' (2 chars, 283 imp) and 'Sleepy' (6 chars, best engagement) validate short caption approach",
+        "implication": "Keep captions under 30 chars"
+      }
+    ],
+    "weaknesses": [
+      {
+        "weakness": "CRITICAL: 3 followers after 12 days",
+        "root_cause": "Insufficient posting volume + 9-day gap + new account cold start",
+        "severity": "HIGH",
+        "fix": "Increase to 2 posts/day, max out outbound engagement (30 likes/day, 5 follows/day)"
+      },
+      {
+        "weakness": "Only 6 posts total (need 50+ for algorithm trust)",
+        "root_cause": "Late start and sub-daily posting",
+        "severity": "HIGH",
+        "fix": "Consistent 2 posts/day = 50+ posts in 25 days"
+      },
+      {
+        "weakness": "Grok quote reposts get zero likes",
+        "root_cause": "Repetitive 'hey @grok remove white' — same request twice, adds no value",
+        "severity": "MEDIUM",
+        "fix": "Diversify Grok requests: '.@grok put me in a red dress', '.@grok anime style', '.@grok change background to Tokyo street'"
+      },
+      {
+        "weakness": "API reply restrictions (403 errors)",
+        "root_cause": "X spam prevention for new/low-follower accounts",
+        "severity": "MEDIUM",
+        "fix": "Manual replies via operator device until account gains standing (est. 50+ followers)"
+      },
+      {
+        "weakness": "Low outbound volume so far",
+        "root_cause": "20 likes given, 7 replies — well below daily limits",
+        "severity": "MEDIUM",
+        "fix": "Saturate daily limits: 30 likes, 5 follows every single day"
+      }
+    ]
+  },
+
+  "section_4_improvement_plan": {
+    "title": "Improvement Plan — Prioritized Actions",
+    "phase_1_this_week": {
+      "label": "Foundation — Volume & Consistency (Mar 10-16)",
+      "actions": [
+        {
+          "action": "Post 2 quality image posts per day without exception",
+          "priority": "CRITICAL",
+          "details": "Slot 1: 13:00 UTC, Slot 2: 21:00 UTC. Ultra-short captions (<30 chars). High-quality AI images.",
+          "target": "14 new posts this week → 20 total"
+        },
+        {
+          "action": "Saturate daily likes budget (30/day)",
+          "priority": "CRITICAL",
+          "details": "Like posts from competitors in our niche. This generates notification-based discovery. 30/day × 7 = 210 notifications sent.",
+          "target": "210 likes this week"
+        },
+        {
+          "action": "Follow 5 accounts per day",
+          "priority": "HIGH",
+          "details": "Target engaged followers of mid-size competitors (5K-20K). Follow → they check profile → see quality content → some follow back.",
+          "target": "35 follows this week"
+        },
+        {
+          "action": "Daily pipeline runs without gaps",
+          "priority": "HIGH",
+          "details": "Run Scout → Strategist → Creator → Publisher daily. No missed days.",
+          "target": "7/7 pipeline completions"
+        },
+        {
+          "action": "Diversify Grok interactive requests",
+          "priority": "MEDIUM",
+          "details": "Each Grok post should have a unique, creative request. Examples: '.@grok put me in a kimono', '.@grok make this cyberpunk'.",
+          "target": "2-3 unique Grok posts this week"
+        }
+      ]
+    },
+    "phase_2_week_2": {
+      "label": "Engagement Pillars — Content Mix (Mar 17-23)",
+      "actions": [
+        "Introduce engagement_questions pillar: 'Am I ur type 👀', 'Rate me 1-10', 'Front or back?'",
+        "Start self_quote_chains on best-performing posts to amplify reach",
+        "Manual replies on high-value competitor posts (5-10/day via phone)",
+        "Analyze Week 1 data: which post types got most impressions?"
+      ]
+    },
+    "phase_3_month_1": {
+      "label": "Growth Acceleration (Mar 24-Apr 6)",
+      "actions": [
+        "Aim for first viral moment (stunning image + provocative question)",
+        "Iterate on content based on data: double down on what works",
+        "Build engagement loops: reply to every comment, use self-quotes",
+        "Consider cross-platform seeding if growth stalls"
+      ]
+    }
+  },
+
+  "section_5_updated_strategy": {
+    "title": "Updated Strategy for @meruru_tcbn",
+    "content_mix": {
+      "engagement_questions": {"pct": 40, "description": "Short provocative questions with stunning images. 'Am I ur type 👀', 'you mind?'"},
+      "image_showcase": {"pct": 25, "description": "Let exceptional images speak with 1-2 word captions. 'Sleepy', 'Hi', 'mood'"},
+      "grok_interactive": {"pct": 20, "description": "Creative Grok requests. VARY the requests — no repeats."},
+      "self_quote_chains": {"pct": 15, "description": "Quote-tweet own top posts to create content chains and extend reach."}
+    },
+    "posting_schedule": {
+      "posts_per_day": 2,
+      "slot_1": {"time": "13:00 UTC", "priority": "high"},
+      "slot_2": {"time": "21:00 UTC", "priority": "high"}
+    },
+    "caption_rules": "Under 30 chars. Casual lowercase, playful, confident. Max 1-2 emoji. No hashtags ever.",
+    "hashtag_strategy": "ZERO — matches 92.7% of top EN competitors",
+    "outbound_daily": {
+      "likes": 30,
+      "follows": 5,
+      "replies": "10 (manual via operator when API 403)"
+    }
+  },
+
+  "section_6_acceleration": {
+    "title": "How to Achieve Goals Faster",
+    "core_insight": "Content quality is NOT the problem (2.71% ER, bookmarks prove it). The bottleneck is REACH. More content + more outbound = faster growth.",
+    "high_impact_tactics": [
+      {
+        "tactic": "Never miss a posting day",
+        "impact": "HIGH",
+        "effort": "LOW",
+        "why": "Consistency is the #1 factor for X algorithm trust. The 9-day gap was the biggest setback."
+      },
+      {
+        "tactic": "Saturate likes budget (30/day = 900 notifications/month)",
+        "impact": "HIGH",
+        "effort": "LOW",
+        "why": "Each like sends a notification to the recipient. At 30/day, that's 900 people seeing our handle monthly."
+      },
+      {
+        "tactic": "One viral-attempt post daily (stunning image + provocative question)",
+        "impact": "VERY HIGH if it hits",
+        "effort": "LOW",
+        "why": "@sessypuuh got 5,413 likes on a single post with 7.6K followers. One viral post can 10x our audience."
+      },
+      {
+        "tactic": "Manual replies to top competitors' posts (5-10/day via phone)",
+        "impact": "HIGH",
+        "effort": "MEDIUM",
+        "why": "Until API 403 is lifted. Replies on popular posts get seen by thousands."
+      },
+      {
+        "tactic": "Self-quote chains on best performers",
+        "impact": "MEDIUM",
+        "effort": "LOW",
+        "why": "Quote-tweeting 'Sleepy' with 'still sleepy tbh' extends its life and reaches new timelines."
+      }
+    ],
+    "realistic_growth_timeline": {
+      "end_of_week_1": {"followers": "15-25", "total_posts": "20+", "condition": "If 2 posts/day + full outbound"},
+      "end_of_week_2": {"followers": "30-60", "total_posts": "35+", "condition": "If engagement pillars added + consistent"},
+      "end_of_month_1": {"followers": "50-150", "total_posts": "60+", "condition": "If no gaps + outbound saturated"},
+      "end_of_month_2": {"followers": "200-500", "total_posts": "120+", "condition": "Steady growth, possibly accelerating"},
+      "end_of_month_3": {"followers": "500-2000+", "total_posts": "180+", "condition": "Compounding. Higher with viral hit."}
+    },
+    "biggest_risk": "Inconsistency. If posting stops for 3-4 days, early momentum resets. Daily pipeline execution is non-negotiable.",
+    "biggest_opportunity": "One viral image post. Our content quality is already there — we just need it to reach the right timeline at the right time."
+  },
+
+  "section_7_action_items": {
+    "title": "Immediate Action Items for Operator",
+    "today": [
+      "Approve today's pipeline content when it arrives",
+      "Post any manual replies that got 403 from API (URLs provided in outbound log)"
+    ],
+    "this_week": [
+      "Run daily pipeline every day (no exceptions)",
+      "Generate 2 images per day (4 image posts + diversified Grok posts)",
+      "Review weekly metrics on Mar 16"
+    ],
+    "decisions_needed": [
+      "Should we post 3/day instead of 2/day to accelerate? (Higher volume = faster algorithm trust, but need image production capacity)",
+      "Is manual replies via phone feasible at 5-10/day?"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "task_id": "20260311_011",
+  "description": "Update scripts/publisher.py to enforce schedule-aware posting. When 'post --account EN' is run without --slot, it should only publish posts whose scheduled_time has passed (comparing against current time in the appropriate timezone — UTC for EN, JST for JP). Posts whose scheduled_time is in the future should be skipped with a log message. The --slot flag should bypass this check (explicit slot = explicit intent). Also add a --force flag to bypass schedule enforcement if needed. Read the current publisher.py first to understand the posting flow.",
+  "task_type": "custom",
+  "agents_planned": [],
+  "notes": "This fixes the issue where all 4 approved posts were published simultaneously instead of respecting their scheduled times. The posting_schedule times are in the content plan JSON under each post's scheduled_time field (e.g. '13:00 UTC', '17:00 UTC'). Keep the implementation simple — parse the time string, compare to now, skip if future.",
+  "created_at": "2026-03-11T22:33:02.318191+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-11T22:34:36.825429+09:00",
+  "exit_code": 0
+}

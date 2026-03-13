@@ -1,0 +1,13 @@
+{
+  "task_id": "20260313_006",
+  "description": "Publish EN slot 2 from content plan 2026-03-12. Run: python3 scripts/publisher.py post --account EN --slot 2. Report back the result (tweet ID, URL, or any errors).",
+  "task_type": "publishing",
+  "agents_planned": [
+    "publisher"
+  ],
+  "notes": "Operator requested single slot publish. Content plan: data/content_plan_20260312_EN.json, slot 2.",
+  "created_at": "2026-03-13T14:47:24.259835+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-13T14:48:19.196363+09:00",
+  "exit_code": 0
+}

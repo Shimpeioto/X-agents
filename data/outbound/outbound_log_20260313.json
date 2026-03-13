@@ -1,0 +1,275 @@
+{
+  "date": "2026-03-13",
+  "actions": [
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2030766679630762487",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:01:45.762184+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2028541769420292268",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:03:45.045637+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2032238206574608398",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:04:19.562218+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2031889659702268192",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:04:58.780376+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2031538093308682618",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:06:12.567332+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2031143493490311576",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:08:01.281731+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2030753423189234130",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:08:55.859321+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2032341447320481797",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:10:05.463667+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2032195810616590651",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:11:55.321487+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2032057239498891748",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:12:50.086148+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2031740882706170088",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:14:07.863615+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2031703603795104025",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:15:24.838989+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "2032251795817607324",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:16:08.944238+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "2032248366844035255",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:17:15.607942+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "2032084535702323448",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:17:54.834384+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "2031904004176036145",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:19:22.234500+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "2031896359624913311",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:20:27.726063+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2030766679630762487",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:21:39.461168+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2028541769420292268",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:23:30.859558+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2032238206574608398",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:25:00.548342+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2031889659702268192",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:26:03.991696+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2031538093308682618",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:27:34.426947+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2031143493490311576",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:29:27.426376+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@marylivbrown",
+      "tweet_id": "2030753423189234130",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:31:02.253778+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2032341447320481797",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:32:37.862267+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2032195810616590651",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:34:11.324292+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2032057239498891748",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:34:50.244805+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2031740882706170088",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:35:23.929514+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumi005",
+      "tweet_id": "2031703603795104025",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:36:23.061341+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Ava_starz",
+      "tweet_id": "2032251795817607324",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-13T19:38:18.693978+09:00",
+      "dry_run": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "task_id": "20260311_002",
+  "description": "THE FIX — Comprehensive strategic overhaul session. Phase 1: Pull all performance data (posts published, engagement, follower growth for @meruru_tcbn since launch). Run Scout for fresh competitive intel. Phase 2: Deep strategic review with Strategist covering: (a) Honest progress audit — what's working, what isn't, why growth is stalling; (b) Integration of the 0→1000 framework from the Japanese article (設計×心理×アルゴリズム — persona design, story arc, profile optimization, dwell time, content volume 30-50 posts, engagement quality); (c) Gap analysis vs top competitors; (d) Outbound effectiveness review. Phase 3: Produce THE FIX — revised strategy with immediate changes: updated persona/character design for @meruru_tcbn, profile bio rewrite, content volume ramp-up plan, engagement quality upgrade (personalized replies vs templates), revised daily action plan with measurable weekly targets, path to 1000 followers with milestones. Phase 4: Generate meeting minutes as HTML report covering the full discussion and action items. Output: data/strategic_review_20260311.json + HTML report sent via Telegram. Note: JP account is suspended, focus on EN (@meruru_tcbn) only. Reference data files: data/scout_compact_20260311.json or latest scout data, data/metrics_*.json, data/outbound_log_*.json, data/content_plan_*_EN.json, data/core_strategy.json, config/account_status.json",
+  "task_type": "custom",
+  "agents_planned": [
+    "scout",
+    "strategist",
+    "analyst"
+  ],
+  "notes": "Operator is frustrated with lack of progress. This is a full strategic overhaul, not incremental. The Japanese article about 0→1000 followers framework should be deeply integrated. Key article concepts: research 30 accounts, persona specificity, concept consistency, initial 50 posts, likes/replies for recognition, evening posting, engagement for algorithm boost. Be brutally honest about what's not working. Focus EN only (JP suspended). Deliver meeting minutes HTML report.",
+  "created_at": "2026-03-11T13:48:37.966166+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-11T14:03:53.148993+09:00",
+  "exit_code": 0
+}

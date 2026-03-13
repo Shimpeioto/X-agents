@@ -1,0 +1,15 @@
+{
+  "task_id": "20260309_003",
+  "description": "Re-run the comprehensive agent meeting report with CORRECTED account data for @meruru_tcbn. The previous report had wrong numbers (claimed 13 posts, 8 published). CORRECT DATA: 6 total posts (4 image posts, 2 quote reposts). Steps: 1) Analyst: collect actual metrics for ALL 6 @meruru_tcbn posts — get engagement (likes, retweets, replies, quotes, bookmarks) for each individual post. Use X API to fetch recent tweets for @meruru_tcbn. 2) Scout: fresh competitor data for benchmarking. 3) Strategist: comprehensive agent meeting analysis using CORRECT data — progress review (is progress being made?), gap analysis, improvement plan, next strategy, how to achieve goals faster. 4) Generate HTML report at data/agent_meeting_20260309.json and .html. The report must accurately reflect: 6 posts total, 4 image + 2 quote reposts, real engagement numbers per post, and base all analysis on these real numbers.",
+  "task_type": "report",
+  "agents_planned": [
+    "analyst",
+    "scout",
+    "strategist"
+  ],
+  "notes": "Previous report had wrong account data. Operator confirmed: @meruru_tcbn has 6 total posts (4 image, 2 quote reposts). Must get real per-post engagement metrics. EN account is active via sub-account @meruru_tcbn. JP is suspended. All analysis and improvement plans must be based on corrected real data.",
+  "created_at": "2026-03-09T15:07:49.368003+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-09T15:12:54.973130+09:00",
+  "exit_code": 0
+}

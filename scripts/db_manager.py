@@ -1,7 +1,7 @@
 import sqlite3, sys, os
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(PROJECT, "data", "metrics_history.db")
+DB_PATH = os.path.join(PROJECT, "data", "metrics", "metrics_history.db")
 
 
 def _connect():

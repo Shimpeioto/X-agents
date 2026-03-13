@@ -1,0 +1,93 @@
+{
+  "date": "2026-03-08",
+  "generated_at": "2026-03-08T13:15:00+09:00",
+  "scout_report_used": "data/scout_report_20260308.json",
+  "EN": {
+    "posting_schedule": [
+      {"slot": 1, "time": "14:00 UTC", "category": "engagement_questions", "priority": "high"},
+      {"slot": 2, "time": "22:00 UTC", "category": "grok_interactive", "priority": "high"}
+    ],
+    "content_mix": {
+      "engagement_questions": 40,
+      "image_showcase": 25,
+      "grok_interactive": 20,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 0
+    },
+    "outbound_strategy": {
+      "daily_likes": 20,
+      "daily_replies": 5,
+      "daily_follows": 3,
+      "target_accounts": ["@Angelwithcakee", "@yogana_19", "@IvoryLane_plus", "@HannaJonso"],
+      "reply_style": "Casual, genuine, and conversational. Reference something specific in their image or caption. Sound like a real person who appreciates the content. Keep it to 1-2 sentences, under 200 characters. Vary between enthusiastic ('okay this might be your best one'), thoughtful ('the lighting here is insane'), and curious ('how do you get the colors like that')."
+    },
+    "ab_test": {
+      "variable": "Caption style: provocative question vs ambient statement",
+      "variant_a": "Provocative question format — e.g., 'Am I ur type?', 'Smash or pass?', 'Rate me 1-10' — direct audience engagement prompt",
+      "variant_b": "Ambient statement format — e.g., 'single btw', 'lord have mercy...', 'built like this' — indirect confidence signaling without a question",
+      "duration_days": 5,
+      "start_date": "2026-03-08"
+    },
+    "key_insights": [
+      "Ultra-short captions (<30 chars) continue to dominate EN: all 14 EN trending posts use sub-30-char text. @imrubyreid's 'lord have mercy...' hit 11,253 likes and 'single btw' hit 9,625 likes — proving the ambient confidence statement can rival direct questions.",
+      "@yuumispm (12K followers, 26.4% ER) reached 16,143 likes on a single image-only post — highest in the dataset. Confirms that at our early growth stage, one viral image can transform trajectory. Prioritize exceptional image quality for the image_showcase slot.",
+      "Grok integration remains massively underutilized in EN — only @ai_hiyo_ (387K) actively uses it among EN competitors. First-mover advantage is still wide open. Slot 2 as grok_interactive at 22:00 UTC (US prime evening) maximizes reach for this experimental format.",
+      "Two large new accounts discovered via keyword search: @24wisher (251K) and @AiMilkers (97K). These are not yet in our tracking list. The EN market is larger than previously mapped — maintaining competitive intelligence advantage requires adding key new entrants.",
+      "Reply contamination analysis shows 36.3% of all sampled tweets are replies. Our outbound target selection avoids reply-farming accounts: @Angelwithcakee (4.5% clean ER), @yogana_19 (6.5% clean ER), @IvoryLane_plus (5,220-like trending post), @HannaJonso (6.1% ER) — all have clean timelines with genuine original content engagement."
+    ],
+    "risks": [
+      "EN market saturation is increasing — @24wisher (251K) and @AiMilkers (97K) are large accounts we were not previously tracking. Competition for the algorithmic For You feed is intensifying.",
+      "Over-reliance on the short provocative question format risks becoming formulaic. The A/B test between questions and ambient statements will diversify our caption approach while maintaining the <30 char rule.",
+      "Shadow ban risk from outbound engagement remains — keeping likes at 20 (33% below 30 limit) and replies at 5 (50% below 10 limit) provides adequate safety margin per @seisei_ai_1st guidance."
+    ]
+  },
+  "JP": {
+    "posting_schedule": [
+      {"slot": 1, "time": "12:30 JST", "category": "grok_interactive", "priority": "high"},
+      {"slot": 2, "time": "21:00 JST", "category": "persona_dialogue", "priority": "high"}
+    ],
+    "content_mix": {
+      "grok_interactive": 30,
+      "persona_dialogue": 30,
+      "art_showcase": 25,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 2
+    },
+    "outbound_strategy": {
+      "daily_likes": 15,
+      "daily_replies": 5,
+      "daily_follows": 2,
+      "target_accounts": ["@yunaelegant", "@AIart_yama94", "@nene__chandayo"],
+      "reply_style": "Warm, appreciative, community-oriented. Use natural Japanese appropriate for peer interaction in the AI art community. Reference something specific about their image or creative approach. Keep it to 1-2 sentences, under 200 characters. Examples: 'この雰囲気すごく好き✨', 'めっちゃ綺麗...光の使い方が素敵', 'クオリティ高すぎ！'."
+    },
+    "ab_test": {
+      "variable": "Grok post request type: transformation vs combination",
+      "variant_a": "Single-image transformation — e.g., '.@grok この画像をアニメ風にして', '.@grok 服を変えて' — simple visual transformation of one image",
+      "variant_b": "Multi-image combination — e.g., '.@grok タップして4枚の画像を1つに結合して' — combining multiple images into a single composition (ai_hyk's 7,872-like format)",
+      "duration_days": 5,
+      "start_date": "2026-03-08"
+    },
+    "key_insights": [
+      "@ai_hyk continues to dominate JP with 28.1% impression ER — two trending posts at 7,872 and 6,834 likes. The Grok combination format ('.@grok タップして4枚の画像を1つに結合して') specifically outperformed at 7,872 likes with 5,945 bookmarks (75% bookmark-to-like ratio). This is the single most important format to master for JP growth.",
+      "JP reply contamination is severe — 10 of 15 JP competitors have >50% reply rates. Only @yunaelegant (1% ER, zero contamination), @honoka_shiri, @AI_Girls_Studio, and @ganbarukaisyain have clean timelines. Our outbound targeting focuses on clean-timeline accounts for maximum visibility benefit.",
+      "@nene__chandayo (7.6K followers, 17.6% impression ER) demonstrates that the intimate persona approach (28-year-old character with warm daily interactions) drives exceptional engagement at small scale. This validates our persona_dialogue pillar — warm, character-consistent Japanese text outperforms generic art captions.",
+      "JP impression-based ER averages 9.12% vs EN's 4.87% — JP audiences view content at high rates but engage through bookmarks rather than likes. Optimizing for bookmark-worthy content (stunning visuals, Grok interactivity, save-worthy transformations) is critical for algorithmic reach in JP.",
+      "Late-night posting (23:00-00:00 JST) is the highest-volume window across JP competitors, but our 2-post schedule uses 12:30 JST (lunch) and 21:00 JST (evening) to capture different audience segments while maintaining minimum 4-hour spacing. If we add a 3rd post, 23:00 JST would be the optimal slot."
+    ],
+    "risks": [
+      "JP outbound monitoring is reportedly stricter per @seisei_ai_1st's expert guidance. Maintaining 15 likes (50% below 30 limit) and 2 follows (60% below 5 limit) is the most conservative approach to avoid shadow ban in JP.",
+      "The gap between @ai_hyk (124K followers) and the next JP competitor is enormous. Attempting to replicate ai_hyk's Grok strategy without their established audience may yield slower initial results — patience and consistency are required.",
+      "@hakoirikumatan (100K followers) is a cautionary example: 100% reply contamination, near-zero original engagement. Vanity metrics (followers) without engagement quality are meaningless. Our strategy prioritizes engagement rate over follower count."
+    ]
+  }
+}

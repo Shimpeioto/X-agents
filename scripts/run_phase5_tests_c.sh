@@ -34,11 +34,11 @@ run_analyst() {
 claude -p "You are the Analyst agent. Read agents/analyst.md, section 'Intelligence Mode' for your instructions.
 
 Today's date: 2026-03-04
-Raw metrics: data/metrics_20260304_EN.json, data/metrics_20260304_JP.json
-Strategy: data/strategy_20260304.json
-Pipeline state: data/pipeline_state_20260304.json
-Outbound log: data/outbound_log_20260304.json
-Content plans: data/content_plan_20260304_EN.json, data/content_plan_20260304_JP.json
+Raw metrics: data/metrics/metrics_20260304_EN.json, data/metrics/metrics_20260304_JP.json
+Strategy: data/strategy/strategy_20260304.json
+Pipeline state: data/pipeline/pipeline_state_20260304.json
+Outbound log: data/outbound/outbound_log_20260304.json
+Content plans: data/content/content_plan_20260304_EN.json, data/content/content_plan_20260304_JP.json
 Yesterday's report: does not exist (first run — skip trend comparison)
 
 IMPORTANT NOTES:
@@ -48,7 +48,7 @@ IMPORTANT NOTES:
 - The outbound_log shows dry-run actions only for EN (no JP outbound).
 
 Analyze all data, detect anomalies, evaluate A/B tests, and produce the daily report.
-Write output to: data/daily_report_20260304.json
+Write output to: data/metrics/daily_report_20260304.json
 Output ONLY valid JSON — no markdown code fences, no commentary." --dangerously-skip-permissions
 PROMPT_EOF
 
@@ -59,7 +59,7 @@ PROMPT_EOF
 
 verify_analyst() {
   echo "--- Verifying Analyst Intelligence output ---"
-  REPORT="data/daily_report_${DATE}.json"
+  REPORT="data/metrics/daily_report_${DATE}.json"
 
   if [ ! -f "$REPORT" ]; then
     fail 1 "File not found: $REPORT"
@@ -198,17 +198,17 @@ sys.path.insert(0, 'scripts')
 from scout import compute_pre_analysis, compact_report
 
 # Load existing full report
-with open('data/scout_report_${DATE}.json') as f:
+with open('data/scout/scout_report_${DATE}.json') as f:
     report = json.load(f)
 
 # Write as 'raw' (it already is the full file)
-with open('data/scout_raw_${DATE}.json', 'w') as f:
+with open('data/scout/scout_raw_${DATE}.json', 'w') as f:
     json.dump(report, f, indent=2, ensure_ascii=False)
 print(f'Wrote scout_raw_${DATE}.json ({len(json.dumps(report))} bytes)')
 
 # Generate compact
 compact = compact_report(report)
-with open('data/scout_compact_${DATE}.json', 'w') as f:
+with open('data/scout/scout_compact_${DATE}.json', 'w') as f:
     json.dump(compact, f, indent=2, ensure_ascii=False)
 compact_size = len(json.dumps(compact))
 print(f'Wrote scout_compact_${DATE}.json ({compact_size} bytes)')
@@ -224,19 +224,19 @@ claude -p "You are the Scout agent. Read agents/scout.md, section 'Daily Intelli
 Today's date: 2026-03-04
 
 SKIP Step 1 (data collection) — raw and compact files already exist:
-- Raw file: data/scout_raw_20260304.json (full report, ~450KB)
-- Compact file: data/scout_compact_20260304.json (~30KB, with _pre_analysis stats)
+- Raw file: data/scout/scout_raw_20260304.json (full report, ~450KB)
+- Compact file: data/scout/scout_compact_20260304.json (~30KB, with _pre_analysis stats)
 
 Proceed directly to Step 2 (Read and Analyze):
-- Read data/scout_compact_20260304.json for analysis input
+- Read data/scout/scout_compact_20260304.json for analysis input
 - Use the _pre_analysis section for reply contamination, impression engagement, trending, and hashtag usage stats
 - Filter new_accounts_discovered to quality accounts
 
 Then Step 3 (Write Enriched Report):
-- Read data/scout_raw_20260304.json as the base (copy ALL fields)
+- Read data/scout/scout_raw_20260304.json as the base (copy ALL fields)
 - ADD your analysis section
 - Do NOT include _pre_analysis in the final output
-- Write to: data/scout_report_enriched_test.json
+- Write to: data/misc/scout_report_enriched_test.json
 
 Output ONLY valid JSON — no markdown code fences, no commentary." --dangerously-skip-permissions
 PROMPT_EOF
@@ -248,7 +248,7 @@ PROMPT_EOF
 
 verify_scout() {
   echo "--- Verifying Scout Intelligence output ---"
-  REPORT="data/scout_report_enriched_test.json"
+  REPORT="data/misc/scout_report_enriched_test.json"
 
   if [ ! -f "$REPORT" ]; then
     fail 6 "File not found: $REPORT"
@@ -330,7 +330,7 @@ run_scout_compat() {
   echo "=========================================="
   echo ""
 
-  ENRICHED="data/scout_report_enriched_test.json"
+  ENRICHED="data/misc/scout_report_enriched_test.json"
   if [ ! -f "$ENRICHED" ]; then
     echo "ERROR: Run scout tests first to create $ENRICHED"
     return
@@ -343,11 +343,11 @@ run_scout_compat() {
 claude -p "You are the Strategist agent. Read agents/strategist.md for your instructions in 'Daily Strategy Mode'.
 
 Today's date: 2026-03-04
-Scout report: data/scout_report_enriched_test.json
+Scout report: data/misc/scout_report_enriched_test.json
 Previous strategy: does not exist (produce from scratch)
 
 Read the scout report and produce a daily growth strategy for both EN and JP accounts.
-Write output to: data/strategy_test_enriched.json
+Write output to: data/misc/strategy_test_enriched.json
 Output ONLY valid JSON — no markdown code fences, no commentary." --dangerously-skip-permissions
 PROMPT_EOF
 
@@ -358,8 +358,8 @@ PROMPT_EOF
 
 verify_scout_compat() {
   echo "--- Verifying Test 10: Backward Compatibility ---"
-  STRATEGY="data/strategy_test_enriched.json"
-  ENRICHED="data/scout_report_enriched_test.json"
+  STRATEGY="data/misc/strategy_test_enriched.json"
+  ENRICHED="data/misc/scout_report_enriched_test.json"
 
   if [ ! -f "$STRATEGY" ]; then
     fail 10 "File not found: $STRATEGY"
@@ -402,8 +402,8 @@ claude -p "You are the Publisher agent. Read agents/publisher.md, section 'Smart
 
 Today's date: 2026-03-04
 Account: EN
-Strategy path: data/strategy_20260304.json
-Content plan path: data/content_plan_20260304_EN.json
+Strategy path: data/strategy/strategy_20260304.json
+Content plan path: data/content/content_plan_20260304_EN.json
 
 Generate a smart outbound engagement plan.
 
@@ -414,7 +414,7 @@ python3 scripts/publisher_outbound_data.py --account EN --targets \"@sessypuuh,@
 
 Then analyze the output and create the outbound plan.
 
-Write plan to: data/outbound_plan_20260304_EN.json
+Write plan to: data/outbound/outbound_plan_20260304_EN.json
 Output ONLY valid JSON — no markdown code fences, no commentary." --dangerously-skip-permissions
 PROMPT_EOF
 
@@ -425,7 +425,7 @@ PROMPT_EOF
 
 verify_outbound() {
   echo "--- Verifying Publisher Smart Outbound output ---"
-  PLAN="data/outbound_plan_${DATE}_EN.json"
+  PLAN="data/outbound/outbound_plan_${DATE}_EN.json"
 
   if [ ! -f "$PLAN" ]; then
     fail 13 "File not found: $PLAN"

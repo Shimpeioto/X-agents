@@ -30,10 +30,10 @@ if [ -z "$ACTIVE_ACCOUNTS" ]; then
 fi
 
 # Check if strategy exists for today (or most recent)
-STRATEGY_FILE="data/strategy_${DATE_COMPACT}.json"
+STRATEGY_FILE="data/strategy/strategy_${DATE_COMPACT}.json"
 if [ ! -f "$STRATEGY_FILE" ]; then
     # Fall back to most recent strategy
-    STRATEGY_FILE=$(ls -t data/strategy_2026*.json 2>/dev/null | head -1)
+    STRATEGY_FILE=$(ls -t data/strategy/strategy_2026*.json 2>/dev/null | head -1)
     if [ -z "$STRATEGY_FILE" ]; then
         echo "ERROR: No strategy file found."
         exit 1

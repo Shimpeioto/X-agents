@@ -1,0 +1,146 @@
+{
+  "date": "2026-03-13",
+  "generated_at": "2026-03-13T18:00:00+09:00",
+  "scout_report_used": "data/scout_report_20260313.json",
+  "EN": {
+    "posting_schedule": [
+      {
+        "slot": 1,
+        "time": "13:00 UTC",
+        "category": "image_showcase",
+        "priority": "high"
+      },
+      {
+        "slot": 2,
+        "time": "17:00 UTC",
+        "category": "engagement_questions",
+        "priority": "high"
+      },
+      {
+        "slot": 3,
+        "time": "21:00 UTC",
+        "category": "grok_interactive",
+        "priority": "high"
+      },
+      {
+        "slot": 4,
+        "time": "00:30 UTC",
+        "category": "self_quote_chains",
+        "priority": "medium"
+      }
+    ],
+    "content_mix": {
+      "engagement_questions": 30,
+      "image_showcase": 35,
+      "grok_interactive": 20,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 0
+    },
+    "outbound_strategy": {
+      "daily_likes": 20,
+      "daily_replies": 5,
+      "daily_follows": 0,
+      "target_accounts": [
+        "@HannaJonso",
+        "@marylivbrown",
+        "@yuumi005",
+        "@Ava_starz"
+      ],
+      "reply_style": "Casual, genuine, and conversational. Reference something specific in their image or caption. Sound like a real fan who appreciates the content. Keep it to 1-2 sentences, under 200 characters. Vary between enthusiastic ('this is insane'), thoughtful ('the lighting here tho'), and playful ('okay but why is this so good'). Never use hashtags in replies."
+    },
+    "ab_test": {
+      "variable": "Image style: mirror selfie vs editorial/lifestyle",
+      "variant_a": "Mirror selfie style — casual bedroom/bathroom mirror shots, natural phone-in-hand pose, warm ambient lighting, iPhone aesthetic. Slots 1 and 3.",
+      "variant_b": "Editorial/lifestyle style — professional-looking outdoor or lifestyle setting, full-body pose without phone, studio-quality natural lighting. Slots 2 and 4.",
+      "duration_days": 5,
+      "start_date": "2026-03-13"
+    },
+    "key_insights": [
+      "Previous A/B test (caption style: provocative question vs ambient statement) concluded with insufficient data after 5 days. However, competitor trending data massively validates BOTH styles: @imrubyreid 'just me and my pump...' (21,665 likes, ambient), 'would u?' (18,659 likes, minimal), @IsabellaCruz_47 'Rate me from 1 to 10' (20,496 likes, question). Both formats work — the differentiator is image quality, not caption style. New A/B test pivots to image style (mirror selfie vs editorial) as the next highest-leverage variable, per strategy feedback recommendation.",
+      "Short captions remain the dominant EN engagement driver. Today's trending posts confirm the pattern at massive scale: @imrubyreid 'rate me' (11,352 likes), 'can I get a hi?' (8,877 likes), @tanarainw 'Lmk!!' (14,693 likes) — all under 15 characters. The 12x engagement multiplier for sub-30-char posts continues to hold. @sessypuuh (7.7K followers, 35.1% avg ER) consistently uses 'would u date me?' and 'Am I ur type?' for massive engagement at small follower counts — proof our strategy works at our scale.",
+      "Content mix adjusted to align with core strategy: image_showcase raised to 35% (from 25%), engagement_questions adjusted to 30% (from 40%). This better reflects the core strategy pillar allocations and the data showing image-only posts averaging 2,275 likes (highest of any category). Slot 1 (13:00 UTC) now leads with image_showcase for strong visual first-impression during US morning prime.",
+      "EN Grok interactive opportunity remains wide open. @ai_hiyo_ (389K followers) uses Grok but 90% of sampled posts are replies — diluting measurable engagement on original Grok content. Our clean original-content Grok posts at 21:00 UTC (US evening prime) face minimal format competition. Maintaining 20% allocation as the strategic floor for this category.",
+      "Outbound target rotation: All Mar 12 targets (@JosephinaM3131, @Angelwithcakee, @yogana_19, @leahyunaxo) are within 3-day cooldown. Fresh targets selected: @HannaJonso (18.9K, 4.2% ER, not targeted since before Mar 10), @marylivbrown (13.8K, 1.6% ER, impression ER 15.4% — punches above weight, never targeted recently), @yuumi005 (81.4K, 2.3% ER, impression ER 12.5% — large audience with high conversion), @Ava_starz (62.2K, 1.0% ER — large account, visibility value from likes). Mix of 2 larger (>50K) and 2 smaller (<20K) accounts per rotation rules."
+    ],
+    "risks": [
+      "Reply 403 restriction persists on @meruru_tcbn. All reply attempts across Mar 9-12 failed. Continue planning replies for manual escalation to operator but do not expect API replies to succeed. The restriction should lift as the account gains organic standing — currently at ~5 followers.",
+      "Content mix realignment (image_showcase 25% -> 35%, engagement_questions 40% -> 30%) is a deliberate shift toward core strategy baseline. With only 4 posts published to date, our own data is insufficient to override the core strategy's competitor-validated allocations. This change carries low risk since both categories perform well.",
+      "New A/B test (image style) requires consistent image generation quality across both variants. Mirror selfie images must look authentically iPhone-captured, while editorial images must look genuinely professional — any AI artifacts in either variant will confound the test results."
+    ]
+  },
+  "JP": {
+    "posting_schedule": [
+      {
+        "slot": 1,
+        "time": "09:00 JST",
+        "category": "grok_interactive",
+        "priority": "high"
+      },
+      {
+        "slot": 2,
+        "time": "12:30 JST",
+        "category": "persona_dialogue",
+        "priority": "high"
+      },
+      {
+        "slot": 3,
+        "time": "20:30 JST",
+        "category": "art_showcase",
+        "priority": "high"
+      },
+      {
+        "slot": 4,
+        "time": "23:30 JST",
+        "category": "self_quote_chains",
+        "priority": "medium"
+      }
+    ],
+    "content_mix": {
+      "grok_interactive": 30,
+      "persona_dialogue": 30,
+      "art_showcase": 25,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 2
+    },
+    "outbound_strategy": {
+      "daily_likes": 15,
+      "daily_replies": 5,
+      "daily_follows": 0,
+      "target_accounts": [
+        "@AIart_yama94",
+        "@AI_Girls_Studio",
+        "@BoobistR"
+      ],
+      "reply_style": "Warm, appreciative, community-oriented. Use natural Japanese appropriate for peer interaction in the AI art community. Reference something specific about their image or creative approach. Keep it to 1-2 sentences, under 200 characters. Examples: 'この雰囲気すごく好き', 'めっちゃ綺麗...光の使い方が素敵', 'クオリティ高すぎ！'."
+    },
+    "ab_test": {
+      "variable": "Grok post request type: transformation vs combination",
+      "variant_a": "Single-image transformation — e.g., '.@grok この画像をアニメ風にして', '.@grok 服を変えて' — simple visual transformation of one image",
+      "variant_b": "Multi-image combination — e.g., '.@grok タップして4枚の画像を1つに結合して' — combining multiple images into a single composition (ai_hyk's 6,844-like format)",
+      "duration_days": 7,
+      "start_date": "2026-03-13"
+    },
+    "key_insights": [
+      "@ai_hyk continues to lead JP with 125.3K followers and 1.68% reply-adjusted ER — Grok integration is the dominant driver. Their recent top post hit 3,977 likes. Our Grok-first JP strategy (30% allocation at slot 1, 09:00 JST) directly mirrors this winning formula. The A/B test on Grok request types (transformation vs combination) is extended to 7 days since the JP account is not yet active — this gives us a pre-validated plan for launch.",
+      "JP impression-based engagement reveals strong algorithmic amplification: @honoka_shiri shows 74.2% impression ER vs 0.12% follower ER, and @2nd_karen_AI shows 12.4% impression ER vs 0.12% follower ER. This confirms that quality JP AI beauty content reaches far beyond the follower base — even a new account with few followers can achieve meaningful reach through Grok-driven content.",
+      "Clean-content JP accounts outperform high-volume reply farms: @yunaelegant (0.75% ER, 0% reply contamination), @AIart_yama94 (0.79% ER, 0% contamination), @AI_Girls_Studio (0.24% ER, 0% contamination) vs @hakoirikumatan (0.06% clean ER, 90% contamination), @seisei_ai_1st (0.08% clean ER, 90% contamination). Our persona_dialogue + art_showcase strategy aligns with the clean-content model.",
+      "Outbound target rotation: Previous targets (@yunaelegant, @honoka_shiri, @tororo_223 from Mar 12 strategy) rotated out. Fresh targets: @AIart_yama94 (37K, 0.79% ER, 0% reply contamination — model SFW/Fictional disclaimer account, strong community presence), @AI_Girls_Studio (61.4K, 0.24% ER, 0% contamination — large clean account), @BoobistR (20.8K, 0.43% ER — active community engagement, moderate reply contamination). Mix of sizes per rotation rules.",
+      "JP hashtag analysis reconfirmed: #SFW (9 uses), #digitalart (9), #Fictional (8) remain the standard ethical disclaimer tags across JP market. @AIart_yama94 uses all three consistently with 0.79% ER. Our JP hashtag strategy (max 2 disclaimer-only tags on art_showcase posts) is correctly calibrated."
+    ],
+    "risks": [
+      "JP account remains suspended (not yet created). All JP strategy is prepared for launch readiness — when the JP account is created, this full strategy can be executed immediately with the validated content mix and Grok-first approach.",
+      "The @ai_hyk dominance gap in JP engagement is massive (125.3K followers, single posts reaching 3,977+ likes vs next competitor @AIart_yama94 at 37K, 811-like top post). Entering this market requires Grok integration as table stakes. Our 30% grok_interactive allocation ensures this is the cornerstone of JP content.",
+      "JP outbound limits remain conservative (15 likes, 5 replies, 0 follows per outbound_rules.json). These limits are appropriate for a market entry phase and align with JP social media norms of quality over quantity engagement."
+    ]
+  }
+}

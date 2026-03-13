@@ -1,0 +1,83 @@
+{
+  "account": "EN",
+  "date": "2026-03-11",
+  "account_metrics": {
+    "account": "EN",
+    "date": "2026-03-11",
+    "followers": 5,
+    "following": 33,
+    "total_posts": 20,
+    "followers_change": 1
+  },
+  "post_metrics": [
+    {
+      "post_id": "EN_20260309_01",
+      "tweet_id": "2031060275047313555",
+      "account": "EN",
+      "measured_at": "2026-03-11T15:08:58.943841+09:00",
+      "hours_after_post": 37,
+      "likes": 2,
+      "retweets": 1,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 1,
+      "impressions": null,
+      "engagement_rate": null,
+      "source": "api"
+    },
+    {
+      "post_id": "EN_20260309_02",
+      "tweet_id": "2031107879407890710",
+      "account": "EN",
+      "measured_at": "2026-03-11T15:08:58.943841+09:00",
+      "hours_after_post": 33,
+      "likes": 2,
+      "retweets": 1,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 1,
+      "impressions": null,
+      "engagement_rate": null,
+      "source": "api"
+    },
+    {
+      "post_id": "EN_20260309_03",
+      "tweet_id": "2031318138890105100",
+      "account": "EN",
+      "measured_at": "2026-03-11T15:08:58.943841+09:00",
+      "hours_after_post": 20,
+      "likes": 1,
+      "retweets": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "impressions": null,
+      "engagement_rate": null,
+      "source": "api"
+    },
+    {
+      "post_id": "EN_20260309_04",
+      "tweet_id": "2031613021269991932",
+      "account": "EN",
+      "measured_at": "2026-03-11T15:08:58.943841+09:00",
+      "hours_after_post": 0,
+      "likes": 0,
+      "retweets": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "impressions": null,
+      "engagement_rate": null,
+      "source": "api"
+    }
+  ],
+  "totals": {
+    "likes": 5,
+    "retweets": 2,
+    "replies": 0,
+    "quotes": 0,
+    "bookmarks": 2
+  },
+  "generated_at": "2026-03-11T16:25:02.901236+09:00",
+  "post_count": 4
+}

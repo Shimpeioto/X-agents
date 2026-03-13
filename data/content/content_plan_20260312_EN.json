@@ -1,0 +1,349 @@
+{
+  "date": "2026-03-12",
+  "account": "EN",
+  "generated_at": "2026-03-12T22:00:00+09:00",
+  "strategy_used": "data/strategy_20260312.json",
+  "total_posts": 4,
+  "posts": [
+    {
+      "id": "EN_20260312_01",
+      "slot": 1,
+      "scheduled_time": "13:00 UTC",
+      "category": "engagement_questions",
+      "priority": "high",
+      "status": "posted",
+      "text": "would u swipe right? 👀",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a spacious modern gym locker room with polished light grey concrete floors and a row of sleek matte black metal lockers lining the wall behind her. She has long dark brown hair pulled back into a high messy ponytail with loose wispy face-framing pieces falling around her temples and along her jawline, the ponytail itself cascading down past her shoulder blades with a slight natural wave from being tied up during her workout session, a few shorter flyaway strands sticking slightly to her damp neck and forehead from recent physical exertion giving the image an authentic just-finished-training quality. Fitness hourglass figure with ample chest pressing against the fitted fabric of her sports bra, toned defined core showing subtle ab definition visible through the tight material, wide curvy hips, and thick sculpted thighs filling out her shorts below the hemline. Light-medium neutral smooth skin with a healthy post-workout flush spreading across her cheeks and upper chest in a natural rosy gradient, a light sheen of fresh perspiration catching the overhead lighting across her collarbones and the bridge of her nose creating tiny specular highlights, natural skin texture with real pores visible especially across her nose and forehead and along the tops of her shoulders, no airbrushing or digital smoothing whatsoever. Naturally attractive face with expressive Japanese features including subtly arched natural brows and warm dark brown eyes. Minimal makeup consisting of softly filled natural brows with a gentle arch, the faintest trace of brown mascara on her upper lashes now slightly smudged and clumped from sweat during her workout, and completely bare soft lips with just her natural pink undertone showing through with a slight dryness at the corners from breathing hard. She wears a fitted charcoal grey performance sports bra with thin criss-cross straps visible at the back of her neck and between her shoulder blades and a subtle matte black Nike swoosh embroidered on the left chest panel, paired with high-waisted jet black spandex biker shorts that end at mid-thigh and hug every curve of her hips and upper thighs tightly with a wide supportive waistband sitting just above her navel, and clean white ankle-cut athletic socks visible above sleek matte black Nike Metcon training shoes with a flat sole. A small black Apple Watch with a black sport band sits on her left wrist and tiny simple gold ball stud earrings glint faintly in both ears catching pinpoints of the overhead light. She stands facing a large rectangular wall-mounted gym mirror with a thin brushed stainless steel frame, holding her iPhone 15 Pro Max in Natural Titanium finish at chest height with her right hand, her fingers wrapped naturally around the back of the device with her index finger along the top edge and her thumb resting casually on the volume button side, while her left hand is lifted up and back to grip the base of her ponytail as if tightening or adjusting the hair tie with her elbow raised and bent outward creating a dynamic triangular shape with her arm that lifts her ribcage on that side and accentuates the narrow taper of her waist in contrast with her hip below. Her weight rests predominantly on her right leg with her right hip pushed slightly out, left knee casually bent with her left foot turned outward and the toe of her sneaker barely touching the concrete floor creating a natural relaxed asymmetric stance. She gazes at the phone screen reflected in the mirror with a relaxed confident expression, her lips barely parted in a subtle almost-smile that is more attitude than grin, one eyebrow raised just a fraction higher than the other creating a quietly playful questioning look as if silently asking the viewer whether they approve of what they see. The locker room visible behind her in the mirror reflection shows a long row of the same matte black metal lockers each with small silver combination padlocks hanging from the latches, a sturdy light maple wood slatted bench running parallel to the lockers with a draped white cotton gym towel bunched casually at one end and a large clear Nalgene water bottle with visible condensation droplets beading on the outside surface sitting upright beside it, warm overhead recessed square LED panel lights set into the white ceiling tiles casting an even bright neutral-white illumination across the space with clean soft diffused shadows forming beneath the bench slats and under her chin and jaw, and a second row of lockers visible further back in the room creating a sense of depth and environment. The bright LED lighting bounces subtle warm reflections off the polished concrete floor surface creating a faint secondary fill light on the lower half of her legs and a crisp clean reflection of her full figure in the mirror that reveals the criss-cross strap detail of her sports bra from behind and the shape of her ponytail hanging between her shoulder blades. Charcoal grey, jet black spandex, polished concrete silver, clean bright white, warm flushed skin tones with rosy post-workout glow color palette. Athletic gym mirror selfie lifestyle aesthetic. Mirror selfie shot captured through the gym mirror at eye-level, full body framing from the top of her head to her training shoes with the brushed steel mirror frame visible at the left and right edges of the composition, centered vertical portrait composition with slight negative space above her head and the locker room environment visible on both sides. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "raw iphone gym mirror selfie"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown",
+            "style": "high messy ponytail with loose wispy face-framing pieces around temples and jawline, slight wave from being tied up, shorter flyaway strands sticking to damp neck and forehead"
+          },
+          "body_type": "fitness hourglass, ample chest, toned core with subtle ab definition, wide curvy hips, thick sculpted thighs",
+          "skin": "light-medium neutral, smooth, healthy post-workout flush on cheeks and upper chest, light perspiration sheen on collarbones and nose bridge, natural texture with real pores visible on nose forehead and shoulders",
+          "expression": "relaxed confident, lips barely parted in subtle almost-smile, one eyebrow raised creating quietly playful questioning look",
+          "makeup": "minimal — softly filled natural brows with gentle arch, faint brown mascara slightly smudged from sweat, completely bare lips with natural pink undertone"
+        },
+        "outfit": {
+          "top": {
+            "type": "fitted performance sports bra",
+            "color": "charcoal grey",
+            "material": "performance stretch fabric",
+            "fit": "fitted, thin criss-cross straps at back visible between shoulder blades",
+            "details": "matte black Nike swoosh embroidered on left chest panel"
+          },
+          "bottom": {
+            "type": "spandex biker shorts",
+            "color": "jet black",
+            "fit": "high-waisted with wide supportive waistband above navel, mid-thigh length, tight-fitting"
+          },
+          "footwear": "matte black Nike Metcon training shoes with flat sole, clean white ankle-cut athletic socks",
+          "accessories": [
+            "black Apple Watch with black sport band on left wrist",
+            "tiny gold ball stud earrings in both ears",
+            "iPhone 15 Pro Max Natural Titanium"
+          ]
+        },
+        "pose": {
+          "position": "standing facing gym mirror",
+          "stance": "weight on right leg with right hip pushed out, left knee casually bent with foot turned outward barely touching floor, natural relaxed asymmetric stance",
+          "hands": "right hand holding phone at chest height with natural finger wrap and thumb on volume button, left hand raised gripping ponytail base with elbow bent outward creating triangular arm shape",
+          "head_gaze": "gazing at phone screen in mirror reflection, one eyebrow slightly raised, quietly questioning look",
+          "vibe": "effortless post-workout confidence"
+        },
+        "scene": {
+          "location": "modern gym locker room",
+          "time": "midday",
+          "atmosphere": "clean, bright, athletic, authentic",
+          "background": "row of matte black metal lockers with silver combination padlocks, light maple wood slatted bench with bunched white gym towel and condensation-beaded Nalgene water bottle, polished light grey concrete floor, second row of lockers creating depth, white ceiling with recessed square LED panels"
+        },
+        "camera": {
+          "pov": "mirror selfie through gym wall mirror",
+          "angle": "eye-level",
+          "framing": "full body from head to shoes, brushed steel mirror frame visible at left and right edges, centered vertical portrait"
+        },
+        "lighting": {
+          "type": "overhead recessed square LED panel lights in white ceiling tiles, neutral-white tone",
+          "effect": "even bright illumination across space, clean soft diffused shadows under bench slats and chin, subtle warm reflections bouncing off polished concrete floor onto lower legs, crisp mirror reflection revealing back details of outfit"
+        },
+        "mood": {
+          "energy": "confident, athletic, authentic",
+          "color_palette": "charcoal grey, jet black spandex, polished concrete silver, clean bright white, warm flushed skin tones with rosy glow",
+          "aesthetic": "athletic gym mirror selfie lifestyle"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "Variant A — provocative question format. Direct swipe-right question invites engagement and sparks replies. 22 characters including emoji. A/B test final day (day 5 of 5).",
+      "tweet_id": "2032145106837610741",
+      "post_url": "https://x.com/meruru_tcbn/status/2032145106837610741",
+      "posted_at": "2026-03-13T02:22:03.893867+09:00"
+    },
+    {
+      "id": "EN_20260312_02",
+      "slot": 2,
+      "scheduled_time": "17:00 UTC",
+      "category": "image_showcase",
+      "priority": "high",
+      "status": "posted",
+      "text": "deadly 🖤",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a sleek modern apartment hallway just before heading out for the evening. She has long straight jet-black hair with a sharp center part falling like silk curtains past her collarbones to her mid-back, the strands catching overhead light with a glossy blue-black sheen, a few face-framing pieces tucked behind her right ear revealing a small gold ear cuff while the left side falls freely creating deliberate asymmetry. Fitness hourglass figure with ample chest filling the structured neckline of her top, toned core visible through the fitted fabric, wide curvy hips accentuated by the high waist of her bottoms, and thick sculpted thighs. Light-medium neutral smooth skin with a healthy natural glow, real skin texture with visible pores across the bridge of her nose, natural complexion with a subtle warmth across her cheekbones. Minimal makeup with softly groomed natural brows, a precise thin wing of black liquid liner extending just past the outer corner of each eye adding sharpness to her naturally warm expression, barely-there brown mascara defining her lashes without clumping, clean dewy skin with no visible foundation, and a matte nude lip in a dusty rose shade that matches her natural lip tone almost exactly. She wears a fitted black ribbed knit long-sleeve top with a square neckline that sits just at the collarbone, the ribbed texture catching vertical light streaks along her torso, paired with high-waisted straight-leg cream tailored trousers with a crisp front crease and a subtle wide fabric belt in matching cream cinching her waist. On her feet just visible at the bottom of the frame are pointed-toe black patent leather mules. A delicate layered gold necklace set sits against her bare clavicle with a thin choker chain and a longer pendant chain, and she holds a small structured black leather crossbody bag with gold hardware in her left hand at hip level. Her right hand holds an iPhone 15 Pro Max at chest height angled toward the full-length mirror on the wall, her grip natural with her index finger along the top edge. Her weight shifts to her right leg pushing her right hip out in a natural confident contrapposto, left leg relaxed with the toe of her shoe barely touching the floor. She gazes at the phone screen in the mirror with a calm self-assured expression, her chin level, lips relaxed into the faintest closed-mouth smile that suggests she knows exactly how good she looks, eyes steady and direct. The hallway has a clean white wall, a slim modern black-framed full-length mirror, warm honey-toned oak hardwood floors, and a minimalist floating console table with a small green monstera plant in a white ceramic pot and a set of keys. Warm early evening light from a window at the end of the hallway creates a natural golden side-light from the left, casting a long soft shadow on the wall behind her and producing warm highlights along the left side of her face and the left sleeve of her top while the right side sits in slightly cooler ambient shadow. Clean white, jet black, warm cream, honey oak, matte gold, monstera green accent color palette. Effortless going-out confidence aesthetic. Mirror selfie shot at eye-level, full body framing from head to shoes, centered vertical composition with mirror frame visible at edges. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "effortless going-out mirror selfie"
+        },
+        "subject": {
+          "hair": {
+            "color": "jet black",
+            "style": "long straight with sharp center part, glossy blue-black sheen, right side tucked behind ear, left side falling freely"
+          },
+          "body_type": "fitness hourglass, ample chest, toned core, wide curvy hips, thick sculpted thighs",
+          "skin": "light-medium neutral, smooth, healthy natural glow, real texture with visible pores on nose, subtle warmth on cheekbones",
+          "expression": "calm self-assured, chin level, faintest closed-mouth smile of quiet confidence, steady direct gaze",
+          "makeup": "minimal — softly groomed natural brows, thin precise black liner wing, barely-there brown mascara, clean dewy skin, matte dusty rose nude lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "ribbed knit long-sleeve top",
+            "color": "black",
+            "material": "ribbed knit",
+            "fit": "fitted, square neckline at collarbone",
+            "details": "ribbed texture catching vertical light streaks"
+          },
+          "bottom": {
+            "type": "straight-leg tailored trousers",
+            "color": "cream",
+            "fit": "high-waisted with crisp front crease, subtle wide cream belt"
+          },
+          "footwear": "pointed-toe black patent leather mules",
+          "accessories": [
+            "delicate layered gold necklace set — thin choker and longer pendant chain",
+            "small gold ear cuff on right ear",
+            "small structured black leather crossbody bag with gold hardware",
+            "iPhone 15 Pro Max"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "weight on right leg, right hip pushed out in contrapposto, left leg relaxed with toe barely touching floor",
+          "hands": "right hand holding phone at chest height with index finger along top edge, left hand holding crossbody bag at hip level",
+          "head_gaze": "gazing at phone screen in mirror, chin level, steady direct confident gaze",
+          "vibe": "effortless going-out confidence"
+        },
+        "scene": {
+          "location": "sleek modern apartment hallway",
+          "time": "early evening",
+          "atmosphere": "clean, confident, refined",
+          "background": "clean white wall, slim black-framed full-length mirror, honey-toned oak hardwood floors, minimalist floating console with green monstera in white pot and keys"
+        },
+        "camera": {
+          "pov": "mirror selfie",
+          "angle": "eye-level",
+          "framing": "full body from head to shoes, centered vertical, mirror frame visible at edges"
+        },
+        "lighting": {
+          "type": "warm early evening natural light from hallway window at left",
+          "effect": "golden side-light on left face and sleeve, long soft shadow on wall, slightly cooler ambient shadow on right side, warm highlights creating dimensional contrast"
+        },
+        "mood": {
+          "energy": "confident, refined, self-assured",
+          "color_palette": "clean white, jet black, warm cream, honey oak, matte gold, monstera green accent",
+          "aesthetic": "effortless going-out confidence"
+        }
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B — ambient mood word for image_showcase. 'deadly' with black heart directly references Meruru's 'Cute but Deadly' tagline. 8 characters including emoji. Character lock enforced: jet-black hair, light-medium neutral skin, fitness hourglass, minimal makeup with precise liner for the going-out edge. Zero hashtags. Scene shows Meruru in control — dressed to kill, heading out, 'softness is a weapon' energy.",
+      "tweet_id": "2032332863765610974",
+      "post_url": "https://x.com/meruru_tcbn/status/2032332863765610974",
+      "posted_at": "2026-03-13T14:48:08.586197+09:00"
+    },
+    {
+      "id": "EN_20260312_03",
+      "slot": 3,
+      "scheduled_time": "21:00 UTC",
+      "category": "grok_interactive",
+      "priority": "high",
+      "status": "approved",
+      "text": "hey @grok now put me in a leather jacket",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic photo of a young Japanese woman in her early 20s standing on a rooftop terrace in a trendy urban neighborhood during the last golden minutes before sunset. She has long dark brown hair in loose tousled waves that catch the golden backlight, the wind lifting several strands away from her face creating dynamic movement, warm honey-brown highlights visible through the naturally dark hair where the sunlight passes through, hair falling past her shoulders with a few wind-blown pieces crossing her face at the bridge of her nose that she has not bothered to push away giving the shot an effortless candid quality. Fitness hourglass figure with ample chest visible through her fitted top, toned core, wide curvy hips, and thick sculpted thighs filling out her jeans. Light-medium neutral smooth skin with a warm golden tone from the direct sunset light hitting her face and bare arms, real skin texture with visible pores across her nose and temples, a natural healthy flush across her cheeks deepened by the warm color temperature of the setting sun. Minimal makeup with softly groomed natural brows catching individual golden hairs in the backlight, barely-there mascara on naturally long lashes now rimmed with golden sunset light, clean bare skin with no visible foundation, and a soft natural lip in a warm pink tone that catches the sunset glow. She wears a simple fitted white crew-neck baby tee in thin cotton that hugs her torso and ends just above her navel showing a sliver of toned midriff, paired with high-waisted medium-wash straight-leg jeans with a slightly distressed knee and the denim faded naturally at the thighs and pocket edges, a thin brown leather belt with a small antique brass buckle threading through the belt loops. White low-top canvas sneakers. A simple thin gold chain bracelet on her right wrist catches sunset light as a single bright point. She stands with her left shoulder leaning casually against a weathered concrete rooftop railing, her right hand raised to push hair away from her face with fingers spread through the wind-blown strands at her temple, left arm resting along the top of the concrete railing with her hand hanging relaxed over the edge. Her weight settles into her left hip creating a relaxed lean, right leg crossed loosely in front of her left at the ankle. She looks directly at the camera with a warm playful expression, one corner of her mouth lifted in a subtle confident smirk, eyes bright and slightly squinted against the low sun behind the camera, radiating effortless charm and quiet self-assurance. The rooftop terrace has a weathered grey concrete half-wall railing, a cluster of terracotta plant pots with trailing green ivy and small succulents along the railing edge, the urban skyline visible in the soft golden haze behind her with building silhouettes and a few distant construction cranes, and the warm orange-gold sky of the final minutes of golden hour filling the upper portion of the frame. Low golden hour sunlight from directly in front and slightly below creates dramatic warm front-lighting that bathes her face and body in rich amber-gold tones, with a strong warm backlight from the sky behind her producing a glowing rim of golden light along the top of her head and shoulders and through the translucent edges of her wind-blown hair strands, the combination creating a luminous halo effect while maintaining clear detail on her face and expression. Warm amber gold, clean white cotton, medium denim blue, weathered concrete grey, terracotta, trailing green, urban skyline silhouette color palette. Golden hour rooftop casual confidence aesthetic. Third-person shot at eye-level, three-quarter body framing from knees up, slight rule-of-thirds composition with subject left of center and skyline filling the right background. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Sony A7R IV",
+          "lens": "35mm f/1.4",
+          "style": "golden hour rooftop casual portrait"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown with warm honey-brown highlights in sunlight",
+            "style": "long loose tousled waves, wind-blown with dynamic movement, several strands crossing face at nose bridge"
+          },
+          "body_type": "fitness hourglass, ample chest, toned core, wide curvy hips, thick sculpted thighs",
+          "skin": "light-medium neutral, warm golden tone from sunset, real texture with visible pores on nose and temples, natural flush on cheeks deepened by warm light",
+          "expression": "warm playful, one corner of mouth lifted in subtle confident smirk, bright eyes slightly squinted against sun, effortless charm",
+          "makeup": "minimal — softly groomed natural brows with golden hairs in backlight, barely-there mascara, clean bare skin, soft warm pink natural lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "fitted crew-neck baby tee",
+            "color": "white",
+            "material": "thin cotton",
+            "fit": "fitted, ends just above navel showing sliver of toned midriff"
+          },
+          "bottom": {
+            "type": "straight-leg jeans",
+            "color": "medium wash",
+            "fit": "high-waisted, slightly distressed knee, naturally faded at thighs and pockets, thin brown leather belt with antique brass buckle"
+          },
+          "footwear": "white low-top canvas sneakers",
+          "accessories": [
+            "thin gold chain bracelet on right wrist"
+          ]
+        },
+        "pose": {
+          "position": "standing, leaning against rooftop railing",
+          "stance": "left shoulder leaning on concrete railing, weight in left hip, right leg crossed loosely at ankle in front of left",
+          "hands": "right hand raised pushing wind-blown hair from face with fingers spread at temple, left arm resting along railing top with hand hanging relaxed over edge",
+          "head_gaze": "looking directly at camera, warm playful confident smirk, eyes bright and slightly squinted from low sun",
+          "vibe": "effortless golden-hour charm"
+        },
+        "scene": {
+          "location": "urban rooftop terrace",
+          "time": "final minutes of golden hour before sunset",
+          "atmosphere": "warm, luminous, candid, urban",
+          "background": "weathered grey concrete half-wall railing, terracotta pots with trailing ivy and succulents, urban skyline silhouettes in golden haze, distant cranes, warm orange-gold sky"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "eye-level",
+          "framing": "three-quarter body from knees up, slight rule-of-thirds with subject left of center, skyline right"
+        },
+        "lighting": {
+          "type": "low golden hour sunlight from front-below, strong warm backlight from sky behind",
+          "effect": "rich amber-gold front-lighting on face and body, glowing golden rim light on head and shoulders, luminous halo through translucent wind-blown hair edges, clear facial detail maintained"
+        },
+        "mood": {
+          "energy": "confident, warm, playful",
+          "color_palette": "warm amber gold, clean white, medium denim blue, weathered concrete grey, terracotta, trailing green, urban skyline silhouette",
+          "aesthetic": "golden hour rooftop casual confidence"
+        }
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B — Grok interactive fashion transformation. 'put me in a leather jacket' is a natural, on-brand Meruru request — she's in a simple white tee and jeans, playfully asking Grok to edge up her look. Stays within the fashion/beauty lane (no fantasy elements). The base image is a confident rooftop golden-hour shot that Grok can realistically transform. Grok text excluded from 30-char limit. 21:00 UTC captures US evening prime time."
+    },
+    {
+      "id": "EN_20260312_04",
+      "slot": 4,
+      "scheduled_time": "00:30 UTC",
+      "category": "self_quote_chains",
+      "priority": "medium",
+      "status": "approved",
+      "text": "u were warned 😈",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic front camera selfie of a young Japanese woman in her early 20s sitting in the back seat of a luxury car at night, captured with the warm intimate glow of the city passing by outside the windows. She has long dark brown hair styled in a sleek blowout with a deep side part swept to the left, the hair falling in glossy polished waves past her shoulders with the top layer smooth and luminous catching every passing street light as a bright sliding reflection, while a few shorter face-framing strands fall loosely along her right cheekbone adding softness to the otherwise polished look. Fitness hourglass figure with ample chest visible above the frame of her outfit, toned shoulders. Light-medium neutral smooth skin with a flawless evening look enhanced by the flattering warm interior car lighting, real skin texture visible along her hairline and at her temples, a subtle healthy warmth across her cheeks. Makeup elevated for evening with softly sculpted natural brows filled slightly darker than her daytime look, a wash of warm bronze-champagne shimmer across her lids blended into the crease, defined upper lash line with a thin smudged dark brown liner creating soft smoky definition, black mascara adding volume and length to her naturally long lashes, clean highlighted skin with a subtle dewy glow along her cheekbones and the bridge of her nose, and a rich warm berry-toned lip stain that gives her lips a bitten just-kissed color deeper than her natural tone. She wears a fitted deep burgundy velvet camisole with thin spaghetti straps and a straight neckline that sits across her upper chest, the velvet fabric catching and absorbing the light in rich dark pools of shadow while the folds and edges shimmer with a warm lighter burgundy sheen, paired with a structured black wool blazer draped over her shoulders without her arms in the sleeves, the collar popped slightly and the lapels framing her face and the velvet camisole beneath. A pair of delicate gold drop earrings with a single small ruby-colored stone catch the light as she tilts her head. She holds her phone in her right hand extended toward the camera at a slightly elevated angle, the classic front-camera selfie position with the screen illuminating the underside of her chin with a faint cool-white glow, while her left hand rests on her crossed left knee with her fingers relaxed and her burgundy-painted nails visible. She leans back into the dark leather car seat with her left leg crossed over her right, her posture relaxed but upright with quiet authority. She looks up at the phone camera with a confident knowing expression, her chin slightly down and eyes looking up through her lashes creating a naturally alluring angle, one eyebrow raised fractionally, the corner of her mouth lifted in a self-satisfied smirk that says she knows exactly what she is doing. The car interior features smooth dark grey leather seats with subtle stitching detail, tinted windows through which blurred streaks of warm golden and cool blue-white city lights pass in long horizontal bokeh trails indicating the car is in motion, the occasional flash of a red traffic light or green neon sign creating brief color splashes across the window glass. The lighting is complex: warm golden city light filtering through the windows creates a shifting ambient glow that paints her face and shoulders with passing warm and cool tones, the phone screen adds a subtle cool fill light from below, and the overall effect is a dynamic interplay of warm amber from the streetlights and cool blue from the city night outside, with the interior kept deliberately low-lit and intimate. Deep burgundy velvet, warm gold, cool city blue, dark charcoal leather, ruby accent, warm amber streetlight, blurred neon bokeh color palette. Nighttime car selfie confidence aesthetic. Front camera selfie from slightly above, close-up to medium shot from chest up, vertical portrait with the dark car interior and blurred city light trails through windows visible in background. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "12mm front camera",
+          "style": "nighttime car selfie"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown",
+            "style": "sleek polished blowout with deep side part swept left, glossy waves past shoulders, shorter face-framing strands along right cheekbone"
+          },
+          "body_type": "fitness hourglass, ample chest, toned shoulders",
+          "skin": "light-medium neutral, smooth, healthy warmth on cheeks, real texture at hairline and temples, dewy highlighted cheekbones",
+          "expression": "confident knowing look, chin slightly down eyes looking up through lashes, one eyebrow raised, self-satisfied smirk, she knows exactly what she is doing",
+          "makeup": "elevated evening — sculpted brows filled slightly darker, warm bronze-champagne shimmer lids, thin smudged dark brown liner, volumizing mascara, dewy highlighted skin, rich warm berry lip stain"
+        },
+        "outfit": {
+          "top": {
+            "type": "velvet camisole",
+            "color": "deep burgundy",
+            "material": "velvet",
+            "fit": "fitted, thin spaghetti straps, straight neckline across upper chest",
+            "details": "velvet absorbs light in dark pools, folds shimmer with lighter burgundy sheen"
+          },
+          "bottom": {
+            "type": "structured wool blazer draped over shoulders",
+            "color": "black",
+            "material": "wool",
+            "fit": "draped without arms in sleeves, collar popped, lapels framing face"
+          },
+          "accessories": [
+            "delicate gold drop earrings with small ruby-colored stone",
+            "burgundy-painted nails",
+            "iPhone 15 Pro Max"
+          ]
+        },
+        "pose": {
+          "position": "sitting in back seat of luxury car",
+          "stance": "leaned back into leather seat, left leg crossed over right, posture relaxed but upright with quiet authority",
+          "hands": "right hand holding phone extended toward camera at elevated selfie angle, left hand resting on crossed left knee with relaxed fingers and visible painted nails",
+          "head_gaze": "looking up at phone camera through lashes, chin slightly down, one eyebrow raised, self-satisfied knowing smirk",
+          "vibe": "quiet nighttime authority"
+        },
+        "scene": {
+          "location": "back seat of luxury car in motion at night",
+          "time": "night",
+          "atmosphere": "intimate, luxurious, dynamic, urban night",
+          "background": "dark grey leather seats with stitching detail, tinted windows with blurred horizontal bokeh trails of warm golden and cool blue-white city lights, occasional red traffic light and green neon color splashes"
+        },
+        "camera": {
+          "pov": "front camera selfie from slightly above",
+          "angle": "slightly elevated, looking up through lashes",
+          "framing": "close-up to medium shot from chest up, vertical portrait with car interior and city bokeh background"
+        },
+        "lighting": {
+          "type": "complex mixed — warm golden city light through windows, cool phone screen fill from below, ambient streetlight shifting warm-cool",
+          "effect": "dynamic interplay of warm amber streetlight and cool city blue on face and shoulders, phone screen cool fill under chin, low-lit intimate interior, passing light painting shifting tones"
+        },
+        "mood": {
+          "energy": "confident, commanding, quietly dangerous",
+          "color_palette": "deep burgundy velvet, warm gold, cool city blue, dark charcoal leather, ruby accent, warm amber streetlight, blurred neon bokeh",
+          "aesthetic": "nighttime car selfie confidence"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "chain_position: chain_start. Variant A — playful provocateur statement. 'u were warned' with smiling devil emoji is pure 'Cute but Deadly' Meruru — confident, teasing, slightly dangerous. 14 characters including emoji. The nighttime car selfie shows Meruru out on the town, in control, quietly commanding — the visual counterpart to the self-quote chain's escalation energy. Character lock enforced: dark brown hair, light-medium neutral skin, fitness hourglass, elevated evening makeup. Zero hashtags."
+    }
+  ],
+  "reply_templates": [
+    "the detail in this is absolutely unreal",
+    "how do you make every shot look so effortless",
+    "okay but the lighting here tho",
+    "this just made me stop scrolling fr",
+    "genuinely obsessed with your whole aesthetic",
+    "the vibes in this are immaculate",
+    "saving this for my vision board ngl",
+    "you never miss and its kind of annoying",
+    "the way this color palette just works together",
+    "dropped everything to stare at this for five minutes"
+  ]
+}

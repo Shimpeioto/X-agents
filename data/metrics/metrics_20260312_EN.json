@@ -1,0 +1,22 @@
+{
+  "account": "EN",
+  "date": "2026-03-12",
+  "account_metrics": {
+    "account": "EN",
+    "date": "2026-03-12",
+    "followers": 5,
+    "following": 40,
+    "total_posts": 28,
+    "followers_change": 0
+  },
+  "post_metrics": [],
+  "totals": {
+    "likes": 0,
+    "retweets": 0,
+    "replies": 0,
+    "quotes": 0,
+    "bookmarks": 0
+  },
+  "generated_at": "2026-03-12T12:44:10.451788+09:00",
+  "post_count": 0
+}

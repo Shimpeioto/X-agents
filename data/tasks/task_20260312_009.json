@@ -1,0 +1,13 @@
+{
+  "task_id": "20260312_009",
+  "description": "Investigate and fix the missing image prompt issue in Creator's EN content plan output. Steps: 1) Read data/content_plan_20260312_EN.json and data/content_plan_20260311_EN.json to see exactly what's present in image_prompt fields vs what's required by agents/creator.md schema (meta, subject, outfit, pose, scene, camera, lighting, mood). 2) Identify root cause — is Creator truncating output? Ignoring the schema? Missing config/image_prompt_guide.md? 3) Check if config/image_prompt_guide.md exists and is readable. 4) Read agents/creator.md validation rules section carefully. 5) Regenerate data/content_plan_20260312_EN.json with COMPLETE image prompts per the full schema — every post must have tool, prompt (150+ words), negative_prompt, aspect_ratio, meta, subject, outfit, pose, scene, camera, lighting, mood. 6) Verify output has all required fields before saving. 7) Generate HTML report: python3 scripts/generate_html_report.py generic data/content_plan_20260312_EN.json --title 'EN Content Plan 2026-03-12 (Fixed)'. 8) Send via Telegram: python3 scripts/telegram_send.py --document data/content_preview_20260312_fixed.html 'EN Content Plan fixed — full image prompts included'",
+  "task_type": "custom",
+  "agents_planned": [
+    "creator"
+  ],
+  "notes": "Root cause investigation required before regeneration. Image prompts have been missing structured fields (meta/subject/outfit/pose/scene/camera/lighting/mood) for at least 2 days. Check if config/image_prompt_guide.md exists — Creator is supposed to read it. Strategy file: data/strategy_20260312.json. Previous broken plan: data/content_plan_20260312_EN.json",
+  "created_at": "2026-03-12T20:21:10.374916+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-12T20:24:08.250284+09:00",
+  "exit_code": 0
+}

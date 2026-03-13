@@ -23,6 +23,7 @@ sys.path.insert(0, os.path.join(PROJECT, "scripts"))
 
 import db_manager
 from x_api import XApiClient, load_bearer_token
+from data_paths import CONTENT_DIR, METRICS_DIR
 
 JST = ZoneInfo("Asia/Tokyo")
 DATA_DIR = os.path.join(PROJECT, "data")
@@ -83,7 +84,7 @@ class Analyst:
 
     def collect_post_metrics(self, account: str) -> int:
         """Collect metrics for all posted tweets of an account. Returns count collected."""
-        plan_path = os.path.join(DATA_DIR, f"content_plan_{self.date}_{account}.json")
+        plan_path = os.path.join(CONTENT_DIR, f"content_plan_{self.date}_{account}.json")
         plan = load_json(plan_path)
         if plan is None:
             logger.error(f"No content plan found: {plan_path}")
@@ -219,7 +220,7 @@ class Analyst:
         summary = db_manager.get_daily_summary(account, self.date_iso)
 
         # Enrich with content plan metadata
-        plan_path = os.path.join(DATA_DIR, f"content_plan_{self.date}_{account}.json")
+        plan_path = os.path.join(CONTENT_DIR, f"content_plan_{self.date}_{account}.json")
         plan = load_json(plan_path)
         if plan:
             post_lookup = {p["id"]: p for p in plan.get("posts", [])}
@@ -233,7 +234,7 @@ class Analyst:
         summary["generated_at"] = now_iso()
         summary["post_count"] = len(summary.get("post_metrics", []))
 
-        output_path = os.path.join(DATA_DIR, f"metrics_{self.date}_{account}.json")
+        output_path = os.path.join(METRICS_DIR, f"metrics_{self.date}_{account}.json")
         save_json(output_path, summary)
         logger.info(f"Summary generated: {output_path} ({summary['post_count']} posts)")
         return True

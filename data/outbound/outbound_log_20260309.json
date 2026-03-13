@@ -1,0 +1,447 @@
+{
+  "date": "2026-03-09",
+  "actions": [
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2027923312152637542",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.436171+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2027164342160933255",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.767359+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2028273416936051024",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.768645+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2028624501857034601",
+      "reply_text": "@Angelwithcakee the glow is unreal in this one ✨",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.770080+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "target_user_id": "1916760212519747584",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.771656+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030086529062932600",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.772841+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030328875746578755",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.774165+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030570719017607447",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.775537+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030449922990809110",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.776702+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030328875746578755",
+      "reply_text": "@yogana_19 okay the grok transformation is actually so good on this",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.777875+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@yogana_19",
+      "target_user_id": "1269692949387935750",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.780354+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@IvoryLane_plus",
+      "tweet_id": "2029935033675292749",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.781428+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@IvoryLane_plus",
+      "tweet_id": "2030297423319577019",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.782608+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@IvoryLane_plus",
+      "tweet_id": "2029935033675292749",
+      "reply_text": "@IvoryLane_plus the lighting here is insane",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.783968+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@IvoryLane_plus",
+      "target_user_id": "1637688245252395010",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.785333+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2027885177284730962",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.786539+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2028832324024991948",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.788007+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2028234267642245555",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.789321+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2027885177284730962",
+      "reply_text": "@HannaJonso genuinely stunning work",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:02:14.790484+09:00",
+      "dry_run": true
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2027923312152637542",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:04:07.939598+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2027164342160933255",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:05:26.723034+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2028273416936051024",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:07:19.986411+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2028624501857034601",
+      "reply_text": "@Angelwithcakee the glow is unreal in this one ✨",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:08:44.369680+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "target_user_id": "1916760212519747584",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:09:43.624942+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030086529062932600",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:10:16.405216+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030328875746578755",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:10:51.158933+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030570719017607447",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:11:34.778433+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030449922990809110",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:12:43.748587+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2030328875746578755",
+      "reply_text": "@yogana_19 okay the grok transformation is actually so good on this",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:13:51.636564+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@yogana_19",
+      "target_user_id": "1269692949387935750",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:14:43.030707+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@IvoryLane_plus",
+      "tweet_id": "2029935033675292749",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:15:59.835659+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@IvoryLane_plus",
+      "tweet_id": "2030297423319577019",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:17:09.691202+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@IvoryLane_plus",
+      "tweet_id": "2029935033675292749",
+      "reply_text": "@IvoryLane_plus the lighting here is insane",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:18:41.040244+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2027885177284730962",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:20:19.464569+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2028832324024991948",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:21:05.491745+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2028234267642245555",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:22:16.252638+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@HannaJonso",
+      "tweet_id": "2027885177284730962",
+      "reply_text": "@HannaJonso genuinely stunning work",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T11:23:22.021504+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@IsabellaCruz_47",
+      "tweet_id": "2028979307901579603",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:04:43.538783+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@IsabellaCruz_47",
+      "tweet_id": "2030775578295517676",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:06:30.482342+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@IsabellaCruz_47",
+      "tweet_id": "2025936957855961549",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:07:21.075208+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@IsabellaCruz_47",
+      "tweet_id": "2025358080674816505",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:08:26.894123+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@IsabellaCruz_47",
+      "tweet_id": "2030775578295517676",
+      "reply_text": "@IsabellaCruz_47 the vibes here are immaculate",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:09:19.982420+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@IsabellaCruz_47",
+      "target_user_id": "1831461948040392704",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:10:50.276769+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Estherbron1",
+      "tweet_id": "2030696123703218610",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:11:32.645832+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Estherbron1",
+      "tweet_id": "2030118455458885745",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:12:50.616498+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Estherbron1",
+      "tweet_id": "2027247292374208976",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:13:49.896023+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Estherbron1",
+      "tweet_id": "2026572134626054541",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-09T13:15:41.297207+09:00",
+      "dry_run": false
+    }
+  ],
+  "failed_replies": [
+    {
+      "target": "@IsabellaCruz_47",
+      "tweet_id": "2030775578295517676",
+      "tweet_url": "https://x.com/IsabellaCruz_47/status/2030775578295517676",
+      "reply_text": "the vibes here are immaculate",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    }
+  ]
+}

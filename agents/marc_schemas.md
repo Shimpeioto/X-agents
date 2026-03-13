@@ -4,7 +4,7 @@ Reference file for pipeline state schema and Telegram message formats.
 
 ## Pipeline State Schema
 
-File: `data/pipeline_state_{YYYYMMDD}.json`
+File: `data/pipeline/pipeline_state_{YYYYMMDD}.json`
 
 ```json
 {

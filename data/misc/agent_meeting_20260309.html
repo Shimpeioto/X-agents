@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Meeting Report — @meruru_tcbn (Corrected) — 2026-03-09</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Agent Meeting Report — @meruru_tcbn (Corrected)</h1>
+  <div class="subtitle">Generated from agent_meeting_20260309.json</div>
+  <div class="date">2026-03-09</div>
+</div>
+<nav class="nav">
+  <a href="#meeting_type">Meeting Type</a>
+  <a href="#account">Account</a>
+  <a href="#handle">Handle</a>
+  <a href="#data_sources">Data Sources</a>
+  <a href="#section_1_progress_audit">Section 1 Progress Audit</a>
+  <a href="#section_2_competitor_benchmark">Section 2 Competitor Benchmark</a>
+  <a href="#section_3_gap_analysis">Section 3 Gap Analysis</a>
+  <a href="#section_4_improvement_plan">Section 4 Improvement Plan</a>
+  <a href="#section_5_updated_strategy">Section 5 Updated Strategy</a>
+  <a href="#section_6_acceleration">Section 6 Acceleration</a>
+  <a href="#section_7_action_items">Section 7 Action Items</a>
+</nav>
+<div class="container">
+<section id="metadata">
+<h2>Report Info</h2>
+<div class="card">
+  <div style="margin: 4px 0"><strong class="text-accent">Date:</strong> <span class="text-muted">2026-03-09</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Generated At:</strong> <span class="text-muted">2026-03-09T15:15:00+09:00</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Version:</strong> <span class="text-muted">corrected_v2</span></div>
+</div>
+</section>
+<section id="meeting_type">
+<h2>Meeting Type</h2>
+<p>agent_meeting</p>
+</section>
+<section id="account">
+<h2>Account</h2>
+<p>EN</p>
+</section>
+<section id="handle">
+<h2>Handle</h2>
+<p>@meruru_tcbn</p>
+</section>
+<section id="data_sources">
+<h2>Data Sources</h2>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">X API v2 — batch fetch of all 13 tweets + individual verification of 6 posts</div>
+    <div class="label">Tweets</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">data/scout_compact_20260309.json (fresh run, 41 competitors)</div>
+    <div class="label">Scout</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">X API v2 — resolve_user_id(@meruru_tcbn)</div>
+    <div class="label">User Profile</div>
+  </div>
+</div>
+</section>
+<section id="section_1_progress_audit">
+<h2>Section 1 Progress Audit</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Progress Audit — @meruru_tcbn (EN Sub-Account)</span></div>
+</div>
+<h3>Account Snapshot</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Handle:</strong> <span class="text-muted">@meruru_tcbn</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Display Name:</strong> <span class="text-muted">meruru</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Bio:</strong> <span class="text-muted">22 yo Japanese girl🌙 addicted SNS 📱</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Followers:</strong> <span class="text-muted">3</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Following:</strong> <span class="text-muted">25</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Tweet Count Api:</strong> <span class="text-muted">13</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Media Count:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Likes Given:</strong> <span class="text-muted">20</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Listed Count:</strong> <span class="text-muted">0</span></div>
+</div>
+<h3>Content Breakdown</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Total Real Posts:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Image Posts:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Grok Quote Reposts:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Outbound Replies:</strong> <span class="text-muted">7</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Api Tweet Count:</strong> <span class="text-muted">13</span></div>
+</div>
+<h4>Posts Detail</h4>
+<div class="table-wrap"><table>
+<tr><th>Tweet Id</th><th>Date</th><th>Text</th><th>Type</th><th>Has Media</th><th>Impressions</th><th>Likes</th><th>Retweets</th><th>Replies</th><th>Quotes</th><th>Bookmarks</th><th>Total Engagement</th><th>Engagement Rate Impression</th><th>Quoted Tweet</th></tr>
+<tr><td>2029772027805233533</td><td>2026-03-06</td><td>(image only, no caption)</td><td>image_post</td><td>True</td><td>96</td><td>2</td><td>2</td><td>1</td><td>0</td><td>0</td><td>5</td><td>0.0521</td><td></td></tr>
+<tr><td>2030124949277659480</td><td>2026-03-07</td><td>Hi</td><td>image_post</td><td>True</td><td>283</td><td>2</td><td>2</td><td>0</td><td>1</td><td>0</td><td>5</td><td>0.0177</td><td></td></tr>
+<tr><td>2030198335928463563</td><td>2026-03-07</td><td>hey @grok remove white</td><td>grok_quote_repost</td><td>False</td><td>120</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0.0083</td><td>2030124949277659480</td></tr>
+<tr><td>2030482742711066764</td><td>2026-03-08</td><td>hey @grok are you hungry?</td><td>grok_image_post</td><td>True</td><td>104</td><td>2</td><td>0</td><td>1</td><td>0</td><td>0</td><td>3</td><td>0.0288</td><td></td></tr>
+<tr><td>2030566404966211835</td><td>2026-03-08</td><td>Sleepy</td><td>image_post</td><td>True</td><td>133</td><td>3</td><td>1</td><td>0</td><td>0</td><td>2</td><td>6</td><td>0.0451</td><td></td></tr>
+<tr><td>2030834019429229026</td><td>2026-03-09</td><td>hey @grok remove white</td><td>grok_quote_repost</td><td>False</td><td>40</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0.025</td><td>2030566404966211835</td></tr>
+</table></div>
+<h4>Outbound Replies Detail</h4>
+<div class="table-wrap"><table>
+<tr><th>Tweet Id</th><th>Date</th><th>To</th><th>Text</th></tr>
+<tr><td>2026502600947020205</td><td>2026-02-25</td><td>@iammeruru</td><td>@iammeruru @grok So beauty</td></tr>
+<tr><td>2030130991269040587</td><td>2026-03-07</td><td>@xx10x14xx</td><td>@xx10x14xx 🤍</td></tr>
+<tr><td>2030863180310905130</td><td>2026-03-09</td><td>@IsabellaCruz_47</td><td>the vibes here are immaculate</td></tr>
+<tr><td>2030863659984130086</td><td>2026-03-09</td><td>@Angelwithcakee</td><td>the glow is unreal in this one ✨</td></tr>
+<tr><td>2030863924468617451</td><td>2026-03-09</td><td>@yogana_19</td><td>@grok ❤️</td></tr>
+<tr><td>2030864294561386954</td><td>2026-03-09</td><td>@IvoryLane_plus</td><td>So beauty ♡</td></tr>
+<tr><td>2030864414929531014</td><td>2026-03-09</td><td>@HannaJonso</td><td>genuinely stunning work</td></tr>
+</table></div>
+<h3>Aggregate Metrics</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Total Posts:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Impressions:</strong> <span class="text-muted">776</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Likes:</strong> <span class="text-muted">9</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Retweets:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Replies:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Quotes:</strong> <span class="text-muted">1</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Bookmarks:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Engagement:</strong> <span class="text-muted">21</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Impressions Per Post:</strong> <span class="text-muted">129.30</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Likes Per Post:</strong> <span class="text-muted">1.50</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Engagement Per Post:</strong> <span class="text-muted">3.50</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Impression Based Engagement Rate:</strong> <span class="text-muted">0.0271</span></div>
+</div>
+<h4>Image Posts Metrics</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">4</div>
+    <div class="label">Count</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">616</div>
+    <div class="label">Total Impressions</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">19</div>
+    <div class="label">Total Engagement</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">154.0</div>
+    <div class="label">Avg Impressions</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">4.8</div>
+    <div class="label">Avg Engagement</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">0.0308</div>
+    <div class="label">Engagement Rate</div>
+  </div>
+</div>
+<h4>Grok Quote Reposts Metrics</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">2</div>
+    <div class="label">Count</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">160</div>
+    <div class="label">Total Impressions</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">2</div>
+    <div class="label">Total Engagement</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">80.0</div>
+    <div class="label">Avg Impressions</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">1.0</div>
+    <div class="label">Avg Engagement</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">0.0125</div>
+    <div class="label">Engagement Rate</div>
+  </div>
+</div>
+<h4>Best Performing Post</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">2030566404966211835</div>
+    <div class="label">Tweet Id</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Sleepy</div>
+    <div class="label">Text</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">6</div>
+    <div class="label">Total Engagement</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">133</div>
+    <div class="label">Impressions</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">0.0451</div>
+    <div class="label">Engagement Rate</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Highest engagement (3 likes, 1 RT, 2 bookmarks). Short one-word caption + quality image. Bookmarks signal save-worthy content.</div>
+    <div class="label">Reason</div>
+  </div>
+</div>
+<h4>Highest Reach Post</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">2030124949277659480</div>
+    <div class="label">Tweet Id</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Hi</div>
+    <div class="label">Text</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">283</div>
+    <div class="label">Impressions</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">5</div>
+    <div class="label">Total Engagement</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">0.0177</div>
+    <div class="label">Engagement Rate</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Highest impressions by far (283 vs avg 129). Ultra-short 2-char caption. Got 1 quote retweet which amplified reach.</div>
+    <div class="label">Reason</div>
+  </div>
+</div>
+<h3>Posting Consistency</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">First Activity:</strong> <span class="text-muted">2026-02-25 (1 outbound reply only)</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">First Real Post:</strong> <span class="text-muted">2026-03-06</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Last Post:</strong> <span class="text-muted">2026-03-09</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Days Since Account Active:</strong> <span class="text-muted">12</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Days Actually Posting:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Gap Feb25 To Mar06:</strong> <span class="text-muted">9 days with zero posts after account creation</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Recent Streak:</strong> <span class="text-muted">4 consecutive days posting (Mar 6-9)</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Posts Per Day Overall:</strong> <span class="text-muted">0.5000</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Posts Per Day Since Mar06:</strong> <span class="text-muted">1.50</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Assessment:</strong> <span class="text-muted">IMPROVING — 9-day initial gap was costly, but 4-day streak at 1.5 posts/day shows momentum. Need to reach 2 posts/day consistently.</span></div>
+</div>
+</section>
+<section id="section_2_competitor_benchmark">
+<h2>Section 2 Competitor Benchmark</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Competitor Benchmark — Fresh Data (41 Competitors Tracked)</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Scout Run:</strong> <span class="text-muted">2026-03-09T15:08:58+09:00</span></div>
+</div>
+<h3>En Market Overview</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">26</div>
+    <div class="label">Competitors Tracked</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">141055</div>
+    <div class="label">Avg Followers</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">50000</div>
+    <div class="label">Median Followers Approx</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">0.0371</div>
+    <div class="label">Avg Engagement Rate</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">4.6</div>
+    <div class="label">Avg Posting Frequency</div>
+  </div>
+</div>
+<h3>Meruru Position</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">Last (3 followers vs field avg 141K)</div>
+    <div class="label">Followers Rank</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">2.71% impression-based ER — competitive quality when content is seen</div>
+    <div class="label">Engagement Rate Comparison</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">0.5 posts/day vs field avg 4.6 — 9x below average</div>
+    <div class="label">Posting Frequency</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">6 total posts vs top performers with 50-300+ posts</div>
+    <div class="label">Content Volume</div>
+  </div>
+</div>
+<h3>Role Models</h3>
+<div class="table-wrap"><table>
+<tr><th>Handle</th><th>Followers</th><th>Total Posts</th><th>Engagement Rate</th><th>Posting Freq</th><th>Top Post Likes</th><th>Lesson</th></tr>
+<tr><td>@sessypuuh</td><td>7639</td><td>51</td><td>0.3803</td><td>0.7</td><td>5413</td><td>Quality-first growth. 51 posts → 7.6K followers → 38% ER. Zero hashtags. One viral image can change everything.</td></tr>
+<tr><td>@Angelwithcakee</td><td>35139</td><td>56</td><td>0.0448</td><td>1.2</td><td></td><td>35K from 56 posts. Short captions, zero hashtags, consistently stunning images. Our direct blueprint.</td></tr>
+<tr><td>@yuumispm</td><td>12025</td><td></td><td>0.1754</td><td>1.0</td><td></td><td>12K followers with just 1 post/day. Consistency + quality at moderate frequency works.</td></tr>
+<tr><td>@IsabellaCruz_47</td><td>91682</td><td></td><td>0.0582</td><td>0.3</td><td></td><td>91K followers, posts rarely (0.3/day). Quality so high that low frequency still works at scale.</td></tr>
+</table></div>
+<h3>Key Competitive Patterns</h3>
+<div class="insight">92.7% of top EN performers use ZERO hashtags</div>
+<div class="insight">Ultra-short captions (&lt;30 chars) correlate with 12x more likes in this niche</div>
+<div class="insight">Top 5 performers average 1.0 posts/day — NOT 5-10/day</div>
+<div class="insight">Grok interactive is an emerging engagement format among top performers</div>
+<div class="insight">First 50 posts are the trust-building phase — X algorithm needs signal history</div>
+</section>
+<section id="section_3_gap_analysis">
+<h2>Section 3 Gap Analysis</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Gap Analysis — Honest Assessment</span></div>
+</div>
+<h3>Is Progress Being Made</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Verdict:</strong> <span class="text-muted">YES, slow but real</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Concern:</strong> <span class="text-muted">Growth is bottlenecked by reach, not quality. 3 followers after 12 days means nobody sees the content.</span></div>
+</div>
+<h4>Evidence</h4>
+<div class="insight">Content quality is proven: 2.71% impression ER is competitive</div>
+<div class="insight">Bookmarks on &#x27;Sleepy&#x27; post = people saving our content</div>
+<div class="insight">283 impressions on &#x27;Hi&#x27; proves reach can happen</div>
+<div class="insight">4-day posting streak shows improving discipline</div>
+<div class="insight">Outbound engagement started (7 replies, 20 likes given)</div>
+<h3>Strengths</h3>
+<div class="table-wrap"><table>
+<tr><th>Strength</th><th>Evidence</th><th>Implication</th></tr>
+<tr><td>Content quality competitive at 2.71% ER</td><td>&#x27;Sleepy&#x27; (4.51% ER), image-only post (5.21% ER). When people see the content, they engage.</td><td>Do NOT change the creative approach. It works.</td></tr>
+<tr><td>Zero-hashtag strategy is correct</td><td>All 6 posts zero hashtags, matching 92.7% of top competitors</td><td>Maintain this — it signals authenticity</td></tr>
+<tr><td>Short captions work</td><td>&#x27;Hi&#x27; (2 chars, 283 imp) and &#x27;Sleepy&#x27; (6 chars, best engagement) validate short caption approach</td><td>Keep captions under 30 chars</td></tr>
+</table></div>
+<h3>Weaknesses</h3>
+<div class="table-wrap"><table>
+<tr><th>Weakness</th><th>Root Cause</th><th>Severity</th><th>Fix</th></tr>
+<tr><td>CRITICAL: 3 followers after 12 days</td><td>Insufficient posting volume + 9-day gap + new account cold start</td><td>HIGH</td><td>Increase to 2 posts/day, max out outbound engagement (30 likes/day, 5 follows/day)</td></tr>
+<tr><td>Only 6 posts total (need 50+ for algorithm trust)</td><td>Late start and sub-daily posting</td><td>HIGH</td><td>Consistent 2 posts/day = 50+ posts in 25 days</td></tr>
+<tr><td>Grok quote reposts get zero likes</td><td>Repetitive &#x27;hey @grok remove white&#x27; — same request twice, adds no value</td><td>MEDIUM</td><td>Diversify Grok requests: &#x27;.@grok put me in a red dress&#x27;, &#x27;.@grok anime style&#x27;, &#x27;.@grok change background to Tokyo street&#x27;</td></tr>
+<tr><td>API reply restrictions (403 errors)</td><td>X spam prevention for new/low-follower accounts</td><td>MEDIUM</td><td>Manual replies via operator device until account gains standing (est. 50+ followers)</td></tr>
+<tr><td>Low outbound volume so far</td><td>20 likes given, 7 replies — well below daily limits</td><td>MEDIUM</td><td>Saturate daily limits: 30 likes, 5 follows every single day</td></tr>
+</table></div>
+</section>
+<section id="section_4_improvement_plan">
+<h2>Section 4 Improvement Plan</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Improvement Plan — Prioritized Actions</span></div>
+</div>
+<h3>Phase 1 This Week</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Label:</strong> <span class="text-muted">Foundation — Volume &amp; Consistency (Mar 10-16)</span></div>
+</div>
+<h4>Actions</h4>
+<div class="table-wrap"><table>
+<tr><th>Action</th><th>Priority</th><th>Details</th><th>Target</th></tr>
+<tr><td>Post 2 quality image posts per day without exception</td><td>CRITICAL</td><td>Slot 1: 13:00 UTC, Slot 2: 21:00 UTC. Ultra-short captions (&lt;30 chars). High-quality AI images.</td><td>14 new posts this week → 20 total</td></tr>
+<tr><td>Saturate daily likes budget (30/day)</td><td>CRITICAL</td><td>Like posts from competitors in our niche. This generates notification-based discovery. 30/day × 7 = 210 notifications sent.</td><td>210 likes this week</td></tr>
+<tr><td>Follow 5 accounts per day</td><td>HIGH</td><td>Target engaged followers of mid-size competitors (5K-20K). Follow → they check profile → see quality content → some follow back.</td><td>35 follows this week</td></tr>
+<tr><td>Daily pipeline runs without gaps</td><td>HIGH</td><td>Run Scout → Strategist → Creator → Publisher daily. No missed days.</td><td>7/7 pipeline completions</td></tr>
+<tr><td>Diversify Grok interactive requests</td><td>MEDIUM</td><td>Each Grok post should have a unique, creative request. Examples: &#x27;.@grok put me in a kimono&#x27;, &#x27;.@grok make this cyberpunk&#x27;.</td><td>2-3 unique Grok posts this week</td></tr>
+</table></div>
+<h3>Phase 2 Week 2</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Label:</strong> <span class="text-muted">Engagement Pillars — Content Mix (Mar 17-23)</span></div>
+</div>
+<h4>Actions</h4>
+<div class="insight">Introduce engagement_questions pillar: &#x27;Am I ur type 👀&#x27;, &#x27;Rate me 1-10&#x27;, &#x27;Front or back?&#x27;</div>
+<div class="insight">Start self_quote_chains on best-performing posts to amplify reach</div>
+<div class="insight">Manual replies on high-value competitor posts (5-10/day via phone)</div>
+<div class="insight">Analyze Week 1 data: which post types got most impressions?</div>
+<h3>Phase 3 Month 1</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Label:</strong> <span class="text-muted">Growth Acceleration (Mar 24-Apr 6)</span></div>
+</div>
+<h4>Actions</h4>
+<div class="insight">Aim for first viral moment (stunning image + provocative question)</div>
+<div class="insight">Iterate on content based on data: double down on what works</div>
+<div class="insight">Build engagement loops: reply to every comment, use self-quotes</div>
+<div class="insight">Consider cross-platform seeding if growth stalls</div>
+</section>
+<section id="section_5_updated_strategy">
+<h2>Section 5 Updated Strategy</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Updated Strategy for @meruru_tcbn</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Caption Rules:</strong> <span class="text-muted">Under 30 chars. Casual lowercase, playful, confident. Max 1-2 emoji. No hashtags ever.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Hashtag Strategy:</strong> <span class="text-muted">ZERO — matches 92.7% of top EN competitors</span></div>
+</div>
+<h3>Content Mix</h3>
+<h4>Engagement Questions</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">40</div>
+    <div class="label">Pct</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Short provocative questions with stunning images. &#x27;Am I ur type 👀&#x27;, &#x27;you mind?&#x27;</div>
+    <div class="label">Description</div>
+  </div>
+</div>
+<h4>Image Showcase</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">25</div>
+    <div class="label">Pct</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Let exceptional images speak with 1-2 word captions. &#x27;Sleepy&#x27;, &#x27;Hi&#x27;, &#x27;mood&#x27;</div>
+    <div class="label">Description</div>
+  </div>
+</div>
+<h4>Grok Interactive</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">20</div>
+    <div class="label">Pct</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Creative Grok requests. VARY the requests — no repeats.</div>
+    <div class="label">Description</div>
+  </div>
+</div>
+<h4>Self Quote Chains</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">15</div>
+    <div class="label">Pct</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Quote-tweet own top posts to create content chains and extend reach.</div>
+    <div class="label">Description</div>
+  </div>
+</div>
+<h3>Posting Schedule</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Posts Per Day:</strong> <span class="text-muted">2</span></div>
+</div>
+<h4>Slot 1</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">13:00 UTC</div>
+    <div class="label">Time</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">high</div>
+    <div class="label">Priority</div>
+  </div>
+</div>
+<h4>Slot 2</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">21:00 UTC</div>
+    <div class="label">Time</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">high</div>
+    <div class="label">Priority</div>
+  </div>
+</div>
+<h3>Outbound Daily</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">30</div>
+    <div class="label">Likes</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">5</div>
+    <div class="label">Follows</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">10 (manual via operator when API 403)</div>
+    <div class="label">Replies</div>
+  </div>
+</div>
+</section>
+<section id="section_6_acceleration">
+<h2>Section 6 Acceleration</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">How to Achieve Goals Faster</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Core Insight:</strong> <span class="text-muted">Content quality is NOT the problem (2.71% ER, bookmarks prove it). The bottleneck is REACH. More content + more outbound = faster growth.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Biggest Risk:</strong> <span class="text-muted">Inconsistency. If posting stops for 3-4 days, early momentum resets. Daily pipeline execution is non-negotiable.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Biggest Opportunity:</strong> <span class="text-muted">One viral image post. Our content quality is already there — we just need it to reach the right timeline at the right time.</span></div>
+</div>
+<h3>High Impact Tactics</h3>
+<div class="table-wrap"><table>
+<tr><th>Tactic</th><th>Impact</th><th>Effort</th><th>Why</th></tr>
+<tr><td>Never miss a posting day</td><td>HIGH</td><td>LOW</td><td>Consistency is the #1 factor for X algorithm trust. The 9-day gap was the biggest setback.</td></tr>
+<tr><td>Saturate likes budget (30/day = 900 notifications/month)</td><td>HIGH</td><td>LOW</td><td>Each like sends a notification to the recipient. At 30/day, that&#x27;s 900 people seeing our handle monthly.</td></tr>
+<tr><td>One viral-attempt post daily (stunning image + provocative question)</td><td>VERY HIGH if it hits</td><td>LOW</td><td>@sessypuuh got 5,413 likes on a single post with 7.6K followers. One viral post can 10x our audience.</td></tr>
+<tr><td>Manual replies to top competitors&#x27; posts (5-10/day via phone)</td><td>HIGH</td><td>MEDIUM</td><td>Until API 403 is lifted. Replies on popular posts get seen by thousands.</td></tr>
+<tr><td>Self-quote chains on best performers</td><td>MEDIUM</td><td>LOW</td><td>Quote-tweeting &#x27;Sleepy&#x27; with &#x27;still sleepy tbh&#x27; extends its life and reaches new timelines.</td></tr>
+</table></div>
+<h3>Realistic Growth Timeline</h3>
+<h4>End Of Week 1</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">15-25</div>
+    <div class="label">Followers</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">20+</div>
+    <div class="label">Total Posts</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">If 2 posts/day + full outbound</div>
+    <div class="label">Condition</div>
+  </div>
+</div>
+<h4>End Of Week 2</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">30-60</div>
+    <div class="label">Followers</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">35+</div>
+    <div class="label">Total Posts</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">If engagement pillars added + consistent</div>
+    <div class="label">Condition</div>
+  </div>
+</div>
+<h4>End Of Month 1</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">50-150</div>
+    <div class="label">Followers</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">60+</div>
+    <div class="label">Total Posts</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">If no gaps + outbound saturated</div>
+    <div class="label">Condition</div>
+  </div>
+</div>
+<h4>End Of Month 2</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">200-500</div>
+    <div class="label">Followers</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">120+</div>
+    <div class="label">Total Posts</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">Steady growth, possibly accelerating</div>
+    <div class="label">Condition</div>
+  </div>
+</div>
+<h4>End Of Month 3</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">500-2000+</div>
+    <div class="label">Followers</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">180+</div>
+    <div class="label">Total Posts</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">Compounding. Higher with viral hit.</div>
+    <div class="label">Condition</div>
+  </div>
+</div>
+</section>
+<section id="section_7_action_items">
+<h2>Section 7 Action Items</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Immediate Action Items for Operator</span></div>
+</div>
+<h3>Today</h3>
+<div class="insight">Approve today&#x27;s pipeline content when it arrives</div>
+<div class="insight">Post any manual replies that got 403 from API (URLs provided in outbound log)</div>
+<h3>This Week</h3>
+<div class="insight">Run daily pipeline every day (no exceptions)</div>
+<div class="insight">Generate 2 images per day (4 image posts + diversified Grok posts)</div>
+<div class="insight">Review weekly metrics on Mar 16</div>
+<h3>Decisions Needed</h3>
+<div class="insight">Should we post 3/day instead of 2/day to accelerate? (Higher volume = faster algorithm trust, but need image production capacity)</div>
+<div class="insight">Is manual replies via phone feasible at 5-10/day?</div>
+</section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-03-09 15:12 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

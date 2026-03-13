@@ -777,7 +777,7 @@ def generate_content_preview(en_plan_path, jp_plan_path, strategy_path, pipeline
 
     # Write output
     date_compact = date.replace("-", "")
-    output_path = f"data/content_preview_{date_compact}.html"
+    output_path = os.path.join("data", "reports", f"content_preview_{date_compact}.html")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(out)
     print(f"[{datetime.now(JST).isoformat()}] [MARC] [INFO] Content preview HTML written to {output_path}")
@@ -990,7 +990,7 @@ def generate_daily_report(report_path):
     out += html_footer()
 
     date_compact = date.replace("-", "")
-    output_path = f"data/daily_report_{date_compact}.html"
+    output_path = os.path.join("data", "reports", f"daily_report_{date_compact}.html")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(out)
     print(f"[{datetime.now(JST).isoformat()}] [MARC] [INFO] Daily report HTML written to {output_path}")
@@ -1115,7 +1115,7 @@ def generate_publish_report(en_plan_path, jp_plan_path, outbound_log_path, rate_
     out += html_footer()
 
     date_compact = date.replace("-", "")
-    output_path = f"data/publish_report_{date_compact}.html"
+    output_path = os.path.join("data", "reports", f"publish_report_{date_compact}.html")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(out)
     print(f"[{datetime.now(JST).isoformat()}] [MARC] [INFO] Publish report HTML written to {output_path}")
@@ -1164,6 +1164,73 @@ def render_publish_post_card(post, account):
     {time_html}
     {error_html}
   </div>"""
+
+
+# ─────────────────────────────────────────────
+# Content Plan Report (single account, full image prompts)
+# ─────────────────────────────────────────────
+
+def generate_content_plan(json_path, output_path=None):
+    """Generate an HTML report for a single content plan with full image prompts."""
+    data = load_json(json_path)
+    account = data.get("account", "?")
+    date = data.get("date", "?")
+    posts = data.get("posts", [])
+    replies = data.get("reply_templates", [])
+    strategy_used = data.get("strategy_used", "—")
+
+    subtitle = f"{len(posts)} Posts | {account} Account"
+    out = html_head(f"Content Plan — {account}", subtitle, date)
+
+    nav_links = [
+        ("overview", "Overview"),
+        ("posts", "Posts"),
+        ("reply-templates", "Reply Templates"),
+    ]
+    out += html_nav(nav_links)
+    out += '<div class="container">\n'
+
+    # ── Overview ──
+    out += '<section id="overview">\n<h2>Overview</h2>\n'
+    out += '<div class="stat-row">\n'
+    out += f'  {stat_box(len(posts), "Total Posts")}\n'
+    out += f'  {stat_box(account, "Account", "en" if account == "EN" else "pink")}\n'
+    draft_count = sum(1 for p in posts if p.get("status") == "draft")
+    approved_count = sum(1 for p in posts if p.get("status") == "approved")
+    out += f'  {stat_box(draft_count, "Draft", "warning")}\n'
+    out += f'  {stat_box(approved_count, "Approved", "green")}\n'
+    out += '</div>\n'
+    out += f'<div class="text-sm text-muted mt-4">Strategy: {h(strategy_used)}</div>\n'
+    out += '</section>\n'
+
+    # ── Posts with full image prompts ──
+    out += '<section id="posts">\n<h2>Posts</h2>\n'
+    for post in posts:
+        out += render_post_card(post, account)
+    out += '</section>\n'
+
+    # ── Reply Templates ──
+    out += '<section id="reply-templates">\n<h2>Reply Templates</h2>\n'
+    if replies:
+        out += '<div class="reply-grid">\n'
+        for r in replies:
+            out += f'  <div class="reply-item">{h(r)}</div>\n'
+        out += '</div>\n'
+    else:
+        out += '<p class="text-muted">No reply templates</p>\n'
+    out += '</section>\n'
+
+    out += '</div>\n'  # container
+    out += html_footer()
+
+    if not output_path:
+        base = os.path.splitext(json_path)[0]
+        output_path = base + ".html"
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(out)
+    print(f"[{datetime.now(JST).isoformat()}] [MARC] [INFO] Content plan HTML report written to {output_path}")
+    return output_path
 
 
 # ─────────────────────────────────────────────
@@ -1446,6 +1513,11 @@ def main():
     pr.add_argument("--outbound-log", help="Path to outbound log JSON")
     pr.add_argument("--rate-limits", help="Path to rate limits JSON")
 
+    # content_plan (single account, full image prompts)
+    cpl = subparsers.add_parser("content_plan", help="Generate content plan HTML with full image prompts")
+    cpl.add_argument("json_path", help="Path to content plan JSON file")
+    cpl.add_argument("--output", help="Output HTML path (auto-generated if omitted)")
+
     # generic
     gen = subparsers.add_parser("generic", help="Generate HTML from any JSON file")
     gen.add_argument("json_path", help="Path to JSON file")
@@ -1466,6 +1538,11 @@ def main():
             args.en_plan, args.jp_plan,
             getattr(args, "outbound_log", None),
             getattr(args, "rate_limits", None)
+        )
+    elif args.report_type == "content_plan":
+        path = generate_content_plan(
+            args.json_path,
+            output_path=getattr(args, "output", None),
         )
     elif args.report_type == "generic":
         path = generate_generic_report(

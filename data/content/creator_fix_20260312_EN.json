@@ -1,0 +1,159 @@
+{
+  "posts": [
+    {
+      "id": "EN_20260312_02",
+      "slot": 2,
+      "scheduled_time": "17:00 UTC",
+      "category": "image_showcase",
+      "priority": "high",
+      "status": "draft",
+      "text": "built different 🖤",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic fashion editorial photo of a young Japanese woman in her early 20s posing in a clean professional photography studio. She has sleek straight jet-black hair worn in a low loose bun with a few wispy strands escaping and falling softly against her cheekbones and the nape of her neck, the hair catching a subtle blue-black sheen under the studio lights. Fitness hourglass figure with ample chest, toned core, wide hips and thick thighs creating a powerful silhouette. Light-medium neutral smooth skin with a natural even tone and real pore texture visible across her nose and cheeks. Naturally attractive features with a clean neutral expression — lips softly closed with a barely perceptible soft pink tint, natural defined brows unaltered, zero heavy makeup, dewy clean skin finish that reads as effortlessly bare. She wears a sculptural sleeveless black ribbed knit midi dress with a deep V-neckline and architectural seaming that follows her waist and hip curves, the dress ending just below the knee with a subtle side slit. Delicate small gold stud earrings sit at each earlobe, and a single thin gold bracelet catches the light on her left wrist. She stands in a refined contrapposto stance with her right hip shifted slightly outward, left foot stepped slightly forward creating a long clean leg line beneath the dress hemline. Her right arm hangs naturally at her side with fingers gently relaxed, left hand rests lightly at her left hip with fingers loose and natural. She looks directly into the camera lens with a composed unwavering gaze, head level with chin slightly lifted, projecting quiet authority. The studio background is a seamless deep charcoal-grey backdrop paper with no wrinkles or seams, creating a moody clean environment that contrasts sharply with her lighter skin tone. Professional three-point studio lighting with a large softbox key light from the upper left producing soft even illumination with well-defined shadows falling across the right side of her face and body, a secondary fill light from the right reducing harsh contrast while retaining dimensional depth, and a narrow strip light from behind creating a precise bright rim line separating her silhouette from the dark backdrop along her right shoulder, upper arm, and the edge of her hair. Matte black, charcoal grey, pale gold, light neutral skin tones, inky blue-black hair color palette. Minimalist high-fashion editorial aesthetic. Third-person shot at eye-level, full body framing with slight space above and below, centered vertical composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Canon EOS R5",
+          "lens": "85mm prime f/1.4",
+          "style": "minimalist high fashion editorial studio"
+        },
+        "subject": {
+          "hair": {
+            "color": "jet black",
+            "style": "low loose bun, wispy strands against cheeks and nape, blue-black sheen under lights"
+          },
+          "body_type": "fitness hourglass, ample chest, toned core, wide hips, thick thighs",
+          "skin": "light-medium neutral, smooth, real pore texture, natural even tone",
+          "expression": "composed unwavering gaze, chin slightly lifted, quiet authority",
+          "makeup": "minimal — natural defined brows, soft pink lip tint, dewy clean skin finish"
+        },
+        "outfit": {
+          "top": {
+            "type": "sleeveless ribbed knit midi dress",
+            "color": "black",
+            "material": "ribbed knit",
+            "fit": "fitted, sculptural seaming following waist and hip curves",
+            "details": "deep V-neckline, architectural seaming, side slit at hem, ends just below knee"
+          },
+          "accessories": [
+            "small gold stud earrings at each earlobe",
+            "thin gold bracelet on left wrist"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "refined contrapposto, right hip shifted out, left foot stepped slightly forward",
+          "hands": "right arm hanging naturally at side with relaxed fingers, left hand resting lightly at left hip",
+          "head_gaze": "facing camera directly, head level, chin slightly lifted, composed direct eye contact",
+          "vibe": "quiet editorial power"
+        },
+        "scene": {
+          "location": "professional photography studio",
+          "time": "studio (controlled lighting)",
+          "atmosphere": "moody, minimal, commanding",
+          "background": "seamless deep charcoal-grey backdrop paper, no wrinkles or seams, smooth gradient shadow"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "eye-level",
+          "framing": "full body with slight headroom above and floor visible below"
+        },
+        "lighting": {
+          "type": "professional three-point studio: large softbox key light upper left, fill light right, narrow strip rim light from behind",
+          "effect": "soft even illumination, defined shadows on right face and body, bright rim outline on right shoulder and hair edge separating silhouette from dark backdrop"
+        },
+        "mood": {
+          "energy": "quiet, commanding, minimal",
+          "color_palette": "matte black, charcoal grey, pale gold, light neutral skin tones, inky blue-black",
+          "aesthetic": "minimalist high fashion editorial"
+        }
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B — ambient statement format. 'built different 🖤' is an indirect confidence signal without a direct question. 16 characters including emoji. Image_showcase category with zero hashtags, character lock fully enforced."
+    },
+    {
+      "id": "EN_20260312_04",
+      "slot": 4,
+      "scheduled_time": "00:30 UTC",
+      "category": "self_quote_chains",
+      "priority": "medium",
+      "status": "draft",
+      "text": "ur type or nah? 👀",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic candid street style photo of a young Japanese woman in her early 20s standing on a sun-warmed urban sidewalk outside a row of small independent boutique storefronts in a stylish city neighborhood. She has long dark brown hair worn loosely down with a natural slight wave and a center part, the lengths falling past her shoulder blades with a healthy shine, a few face-framing pieces swept to the side by a light breeze and catching the warm afternoon light. Fitness hourglass figure with ample chest, toned core, wide hips and thick sculpted thighs. Light-medium neutral smooth skin with natural texture, real visible pores, and a soft warm glow from the late afternoon sun touching her cheekbones and bare forearms. Naturally attractive expressive features with a playful knowing half-smile, one corner of the mouth lifted higher than the other, bright eyes with a candid slightly raised brow conveying casual confidence. Minimal natural makeup — clean defined natural brows untouched, a sheer soft neutral lip tint providing a barely-there moisturized finish, dewy skin with no heavy foundation coverage. She wears a perfectly fitted caramel-brown leather cropped moto jacket with a silver zip front left partially open over a thin white fitted scoop-neck tank top that tucks into her bottoms, paired with high-waisted straight-leg dark indigo denim jeans with clean seaming and a slight ankle crop showing off white low-profile leather sneakers. A small champagne-gold ring on her right index finger and simple small gold hoop earrings at her earlobes complete the look. She stands with her weight shifted to her left leg creating a natural relaxed hip tilt to the right, right knee bent slightly. Her right hand is tucked into the front pocket of her jeans with thumb visible over the waistband, left hand holds an iced coffee in a clear cup with condensation visible on the outside, the cup held loosely at hip height. She looks just slightly off-camera to the left as if glancing at something in the near distance, caught in a natural candid moment between poses. The street behind her shows warm terracotta-painted building facades, a small cactus in a terracotta planter by a shop door, warm-toned wood signage, and blurred pedestrian traffic creating urban depth. Late afternoon golden hour sunlight comes from the right side of frame, washing across her jacket and the right side of her face with warm amber tones, creating a soft highlighted edge along her hair and caramel jacket while leaving gentle directional shadows falling to the left across the sidewalk pavement. Caramel brown, dark indigo, crisp white, warm amber gold, light neutral skin color palette. Candid relaxed urban style aesthetic. Third-person shot from slightly to the right, three-quarter body framing catching the street environment behind her, slight dutch angle adding natural energy to the composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Sony A7R IV",
+          "lens": "35mm f/1.4",
+          "style": "candid urban street style"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown",
+            "style": "long loose natural waves, center part, past shoulder blades"
+          },
+          "body_type": "fitness hourglass, ample chest, toned core, wide hips, thick sculpted thighs",
+          "skin": "light-medium neutral, smooth, natural texture, real pores, soft warm glow",
+          "expression": "playful knowing half-smile, one brow slightly raised, bright candid eyes, casual confidence",
+          "makeup": "minimal — clean natural brows, sheer soft neutral lip tint, dewy skin finish"
+        },
+        "outfit": {
+          "top": {
+            "type": "cropped moto jacket over tank top",
+            "color": "caramel brown jacket, white tank",
+            "material": "leather jacket, thin cotton tank",
+            "fit": "perfectly fitted jacket zip partially open, fitted scoop-neck tank tucked in",
+            "details": "silver zip front, jacket cropped at waist"
+          },
+          "bottom": {
+            "type": "straight-leg jeans",
+            "color": "dark indigo",
+            "fit": "high-waisted, straight-leg, slight ankle crop"
+          },
+          "footwear": "white low-profile leather sneakers",
+          "accessories": [
+            "small gold hoop earrings",
+            "champagne-gold ring on right index finger",
+            "iced coffee in clear cup with condensation"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "weight on left leg, relaxed hip tilt right, right knee slightly bent",
+          "hands": "right hand tucked in front jeans pocket with thumb over waistband, left hand holding iced coffee loosely at hip height",
+          "head_gaze": "looking slightly off-camera to the left, candid natural glance",
+          "vibe": "effortless casual confidence"
+        },
+        "scene": {
+          "location": "stylish urban neighborhood sidewalk outside independent boutiques",
+          "time": "late afternoon golden hour",
+          "atmosphere": "warm, relaxed, candid urban energy",
+          "background": "terracotta-painted building facades, cactus in terracotta planter by shop door, warm-toned wood signage, blurred pedestrian traffic adding urban depth"
+        },
+        "camera": {
+          "pov": "third-person from slightly to the right",
+          "angle": "slight dutch angle for natural energy",
+          "framing": "three-quarter body with street environment"
+        },
+        "lighting": {
+          "type": "late afternoon golden hour sunlight from the right side of frame",
+          "effect": "warm amber wash across jacket and right side of face, soft highlighted edge along hair and jacket, gentle directional shadows falling left across pavement"
+        },
+        "mood": {
+          "energy": "playful, relaxed, confident",
+          "color_palette": "caramel brown, dark indigo, crisp white, warm amber gold, light neutral skin",
+          "aesthetic": "candid relaxed urban style"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "chain_position: chain_start. Variant A — provocative question format. 'ur type or nah? 👀' is a direct casual engagement prompt under 30 characters (18 chars). Character lock fully enforced: dark brown hair, minimal natural makeup (no cat-eye/berry lip), no branded references. self_quote_chains category."
+    }
+  ]
+}

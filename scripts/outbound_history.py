@@ -60,7 +60,7 @@ def load_json_logs(account, start_date, end_date):
     current = start_date
     while current <= end_date:
         date_str = current.strftime("%Y%m%d")
-        path = os.path.join(PROJECT, "data", f"outbound_log_{date_str}.json")
+        path = os.path.join(PROJECT, "data", "outbound", f"outbound_log_{date_str}.json")
         if os.path.exists(path):
             try:
                 with open(path) as f:

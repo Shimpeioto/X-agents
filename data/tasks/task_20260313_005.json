@@ -1,0 +1,13 @@
+{
+  "task_id": "20260313_005",
+  "description": "Publish all 4 approved posts from data/content_plan_20260312_EN.json. Set all posts to status 'approved' then run: python3 scripts/publisher.py post --account EN. After posting, send Telegram summary of results.",
+  "task_type": "publishing",
+  "agents_planned": [
+    "publisher"
+  ],
+  "notes": "Operator approved all 4 posts in the 2026-03-12 EN content plan. Posts were recently edited (posts 2, 3, 4 revised to match Meruru concept). Post 3 text uses 'hey @grok' format (no leading dot). Publish all 4.",
+  "created_at": "2026-03-13T02:19:18.456381+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-13T02:22:39.053384+09:00",
+  "exit_code": 0
+}

@@ -1,0 +1,348 @@
+{
+  "date": "2026-03-11",
+  "account": "EN",
+  "generated_at": "2026-03-11T21:00:00+09:00",
+  "strategy_used": "data/strategy_20260311.json",
+  "total_posts": 4,
+  "posts": [
+    {
+      "id": "EN_20260311_01",
+      "slot": 1,
+      "scheduled_time": "13:00 UTC",
+      "category": "engagement_questions",
+      "priority": "high",
+      "status": "posted",
+      "text": "be honest rn",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic photo of a young Latina woman in her early-mid 20s sitting on the warm limestone edge of a turquoise infinity pool at a luxury tropical resort during midday. She has long wavy auburn-red hair with copper sun-kissed highlights falling past her shoulders, slightly damp and textured from the humid tropical air with a few strands clinging to her neck. Athletic-toned hourglass figure with warm caramel skin showing natural texture, real pores, and a light golden tan with subtle tan lines visible on her shoulders. She wears a simple white triangle bikini top with thin gold chain connector straps and high-waisted denim cutoff shorts that are unbuttoned at the top with frayed edges sitting on her hips. A thin gold anklet catches the light on her right ankle and small gold stud earrings glint in the sun. She sits with her lower legs dangling into the crystal clear turquoise water creating gentle ripples around her calves. Both hands press flat against the sun-warmed stone behind her with arms straight supporting her weight as she leans back with shoulders open and chest lifted toward the sun. She looks directly at the camera with a relaxed unbothered expression, one corner of her mouth turned up in a subtle knowing smirk, eyes squinting slightly against the bright overhead sun with natural crow's feet creases. Her head tilts back just slightly catching the overhead light on her collarbones and jawline casting a defined shadow under her chin. Behind her the infinity pool edge drops off into a panoramic deep blue ocean view with the water meeting a hazy pale sky at the horizon line. Lush tropical greenery and tall coconut palms frame both sides of the pool deck. A folded striped beach towel and an oversized natural straw sun hat sit on the warm stone beside her right hip. Bright overhead midday tropical sun creates strong defined shadows beneath her thighs and across the pool deck with brilliant light reflections dancing off the water surface and casting shimmering aquatic caustic patterns across her bare stomach and the stone beneath her. Turquoise blue, warm caramel, crisp white, faded denim blue, tropical green color palette. Luxury resort poolside aesthetic. Third-person shot from slightly above eye level, full body framing with pool and ocean visible, centered vertical composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Sony A7R IV",
+          "lens": "35mm f/1.4",
+          "style": "luxury resort poolside lifestyle"
+        },
+        "subject": {
+          "hair": {
+            "color": "auburn-red with copper highlights",
+            "style": "long wavy, slightly damp, past shoulders"
+          },
+          "body_type": "athletic-toned hourglass",
+          "skin": "warm caramel, natural texture, real pores, light golden tan, subtle tan lines",
+          "expression": "relaxed unbothered, subtle knowing smirk, eyes squinting from sun",
+          "makeup": "minimal waterproof, light bronzer, SPF dewy finish, clear lip balm"
+        },
+        "outfit": {
+          "top": {
+            "type": "triangle bikini top",
+            "color": "white",
+            "material": "stretch fabric",
+            "fit": "triangle, thin gold chain straps"
+          },
+          "bottom": {
+            "type": "denim cutoff shorts",
+            "color": "faded denim",
+            "fit": "high-waisted, unbuttoned, frayed edges"
+          },
+          "accessories": [
+            "thin gold anklet",
+            "small gold stud earrings"
+          ]
+        },
+        "pose": {
+          "position": "sitting on pool edge, legs in water",
+          "stance": "leaning back on straight arms, shoulders open, chest lifted",
+          "hands": "both palms flat on stone behind her, arms straight supporting weight",
+          "head_gaze": "looking at camera, head tilted slightly back, squinting from sun",
+          "vibe": "unbothered confidence"
+        },
+        "scene": {
+          "location": "luxury tropical resort infinity pool",
+          "time": "midday",
+          "atmosphere": "bright, warm, tropical paradise",
+          "background": "infinity pool edge into deep blue ocean, hazy horizon, coconut palms, tropical greenery, striped towel and straw hat on stone"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "slightly above eye level",
+          "framing": "full body with pool and ocean"
+        },
+        "lighting": {
+          "type": "bright midday tropical overhead sun",
+          "effect": "strong defined shadows, brilliant water reflections, shimmering caustic patterns on skin, sun-warmed highlights on collarbones"
+        },
+        "mood": {
+          "energy": "relaxed, bold",
+          "color_palette": "turquoise blue, warm caramel, crisp white, faded denim, tropical green",
+          "aesthetic": "luxury resort poolside"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "Variant A — playful challenge format instead of question+emoji. Direct casual command that invites engagement without the repeated 'question mark + emoji' pattern from previous plans. 12 characters.",
+      "tweet_id": "2031721470100136301",
+      "post_url": "https://x.com/meruru_tcbn/status/2031721470100136301",
+      "posted_at": "2026-03-11T22:18:40.970316+09:00"
+    },
+    {
+      "id": "EN_20260311_02",
+      "slot": 2,
+      "scheduled_time": "17:00 UTC",
+      "category": "grok_interactive",
+      "priority": "high",
+      "status": "posted",
+      "text": ".@grok put me on a yacht",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic front camera selfie of a young woman in her early-mid 20s with warm olive skin and long straight jet-black hair parted in the middle falling sleekly past her collarbone. Athletic-toned hourglass figure with natural skin texture and visible pores. She wears a cropped black leather jacket with silver zipper details over a simple white scoop-neck bodysuit that hugs her torso. Small silver hoop earrings and a thin silver chain necklace with a tiny crescent moon pendant catch the light. She holds her phone up with her right hand for a front camera selfie at a slightly low angle below her chin, left hand casually tucked into the jacket pocket with her thumb hooked over the edge. She leans slightly against a raw concrete pillar in an urban parking garage with her right shoulder blade pressed against the rough surface and her body angled naturally. Her expression is cool and unbothered, a subtle confident smirk with half-lidded relaxed eyes and her chin tilted slightly up creating a natural down-the-nose gaze at the camera. The parking garage has raw grey concrete walls and structural pillars with visible construction texture, a single strip of harsh fluorescent overhead light visible in the ceiling behind her casting a cool clinical glow, and the warm rich orange glow of a setting sun visible through the wide garage opening behind and to her right painting dramatic warm rim light along her right shoulder and the edge of her hair. The contrast between cold blue-white fluorescent light from above and warm amber sunset backlight from behind creates a striking cinematic dual-tone lighting effect across her face with the warm side glowing amber and the shadow side tinted cool blue. Cool concrete gray, warm sunset orange, matte black leather, brushed silver metallic, warm skin tones color palette. Urban cinematic selfie aesthetic. Front camera shot from slightly below eye level, medium shot from waist up, centered vertical composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "12mm front camera",
+          "style": "urban cinematic front camera selfie"
+        },
+        "subject": {
+          "hair": {
+            "color": "jet black",
+            "style": "long straight, middle part, past collarbone"
+          },
+          "body_type": "athletic-toned hourglass",
+          "skin": "warm olive, natural texture, visible pores",
+          "expression": "cool unbothered, subtle confident smirk, half-lidded eyes, chin slightly up",
+          "makeup": "soft smoky eye, sculpted brows, matte nude lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "cropped leather jacket over bodysuit",
+            "color": "black jacket, white bodysuit",
+            "material": "leather jacket, jersey bodysuit",
+            "fit": "cropped jacket, fitted bodysuit",
+            "details": "silver zipper details, scoop-neck bodysuit"
+          },
+          "accessories": [
+            "small silver hoop earrings",
+            "thin silver chain necklace with crescent moon pendant",
+            "iPhone 15 Pro Max"
+          ]
+        },
+        "pose": {
+          "position": "standing, leaning against concrete pillar",
+          "stance": "right shoulder against pillar, body angled naturally",
+          "hands": "right hand holding phone up for selfie from below, left hand in jacket pocket with thumb hooked",
+          "head_gaze": "facing camera, chin slightly up, half-lidded down-the-nose gaze",
+          "vibe": "cool confidence"
+        },
+        "scene": {
+          "location": "urban parking garage",
+          "time": "sunset",
+          "atmosphere": "cinematic, urban, edgy",
+          "background": "raw concrete walls and pillars, fluorescent strip light overhead, warm sunset glow through wide garage opening"
+        },
+        "camera": {
+          "pov": "front camera selfie",
+          "angle": "slightly below eye-level",
+          "framing": "medium shot, waist-up"
+        },
+        "lighting": {
+          "type": "mixed — cold fluorescent overhead and warm sunset backlight from behind right",
+          "effect": "cinematic dual-tone lighting, warm amber rim light on right shoulder and hair edge, cool blue-white fluorescent on face, striking contrast"
+        },
+        "mood": {
+          "energy": "bold, edgy",
+          "color_palette": "cool concrete gray, warm sunset orange, matte black leather, brushed silver metallic",
+          "aesthetic": "urban cinematic selfie"
+        }
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B — ambient Grok statement. Scene-change request (put me on a yacht) rather than wardrobe/hair change requests used in previous plans. Diversifies the Grok interaction type. Grok text excluded from 30-char caption limit.",
+      "tweet_id": "2031773482179330400",
+      "post_url": "https://x.com/meruru_tcbn/status/2031773482179330400",
+      "posted_at": "2026-03-12T01:45:21.761558+09:00"
+    },
+    {
+      "id": "EN_20260311_03",
+      "slot": 3,
+      "scheduled_time": "21:00 UTC",
+      "category": "image_showcase",
+      "priority": "high",
+      "status": "posted",
+      "text": "she knows",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic fashion editorial photo of a young Black woman in her early-mid 20s posing in a clean professional photography studio. She has long dark brown hair styled in sleek straight layers with a deep side part sweeping across her forehead, the hair falling smoothly past her shoulders with a subtle glossy sheen catching the studio lights. Athletic-toned hourglass figure with rich deep brown skin showing natural texture and real pores with a healthy natural sheen. She wears a structured deep navy blue satin blazer with sharp angular shoulders and a plunging V-neckline worn without a shirt underneath, the lapels framing her sternum and revealing the elegant lines of her collarbones, paired with high-waisted tailored ivory wide-leg trousers that drape elegantly toward the floor with a single front crease. Chunky gold geometric drop earrings hang from her ears catching the light, and multiple thin gold bangles are stacked on her left wrist. She stands in a strong contrapposto pose with her left hip pushed out prominently and right leg stepped slightly forward, creating a powerful angular silhouette. Her right hand rests inside the blazer pocket with just the thumb and wrist visible, left arm bent at the elbow with fingertips lightly touching the edge of her jawline as if in quiet thought. She looks directly into the camera lens with an intense neutral expression, lips closed and perfectly relaxed, strong unwavering eye contact that commands attention, chin elevated slightly with natural authority. The studio features a seamless warm off-white backdrop paper creating a clean minimal environment with no visible wrinkles or seams and a smooth gradient shadow falling softly behind her. Professional studio lighting with a large octabox key light positioned from the upper right creating soft even illumination with gentle defined shadows along the left side of her face and body, a subtle fill light from the left reducing harsh contrast while preserving dimension, and a thin rim light from directly behind adding a bright outline along her right shoulder and the edge of her hair separating her cleanly from the backdrop. Deep navy, warm ivory, rich burnished gold, deep brown skin tones, warm off-white color palette. High fashion editorial aesthetic. Third-person shot at eye-level, full body framing with slight headroom above and floor visible below, centered vertical composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Canon EOS R5",
+          "lens": "85mm prime f/1.4",
+          "style": "high fashion editorial studio"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown",
+            "style": "long sleek straight layers, deep side part, glossy sheen"
+          },
+          "body_type": "athletic-toned hourglass",
+          "skin": "rich deep brown, natural texture, real pores, healthy natural sheen",
+          "expression": "intense neutral, lips closed and relaxed, strong unwavering eye contact, chin slightly elevated",
+          "makeup": "editorial glam, sculpted contour, bold defined brows, smoky neutral eye with gold shimmer, matte nude lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "structured satin blazer",
+            "color": "deep navy blue",
+            "material": "satin",
+            "fit": "structured, sharp angular shoulders",
+            "details": "plunging V-neckline, no shirt underneath, reveals sternum and collarbones"
+          },
+          "bottom": {
+            "type": "wide-leg trousers",
+            "color": "ivory",
+            "fit": "high-waisted, tailored, single front crease"
+          },
+          "accessories": [
+            "chunky gold geometric drop earrings",
+            "stacked thin gold bangles on left wrist"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "strong contrapposto, left hip pushed out, right leg stepped forward",
+          "hands": "right hand in blazer pocket with thumb visible, left hand fingertips touching jawline",
+          "head_gaze": "facing camera directly, strong eye contact, chin slightly elevated",
+          "vibe": "editorial power"
+        },
+        "scene": {
+          "location": "professional photography studio",
+          "time": "studio (controlled)",
+          "atmosphere": "clean, professional, commanding",
+          "background": "seamless warm off-white backdrop paper, smooth gradient shadow behind"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "eye-level",
+          "framing": "full body with headroom and floor visible"
+        },
+        "lighting": {
+          "type": "professional studio: large octabox key light upper right, fill light left, rim light from behind",
+          "effect": "soft even illumination, gentle shadows on left face and body, bright rim outline on right shoulder and hair edge"
+        },
+        "mood": {
+          "energy": "bold, commanding",
+          "color_palette": "deep navy, warm ivory, rich burnished gold, deep brown, warm off-white",
+          "aesthetic": "high fashion editorial"
+        }
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B — third-person statement format. Confident declarative 'she knows' instead of first-person question or minimal 'just me'. 9 characters.",
+      "tweet_id": "2032042947064332669",
+      "post_url": "https://x.com/meruru_tcbn/status/2032042947064332669",
+      "posted_at": "2026-03-12T19:36:07.095365+09:00"
+    },
+    {
+      "id": "EN_20260311_04",
+      "slot": 4,
+      "scheduled_time": "00:30 UTC",
+      "category": "self_quote_chains",
+      "priority": "medium",
+      "status": "posted",
+      "text": "wait for it",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic candid street style photo of a young biracial woman in her early-mid 20s walking down a sun-drenched urban sidewalk in a trendy neighborhood. She has long dark brown hair with natural loose waves and honey-toned highlights scattered through the lengths, the hair falling messily past her shoulders with a few windswept strands blowing across her face from a light breeze. Athletic-toned hourglass figure with light golden-brown skin showing natural texture and a warm sun-kissed glow with a subtle flush across her cheeks from the heat. She wears a vintage oversized faded denim jacket with the sleeves rolled up to her elbows showing her forearms over a fitted black ribbed crop top that reveals a strip of her toned midriff, paired with low-rise olive green cargo pants with silver snap hardware on the pockets and chunky white platform sneakers. Small gold hoop earrings glint as they swing, round tortoiseshell sunglasses are pushed up on top of her head, and a small black leather crossbody bag with a silver chain strap hangs at her hip. She walks mid-stride with her right foot forward and left foot just lifting off the concrete creating a slight natural motion energy in the frame. Her right hand grips the crossbody bag strap across her chest with relaxed fingers, left hand swinging naturally at her side holding an iced matcha latte in a clear plastic cup with condensation dripping down the sides. She glances to her right toward the camera with a candid half-smile caught naturally mid-expression as if someone just caught her attention, bright eyes open and naturally squinted from the warm afternoon sunlight. The street behind her shows warm-toned brick building facades with black iron fire escapes, a vintage neon coffee shop sign glowing faintly in daylight, terracotta pots with trailing ivy plants outside storefronts, and a single blurred pedestrian walking in the opposite direction adding urban life. Late afternoon golden hour sunlight comes from behind and to the left creating a warm luminous backlit halo effect wrapping around her hair and outlining the edges of her denim jacket, with long dramatic shadows stretching forward on the grey concrete sidewalk ahead of her and a warm amber wash softening the entire scene. Faded denim blue, olive green, warm amber gold, matte black, light golden-brown skin tones color palette. Candid urban street style aesthetic. Third-person shot from slightly ahead and to the left capturing her walking toward camera, three-quarter body framing with street environment visible, slight dutch angle adding dynamic energy. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Sony A7R IV",
+          "lens": "35mm f/1.4",
+          "style": "candid urban street style"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown with honey highlights",
+            "style": "long loose waves, windswept, past shoulders"
+          },
+          "body_type": "athletic-toned hourglass",
+          "skin": "light golden-brown, natural texture, sun-kissed glow, subtle flush on cheeks",
+          "expression": "candid half-smile, bright squinted eyes, caught mid-expression naturally",
+          "makeup": "minimal fresh-faced, light concealer, soft brow fill, tinted lip balm, natural flush"
+        },
+        "outfit": {
+          "top": {
+            "type": "oversized denim jacket over crop top",
+            "color": "faded denim jacket, black crop top",
+            "material": "denim jacket, ribbed cotton crop top",
+            "fit": "oversized jacket sleeves rolled, fitted crop top",
+            "details": "vintage wash, reveals midriff"
+          },
+          "bottom": {
+            "type": "cargo pants",
+            "color": "olive green",
+            "fit": "low-rise, relaxed",
+            "details": "silver snap hardware on pockets"
+          },
+          "footwear": "chunky white platform sneakers",
+          "accessories": [
+            "small gold hoop earrings",
+            "round tortoiseshell sunglasses on head",
+            "black leather crossbody bag with silver chain",
+            "iced matcha latte in clear cup"
+          ]
+        },
+        "pose": {
+          "position": "walking mid-stride",
+          "stance": "right foot forward, left foot lifting, natural walking momentum",
+          "hands": "right hand gripping crossbody strap across chest, left hand swinging holding iced drink",
+          "head_gaze": "glancing right toward camera, candid bright-eyed look",
+          "vibe": "spontaneous energy"
+        },
+        "scene": {
+          "location": "trendy urban neighborhood sidewalk",
+          "time": "late afternoon golden hour",
+          "atmosphere": "warm, candid, vibrant urban life",
+          "background": "warm-toned brick facades with fire escapes, vintage neon coffee sign, terracotta pots with trailing ivy, blurred pedestrian walking opposite direction"
+        },
+        "camera": {
+          "pov": "third-person from slightly ahead and left",
+          "angle": "slight dutch angle for dynamic energy",
+          "framing": "three-quarter body with street visible"
+        },
+        "lighting": {
+          "type": "late afternoon golden hour backlight from behind-left",
+          "effect": "warm luminous halo on hair and jacket edges, long dramatic shadows forward on sidewalk, warm amber wash across scene"
+        },
+        "mood": {
+          "energy": "dynamic, spontaneous",
+          "color_palette": "faded denim blue, olive green, warm amber gold, matte black, golden-brown",
+          "aesthetic": "candid urban street style"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "chain_position: chain_start. Variant A — tease/incomplete thought format. 'wait for it' builds anticipation for the chain follow-up without using the question+emoji formula. 11 characters.",
+      "tweet_id": "2032096685913227587",
+      "post_url": "https://x.com/meruru_tcbn/status/2032096685913227587",
+      "posted_at": "2026-03-12T23:09:39.412347+09:00"
+    }
+  ],
+  "reply_templates": [
+    "literally can't stop staring at this",
+    "the way you do lighting is unreal",
+    "okay this one just hit different",
+    "so underrated it's actually criminal",
+    "everything about this is immaculate",
+    "dropped my phone when i saw this",
+    "whoever is behind this deserves a raise",
+    "that color grading is chef's kiss",
+    "saving this for inspo ngl",
+    "you keep raising the bar fr"
+  ]
+}

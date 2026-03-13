@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Plan — EN — 2026-03-12</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Content Plan — EN</h1>
+  <div class="subtitle">4 Posts | EN Account</div>
+  <div class="date">2026-03-12</div>
+</div>
+<nav class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#posts">Posts</a>
+  <a href="#reply-templates">Reply Templates</a>
+</nav>
+<div class="container">
+<section id="overview">
+<h2>Overview</h2>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">4</div>
+    <div class="label">Total Posts</div>
+  </div>
+  <div class="stat-box en">
+    <div class="value">EN</div>
+    <div class="label">Account</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">4</div>
+    <div class="label">Draft</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">0</div>
+    <div class="label">Approved</div>
+  </div>
+</div>
+<div class="text-sm text-muted mt-4">Strategy: data/strategy_20260312.json</div>
+</section>
+<section id="posts">
+<h2>Posts</h2>
+<div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 1</span> <span class="tag">13:00 UTC</span> <span class="tag tag-en">engagement_questions</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-green">Variant A</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260312_01</div>
+    <div class="post-text">would u swipe right? 👀</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a spacious modern gym locker room with polished light grey concrete floors and a row of sleek matte black metal lockers lining the wall behind her. She has long dark brown hair pulled back into a high messy ponytail with loose wispy face-framing pieces falling around her temples and along her jawline, the ponytail itself cascading down past her shoulder blades with a slight natural wave from being tied up during her workout session, a few shorter flyaway strands sticking slightly to her damp neck and forehead from recent physical exertion giving the image an authentic just-finished-training quality. Fitness hourglass figure with ample chest pressing against the fitted fabric of her sports bra, toned defined core showing subtle ab definition visible through the tight material, wide curvy hips, and thick sculpted thighs filling out her shorts below the hemline. Light-medium neutral smooth skin with a healthy post-workout flush spreading across her cheeks and upper chest in a natural rosy gradient, a light sheen of fresh perspiration catching the overhead lighting across her collarbones and the bridge of her nose creating tiny specular highlights, natural skin texture with real pores visible especially across her nose and forehead and along the tops of her shoulders, no airbrushing or digital smoothing whatsoever. Naturally attractive face with expressive Japanese features including subtly arched natural brows and warm dark brown eyes. Minimal makeup consisting of softly filled natural brows with a gentle arch, the faintest trace of brown mascara on her upper lashes now slightly smudged and clumped from sweat during her workout, and completely bare soft lips with just her natural pink undertone showing through with a slight dryness at the corners from breathing hard. She wears a fitted charcoal grey performance sports bra with thin criss-cross straps visible at the back of her neck and between her shoulder blades and a subtle matte black Nike swoosh embroidered on the left chest panel, paired with high-waisted jet black spandex biker shorts that end at mid-thigh and hug every curve of her hips and upper thighs tightly with a wide supportive waistband sitting just above her navel, and clean white ankle-cut athletic socks visible above sleek matte black Nike Metcon training shoes with a flat sole. A small black Apple Watch with a black sport band sits on her left wrist and tiny simple gold ball stud earrings glint faintly in both ears catching pinpoints of the overhead light. She stands facing a large rectangular wall-mounted gym mirror with a thin brushed stainless steel frame, holding her iPhone 15 Pro Max in Natural Titanium finish at chest height with her right hand, her fingers wrapped naturally around the back of the device with her index finger along the top edge and her thumb resting casually on the volume button side, while her left hand is lifted up and back to grip the base of her ponytail as if tightening or adjusting the hair tie with her elbow raised and bent outward creating a dynamic triangular shape with her arm that lifts her ribcage on that side and accentuates the narrow taper of her waist in contrast with her hip below. Her weight rests predominantly on her right leg with her right hip pushed slightly out, left knee casually bent with her left foot turned outward and the toe of her sneaker barely touching the concrete floor creating a natural relaxed asymmetric stance. She gazes at the phone screen reflected in the mirror with a relaxed confident expression, her lips barely parted in a subtle almost-smile that is more attitude than grin, one eyebrow raised just a fraction higher than the other creating a quietly playful questioning look as if silently asking the viewer whether they approve of what they see. The locker room visible behind her in the mirror reflection shows a long row of the same matte black metal lockers each with small silver combination padlocks hanging from the latches, a sturdy light maple wood slatted bench running parallel to the lockers with a draped white cotton gym towel bunched casually at one end and a large clear Nalgene water bottle with visible condensation droplets beading on the outside surface sitting upright beside it, warm overhead recessed square LED panel lights set into the white ceiling tiles casting an even bright neutral-white illumination across the space with clean soft diffused shadows forming beneath the bench slats and under her chin and jaw, and a second row of lockers visible further back in the room creating a sense of depth and environment. The bright LED lighting bounces subtle warm reflections off the polished concrete floor surface creating a faint secondary fill light on the lower half of her legs and a crisp clean reflection of her full figure in the mirror that reveals the criss-cross strap detail of her sports bra from behind and the shape of her ponytail hanging between her shoulder blades. Charcoal grey, jet black spandex, polished concrete silver, clean bright white, warm flushed skin tones with rosy post-workout glow color palette. Athletic gym mirror selfie lifestyle aesthetic. Mirror selfie shot captured through the gym mirror at eye-level, full body framing from the top of her head to her training shoes with the brushed steel mirror frame visible at the left and right edges of the composition, centered vertical portrait composition with slight negative space above her head and the locker room environment visible on both sides. Photorealistic, high quality, high resolution, 9:16 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: raw iphone gym mirror selfie</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260312_01')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260312_01" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a spacious modern gym locker room with polished light grey concrete floors and a row of sleek matte black metal lockers lining the wall behind her. She has long dark brown hair pulled back into a high messy ponytail with loose wispy face-framing pieces falling around her temples and along her jawline, the ponytail itself cascading down past her shoulder blades with a slight natural wave from being tied up during her workout session, a few shorter flyaway strands sticking slightly to her damp neck and forehead from recent physical exertion giving the image an authentic just-finished-training quality. Fitness hourglass figure with ample chest pressing against the fitted fabric of her sports bra, toned defined core showing subtle ab definition visible through the tight material, wide curvy hips, and thick sculpted thighs filling out her shorts below the hemline. Light-medium neutral smooth skin with a healthy post-workout flush spreading across her cheeks and upper chest in a natural rosy gradient, a light sheen of fresh perspiration catching the overhead lighting across her collarbones and the bridge of her nose creating tiny specular highlights, natural skin texture with real pores visible especially across her nose and forehead and along the tops of her shoulders, no airbrushing or digital smoothing whatsoever. Naturally attractive face with expressive Japanese features including subtly arched natural brows and warm dark brown eyes. Minimal makeup consisting of softly filled natural brows with a gentle arch, the faintest trace of brown mascara on her upper lashes now slightly smudged and clumped from sweat during her workout, and completely bare soft lips with just her natural pink undertone showing through with a slight dryness at the corners from breathing hard. She wears a fitted charcoal grey performance sports bra with thin criss-cross straps visible at the back of her neck and between her shoulder blades and a subtle matte black Nike swoosh embroidered on the left chest panel, paired with high-waisted jet black spandex biker shorts that end at mid-thigh and hug every curve of her hips and upper thighs tightly with a wide supportive waistband sitting just above her navel, and clean white ankle-cut athletic socks visible above sleek matte black Nike Metcon training shoes with a flat sole. A small black Apple Watch with a black sport band sits on her left wrist and tiny simple gold ball stud earrings glint faintly in both ears catching pinpoints of the overhead light. She stands facing a large rectangular wall-mounted gym mirror with a thin brushed stainless steel frame, holding her iPhone 15 Pro Max in Natural Titanium finish at chest height with her right hand, her fingers wrapped naturally around the back of the device with her index finger along the top edge and her thumb resting casually on the volume button side, while her left hand is lifted up and back to grip the base of her ponytail as if tightening or adjusting the hair tie with her elbow raised and bent outward creating a dynamic triangular shape with her arm that lifts her ribcage on that side and accentuates the narrow taper of her waist in contrast with her hip below. Her weight rests predominantly on her right leg with her right hip pushed slightly out, left knee casually bent with her left foot turned outward and the toe of her sneaker barely touching the concrete floor creating a natural relaxed asymmetric stance. She gazes at the phone screen reflected in the mirror with a relaxed confident expression, her lips barely parted in a subtle almost-smile that is more attitude than grin, one eyebrow raised just a fraction higher than the other creating a quietly playful questioning look as if silently asking the viewer whether they approve of what they see. The locker room visible behind her in the mirror reflection shows a long row of the same matte black metal lockers each with small silver combination padlocks hanging from the latches, a sturdy light maple wood slatted bench running parallel to the lockers with a draped white cotton gym towel bunched casually at one end and a large clear Nalgene water bottle with visible condensation droplets beading on the outside surface sitting upright beside it, warm overhead recessed square LED panel lights set into the white ceiling tiles casting an even bright neutral-white illumination across the space with clean soft diffused shadows forming beneath the bench slats and under her chin and jaw, and a second row of lockers visible further back in the room creating a sense of depth and environment. The bright LED lighting bounces subtle warm reflections off the polished concrete floor surface creating a faint secondary fill light on the lower half of her legs and a crisp clean reflection of her full figure in the mirror that reveals the criss-cross strap detail of her sports bra from behind and the shape of her ponytail hanging between her shoulder blades. Charcoal grey, jet black spandex, polished concrete silver, clean bright white, warm flushed skin tones with rosy post-workout glow color palette. Athletic gym mirror selfie lifestyle aesthetic. Mirror selfie shot captured through the gym mirror at eye-level, full body framing from the top of her head to her training shoes with the brushed steel mirror frame visible at the left and right edges of the composition, centered vertical portrait composition with slight negative space above her head and the locker room environment visible on both sides. Photorealistic, high quality, high resolution, 9:16 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;raw iphone gym mirror selfie&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;dark brown&quot;,
+      &quot;style&quot;: &quot;high messy ponytail with loose wispy face-framing pieces around temples and jawline, slight wave from being tied up, shorter flyaway strands sticking to damp neck and forehead&quot;
+    },
+    &quot;body_type&quot;: &quot;fitness hourglass, ample chest, toned core with subtle ab definition, wide curvy hips, thick sculpted thighs&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, healthy post-workout flush on cheeks and upper chest, light perspiration sheen on collarbones and nose bridge, natural texture with real pores visible on nose forehead and shoulders&quot;,
+    &quot;expression&quot;: &quot;relaxed confident, lips barely parted in subtle almost-smile, one eyebrow raised creating quietly playful questioning look&quot;,
+    &quot;makeup&quot;: &quot;minimal — softly filled natural brows with gentle arch, faint brown mascara slightly smudged from sweat, completely bare lips with natural pink undertone&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;fitted performance sports bra&quot;,
+      &quot;color&quot;: &quot;charcoal grey&quot;,
+      &quot;material&quot;: &quot;performance stretch fabric&quot;,
+      &quot;fit&quot;: &quot;fitted, thin criss-cross straps at back visible between shoulder blades&quot;,
+      &quot;details&quot;: &quot;matte black Nike swoosh embroidered on left chest panel&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;spandex biker shorts&quot;,
+      &quot;color&quot;: &quot;jet black&quot;,
+      &quot;fit&quot;: &quot;high-waisted with wide supportive waistband above navel, mid-thigh length, tight-fitting&quot;
+    },
+    &quot;footwear&quot;: &quot;matte black Nike Metcon training shoes with flat sole, clean white ankle-cut athletic socks&quot;,
+    &quot;accessories&quot;: [
+      &quot;black Apple Watch with black sport band on left wrist&quot;,
+      &quot;tiny gold ball stud earrings in both ears&quot;,
+      &quot;iPhone 15 Pro Max Natural Titanium&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing facing gym mirror&quot;,
+    &quot;stance&quot;: &quot;weight on right leg with right hip pushed out, left knee casually bent with foot turned outward barely touching floor, natural relaxed asymmetric stance&quot;,
+    &quot;hands&quot;: &quot;right hand holding phone at chest height with natural finger wrap and thumb on volume button, left hand raised gripping ponytail base with elbow bent outward creating triangular arm shape&quot;,
+    &quot;head_gaze&quot;: &quot;gazing at phone screen in mirror reflection, one eyebrow slightly raised, quietly questioning look&quot;,
+    &quot;vibe&quot;: &quot;effortless post-workout confidence&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;modern gym locker room&quot;,
+    &quot;time&quot;: &quot;midday&quot;,
+    &quot;atmosphere&quot;: &quot;clean, bright, athletic, authentic&quot;,
+    &quot;background&quot;: &quot;row of matte black metal lockers with silver combination padlocks, light maple wood slatted bench with bunched white gym towel and condensation-beaded Nalgene water bottle, polished light grey concrete floor, second row of lockers creating depth, white ceiling with recessed square LED panels&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;mirror selfie through gym wall mirror&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;full body from head to shoes, brushed steel mirror frame visible at left and right edges, centered vertical portrait&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;overhead recessed square LED panel lights in white ceiling tiles, neutral-white tone&quot;,
+    &quot;effect&quot;: &quot;even bright illumination across space, clean soft diffused shadows under bench slats and chin, subtle warm reflections bouncing off polished concrete floor onto lower legs, crisp mirror reflection revealing back details of outfit&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;confident, athletic, authentic&quot;,
+    &quot;color_palette&quot;: &quot;charcoal grey, jet black spandex, polished concrete silver, clean bright white, warm flushed skin tones with rosy glow&quot;,
+    &quot;aesthetic&quot;: &quot;athletic gym mirror selfie lifestyle&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;raw iphone gym mirror selfie&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark brown&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;high messy ponytail with loose wispy face-framing pieces around temples and jawline, slight wave from being tied up, shorter flyaway strands sticking to damp neck and forehead&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;fitness hourglass, ample chest, toned core with subtle ab definition, wide curvy hips, thick sculpted thighs&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, healthy post-workout flush on cheeks and upper chest, light perspiration sheen on collarbones and nose bridge, natural texture with real pores visible on nose forehead and shoulders&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;relaxed confident, lips barely parted in subtle almost-smile, one eyebrow raised creating quietly playful questioning look&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal — softly filled natural brows with gentle arch, faint brown mascara slightly smudged from sweat, completely bare lips with natural pink undertone&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;fitted performance sports bra&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;charcoal grey&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;performance stretch fabric&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;fitted, thin criss-cross straps at back visible between shoulder blades&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;details&quot;</span></span>: <span class="json-str">&quot;matte black Nike swoosh embroidered on left chest panel&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;spandex biker shorts&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;jet black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;high-waisted with wide supportive waistband above navel, mid-thigh length, tight-fitting&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;footwear&quot;</span></span>: <span class="json-str">&quot;matte black Nike Metcon training shoes with flat sole, clean white ankle-cut athletic socks&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;black Apple Watch with black sport band on left wrist&quot;</span>,
+      <span class="json-str">&quot;tiny gold ball stud earrings in both ears&quot;</span>,
+      <span class="json-str">&quot;iPhone 15 Pro Max Natural Titanium&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing facing gym mirror&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;weight on right leg with right hip pushed out, left knee casually bent with foot turned outward barely touching floor, natural relaxed asymmetric stance&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;right hand holding phone at chest height with natural finger wrap and thumb on volume button, left hand raised gripping ponytail base with elbow bent outward creating triangular arm shape&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;gazing at phone screen in mirror reflection, one eyebrow slightly raised, quietly questioning look&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;effortless post-workout confidence&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;modern gym locker room&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;midday&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;clean, bright, athletic, authentic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;row of matte black metal lockers with silver combination padlocks, light maple wood slatted bench with bunched white gym towel and condensation-beaded Nalgene water bottle, polished light grey concrete floor, second row of lockers creating depth, white ceiling with recessed square LED panels&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;mirror selfie through gym wall mirror&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;full body from head to shoes, brushed steel mirror frame visible at left and right edges, centered vertical portrait&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;overhead recessed square LED panel lights in white ceiling tiles, neutral-white tone&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;even bright illumination across space, clean soft diffused shadows under bench slats and chin, subtle warm reflections bouncing off polished concrete floor onto lower legs, crisp mirror reflection revealing back details of outfit&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;confident, athletic, authentic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;charcoal grey, jet black spandex, polished concrete silver, clean bright white, warm flushed skin tones with rosy glow&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;athletic gym mirror selfie lifestyle&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Variant A — provocative question format. Direct swipe-right question invites engagement and sparks replies. 22 characters including emoji. A/B test final day (day 5 of 5).</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 2</span> <span class="tag">17:00 UTC</span> <span class="tag tag-en">image_showcase</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-pink">Variant B</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260312_02</div>
+    <div class="post-text">deadly 🖤</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a sleek modern apartment hallway just before heading out for the evening. She has long straight jet-black hair with a sharp center part falling like silk curtains past her collarbones to her mid-back, the strands catching overhead light with a glossy blue-black sheen, a few face-framing pieces tucked behind her right ear revealing a small gold ear cuff while the left side falls freely creating deliberate asymmetry. Fitness hourglass figure with ample chest filling the structured neckline of her top, toned core visible through the fitted fabric, wide curvy hips accentuated by the high waist of her bottoms, and thick sculpted thighs. Light-medium neutral smooth skin with a healthy natural glow, real skin texture with visible pores across the bridge of her nose, natural complexion with a subtle warmth across her cheekbones. Minimal makeup with softly groomed natural brows, a precise thin wing of black liquid liner extending just past the outer corner of each eye adding sharpness to her naturally warm expression, barely-there brown mascara defining her lashes without clumping, clean dewy skin with no visible foundation, and a matte nude lip in a dusty rose shade that matches her natural lip tone almost exactly. She wears a fitted black ribbed knit long-sleeve top with a square neckline that sits just at the collarbone, the ribbed texture catching vertical light streaks along her torso, paired with high-waisted straight-leg cream tailored trousers with a crisp front crease and a subtle wide fabric belt in matching cream cinching her waist. On her feet just visible at the bottom of the frame are pointed-toe black patent leather mules. A delicate layered gold necklace set sits against her bare clavicle with a thin choker chain and a longer pendant chain, and she holds a small structured black leather crossbody bag with gold hardware in her left hand at hip level. Her right hand holds an iPhone 15 Pro Max at chest height angled toward the full-length mirror on the wall, her grip natural with her index finger along the top edge. Her weight shifts to her right leg pushing her right hip out in a natural confident contrapposto, left leg relaxed with the toe of her shoe barely touching the floor. She gazes at the phone screen in the mirror with a calm self-assured expression, her chin level, lips relaxed into the faintest closed-mouth smile that suggests she knows exactly how good she looks, eyes steady and direct. The hallway has a clean white wall, a slim modern black-framed full-length mirror, warm honey-toned oak hardwood floors, and a minimalist floating console table with a small green monstera plant in a white ceramic pot and a set of keys. Warm early evening light from a window at the end of the hallway creates a natural golden side-light from the left, casting a long soft shadow on the wall behind her and producing warm highlights along the left side of her face and the left sleeve of her top while the right side sits in slightly cooler ambient shadow. Clean white, jet black, warm cream, honey oak, matte gold, monstera green accent color palette. Effortless going-out confidence aesthetic. Mirror selfie shot at eye-level, full body framing from head to shoes, centered vertical composition with mirror frame visible at edges. Photorealistic, high quality, high resolution, 9:16 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: effortless going-out mirror selfie</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260312_02')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260312_02" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a sleek modern apartment hallway just before heading out for the evening. She has long straight jet-black hair with a sharp center part falling like silk curtains past her collarbones to her mid-back, the strands catching overhead light with a glossy blue-black sheen, a few face-framing pieces tucked behind her right ear revealing a small gold ear cuff while the left side falls freely creating deliberate asymmetry. Fitness hourglass figure with ample chest filling the structured neckline of her top, toned core visible through the fitted fabric, wide curvy hips accentuated by the high waist of her bottoms, and thick sculpted thighs. Light-medium neutral smooth skin with a healthy natural glow, real skin texture with visible pores across the bridge of her nose, natural complexion with a subtle warmth across her cheekbones. Minimal makeup with softly groomed natural brows, a precise thin wing of black liquid liner extending just past the outer corner of each eye adding sharpness to her naturally warm expression, barely-there brown mascara defining her lashes without clumping, clean dewy skin with no visible foundation, and a matte nude lip in a dusty rose shade that matches her natural lip tone almost exactly. She wears a fitted black ribbed knit long-sleeve top with a square neckline that sits just at the collarbone, the ribbed texture catching vertical light streaks along her torso, paired with high-waisted straight-leg cream tailored trousers with a crisp front crease and a subtle wide fabric belt in matching cream cinching her waist. On her feet just visible at the bottom of the frame are pointed-toe black patent leather mules. A delicate layered gold necklace set sits against her bare clavicle with a thin choker chain and a longer pendant chain, and she holds a small structured black leather crossbody bag with gold hardware in her left hand at hip level. Her right hand holds an iPhone 15 Pro Max at chest height angled toward the full-length mirror on the wall, her grip natural with her index finger along the top edge. Her weight shifts to her right leg pushing her right hip out in a natural confident contrapposto, left leg relaxed with the toe of her shoe barely touching the floor. She gazes at the phone screen in the mirror with a calm self-assured expression, her chin level, lips relaxed into the faintest closed-mouth smile that suggests she knows exactly how good she looks, eyes steady and direct. The hallway has a clean white wall, a slim modern black-framed full-length mirror, warm honey-toned oak hardwood floors, and a minimalist floating console table with a small green monstera plant in a white ceramic pot and a set of keys. Warm early evening light from a window at the end of the hallway creates a natural golden side-light from the left, casting a long soft shadow on the wall behind her and producing warm highlights along the left side of her face and the left sleeve of her top while the right side sits in slightly cooler ambient shadow. Clean white, jet black, warm cream, honey oak, matte gold, monstera green accent color palette. Effortless going-out confidence aesthetic. Mirror selfie shot at eye-level, full body framing from head to shoes, centered vertical composition with mirror frame visible at edges. Photorealistic, high quality, high resolution, 9:16 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;effortless going-out mirror selfie&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;jet black&quot;,
+      &quot;style&quot;: &quot;long straight with sharp center part, glossy blue-black sheen, right side tucked behind ear, left side falling freely&quot;
+    },
+    &quot;body_type&quot;: &quot;fitness hourglass, ample chest, toned core, wide curvy hips, thick sculpted thighs&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, healthy natural glow, real texture with visible pores on nose, subtle warmth on cheekbones&quot;,
+    &quot;expression&quot;: &quot;calm self-assured, chin level, faintest closed-mouth smile of quiet confidence, steady direct gaze&quot;,
+    &quot;makeup&quot;: &quot;minimal — softly groomed natural brows, thin precise black liner wing, barely-there brown mascara, clean dewy skin, matte dusty rose nude lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;ribbed knit long-sleeve top&quot;,
+      &quot;color&quot;: &quot;black&quot;,
+      &quot;material&quot;: &quot;ribbed knit&quot;,
+      &quot;fit&quot;: &quot;fitted, square neckline at collarbone&quot;,
+      &quot;details&quot;: &quot;ribbed texture catching vertical light streaks&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;straight-leg tailored trousers&quot;,
+      &quot;color&quot;: &quot;cream&quot;,
+      &quot;fit&quot;: &quot;high-waisted with crisp front crease, subtle wide cream belt&quot;
+    },
+    &quot;footwear&quot;: &quot;pointed-toe black patent leather mules&quot;,
+    &quot;accessories&quot;: [
+      &quot;delicate layered gold necklace set — thin choker and longer pendant chain&quot;,
+      &quot;small gold ear cuff on right ear&quot;,
+      &quot;small structured black leather crossbody bag with gold hardware&quot;,
+      &quot;iPhone 15 Pro Max&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing&quot;,
+    &quot;stance&quot;: &quot;weight on right leg, right hip pushed out in contrapposto, left leg relaxed with toe barely touching floor&quot;,
+    &quot;hands&quot;: &quot;right hand holding phone at chest height with index finger along top edge, left hand holding crossbody bag at hip level&quot;,
+    &quot;head_gaze&quot;: &quot;gazing at phone screen in mirror, chin level, steady direct confident gaze&quot;,
+    &quot;vibe&quot;: &quot;effortless going-out confidence&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;sleek modern apartment hallway&quot;,
+    &quot;time&quot;: &quot;early evening&quot;,
+    &quot;atmosphere&quot;: &quot;clean, confident, refined&quot;,
+    &quot;background&quot;: &quot;clean white wall, slim black-framed full-length mirror, honey-toned oak hardwood floors, minimalist floating console with green monstera in white pot and keys&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;mirror selfie&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;full body from head to shoes, centered vertical, mirror frame visible at edges&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;warm early evening natural light from hallway window at left&quot;,
+    &quot;effect&quot;: &quot;golden side-light on left face and sleeve, long soft shadow on wall, slightly cooler ambient shadow on right side, warm highlights creating dimensional contrast&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;confident, refined, self-assured&quot;,
+    &quot;color_palette&quot;: &quot;clean white, jet black, warm cream, honey oak, matte gold, monstera green accent&quot;,
+    &quot;aesthetic&quot;: &quot;effortless going-out confidence&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;effortless going-out mirror selfie&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;jet black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long straight with sharp center part, glossy blue-black sheen, right side tucked behind ear, left side falling freely&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;fitness hourglass, ample chest, toned core, wide curvy hips, thick sculpted thighs&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, healthy natural glow, real texture with visible pores on nose, subtle warmth on cheekbones&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;calm self-assured, chin level, faintest closed-mouth smile of quiet confidence, steady direct gaze&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal — softly groomed natural brows, thin precise black liner wing, barely-there brown mascara, clean dewy skin, matte dusty rose nude lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;ribbed knit long-sleeve top&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;ribbed knit&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;fitted, square neckline at collarbone&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;details&quot;</span></span>: <span class="json-str">&quot;ribbed texture catching vertical light streaks&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;straight-leg tailored trousers&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;cream&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;high-waisted with crisp front crease, subtle wide cream belt&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;footwear&quot;</span></span>: <span class="json-str">&quot;pointed-toe black patent leather mules&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;delicate layered gold necklace set — thin choker and longer pendant chain&quot;</span>,
+      <span class="json-str">&quot;small gold ear cuff on right ear&quot;</span>,
+      <span class="json-str">&quot;small structured black leather crossbody bag with gold hardware&quot;</span>,
+      <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;weight on right leg, right hip pushed out in contrapposto, left leg relaxed with toe barely touching floor&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;right hand holding phone at chest height with index finger along top edge, left hand holding crossbody bag at hip level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;gazing at phone screen in mirror, chin level, steady direct confident gaze&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;effortless going-out confidence&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;sleek modern apartment hallway&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;early evening&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;clean, confident, refined&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;clean white wall, slim black-framed full-length mirror, honey-toned oak hardwood floors, minimalist floating console with green monstera in white pot and keys&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;mirror selfie&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;full body from head to shoes, centered vertical, mirror frame visible at edges&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;warm early evening natural light from hallway window at left&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;golden side-light on left face and sleeve, long soft shadow on wall, slightly cooler ambient shadow on right side, warm highlights creating dimensional contrast&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;confident, refined, self-assured&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;clean white, jet black, warm cream, honey oak, matte gold, monstera green accent&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;effortless going-out confidence&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Variant B — ambient mood word for image_showcase. &#x27;deadly&#x27; with black heart directly references Meruru&#x27;s &#x27;Cute but Deadly&#x27; tagline. 8 characters including emoji. Character lock enforced: jet-black hair, light-medium neutral skin, fitness hourglass, minimal makeup with precise liner for the going-out edge. Zero hashtags. Scene shows Meruru in control — dressed to kill, heading out, &#x27;softness is a weapon&#x27; energy.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 3</span> <span class="tag">21:00 UTC</span> <span class="tag tag-en">grok_interactive</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-pink">Variant B</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260312_03</div>
+    <div class="post-text">hey @grok now put me in a leather jacket</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic photo of a young Japanese woman in her early 20s standing on a rooftop terrace in a trendy urban neighborhood during the last golden minutes before sunset. She has long dark brown hair in loose tousled waves that catch the golden backlight, the wind lifting several strands away from her face creating dynamic movement, warm honey-brown highlights visible through the naturally dark hair where the sunlight passes through, hair falling past her shoulders with a few wind-blown pieces crossing her face at the bridge of her nose that she has not bothered to push away giving the shot an effortless candid quality. Fitness hourglass figure with ample chest visible through her fitted top, toned core, wide curvy hips, and thick sculpted thighs filling out her jeans. Light-medium neutral smooth skin with a warm golden tone from the direct sunset light hitting her face and bare arms, real skin texture with visible pores across her nose and temples, a natural healthy flush across her cheeks deepened by the warm color temperature of the setting sun. Minimal makeup with softly groomed natural brows catching individual golden hairs in the backlight, barely-there mascara on naturally long lashes now rimmed with golden sunset light, clean bare skin with no visible foundation, and a soft natural lip in a warm pink tone that catches the sunset glow. She wears a simple fitted white crew-neck baby tee in thin cotton that hugs her torso and ends just above her navel showing a sliver of toned midriff, paired with high-waisted medium-wash straight-leg jeans with a slightly distressed knee and the denim faded naturally at the thighs and pocket edges, a thin brown leather belt with a small antique brass buckle threading through the belt loops. White low-top canvas sneakers. A simple thin gold chain bracelet on her right wrist catches sunset light as a single bright point. She stands with her left shoulder leaning casually against a weathered concrete rooftop railing, her right hand raised to push hair away from her face with fingers spread through the wind-blown strands at her temple, left arm resting along the top of the concrete railing with her hand hanging relaxed over the edge. Her weight settles into her left hip creating a relaxed lean, right leg crossed loosely in front of her left at the ankle. She looks directly at the camera with a warm playful expression, one corner of her mouth lifted in a subtle confident smirk, eyes bright and slightly squinted against the low sun behind the camera, radiating effortless charm and quiet self-assurance. The rooftop terrace has a weathered grey concrete half-wall railing, a cluster of terracotta plant pots with trailing green ivy and small succulents along the railing edge, the urban skyline visible in the soft golden haze behind her with building silhouettes and a few distant construction cranes, and the warm orange-gold sky of the final minutes of golden hour filling the upper portion of the frame. Low golden hour sunlight from directly in front and slightly below creates dramatic warm front-lighting that bathes her face and body in rich amber-gold tones, with a strong warm backlight from the sky behind her producing a glowing rim of golden light along the top of her head and shoulders and through the translucent edges of her wind-blown hair strands, the combination creating a luminous halo effect while maintaining clear detail on her face and expression. Warm amber gold, clean white cotton, medium denim blue, weathered concrete grey, terracotta, trailing green, urban skyline silhouette color palette. Golden hour rooftop casual confidence aesthetic. Third-person shot at eye-level, three-quarter body framing from knees up, slight rule-of-thirds composition with subject left of center and skyline filling the right background. Photorealistic, high quality, high resolution, 4:5 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 4:5</span> <span>Camera: Sony A7R IV</span> <span>Lens: 35mm f/1.4</span> <span>Style: golden hour rooftop casual portrait</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260312_03')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260312_03" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic photo of a young Japanese woman in her early 20s standing on a rooftop terrace in a trendy urban neighborhood during the last golden minutes before sunset. She has long dark brown hair in loose tousled waves that catch the golden backlight, the wind lifting several strands away from her face creating dynamic movement, warm honey-brown highlights visible through the naturally dark hair where the sunlight passes through, hair falling past her shoulders with a few wind-blown pieces crossing her face at the bridge of her nose that she has not bothered to push away giving the shot an effortless candid quality. Fitness hourglass figure with ample chest visible through her fitted top, toned core, wide curvy hips, and thick sculpted thighs filling out her jeans. Light-medium neutral smooth skin with a warm golden tone from the direct sunset light hitting her face and bare arms, real skin texture with visible pores across her nose and temples, a natural healthy flush across her cheeks deepened by the warm color temperature of the setting sun. Minimal makeup with softly groomed natural brows catching individual golden hairs in the backlight, barely-there mascara on naturally long lashes now rimmed with golden sunset light, clean bare skin with no visible foundation, and a soft natural lip in a warm pink tone that catches the sunset glow. She wears a simple fitted white crew-neck baby tee in thin cotton that hugs her torso and ends just above her navel showing a sliver of toned midriff, paired with high-waisted medium-wash straight-leg jeans with a slightly distressed knee and the denim faded naturally at the thighs and pocket edges, a thin brown leather belt with a small antique brass buckle threading through the belt loops. White low-top canvas sneakers. A simple thin gold chain bracelet on her right wrist catches sunset light as a single bright point. She stands with her left shoulder leaning casually against a weathered concrete rooftop railing, her right hand raised to push hair away from her face with fingers spread through the wind-blown strands at her temple, left arm resting along the top of the concrete railing with her hand hanging relaxed over the edge. Her weight settles into her left hip creating a relaxed lean, right leg crossed loosely in front of her left at the ankle. She looks directly at the camera with a warm playful expression, one corner of her mouth lifted in a subtle confident smirk, eyes bright and slightly squinted against the low sun behind the camera, radiating effortless charm and quiet self-assurance. The rooftop terrace has a weathered grey concrete half-wall railing, a cluster of terracotta plant pots with trailing green ivy and small succulents along the railing edge, the urban skyline visible in the soft golden haze behind her with building silhouettes and a few distant construction cranes, and the warm orange-gold sky of the final minutes of golden hour filling the upper portion of the frame. Low golden hour sunlight from directly in front and slightly below creates dramatic warm front-lighting that bathes her face and body in rich amber-gold tones, with a strong warm backlight from the sky behind her producing a glowing rim of golden light along the top of her head and shoulders and through the translucent edges of her wind-blown hair strands, the combination creating a luminous halo effect while maintaining clear detail on her face and expression. Warm amber gold, clean white cotton, medium denim blue, weathered concrete grey, terracotta, trailing green, urban skyline silhouette color palette. Golden hour rooftop casual confidence aesthetic. Third-person shot at eye-level, three-quarter body framing from knees up, slight rule-of-thirds composition with subject left of center and skyline filling the right background. Photorealistic, high quality, high resolution, 4:5 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;4:5&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;Sony A7R IV&quot;,
+    &quot;lens&quot;: &quot;35mm f/1.4&quot;,
+    &quot;style&quot;: &quot;golden hour rooftop casual portrait&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;dark brown with warm honey-brown highlights in sunlight&quot;,
+      &quot;style&quot;: &quot;long loose tousled waves, wind-blown with dynamic movement, several strands crossing face at nose bridge&quot;
+    },
+    &quot;body_type&quot;: &quot;fitness hourglass, ample chest, toned core, wide curvy hips, thick sculpted thighs&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, warm golden tone from sunset, real texture with visible pores on nose and temples, natural flush on cheeks deepened by warm light&quot;,
+    &quot;expression&quot;: &quot;warm playful, one corner of mouth lifted in subtle confident smirk, bright eyes slightly squinted against sun, effortless charm&quot;,
+    &quot;makeup&quot;: &quot;minimal — softly groomed natural brows with golden hairs in backlight, barely-there mascara, clean bare skin, soft warm pink natural lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;fitted crew-neck baby tee&quot;,
+      &quot;color&quot;: &quot;white&quot;,
+      &quot;material&quot;: &quot;thin cotton&quot;,
+      &quot;fit&quot;: &quot;fitted, ends just above navel showing sliver of toned midriff&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;straight-leg jeans&quot;,
+      &quot;color&quot;: &quot;medium wash&quot;,
+      &quot;fit&quot;: &quot;high-waisted, slightly distressed knee, naturally faded at thighs and pockets, thin brown leather belt with antique brass buckle&quot;
+    },
+    &quot;footwear&quot;: &quot;white low-top canvas sneakers&quot;,
+    &quot;accessories&quot;: [
+      &quot;thin gold chain bracelet on right wrist&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing, leaning against rooftop railing&quot;,
+    &quot;stance&quot;: &quot;left shoulder leaning on concrete railing, weight in left hip, right leg crossed loosely at ankle in front of left&quot;,
+    &quot;hands&quot;: &quot;right hand raised pushing wind-blown hair from face with fingers spread at temple, left arm resting along railing top with hand hanging relaxed over edge&quot;,
+    &quot;head_gaze&quot;: &quot;looking directly at camera, warm playful confident smirk, eyes bright and slightly squinted from low sun&quot;,
+    &quot;vibe&quot;: &quot;effortless golden-hour charm&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;urban rooftop terrace&quot;,
+    &quot;time&quot;: &quot;final minutes of golden hour before sunset&quot;,
+    &quot;atmosphere&quot;: &quot;warm, luminous, candid, urban&quot;,
+    &quot;background&quot;: &quot;weathered grey concrete half-wall railing, terracotta pots with trailing ivy and succulents, urban skyline silhouettes in golden haze, distant cranes, warm orange-gold sky&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;third-person&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;three-quarter body from knees up, slight rule-of-thirds with subject left of center, skyline right&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;low golden hour sunlight from front-below, strong warm backlight from sky behind&quot;,
+    &quot;effect&quot;: &quot;rich amber-gold front-lighting on face and body, glowing golden rim light on head and shoulders, luminous halo through translucent wind-blown hair edges, clear facial detail maintained&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;confident, warm, playful&quot;,
+    &quot;color_palette&quot;: &quot;warm amber gold, clean white, medium denim blue, weathered concrete grey, terracotta, trailing green, urban skyline silhouette&quot;,
+    &quot;aesthetic&quot;: &quot;golden hour rooftop casual confidence&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;Sony A7R IV&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;35mm f/1.4&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;golden hour rooftop casual portrait&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark brown with warm honey-brown highlights in sunlight&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long loose tousled waves, wind-blown with dynamic movement, several strands crossing face at nose bridge&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;fitness hourglass, ample chest, toned core, wide curvy hips, thick sculpted thighs&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, warm golden tone from sunset, real texture with visible pores on nose and temples, natural flush on cheeks deepened by warm light&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;warm playful, one corner of mouth lifted in subtle confident smirk, bright eyes slightly squinted against sun, effortless charm&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal — softly groomed natural brows with golden hairs in backlight, barely-there mascara, clean bare skin, soft warm pink natural lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;fitted crew-neck baby tee&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;white&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;thin cotton&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;fitted, ends just above navel showing sliver of toned midriff&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;straight-leg jeans&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;medium wash&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;high-waisted, slightly distressed knee, naturally faded at thighs and pockets, thin brown leather belt with antique brass buckle&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;footwear&quot;</span></span>: <span class="json-str">&quot;white low-top canvas sneakers&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;thin gold chain bracelet on right wrist&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing, leaning against rooftop railing&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;left shoulder leaning on concrete railing, weight in left hip, right leg crossed loosely at ankle in front of left&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;right hand raised pushing wind-blown hair from face with fingers spread at temple, left arm resting along railing top with hand hanging relaxed over edge&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;looking directly at camera, warm playful confident smirk, eyes bright and slightly squinted from low sun&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;effortless golden-hour charm&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;urban rooftop terrace&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;final minutes of golden hour before sunset&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;warm, luminous, candid, urban&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;weathered grey concrete half-wall railing, terracotta pots with trailing ivy and succulents, urban skyline silhouettes in golden haze, distant cranes, warm orange-gold sky&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;third-person&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;three-quarter body from knees up, slight rule-of-thirds with subject left of center, skyline right&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;low golden hour sunlight from front-below, strong warm backlight from sky behind&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;rich amber-gold front-lighting on face and body, glowing golden rim light on head and shoulders, luminous halo through translucent wind-blown hair edges, clear facial detail maintained&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;confident, warm, playful&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;warm amber gold, clean white, medium denim blue, weathered concrete grey, terracotta, trailing green, urban skyline silhouette&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;golden hour rooftop casual confidence&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Variant B — Grok interactive fashion transformation. &#x27;put me in a leather jacket&#x27; is a natural, on-brand Meruru request — she&#x27;s in a simple white tee and jeans, playfully asking Grok to edge up her look. Stays within the fashion/beauty lane (no fantasy elements). The base image is a confident rooftop golden-hour shot that Grok can realistically transform. Grok text excluded from 30-char limit. 21:00 UTC captures US evening prime time.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 4</span> <span class="tag">00:30 UTC</span> <span class="tag tag-en">self_quote_chains</span> <span class="tag tag-medium">medium</span> <span class="tag tag-draft">draft</span> <span class="tag tag-green">Variant A</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260312_04</div>
+    <div class="post-text">u were warned 😈</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic front camera selfie of a young Japanese woman in her early 20s sitting in the back seat of a luxury car at night, captured with the warm intimate glow of the city passing by outside the windows. She has long dark brown hair styled in a sleek blowout with a deep side part swept to the left, the hair falling in glossy polished waves past her shoulders with the top layer smooth and luminous catching every passing street light as a bright sliding reflection, while a few shorter face-framing strands fall loosely along her right cheekbone adding softness to the otherwise polished look. Fitness hourglass figure with ample chest visible above the frame of her outfit, toned shoulders. Light-medium neutral smooth skin with a flawless evening look enhanced by the flattering warm interior car lighting, real skin texture visible along her hairline and at her temples, a subtle healthy warmth across her cheeks. Makeup elevated for evening with softly sculpted natural brows filled slightly darker than her daytime look, a wash of warm bronze-champagne shimmer across her lids blended into the crease, defined upper lash line with a thin smudged dark brown liner creating soft smoky definition, black mascara adding volume and length to her naturally long lashes, clean highlighted skin with a subtle dewy glow along her cheekbones and the bridge of her nose, and a rich warm berry-toned lip stain that gives her lips a bitten just-kissed color deeper than her natural tone. She wears a fitted deep burgundy velvet camisole with thin spaghetti straps and a straight neckline that sits across her upper chest, the velvet fabric catching and absorbing the light in rich dark pools of shadow while the folds and edges shimmer with a warm lighter burgundy sheen, paired with a structured black wool blazer draped over her shoulders without her arms in the sleeves, the collar popped slightly and the lapels framing her face and the velvet camisole beneath. A pair of delicate gold drop earrings with a single small ruby-colored stone catch the light as she tilts her head. She holds her phone in her right hand extended toward the camera at a slightly elevated angle, the classic front-camera selfie position with the screen illuminating the underside of her chin with a faint cool-white glow, while her left hand rests on her crossed left knee with her fingers relaxed and her burgundy-painted nails visible. She leans back into the dark leather car seat with her left leg crossed over her right, her posture relaxed but upright with quiet authority. She looks up at the phone camera with a confident knowing expression, her chin slightly down and eyes looking up through her lashes creating a naturally alluring angle, one eyebrow raised fractionally, the corner of her mouth lifted in a self-satisfied smirk that says she knows exactly what she is doing. The car interior features smooth dark grey leather seats with subtle stitching detail, tinted windows through which blurred streaks of warm golden and cool blue-white city lights pass in long horizontal bokeh trails indicating the car is in motion, the occasional flash of a red traffic light or green neon sign creating brief color splashes across the window glass. The lighting is complex: warm golden city light filtering through the windows creates a shifting ambient glow that paints her face and shoulders with passing warm and cool tones, the phone screen adds a subtle cool fill light from below, and the overall effect is a dynamic interplay of warm amber from the streetlights and cool blue from the city night outside, with the interior kept deliberately low-lit and intimate. Deep burgundy velvet, warm gold, cool city blue, dark charcoal leather, ruby accent, warm amber streetlight, blurred neon bokeh color palette. Nighttime car selfie confidence aesthetic. Front camera selfie from slightly above, close-up to medium shot from chest up, vertical portrait with the dark car interior and blurred city light trails through windows visible in background. Photorealistic, high quality, high resolution, 9:16 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 12mm front camera</span> <span>Style: nighttime car selfie</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260312_04')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260312_04" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic front camera selfie of a young Japanese woman in her early 20s sitting in the back seat of a luxury car at night, captured with the warm intimate glow of the city passing by outside the windows. She has long dark brown hair styled in a sleek blowout with a deep side part swept to the left, the hair falling in glossy polished waves past her shoulders with the top layer smooth and luminous catching every passing street light as a bright sliding reflection, while a few shorter face-framing strands fall loosely along her right cheekbone adding softness to the otherwise polished look. Fitness hourglass figure with ample chest visible above the frame of her outfit, toned shoulders. Light-medium neutral smooth skin with a flawless evening look enhanced by the flattering warm interior car lighting, real skin texture visible along her hairline and at her temples, a subtle healthy warmth across her cheeks. Makeup elevated for evening with softly sculpted natural brows filled slightly darker than her daytime look, a wash of warm bronze-champagne shimmer across her lids blended into the crease, defined upper lash line with a thin smudged dark brown liner creating soft smoky definition, black mascara adding volume and length to her naturally long lashes, clean highlighted skin with a subtle dewy glow along her cheekbones and the bridge of her nose, and a rich warm berry-toned lip stain that gives her lips a bitten just-kissed color deeper than her natural tone. She wears a fitted deep burgundy velvet camisole with thin spaghetti straps and a straight neckline that sits across her upper chest, the velvet fabric catching and absorbing the light in rich dark pools of shadow while the folds and edges shimmer with a warm lighter burgundy sheen, paired with a structured black wool blazer draped over her shoulders without her arms in the sleeves, the collar popped slightly and the lapels framing her face and the velvet camisole beneath. A pair of delicate gold drop earrings with a single small ruby-colored stone catch the light as she tilts her head. She holds her phone in her right hand extended toward the camera at a slightly elevated angle, the classic front-camera selfie position with the screen illuminating the underside of her chin with a faint cool-white glow, while her left hand rests on her crossed left knee with her fingers relaxed and her burgundy-painted nails visible. She leans back into the dark leather car seat with her left leg crossed over her right, her posture relaxed but upright with quiet authority. She looks up at the phone camera with a confident knowing expression, her chin slightly down and eyes looking up through her lashes creating a naturally alluring angle, one eyebrow raised fractionally, the corner of her mouth lifted in a self-satisfied smirk that says she knows exactly what she is doing. The car interior features smooth dark grey leather seats with subtle stitching detail, tinted windows through which blurred streaks of warm golden and cool blue-white city lights pass in long horizontal bokeh trails indicating the car is in motion, the occasional flash of a red traffic light or green neon sign creating brief color splashes across the window glass. The lighting is complex: warm golden city light filtering through the windows creates a shifting ambient glow that paints her face and shoulders with passing warm and cool tones, the phone screen adds a subtle cool fill light from below, and the overall effect is a dynamic interplay of warm amber from the streetlights and cool blue from the city night outside, with the interior kept deliberately low-lit and intimate. Deep burgundy velvet, warm gold, cool city blue, dark charcoal leather, ruby accent, warm amber streetlight, blurred neon bokeh color palette. Nighttime car selfie confidence aesthetic. Front camera selfie from slightly above, close-up to medium shot from chest up, vertical portrait with the dark car interior and blurred city light trails through windows visible in background. Photorealistic, high quality, high resolution, 9:16 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;12mm front camera&quot;,
+    &quot;style&quot;: &quot;nighttime car selfie&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;dark brown&quot;,
+      &quot;style&quot;: &quot;sleek polished blowout with deep side part swept left, glossy waves past shoulders, shorter face-framing strands along right cheekbone&quot;
+    },
+    &quot;body_type&quot;: &quot;fitness hourglass, ample chest, toned shoulders&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, healthy warmth on cheeks, real texture at hairline and temples, dewy highlighted cheekbones&quot;,
+    &quot;expression&quot;: &quot;confident knowing look, chin slightly down eyes looking up through lashes, one eyebrow raised, self-satisfied smirk, she knows exactly what she is doing&quot;,
+    &quot;makeup&quot;: &quot;elevated evening — sculpted brows filled slightly darker, warm bronze-champagne shimmer lids, thin smudged dark brown liner, volumizing mascara, dewy highlighted skin, rich warm berry lip stain&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;velvet camisole&quot;,
+      &quot;color&quot;: &quot;deep burgundy&quot;,
+      &quot;material&quot;: &quot;velvet&quot;,
+      &quot;fit&quot;: &quot;fitted, thin spaghetti straps, straight neckline across upper chest&quot;,
+      &quot;details&quot;: &quot;velvet absorbs light in dark pools, folds shimmer with lighter burgundy sheen&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;structured wool blazer draped over shoulders&quot;,
+      &quot;color&quot;: &quot;black&quot;,
+      &quot;material&quot;: &quot;wool&quot;,
+      &quot;fit&quot;: &quot;draped without arms in sleeves, collar popped, lapels framing face&quot;
+    },
+    &quot;accessories&quot;: [
+      &quot;delicate gold drop earrings with small ruby-colored stone&quot;,
+      &quot;burgundy-painted nails&quot;,
+      &quot;iPhone 15 Pro Max&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;sitting in back seat of luxury car&quot;,
+    &quot;stance&quot;: &quot;leaned back into leather seat, left leg crossed over right, posture relaxed but upright with quiet authority&quot;,
+    &quot;hands&quot;: &quot;right hand holding phone extended toward camera at elevated selfie angle, left hand resting on crossed left knee with relaxed fingers and visible painted nails&quot;,
+    &quot;head_gaze&quot;: &quot;looking up at phone camera through lashes, chin slightly down, one eyebrow raised, self-satisfied knowing smirk&quot;,
+    &quot;vibe&quot;: &quot;quiet nighttime authority&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;back seat of luxury car in motion at night&quot;,
+    &quot;time&quot;: &quot;night&quot;,
+    &quot;atmosphere&quot;: &quot;intimate, luxurious, dynamic, urban night&quot;,
+    &quot;background&quot;: &quot;dark grey leather seats with stitching detail, tinted windows with blurred horizontal bokeh trails of warm golden and cool blue-white city lights, occasional red traffic light and green neon color splashes&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;front camera selfie from slightly above&quot;,
+    &quot;angle&quot;: &quot;slightly elevated, looking up through lashes&quot;,
+    &quot;framing&quot;: &quot;close-up to medium shot from chest up, vertical portrait with car interior and city bokeh background&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;complex mixed — warm golden city light through windows, cool phone screen fill from below, ambient streetlight shifting warm-cool&quot;,
+    &quot;effect&quot;: &quot;dynamic interplay of warm amber streetlight and cool city blue on face and shoulders, phone screen cool fill under chin, low-lit intimate interior, passing light painting shifting tones&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;confident, commanding, quietly dangerous&quot;,
+    &quot;color_palette&quot;: &quot;deep burgundy velvet, warm gold, cool city blue, dark charcoal leather, ruby accent, warm amber streetlight, blurred neon bokeh&quot;,
+    &quot;aesthetic&quot;: &quot;nighttime car selfie confidence&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;12mm front camera&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;nighttime car selfie&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark brown&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;sleek polished blowout with deep side part swept left, glossy waves past shoulders, shorter face-framing strands along right cheekbone&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;fitness hourglass, ample chest, toned shoulders&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, healthy warmth on cheeks, real texture at hairline and temples, dewy highlighted cheekbones&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;confident knowing look, chin slightly down eyes looking up through lashes, one eyebrow raised, self-satisfied smirk, she knows exactly what she is doing&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;elevated evening — sculpted brows filled slightly darker, warm bronze-champagne shimmer lids, thin smudged dark brown liner, volumizing mascara, dewy highlighted skin, rich warm berry lip stain&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;velvet camisole&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;deep burgundy&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;velvet&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;fitted, thin spaghetti straps, straight neckline across upper chest&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;details&quot;</span></span>: <span class="json-str">&quot;velvet absorbs light in dark pools, folds shimmer with lighter burgundy sheen&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;structured wool blazer draped over shoulders&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;wool&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;draped without arms in sleeves, collar popped, lapels framing face&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;delicate gold drop earrings with small ruby-colored stone&quot;</span>,
+      <span class="json-str">&quot;burgundy-painted nails&quot;</span>,
+      <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;sitting in back seat of luxury car&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;leaned back into leather seat, left leg crossed over right, posture relaxed but upright with quiet authority&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;right hand holding phone extended toward camera at elevated selfie angle, left hand resting on crossed left knee with relaxed fingers and visible painted nails&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;looking up at phone camera through lashes, chin slightly down, one eyebrow raised, self-satisfied knowing smirk&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;quiet nighttime authority&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;back seat of luxury car in motion at night&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;night&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;intimate, luxurious, dynamic, urban night&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;dark grey leather seats with stitching detail, tinted windows with blurred horizontal bokeh trails of warm golden and cool blue-white city lights, occasional red traffic light and green neon color splashes&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;front camera selfie from slightly above&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;slightly elevated, looking up through lashes&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;close-up to medium shot from chest up, vertical portrait with car interior and city bokeh background&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;complex mixed — warm golden city light through windows, cool phone screen fill from below, ambient streetlight shifting warm-cool&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;dynamic interplay of warm amber streetlight and cool city blue on face and shoulders, phone screen cool fill under chin, low-lit intimate interior, passing light painting shifting tones&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;confident, commanding, quietly dangerous&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;deep burgundy velvet, warm gold, cool city blue, dark charcoal leather, ruby accent, warm amber streetlight, blurred neon bokeh&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;nighttime car selfie confidence&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">chain_position: chain_start. Variant A — playful provocateur statement. &#x27;u were warned&#x27; with smiling devil emoji is pure &#x27;Cute but Deadly&#x27; Meruru — confident, teasing, slightly dangerous. 14 characters including emoji. The nighttime car selfie shows Meruru out on the town, in control, quietly commanding — the visual counterpart to the self-quote chain&#x27;s escalation energy. Character lock enforced: dark brown hair, light-medium neutral skin, fitness hourglass, elevated evening makeup. Zero hashtags.</div>
+  </div></section>
+<section id="reply-templates">
+<h2>Reply Templates</h2>
+<div class="reply-grid">
+  <div class="reply-item">the detail in this is absolutely unreal</div>
+  <div class="reply-item">how do you make every shot look so effortless</div>
+  <div class="reply-item">okay but the lighting here tho</div>
+  <div class="reply-item">this just made me stop scrolling fr</div>
+  <div class="reply-item">genuinely obsessed with your whole aesthetic</div>
+  <div class="reply-item">the vibes in this are immaculate</div>
+  <div class="reply-item">saving this for my vision board ngl</div>
+  <div class="reply-item">you never miss and its kind of annoying</div>
+  <div class="reply-item">the way this color palette just works together</div>
+  <div class="reply-item">dropped everything to stare at this for five minutes</div>
+</div>
+</section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-03-13 01:01 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "task_id": "20260312_012",
+  "description": "Fix EN content plan image prompts. The file data/content_plan_20260312_EN.json has incomplete image_prompt objects — missing meta, subject, outfit, pose, scene, camera, lighting, mood fields. Read data/content_plan_20260311_EN.json to understand the correct full image_prompt format (with all nested detail blocks). Then regenerate data/content_plan_20260312_EN.json using Creator, ensuring every post has a complete, detailed image_prompt matching the 2026-03-11 quality. Also verify EN core strategy compliance: empty hashtags, captions under 30 chars, correct grok format. Write the fixed plan to data/content_plan_20260312_EN.json and send a Telegram notification with HTML preview when done.",
+  "task_type": "custom",
+  "agents_planned": [
+    "creator"
+  ],
+  "notes": "This is the 4th time the operator has asked for this fix. The root cause is Creator outputting incomplete image_prompt objects. The 2026-03-11 plan has the correct format — use it as the reference template. Do not just re-run Creator without explicitly instructing it to include ALL image_prompt sub-fields: tool, prompt (150+ words), negative_prompt, aspect_ratio, meta, subject (with hair sub-object), outfit (with top, bottom, accessories), pose, scene, camera, lighting, mood. Every single one of these must be present and filled with rich detail.",
+  "created_at": "2026-03-12T20:45:40.608876+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-12T20:57:22.531376+09:00",
+  "exit_code": 0
+}

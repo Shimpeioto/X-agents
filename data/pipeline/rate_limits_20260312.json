@@ -1,0 +1,39 @@
+{
+  "date": "2026-03-12",
+  "EN": {
+    "posts": {
+      "used": 5,
+      "limit": 5
+    },
+    "likes": {
+      "used": 7,
+      "limit": 30
+    },
+    "replies": {
+      "used": 3,
+      "limit": 10
+    },
+    "follows": {
+      "used": 0,
+      "limit": 5
+    }
+  },
+  "JP": {
+    "posts": {
+      "used": 0,
+      "limit": 5
+    },
+    "likes": {
+      "used": 0,
+      "limit": 30
+    },
+    "replies": {
+      "used": 0,
+      "limit": 10
+    },
+    "follows": {
+      "used": 0,
+      "limit": 5
+    }
+  }
+}

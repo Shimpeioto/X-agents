@@ -1,0 +1,111 @@
+{
+  "pipeline_date": "2026-03-12",
+  "started_at": "2026-03-12T12:04:00+09:00",
+  "completed_at": "2026-03-12T12:15:00+09:00",
+  "status": "completed",
+  "duration_seconds": 660,
+  "tasks": [
+    {
+      "id": "scout_run",
+      "agent": "scout",
+      "status": "completed",
+      "started_at": "2026-03-12T12:04:29+09:00",
+      "completed_at": "2026-03-12T12:04:52+09:00",
+      "output": "data/scout_raw_20260312.json",
+      "dependencies": [],
+      "notes": "41/41 competitors fetched, 55 new accounts discovered"
+    },
+    {
+      "id": "scout_validation",
+      "agent": "marc",
+      "status": "completed",
+      "started_at": "2026-03-12T12:08:00+09:00",
+      "completed_at": "2026-03-12T12:08:01+09:00",
+      "output": "data/scout_report_20260312.json",
+      "dependencies": ["scout_run"],
+      "notes": "All 8 checks passed"
+    },
+    {
+      "id": "strategist_run",
+      "agent": "strategist",
+      "status": "completed",
+      "started_at": "2026-03-12T12:08:10+09:00",
+      "completed_at": "2026-03-12T12:11:00+09:00",
+      "output": "data/strategy_20260312.json",
+      "dependencies": ["scout_validation"],
+      "notes": "All 14 strategist checks + 4 cross-validation checks passed"
+    },
+    {
+      "id": "strategist_validation",
+      "agent": "marc",
+      "status": "completed",
+      "started_at": "2026-03-12T12:11:00+09:00",
+      "completed_at": "2026-03-12T12:11:01+09:00",
+      "output": null,
+      "dependencies": ["strategist_run"],
+      "notes": "PASS: All 14 checks passed"
+    },
+    {
+      "id": "cross_validation",
+      "agent": "marc",
+      "status": "completed",
+      "started_at": "2026-03-12T12:11:01+09:00",
+      "completed_at": "2026-03-12T12:11:02+09:00",
+      "output": null,
+      "dependencies": ["strategist_run"],
+      "notes": "PASS: All 4 checks passed"
+    },
+    {
+      "id": "creator_en_run",
+      "agent": "creator",
+      "status": "completed",
+      "started_at": "2026-03-12T12:11:10+09:00",
+      "completed_at": "2026-03-12T12:13:30+09:00",
+      "output": "data/content_plan_20260312_EN.json",
+      "dependencies": ["strategist_validation"],
+      "notes": "4 posts, 10 reply templates, all validation passed"
+    },
+    {
+      "id": "creator_en_validation",
+      "agent": "marc",
+      "status": "completed",
+      "started_at": "2026-03-12T12:13:30+09:00",
+      "completed_at": "2026-03-12T12:13:31+09:00",
+      "output": null,
+      "dependencies": ["creator_en_run"],
+      "notes": "PASS: All 12 checks passed"
+    },
+    {
+      "id": "creator_en_cross_validation",
+      "agent": "marc",
+      "status": "completed",
+      "started_at": "2026-03-12T12:13:31+09:00",
+      "completed_at": "2026-03-12T12:13:32+09:00",
+      "output": null,
+      "dependencies": ["creator_en_run"],
+      "notes": "PASS: All 3 checks passed"
+    },
+    {
+      "id": "war_room",
+      "agent": "marc",
+      "status": "completed",
+      "started_at": "2026-03-12T12:14:00+09:00",
+      "completed_at": "2026-03-12T12:14:30+09:00",
+      "output": null,
+      "dependencies": ["creator_en_validation"],
+      "notes": "EN: 100/100 Excellent. JP: skipped (suspended)."
+    },
+    {
+      "id": "telegram_preview",
+      "agent": "marc",
+      "status": "completed",
+      "started_at": "2026-03-12T12:15:00+09:00",
+      "completed_at": "2026-03-12T12:15:30+09:00",
+      "output": "data/content_preview_20260312.html",
+      "dependencies": ["war_room"],
+      "notes": "HTML preview sent to Telegram"
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

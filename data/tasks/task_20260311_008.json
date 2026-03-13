@@ -1,0 +1,14 @@
+{
+  "task_id": "20260311_008",
+  "description": "CRITICAL BUG FIX + RE-EXECUTION: Outbound follow deduplication is broken — keeps following already-followed accounts, wasting budget. This is a repeat offense.\n\n1. INVESTIGATE: Run `python3 scripts/outbound_history.py --account EN --days 30` and compare its 'already_followed' list against the ACTUAL following list from X API (use bearer token: `python3 -c \"import scripts.publisher as p; ...\"` or similar to call GET /2/users/:id/following). Find the discrepancy — is history incomplete? Is the safety check being skipped? Is there a race condition?\n\n2. FIX: Once root cause is identified, fix the code. Likely candidates: outbound_history.py not reading all past logs, or outbound agent not properly checking the already_followed list, or publisher.py not logging follows correctly.\n\n3. RE-EXECUTE: Run 3 NEW follows for EN account on accounts we have NOT followed yet. Verify via API after execution that the follows actually went through to new accounts.\n\n4. IMPROVEMENT PLAN: Add a pre-execution verification step — before any follow action, query GET /2/users/:id/following to get the REAL following list and cross-check. Don't rely solely on log history. Write the plan to a file.\n\nAccount: EN (@meruru_tcbn)\nDate: 2026-03-11\nRelevant files: scripts/outbound_history.py, scripts/publisher.py, agents/outbound.md, data/outbound_log_*.json",
+  "task_type": "custom",
+  "agents_planned": [
+    "outbound",
+    "publisher"
+  ],
+  "notes": "This is a REPEAT bug — operator is frustrated. Root cause analysis is mandatory. The fix must be permanent. Check if outbound_history.py even queries the real API or just reads local logs. The real source of truth is GET /2/users/:id/following via bearer token (user context tokens get 401 on this endpoint).",
+  "created_at": "2026-03-11T19:16:50.047895+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-11T19:26:10.313211+09:00",
+  "exit_code": 0
+}

@@ -3,7 +3,7 @@
 Reference file for the daily content pipeline. Marc reads this when executing the pipeline.
 
 Today's date is provided in the invocation prompt as YYYY-MM-DD.
-For file paths, strip dashes to get YYYYMMDD format (e.g., `data/scout_report_20260303.json`).
+For file paths, strip dashes to get YYYYMMDD format (e.g., `data/scout/scout_report_20260303.json`).
 For JSON date fields, use the original YYYY-MM-DD format.
 
 ## Goal
@@ -51,7 +51,7 @@ python3 scripts/telegram_send.py "Pipeline skipped — no active accounts in con
 
 ### 1. Initialize Pipeline State
 
-Create `data/pipeline_state_{YYYYMMDD}.json` — see [marc_schemas.md](marc_schemas.md) for the initial state template.
+Create `data/pipeline/pipeline_state_{YYYYMMDD}.json` — see [marc_schemas.md](marc_schemas.md) for the initial state template.
 
 ### 2. Spawn Scout Teammate
 
@@ -60,7 +60,7 @@ Spawn a Scout teammate with **model: sonnet**:
 "You are Scout. Read agents/scout.md, section 'Daily Intelligence Mode' for your instructions.
 Today's date: {YYYY-MM-DD}
 Run data collection with compact output, then analyze the raw data and produce an enriched report.
-Write output to: data/scout_report_{YYYYMMDD}.json
+Write output to: data/scout/scout_report_{YYYYMMDD}.json
 Output ONLY valid JSON — no markdown code fences, no commentary."
 ```
 
@@ -71,7 +71,7 @@ If Scout fails: message with error context, retry ONCE. If retry also fails, fal
 ### 3. Validate Scout
 
 ```bash
-python3 scripts/validate.py scout data/scout_report_{YYYYMMDD}.json
+python3 scripts/validate.py scout data/scout/scout_report_{YYYYMMDD}.json
 ```
 
 If FAIL: log, update pipeline state, **STOP**.
@@ -81,18 +81,18 @@ If FAIL: log, update pipeline state, **STOP**.
 Analyze top-performing competitor images for Creator visual references.
 
 ```bash
-python3 scripts/image_analyzer.py data/scout_report_{YYYYMMDD}.json
+python3 scripts/image_analyzer.py data/scout/scout_report_{YYYYMMDD}.json
 ```
 
-- Input: `data/scout_report_{YYYYMMDD}.json` (must exist from Step 2)
-- Output: `data/image_references_{YYYYMMDD}.json`
+- Input: `data/scout/scout_report_{YYYYMMDD}.json` (must exist from Step 2)
+- Output: `data/content/image_references_{YYYYMMDD}.json`
 - Analyzes top 5 competitor images by engagement using Claude Vision
 - This step is **optional** — if it fails, pipeline continues without image references
 - Creator will use references if available, fall back to templates if not
 
 Validate (best-effort, do NOT stop pipeline on failure):
 ```bash
-python3 scripts/validate.py image_references data/image_references_{YYYYMMDD}.json
+python3 scripts/validate.py image_references data/content/image_references_{YYYYMMDD}.json
 ```
 
 Update pipeline state with `image_analysis` step status.
@@ -103,9 +103,9 @@ Spawn with **model: opus**:
 ```
 "You are Strategist. Read agents/strategist.md, section 'Daily Strategy Mode' for your instructions.
 Today's date: {YYYY-MM-DD}
-Scout report path: data/scout_report_{YYYYMMDD}.json
+Scout report path: data/scout/scout_report_{YYYYMMDD}.json
 Generate today's growth strategy based on the scout report.
-Write the output to: data/strategy_{YYYYMMDD}.json
+Write the output to: data/strategy/strategy_{YYYYMMDD}.json
 Output ONLY valid JSON — no markdown code fences, no commentary."
 ```
 
@@ -114,8 +114,8 @@ Output ONLY valid JSON — no markdown code fences, no commentary."
 ### 5. Validate Strategist + Cross-validate
 
 ```bash
-python3 scripts/validate.py strategist data/strategy_{YYYYMMDD}.json
-python3 scripts/validate.py cross data/scout_report_{YYYYMMDD}.json data/strategy_{YYYYMMDD}.json
+python3 scripts/validate.py strategist data/strategy/strategy_{YYYYMMDD}.json
+python3 scripts/validate.py cross data/scout/scout_report_{YYYYMMDD}.json data/strategy/strategy_{YYYYMMDD}.json
 ```
 
 If strategist validation FAILs: log, update pipeline state, **STOP**.
@@ -135,11 +135,11 @@ For each active account (`{account}` = EN or JP), spawn with **model: sonnet**:
 "You are Creator. Read agents/creator.md for your instructions.
 Today's date: {YYYY-MM-DD}
 Account: {account}
-Strategy path: data/strategy_{YYYYMMDD}.json
-Image references path (if exists): data/image_references_{YYYYMMDD}.json
+Strategy path: data/strategy/strategy_{YYYYMMDD}.json
+Image references path (if exists): data/content/image_references_{YYYYMMDD}.json
 Generate today's content plan for the {account} account.
 All posts must have status: 'draft' — human approval happens via Telegram, not here.
-Write the output to: data/content_plan_{YYYYMMDD}_{account}.json
+Write the output to: data/content/content_plan_{YYYYMMDD}_{account}.json
 Output ONLY valid JSON — no markdown code fences, no commentary."
 ```
 
@@ -149,8 +149,8 @@ Skip inactive accounts — do not spawn Creator for them.
 
 For each **active** account:
 ```bash
-python3 scripts/validate.py creator data/content_plan_{YYYYMMDD}_{account}.json
-python3 scripts/validate.py creator_cross data/content_plan_{YYYYMMDD}_{account}.json data/strategy_{YYYYMMDD}.json
+python3 scripts/validate.py creator data/content/content_plan_{YYYYMMDD}_{account}.json
+python3 scripts/validate.py creator_cross data/content/content_plan_{YYYYMMDD}_{account}.json data/strategy/strategy_{YYYYMMDD}.json
 ```
 
 Creator validation FAIL: log, update pipeline state, **STOP**.
@@ -197,9 +197,9 @@ Only pass **active account** content plan files to the report generator:
 ```bash
 # Example with only EN active:
 python3 scripts/generate_html_report.py content_preview \
-  data/content_plan_{YYYYMMDD}_EN.json \
-  --strategy data/strategy_{YYYYMMDD}.json --pipeline-state data/pipeline_state_{YYYYMMDD}.json
-python3 scripts/telegram_send.py --document data/content_preview_{YYYYMMDD}.html "Content Preview — {YYYY-MM-DD}"
+  data/content/content_plan_{YYYYMMDD}_EN.json \
+  --strategy data/strategy/strategy_{YYYYMMDD}.json --pipeline-state data/pipeline/pipeline_state_{YYYYMMDD}.json
+python3 scripts/telegram_send.py --document data/reports/content_preview_{YYYYMMDD}.html "Content Preview — {YYYY-MM-DD}"
 ```
 
 If `telegram_send.py` fails: log as warning, do NOT fail the pipeline.
@@ -208,7 +208,7 @@ If `telegram_send.py` fails: log as warning, do NOT fail the pipeline.
 
 Only after ALL validations pass:
 
-1. **Copy strategy to current**: Copy `data/strategy_{YYYYMMDD}.json` → `data/strategy_current.json`
+1. **Copy strategy to current**: Copy `data/strategy/strategy_{YYYYMMDD}.json` → `data/strategy/strategy_current.json`
 2. **Update pipeline state**: Set `status: "completed"`, `completed_at`, calculate `duration_seconds`
 3. **Write pipeline log**: `logs/pipeline_{YYYYMMDD}.log` with timestamped entries for each step
 4. **Send completion notification** (best-effort):

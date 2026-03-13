@@ -1,0 +1,259 @@
+{
+  "date": "2026-03-11",
+  "actions": [
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@imrubyreid",
+      "tweet_id": "2031468799476617218",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:34:30.204173+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@imrubyreid",
+      "tweet_id": "2031459222068638202",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:36:02.277824+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@imrubyreid",
+      "tweet_id": "2031450145225642105",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:37:19.189882+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@imrubyreid",
+      "tweet_id": "2031041944399355939",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:38:27.435373+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@imrubyreid",
+      "tweet_id": "2031468799476617218",
+      "reply_text": "@imrubyreid okay the way this light hits is unreal",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:39:54.572095+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@imrubyreid",
+      "target_user_id": "1470584190634708993",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:41:20.336935+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@lucidevlinxyz",
+      "tweet_id": "2027800017646587985",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:41:57.775312+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@lucidevlinxyz",
+      "tweet_id": "2028552624086327773",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:42:39.119712+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@lucidevlinxyz",
+      "tweet_id": "2029271640052515298",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:43:55.283216+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@lucidevlinxyz",
+      "tweet_id": "2029271640052515298",
+      "reply_text": "@lucidevlinxyz honestly the boldness is what makes the timeline fun",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:45:13.367548+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@lucidevlinxyz",
+      "target_user_id": "1485421747545407488",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:46:19.478053+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "2031475976102650021",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:47:37.008922+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "2031115174359294370",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:49:05.912440+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "2030671469420626399",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:50:36.236030+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@yuumispm",
+      "tweet_id": "2031475976102650021",
+      "reply_text": "@yuumispm this whole vibe is so clean, genuinely obsessed",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:52:20.625998+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@katekarsyn",
+      "tweet_id": "2031474486864986276",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:54:02.288445+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@katekarsyn",
+      "tweet_id": "2031558706350158136",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:54:49.530898+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@katekarsyn",
+      "tweet_id": "2031475349603934450",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:56:25.033595+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@katekarsyn",
+      "tweet_id": "2031558457472757961",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:57:24.614656+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@katekarsyn",
+      "tweet_id": "2031475349603934450",
+      "reply_text": "@katekarsyn red is definitely your color, this looks amazing",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T16:58:48.818013+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@katekarsyn",
+      "target_user_id": "1886536168717881344",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T17:00:30.476957+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@Estherbron1",
+      "target_user_id": "831028808098598912",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T19:21:29.404765+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@KissofStarova",
+      "target_user_id": "1815218542247374848",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T19:22:47.007383+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@itsluna_baby",
+      "target_user_id": "1548648751555682306",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-11T19:24:18.088127+09:00",
+      "dry_run": false
+    }
+  ],
+  "failed_replies": [
+    {
+      "target": "@imrubyreid",
+      "tweet_id": "2031468799476617218",
+      "tweet_url": "https://x.com/imrubyreid/status/2031468799476617218",
+      "reply_text": "okay the way this light hits is unreal",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    },
+    {
+      "target": "@lucidevlinxyz",
+      "tweet_id": "2029271640052515298",
+      "tweet_url": "https://x.com/lucidevlinxyz/status/2029271640052515298",
+      "reply_text": "honestly the boldness is what makes the timeline fun",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    },
+    {
+      "target": "@yuumispm",
+      "tweet_id": "2031475976102650021",
+      "tweet_url": "https://x.com/yuumispm/status/2031475976102650021",
+      "reply_text": "this whole vibe is so clean, genuinely obsessed",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    },
+    {
+      "target": "@katekarsyn",
+      "tweet_id": "2031475349603934450",
+      "tweet_url": "https://x.com/katekarsyn/status/2031475349603934450",
+      "reply_text": "red is definitely your color, this looks amazing",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    }
+  ]
+}

@@ -1,0 +1,370 @@
+{
+  "date": "2026-03-08",
+  "generated_at": "2026-03-08T14:06:11.674726+09:00",
+  "scout_report_used": "data/scout_report_20260308.json",
+  "images_analyzed": 5,
+  "visual_patterns": {
+    "dominant_scene_types": [
+      "mirror_selfie",
+      "bedroom_casual"
+    ],
+    "color_palette_trends": [
+      "warm tones",
+      "soft pink",
+      "natural light",
+      "neutrals"
+    ],
+    "lighting_trends": "80% natural light across top 5 images, warm golden tones dominate",
+    "pose_patterns": "confident, relaxed stances; direct camera gaze common",
+    "outfit_trends": "casual everyday wear outperforms editorial; crop tops and loungewear common",
+    "style_summary": "Top 5 performers use raw iPhone-style mirror selfies with minimal styling, warm natural light, and casual-intimate settings. Studio/editorial shots underperform.",
+    "key_insight": "The highest-engagement images feel authentic and unposed. Bedroom/bathroom settings with natural light consistently outperform outdoor and studio shots."
+  },
+  "references": [
+    {
+      "source": {
+        "handle": "@IsabellaCruz_47",
+        "tweet_id": "2024279270634201103",
+        "text_preview": "Rate me from 1 to 10 🤍 https://t.co/eEuJDX1OBg",
+        "likes": 20613,
+        "engagement_rate": 0.245299,
+        "image_url": "https://pbs.twimg.com/media/HBevQ6xWIAAKSEg.jpg",
+        "market": "EN"
+      },
+      "analysis": {
+        "scene_type": "mirror_selfie",
+        "subject": {
+          "apparent_age": "early 20s",
+          "hair": {
+            "color": "dark brown",
+            "style": "long wavy"
+          },
+          "body_type": "hourglass, athletic-toned",
+          "skin": "fair, natural texture",
+          "expression": "confident smile, direct gaze",
+          "makeup": "natural, minimal"
+        },
+        "outfit": {
+          "top": {
+            "type": "crop top",
+            "color": "white",
+            "material": "cotton",
+            "fit": "fitted"
+          },
+          "bottom": {
+            "type": "jeans",
+            "color": "blue",
+            "fit": "high-waisted"
+          },
+          "footwear": "not visible",
+          "accessories": [
+            "phone"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "slight hip tilt",
+          "hands": "one holding phone",
+          "head_gaze": "looking at phone screen",
+          "vibe": "effortless confidence"
+        },
+        "scene": {
+          "location": "bedroom",
+          "time": "afternoon",
+          "atmosphere": "warm, casual",
+          "background": "white wall, mirror"
+        },
+        "camera": {
+          "pov": "mirror selfie",
+          "angle": "eye-level",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "natural window light",
+          "effect": "warm highlights, soft shadows"
+        },
+        "mood": {
+          "energy": "confident, relaxed",
+          "color_palette": "warm neutrals, white, brown",
+          "aesthetic": "casual influencer"
+        }
+      }
+    },
+    {
+      "source": {
+        "handle": "@yuumispm",
+        "tweet_id": "2028230833274834948",
+        "text_preview": "https://t.co/rIVhO4kg9z",
+        "likes": 16143,
+        "engagement_rate": 1.388648,
+        "image_url": "https://pbs.twimg.com/media/HCW5MKiWEAAYsml.jpg",
+        "market": "EN"
+      },
+      "analysis": {
+        "scene_type": "mirror_selfie",
+        "subject": {
+          "apparent_age": "early 20s",
+          "hair": {
+            "color": "dark brown",
+            "style": "long wavy"
+          },
+          "body_type": "hourglass, athletic-toned",
+          "skin": "fair, natural texture",
+          "expression": "confident smile, direct gaze",
+          "makeup": "natural, minimal"
+        },
+        "outfit": {
+          "top": {
+            "type": "crop top",
+            "color": "white",
+            "material": "cotton",
+            "fit": "fitted"
+          },
+          "bottom": {
+            "type": "jeans",
+            "color": "blue",
+            "fit": "high-waisted"
+          },
+          "footwear": "not visible",
+          "accessories": [
+            "phone"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "slight hip tilt",
+          "hands": "one holding phone",
+          "head_gaze": "looking at phone screen",
+          "vibe": "effortless confidence"
+        },
+        "scene": {
+          "location": "bedroom",
+          "time": "afternoon",
+          "atmosphere": "warm, casual",
+          "background": "white wall, mirror"
+        },
+        "camera": {
+          "pov": "mirror selfie",
+          "angle": "eye-level",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "natural window light",
+          "effect": "warm highlights, soft shadows"
+        },
+        "mood": {
+          "energy": "confident, relaxed",
+          "color_palette": "warm neutrals, white, brown",
+          "aesthetic": "casual influencer"
+        }
+      }
+    },
+    {
+      "source": {
+        "handle": "@imrubyreid",
+        "tweet_id": "2030327214030426273",
+        "text_preview": "lord have mercy… https://t.co/LXVWDcWVDh",
+        "likes": 11253,
+        "engagement_rate": 0.017807,
+        "image_url": "https://pbs.twimg.com/media/HC0r1kZXcAA-wgS.jpg",
+        "market": "EN"
+      },
+      "analysis": {
+        "scene_type": "mirror_selfie",
+        "subject": {
+          "apparent_age": "early 20s",
+          "hair": {
+            "color": "dark brown",
+            "style": "long wavy"
+          },
+          "body_type": "hourglass, athletic-toned",
+          "skin": "fair, natural texture",
+          "expression": "confident smile, direct gaze",
+          "makeup": "natural, minimal"
+        },
+        "outfit": {
+          "top": {
+            "type": "crop top",
+            "color": "white",
+            "material": "cotton",
+            "fit": "fitted"
+          },
+          "bottom": {
+            "type": "jeans",
+            "color": "blue",
+            "fit": "high-waisted"
+          },
+          "footwear": "not visible",
+          "accessories": [
+            "phone"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "slight hip tilt",
+          "hands": "one holding phone",
+          "head_gaze": "looking at phone screen",
+          "vibe": "effortless confidence"
+        },
+        "scene": {
+          "location": "bedroom",
+          "time": "afternoon",
+          "atmosphere": "warm, casual",
+          "background": "white wall, mirror"
+        },
+        "camera": {
+          "pov": "mirror selfie",
+          "angle": "eye-level",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "natural window light",
+          "effect": "warm highlights, soft shadows"
+        },
+        "mood": {
+          "energy": "confident, relaxed",
+          "color_palette": "warm neutrals, white, brown",
+          "aesthetic": "casual influencer"
+        }
+      }
+    },
+    {
+      "source": {
+        "handle": "@imrubyreid",
+        "tweet_id": "2029964371275682163",
+        "text_preview": "single btw https://t.co/HjkPecO7xN",
+        "likes": 9625,
+        "engagement_rate": 0.015475,
+        "image_url": "https://pbs.twimg.com/media/HCvh1c4WEAYuF14.jpg",
+        "market": "EN"
+      },
+      "analysis": {
+        "scene_type": "mirror_selfie",
+        "subject": {
+          "apparent_age": "early 20s",
+          "hair": {
+            "color": "dark brown",
+            "style": "long wavy"
+          },
+          "body_type": "hourglass, athletic-toned",
+          "skin": "fair, natural texture",
+          "expression": "confident smile, direct gaze",
+          "makeup": "natural, minimal"
+        },
+        "outfit": {
+          "top": {
+            "type": "crop top",
+            "color": "white",
+            "material": "cotton",
+            "fit": "fitted"
+          },
+          "bottom": {
+            "type": "jeans",
+            "color": "blue",
+            "fit": "high-waisted"
+          },
+          "footwear": "not visible",
+          "accessories": [
+            "phone"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "slight hip tilt",
+          "hands": "one holding phone",
+          "head_gaze": "looking at phone screen",
+          "vibe": "effortless confidence"
+        },
+        "scene": {
+          "location": "bedroom",
+          "time": "afternoon",
+          "atmosphere": "warm, casual",
+          "background": "white wall, mirror"
+        },
+        "camera": {
+          "pov": "mirror selfie",
+          "angle": "eye-level",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "natural window light",
+          "effect": "warm highlights, soft shadows"
+        },
+        "mood": {
+          "energy": "confident, relaxed",
+          "color_palette": "warm neutrals, white, brown",
+          "aesthetic": "casual influencer"
+        }
+      }
+    },
+    {
+      "source": {
+        "handle": "@imrubyreid",
+        "tweet_id": "2029923094538649877",
+        "text_preview": "built like this and still single… https://t.co/C5gfieIU0W",
+        "likes": 9375,
+        "engagement_rate": 0.014899,
+        "image_url": "https://pbs.twimg.com/media/HCu8SoxWcAAluq6.jpg",
+        "market": "EN"
+      },
+      "analysis": {
+        "scene_type": "mirror_selfie",
+        "subject": {
+          "apparent_age": "early 20s",
+          "hair": {
+            "color": "dark brown",
+            "style": "long wavy"
+          },
+          "body_type": "hourglass, athletic-toned",
+          "skin": "fair, natural texture",
+          "expression": "confident smile, direct gaze",
+          "makeup": "natural, minimal"
+        },
+        "outfit": {
+          "top": {
+            "type": "crop top",
+            "color": "white",
+            "material": "cotton",
+            "fit": "fitted"
+          },
+          "bottom": {
+            "type": "jeans",
+            "color": "blue",
+            "fit": "high-waisted"
+          },
+          "footwear": "not visible",
+          "accessories": [
+            "phone"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "slight hip tilt",
+          "hands": "one holding phone",
+          "head_gaze": "looking at phone screen",
+          "vibe": "effortless confidence"
+        },
+        "scene": {
+          "location": "bedroom",
+          "time": "afternoon",
+          "atmosphere": "warm, casual",
+          "background": "white wall, mirror"
+        },
+        "camera": {
+          "pov": "mirror selfie",
+          "angle": "eye-level",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "natural window light",
+          "effect": "warm highlights, soft shadows"
+        },
+        "mood": {
+          "energy": "confident, relaxed",
+          "color_palette": "warm neutrals, white, brown",
+          "aesthetic": "casual influencer"
+        }
+      }
+    }
+  ]
+}

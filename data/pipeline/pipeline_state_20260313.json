@@ -1,0 +1,35 @@
+{
+  "date": "2026-03-13",
+  "status": "completed",
+  "started_at": "2026-03-13T05:00:00+09:00",
+  "completed_at": "2026-03-13T17:13:24.188008+09:00",
+  "duration_seconds": 44004,
+  "active_accounts": [
+    "EN"
+  ],
+  "steps": {
+    "scout_data": {
+      "status": "completed",
+      "competitors_fetched": 41
+    },
+    "scout_analysis": {
+      "status": "completed"
+    },
+    "strategist": {
+      "status": "completed",
+      "validation": "PASS (14/14 + 4/4 cross)"
+    },
+    "creator_en": {
+      "status": "completed",
+      "validation": "PASS (12/12 + 3/3 cross)",
+      "war_room_score": 100
+    },
+    "creator_jp": {
+      "status": "skipped",
+      "reason": "JP account suspended"
+    },
+    "telegram_preview": {
+      "status": "completed"
+    }
+  }
+}

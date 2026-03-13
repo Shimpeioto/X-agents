@@ -1,0 +1,13 @@
+{
+  "task_id": "20260313_010",
+  "description": "Run Outbound agent for EN account (@meruru_tcbn) for 2026-03-13. Goal: plan and execute likes only (0 API replies, 0 follows per operator policy). Identify 1-3 best reply opportunities and output them as manual_replies in the outbound plan. Steps: 1) Read data/strategy_20260313.json for EN outbound_strategy targets. 2) Read config/outbound_rules.json for safety rules. 3) Run python3 scripts/outbound_history.py --account EN --days 7 for history. 4) Run python3 scripts/publisher_outbound_data.py --account EN for target tweet data. 5) Reason about which tweets to like and which are best reply targets. 6) Write data/outbound_plan_20260313_EN.json with manual_replies array. 7) Execute likes via: python3 scripts/publisher.py smart-outbound --account EN --plan data/outbound_plan_20260313_EN.json. 8) Send Marc the manual_replies list formatted for operator.",
+  "task_type": "publishing",
+  "agents_planned": [
+    "outbound"
+  ],
+  "notes": "Replies are manual-only permanently (operator decision 2026-03-13). daily_replies=0, daily_follows=0. Only plan likes. The key deliverable is a formatted list of 1-3 reply recommendations with exact tweet URLs and reply text for the operator to post manually from the app.",
+  "created_at": "2026-03-13T20:33:23.757064+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-13T20:36:42.093700+09:00",
+  "exit_code": 0
+}

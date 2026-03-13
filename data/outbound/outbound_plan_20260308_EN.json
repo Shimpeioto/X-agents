@@ -1,0 +1,116 @@
+{
+  "date": "2026-03-08",
+  "account": "EN",
+  "generated_at": "2026-03-08T22:55:00+09:00",
+  "strategy_used": "data/strategy_20260308.json",
+  "content_plan_used": "data/content_plan_20260308_EN.json",
+  "safety_summary": {
+    "targets_checked": 4,
+    "targets_engaged": 4,
+    "targets_skipped": 0,
+    "already_followed_skipped": [],
+    "cooldown_skipped": [],
+    "planned_likes": 12,
+    "planned_replies": 4,
+    "planned_follows": 3,
+    "budget_remaining": {"likes": 8, "replies": 1, "follows": 0}
+  },
+  "targets": [
+    {
+      "handle": "@Angelwithcakee",
+      "user_id": "1916760212519747584",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2027923312152637542",
+        "2027164342160933255",
+        "2028273416936051024"
+      ],
+      "reply_to": {
+        "tweet_id": "2028624501857034601",
+        "reply_text": "the glow is unreal in this one ✨",
+        "reasoning": "Most recent original tweet with engagement prompt ('say something nice'). Natural entry point for a genuine compliment. 400 likes — decent visibility. Matches the casual, appreciative reply_style from strategy."
+      },
+      "follow": true,
+      "reasoning": "35K followers, clean original AI beauty content, good engagement rate (4.5% clean ER per scout report). No prior engagement — fresh target. Good size for reciprocal engagement likelihood."
+    },
+    {
+      "handle": "@yogana_19",
+      "user_id": "1269692949387935750",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2030086529062932600",
+        "2030328875746578755",
+        "2030570719017607447",
+        "2030449922990809110"
+      ],
+      "reply_to": {
+        "tweet_id": "2030328875746578755",
+        "reply_text": "okay the grok transformation is actually so good on this",
+        "reasoning": "Grok bikini post with 2,085 likes — most engaging recent tweet. Commenting on the grok use is natural and relevant since we also use grok interactive content. Shows genuine interest in the format rather than just appearance."
+      },
+      "follow": true,
+      "reasoning": "28K followers, extremely active (5 tweets in 2 days), strong engagement (6.5% clean ER). Uses grok — shared content strategy alignment. Good reciprocal engagement potential at this follower count."
+    },
+    {
+      "handle": "@IvoryLane_plus",
+      "user_id": "1637688245252395010",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2029935033675292749",
+        "2030297423319577019"
+      ],
+      "reply_to": {
+        "tweet_id": "2029935033675292749",
+        "reply_text": "the lighting here is insane",
+        "reasoning": "Highest engagement original tweet (5,473 likes). Short provocative caption 'eyes up here' — a reply about the lighting feels natural and specific without being generic. High visibility post maximizes reply impressions."
+      },
+      "follow": true,
+      "reasoning": "253K followers — largest target, high visibility value. Only 2 original tweets to like (3 are RTs, skipped). Following a 253K account has discovery value even if reciprocal follow is unlikely."
+    },
+    {
+      "handle": "@HannaJonso",
+      "user_id": "1936094554865754112",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2027885177284730962",
+        "2028832324024991948",
+        "2028234267642245555"
+      ],
+      "reply_to": {
+        "tweet_id": "2027885177284730962",
+        "reply_text": "genuinely stunning work",
+        "reasoning": "Viral post with 2,740 likes — highest engagement by far. 'Generational bottom' caption is playful and on-brand. A genuine compliment reply on a high-visibility post maximizes our exposure. Skipping tweet 2028541769420292268 (promotional/spam) and 2027884893812789717 (reply to another user)."
+      },
+      "follow": false,
+      "reasoning": "19K followers but bio is spammy ('sent me a message I have something special for you check the link below'). Repeated identical body-count posts suggest engagement-farming tactics. One promotional tweet pushing another account. Worth engaging with the viral post for visibility but NOT worth following — could signal bot-network association."
+    }
+  ]
+}

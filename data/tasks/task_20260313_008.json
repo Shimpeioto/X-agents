@@ -1,0 +1,13 @@
+{
+  "task_id": "20260313_008",
+  "description": "Run outbound engagement for EN account. 1) Read data/strategy_20260313.json (or latest available strategy) for outbound_strategy section. 2) Check outbound history via python3 scripts/outbound_history.py --account EN --days 7. 3) Fetch target data via python3 scripts/publisher_outbound_data.py --account EN --targets <targets from strategy>. 4) Apply safety reasoning (cooldowns, dedup, no auto-follows per global rules). 5) Write outbound plan to data/outbound_plan_20260313_EN.json. 6) Execute via python3 scripts/publisher.py smart-outbound --account EN --plan data/outbound_plan_20260313_EN.json. 7) Report results to Marc via Telegram. Note: daily_follows = 0 (operator policy, no auto-follows). Max 30 likes, 0 replies currently blocked by 403 for new accounts.",
+  "task_type": "publishing",
+  "agents_planned": [
+    "outbound"
+  ],
+  "notes": "JP suspended — EN only. No auto-follows (daily_follows=0). Replies likely to fail with 403 (account too new) — if failed, escalate to operator with manual posting instructions. Use today's strategy file if available, otherwise use most recent.",
+  "created_at": "2026-03-13T18:59:07.632874+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-13T19:39:16.332608+09:00",
+  "exit_code": 0
+}

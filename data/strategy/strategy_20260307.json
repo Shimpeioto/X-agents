@@ -1,0 +1,95 @@
+{
+  "date": "2026-03-07",
+  "generated_at": "2026-03-07T15:00:00+09:00",
+  "scout_report_used": "data/scout_analysis_20260307.json",
+  "EN": {
+    "posting_schedule": [
+      {"slot": 1, "time": "13:30 UTC", "category": "engagement_questions", "priority": "high"},
+      {"slot": 2, "time": "21:30 UTC", "category": "grok_interactive", "priority": "high"},
+      {"slot": 3, "time": "00:30 UTC", "category": "image_showcase", "priority": "medium"}
+    ],
+    "content_mix": {
+      "engagement_questions": 40,
+      "image_showcase": 25,
+      "grok_interactive": 20,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 0
+    },
+    "outbound_strategy": {
+      "daily_likes": 25,
+      "daily_replies": 8,
+      "daily_follows": 3,
+      "target_accounts": ["@sessypuuh", "@yogana_19", "@IsabellaCruz_47", "@Angelwithcakee", "@imrubyreid"],
+      "reply_style": "Casual, genuine compliments on image quality or playful responses to their engagement questions. Keep it short (1 sentence), use casual lowercase English, no hashtags in replies. Vary between enthusiastic ('this is stunning'), curious ('how do you always look this good?'), and playful ('ok you win') tones."
+    },
+    "ab_test": {
+      "variable": "Grok request style — testing whether transformation requests ('remove the jacket') or creative requests ('put me on the moon') drive more engagement on .@grok posts",
+      "variant_a": "Realistic transformation: .@grok posts requesting clothing/style changes (e.g., 'hey @grok put me in a red dress'). Keeps the image grounded and relatable.",
+      "variant_b": "Creative/surreal transformation: .@grok posts requesting fantastical scenarios (e.g., 'hey @grok put me on a beach in Bali at sunset'). Pushes creative boundaries for shareability.",
+      "duration_days": 5,
+      "start_date": "2026-03-07"
+    },
+    "key_insights": [
+      "Short provocative captions under 30 chars drive 12x more likes than long text (2,043 avg vs 168 avg) — every EN post should use ultra-short text like 'Am I ur type?', 'Rate me 1-10', or image-only",
+      "Zero hashtags is mandatory — 92.7% of tracked EN competitors use zero hashtags, and every top performer (@sessypuuh 38% ER, @imrubyreid 691K followers) avoids them entirely. Hashtags signal inauthenticity in this niche.",
+      "Grok integration is the #1 emerging engagement technique — @ai_hiyo_ got 5.6M impressions on a single .@grok post. We must incorporate Grok at 20% of content mix using the .@grok format (leading dot prevents reply-hiding).",
+      "Quality over quantity is algorithmically enforced — X's AI now suppresses low-quality content even from followers' feeds. Top performers post 0.3-3.8x/day. Our 3 slots/day with high image quality is the right cadence.",
+      "High bookmark-to-like ratios (>20%) correlate with massive algorithmic reach — @Estherbron1 (1.24M followers) has 29-33% bookmark ratios. Design content that users want to save, not just like."
+    ],
+    "risks": [
+      "Shadow ban risk from automated outbound engagement — stay well within 25 likes, 8 replies, 3 follows limits with random 30-120s delays. Monitor for sudden reach drops.",
+      "Grok integration could be restricted if X changes policy on automated Grok mentions — keep Grok at 20% not higher to avoid over-dependence.",
+      "EN market is highly competitive with established accounts (691K+ followers) — differentiation through consistent Grok innovation and self-quote chains is essential to stand out."
+    ]
+  },
+  "JP": {
+    "posting_schedule": [
+      {"slot": 1, "time": "12:30 JST", "category": "grok_interactive", "priority": "high"},
+      {"slot": 2, "time": "20:30 JST", "category": "persona_dialogue", "priority": "high"},
+      {"slot": 3, "time": "23:30 JST", "category": "art_showcase", "priority": "medium"}
+    ],
+    "content_mix": {
+      "grok_interactive": 30,
+      "persona_dialogue": 30,
+      "art_showcase": 25,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 2
+    },
+    "outbound_strategy": {
+      "daily_likes": 25,
+      "daily_replies": 8,
+      "daily_follows": 3,
+      "target_accounts": ["@ai_hyk", "@AIart_yama94", "@yunaelegant", "@ganbarukaisyain"],
+      "reply_style": "Warm, natural Japanese — match the intimate, friendly tone of successful JP accounts. Use polite-casual Japanese (です/ます mixed with casual), express genuine admiration for their art or character. Vary between appreciative ('すごく綺麗です✨'), curious ('どんなプロンプトですか？'), and supportive ('いつも素敵な作品ですね') tones. Max 1-2 emoji."
+    },
+    "ab_test": {
+      "variable": "Grok post format — testing whether image-puzzle Grok requests or single-image transformation Grok requests drive more engagement in JP market",
+      "variant_a": "Image puzzle format: .@grok タップして4枚の画像を1つに結合して — multi-image combination requests that create visual puzzles, following @ai_hyk's proven format",
+      "variant_b": "Single transformation format: .@grok この写真を水彩画風にして — single-image artistic transformation requests that showcase AI art capability",
+      "duration_days": 5,
+      "start_date": "2026-03-07"
+    },
+    "key_insights": [
+      "Grok integration dominates JP engagement — @ai_hyk's single .@grok post generated 7,880 likes and 5.6M impressions (45x follower count). This technique produced more engagement than ALL other JP competitors combined. Must be 30% of our content mix.",
+      "JP text sweet spot is 30-100 characters (758 avg likes) vs under-30 chars (87 avg likes) — unlike EN, JP needs enough text for a warm character voice. Persona dialogue posts should be 30-80 chars with natural Japanese.",
+      "Transparent AI labeling is the winning JP strategy — @AIart_yama94 (37K) and @yunaelegant (20.5K) both openly label AI content. Use #SFW and #AIart disclaimers ONLY on art_showcase posts, never on grok_interactive or persona_dialogue.",
+      "JP bookmark rates are exceptionally high — @ai_hyk's top post has 5,945 bookmarks (75% of likes). JP users curate content actively, and bookmarks signal quality to the X algorithm. Design posts that users want to revisit.",
+      "Self-quote chains ('セルフ引用で数珠繋ぎ') can double impressions without increasing post count — use for themed image series. This technique is not yet adopted by top JP accounts, giving us first-mover advantage."
+    ],
+    "risks": [
+      "JP market has extreme reply contamination (7 of 17 accounts are 90-100% replies) — avoid any reply-farming behavior that could associate our account with spam patterns.",
+      "The gap between #1 (@ai_hyk, 124K) and the rest of JP market is enormous — we are competing in a market dominated by one innovator. Differentiate through persona consistency + Grok innovation rather than trying to copy @ai_hyk directly.",
+      "Shadow ban risk is heightened for JP accounts — the growth expert warns that X AI monitoring 'changes daily'. Stay conservative with outbound limits (25 likes, 8 replies, 3 follows) and vary patterns daily."
+    ]
+  }
+}

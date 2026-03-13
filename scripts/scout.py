@@ -27,6 +27,7 @@ PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT)
 
 from scripts.x_api import XApiClient, load_bearer_token
+from scripts.data_paths import SCOUT_DIR
 
 logger = logging.getLogger("scout")
 JST = ZoneInfo("Asia/Tokyo")
@@ -412,25 +413,25 @@ class Scout:
         Returns path to the primary output file.
         """
         date_str = datetime.now(JST).strftime("%Y%m%d")
-        data_dir = os.path.join(PROJECT, "data")
+        os.makedirs(SCOUT_DIR, exist_ok=True)
 
         # --raw: write full file to scout_raw_{date}.json
         if raw:
-            raw_path = os.path.join(data_dir, f"scout_raw_{date_str}.json")
+            raw_path = os.path.join(SCOUT_DIR, f"scout_raw_{date_str}.json")
             with open(raw_path, "w") as f:
                 json.dump(report, f, indent=2, ensure_ascii=False)
             logger.info(f"  Raw report: {raw_path}")
             output_path = raw_path
         else:
             # Default: write to scout_report_{date}.json
-            output_path = os.path.join(data_dir, f"scout_report_{date_str}.json")
+            output_path = os.path.join(SCOUT_DIR, f"scout_report_{date_str}.json")
             with open(output_path, "w") as f:
                 json.dump(report, f, indent=2, ensure_ascii=False)
 
         # --compact: additionally write compact file
         if compact:
             compact_data = compact_report(report)
-            compact_path = os.path.join(data_dir, f"scout_compact_{date_str}.json")
+            compact_path = os.path.join(SCOUT_DIR, f"scout_compact_{date_str}.json")
             with open(compact_path, "w") as f:
                 json.dump(compact_data, f, indent=2, ensure_ascii=False)
             logger.info(f"  Compact report: {compact_path}")

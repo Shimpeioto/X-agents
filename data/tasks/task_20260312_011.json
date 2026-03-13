@@ -1,0 +1,13 @@
+{
+  "task_id": "20260312_011",
+  "description": "Regenerate the EN content plan for 2026-03-12 with correct, fully-detailed image prompts. The current plan at data/content_plan_20260312_EN.json has incomplete image_prompt objects — missing meta, subject, outfit, pose, scene, camera, lighting, mood fields. The correct format is in data/content_plan_20260311_EN.json. Steps: 1) Read data/content_plan_20260312_EN.json to see current (broken) state. 2) Read data/content_plan_20260311_EN.json to see the correct full image prompt format. 3) Read config/image_prompt_guide.md for the character profiles and scene templates. 4) Read data/strategy_20260312.json for today's posting schedule and content mix. 5) Regenerate and overwrite data/content_plan_20260312_EN.json with full, correct image prompts for all posts — each image_prompt must include: tool, prompt (150+ word paragraph), negative_prompt, aspect_ratio, meta, subject, outfit, pose, scene, camera, lighting, mood. All other fields (text, hashtags, reply_templates, etc.) must remain correct per core strategy rules (EN=zero hashtags, captions under 30 chars, grok_interactive format). 6) Validate the output JSON. 7) Generate HTML report: python3 scripts/generate_html_report.py generic data/content_plan_20260312_EN.json --title 'EN Content Plan 2026-03-12 (Fixed)'. 8) Send via Telegram: python3 scripts/telegram_send.py --document data/content_preview_20260312.html 'EN Content Plan 2026-03-12 (Fixed — full image prompts)'",
+  "task_type": "custom",
+  "agents_planned": [
+    "creator"
+  ],
+  "notes": "Root cause: Creator is outputting incomplete image_prompt objects. The fix is to regenerate the content plan using the correct full schema from image_prompt_guide.md and the 2026-03-11 plan as a quality reference. Do NOT just re-run Creator — read the 2026-03-11 plan carefully and ensure the new plan matches that level of detail in every image_prompt field.",
+  "created_at": "2026-03-12T20:29:46.598440+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-12T20:32:11.966706+09:00",
+  "exit_code": 0
+}

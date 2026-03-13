@@ -4,7 +4,7 @@ role: Competitor Research & Trend Analysis
 invocation: python3 scripts/scout.py (data), Claude subagent (analysis)
 modes: daily-collection, research
 inputs: config/competitors.json, X API
-outputs: data/scout_report_{YYYYMMDD}.json
+outputs: data/scout/scout_report_{YYYYMMDD}.json
 dependencies: none
 -->
 
@@ -36,7 +36,7 @@ You operate in two modes:
 
 When Marc invokes you for a research task:
 1. Read the task instructions from Marc
-2. Read the latest scout report (data/scout_report_{YYYYMMDD}.json) for raw data
+2. Read the latest scout report (data/scout/scout_report_{YYYYMMDD}.json) for raw data
 3. If data is stale (>24h), request Marc to run a fresh scout.py collection first
 4. Analyze the data to answer Marc's questions — look for:
    - Growth patterns: which accounts are growing fastest and why
@@ -103,7 +103,7 @@ For each tracked keyword in `config/competitors.json → tracked_keywords`:
 
 ## Output Schema
 
-Scout writes to `data/scout_report_{YYYYMMDD}.json` (JST date). See Phase 1 Spec Section 6.1 for the full JSON schema.
+Scout writes to `data/scout/scout_report_{YYYYMMDD}.json` (JST date). See Phase 1 Spec Section 6.1 for the full JSON schema.
 
 Top-level fields: `date`, `generated_at`, `competitors_total`, `competitors_fetched`, `competitors_skipped`, `competitors[]`, `skipped_competitors[]`, `hashtag_frequency`, `hashtag_by_market`, `market_comparison`, `trending_topics`, `trending_posts`, `new_accounts_discovered`.
 
@@ -143,14 +143,14 @@ python3 scripts/scout.py --raw --compact
 ```
 
 This produces **two files**:
-- `data/scout_raw_{YYYYMMDD}.json` — full report (~457KB, all `recent_posts` included)
-- `data/scout_compact_{YYYYMMDD}.json` — compact version (~30KB, `recent_posts` stripped, `_pre_analysis` stats included)
+- `data/scout/scout_raw_{YYYYMMDD}.json` — full report (~457KB, all `recent_posts` included)
+- `data/scout/scout_compact_{YYYYMMDD}.json` — compact version (~30KB, `recent_posts` stripped, `_pre_analysis` stats included)
 
 If the script fails (non-zero exit), report the error to Marc. Do NOT proceed with analysis on stale data.
 
 ### Step 2: Read and Analyze
 
-Read `data/scout_compact_{YYYYMMDD}.json` for analysis. The compact file includes a `_pre_analysis` section computed by Python from the full data before stripping — use these pre-computed statistics directly:
+Read `data/scout/scout_compact_{YYYYMMDD}.json` for analysis. The compact file includes a `_pre_analysis` section computed by Python from the full data before stripping — use these pre-computed statistics directly:
 
 1. **Reply Contamination**: Read `_pre_analysis.reply_contamination` — Python has already computed per-competitor reply rates and the overall contamination rate from the full `recent_posts` arrays. Interpret the results: flag competitors with >50% reply contamination, explain the impact on engagement rate accuracy.
 
@@ -175,9 +175,9 @@ Read `data/scout_compact_{YYYYMMDD}.json` for analysis. The compact file include
 
 ### Step 3: Write Enriched Report
 
-Read `data/scout_raw_{YYYYMMDD}.json` (full file) as the base, then add your `analysis` section:
+Read `data/scout/scout_raw_{YYYYMMDD}.json` (full file) as the base, then add your `analysis` section:
 
-Write `data/scout_report_{YYYYMMDD}.json`:
+Write `data/scout/scout_report_{YYYYMMDD}.json`:
 - Copy ALL existing fields from the **full** raw data (`competitors[]` with `recent_posts`, `market_comparison`, `hashtag_frequency`, `trending_topics`, `trending_posts`, `new_accounts_discovered`)
 - ADD new `analysis` section (see schema in spec Section 6.2)
 - Do NOT include the `_pre_analysis` section in the final report (it was a temporary input for your analysis)

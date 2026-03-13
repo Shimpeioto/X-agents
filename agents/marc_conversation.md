@@ -70,10 +70,10 @@ All task results should be delivered as HTML reports for mobile-friendly Telegra
 
 ```bash
 # Content plans — full structured image prompts with Copy JSON
-python3 scripts/generate_html_report.py content_plan data/content_plan_{YYYYMMDD}_{account}.json
+python3 scripts/generate_html_report.py content_plan data/content/content_plan_{YYYYMMDD}_{account}.json
 
 # Daily reports
-python3 scripts/generate_html_report.py daily_report data/daily_report_{YYYYMMDD}.json
+python3 scripts/generate_html_report.py daily_report data/metrics/daily_report_{YYYYMMDD}.json
 
 # Fallback for other JSON types
 python3 scripts/generate_html_report.py generic <json_path> --title "<Title>"

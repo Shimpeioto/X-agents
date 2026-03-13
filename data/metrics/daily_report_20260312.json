@@ -1,0 +1,226 @@
+{
+  "date": "2026-03-12",
+  "generated_at": "2026-03-12T13:00:00+09:00",
+  "accounts": {
+    "EN": {
+      "followers": 5,
+      "followers_change": 0,
+      "total_likes": 0,
+      "account_metrics": {
+        "account": "EN",
+        "date": "2026-03-12",
+        "followers": 5,
+        "following": 40,
+        "total_posts": 28,
+        "followers_change": 0,
+        "following_change": 7
+      },
+      "anomaly": false,
+      "anomaly_detail": null,
+      "posts_today": 0,
+      "posts_today_note": "4 posts exist in content_plan_20260312_EN.json but all remain in 'draft' status — awaiting human approval before posting.",
+      "post_metrics": [],
+      "totals": {
+        "likes": 0,
+        "retweets": 0,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 0
+      },
+      "category_breakdown": {
+        "engagement_questions": {
+          "posts": 1,
+          "likes": 2,
+          "retweets": 1,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 1,
+          "total_engagement": 4,
+          "note": "Data from Mar 9 posts (EN_20260309_01). No new posts today."
+        },
+        "image_showcase": {
+          "posts": 1,
+          "likes": 2,
+          "retweets": 1,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 1,
+          "total_engagement": 4,
+          "note": "Data from Mar 9 posts (EN_20260309_02)."
+        },
+        "grok_interactive": {
+          "posts": 1,
+          "likes": 1,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 1,
+          "note": "Data from Mar 9 posts (EN_20260309_03). Lower than expected — likely due to low follower count limiting initial distribution."
+        },
+        "self_quote_chains": {
+          "posts": 1,
+          "likes": 0,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 0,
+          "note": "Data from Mar 9 posts (EN_20260309_04). Posted late-night JST; metrics at 0h when measured. May have improved since."
+        }
+      },
+      "best_performing_post": {
+        "post_id": "EN_20260309_01",
+        "category": "engagement_questions",
+        "text": "Am I your type? 👀",
+        "ab_test_variant": "A",
+        "likes": 2,
+        "retweets": 1,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 1,
+        "total_engagement": 4,
+        "note": "Tied with EN_20260309_02 (image_showcase, variant B). Both at 4 total engagement."
+      },
+      "ab_test_evaluation": {
+        "variable": "Caption style: provocative question vs ambient statement",
+        "variant_a": "Provocative question format (e.g., 'Am I your type?', 'which angle tho?')",
+        "variant_b": "Ambient statement format (e.g., 'golden hour hits different', '.@grok put me in a bikini')",
+        "test_period": "2026-03-08 to 2026-03-12 (5 days)",
+        "status": "concluded_insufficient_data",
+        "verdict": "insufficient_data",
+        "data_points": {
+          "variant_a": {
+            "posts": 2,
+            "total_likes": 2,
+            "total_retweets": 1,
+            "total_engagement": 4,
+            "avg_engagement": 2.0
+          },
+          "variant_b": {
+            "posts": 2,
+            "total_likes": 3,
+            "total_retweets": 1,
+            "total_engagement": 5,
+            "avg_engagement": 2.5
+          }
+        },
+        "directional_signal": "Variant B (ambient statement) shows marginally higher average engagement (2.5 vs 2.0) but with only 2 data points per variant, this is not statistically meaningful. Sample too small to conclude. Recommendation: extend test with the next round of content posting. Competitor data strongly validates BOTH styles at scale (@imrubyreid 'lord have mercy...' = 21,948 likes ambient; @IsabellaCruz_47 'Rate me from 1 to 10' = 20,522 likes question) — the format itself is not the limiting factor at our current stage.",
+        "action": "Extend A/B test — design new A/B structure in tomorrow's strategy with same variable, using Mar 12 content plan posts as next data batch once they are approved and posted."
+      },
+      "engagement_trend": null,
+      "outbound_summary": {
+        "date_of_outbound": "2026-03-11",
+        "source_file": "data/outbound_log_20260311.json",
+        "note": "No outbound was run on 2026-03-12. Summary reflects yesterday's outbound (Mar 11).",
+        "likes_given": 16,
+        "replies_sent": 0,
+        "replies_attempted": 4,
+        "replies_failed": 4,
+        "follows_executed": 6,
+        "targets_engaged": {
+          "imrubyreid": {"likes": 4, "reply": "failed_403", "follow": true},
+          "lucidevlinxyz": {"likes": 3, "reply": "failed_403", "follow": true},
+          "yuumispm": {"likes": 3, "reply": "failed_403", "follow": false},
+          "katekarsyn": {"likes": 4, "reply": "failed_403", "follow": true},
+          "Estherbron1": {"likes": 0, "reply": "not_attempted", "follow": true},
+          "KissofStarova": {"likes": 0, "reply": "not_attempted", "follow": true},
+          "itsluna_baby": {"likes": 0, "reply": "not_attempted", "follow": true}
+        },
+        "failed_replies": [
+          {
+            "target": "@imrubyreid",
+            "tweet_url": "https://x.com/imrubyreid/status/2031468799476617218",
+            "reply_text": "okay the way this light hits is unreal",
+            "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+          },
+          {
+            "target": "@lucidevlinxyz",
+            "tweet_url": "https://x.com/lucidevlinxyz/status/2029271640052515298",
+            "reply_text": "honestly the boldness is what makes the timeline fun",
+            "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+          },
+          {
+            "target": "@yuumispm",
+            "tweet_url": "https://x.com/yuumispm/status/2031475976102650021",
+            "reply_text": "this whole vibe is so clean, genuinely obsessed",
+            "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+          },
+          {
+            "target": "@katekarsyn",
+            "tweet_url": "https://x.com/katekarsyn/status/2031475349603934450",
+            "reply_text": "red is definitely your color, this looks amazing",
+            "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+          }
+        ]
+      }
+    },
+    "JP": {
+      "followers": 0,
+      "followers_change": 0,
+      "total_likes": 0,
+      "account_metrics": null,
+      "anomaly": false,
+      "anomaly_detail": null,
+      "posts_today": 0,
+      "post_metrics": [],
+      "totals": {"likes": 0, "retweets": 0, "replies": 0, "quotes": 0, "bookmarks": 0},
+      "category_breakdown": {},
+      "best_performing_post": null,
+      "ab_test_evaluation": null,
+      "engagement_trend": null,
+      "outbound_summary": null,
+      "note": "JP account is suspended. No JP data available. All JP fields are null placeholders."
+    }
+  },
+  "alerts": [
+    {
+      "level": "warn",
+      "account": "EN",
+      "type": "reply_restriction_persists",
+      "message": "API replies continue to fail with 403 on all attempts (Mar 9, 10, 11). 4 failed replies from Mar 11 outbound require manual posting. See failed_replies in outbound_summary. Restriction expected to lift as account gains organic standing."
+    },
+    {
+      "level": "info",
+      "account": "EN",
+      "type": "no_posts_today",
+      "message": "No content was posted on 2026-03-12. Content plan is ready (4 draft posts) — awaiting human approval."
+    },
+    {
+      "level": "info",
+      "account": "EN",
+      "type": "ab_test_extended",
+      "message": "A/B test (caption style) concluded its 5-day window with insufficient data (2 posts per variant). Test should be extended and evaluated once the Mar 12 content plan posts are approved and published."
+    }
+  ],
+  "manual_reply_escalation": {
+    "account_handle": "@meruru_tcbn",
+    "note": "The following replies failed via API (403). Please post manually from @meruru_tcbn.",
+    "replies": [
+      {
+        "target": "@imrubyreid",
+        "reply_text": "okay the way this light hits is unreal",
+        "tweet_url": "https://x.com/imrubyreid/status/2031468799476617218"
+      },
+      {
+        "target": "@lucidevlinxyz",
+        "reply_text": "honestly the boldness is what makes the timeline fun",
+        "tweet_url": "https://x.com/lucidevlinxyz/status/2029271640052515298"
+      },
+      {
+        "target": "@yuumispm",
+        "reply_text": "this whole vibe is so clean, genuinely obsessed",
+        "tweet_url": "https://x.com/yuumispm/status/2031475976102650021"
+      },
+      {
+        "target": "@katekarsyn",
+        "reply_text": "red is definitely your color, this looks amazing",
+        "tweet_url": "https://x.com/katekarsyn/status/2031475349603934450"
+      }
+    ]
+  },
+  "telegram_report": "📊 Daily Report — Mar 12\n\n@meruru_tcbn (EN)\n• Followers: 5 (+0) | Following: 40 (+7 from yesterday's outbound)\n• Posts today: 0 — content plan ready (4 drafts), awaiting your approval\n\nYesterday's outbound (Mar 11):\n• 16 likes given across 4 targets\n• 6 follows completed (imrubyreid, lucidevlinxyz, katekarsyn, Estherbron1, KissofStarova, itsluna_baby)\n• 4 replies failed — 403 restriction still active (needs manual posting)\n\nA/B test update:\n• Test window closed (day 5/5) — insufficient data to conclude (only 2 posts per variant from Mar 9)\n• Directional: Variant B (ambient) avg 2.5 vs Variant A (question) avg 2.0 — not significant\n• Recommend extending test once today's content is approved and posted\n\nJP: suspended",
+  "telegram_alerts": [
+    "⚠️ @meruru_tcbn — 4 replies need manual posting from yesterday's outbound. API 403 still blocking all replies. See report for tweet URLs and reply texts."
+  ]
+}

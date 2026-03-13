@@ -1,0 +1,40 @@
+{
+  "date": "2026-03-11",
+  "EN": {
+    "posts": {
+      "used": 4,
+      "limit": 5
+    },
+    "likes": {
+      "used": 14,
+      "limit": 30
+    },
+    "replies": {
+      "used": 4,
+      "limit": 10
+    },
+    "follows": {
+      "used": 3,
+      "limit": 5,
+      "note": "Reset from 3 — previous 3 were wasted re-follows on already-followed accounts (bug fix task 20260311_008)"
+    }
+  },
+  "JP": {
+    "posts": {
+      "used": 0,
+      "limit": 5
+    },
+    "likes": {
+      "used": 0,
+      "limit": 30
+    },
+    "replies": {
+      "used": 0,
+      "limit": 10
+    },
+    "follows": {
+      "used": 0,
+      "limit": 5
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "task_id": "20260311_001",
+  "description": "Execute comprehensive strategic overhaul ('THE FIX'). Phase 1: Pull ALL performance data — read all content plans, outbound logs, metrics, rate limits, scout reports from data/ folder to build complete picture of progress since launch. Phase 2: Run fresh Scout collection for latest competitive intel. Phase 3: Deep strategic review session with Strategist covering: (a) Honest progress audit — posts published, engagement, follower growth, what's working vs not, (b) Strategy gaps — persona/story design, profile optimization, content volume, engagement quality, (c) Integration of 0→1000 framework from article (設計×心理×アルゴリズム — Design×Psychology×Algorithm, character×worldview×consistency, profile who/what/why, dwell time optimization, pseudo-relationship building), (d) Revised daily action plan with immediate changes, (e) Path to 1,000 followers with milestones. Phase 4: Produce meeting minutes as data/strategic_review_20260311.json covering full discussion, decisions, and action items. Phase 5: Generate HTML report and send via Telegram. Key context: EN account @meruru_tcbn is active (few posts published so far, low growth). JP suspended. Current strategy has good research/scheduling but weak on persona, story arc, profile optimization, content volume, and engagement personalization. Operator explicitly said progress is NOT going well and wants honest assessment + concrete improvements. Article reference points: initial 30-50 posts needed, persona specificity, profile conversion optimization, dwell time (threads/longer content), 1-on-1 engagement feeling, posting times 12-14h and 17-21h.",
+  "task_type": "custom",
+  "agents_planned": [
+    "scout",
+    "strategist",
+    "analyst"
+  ],
+  "notes": "Operator wants HONEST assessment — don't sugarcoat. This is a turning point session. Focus on what's actually broken and what changes TODAY. The deliverable is meeting minutes + concrete action plan. EN only (JP suspended). Read ALL data files in data/ to build complete picture before strategist session.",
+  "created_at": "2026-03-11T11:44:48.975079+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-11T11:53:50.310765+09:00",
+  "exit_code": 0
+}

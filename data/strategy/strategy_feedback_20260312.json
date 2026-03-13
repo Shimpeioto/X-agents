@@ -1,0 +1,104 @@
+{
+  "date": "2026-03-12",
+  "generated_at": "2026-03-12T22:00:00+09:00",
+  "daily_report_used": "data/daily_report_20260312.json",
+  "strategy_used": "data/strategy_20260312.json",
+  "accounts": {
+    "EN": {
+      "category_performance": [
+        {
+          "category": "engagement_questions",
+          "posts_count": 1,
+          "total_likes": 2,
+          "avg_engagement_per_post": 4,
+          "rank": 1,
+          "vs_average": "+78%",
+          "recommendation": "maintain_or_increase",
+          "note": "Based on EN_20260309_01 measured at 37h post-publish. Tied for best with image_showcase. Very limited sample (1 post)."
+        },
+        {
+          "category": "image_showcase",
+          "posts_count": 1,
+          "total_likes": 2,
+          "avg_engagement_per_post": 4,
+          "rank": 1,
+          "vs_average": "+78%",
+          "recommendation": "maintain_or_increase",
+          "note": "Based on EN_20260309_02 measured at 33h. Tied for best. Both top categories confirm that image-first content with short captions works."
+        },
+        {
+          "category": "grok_interactive",
+          "posts_count": 1,
+          "total_likes": 1,
+          "avg_engagement_per_post": 1,
+          "rank": 3,
+          "vs_average": "-56%",
+          "recommendation": "maintain",
+          "note": "Based on EN_20260309_03 measured at 20h. Lower engagement likely due to format novelty + low follower count limiting distribution, NOT format weakness. Competitor data strongly validates Grok interactive. Maintain at current allocation — reassess after 10+ Grok posts."
+        },
+        {
+          "category": "self_quote_chains",
+          "posts_count": 1,
+          "total_likes": 0,
+          "avg_engagement_per_post": 0,
+          "rank": 4,
+          "vs_average": "-100%",
+          "recommendation": "maintain",
+          "note": "Based on EN_20260309_04 measured at 0h — essentially unmeasured. Zero engagement is an artifact of measurement timing, not content quality. Cannot draw conclusions. Maintain allocation."
+        }
+      ],
+      "ab_test_evaluation": {
+        "variable": "Caption style: provocative question vs ambient statement",
+        "status": "insufficient_data",
+        "days_elapsed": 5,
+        "days_remaining": 0,
+        "early_signal": "Variant B (ambient statement) marginally leads — avg 2.5 vs 2.0 engagement per post",
+        "confidence": "low",
+        "winner": null,
+        "conclusion": "Test window expired (5/5 days) but only 4 posts were published (all on Mar 9), giving just 2 data points per variant. Sample far too small for any conclusion. Competitor trending data validates BOTH styles at massive scale (@imrubyreid 'lord have mercy...' 21,948 likes ambient; @IsabellaCruz_47 'Rate me from 1 to 10' 20,522 likes question). Recommendation: design a NEW A/B test on a DIFFERENT variable since caption style is validated by competitor evidence. Suggested next test: posting time optimization (morning vs evening US time) or image style (mirror selfie vs editorial)."
+      },
+      "posting_time_effectiveness": [
+        {"slot": 1, "time": "13:00 UTC", "avg_engagement": 4, "rank": 1, "note": "Measured at 37h — longest measurement window, highest engagement"},
+        {"slot": 2, "time": "17:00 UTC", "avg_engagement": 4, "rank": 1, "note": "Measured at 33h — tied for best"},
+        {"slot": 3, "time": "21:00 UTC", "avg_engagement": 1, "rank": 3, "note": "Measured at 20h — shorter window may explain lower numbers"},
+        {"slot": 4, "time": "00:30 UTC", "avg_engagement": 0, "rank": 4, "note": "Measured at 0h — essentially unmeasured, cannot rank"}
+      ],
+      "outbound_effectiveness": {
+        "total_likes_given": 16,
+        "total_replies_attempted": 4,
+        "total_replies_succeeded": 0,
+        "total_follows": 6,
+        "reciprocal_engagement": 0,
+        "effective_targets": [],
+        "ineffective_targets": ["@imrubyreid", "@lucidevlinxyz", "@yuumispm", "@katekarsyn"],
+        "note": "No reciprocal engagement detected — followers stayed flat at 5 (+0). All 4 reply attempts failed (403). The 403 restriction is X's spam prevention for new/low-follower accounts. Outbound is currently likes-and-follows only. Consider pausing reply attempts until account gains standing, or continue escalating to operator for manual replies."
+      },
+      "recommended_adjustments": [
+        {
+          "type": "ab_test",
+          "confidence": "medium",
+          "description": "Close current caption style test (insufficient data after 5 days). Design new A/B test on image style: mirror selfie (slots 1,3) vs editorial/studio (slots 2,4). Both caption styles validated by competitor data at scale.",
+          "rationale": "Only 4 posts across entire test period — cannot reach statistical significance. Competitor evidence validates both provocative questions and ambient statements equally. Image style variation is the next highest-leverage variable to test."
+        },
+        {
+          "type": "content_mix",
+          "confidence": "low",
+          "description": "Maintain current content mix (engagement_questions 40%, image_showcase 25%, grok_interactive 20%, self_quote_chains 15%). No changes recommended.",
+          "rationale": "Only 4 posts total (1 per category) with inconsistent measurement windows. Insufficient data to adjust mix. Engagement_questions and image_showcase tied at top, but sample too small. Need 10+ posts per category before making mix adjustments."
+        },
+        {
+          "type": "posting_time",
+          "confidence": "low",
+          "description": "Maintain current posting schedule (13:00, 17:00, 21:00, 00:30 UTC). No changes recommended.",
+          "rationale": "Measurement windows vary from 0h to 37h across slots. Cannot attribute engagement differences to time-of-day vs measurement duration. Need consistent 24h+ measurement for all slots before adjusting."
+        },
+        {
+          "type": "outbound_target",
+          "confidence": "medium",
+          "description": "Rotate all 4 outbound targets (imrubyreid, lucidevlinxyz, yuumispm, katekarsyn) — all within cooldown period. Continue follow-only strategy until reply restriction lifts. Prioritize larger accounts (>50K followers) for visibility value from likes.",
+          "rationale": "Zero reciprocal engagement from 16 likes and 6 follows across Mar 11 targets. All reply attempts failed (403). Outbound ROI is currently unmeasurable. Fresh target rotation per cooldown rules is standard practice."
+        }
+      ]
+    }
+  }
+}

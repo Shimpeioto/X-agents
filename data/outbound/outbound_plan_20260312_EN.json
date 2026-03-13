@@ -1,0 +1,96 @@
+{
+  "date": "2026-03-12",
+  "account": "EN",
+  "generated_at": "2026-03-12T12:46:00+09:00",
+  "strategy_used": "data/strategy_20260312.json",
+  "content_plan_used": "data/content_plan_20260312_EN.json",
+  "safety_summary": {
+    "targets_checked": 4,
+    "targets_engaged": 4,
+    "targets_skipped": 0,
+    "already_followed_skipped": [],
+    "cooldown_skipped": [],
+    "planned_likes": 7,
+    "planned_replies": 3,
+    "planned_follows": 2,
+    "budget_remaining": {"likes": 13, "replies": 2, "follows": 1}
+  },
+  "targets": [
+    {
+      "handle": "@JosephinaM3131",
+      "user_id": "1941403756261752832",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": ["2031742045904343127"],
+      "reply_to": null,
+      "follow": true,
+      "reasoning": "First engagement with @JosephinaM3131 (44K followers, EN account of AI_MIKENEKO). 5 sampled tweets had 4 replies (@mentions) and 1 strong original post. Only eligible tweet for liking is the 'SFW Rate her out of 10?' post with 3,143 likes — directly in our AI beauty niche. No reply planned: the tweet is 24h+ old, already has 36 replies and is reply-saturated — a reply now would get buried and look inauthentic. Follow: YES — highly relevant AI beauty account, strong engagement, zero prior engagement history."
+    },
+    {
+      "handle": "@Angelwithcakee",
+      "user_id": "1916760212519747584",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": "2026-03-09",
+        "days_since_last": 3,
+        "already_followed": true,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": ["2028624501857034601", "2027554360943612398"],
+      "reply_to": {
+        "tweet_id": "2028624501857034601",
+        "reply_text": "everything about this honestly 😭 genuinely cannot fault it",
+        "reasoning": "The 'say something nice abt me' tweet (404 likes, 55 replies) invites direct complimentary engagement — perfect natural entry for a genuine-feeling reply. The tweet is authentic and playful, matching our EN casual tone. Reply text complies: does not start with @, is under 200 characters, feels natural not bot-like. Cooldown: last replied 3 days ago, 3-day cooldown = clear."
+      },
+      "follow": false,
+      "reasoning": "Cooldown for likes and replies is clear (last engaged 3 days ago, both cooldowns now expired). Already followed — skip follow. Previously liked tweet IDs 2027923312152637542, 2027164342160933255, 2028273416936051024 excluded from tweets_to_like. Two fresh eligible tweets: 'say something nice abt me' (404 likes) and the Grok bikini post (266 likes, shows she uses Grok too — aligns with our grok_interactive strategy). Reply on the 'say something nice' post for natural engagement."
+    },
+    {
+      "handle": "@yogana_19",
+      "user_id": "1269692949387935750",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": "2026-03-09",
+        "days_since_last": 3,
+        "already_followed": true,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": ["2031817182217474247", "2031900229327294708", "2031722558836646117"],
+      "reply_to": {
+        "tweet_id": "2031817182217474247",
+        "reply_text": "okay I said what I said and I'm not taking it back 🔥",
+        "reasoning": "The 'Taste or pass?' post has 1,811 likes and 280 replies — high engagement, clearly AI beauty content in our niche. It's from 2026-03-11 19:39 UTC (under 24h ago). The reply is playful and non-committal, matching the teasing engagement-question format. Does not start with @, under 200 chars, feels like a real fan engaging. Cooldown: last replied 3 days ago = clear. Excluded from likes: already-liked IDs from history (2030086529062932600, 2030328875746578755, 2030570719017607447, 2030449922990809110). RTs (2031733941426675994, 2031733883855614213) excluded as they are retweets."
+      },
+      "follow": false,
+      "reasoning": "Already followed — skip follow. Cooldowns clear at 3 days. Three fresh original (non-RT) tweets available for liking. Strong engagement signals on the 'Taste or pass?' post (1,811 likes, 280 replies) confirms continued algorithmic amplification. Reply on highest-engagement post for maximum visibility."
+    },
+    {
+      "handle": "@leahyunaxo",
+      "user_id": "1922665614503469057",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": ["2031826764788298122"],
+      "reply_to": {
+        "tweet_id": "2031826764788298122",
+        "reply_text": "this stopped my scroll for a full minute I had to say something",
+        "reasoning": "The 'Check the comments you'll see why' post has 6,081 likes and 122 replies — outstanding engagement for a 79.9K account (7.6% engagement rate by likes alone). The teaser format invites curiosity-driven engagement. Our reply acknowledges the scroll-stopping quality in an authentic fan voice without being generic. Does not start with @, under 200 chars. First engagement with this account — clean slate, no cooldowns."
+      },
+      "follow": true,
+      "reasoning": "First engagement with @leahyunaxo (79.9K followers). Strong AI beauty account with outsized engagement (6,081 likes on top post). Never engaged, no cooldowns. Strategy key_insights specifically call out this account as a fresh target. One primary eligible tweet for liking (2031826764788298122 — 6,081 likes); other tweets are either links-only (2031706758586990599, 2031830083363553772), a retweet (2031799537723949327), or a reply (2031799490244390987). Follow: YES — large account (79.9K), relevant niche, not yet followed. Mix of large target (79.9K) for visibility alongside smaller accounts aligns with target rotation strategy."
+    }
+  ]
+}

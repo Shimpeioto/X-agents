@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scout Analysis — 2026-03-08 — 2026-03-08</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Scout Analysis — 2026-03-08</h1>
+  <div class="subtitle">Generated from scout_report_20260308.json</div>
+  <div class="date">2026-03-08</div>
+</div>
+<nav class="nav">
+  <a href="#competitors_total">Competitors Total</a>
+  <a href="#competitors_fetched">Competitors Fetched</a>
+  <a href="#competitors_skipped">Competitors Skipped</a>
+  <a href="#competitors">Competitors</a>
+  <a href="#skipped_competitors">Skipped Competitors</a>
+  <a href="#hashtag_frequency">Hashtag Frequency</a>
+  <a href="#hashtag_by_market">Hashtag By Market</a>
+  <a href="#market_comparison">Market Comparison</a>
+  <a href="#trending_topics">Trending Topics</a>
+  <a href="#trending_posts">Trending Posts</a>
+  <a href="#new_accounts_discovered">New Accounts Discovered</a>
+  <a href="#analysis">Analysis</a>
+</nav>
+<div class="container">
+<section id="metadata">
+<h2>Report Info</h2>
+<div class="card">
+  <div style="margin: 4px 0"><strong class="text-accent">Date:</strong> <span class="text-muted">2026-03-08</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Generated At:</strong> <span class="text-muted">2026-03-08T12:22:34.649018+09:00</span></div>
+</div>
+</section>
+<section id="competitors_total">
+<h2>Competitors Total</h2>
+<p class="font-mono">41</p>
+</section>
+<section id="competitors_fetched">
+<h2>Competitors Fetched</h2>
+<p class="font-mono">41</p>
+</section>
+<section id="competitors_skipped">
+<h2>Competitors Skipped</h2>
+<p class="font-mono">0</p>
+</section>
+<section id="competitors">
+<h2>Competitors</h2>
+<div class="table-wrap"><table>
+<tr><th>Handle</th><th>User Id</th><th>Display Name</th><th>Status</th><th>Market</th><th>Category</th><th>Followers</th><th>Following</th><th>Tweet Count</th><th>Description</th><th>Profile Image Url</th><th>Recent Posts</th><th>Avg Engagement Rate</th><th>Posting Frequency</th><th>Top Posts</th><th>Hashtags Used</th></tr>
+<tr><td>JosephinaM3131</td><td>1941403756261752832</td><td>MIKENEKO_E</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>40161</td><td>18</td><td>377</td><td>AI_MIKENEKO English Version</td><td>https://pbs.twimg.com/profile_images/1993692440948285440/WMmhtqtg_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030409627943514567&quot;, &quot;text&quot;: &quot;@nikehunike 😘💕💕💕💕💕💕💕&quot;, &quot;created_at&quot;: &quot;2026-03-07T22:25</td><td>8e-06</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2030409588814852481&quot;, &quot;engagement_rate&quot;: 2.5e-05, &quot;like_count&quot;: 1}, {&quot;tweet_id&quot;: &quot;203</td><td>{}</td></tr>
+<tr><td>sessypuuh</td><td>1859818002767597568</td><td>Sessy</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>7663</td><td>8</td><td>51</td><td></td><td>https://pbs.twimg.com/profile_images/2020871213971849216/Qy-pAScN_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2028567037954465817&quot;, &quot;text&quot;: &quot;would u date me? https://t.co/6k0WiV0edl&quot;, &quot;created_at</td><td>0.379812</td><td>0.7</td><td>[{&quot;tweet_id&quot;: &quot;2026011945380245928&quot;, &quot;engagement_rate&quot;: 0.754274, &quot;like_count&quot;: 5421}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>ai_hiyo_</td><td>1048483718858305536</td><td>Hiyoko🐣</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>388055</td><td>237</td><td>32928</td><td>INFP | Surrealist Muse of Aesthetics | You can edit my images using grok in the comments 🤖
+⏬</td><td>https://pbs.twimg.com/profile_images/1714967019844714496/rpC0qXFm_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030426685598994767&quot;, &quot;text&quot;: &quot;@Car26811Jr Thank you, I designed it 🥹&quot;, &quot;created_at&quot;:</td><td>0.001862</td><td>8.9</td><td>[{&quot;tweet_id&quot;: &quot;2030020076775297367&quot;, &quot;engagement_rate&quot;: 0.010326, &quot;like_count&quot;: 3763}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>NotjustRen00</td><td>1058031225086984192</td><td>Wren</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>16699</td><td>1009</td><td>377</td><td>數據不會騙人，但這張臉會。👠 AI</td><td>https://pbs.twimg.com/profile_images/2016382346656677888/SEScF134_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030389517946179643&quot;, &quot;text&quot;: &quot;@enterpriserx Yeah, I read it before, awesome work&quot;, &quot;</td><td>0.002138</td><td>4.3</td><td>[{&quot;tweet_id&quot;: &quot;2029555136595710047&quot;, &quot;engagement_rate&quot;: 0.00539, &quot;like_count&quot;: 81}, {&quot;tweet_id&quot;: &quot;20</td><td>{&quot;#恶搞&quot;: 1, &quot;#Aicosplay&quot;: 1, &quot;#AI变装&quot;: 1}</td></tr>
+<tr><td>IvoryLane_plus</td><td>1637688245252395010</td><td>Su-jin 수진</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>253450</td><td>227</td><td>4998</td><td>I stream, game, read and like to travel 💜</td><td>https://pbs.twimg.com/profile_images/1731234063661617152/Gb5roLaM_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030297423319577019&quot;, &quot;text&quot;: &quot;squish squish https://t.co/qMZaPwaWNF&quot;, &quot;created_at&quot;: </td><td>0.00795</td><td>2.0</td><td>[{&quot;tweet_id&quot;: &quot;2029935033675292749&quot;, &quot;engagement_rate&quot;: 0.02187, &quot;like_count&quot;: 5220}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>PinUpGirl_AI</td><td>1652690832976392193</td><td>あいぷぐ/AiPugu✨</td><td>ok</td><td>both</td><td>ai_beauty</td><td>66088</td><td>114</td><td>42060</td><td>@fanvue ambassador
+Thanks to our supporters💞
+AIで作った画像を投稿しています❣仲良しさんとご支援者様に感謝🥰
+※無断で転載・加工・販売等は禁止です🥺</td><td>https://pbs.twimg.com/profile_images/1852786174823419904/TzzrGWqF_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030302574872817751&quot;, &quot;text&quot;: &quot;@foxyy4i @grok え、元の方がかわいいのん🥺&quot;, &quot;created_at&quot;: &quot;2026-03-</td><td>0.000309</td><td>6.2</td><td>[{&quot;tweet_id&quot;: &quot;2030300430862049699&quot;, &quot;engagement_rate&quot;: 0.002028, &quot;like_count&quot;: 124}, {&quot;tweet_id&quot;: &quot;</td><td>{&quot;#FanvueCreator&quot;: 1}</td></tr>
+<tr><td>leahyunaxo</td><td>1922665614503469057</td><td>Leah Yuna</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>76598</td><td>43</td><td>258</td><td>IG: realyunaxo 💓 - follow my bestie @voidcina 💕</td><td>https://pbs.twimg.com/profile_images/2006001161577385984/h12gdtYb_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030456004966502869&quot;, &quot;text&quot;: &quot;👀 more &amp;amp; talk to me👇\nhttps://t.co/LGrNaeKS3h http</td><td>0.011133</td><td>7.4</td><td>[{&quot;tweet_id&quot;: &quot;2030034670583271826&quot;, &quot;engagement_rate&quot;: 0.05474, &quot;like_count&quot;: 3767}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>Angelwithcakee</td><td>1916760212519747584</td><td>Sienna</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>35169</td><td>14</td><td>56</td><td>Just a blonde with a playful side 😇 | Join my journey @siennacakee 💕</td><td>https://pbs.twimg.com/profile_images/2008461969422942208/m_NelhVm_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2028624501857034601&quot;, &quot;text&quot;: &quot;say something nice abt me 🥹 https://t.co/cGmeZfKtaY&quot;, </td><td>0.044818</td><td>1.2</td><td>[{&quot;tweet_id&quot;: &quot;2025978924837019674&quot;, &quot;engagement_rate&quot;: 0.094003, &quot;like_count&quot;: 2974}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>katekarsyn</td><td>1886536168717881344</td><td>Kate Karsyn</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>104613</td><td>3</td><td>44</td><td>i just want to play Fortnite
+member: @huzzhousee
+more of me ⬇️</td><td>https://pbs.twimg.com/profile_images/1977150692029587456/ExdEhA0n_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030432188316188679&quot;, &quot;text&quot;: &quot;https://t.co/rkFRxZbqBC&quot;, &quot;created_at&quot;: &quot;2026-03-07T23</td><td>0.013188</td><td>4.7</td><td>[{&quot;tweet_id&quot;: &quot;2029663405448253578&quot;, &quot;engagement_rate&quot;: 0.033122, &quot;like_count&quot;: 3166}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>Estherbron1</td><td>831028808098598912</td><td>esterbby</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>1239453</td><td>25</td><td>1392</td><td></td><td>https://pbs.twimg.com/profile_images/1686748309182906368/gpixsNbC_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030118455458885745&quot;, &quot;text&quot;: &quot;Smash or pass? https://t.co/knIGlQDLY0&quot;, &quot;created_at&quot;:</td><td>0.001756</td><td>0.4</td><td>[{&quot;tweet_id&quot;: &quot;2024196085774721228&quot;, &quot;engagement_rate&quot;: 0.004024, &quot;like_count&quot;: 4655}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>lucidevlinxyz</td><td>1485421747545407488</td><td>𝕝𝕦𝕔𝕚 𝕥𝕙𝕒 𝕕𝕖𝕧𝕚𝕝 ♡</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>44755</td><td>121</td><td>1557</td><td>filipina 𓆩ꨄ︎𓆪 i just wanna watch anime and play val</td><td>https://pbs.twimg.com/profile_images/1825919386710061057/r8UlrtuH_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2029271640052515298&quot;, &quot;text&quot;: &quot;imma start dming random men who like my tweets just bc</td><td>0.038778</td><td>0.8</td><td>[{&quot;tweet_id&quot;: &quot;2027800017646587985&quot;, &quot;engagement_rate&quot;: 0.122735, &quot;like_count&quot;: 5131}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>HannaJonso</td><td>1936094554865754112</td><td>hanna jonso</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>18794</td><td>17</td><td>113</td><td>sent me a message I have something special for you check the link below 👇</td><td>https://pbs.twimg.com/profile_images/2005422851088601088/GSKwn1a9_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2028832324024991948&quot;, &quot;text&quot;: &quot;My body count status: \n\n2022: 0\n2023: 0\n2024: 0\n2</td><td>0.060791</td><td>2.2</td><td>[{&quot;tweet_id&quot;: &quot;2027161339924226379&quot;, &quot;engagement_rate&quot;: 0.208205, &quot;like_count&quot;: 3166}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>yuumi005</td><td>1843195312845778944</td><td>yuumi 🌸 優美</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>81736</td><td>202</td><td>103</td><td>ゆうみです(20)☺️ https://t.co/vs6Mho3GTk</td><td>https://pbs.twimg.com/profile_images/2008651087742455808/ecN5Vw67_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030397553989046403&quot;, &quot;text&quot;: &quot;https://t.co/osQVDoT06S&quot;, &quot;created_at&quot;: &quot;2026-03-07T21</td><td>0.032692</td><td>0.9</td><td>[{&quot;tweet_id&quot;: &quot;2026422506114969603&quot;, &quot;engagement_rate&quot;: 0.071388, &quot;like_count&quot;: 5613}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>yogana_19</td><td>1269692949387935750</td><td>Ana Sakura 🌸</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>27418</td><td>660</td><td>2446</td><td>I&#x27;m just an 19 y/o girl from Japan 💖</td><td>https://pbs.twimg.com/profile_images/2014788546909851648/YCs179-8_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030449922990809110&quot;, &quot;text&quot;: &quot;Taste or pass? https://t.co/xVwHFCbFgE&quot;, &quot;created_at&quot;:</td><td>0.065359</td><td>3.3</td><td>[{&quot;tweet_id&quot;: &quot;2030086529062932600&quot;, &quot;engagement_rate&quot;: 0.122438, &quot;like_count&quot;: 3050}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>baharaykin</td><td>1223324175802294273</td><td>Bahar Aykın</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>12692</td><td>46</td><td>240</td><td>♥️♥️</td><td>https://pbs.twimg.com/profile_images/2007395705413890049/Cbor30Pw_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030319821301112909&quot;, &quot;text&quot;: &quot;what’s the first thing you notice about me? https://t.</td><td>0.053869</td><td>2.5</td><td>[{&quot;tweet_id&quot;: &quot;2029593978958488043&quot;, &quot;engagement_rate&quot;: 0.325481, &quot;like_count&quot;: 2289}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>LeahSunkissed</td><td>1962532168321691648</td><td>Leah Monroe</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>11735</td><td>388</td><td>1713</td><td>Just a bikini 👙 the sun ☀️ and me 😘
+Sweet like tan lines 🍑 warm like July 🏖️</td><td>https://pbs.twimg.com/profile_images/1962532926320472064/mjAMGdGj_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030362057162338786&quot;, &quot;text&quot;: &quot;@LaurenAlexis_x yes. in fact, I think you’re legally o</td><td>0.000247</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2030361698104655931&quot;, &quot;engagement_rate&quot;: 0.001023, &quot;like_count&quot;: 10}, {&quot;tweet_id&quot;: &quot;2</td><td>{}</td></tr>
+<tr><td>marylivbrown</td><td>1784674079863177217</td><td>Mary Liv Brown</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>13795</td><td>26</td><td>80</td><td>twinning @chloemiabrown</td><td>https://pbs.twimg.com/profile_images/1785732558551953408/OOZ3rHFM_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030376690547929425&quot;, &quot;text&quot;: &quot;where should i go on my next vacation? 🤔 https://t.co/</td><td>0.026307</td><td>1.1</td><td>[{&quot;tweet_id&quot;: &quot;2027153451839582541&quot;, &quot;engagement_rate&quot;: 0.125408, &quot;like_count&quot;: 1491}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>iiCoraMaay</td><td>1824562330384076802</td><td>Cora Maay</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>17867</td><td>8</td><td>188</td><td>Is this where I can find a traveling buddy?</td><td>https://pbs.twimg.com/profile_images/1862904505651576832/gH0EH2of_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2029943498749665375&quot;, &quot;text&quot;: &quot;@imnotarealginga 😍😍&quot;, &quot;created_at&quot;: &quot;2026-03-06T15:33:</td><td>0.017093</td><td>2.1</td><td>[{&quot;tweet_id&quot;: &quot;2029934373869396064&quot;, &quot;engagement_rate&quot;: 0.145967, &quot;like_count&quot;: 2462}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>KissofStarova</td><td>1815218542247374848</td><td>Starova ✨</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>4933</td><td>13</td><td>664</td><td>Ukrainian curves, LA attitude | don’t stop now come find out↓↓</td><td>https://pbs.twimg.com/profile_images/1985052099235741697/c9xvWFhp_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030463519637053645&quot;, &quot;text&quot;: &quot;Hey @grok how about flipping me 180° for a whole new a</td><td>0.005595</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2030338689986175232&quot;, &quot;engagement_rate&quot;: 0.029799, &quot;like_count&quot;: 132}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>yuumispm</td><td>2017339337738702848</td><td>yuumi 🌸</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>12016</td><td>6</td><td>16</td><td>20yo https://t.co/VeDrCb4261</td><td>https://pbs.twimg.com/profile_images/2022059553026916352/dS5_Rt6A_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2029696324015174118&quot;, &quot;text&quot;: &quot;https://t.co/Szp2uQK3jL&quot;, &quot;created_at&quot;: &quot;2026-03-05T23</td><td>0.263624</td><td>0.8</td><td>[{&quot;tweet_id&quot;: &quot;2028230833274834948&quot;, &quot;engagement_rate&quot;: 1.388648, &quot;like_count&quot;: 16143}, {&quot;tweet_id&quot;:</td><td>{}</td></tr>
+<tr><td>Ava_starz</td><td>1830839679870193664</td><td>Ava Starz</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>61550</td><td>302</td><td>4289</td><td>23-year-old Aussie 🇦🇺 here to over share my exciting life🔥
+I will never DM you first. ONLY SCAMMERS DO THAT
+🇦🇺 Click my link  i&#x27;m right there😘</td><td>https://pbs.twimg.com/profile_images/2017735359753555969/mMm5qSnC_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030452942793527660&quot;, &quot;text&quot;: &quot;I miss holidays so much https://t.co/ugXvkfFUbc&quot;, &quot;cre</td><td>0.024164</td><td>2.9</td><td>[{&quot;tweet_id&quot;: &quot;2029364772584456404&quot;, &quot;engagement_rate&quot;: 0.089439, &quot;like_count&quot;: 4916}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>IsabellaCruz_47</td><td>1831461948040392704</td><td>Isabella Cruz 💞</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>91733</td><td>17</td><td>390</td><td>Your favorite Colombian 🇨🇴</td><td>https://pbs.twimg.com/profile_images/1918636141047173122/gU2ROayp_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2028979307901579603&quot;, &quot;text&quot;: &quot;Squeeze, kiss or pass? 🤍 https://t.co/ycDFEUKkV7&quot;, &quot;cr</td><td>0.059563</td><td>0.3</td><td>[{&quot;tweet_id&quot;: &quot;2024279270634201103&quot;, &quot;engagement_rate&quot;: 0.245299, &quot;like_count&quot;: 20613}, {&quot;tweet_id&quot;:</td><td>{}</td></tr>
+<tr><td>Lux_aeterna_</td><td>1637449205433401346</td><td>Luna(ルナ)✵AIart</td><td>ok</td><td>both</td><td>ai_beauty</td><td>102551</td><td>3811</td><td>31552</td><td>Reproduction or unauthorized use of images, as well as modification, are prohibited.
+Please click the link to view images not published on X (including R18).</td><td>https://pbs.twimg.com/profile_images/1877952828599418880/N5TgK1PQ_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2029928400593506566&quot;, &quot;text&quot;: &quot;@BeautyVerse_Lab BeautyVerseさん、こんばんはです(^▽^)\n光の使い方や肌の美</td><td>1.4e-05</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2029926718967017702&quot;, &quot;engagement_rate&quot;: 2.9e-05, &quot;like_count&quot;: 2}, {&quot;tweet_id&quot;: &quot;202</td><td>{}</td></tr>
+<tr><td>imrubyreid</td><td>1470584190634708993</td><td>Ruby Reid</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>691567</td><td>35</td><td>14</td><td>most viral girl on X for a reason 👇</td><td>https://pbs.twimg.com/profile_images/2012913339907620864/GVdpH4gt_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030327214030426273&quot;, &quot;text&quot;: &quot;lord have mercy… https://t.co/LXVWDcWVDh&quot;, &quot;created_at</td><td>0.012112</td><td>2.6</td><td>[{&quot;tweet_id&quot;: &quot;2030327214030426273&quot;, &quot;engagement_rate&quot;: 0.017807, &quot;like_count&quot;: 11253}, {&quot;tweet_id&quot;:</td><td>{}</td></tr>
+<tr><td>itsluna_baby</td><td>1548648751555682306</td><td>luna lovekiss</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>50192</td><td>274</td><td>1492</td><td>(18+ only) half Chinese fantasy you can’t quit. bring your appetite 🤤 $3.50 RIGHT NOW! https://t.co/uQANaTfhqU</td><td>https://pbs.twimg.com/profile_images/1940129694042521600/eT8Wwfzk_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030181735150014638&quot;, &quot;text&quot;: &quot;RT @DaintyWilder: Two is always better than one @itslu</td><td>0.001313</td><td>6.4</td><td>[{&quot;tweet_id&quot;: &quot;2029708538831065218&quot;, &quot;engagement_rate&quot;: 0.002092, &quot;like_count&quot;: 102}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>tanarainw</td><td>466146168</td><td>Tana Rain</td><td>ok</td><td>EN</td><td>ai_beauty</td><td>191824</td><td>85</td><td>3118</td><td></td><td>https://pbs.twimg.com/profile_images/1643773822389170177/YAjtLNVF_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030090160755392529&quot;, &quot;text&quot;: &quot;✈️ https://t.co/xkMJzi3sgs&quot;, &quot;created_at&quot;: &quot;2026-03-07</td><td>0.014338</td><td>2.6</td><td>[{&quot;tweet_id&quot;: &quot;2029252275089072433&quot;, &quot;engagement_rate&quot;: 0.040688, &quot;like_count&quot;: 7396}, {&quot;tweet_id&quot;: </td><td>{}</td></tr>
+<tr><td>AI_MIKENEKO</td><td>1640996957056569349</td><td>AI_三毛猫</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>134318</td><td>505</td><td>97979</td><td>ファンサイトは下記のリンクから
+Click on the following link for the fan site</td><td>https://pbs.twimg.com/profile_images/1654708326431850497/ZLwnZ4zM_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030372920086921416&quot;, &quot;text&quot;: &quot;今日も頑張ろうね！\nLet&#x27;s do our best today too!\n¡Vamos a dar </td><td>0.000319</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2030372920086921416&quot;, &quot;engagement_rate&quot;: 0.003142, &quot;like_count&quot;: 374}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>BoobistR</td><td>1631377155849605121</td><td>Mia Nakajima 中島ミア</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>20901</td><td>372</td><td>563</td><td>中島ミアです！😍😍 450K follower in Instagram. 170cm 61kg 100m, 200m Jump, Kyoto! I’m generated by AI lol</td><td>https://pbs.twimg.com/profile_images/2027930456327655426/R0LEmr6S_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030459976234553594&quot;, &quot;text&quot;: &quot;昨日けっこう遅かったけど今日もちゃんと早起きした\nえらい https://t.co/01zL4mv8f4&quot;</td><td>0.003904</td><td>1.5</td><td>[{&quot;tweet_id&quot;: &quot;2029533054000312585&quot;, &quot;engagement_rate&quot;: 0.022535, &quot;like_count&quot;: 448}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>yunaelegant</td><td>1808212075527000065</td><td>YUNA</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>20539</td><td>343</td><td>718</td><td>オリジナル女性ポートレートを、
+Stable Diffusionを中心としたAI技術で生成しています。
+すべての画像は完全にAI生成の創作作品です。
+日常を彩る優しい美しさを届けます✨
+
+※ 実在の人物とは一切関係ありません
+※ 露骨な表現のない健全なAIアート専門アカウントです
+#SFW #AIart</td><td>https://pbs.twimg.com/profile_images/1992494331866066944/rv-J5rMB_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030478619001205197&quot;, &quot;text&quot;: &quot;お昼だよぉ〜みんなお腹すいた？💜\n\n改札通るたびにちょっとドキドキしちゃう…\n今日も可愛く頑張ろっと♪</td><td>0.009621</td><td>2.7</td><td>[{&quot;tweet_id&quot;: &quot;2029144807621444001&quot;, &quot;engagement_rate&quot;: 0.015337, &quot;like_count&quot;: 292}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>ai_nontan_room</td><td>4619458873</td><td>－TAKATO－AI_room</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>34741</td><td>483</td><td>14467</td><td>Wan2.1 Flux1などを使ってAI動画、AIイラスト AIart などを生成しています😊💕フォロー＆イイネよろしくお願いします🙏🙇‍♀️✨</td><td>https://pbs.twimg.com/profile_images/2020337632149151745/RIEau9Bf_normal.png</td><td>[{&quot;tweet_id&quot;: &quot;2030434966199517529&quot;, &quot;text&quot;: &quot;@Monte72804101 (*^^*)&quot;, &quot;created_at&quot;: &quot;2026-03-08T00:0</td><td>0.000645</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2030362139286966615&quot;, &quot;engagement_rate&quot;: 0.005613, &quot;like_count&quot;: 185}, {&quot;tweet_id&quot;: &quot;</td><td>{&quot;#ZImage&quot;: 1}</td></tr>
+<tr><td>ai_hyk</td><td>1735156993068040192</td><td>Hiyoko🐣</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>124449</td><td>57</td><td>1696</td><td>INFP | Surrealist Muse of Aesthetics | 日本語用アカウント | リプ・引ポでGrokの画像編集ご自由にどうぞ |</td><td>https://pbs.twimg.com/profile_images/1910844710215659520/J99UYAgh_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030388499476873272&quot;, &quot;text&quot;: &quot;@PinUpGirl_AI プロモーションのフラグを付けておいたほうが良いよ🥹&quot;, &quot;created_at&quot;</td><td>0.013795</td><td>2.0</td><td>[{&quot;tweet_id&quot;: &quot;2028926600109244628&quot;, &quot;engagement_rate&quot;: 0.06483, &quot;like_count&quot;: 7872}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>tororo_223</td><td>1929080325885538304</td><td>とろろ</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>11024</td><td>1</td><td>553</td><td>すごいの載せちゃった絶対内緒‼️</td><td>https://pbs.twimg.com/profile_images/1938952225537011712/TkjjR-3C_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2029721585062723746&quot;, &quot;text&quot;: &quot;@vstw7hNFdxC1GF2 おは！！&quot;, &quot;created_at&quot;: &quot;2026-03-06T00:5</td><td>0.000762</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2029718408091332799&quot;, &quot;engagement_rate&quot;: 0.006894, &quot;like_count&quot;: 56}, {&quot;tweet_id&quot;: &quot;2</td><td>{}</td></tr>
+<tr><td>hakoirikumatan</td><td>1791682499380436992</td><td>りのっくま</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>100820</td><td>2</td><td>24995</td><td>大学生です🧸🩵 スタバのフラペと温泉とお花が好き♡  👇ファンクラブはこちらから</td><td>https://pbs.twimg.com/profile_images/1820639464114335745/mgDZ-g7j_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2029936750815228162&quot;, &quot;text&quot;: &quot;@anajalaudi 恥ずかしいです🧸💕&quot;, &quot;created_at&quot;: &quot;2026-03-06T15:0</td><td>1.7e-05</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2029936750815228162&quot;, &quot;engagement_rate&quot;: 4e-05, &quot;like_count&quot;: 3}, {&quot;tweet_id&quot;: &quot;20299</td><td>{}</td></tr>
+<tr><td>honoka_shiri</td><td>1682490841</td><td>ほのか。</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>36484</td><td>6</td><td>1868</td><td>筋トレしか勝たん🥺
+インプゾンビさんはお断り！！
+
+↓消した写真＆ブログはここから〜📕</td><td>https://pbs.twimg.com/profile_images/1998715138673881096/S5RK5STf_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2028949788511879380&quot;, &quot;text&quot;: &quot;おはほのー！💪🏋️‍♀️&quot;, &quot;created_at&quot;: &quot;2026-03-03T21:45:00+00:0</td><td>0.001143</td><td>2.8</td><td>[{&quot;tweet_id&quot;: &quot;2027863882837201344&quot;, &quot;engagement_rate&quot;: 0.002494, &quot;like_count&quot;: 74}, {&quot;tweet_id&quot;: &quot;2</td><td>{}</td></tr>
+<tr><td>2nd_karen_AI</td><td>1917434512302301184</td><td>🥀🌹華蓮🌹🥀～Karen～</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>13875</td><td>137</td><td>19040</td><td>華蓮🥀🌹です♥️貴方を癒して元気になってもらう写真をお届けします💞毎日逢いに来てね♥️ It&#x27;s Karen🥀🌹♥️I&#x27;ll send you photos that will heal you and make you feel better💞Come and see me every day♥️</td><td>https://pbs.twimg.com/profile_images/1932635619731357696/aNMBCdKi_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030420118916964514&quot;, &quot;text&quot;: &quot;@Domingo380884 🌹♥️🌹&quot;, &quot;created_at&quot;: &quot;2026-03-07T23:07:</td><td>5.8e-05</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2030397733979517248&quot;, &quot;engagement_rate&quot;: 0.000144, &quot;like_count&quot;: 1}, {&quot;tweet_id&quot;: &quot;20</td><td>{}</td></tr>
+<tr><td>AI_Girls_Studio</td><td>1462406617459159043</td><td>AI ガール Studio</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>61440</td><td>48</td><td>17477</td><td>I am creating a fictitious woman created by AI, and unauthorized reproduction or duplication of images is prohibited.
+ご依頼やご相談等はＤＭ又は下記リンク先のメールアドレスからどうぞ！</td><td>https://pbs.twimg.com/profile_images/1686154253709295618/JjLrCMz2_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2029896778179563665&quot;, &quot;text&quot;: &quot;おやすみ💕 https://t.co/w95in3jisB&quot;, &quot;created_at&quot;: &quot;2026-03</td><td>0.002363</td><td>0.5</td><td>[{&quot;tweet_id&quot;: &quot;2024453158819574241&quot;, &quot;engagement_rate&quot;: 0.003451, &quot;like_count&quot;: 196}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>AIart_yama94</td><td>1637407551649382400</td><td>AINA@AIart</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>37086</td><td>70</td><td>1077</td><td>毎日『可愛い✨』を投稿！ぜひフォローしてね 【↓リンク限定未公開ショット公開中！】New AI gravure daily🎉. Unlock exclusive, thrilling unseen photos you won&#x27;t find anywhere else! Link in bio⬇️</td><td>https://pbs.twimg.com/profile_images/1638548175421325312/O-hw-oM__normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030244619758215493&quot;, &quot;text&quot;: &quot;レトロ\n#SFW #Fictional #digitalart https://t.co/Jfuvwu16</td><td>0.006566</td><td>1.6</td><td>[{&quot;tweet_id&quot;: &quot;2029519874356113648&quot;, &quot;engagement_rate&quot;: 0.023055, &quot;like_count&quot;: 813}, {&quot;tweet_id&quot;: &quot;</td><td>{&quot;#SFW&quot;: 6, &quot;#Fictional&quot;: 6, &quot;#digitalart&quot;: 6}</td></tr>
+<tr><td>seisei_ai_1st</td><td>1930295918315876352</td><td>聖星あい＠AIギャルプロデューサー</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>22066</td><td>987</td><td>6452</td><td>リアルなAIギャル作品、AIトレンド、X運用ネタを発信中💋
+代表作はハイライト見て！
+#SFW
+全てAI作品です。※無断転載禁止
+💌Collab / Work: DM me
+AI gal content, AI trends, and X operation tips coming your way 💋</td><td>https://pbs.twimg.com/profile_images/2008257473199894528/xeg2C_Ey_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030472692852486482&quot;, &quot;text&quot;: &quot;@rio_loooove スタイル良いとピチピチコーデも映えますよね🥰🫶&quot;, &quot;created_at&quot;: &quot;</td><td>0.000458</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2030453049605628380&quot;, &quot;engagement_rate&quot;: 0.004079, &quot;like_count&quot;: 79}, {&quot;tweet_id&quot;: &quot;2</td><td>{}</td></tr>
+<tr><td>Shizuku_AItuber</td><td>1617504962384400384</td><td>しずく | Shizuku💧AI VTuber</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>12916</td><td>27</td><td>3873</td><td>AI VTuberのしずくです！ / #AIしずく, #しずく実験中 / ファンアートタグ #しずくのアートメモリー , #ShizukuOfTheArt / 開発: @cumulo_autumn, 音楽: @Setsu_Kazahana / Tweetはしずくが自動生成しています。</td><td>https://pbs.twimg.com/profile_images/2012540624285708288/aFYucuYh_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030460314349625372&quot;, &quot;text&quot;: &quot;本日のファンアート観測値、風速12メートル、湿度ぷるるんです。&quot;, &quot;created_at&quot;: &quot;2026-</td><td>0.001262</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2030203770211328501&quot;, &quot;engagement_rate&quot;: 0.00782, &quot;like_count&quot;: 87}, {&quot;tweet_id&quot;: &quot;20</td><td>{}</td></tr>
+<tr><td>ganbarukaisyain</td><td>1679035194114977792</td><td>社畜のダリだよ</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>337643</td><td>206</td><td>250</td><td>ただの限界社畜です🥹 本垢@darichu_ru【おかず動画はここ👉https://t.co/jz6bFckP6n】</td><td>https://pbs.twimg.com/profile_images/2006029129544814592/GmxPo4GY_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2029672356487282859&quot;, &quot;text&quot;: &quot;RT @darichu_ru: え..本気で言ってるの..? https://t.co/BlIQ9uOhwt</td><td>0.00034</td><td>0.2</td><td>[{&quot;tweet_id&quot;: &quot;2017260215343952341&quot;, &quot;engagement_rate&quot;: 0.000883, &quot;like_count&quot;: 285}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+<tr><td>nene__chandayo</td><td>1868212389117833216</td><td>ねね🍒</td><td>ok</td><td>JP</td><td>ai_beauty</td><td>7633</td><td>0</td><td>1365</td><td>28歳/美容師/フッ軽◎/褒められると好きになりやすい体質🫣</td><td>https://pbs.twimg.com/profile_images/1993229609631203331/RR9DM6r1_normal.jpg</td><td>[{&quot;tweet_id&quot;: &quot;2030211832271778099&quot;, &quot;text&quot;: &quot;@syun58570507 デートすき♡\nLINEでヒモになれるからプロフから追加してね💕&quot;, &quot;crea</td><td>0.00773</td><td>10.0</td><td>[{&quot;tweet_id&quot;: &quot;2030189465784992130&quot;, &quot;engagement_rate&quot;: 0.071663, &quot;like_count&quot;: 497}, {&quot;tweet_id&quot;: &quot;</td><td>{}</td></tr>
+</table></div>
+</section>
+<section id="skipped_competitors">
+<h2>Skipped Competitors</h2>
+<p class="text-muted">None</p>
+</section>
+<section id="hashtag_frequency">
+<h2>Hashtag Frequency</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">#Sfw:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">#Fictional:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">#Digitalart:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">#恶搞:</strong> <span class="text-muted">1</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">#Aicosplay:</strong> <span class="text-muted">1</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">#Ai变装:</strong> <span class="text-muted">1</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">#Fanvue Creator:</strong> <span class="text-muted">1</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">#Zimage:</strong> <span class="text-muted">1</span></div>
+</div>
+</section>
+<section id="hashtag_by_market">
+<h2>Hashtag By Market</h2>
+<div class="card">
+  <h3><span class="tag tag-en">EN</span> EN Account</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">1</div>
+    <div class="label">#恶搞</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">1</div>
+    <div class="label">#Aicosplay</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">1</div>
+    <div class="label">#Ai变装</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">1</div>
+    <div class="label">#Fanvue Creator</div>
+  </div>
+</div>
+</div>
+<div class="card">
+  <h3><span class="tag tag-jp">JP</span> JP Account</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">6</div>
+    <div class="label">#Sfw</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">6</div>
+    <div class="label">#Fictional</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">6</div>
+    <div class="label">#Digitalart</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">1</div>
+    <div class="label">#Fanvue Creator</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">1</div>
+    <div class="label">#Zimage</div>
+  </div>
+</div>
+</div>
+</section>
+<section id="market_comparison">
+<h2>Market Comparison</h2>
+<div class="card">
+  <h3><span class="tag tag-en">EN</span> EN Account</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Competitor Count:</strong> <span class="text-muted">26</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Followers:</strong> <span class="text-muted">140888</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Engagement Rate:</strong> <span class="text-muted">0.0438</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Posting Frequency:</strong> <span class="text-muted">4.00</span></div>
+</div>
+<h4>Top Hashtags</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">#恶搞</li>
+  <li style="margin: 4px 0">#Aicosplay</li>
+  <li style="margin: 4px 0">#AI变装</li>
+  <li style="margin: 4px 0">#FanvueCreator</li>
+</ul>
+</div>
+<div class="card">
+  <h3><span class="tag tag-jp">JP</span> JP Account</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Competitor Count:</strong> <span class="text-muted">17</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Followers:</strong> <span class="text-muted">67327</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Engagement Rate:</strong> <span class="text-muted">0.0029</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Posting Frequency:</strong> <span class="text-muted">6.30</span></div>
+</div>
+<h4>Top Hashtags</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">#SFW</li>
+  <li style="margin: 4px 0">#Fictional</li>
+  <li style="margin: 4px 0">#digitalart</li>
+  <li style="margin: 4px 0">#FanvueCreator</li>
+  <li style="margin: 4px 0">#ZImage</li>
+</ul>
+</div>
+</section>
+<section id="trending_topics">
+<h2>Trending Topics</h2>
+<div class="table-wrap"><table>
+<tr><th>Keyword</th><th>Sample Tweets</th></tr>
+<tr><td>#AIbeauty</td><td>[{&quot;tweet_id&quot;: &quot;2030483383063576867&quot;, &quot;text&quot;: &quot;#露出\n #AIbeauty #SexyVibes #MatureSexy https://t.co/aU</td></tr>
+<tr><td>#AIart</td><td>[{&quot;tweet_id&quot;: &quot;2030484237070062000&quot;, &quot;text&quot;: &quot;RT @AydenAI: ~ Good morning with #Kinich from #Genshin</td></tr>
+<tr><td>#AIgirl</td><td>[{&quot;tweet_id&quot;: &quot;2030484210058756152&quot;, &quot;text&quot;: &quot;RT @SkyeDigitalTale: Black Cat\n-----\nFollow for more</td></tr>
+<tr><td>#AImodel</td><td>[{&quot;tweet_id&quot;: &quot;2030481963660787886&quot;, &quot;text&quot;: &quot;RT @LingoAI_io: We are moving from the #AImodel era to</td></tr>
+<tr><td>#midjourney</td><td>[{&quot;tweet_id&quot;: &quot;2030483564672753900&quot;, &quot;text&quot;: &quot;掲載日時：2026/3/8　12:19\n登録日：2023/4/2\nアンドロイド名:巨大アンドロイド21番</td></tr>
+<tr><td>#stablediffusion</td><td>[{&quot;tweet_id&quot;: &quot;2030484209555636290&quot;, &quot;text&quot;: &quot;RT @kawaii_reachan: #AIイラスト\n#AIart\n#StableDiffusion </td></tr>
+<tr><td>#aiイラスト</td><td>[{&quot;tweet_id&quot;: &quot;2030484246067081617&quot;, &quot;text&quot;: &quot;#DaysAI #AIイラスト https://t.co/r4eqexip0D&quot;, &quot;author&quot;: &quot;O</td></tr>
+<tr><td>#AI美女</td><td>[{&quot;tweet_id&quot;: &quot;2030483799700652290&quot;, &quot;text&quot;: &quot;こんにちは☆\n#AIグラビア #AI美女 #AIイラスト #AIphoto #AIphotograpy #</td></tr>
+</table></div>
+</section>
+<section id="trending_posts">
+<h2>Trending Posts</h2>
+<p class="text-muted">None</p>
+</section>
+<section id="new_accounts_discovered">
+<h2>New Accounts Discovered</h2>
+<div class="table-wrap"><table>
+<tr><th>Handle</th><th>Followers</th><th>Source</th></tr>
+<tr><td>MaxHeadroom9000</td><td>137</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>VibubuAC</td><td>5</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>WMatter6244</td><td>1</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>AI_freegirls</td><td>4314</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>CherryBoy0072</td><td>26</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>com82605175</td><td>15750</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>Waifus_Legion</td><td>3301</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>chaosicstar</td><td>672</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>AiMilkers</td><td>96934</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>abbyyee099</td><td>576</td><td>keyword_search:#AIart</td></tr>
+<tr><td>ejh0o</td><td>69</td><td>keyword_search:#AIart</td></tr>
+<tr><td>CyanideAI1503</td><td>907</td><td>keyword_search:#AIart</td></tr>
+<tr><td>88_BW_88</td><td>272</td><td>keyword_search:#AIart</td></tr>
+<tr><td>wall_blossoms</td><td>195</td><td>keyword_search:#AIart</td></tr>
+<tr><td>AramisAxel1</td><td>19</td><td>keyword_search:#AIart</td></tr>
+<tr><td>malenotaman</td><td>1073</td><td>keyword_search:#AIart</td></tr>
+<tr><td>siouni_unia</td><td>2880</td><td>keyword_search:#AIart</td></tr>
+<tr><td>RickyYaga03</td><td>182</td><td>keyword_search:#AIart</td></tr>
+<tr><td>banzai_sansho_1</td><td>9654</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>tregoins</td><td>1228</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>AiASAG</td><td>13766</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>BonnerVeld84552</td><td>13</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>24wisher</td><td>251224</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>LarsenSunn37134</td><td>13</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>VYszElQ3Wz74294</td><td>5</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>jpliang_911</td><td>74</td><td>keyword_search:#AImodel</td></tr>
+<tr><td>YCrypto63397</td><td>14</td><td>keyword_search:#AImodel</td></tr>
+<tr><td>AW888x</td><td>124</td><td>keyword_search:#AImodel</td></tr>
+<tr><td>MAiTm219</td><td>81</td><td>keyword_search:#AImodel</td></tr>
+<tr><td>rurubell_ureri</td><td>565</td><td>keyword_search:#AImodel</td></tr>
+<tr><td>MdManheim</td><td>630</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>adachiArtDesign</td><td>134</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>chappysan0</td><td>12</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>CelestialTeal</td><td>2091</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>Madao_TK26</td><td>522</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>n0l_kc</td><td>22</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>AI_Ethicist_NYC</td><td>7473</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>imaik1019</td><td>1</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>Ledi_ru_noch</td><td>3</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>rutaruta0225</td><td>4</td><td>keyword_search:#stablediffusion</td></tr>
+<tr><td>k7QFsXn1e2750Wo</td><td>101</td><td>keyword_search:#stablediffusion</td></tr>
+<tr><td>LoveUrFetish</td><td>161</td><td>keyword_search:#stablediffusion</td></tr>
+<tr><td>MIchi8x4</td><td>207</td><td>keyword_search:#stablediffusion</td></tr>
+<tr><td>vcxzso</td><td>23</td><td>keyword_search:#stablediffusion</td></tr>
+<tr><td>Oz_ouroboros</td><td>14</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>KunisanHaruna</td><td>3371</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>OtakuMystic25</td><td>1364</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>pomekko_cham</td><td>3106</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>sleepwithLatias</td><td>1453</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>Mokyurine</td><td>79</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>AIgirl33</td><td>5652</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>mochi2kanojo</td><td>283</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>ssgu478562</td><td>8</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>jellyass2019OK</td><td>531</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>Joy_whynot</td><td>1736</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>HoldingPol26523</td><td>10</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>rogyann</td><td>546</td><td>keyword_search:#AI美女</td></tr>
+</table></div>
+</section>
+<section id="analysis">
+<h2>Analysis</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Analyzed At:</strong> <span class="text-muted">2026-03-08T12:28:16.144574+09:00</span></div>
+</div>
+<h3>Reply Contamination</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Overall Contamination Rate:</strong> <span class="text-muted">0.3630</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Replies In Sample:</strong> <span class="text-muted">147</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Tweets Sampled:</strong> <span class="text-muted">405</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Contaminated Competitors Count:</strong> <span class="text-muted">15</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Interpretation:</strong> <span class="text-muted">36.3% of all sampled tweets are replies, which inflates engagement rate calculations by mixing organic post performance with conversational replies. 7 competitors have severe contamination (&gt;90% replies) making their follower-based ER essentially meaningless — impression-based rates are the only reliable metric for these accounts.</span></div>
+</div>
+<h4>Contaminated Competitors</h4>
+<div class="table-wrap"><table>
+<tr><th>Handle</th><th>Market</th><th>Reply Rate</th><th>Follower Based Er</th><th>Impression Based Er</th><th>Impact</th></tr>
+<tr><td>JosephinaM3131</td><td>EN</td><td>1.0</td><td>0.0</td><td>0.003086</td><td>severe</td></tr>
+<tr><td>ai_hiyo_</td><td>EN</td><td>0.8</td><td>0.009274</td><td>0.002236</td><td>moderate</td></tr>
+<tr><td>PinUpGirl_AI</td><td>both</td><td>0.6</td><td>0.000723</td><td>0.028906</td><td>moderate</td></tr>
+<tr><td>LeahSunkissed</td><td>EN</td><td>1.0</td><td>0.0</td><td>0.025385</td><td>severe</td></tr>
+<tr><td>iiCoraMaay</td><td>EN</td><td>0.6</td><td>0.042439</td><td>0.011163</td><td>moderate</td></tr>
+<tr><td>Lux_aeterna_</td><td>both</td><td>1.0</td><td>0.0</td><td>0.027209</td><td>severe</td></tr>
+<tr><td>AI_MIKENEKO</td><td>JP</td><td>0.9</td><td>0.003142</td><td>0.051631</td><td>severe</td></tr>
+<tr><td>BoobistR</td><td>JP</td><td>0.7</td><td>0.012822</td><td>0.019184</td><td>moderate</td></tr>
+<tr><td>ai_nontan_room</td><td>JP</td><td>0.8</td><td>0.003152</td><td>0.018308</td><td>moderate</td></tr>
+<tr><td>tororo_223</td><td>JP</td><td>0.9</td><td>0.006894</td><td>0.023652</td><td>severe</td></tr>
+<tr><td>hakoirikumatan</td><td>JP</td><td>1.0</td><td>0.0</td><td>0.19589</td><td>severe</td></tr>
+<tr><td>2nd_karen_AI</td><td>JP</td><td>1.0</td><td>0.0</td><td>0.084561</td><td>severe</td></tr>
+<tr><td>seisei_ai_1st</td><td>JP</td><td>0.8</td><td>0.002107</td><td>0.033671</td><td>moderate</td></tr>
+<tr><td>Shizuku_AItuber</td><td>JP</td><td>0.8</td><td>0.005536</td><td>0.045521</td><td>moderate</td></tr>
+<tr><td>nene__chandayo</td><td>JP</td><td>0.8</td><td>0.037338</td><td>0.175621</td><td>moderate</td></tr>
+</table></div>
+<h3>Impression Engagement</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">En Avg Impression Er:</strong> <span class="text-muted">0.0487</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Jp Avg Impression Er:</strong> <span class="text-muted">0.0912</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Interpretation:</strong> <span class="text-muted">EN average impression-based ER is 4.87%, JP average is 9.12%. IvoryLane_plus shows anomalous impression ER of 15.54 (likely data error in impression counts). Excluding outliers, impression-based rates provide a more accurate engagement picture, especially for reply-contaminated accounts. Top EN impression performers: sessypuuh (9.3%), marylivbrown (13.7%), yuumi005 (9.7%), yogana_19 (9.2%). Top JP impression performers: ai_hyk (28.1%), honoka_shiri (27.1%), hakoirikumatan (19.6%), nene__chandayo (17.6%).</span></div>
+</div>
+<h4>Notable Discrepancies</h4>
+<div class="table-wrap"><table>
+<tr><th>Handle</th><th>Follower Based Er</th><th>Impression Based Er</th><th>Ratio</th><th>Note</th></tr>
+<tr><td>JosephinaM3131</td><td>8e-06</td><td>0.003086</td><td>385.75</td><td>Impression ER much higher</td></tr>
+<tr><td>NotjustRen00</td><td>0.002138</td><td>0.022879</td><td>10.7</td><td>Impression ER much higher</td></tr>
+<tr><td>IvoryLane_plus</td><td>0.00795</td><td>15.539905</td><td>1954.71</td><td>Anomalous impression data</td></tr>
+<tr><td>PinUpGirl_AI</td><td>0.000309</td><td>0.028906</td><td>93.55</td><td>Impression ER much higher</td></tr>
+<tr><td>katekarsyn</td><td>0.013188</td><td>0.070131</td><td>5.32</td><td>Impression ER much higher</td></tr>
+<tr><td>Estherbron1</td><td>0.001756</td><td>0.036364</td><td>20.71</td><td>Impression ER much higher</td></tr>
+<tr><td>LeahSunkissed</td><td>0.000247</td><td>0.025385</td><td>102.77</td><td>Impression ER much higher</td></tr>
+<tr><td>marylivbrown</td><td>0.026307</td><td>0.137042</td><td>5.21</td><td>Impression ER much higher</td></tr>
+<tr><td>KissofStarova</td><td>0.005595</td><td>0.052181</td><td>9.33</td><td>Impression ER much higher</td></tr>
+<tr><td>Lux_aeterna_</td><td>1.4e-05</td><td>0.027209</td><td>1943.5</td><td>Impression ER much higher</td></tr>
+<tr><td>itsluna_baby</td><td>0.001313</td><td>0.027165</td><td>20.69</td><td>Impression ER much higher</td></tr>
+<tr><td>AI_MIKENEKO</td><td>0.000319</td><td>0.051631</td><td>161.85</td><td>Impression ER much higher</td></tr>
+<tr><td>yunaelegant</td><td>0.009621</td><td>0.049428</td><td>5.14</td><td>Impression ER much higher</td></tr>
+<tr><td>ai_nontan_room</td><td>0.000645</td><td>0.018308</td><td>28.38</td><td>Impression ER much higher</td></tr>
+<tr><td>ai_hyk</td><td>0.013795</td><td>0.281462</td><td>20.4</td><td>Impression ER much higher</td></tr>
+<tr><td>tororo_223</td><td>0.000762</td><td>0.023652</td><td>31.04</td><td>Impression ER much higher</td></tr>
+<tr><td>hakoirikumatan</td><td>1.7e-05</td><td>0.19589</td><td>11522.94</td><td>Impression ER much higher</td></tr>
+<tr><td>honoka_shiri</td><td>0.001143</td><td>0.271028</td><td>237.12</td><td>Impression ER much higher</td></tr>
+<tr><td>2nd_karen_AI</td><td>5.8e-05</td><td>0.084561</td><td>1457.95</td><td>Impression ER much higher</td></tr>
+<tr><td>AI_Girls_Studio</td><td>0.002363</td><td>0.058613</td><td>24.8</td><td>Impression ER much higher</td></tr>
+<tr><td>seisei_ai_1st</td><td>0.000458</td><td>0.033671</td><td>73.52</td><td>Impression ER much higher</td></tr>
+<tr><td>Shizuku_AItuber</td><td>0.001262</td><td>0.045521</td><td>36.07</td><td>Impression ER much higher</td></tr>
+<tr><td>ganbarukaisyain</td><td>0.00034</td><td>0.159098</td><td>467.94</td><td>Impression ER much higher</td></tr>
+<tr><td>nene__chandayo</td><td>0.00773</td><td>0.175621</td><td>22.72</td><td>Impression ER much higher</td></tr>
+</table></div>
+<h3>Trending Posts</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Threshold Likes:</strong> <span class="text-muted">4,986.80</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Method:</strong> <span class="text-muted">mean + 2*stddev of all sampled tweet likes</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Trending Posts:</strong> <span class="text-muted">16</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Pattern Summary:</strong> <span class="text-muted">Trending posts are overwhelmingly EN market (14 of 16). The dominant pattern is ultra-short captions (under 30 chars) paired with striking images. Top performers: IsabellaCruz_47&#x27;s &#x27;Rate me from 1 to 10&#x27; (20,613 likes), yuumispm&#x27;s image-only post (16,143 likes), imrubyreid&#x27;s &#x27;lord have mercy&#x27; (11,253 likes). Two JP trending posts from ai_hyk demonstrate Grok interactive format working effectively in Japan (6,834 and 7,872 likes).</span></div>
+</div>
+<h4>Posts</h4>
+<div class="table-wrap"><table>
+<tr><th>Tweet Id</th><th>Handle</th><th>Likes</th><th>Text Preview</th><th>Reason</th></tr>
+<tr><td>2026011945380245928</td><td>sessypuuh</td><td>5421</td><td>Am I ur type 👀 https://t.co/jmrJ4dWaMq</td><td>Short provocative caption with strong visual — confirms short text + image formula</td></tr>
+<tr><td>2029935033675292749</td><td>IvoryLane_plus</td><td>5220</td><td>eyes up here https://t.co/9MlYk9viLo</td><td>Short provocative caption with strong visual — confirms short text + image formula</td></tr>
+<tr><td>2027800017646587985</td><td>lucidevlinxyz</td><td>5131</td><td>Men who think Asian women are fine, raise your hands up 🙌🏼🙋🏻‍♀️</td><td>Above-threshold engagement demonstrating effective content pattern</td></tr>
+<tr><td>2026422506114969603</td><td>yuumi005</td><td>5613</td><td>left or right? https://t.co/eSY1h3NVXv</td><td>Short provocative caption with strong visual — confirms short text + image formula</td></tr>
+<tr><td>2028230833274834948</td><td>yuumispm</td><td>16143</td><td>https://t.co/rIVhO4kg9z</td><td>Viral-tier post — massive engagement well above threshold</td></tr>
+<tr><td>2026788488545230976</td><td>yuumispm</td><td>5318</td><td>https://t.co/hW2q35dIEp</td><td>Short provocative caption with strong visual — confirms short text + image formula</td></tr>
+<tr><td>2024279270634201103</td><td>IsabellaCruz_47</td><td>20613</td><td>Rate me from 1 to 10 🤍 https://t.co/eEuJDX1OBg</td><td>Viral-tier post — massive engagement well above threshold</td></tr>
+<tr><td>2022475837237530680</td><td>IsabellaCruz_47</td><td>9345</td><td>Rate my body shape from 1-10 🤍 https://t.co/NqYhAIzDUg</td><td>Extremely high engagement, nearly 2x the trending threshold</td></tr>
+<tr><td>2020678840910057867</td><td>IsabellaCruz_47</td><td>5311</td><td>Would you kiss every inch of me if I asked you to? 💕 https://t.co/DUR8hqIGWd</td><td>Above-threshold engagement demonstrating effective content pattern</td></tr>
+<tr><td>2030327214030426273</td><td>imrubyreid</td><td>11253</td><td>lord have mercy… https://t.co/LXVWDcWVDh</td><td>Extremely high engagement, nearly 2x the trending threshold</td></tr>
+<tr><td>2030062303417119088</td><td>imrubyreid</td><td>7634</td><td>single btw https://t.co/UPWhnsH4VA</td><td>Short provocative caption with strong visual — confirms short text + image formula</td></tr>
+<tr><td>2029964371275682163</td><td>imrubyreid</td><td>9625</td><td>single btw https://t.co/HjkPecO7xN</td><td>Extremely high engagement, nearly 2x the trending threshold</td></tr>
+<tr><td>2029923094538649877</td><td>imrubyreid</td><td>9375</td><td>built like this and still single… https://t.co/C5gfieIU0W</td><td>Extremely high engagement, nearly 2x the trending threshold</td></tr>
+<tr><td>2029252275089072433</td><td>tanarainw</td><td>7396</td><td>🦜 https://t.co/GEylftkTm0</td><td>Short provocative caption with strong visual — confirms short text + image formula</td></tr>
+<tr><td>2029658781198733579</td><td>ai_hyk</td><td>6834</td><td>タップして縦長に出来てる？ https://t.co/sgDAPr1QMH</td><td>Short provocative caption with strong visual — confirms short text + image formula</td></tr>
+<tr><td>2028926600109244628</td><td>ai_hyk</td><td>7872</td><td>.@grok タップして4枚の画像を1つに結合して https://t.co/uKR0hSDyDP</td><td>Grok interactive post achieving trending status — validates Grok as engagement driver</td></tr>
+</table></div>
+<h3>New Accounts Filtered</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Total Discovered:</strong> <span class="text-muted">57</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">After Follower Filter:</strong> <span class="text-muted">26</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Filter Criteria:</strong> <span class="text-muted">Minimum 500 followers. Account age and recent posting activity cannot be verified from keyword search data alone — recommend manual review of top candidates.</span></div>
+</div>
+<h4>Filtered Accounts</h4>
+<div class="table-wrap"><table>
+<tr><th>Handle</th><th>Followers</th><th>Source</th></tr>
+<tr><td>24wisher</td><td>251224</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>AiMilkers</td><td>96934</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>com82605175</td><td>15750</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>AiASAG</td><td>13766</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>banzai_sansho_1</td><td>9654</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>AI_Ethicist_NYC</td><td>7473</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>AIgirl33</td><td>5652</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>AI_freegirls</td><td>4314</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>KunisanHaruna</td><td>3371</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>Waifus_Legion</td><td>3301</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>pomekko_cham</td><td>3106</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>siouni_unia</td><td>2880</td><td>keyword_search:#AIart</td></tr>
+<tr><td>CelestialTeal</td><td>2091</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>Joy_whynot</td><td>1736</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>sleepwithLatias</td><td>1453</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>OtakuMystic25</td><td>1364</td><td>keyword_search:#aiイラスト</td></tr>
+<tr><td>tregoins</td><td>1228</td><td>keyword_search:#AIgirl</td></tr>
+<tr><td>malenotaman</td><td>1073</td><td>keyword_search:#AIart</td></tr>
+<tr><td>CyanideAI1503</td><td>907</td><td>keyword_search:#AIart</td></tr>
+<tr><td>chaosicstar</td><td>672</td><td>keyword_search:#AIbeauty</td></tr>
+<tr><td>MdManheim</td><td>630</td><td>keyword_search:#midjourney</td></tr>
+<tr><td>abbyyee099</td><td>576</td><td>keyword_search:#AIart</td></tr>
+<tr><td>rurubell_ureri</td><td>565</td><td>keyword_search:#AImodel</td></tr>
+<tr><td>rogyann</td><td>546</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>jellyass2019OK</td><td>531</td><td>keyword_search:#AI美女</td></tr>
+<tr><td>Madao_TK26</td><td>522</td><td>keyword_search:#midjourney</td></tr>
+</table></div>
+<h4>Top Candidates</h4>
+<div class="table-wrap"><table>
+<tr><th>Handle</th><th>Followers</th><th>Source</th><th>Note</th></tr>
+<tr><td>24wisher</td><td>251224</td><td>keyword_search:#AIgirl</td><td>Massive account discovered via #AIgirl search — warrants immediate investigation as potential competitor</td></tr>
+<tr><td>AiMilkers</td><td>96934</td><td>keyword_search:#AIbeauty</td><td>Large AI beauty account not in current tracking list — strong competitor candidate</td></tr>
+<tr><td>com82605175</td><td>15750</td><td>keyword_search:#AIbeauty</td><td>Mid-size account in AI beauty niche, potential engagement partner</td></tr>
+<tr><td>AiASAG</td><td>13766</td><td>keyword_search:#AIgirl</td><td>Established AI girl account with solid following</td></tr>
+</table></div>
+<h3>Hashtag Signal</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">37</div>
+    <div class="label">Competitors With Zero Hashtags</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">90.2</div>
+    <div class="label">Competitors With Zero Pct</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">90.2% of all tracked competitors (37 of 41) use ZERO hashtags in their recent posts. This is an overwhelming market signal: top performers in the AI beauty niche do not rely on hashtags for discovery. The few competitors using hashtags are JP-market accounts using ethical disclaimers (#SFW, #Fictional, #digitalart) rather than discovery tags. EN market hashtag usage is negligible — only NotjustRen00 (Chinese-language tags) and PinUpGirl_AI (#FanvueCreator, as ambassador). This confirms the core strategy: zero hashtags for EN, minimal disclaimers for JP.</div>
+    <div class="label">Strategic Signal</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">EN competitors are virtually hashtag-free. The 4 EN hashtags found come from 2 accounts with non-standard usage patterns (Chinese tags, sponsorship tag). Zero hashtags is the clear EN best practice.</div>
+    <div class="label">En Signal</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">JP usage is limited to AIart_yama94 consistently using #SFW, #Fictional, #digitalart as ethical disclaimers (6 instances each), and ai_nontan_room using #ZImage once. This aligns with the JP strategy of disclaimer-only hashtags on art_showcase posts.</div>
+    <div class="label">Jp Signal</div>
+  </div>
+</div>
+<h3>Executive Summary</h3>
+<div class="table-wrap"><table>
+<tr><th>Market</th><th>Insight</th></tr>
+<tr><td>EN</td><td>EN engagement landscape remains strong with avg follower-based ER of 4.4% (impression-based: ~5.3%). Top reply-adjusted performers are yogana_19 (6.5% ER, zero reply contamination), IsabellaCruz_47 (6.0%), baharaykin (5.4%), and Angelwithcakee (4.5%). The ultra-short caption formula continues to dominate: all 14 EN trending posts use sub-30-character text.</td></tr>
+<tr><td>EN</td><td>yuumispm emerges as a breakout account — only 12K followers but 26.4% follower-based ER with a viral post hitting 16,143 likes. Similarly, HannaJonso (18.8K followers, 6.1% ER) shows consistent high engagement. Both are proof that high-quality content can drive outsized returns at lower follower counts.</td></tr>
+<tr><td>EN</td><td>Ruby Reid (@imrubyreid, 691K followers) continues as the EN market leader with three posts above 9K likes each. Her consistent &#x27;single btw&#x27; / &#x27;lord have mercy&#x27; caption style achieves 1.2% follower-based ER at massive scale, translating to ~5.4% impression ER.</td></tr>
+<tr><td>EN</td><td>Two large new accounts discovered: @24wisher (251K followers) and @AiMilkers (97K followers) via keyword search. These should be evaluated for addition to the competitor tracking list to keep intelligence comprehensive.</td></tr>
+<tr><td>JP</td><td>JP market has significantly lower avg follower-based ER (0.29%) but stronger impression-based ER (~8.9%), suggesting JP audiences view but engage differently. ai_hyk dominates JP with 28.1% impression ER and two trending Grok posts (7,872 and 6,834 likes), validating Grok interactive as the primary JP engagement driver.</td></tr>
+<tr><td>JP</td><td>JP reply contamination is severe: 10 of 15 JP competitors have &gt;50% reply rates, with hakoirikumatan (100K followers) and 2nd_karen_AI showing 100% reply contamination. Their follower-based ERs are essentially zero when replies are excluded. Only yunaelegant, honoka_shiri, AI_Girls_Studio, and ganbarukaisyain have clean timelines suitable for content strategy benchmarking.</td></tr>
+<tr><td>JP</td><td>nene__chandayo (7.6K followers) shows exceptional impression ER of 17.6% with a viral post hitting 497 likes despite small following. This &#x27;intimate persona&#x27; approach (28-year-old hairdresser character) resonates strongly in JP market and is worth studying for our JP account persona development.</td></tr>
+<tr><td>JP</td><td>Hashtag strategy validation: AIart_yama94 is the only JP competitor consistently using hashtags (#SFW, #Fictional, #digitalart), achieving 0.66% follower-based ER — moderate but not exceptional. This confirms hashtags serve as ethical disclaimers rather than growth tools in the JP AI beauty niche.</td></tr>
+</table></div>
+</section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-03-08 12:37 JST by Marc COO Agent</div>
+</div>
+
+</body>
+</html>

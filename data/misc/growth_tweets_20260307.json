@@ -1,0 +1,146 @@
+{
+  "fetched_at": "2026-03-07T04:58:27.031872+00:00",
+  "requested": 5,
+  "fetched": 5,
+  "tweets": [
+    {
+      "tweet_id": "2026979693300473887",
+      "text": "https://t.co/0O3u7wGNFa",
+      "created_at": "2026-02-26T11:16:33+00:00",
+      "public_metrics": {
+        "retweet_count": 5,
+        "reply_count": 6,
+        "like_count": 144,
+        "quote_count": 6,
+        "bookmark_count": 177,
+        "impression_count": 15359
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 0,
+            "end": 23,
+            "url": "https://t.co/0O3u7wGNFa",
+            "expanded_url": "http://x.com/i/article/2026919973067935744",
+            "display_url": "x.com/i/article/2026…",
+            "status": 500,
+            "unwound_url": "https://x.com/i/article/2026919973067935744"
+          }
+        ]
+      },
+      "hashtags": [],
+      "source_url": "https://x.com/reon_x_1000man/status/2026979693300473887"
+    },
+    {
+      "tweet_id": "2026972006340768107",
+      "text": "俺が3ヶ月でAI美女×裏垢×noteで100万行くなら⬇️",
+      "created_at": "2026-02-26T10:46:00+00:00",
+      "public_metrics": {
+        "retweet_count": 14,
+        "reply_count": 13,
+        "like_count": 355,
+        "quote_count": 1,
+        "bookmark_count": 278,
+        "impression_count": 24681
+      },
+      "entities": {},
+      "hashtags": [],
+      "source_url": "https://x.com/maind200/status/2026972006340768107"
+    },
+    {
+      "tweet_id": "2014167228024021283",
+      "text": "最新アルゴ「投稿減らせ」とかマジ無理ゲーじゃない⁉️🙀💥\n\nクリエイターには鬼キツイにゃん…😿💔\nでも安心して‼️\n投稿減らさずにインプ【2倍】にする\n最強の「抜け道」あるから💖✨\n\nウチが実際にやってマジで伸びた裏技、\n特別に教えちゃうにゃん😽👇⚡️\n\n1️⃣ セルフ引用で「数珠繋ぎ」🔗✨ https://t.co/yYZm0OTxW5 https://t.co/76KMzQLKjT",
+      "created_at": "2026-01-22T02:44:23+00:00",
+      "public_metrics": {
+        "retweet_count": 3,
+        "reply_count": 7,
+        "like_count": 57,
+        "quote_count": 2,
+        "bookmark_count": 21,
+        "impression_count": 27844
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 147,
+            "end": 170,
+            "url": "https://t.co/yYZm0OTxW5",
+            "expanded_url": "https://x.com/seisei_ai_1st/status/2014167228024021283/photo/1",
+            "display_url": "pic.x.com/yYZm0OTxW5",
+            "media_key": "3_2014164011936567296"
+          },
+          {
+            "start": 171,
+            "end": 194,
+            "url": "https://t.co/76KMzQLKjT",
+            "expanded_url": "https://twitter.com/seisei_ai_1st/status/2013805338433359994",
+            "display_url": "x.com/seisei_ai_1st/…"
+          }
+        ]
+      },
+      "hashtags": [],
+      "source_url": "https://x.com/seisei_ai_1st/status/2014167228024021283"
+    },
+    {
+      "tweet_id": "1982644880338976976",
+      "text": "X運用シャドウバン・サーチバン対策に関して、関心がある人多かったのでまとめたよ👍\n\nXは現在、AIによる監視と健全化が強化中。毎日変更されている可能性あり。（現時点版ですが保存推奨）\n\n以下の行為は、シャドウバン／検索除外／凍結／拡散性の激減に繋がるので要注意⚠️\n\n👻 https://t.co/58iUK42Y8X https://t.co/AG23O83yWW",
+      "created_at": "2025-10-27T03:05:49+00:00",
+      "public_metrics": {
+        "retweet_count": 17,
+        "reply_count": 3,
+        "like_count": 143,
+        "quote_count": 4,
+        "bookmark_count": 68,
+        "impression_count": 50013
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 136,
+            "end": 159,
+            "url": "https://t.co/58iUK42Y8X",
+            "expanded_url": "https://x.com/seisei_ai_1st/status/1982644880338976976/photo/1",
+            "display_url": "pic.x.com/58iUK42Y8X",
+            "media_key": "3_1982644737560498176"
+          },
+          {
+            "start": 160,
+            "end": 183,
+            "url": "https://t.co/AG23O83yWW",
+            "expanded_url": "https://twitter.com/seisei_ai_1st/status/1982442546552025501",
+            "display_url": "x.com/seisei_ai_1st/…"
+          }
+        ]
+      },
+      "hashtags": [],
+      "source_url": "https://x.com/seisei_ai_1st/status/1982644880338976976"
+    },
+    {
+      "tweet_id": "2013805338433359994",
+      "text": "💖AI美女界隈のみんな聞いて〜！📣\n最近「おすすめ」に載らなかったり、フォロワーにすら届いてない気がしない？🥺💦\n\n実はXのアルゴリズムが超進化してて、今までのやり方してるとAIに「表示しなくていいや」って判定されちゃうかも😱⚡️ https://t.co/3MPhAaHnyD",
+      "created_at": "2026-01-21T02:46:22+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 1,
+        "like_count": 33,
+        "quote_count": 2,
+        "bookmark_count": 12,
+        "impression_count": 24143
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 116,
+            "end": 139,
+            "url": "https://t.co/3MPhAaHnyD",
+            "expanded_url": "https://twitter.com/seisei_ai_1st/status/2013512658344124889",
+            "display_url": "x.com/seisei_ai_1st/…"
+          }
+        ]
+      },
+      "hashtags": [],
+      "source_url": "https://x.com/seisei_ai_1st/status/2013805338433359994"
+    }
+  ],
+  "not_found": []
+}

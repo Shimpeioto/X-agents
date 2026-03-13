@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Meeting — Comprehensive Strategic Review (Mar 10) — 2026-03-10</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Agent Meeting — Comprehensive Strategic Review (Mar 10)</h1>
+  <div class="subtitle">Generated from agent_meeting_20260310.json</div>
+  <div class="date">2026-03-10</div>
+</div>
+<nav class="nav">
+  <a href="#meeting_type">Meeting Type</a>
+  <a href="#called_by">Called By</a>
+  <a href="#attendees">Attendees</a>
+  <a href="#mood">Mood</a>
+  <a href="#context">Context</a>
+  <a href="#agenda">Agenda</a>
+  <a href="#section_1_analyst_report">Section 1 Analyst Report</a>
+  <a href="#section_2_scout_report">Section 2 Scout Report</a>
+  <a href="#section_3_root_cause_analysis">Section 3 Root Cause Analysis</a>
+  <a href="#section_4_zero_to_1000_framework">Section 4 Zero To 1000 Framework</a>
+  <a href="#section_5_our_approach_vs_winners">Section 5 Our Approach Vs Winners</a>
+  <a href="#section_6_revised_action_plan">Section 6 Revised Action Plan</a>
+  <a href="#section_7_path_to_1000">Section 7 Path To 1000</a>
+  <a href="#section_8_hard_truths">Section 8 Hard Truths</a>
+  <a href="#meeting_conclusion">Meeting Conclusion</a>
+</nav>
+<div class="container">
+<section id="metadata">
+<h2>Report Info</h2>
+<div class="card">
+  <div style="margin: 4px 0"><strong class="text-accent">Date:</strong> <span class="text-muted">2026-03-10</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Generated At:</strong> <span class="text-muted">2026-03-10T22:30:00+09:00</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Comprehensive Strategic Review &amp; 0→1000 Framework Integration</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Version:</strong> <span class="text-muted">v2_comprehensive</span></div>
+</div>
+</section>
+<section id="meeting_type">
+<h2>Meeting Type</h2>
+<p>comprehensive_agent_meeting</p>
+</section>
+<section id="called_by">
+<h2>Called By</h2>
+<p>Operator (via Marc)</p>
+</section>
+<section id="attendees">
+<h2>Attendees</h2>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">Marc (COO)</li>
+  <li style="margin: 4px 0">Analyst</li>
+  <li style="margin: 4px 0">Scout</li>
+  <li style="margin: 4px 0">Strategist</li>
+</ul>
+</section>
+<section id="mood">
+<h2>Mood</h2>
+<p>Brutally honest. The operator is frustrated. Zero sugarcoating.</p>
+</section>
+<section id="context">
+<h2>Context</h2>
+<div class="card"><p>Two weeks since project inception. EN account @meruru_tcbn has 3 followers (down from 6). Operator requested a wake-up call meeting with full data review and integration of the Japanese 0→1000 growth framework (設計×心理×アルゴリズム).</p></div>
+</section>
+<section id="agenda">
+<h2>Agenda</h2>
+<div class="insight">1. Analyst: Performance data &amp; hard numbers</div>
+<div class="insight">2. Scout: Competitive landscape &amp; our position</div>
+<div class="insight">3. Strategist: Why we&#x27;re failing &amp; root causes</div>
+<div class="insight">4. Strategist: 0→1000 Framework integration (設計×心理×アルゴリズム)</div>
+<div class="insight">5. All: Our approach vs what winners do</div>
+<div class="insight">6. Strategist: Revised action plan &amp; path to 1000</div>
+<div class="insight">7. Marc: Hard truths &amp; operator action items</div>
+</section>
+<section id="section_1_analyst_report">
+<h2>Section 1 Analyst Report</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Performance Data — The Unvarnished Numbers</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Speaker:</strong> <span class="text-muted">Analyst</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Tone:</strong> <span class="text-muted">Clinical. Just the numbers.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Analyst Verdict:</strong> <span class="text-muted">The numbers tell a clear story: we&#x27;ve generated a lot of plans but shipped almost nothing. 6 posts in 14 days, 3 followers going in the wrong direction, and 62.5% of our outbound replies fail. The machine works — it just isn&#x27;t being turned on consistently.</span></div>
+</div>
+<h3>Account Snapshot</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Handle:</strong> <span class="text-muted">@meruru_tcbn</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Display Name:</strong> <span class="text-muted">meruru 🌙</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Bio:</strong> <span class="text-muted">22 yo Japanese girl🌙 addicted SNS 📱</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Followers:</strong> <span class="text-muted">3</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Following:</strong> <span class="text-muted">25</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Tweet Count Api:</strong> <span class="text-muted">13</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Media Count:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Likes Given:</strong> <span class="text-muted">20</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Listed Count:</strong> <span class="text-muted">0</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Follower Trajectory:</strong> <span class="text-muted">DECLINING — was 6 on Mar 5, now 3. Lost 50% of followers.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Account Age Days:</strong> <span class="text-muted">14</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Days Actually Posting:</strong> <span class="text-muted">4</span></div>
+</div>
+<h3>Content Published</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Total Original Posts:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Image Posts:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Grok Posts:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Outbound Replies:</strong> <span class="text-muted">7</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Posts Per Day Actual:</strong> <span class="text-muted">0.4300</span></div>
+</div>
+<h4>Posts Detail</h4>
+<div class="table-wrap"><table>
+<tr><th>Date</th><th>Text</th><th>Type</th><th>Impressions</th><th>Likes</th><th>Retweets</th><th>Replies</th><th>Bookmarks</th><th>Engagement Rate Impression</th><th>Quotes</th><th>Note</th></tr>
+<tr><td>2026-03-06</td><td>(image only, no caption)</td><td>image_post</td><td>96</td><td>2</td><td>2</td><td>1</td><td>0</td><td>5.21%</td><td></td><td></td></tr>
+<tr><td>2026-03-07</td><td>Hi</td><td>image_post</td><td>283</td><td>2</td><td>2</td><td>0</td><td>0</td><td>1.77%</td><td>1</td><td>Highest impressions — quote retweet amplified reach</td></tr>
+<tr><td>2026-03-07</td><td>hey @grok remove white</td><td>grok_quote_repost</td><td>120</td><td>0</td><td></td><td></td><td></td><td>0.83%</td><td></td><td>Grok post — boring prompt, zero engagement</td></tr>
+<tr><td>2026-03-08</td><td>hey @grok are you hungry?</td><td>grok_image_post</td><td>104</td><td>2</td><td></td><td>1</td><td>0</td><td>2.88%</td><td></td><td></td></tr>
+<tr><td>2026-03-08</td><td>Sleepy</td><td>image_post</td><td>133</td><td>3</td><td>1</td><td></td><td>2</td><td>4.51%</td><td></td><td>BEST POST — bookmarks signal save-worthy content</td></tr>
+<tr><td>2026-03-09</td><td>hey @grok remove white</td><td>grok_quote_repost</td><td>40</td><td>0</td><td></td><td></td><td></td><td>2.50%</td><td></td><td>Exact same Grok prompt as Mar 7. Repetitive and lazy.</td></tr>
+</table></div>
+<h4>Aggregate</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Total Impressions:</strong> <span class="text-muted">776</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Likes:</strong> <span class="text-muted">9</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Retweets:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Replies:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Quotes:</strong> <span class="text-muted">1</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Bookmarks:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Engagements:</strong> <span class="text-muted">21</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Impressions Per Post:</strong> <span class="text-muted">129</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Likes Per Post:</strong> <span class="text-muted">1.50</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Engagement Rate Impression:</strong> <span class="text-muted">2.71%</span></div>
+</div>
+<h3>Pipeline Efficiency</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Pipeline Runs:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Content Plans Generated:</strong> <span class="text-muted">17</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Posts Actually Published On Active Account:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Posts On Wrong Account Iammeruru:</strong> <span class="text-muted">8</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Posts Stuck As Draft Never Posted:</strong> <span class="text-muted">7</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Execution Rate:</strong> <span class="text-muted">35.3%</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Waste Rate:</strong> <span class="text-muted">64.7%</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Analyst Comment:</strong> <span class="text-muted">Almost two-thirds of our generated content was never published. 8 posts went to a shadowbanned account. 7 posts from Mar 7-8 were never approved. The pipeline generates content into a void.</span></div>
+</div>
+<h3>Outbound Activity</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Total Days With Outbound:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">First Outbound Date:</strong> <span class="text-muted">2026-03-09</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Days With Zero Outbound:</strong> <span class="text-muted">12</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Likes Given:</strong> <span class="text-muted">32</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Replies Attempted:</strong> <span class="text-muted">8</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Replies Succeeded:</strong> <span class="text-muted">3</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Replies Failed 403:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Reply Failure Rate:</strong> <span class="text-muted">62.5%</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Follows:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Analyst Comment:</strong> <span class="text-muted">Outbound started 12 days late. When it finally started, replies mostly fail due to X&#x27;s new-account restriction. Likes and follows work. Net effect on follower growth: zero or negative.</span></div>
+</div>
+<h4>Targets Engaged</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">@Angelwithcakee</li>
+  <li style="margin: 4px 0">@yogana_19</li>
+  <li style="margin: 4px 0">@IvoryLane_plus</li>
+  <li style="margin: 4px 0">@HannaJonso</li>
+  <li style="margin: 4px 0">@IsabellaCruz_47</li>
+  <li style="margin: 4px 0">@Estherbron1</li>
+  <li style="margin: 4px 0">@tanarainw</li>
+  <li style="margin: 4px 0">@iiCoraMaay</li>
+  <li style="margin: 4px 0">@baharaykin</li>
+  <li style="margin: 4px 0">@NotjustRen00</li>
+</ul>
+<h3>Jp Account</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">SUSPENDED — account not yet created</div>
+    <div class="label">Status</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">None</div>
+    <div class="label">Operations</div>
+  </div>
+</div>
+</section>
+<section id="section_2_scout_report">
+<h2>Section 2 Scout Report</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Competitive Landscape &amp; Our Position</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Speaker:</strong> <span class="text-muted">Scout</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Data Source:</strong> <span class="text-muted">scout_report_20260309.json (41 competitors tracked)</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Scout Bottom Line:</strong> <span class="text-muted">The market is booming for AI beauty content. X&#x27;s algorithm actively promotes it. Competitors prove that explosive growth is possible even from zero. But our execution is nowhere near the quality and consistency bar needed to compete.</span></div>
+</div>
+<h3>En Market Overview</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">26</div>
+    <div class="label">Competitors Tracked</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">141055</div>
+    <div class="label">Avg Followers</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">50000</div>
+    <div class="label">Median Followers Approx</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">3.71%</div>
+    <div class="label">Avg Engagement Rate</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">4.6 posts/day</div>
+    <div class="label">Avg Posting Frequency</div>
+  </div>
+</div>
+<h3>Meruru Position</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">Dead last. 3 followers vs field average 141K.</div>
+    <div class="label">Followers Rank</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">2.71% impression ER — actually competitive when content IS seen</div>
+    <div class="label">Engagement Quality</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">0.43/day vs field avg 4.6 — 10x below average</div>
+    <div class="label">Posting Frequency</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">6 posts vs top performers with 50-300+</div>
+    <div class="label">Content Volume</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">Our content quality is not the problem. When people see our posts, they engage at a rate comparable to mid-tier competitors. The problem is that almost nobody sees our posts.</div>
+    <div class="label">Scout Comment</div>
+  </div>
+</div>
+<h3>Role Models For Our Stage</h3>
+<div class="table-wrap"><table>
+<tr><th>Handle</th><th>Followers</th><th>Total Posts</th><th>Engagement Rate</th><th>Posting Freq</th><th>Top Post Likes</th><th>Lesson</th><th>Key Difference From Us</th></tr>
+<tr><td>@sessypuuh</td><td>7639</td><td>51</td><td>38.0%</td><td>0.7/day</td><td>5413</td><td>Quality-first growth. 51 posts → 7.6K followers. Zero hashtags. Proof that exceptional images + short provocative captions can achieve explosive growth even at moderate posting frequency.</td><td>Their images are jaw-dropping. Every single one. Ours are good-not-great.</td></tr>
+<tr><td>@Angelwithcakee</td><td>35139</td><td>56</td><td>4.48%</td><td>1.2/day</td><td></td><td>35K from 56 posts. Consistent aesthetic, engaging captions, zero hashtags. Our most direct blueprint.</td><td>They post consistently every day. We don&#x27;t.</td></tr>
+<tr><td>@yuumispm</td><td>12025</td><td></td><td>17.5%</td><td></td><td>16177</td><td>12K followers from ~17 posts. ONE viral image (16K likes) did most of the work. Proof that one extraordinary image can change everything.</td><td>They had THAT one image. We haven&#x27;t had ours yet.</td></tr>
+<tr><td>@IsabellaCruz_47</td><td>91682</td><td></td><td>5.82%</td><td>0.3/day</td><td></td><td>91K followers, posts rarely. Quality so high that frequency barely matters at scale.</td><td>Professional-grade image quality that makes people stop scrolling.</td></tr>
+</table></div>
+<h3>Key Competitive Patterns</h3>
+<div class="insight">92.7% of top EN performers use ZERO hashtags — we follow this correctly</div>
+<div class="insight">Ultra-short captions (&lt;30 chars) correlate with 12x more likes — we&#x27;re short but not provocative</div>
+<div class="insight">Top 5 quality performers average 0.5-1.5 posts/day — NOT 5-10/day. Quality &gt; volume.</div>
+<div class="insight">Grok interactive is an emerging format — @ai_hyk got 7,880 likes on one Grok post</div>
+<div class="insight">First 50 posts are the trust-building phase — X algorithm needs signal history before it amplifies</div>
+<div class="insight">Successful accounts have a SIGNATURE LOOK — recognizable visual identity within 3 posts</div>
+</section>
+<section id="section_3_root_cause_analysis">
+<h2>Section 3 Root Cause Analysis</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Why Our Strategy Isn&#x27;t Delivering — Root Cause Analysis</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Speaker:</strong> <span class="text-muted">Strategist</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Diagnosis:</strong> <span class="text-muted">Strategy quality is A-tier. Execution quality is D-tier. The gap between what we plan and what we ship is catastrophic.</span></div>
+</div>
+<h3>Root Causes</h3>
+<div class="table-wrap"><table>
+<tr><th>Rank</th><th>Cause</th><th>Severity</th><th>Detail</th><th>Fix</th></tr>
+<tr><td>1</td><td>The Approval Bottleneck</td><td>CRITICAL</td><td>Content plans are generated daily, but the human operator must manually approve each post via Telegram. Mar 7: 3 planned, 0 posted. Mar 8: 2 planned, 0 posted. That&#x27;s 5 posts — more than our total posted count — sitting unexecuted. The operator is running a startup. They cannot babysit a Telegram approval flow 4 times a day.</td><td>Batch approval (review week on Sunday, auto-publish) or trust threshold (auto-publish after 10 successful posts)</td></tr>
+<tr><td>2</td><td>The 9-Day Launch Gap</td><td>CRITICAL</td><td>Account created Feb 25, first post Mar 6. New X accounts get an initial algorithmic boost window (7-14 days). We spent that entire window building infrastructure instead of posting. By the time we started, the algorithm classified us as dormant.</td><td>Cannot be undone. Must earn algorithmic trust the hard way through 30+ days of consistent daily posting.</td></tr>
+<tr><td>3</td><td>Wrong Account Migration</td><td>HIGH</td><td>Posted 8 tweets on @iammeruru (shadowbanned), then restarted on @meruru_tcbn from zero. Lost 8 posts of content and momentum.</td><td>Sunk cost. Focus entirely on @meruru_tcbn.</td></tr>
+<tr><td>4</td><td>Over-Engineering Before Shipping</td><td>HIGH</td><td>6 agents running daily for 3 followers. Strategy documents to posts ratio: ~50:1. Full pipeline per run takes hours of compute and produces JSON files nobody acts on.</td><td>Simplify: Creator daily, Scout + Strategist weekly.</td></tr>
+<tr><td>5</td><td>Image Quality Below the Bar</td><td>HIGH</td><td>In this niche, the image IS the product. Our best: 3 likes, 133 impressions. Competitors at similar stage: 100-500+ likes on breakout images. Algorithm gives us ~100 impressions to test with and we don&#x27;t trigger amplification.</td><td>Generate 5-10 variants per slot, pick only the best. Build 5-day image buffer. Reverse-engineer top competitor images.</td></tr>
+<tr><td>6</td><td>Grok Posts Are Failing</td><td>MEDIUM</td><td>&#x27;hey @grok remove white&#x27; used TWICE — boring, uncreative. @ai_hyk gets 7,880 likes on creative Grok prompts. Our Grok posts average 0 likes.</td><td>Make Grok entertaining: &#x27;.@grok put me on a yacht&#x27;, &#x27;.@grok anime version&#x27;, &#x27;.@grok what do I look like as a blonde?&#x27;</td></tr>
+<tr><td>7</td><td>No Community Presence Before Outbound</td><td>MEDIUM</td><td>Outbound with 3 followers and 6 posts. When someone sees a like from a 3-follower account, they don&#x27;t visit. Profile too thin to convert.</td><td>Build content library first (20-30 posts), then ramp outbound.</td></tr>
+<tr><td>8</td><td>Follower Loss Signal Ignored</td><td>MEDIUM</td><td>6 → 3 followers = 50% churn. Should have triggered immediate investigation. People actively unfollowed us.</td><td>Profile overhaul + consistent posting to prevent further churn.</td></tr>
+</table></div>
+<h3>Strategy Vs Execution Scorecard</h3>
+<h4>Competitor Research</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">A</div>
+    <div class="label">Quality</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">41 competitors, deep analysis. Excellent.</div>
+    <div class="label">Note</div>
+  </div>
+</div>
+<h4>Content Strategy</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">A</div>
+    <div class="label">Quality</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Pillars, hashtag policy, outbound framework — well-designed.</div>
+    <div class="label">Note</div>
+  </div>
+</div>
+<h4>Content Execution</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">D</div>
+    <div class="label">Quality</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">6 posts in 14 days. Half the plans never posted.</div>
+    <div class="label">Note</div>
+  </div>
+</div>
+<h4>Image Quality</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">C+</div>
+    <div class="label">Quality</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Competitive ER but not stopping scrolls.</div>
+    <div class="label">Note</div>
+  </div>
+</div>
+<h4>Caption Quality</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">D</div>
+    <div class="label">Quality</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">&#x27;Hi&#x27;, &#x27;Sleepy&#x27;, &#x27;hey @grok remove white&#x27; — zero hooks.</div>
+    <div class="label">Note</div>
+  </div>
+</div>
+<h4>Outbound Execution</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">D</div>
+    <div class="label">Quality</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Started 12 days late. Replies broken.</div>
+    <div class="label">Note</div>
+  </div>
+</div>
+<h4>Profile Optimization</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">F</div>
+    <div class="label">Quality</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Bio never optimized. No pinned post.</div>
+    <div class="label">Note</div>
+  </div>
+</div>
+<h4>Daily Consistency</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">F</div>
+    <div class="label">Quality</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">9-day gap. Multiple zero-post days.</div>
+    <div class="label">Note</div>
+  </div>
+</div>
+</section>
+<section id="section_4_zero_to_1000_framework">
+<h2>Section 4 Zero To 1000 Framework</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">0→1000 Framework (設計×心理×アルゴリズム) Applied to Our Account</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Speaker:</strong> <span class="text-muted">Strategist</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Framework Overview:</strong> <span class="text-muted">Growth from 0→1000 requires three forces in harmony: Design (設計), Psychology (心理), Algorithm (アルゴリズム). All three must score high. Zero on any axis = zero growth.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Biggest Framework Violation:</strong> <span class="text-muted">The framework says first 30-50 posts are FOUNDATION — don&#x27;t expect growth. Just ship consistently at high quality. We have 6 posts and are already frustrated. The framework says: stop worrying about followers, focus on shipping 25+ exceptional posts ASAP.</span></div>
+</div>
+<h3>Our Scores</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">4/10</div>
+    <div class="label">Design</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">3/10</div>
+    <div class="label">Psychology</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">2/10</div>
+    <div class="label">Algorithm</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">3/10 — which explains the 3 followers</div>
+    <div class="label">Overall</div>
+  </div>
+</div>
+<h3>Design Axis</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">設計 (Design) — 4/10</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Principle:</strong> <span class="text-muted">Study 30 accounts. Design every profile element as a conversion funnel. Profile answers in 3 seconds: Who? What? Why follow?</span></div>
+</div>
+<h4>What We Did Right</h4>
+<div class="insight">Studied 41 competitors (exceeds 30-account recommendation)</div>
+<div class="insight">Developed clear content pillars from data</div>
+<div class="insight">Established character positioning</div>
+<h4>What We Missed</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">Profile optimization NEVER executed — analyzed competitors&#x27; bios but never redesigned our own</li>
+  <li style="margin: 4px 0">No pinned post strategy</li>
+  <li style="margin: 4px 0">No banner image optimization</li>
+  <li style="margin: 4px 0">No deliberate avatar selection</li>
+  <li style="margin: 4px 0">Framework says design these BEFORE posting. We posted without this foundation.</li>
+</ul>
+<h4>Bio Audit</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Current:</strong> <span class="text-muted">22 yo Japanese girl🌙 addicted SNS 📱</span></div>
+</div>
+<h4>Problems</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">Does NOT answer &#x27;Why follow?&#x27; — gives zero reason</li>
+  <li style="margin: 4px 0">Generic and forgettable</li>
+  <li style="margin: 4px 0">&#x27;22 yo Japanese girl&#x27; reads like a bot profile</li>
+  <li style="margin: 4px 0">Competitor bios: @imrubyreid (&#x27;most viral girl on X for a reason&#x27;), @katekarsyn (&#x27;i just want to play Fortnite&#x27;), @IsabellaCruz_47 (&#x27;Your favorite Colombian&#x27;) — bold, memorable</li>
+</ul>
+<h4>Recommended Bios</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">your new obsession</li>
+  <li style="margin: 4px 0">i know what you&#x27;re thinking...</li>
+  <li style="margin: 4px 0">the girl your gf warned you about</li>
+  <li style="margin: 4px 0">you&#x27;re staring btw</li>
+  <li style="margin: 4px 0">most beautiful girl you&#x27;ll never meet</li>
+</ul>
+<h3>Psychology Axis</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">心理 (Psychology) — 3/10</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Principle:</strong> <span class="text-muted">Target EMOTIONS not desires. Character × Worldview × Consistency. Every interaction feels 1-on-1 personal. People follow because of parasocial connection.</span></div>
+</div>
+<h4>Emotional Triggers</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">&#x27;Am I ur type&#x27; (5,424 likes), &#x27;Rate me 1 to 10&#x27; (20,670 likes), &#x27;built like this and still single...&#x27; (20,329 likes)</div>
+    <div class="label">Winners</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">&#x27;Hi&#x27;, &#x27;Sleepy&#x27;, &#x27;hey @grok remove white&#x27; — triggers NOTHING</div>
+    <div class="label">Us</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">Short AND provocative is the formula. We have short. We don&#x27;t have provocative.</div>
+    <div class="label">Gap</div>
+  </div>
+</div>
+<h4>Persona Depth</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Current:</strong> <span class="text-muted">SHALLOW — concept exists but zero personality in posts. No voice, opinions, life details.</span></div>
+</div>
+<h4>Needed</h4>
+<div class="insight">Backstory informing voice (where she lives, her vibe, what makes her unique)</div>
+<div class="insight">Emotional arc across posts (not isolated images but a story unfolding)</div>
+<div class="insight">Every post creates &#x27;I want to respond&#x27; micro-moment</div>
+<div class="insight">1-on-1 intimate feeling, not broadcast</div>
+<h4>Character Worldview Consistency</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">Character × Worldview × Consistency</div>
+    <div class="label">Formula</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">F — 6 posts, multi-day gaps, no consistent voice, mixed styles</div>
+    <div class="label">Our Grade</div>
+  </div>
+</div>
+<h3>Algorithm Axis</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">アルゴリズム (Algorithm) — 2/10</span></div>
+</div>
+<h4>Three Critical Metrics</h4>
+<h4>初速反応率</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">Initial Response Rate (first 30 min)</div>
+    <div class="label">Name</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Determines whether algorithm amplifies or suppresses</div>
+    <div class="label">Importance</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">FAILING — 3 followers = zero guaranteed first-30-min engagement. Algorithm tests with ~100 people, gets 0-3 likes, stops.</div>
+    <div class="label">Our Status</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">Until seed audience exists, images must be SO striking that random viewers stop scrolling</div>
+    <div class="label">Fix</div>
+  </div>
+</div>
+<h4>滞在時間</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">Dwell Time</div>
+    <div class="label">Name</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">How long people look at content. Higher = more distribution</div>
+    <div class="label">Importance</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">MIXED — Image posts probably decent dwell. Grok &#x27;remove white&#x27; = near-zero dwell.</div>
+    <div class="label">Our Status</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">Every image worth zooming in on. Every caption makes someone pause.</div>
+    <div class="label">Fix</div>
+  </div>
+</div>
+<h4>プロフィール遷移率</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">Profile Click-Through</div>
+    <div class="label">Name</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Do viewers visit profile? High CTR = algorithm sees high-quality creator</div>
+    <div class="label">Importance</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">FAILING — 6 posts, boring bio, no pinned post. Visitors leave in 2 seconds.</div>
+    <div class="label">Our Status</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">Need 15-20 posts + optimized profile before this metric can improve</div>
+    <div class="label">Fix</div>
+  </div>
+</div>
+<h4>Algorithmic Damage Done</h4>
+<div class="insight">9-day dormancy flagged us as low-priority</div>
+<div class="insight">Account switch means zero history</div>
+<div class="insight">Inconsistent cadence confuses algorithm</div>
+<div class="insight">Low engagement signals &#x27;not worth distributing&#x27;</div>
+<h4>Recovery Plan</h4>
+<div class="insight">Post every day for 30 days — teach algorithm we&#x27;re consistent</div>
+<div class="insight">Same times daily — regularity builds trust</div>
+<div class="insight">Front-load best images in next 10 posts — each impression is a test</div>
+<div class="insight">Self-quote chains to amplify reach</div>
+<h3>Framework Phase Mapping</h3>
+<div class="table-wrap"><table>
+<tr><th>Phase</th><th>Status</th><th>Detail</th></tr>
+<tr><td>Research (30 accounts)</td><td>COMPLETED ✓</td><td>41 competitors analyzed. Best phase.</td></tr>
+<tr><td>Profile Design (ペルソナ設計)</td><td>INCOMPLETE ✗</td><td>Concept exists but bio/avatar/banner/pinned never optimized.</td></tr>
+<tr><td>Foundation Posts (30-50)</td><td>12% ✗ (6/50)</td><td>Need 24-44 more. At 3/day = 8-15 days.</td></tr>
+<tr><td>Community Building</td><td>JUST STARTED — BROKEN ✗</td><td>Late start, replies blocked, profile too thin.</td></tr>
+<tr><td>Growth Phase</td><td>NOT REACHED</td><td>2-3 weeks away if we execute daily.</td></tr>
+</table></div>
+</section>
+<section id="section_5_our_approach_vs_winners">
+<h2>Section 5 Our Approach Vs Winners</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Our Actual Execution vs What Winners Do</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Speaker:</strong> <span class="text-muted">All agents</span></div>
+</div>
+<h3>Comparisons</h3>
+<div class="table-wrap"><table>
+<tr><th>Dimension</th><th>Us</th><th>Winners</th><th>Verdict</th></tr>
+<tr><td>Post Frequency</td><td>0.43 posts/day (6 posts in 14 days)</td><td>@sessypuuh 0.7/day, @Angelwithcakee 1.2/day, @yuumispm 0.5/day</td><td>Even quality-first accounts post more. And they never skip a day.</td></tr>
+<tr><td>Caption Style</td><td>&#x27;Hi&#x27;, &#x27;Sleepy&#x27;, &#x27;hey @grok remove white&#x27; — flat, uninspired, repetitive</td><td>&#x27;Am I ur type&#x27; (5,424 likes), &#x27;Rate me 1 to 10&#x27; (20,670 likes), &#x27;built like this and still single...&#x27; (20,329 likes)</td><td>Short (correct) but EMOTIONALLY DEAD (wrong). Winners are short AND provocative.</td></tr>
+<tr><td>Profile &amp; Bio</td><td>&#x27;22 yo Japanese girl addicted SNS&#x27;. 3:25 follower ratio.</td><td>&#x27;most viral girl on X for a reason&#x27; (691K), &#x27;i just want to play Fortnite&#x27; (105K), &#x27;Your favorite Colombian&#x27; (92K)</td><td>Their bios are bold or personality reveals. Ours is generic bot-like description.</td></tr>
+<tr><td>Visual Identity</td><td>4 images, no consistent style</td><td>Signature look within 10-20 posts. Recognizable in feed without reading handle.</td><td>We haven&#x27;t established identity. 4 images isn&#x27;t enough.</td></tr>
+<tr><td>Community Engagement</td><td>Zero for 12 days. Then 32 likes and 3 replies over 2 days.</td><td>Engage from day 1, even before first post.</td><td>We waited 12 days. Nobody knows we exist.</td></tr>
+<tr><td>Grok Posts</td><td>&#x27;hey @grok remove white&#x27; (0 likes, used TWICE)</td><td>@ai_hyk: creative Grok = 7,880 likes</td><td>Boring technical tests vs entertaining transformations.</td></tr>
+</table></div>
+</section>
+<section id="section_6_revised_action_plan">
+<h2>Section 6 Revised Action Plan</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Revised Daily Action Plan — Starting Tomorrow</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Speaker:</strong> <span class="text-muted">Strategist</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Philosophy Shift:</strong> <span class="text-muted">STOP optimizing strategy. START shipping content. Only metric for 30 days: did we post 3 stunning images today?</span></div>
+</div>
+<h3>Immediate Actions Today</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Priority:</strong> <span class="text-muted">DO THESE BEFORE TOMORROW</span></div>
+</div>
+<h4>Actions</h4>
+<div class="table-wrap"><table>
+<tr><th>Action</th><th>Owner</th><th>Time</th><th>Options</th></tr>
+<tr><td>Rewrite bio</td><td>Operator</td><td>2 min</td><td>[&quot;your new obsession&quot;, &quot;i know what you&#x27;re thinking...&quot;, &quot;the girl your gf warned you about&quot;, &quot;you&#x27;r</td></tr>
+<tr><td>Pin best post</td><td>Operator</td><td>2 min</td><td></td></tr>
+<tr><td>Unfollow to &lt;10</td><td>Operator</td><td>5 min</td><td></td></tr>
+<tr><td>Audit image quality vs competitors</td><td>Operator</td><td>10 min</td><td></td></tr>
+</table></div>
+<h3>New Daily Routine</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Operator Time:</strong> <span class="text-muted">30-45 min/day</span></div>
+</div>
+<h4>Schedule</h4>
+<div class="table-wrap"><table>
+<tr><th>Time</th><th>Action</th><th>Owner</th></tr>
+<tr><td>09:00 JST</td><td>Review &amp; approve content</td><td>Operator</td></tr>
+<tr><td>09:30 JST</td><td>Post 1 live</td><td>Automation</td></tr>
+<tr><td>12:00 JST</td><td>Post 2 live</td><td>Automation</td></tr>
+<tr><td>13:00 JST</td><td>Manual engagement 10 min</td><td>Operator from phone</td></tr>
+<tr><td>21:00 JST</td><td>Post 3 live (US afternoon prime)</td><td>Automation</td></tr>
+<tr><td>22:00 JST</td><td>Automated outbound (likes + follows only)</td><td>Automation</td></tr>
+</table></div>
+<h3>Content Changes</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Posting Target:</strong> <span class="text-muted">3/day, every day, no exceptions, 30 days</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Quality Bar:</strong> <span class="text-muted">5-10 image variants, post only the best. Never &#x27;good enough&#x27;.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Grok Evolution:</strong> <span class="text-muted">Entertaining not technical. &#x27;.@grok put me on a yacht&#x27;, &#x27;.@grok anime version&#x27;</span></div>
+</div>
+<h4>Caption Rules</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">Every caption = engagement hook</li>
+  <li style="margin: 4px 0">Under 25 characters</li>
+  <li style="margin: 4px 0">BANNED: &#x27;Hi&#x27;, &#x27;Hey&#x27;, &#x27;Sleepy&#x27;, flat single words</li>
+  <li style="margin: 4px 0">Template bank: &#x27;Am I your type?&#x27;, &#x27;rate me honestly&#x27;, &#x27;you like?&#x27;, &#x27;front or back?&#x27;, &#x27;thoughts?&#x27;, &#x27;be honest...&#x27;, &#x27;staring is free&#x27;</li>
+</ul>
+<h4>Content Mix</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">50% (↑ from 40%)</div>
+    <div class="label">Engagement Questions</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">30% (↑ from 25%)</div>
+    <div class="label">Image Showcase</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">10% (↓ from 20%)</div>
+    <div class="label">Grok Interactive</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">10% (↓ from 15%)</div>
+    <div class="label">Self Quote Chains</div>
+  </div>
+</div>
+<h3>Pipeline Simplification</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">Daily: Scout → Strategist → Creator → War Room → approval → publish</div>
+    <div class="label">Current</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Daily: Creator only → approval → publish. Weekly: Scout + Strategist.</div>
+    <div class="label">Revised</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">Strategy doesn&#x27;t change day-to-day for 3 followers. Save compute and attention.</div>
+    <div class="label">Reasoning</div>
+  </div>
+</div>
+<h3>Approval Fix Options</h3>
+<div class="insight">Batch approval: review week Sunday, auto-publish Mon-Sat</div>
+<div class="insight">Trust threshold: auto-publish after 10 good posts, post-hoc review</div>
+<div class="insight">Reduce friction: 1 post needs approval, other 2 auto-publish</div>
+</section>
+<section id="section_7_path_to_1000">
+<h2>Section 7 Path To 1000</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Path to 1,000 Followers — Milestone Roadmap</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Speaker:</strong> <span class="text-muted">Strategist</span></div>
+</div>
+<h3>Current</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">3</div>
+    <div class="label">Followers</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">6</div>
+    <div class="label">Posts</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">4</div>
+    <div class="label">Days Active</div>
+  </div>
+</div>
+<h3>Phases</h3>
+<div class="table-wrap"><table>
+<tr><th>Phase</th><th>Timeline</th><th>Follower Target</th><th>Actions</th><th>Success</th></tr>
+<tr><td>Phase 0: Foundation Reset</td><td>Days 1-7 (Mar 10-16)</td><td>10-20</td><td>[&quot;Profile overhaul&quot;, &quot;3 images/day × 7 = 21 new posts&quot;, &quot;Consistent times&quot;, &quot;Manual engagement 15-20</td><td>27+ posts, daily posting, 10+ followers</td></tr>
+<tr><td>Phase 1: Content Library</td><td>Days 8-21 (Mar 17-30)</td><td>50-100</td><td>[&quot;Continue 3/day&quot;, &quot;Algorithm starts wider testing at post 30-40&quot;, &quot;Creative Grok posts&quot;, &quot;Self-quot</td><td>50+ posts, 50+ followers, one post with 50+ likes</td></tr>
+<tr><td>Phase 2: Community Growth</td><td>Days 22-45 (Mar 31 - Apr 13)</td><td>200-400</td><td>[&quot;Visual identity established&quot;, &quot;Full pipeline reactivated&quot;, &quot;Full outbound with replies&quot;, &quot;Engage e</td><td>200+ followers, 500+ avg impressions</td></tr>
+<tr><td>Phase 3: Momentum</td><td>Days 46-75 (Apr 14 - May 13)</td><td>500-1000</td><td>[&quot;Data-driven optimization from 100+ posts&quot;, &quot;1-2 breakout posts/week&quot;, &quot;Consider JP launch&quot;, &quot;Monet</td><td>1,000 followers</td></tr>
+</table></div>
+<h3>Timeline Estimates</h3>
+<h4>Fastest</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">3-4 weeks</div>
+    <div class="label">To 100</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">6-8 weeks</div>
+    <div class="label">To 500</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">8-12 weeks</div>
+    <div class="label">To 1000</div>
+  </div>
+</div>
+<h4>Likely</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">4-6 weeks</div>
+    <div class="label">To 100</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">10-14 weeks</div>
+    <div class="label">To 500</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">14-20 weeks</div>
+    <div class="label">To 1000</div>
+  </div>
+</div>
+<h4>If Unchanged</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">To 100:</strong> <span class="text-muted">NEVER — at -0.2 followers/day we hit 0 before 100</span></div>
+</div>
+<h3>Benchmarks</h3>
+<div class="table-wrap"><table>
+<tr><th>Account</th><th>Path</th></tr>
+<tr><td>@sessypuuh</td><td>0 → 7,639 in ~90 days at 0.7 posts/day</td></tr>
+<tr><td>@yuumispm</td><td>0 → 12,025 from ~17 posts. ONE viral image (16K likes) did most of it.</td></tr>
+<tr><td>@Angelwithcakee</td><td>0 → 35,139 in ~50 days. 56 posts at 1.1/day.</td></tr>
+</table></div>
+</section>
+<section id="section_8_hard_truths">
+<h2>Section 8 Hard Truths</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Hard Truths</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Speaker:</strong> <span class="text-muted">Marc (synthesizing all perspectives)</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">The One Thing:</strong> <span class="text-muted">Execution velocity. Ship 3 stunning images with provocative captions every day. Everything else is a distraction until we have 50 posts.</span></div>
+</div>
+<h3>Truths</h3>
+<div class="table-wrap"><table>
+<tr><th>Number</th><th>Statement</th><th>Detail</th></tr>
+<tr><td>1</td><td>We&#x27;ve been playing business instead of doing business.</td><td>50:1 ratio of strategy documents to posts. The entire agent system has produced LESS output than one person posting from their phone.</td></tr>
+<tr><td>2</td><td>Image quality is the ONLY thing that matters right now.</td><td>The image IS the product. Our best: 3 likes. Competitors at similar stage: 100-500+. Should spend 80% effort on images, 20% everything else.</td></tr>
+<tr><td>3</td><td>The approval bottleneck will kill this project.</td><td>7 of 17 planned posts died as drafts. Implement batch approval or auto-publish.</td></tr>
+<tr><td>4</td><td>The multi-agent system is over-engineered for 3 followers.</td><td>Six agents daily is for 50K+ accounts. Simplify: Creator daily, everything else weekly.</td></tr>
+<tr><td>5</td><td>If unchanged, we&#x27;ll have fewer than 3 followers in 30 days.</td><td>Lost 3 in 5 days. No mechanism currently produces growth. Math, not pessimism.</td></tr>
+<tr><td>6</td><td>Operator&#x27;s 15 min/day manual engagement &gt; all 6 agents combined.</td><td>Manual engagement bypasses API restrictions, builds real presence. The #1 growth lever.</td></tr>
+<tr><td>7</td><td>Our character concept needs questioning.</td><td>Bio says &#x27;Japanese girl&#x27; on EN-market account. Handle doesn&#x27;t resonate like @IsabellaCruz_47. May need redesign.</td></tr>
+</table></div>
+<h3>Fundamental Changes</h3>
+<div class="insight">Kill daily full pipeline → Creator daily, Scout+Strategist weekly</div>
+<div class="insight">Batch approval → review Sunday, auto-publish through week</div>
+<div class="insight">Operator manual engagement → 10-15 min/day. NON-NEGOTIABLE.</div>
+<div class="insight">Image quality sprint → Generate 50, curate 15, build 5-day buffer</div>
+<div class="insight">Profile overhaul → New bio, pinned post, reduce following</div>
+<div class="insight">Caption template bank → 30+ proven hooks, no more flat captions</div>
+</section>
+<section id="meeting_conclusion">
+<h2>Meeting Conclusion</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Speaker:</strong> <span class="text-muted">Marc</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Summary:</strong> <span class="text-muted">Wake-up call delivered. Strategy is A-tier, execution is D-tier. We scored 3/10 on the 0→1000 framework because we skipped fundamentals: profile optimization, consistent posting, community building. We&#x27;ve been building a Formula 1 car when we need to be running.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Key Takeaway:</strong> <span class="text-muted">Starting tomorrow: 3 stunning images + provocative captions, every day, 30 days. Everything else is secondary until 50 posts exist.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Next Meeting:</strong> <span class="text-muted">Mar 16 — Week 1 check-in. Target: 27+ posts, daily posting streak intact.</span></div>
+</div>
+<h3>Immediate Operator Actions</h3>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">1. Rewrite bio (2 min)</li>
+  <li style="margin: 4px 0">2. Pin best post (2 min)</li>
+  <li style="margin: 4px 0">3. Unfollow to &lt;10 (5 min)</li>
+  <li style="margin: 4px 0">4. Decide on batch-approval system</li>
+  <li style="margin: 4px 0">5. Commit to 15 min/day manual engagement</li>
+  <li style="margin: 4px 0">6. Generate image batch for this week</li>
+</ul>
+</section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-03-10 23:03 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

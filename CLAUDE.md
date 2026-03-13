@@ -29,7 +29,7 @@ Entry points:
 - Impressions only via Playwright (own account pages)
 - Human approval required before any post goes live
 - All Telegram communication goes through Marc (COO)
-- Task coordination via shared task list (Agent Teams) or data/pipeline_state_{date}.json
+- Task coordination via shared task list (Agent Teams) or data/pipeline/pipeline_state_{date}.json
 
 ## Agent Definitions (Teammates)
 - @agents/marc.md — COO / Team Leader (Opus)

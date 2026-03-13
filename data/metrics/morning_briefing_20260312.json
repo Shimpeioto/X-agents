@@ -1,0 +1,76 @@
+{
+  "date": "2026-03-12",
+  "generated_at": "2026-03-12T05:30:00+09:00",
+  "type": "morning_briefing",
+  "daily_report_used": "data/daily_report_20260312.json",
+  "data_sources": [
+    "data/metrics_20260312_EN.json",
+    "data/content_plan_20260311_EN.json",
+    "data/outbound_log_20260311.json",
+    "data/strategy_20260311.json",
+    "data/daily_report_20260312.json"
+  ],
+  "accounts": {
+    "EN": {
+      "followers": 5,
+      "followers_change": 0,
+      "following": 40,
+      "following_change": 7,
+      "total_posts": 28,
+      "metrics_note": "Post metrics available only for Mar 9 posts (measured Mar 11). Mar 11 posts were published late — no metrics collected yet.",
+      "total_likes": 5,
+      "total_retweets": 2,
+      "total_replies": 0,
+      "total_bookmarks": 2,
+      "top_post": {
+        "post_id": "EN_20260309_01",
+        "category": "engagement_questions",
+        "text": "Am I your type? 👀",
+        "likes": 2,
+        "retweets": 1,
+        "bookmarks": 1,
+        "total_engagement": 4,
+        "note": "Tied with EN_20260309_02 (image_showcase) at 4 total engagement each"
+      },
+      "posts_yesterday": {
+        "total_planned": 4,
+        "posted": 3,
+        "still_approved": 1,
+        "posted_details": [
+          {"id": "EN_20260311_01", "text": "be honest rn", "category": "engagement_questions", "variant": "A", "posted_at": "2026-03-11T22:18:40+09:00"},
+          {"id": "EN_20260311_02", "text": ".@grok put me on a yacht", "category": "grok_interactive", "variant": "B", "posted_at": "2026-03-12T01:45:21+09:00"},
+          {"id": "EN_20260311_03", "text": "she knows", "category": "image_showcase", "variant": "B", "posted_at": "2026-03-12T19:36:07+09:00"}
+        ],
+        "pending_details": [
+          {"id": "EN_20260311_04", "text": "wait for it", "category": "self_quote_chains", "status": "approved"}
+        ]
+      },
+      "outbound_summary": {
+        "likes_given": 16,
+        "replies_attempted": 4,
+        "replies_succeeded": 0,
+        "replies_failed": 4,
+        "follows": 6,
+        "targets_engaged": ["@imrubyreid", "@lucidevlinxyz", "@yuumispm", "@katekarsyn"],
+        "additional_follows": ["@Estherbron1", "@KissofStarova", "@itsluna_baby"],
+        "reply_failure_reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+      },
+      "ab_test_status": "Caption style: provocative question vs ambient statement — day 5/5 concluded. Insufficient data (2 posts per variant). Variant B marginally ahead (avg 2.5 vs 2.0). Extending recommended.",
+      "anomalies": [],
+      "needs_attention": [
+        "EN_20260311_04 ('wait for it') approved but not posted — need to publish or reschedule",
+        "4 reply attempts failed with 403 — manual replies needed if desired",
+        "Today's content plan (Mar 12): 4 drafts awaiting approval",
+        "A/B test needs extension — design continuation in today's strategy"
+      ]
+    }
+  },
+  "manual_replies_needed": [
+    {"target": "@imrubyreid", "reply_text": "okay the way this light hits is unreal", "tweet_url": "https://x.com/imrubyreid/status/2031468799476617218"},
+    {"target": "@lucidevlinxyz", "reply_text": "honestly the boldness is what makes the timeline fun", "tweet_url": "https://x.com/lucidevlinxyz/status/2029271640052515298"},
+    {"target": "@yuumispm", "reply_text": "this whole vibe is so clean, genuinely obsessed", "tweet_url": "https://x.com/yuumispm/status/2031475976102650021"},
+    {"target": "@katekarsyn", "reply_text": "red is definitely your color, this looks amazing", "tweet_url": "https://x.com/katekarsyn/status/2031475349603934450"}
+  ],
+  "summary": "EN steady at 5 followers. 3/4 Mar 11 posts published, 1 pending. Mar 9 posts showing modest early traction (5 likes, 2 RTs, 2 bookmarks). Outbound: 16 likes, 6 follows successful; all 4 replies blocked by 403. A/B test concluded with insufficient data — extending recommended. One post still needs publishing, and today's 4 draft posts await approval.",
+  "telegram_message": "☀️ Morning Briefing — Mar 12\n\n📊 EN (@meruru_tcbn)\n• Followers: 5 (+0) | Following: 40 (+7)\n• Total posts: 28\n\n📝 Mar 11 Posts: 3/4 published\n• ✅ \"be honest rn\" (engagement, var A)\n• ✅ \".@grok put me on a yacht\" (grok, var B)\n• ✅ \"she knows\" (image_showcase, var B)\n• ⏳ \"wait for it\" (chain) — approved, not posted\n\n📈 Mar 9 Engagement:\n• 5 likes, 2 RTs, 2 bookmarks across 4 posts\n• Top: \"Am I your type? 👀\" — 2 likes, 1 RT, 1 bookmark\n\n📤 Outbound (Mar 11): 16 likes, 6 follows ✅\n• Replies: 0/4 — 403 still blocking\n\n🧪 A/B Test: question vs statement\n• Day 5/5 done — insufficient data to conclude\n• B slightly ahead (2.5 vs 2.0) — extending\n\n⚠️ Action needed:\n1. Post EN_20260311_04 or reschedule\n2. Approve today's 4 draft posts\n3. 403 reply block continues\n\n📅 Today: Pipeline → Outbound → Evening review"
+}

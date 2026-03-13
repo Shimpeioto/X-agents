@@ -1,0 +1,13 @@
+{
+  "task_id": "20260313_002",
+  "description": "Regenerate posts 2 and 4 in data/content_plan_20260312_EN.json to match Meruru's core concept. Read config/meruru_concept.md and config/image_prompt_guide.md first. Both the post text AND image_prompt must align with Meruru's character lock, voice, and content pillars. Use the 2026-03-11 EN content plan (data/content_plan_20260311_EN.json) as the quality reference for image prompt detail. Update the two posts in-place in the file, keeping posts 1 and 3 unchanged. Then generate an HTML report and send via Telegram.",
+  "task_type": "custom",
+  "agents_planned": [
+    "creator"
+  ],
+  "notes": "Fix posts 2 and 4 only. Read meruru_concept.md carefully — character lock (physical traits), voice rules, NG list must all be respected. Image prompts must have full meta/subject/outfit/pose/scene/camera/lighting/mood blocks with 150+ word prompt text. Use 2026-03-11 plan as quality benchmark.",
+  "created_at": "2026-03-13T00:39:51.114522+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-13T00:48:34.514394+09:00",
+  "exit_code": 0
+}

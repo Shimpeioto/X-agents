@@ -1,0 +1,145 @@
+{
+  "date": "2026-03-11",
+  "generated_at": "2026-03-11T17:00:00+09:00",
+  "scout_report_used": "data/scout_report_20260311.json",
+  "EN": {
+    "posting_schedule": [
+      {
+        "slot": 1,
+        "time": "13:00 UTC",
+        "category": "engagement_questions",
+        "priority": "high"
+      },
+      {
+        "slot": 2,
+        "time": "17:00 UTC",
+        "category": "grok_interactive",
+        "priority": "high"
+      },
+      {
+        "slot": 3,
+        "time": "21:00 UTC",
+        "category": "image_showcase",
+        "priority": "high"
+      },
+      {
+        "slot": 4,
+        "time": "00:30 UTC",
+        "category": "self_quote_chains",
+        "priority": "medium"
+      }
+    ],
+    "content_mix": {
+      "engagement_questions": 40,
+      "image_showcase": 25,
+      "grok_interactive": 20,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 0
+    },
+    "outbound_strategy": {
+      "daily_likes": 20,
+      "daily_replies": 5,
+      "daily_follows": 3,
+      "target_accounts": [
+        "@imrubyreid",
+        "@lucidevlinxyz",
+        "@yuumispm",
+        "@katekarsyn"
+      ],
+      "reply_style": "Casual, genuine, and conversational. Reference something specific in their image or caption. Sound like a real person who appreciates the content. Keep it to 1-2 sentences, under 200 characters. Vary between enthusiastic ('okay this might be your best one'), thoughtful ('the lighting here is insane'), and curious ('how do you get that glow?'). Never use hashtags in replies."
+    },
+    "ab_test": {
+      "variable": "Caption style: provocative question vs ambient statement",
+      "variant_a": "Provocative question format — e.g., 'Am I ur type?', 'Smash or pass?', 'Rate me 1-10' — direct audience engagement prompt",
+      "variant_b": "Ambient statement format — e.g., 'single btw', 'lord have mercy...', 'built like this' — indirect confidence signaling without a question",
+      "duration_days": 5,
+      "start_date": "2026-03-08"
+    },
+    "key_insights": [
+      "Short captions remain the #1 EN engagement driver. @sessypuuh (7.6K followers, 37.9% ER) and @yuumispm (12.1K followers, 19.6% avg ER with a viral 16,072-like post) both use minimal text under 30 chars. @imrubyreid (695K followers) continues to dominate with 21,915 likes on a single post using ambient captions. All confirmed: keep captions under 30 characters, casual lowercase, playful confidence.",
+      "Grok interactive remains a massive first-mover gap in EN. @ai_hiyo_ (389K followers) is still the only EN account using Grok at scale, but recent sampled posts show low engagement (mostly replies). For our clean original posts, Grok at slot 2 (17:00 UTC, US afternoon) captures the underexploited format while avoiding @ai_hiyo_'s reply-heavy pattern.",
+      "A/B test (provocative question vs ambient statement) is on day 4 of 5 — approaching completion. With 4 posts today, assign 2 to each variant (slots 1,4 = variant A questions, slots 2,3 = variant B statements). Collect final data point before evaluating winner tomorrow.",
+      "Target rotation: avoiding all accounts engaged Mar 9 (@Angelwithcakee, @yogana_19, @IvoryLane_plus, @HannaJonso, @IsabellaCruz_47, @Estherbron1) and Mar 10 (@tanarainw, @iiCoraMaay, @baharaykin, @NotjustRen00). Fresh targets: @imrubyreid (695K — max visibility, zero reply contamination, 1.7% ER), @lucidevlinxyz (45.4K, 3.4% ER — clean timeline, 5,129-like top post), @yuumispm (12.1K, 19.6% ER — small but explosive viral potential), @katekarsyn (104.7K, 0.9% ER — large, clean timeline, Fortnite persona).",
+      "EN market avg engagement at 3.7% follower-based continues strong. Impression-based ER shows @sessypuuh at 9.1% and @yuumi005 at 11.0%, confirming X algorithm actively boosts AI beauty content. The 4-post cadence maximizes chances of catching algorithmic distribution windows."
+    ],
+    "risks": [
+      "Our EN account (@meruru_tcbn) continues to get 403 on all reply attempts — every reply in the Mar 10 outbound log failed. Likes and follows work fine. Plan replies but expect all to fail and require manual escalation. The 403 restriction may lift as the account gains more organic engagement and standing.",
+      "The A/B test concludes tomorrow (day 5). With limited post volume (8-12 total posts across 5 days), statistical significance will be weak. Use directional signals rather than definitive conclusions when evaluating.",
+      "Targeting @imrubyreid (695K) for outbound — our like/follow will be invisible in their notification volume, but it signals activity to X's algorithm. The real value is algorithmic association, not direct reciprocal engagement."
+    ]
+  },
+  "JP": {
+    "posting_schedule": [
+      {
+        "slot": 1,
+        "time": "09:00 JST",
+        "category": "grok_interactive",
+        "priority": "high"
+      },
+      {
+        "slot": 2,
+        "time": "12:30 JST",
+        "category": "persona_dialogue",
+        "priority": "high"
+      },
+      {
+        "slot": 3,
+        "time": "20:30 JST",
+        "category": "art_showcase",
+        "priority": "high"
+      },
+      {
+        "slot": 4,
+        "time": "23:30 JST",
+        "category": "self_quote_chains",
+        "priority": "medium"
+      }
+    ],
+    "content_mix": {
+      "grok_interactive": 30,
+      "persona_dialogue": 30,
+      "art_showcase": 25,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 2
+    },
+    "outbound_strategy": {
+      "daily_likes": 15,
+      "daily_replies": 5,
+      "daily_follows": 2,
+      "target_accounts": [
+        "@AIart_yama94",
+        "@ai_nontan_room",
+        "@ganbarukaisyain"
+      ],
+      "reply_style": "Warm, appreciative, community-oriented. Use natural Japanese appropriate for peer interaction in the AI art community. Reference something specific about their image or creative approach. Keep it to 1-2 sentences, under 200 characters. Examples: 'この雰囲気すごく好き', 'めっちゃ綺麗...光の使い方が素敵', 'クオリティ高すぎ！'."
+    },
+    "ab_test": {
+      "variable": "Grok post request type: transformation vs combination",
+      "variant_a": "Single-image transformation — e.g., '.@grok この画像をアニメ風にして', '.@grok 服を変えて' — simple visual transformation of one image",
+      "variant_b": "Multi-image combination — e.g., '.@grok タップして4枚の画像を1つに結合して' — combining multiple images into a single composition (ai_hyk's 7,832-like format)",
+      "duration_days": 5,
+      "start_date": "2026-03-08"
+    },
+    "key_insights": [
+      "@ai_hyk continues to dominate JP with 7,832 likes on top post (124.5K followers, 1.6% avg ER). The Grok format is the primary driver — bookmark ratio remains exceptionally high, signaling algorithmic boost. Our grok_interactive slot moves to 09:00 JST (morning commute peak) for maximum early-day traction.",
+      "JP market avg ER at 0.27% is significantly lower than EN (3.7%). However, impression-based ER tells a different story — @ai_nontan_room shows 11.8% impression ER, indicating the algorithm delivers content broadly even if follower-based metrics look low. Quality Grok content can break through.",
+      "JP reply contamination remains severe: @ai_nontan_room (80%), @tororo_223 (80%), @seisei_ai_1st (80%), @BoobistR (70%), @nene__chandayo (70%). Clean original content accounts (@yunaelegant 0%, @AI_Girls_Studio 0%, @honoka_shiri 0%) serve as better engagement models.",
+      "Outbound targets rotated from previous cycles. Fresh targets: @AIart_yama94 (37.1K, 0.79% ER — consistent quality, uses SFW/Fictional disclaimers, 814-like top post), @ai_nontan_room (35.7K, 0.15% ER — high impression ER of 11.8%, active Grok user), @ganbarukaisyain (337.6K, 0.04% ER — massive JP account for visibility, low posting frequency indicates selectivity)."
+    ],
+    "risks": [
+      "JP account remains suspended (not yet created). All JP strategy is prepared for launch readiness — when the JP account is created, this strategy can be executed immediately.",
+      "The @ai_hyk dominance gap (124.5K vs next JP competitor) is enormous. Our launch strategy focuses on Grok interactive as the primary differentiator, leveraging the format that drives @ai_hyk's success.",
+      "JP outbound limits remain ultra-conservative (15 likes, 5 replies, 2 follows) per outbound_rules.json. Targeting larger accounts like @ganbarukaisyain (337.6K) is for algorithmic association rather than reciprocal engagement."
+    ]
+  }
+}

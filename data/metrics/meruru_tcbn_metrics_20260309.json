@@ -1,0 +1,322 @@
+{
+  "account": "EN",
+  "handle": "@meruru_tcbn",
+  "user_info": {
+    "user_id": "1962081689238491136",
+    "username": "meruru_tcbn",
+    "name": "meruru 🌙",
+    "description": "22 yo Japanese girl🌙 addicted SNS 📱",
+    "public_metrics": {
+      "followers_count": 3,
+      "following_count": 25,
+      "tweet_count": 13,
+      "listed_count": 0,
+      "like_count": 20,
+      "media_count": 4
+    },
+    "profile_image_url": "https://pbs.twimg.com/profile_images/2029843160718004225/tTw-G90j_normal.jpg"
+  },
+  "tweets": [
+    {
+      "tweet_id": "2030864414929531014",
+      "text": "@HannaJonso genuinely stunning work",
+      "created_at": "2026-03-09T04:33:02+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 1
+      },
+      "entities": {
+        "mentions": [
+          {
+            "start": 0,
+            "end": 11,
+            "username": "HannaJonso",
+            "id": "1936094554865754112"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": []
+    },
+    {
+      "tweet_id": "2030864294561386954",
+      "text": "@IvoryLane_plus So beauty ♡",
+      "created_at": "2026-03-09T04:32:34+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 1
+      },
+      "entities": {
+        "mentions": [
+          {
+            "start": 0,
+            "end": 15,
+            "username": "IvoryLane_plus",
+            "id": "1637688245252395010"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": []
+    },
+    {
+      "tweet_id": "2030863924468617451",
+      "text": "@yogana_19 @grok ❤️",
+      "created_at": "2026-03-09T04:31:05+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 6
+      },
+      "entities": {
+        "mentions": [
+          {
+            "start": 0,
+            "end": 10,
+            "username": "yogana_19",
+            "id": "1269692949387935750"
+          },
+          {
+            "start": 11,
+            "end": 16,
+            "username": "grok",
+            "id": "1720665183188922368"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": []
+    },
+    {
+      "tweet_id": "2030863659984130086",
+      "text": "@Angelwithcakee the glow is unreal in this one ✨",
+      "created_at": "2026-03-09T04:30:02+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 1
+      },
+      "entities": {
+        "mentions": [
+          {
+            "start": 0,
+            "end": 15,
+            "username": "Angelwithcakee",
+            "id": "1916760212519747584"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": []
+    },
+    {
+      "tweet_id": "2030863180310905130",
+      "text": "@IsabellaCruz_47 the vibes here are immaculate",
+      "created_at": "2026-03-09T04:28:08+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 20
+      },
+      "entities": {
+        "mentions": [
+          {
+            "start": 0,
+            "end": 16,
+            "username": "IsabellaCruz_47",
+            "id": "1831461948040392704"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": []
+    },
+    {
+      "tweet_id": "2030834019429229026",
+      "text": "hey @grok remove white https://t.co/4bRSe1mVpk",
+      "created_at": "2026-03-09T02:32:15+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 1,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 40
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 23,
+            "end": 46,
+            "url": "https://t.co/4bRSe1mVpk",
+            "expanded_url": "https://twitter.com/meruru_tcbn/status/2030566404966211835",
+            "display_url": "x.com/meruru_tcbn/st…"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 4,
+            "end": 9,
+            "username": "grok",
+            "id": "1720665183188922368"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": []
+    },
+    {
+      "tweet_id": "2030566404966211835",
+      "text": "Sleepy https://t.co/RKE4GC1ZZt",
+      "created_at": "2026-03-08T08:48:51+00:00",
+      "public_metrics": {
+        "retweet_count": 1,
+        "reply_count": 0,
+        "like_count": 3,
+        "quote_count": 0,
+        "bookmark_count": 2,
+        "impression_count": 133
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 7,
+            "end": 30,
+            "url": "https://t.co/RKE4GC1ZZt",
+            "expanded_url": "https://x.com/meruru_tcbn/status/2030566404966211835/photo/1",
+            "display_url": "pic.x.com/RKE4GC1ZZt",
+            "media_key": "3_2030566397059989505"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": [
+        {
+          "type": "photo",
+          "url": "https://pbs.twimg.com/media/HC4FYTWbAAEuOuE.jpg",
+          "preview_image_url": null,
+          "alt_text": null
+        }
+      ]
+    },
+    {
+      "tweet_id": "2030482742711066764",
+      "text": "hey @grok are you hungry? https://t.co/NPi7TEDGlN",
+      "created_at": "2026-03-08T03:16:25+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 1,
+        "like_count": 2,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 104
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 26,
+            "end": 49,
+            "url": "https://t.co/NPi7TEDGlN",
+            "expanded_url": "https://x.com/meruru_tcbn/status/2030482742711066764/photo/1",
+            "display_url": "pic.x.com/NPi7TEDGlN",
+            "media_key": "3_2030482736289550336"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 4,
+            "end": 9,
+            "username": "grok",
+            "id": "1720665183188922368"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": [
+        {
+          "type": "photo",
+          "url": "https://pbs.twimg.com/media/HC25SmsaEAAo3yP.jpg",
+          "preview_image_url": null,
+          "alt_text": null
+        }
+      ]
+    },
+    {
+      "tweet_id": "2030198335928463563",
+      "text": "hey @grok remove white https://t.co/omLWnVf3tZ",
+      "created_at": "2026-03-07T08:26:17+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 1,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 120
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 23,
+            "end": 46,
+            "url": "https://t.co/omLWnVf3tZ",
+            "expanded_url": "https://twitter.com/meruru_tcbn/status/2030124949277659480",
+            "display_url": "x.com/meruru_tcbn/st…"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 4,
+            "end": 9,
+            "username": "grok",
+            "id": "1720665183188922368"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": []
+    },
+    {
+      "tweet_id": "2030130991269040587",
+      "text": "@xx10x14xx 🤍",
+      "created_at": "2026-03-07T03:58:40+00:00",
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 1,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 7
+      },
+      "entities": {
+        "mentions": [
+          {
+            "start": 0,
+            "end": 10,
+            "username": "xx10x14xx",
+            "id": "1147717472"
+          }
+        ]
+      },
+      "hashtags": [],
+      "media": []
+    }
+  ],
+  "total_tweets_fetched": 10
+}

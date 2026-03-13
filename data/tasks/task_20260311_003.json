@@ -1,0 +1,16 @@
+{
+  "task_id": "20260311_003",
+  "description": "Two parallel tasks: (1) Publish EN_20260309_04 — update status to 'approved' in data/content_plan_20260309_EN.json and run python3 scripts/publisher.py post --account EN --slot 4. (2) THE FIX — comprehensive strategic review: Pull all performance data (posts published, engagement, follower growth). Run fresh scout data collection. Have Strategist conduct deep strategic review covering: honest progress audit, strategy gaps analysis, article framework integration (設計×心理×アルゴリズム, persona design, profile optimization, dwell time), revised daily action plan, content volume ramp-up, engagement quality upgrade, path to 1000 followers with milestones. The article key points: design before posting, algorithm values 初速反応率→滞在時間→プロフィール遷移率, persona×worldview×consistency, profile must answer who/what/why, initial 30-50 posts, personalized engagement, posting 12-14h and 17-21h. Our current gaps: no character narrative/backstory, generic reply templates, low content volume, no dwell time optimization. Output: strategic_review_20260311.json + HTML meeting minutes report. Send both the publishing result and the strategic review report via Telegram.",
+  "task_type": "custom",
+  "agents_planned": [
+    "publisher",
+    "scout",
+    "strategist",
+    "analyst"
+  ],
+  "notes": "Operator wants honest assessment — current progress is not going well. This is a full strategic overhaul called THE FIX. Be brutally honest about what's not working. EN account is @meruru_tcbn (sub-account, main is shadowbanned). JP is suspended. Only operate on EN. Deliver meeting minutes as HTML report via Telegram.",
+  "created_at": "2026-03-11T15:05:54.853899+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-11T15:22:35.282513+09:00",
+  "exit_code": 0
+}

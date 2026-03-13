@@ -1,0 +1,13 @@
+{
+  "task_id": "20260312_007",
+  "description": "Check data/content_plan_20260312_EN.json — verify whether image_prompt fields are missing from the posts array. If image prompts are absent or empty, re-run Creator EN to regenerate the content plan with proper image prompts (following agents/creator.md and config/image_prompt_guide.md). Use today's strategy at data/strategy_20260312.json. Output to data/content_plan_20260312_EN.json (overwrite). Then generate HTML report: python3 scripts/generate_html_report.py generic data/content_plan_20260312_EN.json --title 'EN Content Plan 2026-03-12' and send to Telegram.",
+  "task_type": "pipeline",
+  "agents_planned": [
+    "creator"
+  ],
+  "notes": "Operator found no image prompts in the EN content plan. Priority is to fix this — regenerate with full image_prompt objects per creator.md schema. Posts should already exist; check if we need full regeneration or just patch the image prompts.",
+  "created_at": "2026-03-12T20:01:08.471479+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-12T20:02:51.081444+09:00",
+  "exit_code": 0
+}

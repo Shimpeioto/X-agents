@@ -1,0 +1,345 @@
+{
+  "date": "2026-03-09",
+  "account": "EN",
+  "generated_at": "2026-03-09T17:45:00+09:00",
+  "strategy_used": "data/strategy_20260309.json",
+  "total_posts": 4,
+  "posts": [
+    {
+      "id": "EN_20260309_01",
+      "slot": 1,
+      "scheduled_time": "13:30 UTC",
+      "category": "engagement_questions",
+      "priority": "high",
+      "status": "posted",
+      "text": "Am I your type? 👀",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young woman in her early 20s standing in a modern minimalist apartment living room. She has long flowing honey blonde hair with soft beachy waves cascading past her shoulders with a few face-framing strands. Athletic-toned hourglass figure with natural skin texture showing real pores and subtle freckles across her nose and cheeks. She wears a fitted dusty rose ribbed tank top tucked into high-waisted light-wash mom jeans with a raw hem and white Nike Air Force 1 sneakers. A thin gold chain belt and small gold hoop earrings catch the light. One hand holds an iPhone 15 Pro Max at chest height capturing the mirror selfie, the other hand rests on her hip with fingers casually spread. Her weight shifts onto her right leg creating a natural S-curve hip tilt. She gazes at the phone screen with a confident knowing smirk and slightly raised eyebrow, head tilted gently to the left. The living room features a large leaning floor mirror with a thin brass frame, a cream boucle sofa partially visible in the background, a fiddle leaf fig plant in a white ceramic pot, and light oak hardwood floors. Warm afternoon sunlight streams through sheer white curtains from a window to the right, casting soft golden highlights across her hair and bare arms and creating elongated warm shadows on the floor. The light produces a gentle warm haze in the air. Soft pink, warm gold, cream white, light denim blue color palette. Casual confident influencer aesthetic. Shot at eye-level in portrait orientation, full body centered composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "raw iphone mirror selfie"
+        },
+        "subject": {
+          "hair": {
+            "color": "honey blonde",
+            "style": "long beachy waves past shoulders"
+          },
+          "body_type": "hourglass, athletic-toned",
+          "skin": "natural texture, visible pores, subtle freckles on nose and cheeks",
+          "expression": "confident knowing smirk, slightly raised eyebrow",
+          "makeup": "natural sun-kissed look, light bronzer, nude lip gloss, subtle mascara"
+        },
+        "outfit": {
+          "top": {
+            "type": "ribbed tank top",
+            "color": "dusty rose",
+            "material": "ribbed cotton",
+            "fit": "fitted, tucked in"
+          },
+          "bottom": {
+            "type": "mom jeans",
+            "color": "light wash denim",
+            "fit": "high-waisted, raw hem"
+          },
+          "footwear": "white Nike Air Force 1 sneakers",
+          "accessories": [
+            "iPhone 15 Pro Max",
+            "thin gold chain belt",
+            "small gold hoop earrings"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "weight on right leg, natural S-curve hip tilt",
+          "hands": "right hand holding phone at chest height, left hand on hip with fingers spread",
+          "head_gaze": "slight left tilt, eyes at phone screen",
+          "vibe": "effortless confidence"
+        },
+        "scene": {
+          "location": "modern minimalist apartment living room",
+          "time": "afternoon",
+          "atmosphere": "warm, bright, casual",
+          "background": "leaning brass-framed floor mirror, cream boucle sofa, fiddle leaf fig in white pot, light oak hardwood floors, sheer white curtains"
+        },
+        "camera": {
+          "pov": "mirror selfie",
+          "angle": "eye-level",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "warm afternoon sunlight through sheer curtains from right window",
+          "effect": "soft golden highlights on hair and arms, elongated warm shadows on floor, gentle warm haze"
+        },
+        "mood": {
+          "energy": "confident, playful",
+          "color_palette": "soft pink, warm gold, cream white, light denim blue",
+          "aesthetic": "casual confident influencer"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "Variant A: provocative question format. Classic engagement driver — direct audience prompt paired with casual mirror selfie. 18 characters.",
+      "tweet_id": "2031060275047313555",
+      "post_url": "https://x.com/meruru_tcbn/status/2031060275047313555",
+      "posted_at": "2026-03-10T02:31:19.784024+09:00"
+    },
+    {
+      "id": "EN_20260309_02",
+      "slot": 2,
+      "scheduled_time": "17:30 UTC",
+      "category": "image_showcase",
+      "priority": "high",
+      "status": "posted",
+      "text": "golden hour hits different",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic photo of a young Black woman in her early 20s standing on the rooftop terrace of a luxury city apartment building during golden hour. She has voluminous curly dark brown hair with golden-lit highlights catching the sunset light, styled in a natural textured afro that frames her face beautifully. Athletic-toned hourglass figure with rich deep brown skin showing natural texture and a warm sun-kissed glow. She wears a sleek satin champagne-colored slip dress with thin spaghetti straps that drapes elegantly along her curves, ending just above the knee, paired with strappy gold heeled sandals. A delicate gold layered necklace catches the light at her collarbone and small gold stud earrings shimmer. She leans against a glass and steel rooftop railing with her back slightly arched, both hands resting lightly on the railing behind her, shoulders relaxed and pulled back. She looks just past the camera with a serene confident expression, lips slightly parted, chin tilted up into the warm light. The rooftop overlooks a city skyline blurred in soft bokeh with warm-toned buildings and distant lights beginning to glow. Concrete planters with ornamental grasses and a modern outdoor lounge chair are partially visible to the side. Dramatic golden hour sunlight from directly behind and to the left creates a luminous backlight halo around her hair and silhouette, casting long warm shadows across the terrace and painting her skin with deep amber tones and golden rim lighting along her shoulders and arms. Rich amber, champagne gold, warm bronze, deep burnt orange, soft sky pink color palette. Elevated luxury golden hour aesthetic. Third-person shot, slightly low angle looking up, three-quarter body framing, vertical portrait composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "Sony A7R IV",
+          "lens": "85mm prime f/1.4",
+          "style": "luxury golden hour editorial"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown with golden highlights",
+            "style": "voluminous natural curly afro"
+          },
+          "body_type": "athletic-toned hourglass",
+          "skin": "rich deep brown, natural texture, warm sun-kissed glow",
+          "expression": "serene confident, lips slightly parted, chin tilted up",
+          "makeup": "glowing dewy skin, soft bronze eyeshadow, defined brows, glossy nude lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "slip dress",
+            "color": "champagne",
+            "material": "satin",
+            "fit": "draped, thin spaghetti straps",
+            "details": "ends just above knee"
+          },
+          "footwear": "strappy gold heeled sandals",
+          "accessories": [
+            "delicate gold layered necklace",
+            "small gold stud earrings"
+          ]
+        },
+        "pose": {
+          "position": "standing, leaning against railing",
+          "stance": "back slightly arched, shoulders relaxed and pulled back",
+          "hands": "both hands resting lightly on railing behind her",
+          "head_gaze": "looking just past camera, chin tilted up into light",
+          "vibe": "elevated serenity"
+        },
+        "scene": {
+          "location": "luxury rooftop terrace",
+          "time": "golden hour sunset",
+          "atmosphere": "warm, elevated, dreamy",
+          "background": "city skyline in soft bokeh, warm-toned buildings, distant lights, concrete planters with grasses, modern outdoor lounge chair"
+        },
+        "camera": {
+          "pov": "third-person",
+          "angle": "slightly low angle looking up",
+          "framing": "three-quarter body"
+        },
+        "lighting": {
+          "type": "dramatic golden hour backlight from behind-left",
+          "effect": "luminous halo around hair and silhouette, deep amber skin tones, golden rim lighting on shoulders and arms, long warm shadows"
+        },
+        "mood": {
+          "energy": "serene, bold",
+          "color_palette": "rich amber, champagne gold, warm bronze, deep burnt orange, soft sky pink",
+          "aesthetic": "elevated luxury golden hour"
+        }
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B: ambient statement format. Minimal text lets the stunning golden hour rooftop image do the talking. 26 characters.",
+      "tweet_id": "2031107879407890710",
+      "post_url": "https://x.com/meruru_tcbn/status/2031107879407890710",
+      "posted_at": "2026-03-10T05:40:29.558834+09:00"
+    },
+    {
+      "id": "EN_20260309_03",
+      "slot": 3,
+      "scheduled_time": "21:30 UTC",
+      "category": "grok_interactive",
+      "priority": "high",
+      "status": "posted",
+      "text": ".@grok put me in a bikini",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic photo of a young Latina woman in her early 20s taking a front-camera selfie while sitting on a plush deep green velvet sofa in a stylish modern apartment. She has long straight dark brown hair with a middle part, silky and flowing over her shoulders and down her chest. Athletic-toned hourglass figure with warm olive-toned skin showing natural texture and a healthy glow. She wears an oversized vintage cream cable-knit sweater that hangs loosely with the neckline slipping off one shoulder revealing a bare collarbone, sleeves pushed up to her elbows, paired with fitted black leggings. Small gold hoop earrings and a thin gold bracelet on her left wrist. She holds the phone with her right hand at a slightly high angle above eye level, left hand resting on the sofa cushion beside her. She sits with her legs tucked under her, body angled slightly to the left. She looks up at the camera with a warm playful smile, dimples visible, eyes bright and inviting, eyebrows slightly raised. The apartment has a deep emerald green accent wall behind her, a brass arc floor lamp casting warm light to her right, scattered velvet throw pillows in mustard and burgundy, and a small glass coffee table with a candle and stacked books visible. Warm artificial lamplight from the brass arc lamp creates a cozy golden glow on her face and sweater, soft shadows behind her on the emerald wall, and warm highlights on the velvet textures throughout the scene. Warm cream, deep emerald, mustard gold, burgundy, soft brass color palette. Cozy evening at home aesthetic. Front-camera selfie from slightly above, medium shot waist-up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "4:5",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "12mm front camera",
+          "style": "cozy evening selfie"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown",
+            "style": "long straight with middle part, silky"
+          },
+          "body_type": "athletic-toned hourglass",
+          "skin": "warm olive tone, natural texture, healthy glow",
+          "expression": "warm playful smile, dimples visible, bright inviting eyes, eyebrows slightly raised",
+          "makeup": "natural glam, soft brown smokey eye, defined brows, warm nude lip, dewy finish"
+        },
+        "outfit": {
+          "top": {
+            "type": "cable-knit sweater",
+            "color": "cream",
+            "material": "chunky cable knit",
+            "fit": "oversized, off-one-shoulder, sleeves pushed to elbows"
+          },
+          "bottom": {
+            "type": "leggings",
+            "color": "black",
+            "fit": "fitted"
+          },
+          "accessories": [
+            "small gold hoop earrings",
+            "thin gold bracelet on left wrist",
+            "iPhone 15 Pro Max"
+          ]
+        },
+        "pose": {
+          "position": "sitting on sofa, legs tucked under",
+          "stance": "body angled slightly left, relaxed posture",
+          "hands": "right hand holding phone above eye level, left hand resting on cushion",
+          "head_gaze": "looking up at camera, playful warm gaze",
+          "vibe": "cozy warmth"
+        },
+        "scene": {
+          "location": "stylish modern apartment living room",
+          "time": "evening",
+          "atmosphere": "cozy, warm, inviting",
+          "background": "deep emerald green accent wall, brass arc floor lamp, mustard and burgundy velvet throw pillows, glass coffee table with candle and stacked books"
+        },
+        "camera": {
+          "pov": "front camera selfie",
+          "angle": "slightly above eye level",
+          "framing": "medium shot, waist-up"
+        },
+        "lighting": {
+          "type": "warm artificial lamplight from brass arc lamp to the right",
+          "effect": "cozy golden glow on face and sweater, soft shadows on emerald wall, warm highlights on velvet textures"
+        },
+        "mood": {
+          "energy": "playful, cozy",
+          "color_palette": "warm cream, deep emerald, mustard gold, burgundy, soft brass",
+          "aesthetic": "cozy evening at home"
+        }
+      },
+      "ab_test_variant": "B",
+      "notes": "Variant B: ambient Grok statement (not a question). The sweater-to-bikini transformation request is a proven Grok engagement driver with high visual contrast. Grok text excluded from 30-char caption limit per core strategy rules. Posted at 21:30 UTC (US evening prime) to capture the underexploited Grok lane.",
+      "tweet_id": "2031318138890105100",
+      "post_url": "https://x.com/meruru_tcbn/status/2031318138890105100",
+      "posted_at": "2026-03-10T19:35:59.342931+09:00"
+    },
+    {
+      "id": "EN_20260309_04",
+      "slot": 4,
+      "scheduled_time": "00:30 UTC",
+      "category": "self_quote_chains",
+      "priority": "medium",
+      "status": "posted",
+      "text": "which angle tho? 🤔",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "higgsfield",
+        "prompt": "Ultra photorealistic photo of a young East Asian woman in her early 20s in a bright modern gym locker room taking a mirror selfie. She has shoulder-length straight jet-black hair with blunt-cut bangs framing her face and the rest tucked neatly behind her ears. Athletic-toned hourglass figure with fair skin showing a light post-workout flush and a natural sheen of perspiration on her collarbones and shoulders. She wears a fitted deep burgundy sports bra with thin racerback straps and matching high-waisted burgundy bike shorts that end mid-thigh, showing off her toned midsection and defined waist. White wireless earbuds sit in both ears. She holds her phone in her right hand at hip level, angling the camera upward toward the large wall mirror, while her left hand reaches up to adjust her hair behind her ear. She stands with her left hip popped slightly, weight on her right foot, torso turned to show her profile and the curve of her figure. She looks at the phone screen in the mirror with a subtle satisfied smirk, chin slightly down, exuding confident post-workout energy. The locker room has pale grey tile walls, a large frameless wall mirror with bright even lighting strips on either side, a wooden slatted bench with a black gym bag and clear water bottle visible, and clean white metal lockers in the background. Bright overhead fluorescent lights mix with warm side-mounted vanity light strips creating clean even illumination with a slight warm cast on her skin, sharp reflections on the tile floor, and gentle shadows that define her muscle tone and physique. Deep burgundy, pale grey, clean white, warm skin tones, dark black color palette. Post-workout fitness influencer aesthetic. Mirror selfie from hip level angled up, full body framing, vertical portrait composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "gym mirror selfie"
+        },
+        "subject": {
+          "hair": {
+            "color": "jet black",
+            "style": "shoulder-length straight with blunt bangs, tucked behind ears"
+          },
+          "body_type": "athletic-toned hourglass",
+          "skin": "fair, light post-workout flush, natural perspiration sheen on collarbones",
+          "expression": "subtle satisfied smirk, chin slightly down, confident energy",
+          "makeup": "minimal, natural brows, clear lip balm, no-makeup workout look"
+        },
+        "outfit": {
+          "top": {
+            "type": "sports bra",
+            "color": "deep burgundy",
+            "material": "performance fabric",
+            "fit": "fitted, racerback straps"
+          },
+          "bottom": {
+            "type": "bike shorts",
+            "color": "deep burgundy",
+            "fit": "high-waisted, mid-thigh length"
+          },
+          "accessories": [
+            "white wireless earbuds",
+            "iPhone 15 Pro Max"
+          ]
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "left hip popped, weight on right foot, torso turned to show profile",
+          "hands": "right hand holding phone at hip level angled up, left hand reaching up to adjust hair behind ear",
+          "head_gaze": "looking at phone screen in mirror, chin slightly down",
+          "vibe": "post-workout satisfaction"
+        },
+        "scene": {
+          "location": "modern gym locker room",
+          "time": "daytime",
+          "atmosphere": "clean, bright, energetic",
+          "background": "pale grey tile walls, frameless wall mirror with light strips, wooden slatted bench with black gym bag and water bottle, white metal lockers"
+        },
+        "camera": {
+          "pov": "mirror selfie from hip level angled up",
+          "angle": "low angle looking up",
+          "framing": "full body"
+        },
+        "lighting": {
+          "type": "bright overhead fluorescent mixed with warm side vanity light strips",
+          "effect": "clean even illumination, slight warm cast on skin, sharp tile reflections, gentle shadows defining muscle tone"
+        },
+        "mood": {
+          "energy": "confident, energetic",
+          "color_palette": "deep burgundy, pale grey, clean white, warm skin tones, dark black",
+          "aesthetic": "post-workout fitness influencer"
+        }
+      },
+      "ab_test_variant": "A",
+      "notes": "chain_position: chain_start. Variant A: provocative question format. Gym selfie designed as the anchor for a self-quote chain — follow-up posts can show different angles or post-workout outfit changes. 18 characters.",
+      "tweet_id": "2031613021269991932",
+      "post_url": "https://x.com/meruru_tcbn/status/2031613021269991932",
+      "posted_at": "2026-03-11T15:07:44.749140+09:00"
+    }
+  ],
+  "reply_templates": [
+    "okay this might be your best one yet",
+    "the lighting in this is actually insane",
+    "i keep coming back to this one ngl",
+    "how do you make it look so effortless",
+    "genuinely obsessed with this vibe",
+    "this whole aesthetic is so clean",
+    "wait this is actually stunning",
+    "the way the light hits here tho",
+    "you never miss honestly",
+    "need this energy in my life fr"
+  ]
+}

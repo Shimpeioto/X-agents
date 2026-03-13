@@ -415,10 +415,10 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 - `scripts/run_phase5_tests.sh` — Phase A+B test runner
 - `scripts/run_phase5_tests_c.sh` — Phase C test runner (Claude subagents)
 - `scripts/run_phase5_tests_d.sh` — Phase D test runner (full E2E + live posting)
-- `data/scout_report_enriched_test.json` — Fixture for Claude intelligence tests
-- `data/scout_report_fallback_test.json` — Fixture for fallback resilience tests
-- `data/strategy_fallback_test.json` — Fixture for fallback testing
-- `data/strategy_test_enriched.json` — Fixture for enriched strategy testing
+- `data/misc/scout_report_enriched_test.json` — Fixture for Claude intelligence tests
+- `data/misc/scout_report_fallback_test.json` — Fixture for fallback resilience tests
+- `data/misc/strategy_fallback_test.json` — Fixture for fallback testing
+- `data/misc/strategy_test_enriched.json` — Fixture for enriched strategy testing
 
 **Live Posts**: 4 EN + 4 JP tweets posted successfully (Day 2, March 5, 2026)
 
@@ -505,12 +505,12 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 - `agents/marc_pipeline.md` — Added `status: "draft"` instruction to Creator spawn prompts
 
 **Key outputs produced** (verified end-to-end, later cleaned up in Session 27):
-- `data/scout_report_20260306.json` (538KB) — 41 competitors with media data
-- `data/strategy_report_20260306.html` (86KB) — Professional HTML report with competitor analysis + EN/JP strategies
-- `data/image_analysis_report_20260306.json` (60KB) — Image post analysis with real URLs, category performance, engagement comparison
-- `data/strategy_20260306.json` (7.6KB) — Daily strategy with data-driven insights
-- `data/content_plan_20260306_EN.json` + `_JP.json` — 4 posts each with image prompts, A/B test variants, reply templates
-- `data/pipeline_state_20260306.json` — Full pipeline state, all tasks completed
+- `data/scout/scout_report_20260306.json` (538KB) — 41 competitors with media data
+- `data/reports/strategy_report_20260306.html` (86KB) — Professional HTML report with competitor analysis + EN/JP strategies
+- `data/misc/image_analysis_report_20260306.json` (60KB) — Image post analysis with real URLs, category performance, engagement comparison
+- `data/strategy/strategy_20260306.json` (7.6KB) — Daily strategy with data-driven insights
+- `data/content/content_plan_20260306_EN.json` + `_JP.json` — 4 posts each with image prompts, A/B test variants, reply templates
+- `data/pipeline/pipeline_state_20260306.json` — Full pipeline state, all tasks completed
 
 ### Session 26 — HTML Report Generation for Telegram Review (March 7, 2026)
 
@@ -522,9 +522,9 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 
 | Report Type | CLI Command | JSON Input | HTML Output |
 |---|---|---|---|
-| `content_preview` | `generate_html_report.py content_preview <EN> <JP> --strategy <path> [--pipeline-state <path>]` | Content plans + strategy + pipeline state | `data/content_preview_{date}.html` |
-| `daily_report` | `generate_html_report.py daily_report <report.json>` | Daily report JSON | `data/daily_report_{date}.html` |
-| `publish_report` | `generate_html_report.py publish_report <EN> <JP> [--outbound-log <path>] [--rate-limits <path>]` | Content plans (posted) + outbound log + rate limits | `data/publish_report_{date}.html` |
+| `content_preview` | `generate_html_report.py content_preview <EN> <JP> --strategy <path> [--pipeline-state <path>]` | Content plans + strategy + pipeline state | `data/reports/content_preview_{date}.html` |
+| `daily_report` | `generate_html_report.py daily_report <report.json>` | Daily report JSON | `data/metrics/daily_report_{date}.html` |
+| `publish_report` | `generate_html_report.py publish_report <EN> <JP> [--outbound-log <path>] [--rate-limits <path>]` | Content plans (posted) + outbound log + rate limits | `data/reports/publish_report_{date}.html` |
 
 **Design**: Reuses CSS design system from the Session 25 strategy report (dark theme, cards, stat boxes, tags, bar charts, responsive). Standard library only — no external dependencies.
 
@@ -544,17 +544,17 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 **Rationale**: The Mar 6 pipeline was a production test to verify the system works. With that confirmed, the test output is no longer needed and was cluttering the `data/` directory. Mar 3-5 data (earlier test runs) is retained.
 
 **Files removed** (11):
-- `data/content_plan_20260306_EN.json` — Test content plan (EN)
-- `data/content_plan_20260306_JP.json` — Test content plan (JP)
-- `data/content_preview_20260306.html` — Session 26 HTML report derived from Mar 6 test data
-- `data/image_analysis_report_20260306.json` — Image analysis from test run
-- `data/pipeline_state_20260306.json` — Pipeline state from test run
-- `data/scout_compact_20260306.json` — Compact scout data
-- `data/scout_raw_20260306.json` — Raw scout data
-- `data/scout_report_20260306.json` — Enriched scout report
-- `data/strategy_20260306.json` — Strategy from test run
-- `data/strategy_report_20260306.html` — Strategy HTML report from test run
-- `data/strategy_current.json` — Copy of strategy_20260306.json (will regenerate on next real pipeline run)
+- `data/content/content_plan_20260306_EN.json` — Test content plan (EN)
+- `data/content/content_plan_20260306_JP.json` — Test content plan (JP)
+- `data/reports/content_preview_20260306.html` — Session 26 HTML report derived from Mar 6 test data
+- `data/misc/image_analysis_report_20260306.json` — Image analysis from test run
+- `data/pipeline/pipeline_state_20260306.json` — Pipeline state from test run
+- `data/scout/scout_compact_20260306.json` — Compact scout data
+- `data/scout/scout_raw_20260306.json` — Raw scout data
+- `data/scout/scout_report_20260306.json` — Enriched scout report
+- `data/strategy/strategy_20260306.json` — Strategy from test run
+- `data/reports/strategy_report_20260306.html` — Strategy HTML report from test run
+- `data/strategy/strategy_current.json` — Copy of strategy_20260306.json (will regenerate on next real pipeline run)
 
 **Note**: No posts were published to X from the Mar 6 pipeline — all posts stayed at `approved` status locally, so no X API cleanup was needed.
 
@@ -584,7 +584,7 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 **Problem**: Scout collects media URLs but Creator had zero insight into competitor visuals. Existing content plan prompts used old midjourney/stable_diffusion format (short generic text, no structured fields). HTML preview only showed flat prompt text — structured fields were invisible and required per-section copy-paste.
 
 **Solution**:
-1. New `image_analyzer.py` script — reads scout report, picks top 5 images by likes, calls Anthropic Vision API (Claude Sonnet), outputs Higgsfield-format references + visual patterns summary to `data/image_references_{YYYYMMDD}.json`. Creator uses these as (a) pattern awareness and (b) per-post style matching.
+1. New `image_analyzer.py` script — reads scout report, picks top 5 images by likes, calls Anthropic Vision API (Claude Sonnet), outputs Higgsfield-format references + visual patterns summary to `data/content/image_references_{YYYYMMDD}.json`. Creator uses these as (a) pattern awareness and (b) per-post style matching.
 2. Rewrote all 4 content plan image prompts (EN_01, EN_02, JP_01, JP_02) to full Higgsfield schema: 150+ word prompts, standard negative prompts, all structured fields (meta, subject, outfit, pose, scene, camera, lighting, mood), locked character profiles.
 3. Updated HTML report generator to render structured fields as syntax-highlighted JSON with "Copy JSON" button — one click copies the entire image_prompt object.
 
@@ -601,8 +601,8 @@ The original parent spec assumed a Python orchestrator script (`run_pipeline.py`
 - `agents/marc_pipeline.md` — Added Step 3.5, updated dependency diagram and Creator spawn prompts
 - `scripts/validate.py` — Added `image_references` validation mode (6 checks)
 - `scripts/generate_html_report.py` — Structured Higgsfield fields rendered as syntax-highlighted JSON block with "Copy JSON" button
-- `data/content_plan_20260308_EN.json` — Full Higgsfield rewrite (was midjourney)
-- `data/content_plan_20260308_JP.json` — Full Higgsfield rewrite (was stable_diffusion)
+- `data/content/content_plan_20260308_EN.json` — Full Higgsfield rewrite (was midjourney)
+- `data/content/content_plan_20260308_JP.json` — Full Higgsfield rewrite (was stable_diffusion)
 
 **Verification**: Dry-run found 206 images, analyzed top 5 with mock data, validator passed 6/6 checks. Content plan validator passed 12/12 checks for both EN and JP. Character profile review passed all checks after fixes.
 
@@ -692,7 +692,7 @@ The operator shared an AI-generated image via Telegram with a caption asking Mar
 
 **Goal**: Run daily outbound engagement for EN, evaluate Claude Code's new scheduled tasks feature for pipeline scheduling.
 
-**Outbound run (Round 3)**: Used strategy from `data/strategy_20260309.json` with 4 targets: @tanarainw (191K), @iiCoraMaay (17.8K), @baharaykin (12.6K), @NotjustRen00 (16.7K).
+**Outbound run (Round 3)**: Used strategy from `data/strategy/strategy_20260309.json` with 4 targets: @tanarainw (191K), @iiCoraMaay (17.8K), @baharaykin (12.6K), @NotjustRen00 (16.7K).
 
 Before planning, verified @meruru_tcbn's actual following list via bearer token API (`get_users_following`) — found 3 of 4 targets already followed (likely manually by operator), only @baharaykin not followed. This programmatic check prevented wasting 3 follow attempts.
 
@@ -705,8 +705,8 @@ Before planning, verified @meruru_tcbn's actual following list via bearer token 
 Failed replies escalated to operator with tweet URLs and reply text per the escalation pattern established in Session 32.
 
 **Files created** (2):
-- `data/outbound_plan_20260310_EN.json` — Outbound plan with safety checks (API-verified follow status)
-- `data/outbound_log_20260310.json` — Execution log with 4 `failed_replies` entries
+- `data/outbound/outbound_plan_20260310_EN.json` — Outbound plan with safety checks (API-verified follow status)
+- `data/outbound/outbound_log_20260310.json` — Execution log with 4 `failed_replies` entries
 
 **Scheduling architecture decision**: Evaluated Claude Code's new scheduled tasks feature (`/loop` CLI and Desktop Scheduled Tasks) against system cron for our pipeline scheduling needs.
 
@@ -762,7 +762,7 @@ Publishing remains manual (requires human approval via Telegram).
 - **Morning War Room (05:30 JST)** — Marc reviews yesterday's results, sends operator briefing via Telegram before the pipeline runs
 - **Evening War Room (22:00 JST)** — Marc collects metrics, generates daily report, produces `strategy_feedback_{date}.json` for tomorrow's Strategist
 
-The key new artifact is `data/strategy_feedback_{YYYYMMDD}.json` — the missing bridge from Check to Act. It contains category performance rankings, A/B test evaluations (with auto-conclusion at high confidence), posting time effectiveness, outbound effectiveness, and recommended adjustments with confidence levels.
+The key new artifact is `data/strategy/strategy_feedback_{YYYYMMDD}.json` — the missing bridge from Check to Act. It contains category performance rankings, A/B test evaluations (with auto-conclusion at high confidence), posting time effectiveness, outbound effectiveness, and recommended adjustments with confidence levels.
 
 **Strategist PDCA integration** (new Step 1.5): Strategist now reads yesterday's strategy feedback before generating today's strategy. Confidence-based rules control how aggressively adjustments are applied:
 - `high` confidence → apply directly (shift content_mix 5-10%, swap time slots, conclude A/B test)
@@ -1327,8 +1327,8 @@ Session 34 files modified (11 files):
 - `scripts/telegram_bot.py` — Performance fix: cwd=$HOME, --allowedTools "", history truncation
 
 Session 33 files created (2 files):
-- `data/outbound_plan_20260310_EN.json` — Outbound plan with API-verified follow status
-- `data/outbound_log_20260310.json` — Execution log with `failed_replies` for human escalation
+- `data/outbound/outbound_plan_20260310_EN.json` — Outbound plan with API-verified follow status
+- `data/outbound/outbound_log_20260310.json` — Execution log with `failed_replies` for human escalation
 
 Session 32 files modified (4 files):
 - `config/accounts.json` — EN and EN-subaccount tokens updated to @meruru_tcbn's OAuth tokens
@@ -1367,8 +1367,8 @@ Session 29 files created/modified (7 files):
 - `agents/marc_pipeline.md` — Added Step 3.5 (Image Analysis, optional), updated Creator spawn prompts
 - `scripts/validate.py` — Added `image_references` validation mode (6 checks)
 - `scripts/generate_html_report.py` — Image prompt section now renders all structured Higgsfield fields (meta, subject, outfit, pose, scene, camera, lighting, mood) as syntax-highlighted JSON with "Copy JSON" button for one-click copy of entire prompt
-- `data/content_plan_20260308_EN.json` — Rewrote image prompts from old midjourney format to full Higgsfield schema (150+ word prompts, structured fields, standard negative prompts, fixed character profiles with curvaceous body type)
-- `data/content_plan_20260308_JP.json` — Rewrote image prompts from old stable_diffusion format to full Higgsfield schema (150+ word prompts, structured fields, locked JP character profile with specific body measurements)
+- `data/content/content_plan_20260308_EN.json` — Rewrote image prompts from old midjourney format to full Higgsfield schema (150+ word prompts, structured fields, standard negative prompts, fixed character profiles with curvaceous body type)
+- `data/content/content_plan_20260308_JP.json` — Rewrote image prompts from old stable_diffusion format to full Higgsfield schema (150+ word prompts, structured fields, locked JP character profile with specific body measurements)
 
 Session 28 files created/modified (3 files):
 - `scripts/fetch_url.py` — **New** URL fetcher (requests + stdlib html.parser, CLI-compatible)
@@ -1377,7 +1377,7 @@ Session 28 files created/modified (3 files):
 
 Session 27 files removed (11 files):
 - `data/*20260306*` (9 files) — All Mar 6 pipeline test outputs (scout, strategy, content plans, HTML reports, pipeline state, image analysis)
-- `data/strategy_current.json` — Copy of Mar 6 strategy (regenerates on next pipeline run)
+- `data/strategy/strategy_current.json` — Copy of Mar 6 strategy (regenerates on next pipeline run)
 
 Session 26 files created/modified (3 files):
 - `scripts/generate_html_report.py` — **New** HTML report generator (3 report types, dark theme, responsive)

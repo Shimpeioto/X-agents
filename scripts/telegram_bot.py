@@ -113,7 +113,7 @@ def save_json(path: str, data: dict) -> None:
 
 def load_content_plan(account: str) -> tuple[dict | None, str]:
     date = today_str()
-    path = os.path.join(DATA_DIR, f"content_plan_{date}_{account}.json")
+    path = os.path.join(DATA_DIR, "content", f"content_plan_{date}_{account}.json")
     return load_json(path), path
 
 
@@ -201,11 +201,14 @@ def _build_conversation_prompt(user_message: str) -> str:
     if not _marc_system_prompt:
         _marc_system_prompt = _load_marc_system_prompt()
 
-    # Format conversation history
+    # Format conversation history (truncate long messages to keep prompt manageable)
     history_lines = []
     for msg in _conversation_history:
         role = "Operator" if msg["role"] == "user" else "Marc"
-        history_lines.append(f"{role}: {msg['content']}")
+        content = msg["content"]
+        if len(content) > 500:
+            content = content[:500] + "... [truncated]"
+        history_lines.append(f"{role}: {content}")
 
     history_text = "\n".join(history_lines) if history_lines else "(no prior messages)"
 
@@ -235,9 +238,9 @@ async def chat_with_marc(user_message: str) -> tuple[str, dict | None]:
     """
     global _conversation_history
 
-    # Keep history manageable (last 20 messages)
-    if len(_conversation_history) > 20:
-        _conversation_history = _conversation_history[-20:]
+    # Keep history manageable (last 10 messages)
+    if len(_conversation_history) > 10:
+        _conversation_history = _conversation_history[-10:]
 
     prompt = _build_conversation_prompt(user_message)
 
@@ -247,12 +250,20 @@ async def chat_with_marc(user_message: str) -> tuple[str, dict | None]:
     env = os.environ.copy()
     env.pop("CLAUDECODE", None)
 
+    # Run from HOME to avoid loading project CLAUDE.md files (massive context).
+    # The system prompt already contains everything Marc needs for conversation.
     try:
         proc = await asyncio.get_event_loop().run_in_executor(
             None,
             lambda: subprocess.run(
-                ["claude", "-p", prompt],
-                capture_output=True, text=True, timeout=120, cwd=PROJECT, env=env,
+                [
+                    "claude", "-p", prompt,
+                    "--model", "sonnet",
+                    "--allowedTools", "",
+                    "--no-session-persistence",
+                ],
+                capture_output=True, text=True, timeout=120, env=env,
+                cwd=os.path.expanduser("~"),
             ),
         )
     except subprocess.TimeoutExpired:
@@ -446,7 +457,7 @@ async def cmd_status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         return
 
     date = today_str()
-    state = load_json(os.path.join(DATA_DIR, f"pipeline_state_{date}.json"))
+    state = load_json(os.path.join(DATA_DIR, "pipeline", f"pipeline_state_{date}.json"))
 
     if state is None:
         await update.message.reply_text(f"No pipeline state found for {today_iso()}")

@@ -1,0 +1,448 @@
+{
+  "date": "2026-03-11",
+  "type": "tactical_strategic_review",
+  "title": "Tactical Reset — Immediate Actionable Changes",
+  "generated_at": "2026-03-11T15:55:00+09:00",
+  "task_id": "20260311_004",
+  "framework": "設計 × 心理 × アルゴリズム (Design × Psychology × Algorithm)",
+  "scope": "EN account only (@meruru_tcbn) — JP suspended",
+  "scout_data_used": "data/scout_raw_20260311.json (41 competitors, fresh collection)",
+
+  "sections": {
+    "honest_progress_audit": {
+      "title": "1. Honest Progress Audit — Where We Actually Are",
+      "overall_verdict": "Still pre-launch. 5 followers after 17 days. But the REAL problem is 2 days without posting (Mar 10-11). We broke momentum right when it was starting.",
+      "current_numbers": {
+        "followers": 5,
+        "following": 33,
+        "total_posts": 20,
+        "posts_with_images_on_meruru_tcbn": 4,
+        "days_since_last_post": 2,
+        "bio": "22 yo Japanese girl🌙 addicted SNS 📱",
+        "follower_following_ratio": "5:33 (catastrophic — screams bot)",
+        "avg_likes_per_post": 1.25,
+        "total_engagement_received": "5 likes, 2 RTs, 0 replies, 2 bookmarks across 4 posts",
+        "impression_data": "Only from old tweets: best was 133 impressions on 'Sleepy' (3 likes = 2.3% impression ER)"
+      },
+      "what_actually_happened_since_mar9": {
+        "mar_9": "4 posts published (best day ever). 20 outbound likes, 3 successful replies, 5 follows. First real content day.",
+        "mar_10": "0 posts. 12 outbound likes, 0 successful replies (ALL 4 failed with 403), 1 follow. Outbound only, no content.",
+        "mar_11": "0 posts. No outbound. Complete silence.",
+        "verdict": "We had ONE good day (Mar 9) then stopped. This is the core problem — inconsistency kills new accounts. The algorithm gave us a tiny test window and we went silent."
+      },
+      "outbound_audit": {
+        "total_real_likes": 32,
+        "total_real_replies_attempted": 8,
+        "total_real_replies_succeeded": 3,
+        "total_real_replies_failed": 5,
+        "reply_failure_rate": "62.5%",
+        "total_follows": 6,
+        "verdict": "Likes work fine. Replies are 100% blocked since Mar 10 (X's new-account spam prevention). Follows are HURTING us — each follow worsens the ratio. The 3 successful replies on Mar 9 were the ONLY community touchpoints we've made.",
+        "cost_of_follows": "6 follows added to the already-bad ratio. Net result: profile looks MORE like a bot, not less."
+      },
+      "competitor_context": {
+        "en_market_avg_er": "3.7% (follower-based)",
+        "our_er": "~0.25 (meaningless at 5 followers, but directionally terrible)",
+        "what_5_follower_accounts_should_focus_on": "Not engagement rate. Focus on: post volume, profile optimization, image quality, and building any audience at all.",
+        "benchmark_accounts": [
+          {"handle": "@sessypuuh", "followers": 7637, "posts": 51, "er": "37.9%", "frequency": "0.7/day", "bio": "(empty)", "lesson": "Ultra-quality images, minimal posts. Every post is a banger. Quality > quantity at this stage."},
+          {"handle": "@yuumispm", "followers": 12095, "posts": 21, "er": "19.6%", "frequency": "1.1/day", "bio": "20yo [link]", "lesson": "ONLY 21 posts but 12K followers. One viral post (16K likes) changed everything. Quality is the multiplier."},
+          {"handle": "@Angelwithcakee", "followers": 35101, "posts": 56, "er": "4.5%", "frequency": "1.2/day", "bio": "Just a blonde with a playful side 😇", "lesson": "56 posts, 35K followers. 1.2 posts/day. Achievable model for us."},
+          {"handle": "@imrubyreid", "followers": 695458, "posts": 20, "er": "1.7%", "frequency": "2.3/day", "bio": "most viral girl on X for a reason 👇", "lesson": "20 posts, 695K followers. Explosive viral growth from extreme quality."}
+        ]
+      }
+    },
+
+    "what_changes_immediately": {
+      "title": "2. What Changes TODAY — Tactical Fixes",
+      "changes": [
+        {
+          "id": "FIX-01",
+          "action": "REWRITE BIO NOW",
+          "priority": "DO RIGHT NOW",
+          "current": "22 yo Japanese girl🌙 addicted SNS 📱",
+          "problem": "Bland, generic, no personality. 'addicted SNS' is grammatically odd and doesn't create curiosity. Compare to competitors: @IsabellaCruz_47 ('Your favorite Colombian 🇨🇴'), @katekarsyn ('i just want to play Fortnite'), @Angelwithcakee ('Just a blonde with a playful side 😇').",
+          "recommended_bios": [
+            "just a girl who looks too good in mirror selfies 🪞",
+            "your newest obsession maybe 🌙",
+            "i look better in person trust me",
+            "tokyo girl with a coffee addiction ☕ more of me ⬇️"
+          ],
+          "bio_principles": "Under 50 chars. ONE personality trait. Casual lowercase. Creates curiosity or mild provocation. Never mention AI. Never list traits (age + nationality + hobby = resume, not personality).",
+          "operator_action": "Pick one of the above or write a variant. Update via X app immediately."
+        },
+        {
+          "id": "FIX-02",
+          "action": "STOP ALL AUTOMATED FOLLOWS IMMEDIATELY",
+          "priority": "DO RIGHT NOW",
+          "problem": "Follower:following ratio is 5:33. This is the #1 bot signal on our profile. Every automated follow makes it worse. Top performers: @sessypuuh follows 8, @katekarsyn follows 3, @nene__chandayo follows 0. We follow 33.",
+          "fix": "1) Disable follow actions in outbound config. 2) Manually unfollow all accounts except 3-5 that are either real community connections or aspirational peers. Target: following ≤ 5.",
+          "operator_action": "Go to X app → Following list → Unfollow everyone except 3-5 accounts you want to keep. Then confirm to Marc that follows are disabled."
+        },
+        {
+          "id": "FIX-03",
+          "action": "POST 3 TIMES TODAY",
+          "priority": "DO TODAY",
+          "problem": "2 consecutive days of silence (Mar 10-11). The algorithm penalizes inconsistency, especially for new accounts. Every day without a post is a step backward.",
+          "fix": "Generate and post 3 high-quality image posts today at: 18:00 JST, 20:00 JST, 22:00 JST (evening block to catch US morning + JP prime time). Even if times aren't perfect, POSTING > perfect timing.",
+          "content_suggestions": [
+            {"slot": 1, "time": "18:00 JST", "category": "engagement_questions", "caption": "be honest with me rn 👀", "notes": "Provocative question format. Under 30 chars. Forces mental response."},
+            {"slot": 2, "time": "20:00 JST", "category": "image_showcase", "caption": "not my best angle or whatever", "notes": "False modesty + confidence. Creates curiosity (is it actually great?). Under 30 chars."},
+            {"slot": 3, "time": "22:00 JST", "category": "grok_interactive", "caption": ".@grok turn me into a 90s anime character", "notes": "Creative Grok prompt that creates curiosity gap. More entertaining than 'remove white'."}
+          ],
+          "operator_action": "Approve these 3 posts via Telegram. Marc will generate images and publish immediately."
+        },
+        {
+          "id": "FIX-04",
+          "action": "PIN BEST POST",
+          "priority": "DO TODAY",
+          "problem": "No pinned post. When someone visits our profile, they see a thin feed of 10 posts. A pinned best post gives visitors the strongest first impression.",
+          "fix": "Pin the post 'Am I your type? 👀' (tweet ID 2031060275047313555) — it's our highest-engagement post with 2 likes, 1 RT, 1 bookmark. Not great, but it's the best we have and the caption + image format is strong.",
+          "operator_action": "Go to https://x.com/meruru_tcbn/status/2031060275047313555 → Pin to profile."
+        },
+        {
+          "id": "FIX-05",
+          "action": "OPERATOR MANUAL ENGAGEMENT — 15 MIN TODAY",
+          "priority": "DO TODAY — NON-NEGOTIABLE",
+          "problem": "Zero manual engagement from operator so far. API replies are 100% blocked. The ONLY way to build community presence right now is manual engagement from phone/browser. This was declared non-negotiable on Mar 10 and still hasn't happened.",
+          "fix": "Spend 15 minutes on X from phone. Like 15-20 posts from AI beauty accounts. Reply manually to 3-5 posts (bypasses API restriction). Reply to any engagement on our own posts. Like posts from accounts we've followed.",
+          "operator_action": "Open X app. Search for recent posts from: @sessypuuh, @Angelwithcakee, @yogana_19, @HannaJonso, @baharaykin. Like their posts. Reply with genuine comments about specific details in their images. Check our own posts for any engagement and respond immediately.",
+          "timing": "Between 18:00-20:00 JST today."
+        },
+        {
+          "id": "FIX-06",
+          "action": "OUTBOUND: LIKES ONLY, NO FOLLOWS, NO API REPLIES",
+          "priority": "EFFECTIVE IMMEDIATELY",
+          "problem": "Automated follows worsen ratio. API replies fail 100%. Only likes reliably work and create notifications that might draw profile visits.",
+          "fix": "Outbound strategy: 25-30 likes/day on target accounts. ZERO follows. ZERO API replies. All reply engagement via operator manual only.",
+          "target_accounts_today": ["@leahyunaxo", "@yuumi005", "@lucidevlinxyz", "@marylivbrown"],
+          "selection_rationale": "Fresh targets not engaged in last 3 days. Mix of mid-tier (13K-81K) EN accounts with clean timelines and high engagement. Likes on their posts create notifications that might lead to profile visits."
+        }
+      ]
+    },
+
+    "framework_analysis": {
+      "title": "3. 設計 × 心理 × アルゴリズム — Updated Scores",
+      "overall": "Design=5, Psychology=3, Algorithm=2. Product = 5×3×2 = 30 out of 1000. Previous was 4×3×2=24. Marginal improvement from better captions, but still fundamentally broken.",
+
+      "design": {
+        "score": "5/10",
+        "what_works": "Short captions, zero hashtags, content pillar categories all correct. Image prompts are detailed and well-structured.",
+        "what_doesnt": [
+          "Bio is generic — fails the '3-second profile test'",
+          "No pinned post — wasted profile real estate",
+          "Following 33 — profile screams bot/desperate",
+          "No banner image optimization",
+          "Posting at wrong times (dead zones)",
+          "Image quality unknown — no side-by-side comparison with competitors done yet"
+        ],
+        "immediate_fixes": "Bio rewrite (FIX-01), unfollow cleanup (FIX-02), pin best post (FIX-04). These three take 10 minutes and significantly improve profile conversion."
+      },
+
+      "psychology": {
+        "score": "3/10",
+        "what_works": "Provocative question format ('Am I your type?') outperformed other styles. Shows the psychology lever IS there.",
+        "what_doesnt": [
+          "Captions are hooks that hook into nothing — no character depth yet",
+          "Zero dwell time optimization — single image + 5 words = scroll past in 1 second",
+          "Outbound replies are generic bot-sounding templates ('genuinely stunning work')",
+          "No emotional arc between posts — each post is disconnected"
+        ],
+        "tactical_fixes_skip_persona": [
+          "Use dwell-time captions: 'be honest with me rn' forces mental response (3+ seconds to formulate answer)",
+          "Try multi-image posts: 2-4 images per post = swipe dwell time",
+          "Make Grok prompts entertaining: '.@grok turn me into a 90s anime character' > '.@grok put me in a bikini' (curiosity gap)",
+          "Every caption should force a mental pause, not just announce the image"
+        ]
+      },
+
+      "algorithm": {
+        "score": "2/10",
+        "what_works": "Posts are getting SOME impressions (best was 133 on 'Sleepy'). The algorithm IS testing us — we're just failing the test.",
+        "what_doesnt": [
+          "Zero first-30-minute engagement — algorithm test fails immediately every time",
+          "Posting at dead times — content dies before anyone can see it",
+          "2-day silence kills whatever algorithmic trust we built on Mar 9",
+          "Follower:following ratio triggers spam detection heuristics",
+          "Only 20 posts in feed — too thin for algorithmic categorization"
+        ],
+        "immediate_fixes": [
+          "Post consistently — NEVER miss a day. This is the single biggest algorithm factor for new accounts.",
+          "Post at 12:00, 18:00, 20:00 JST — overlap with JP prime time + US morning/afternoon",
+          "Operator seeds every post with a like within 10 minutes — gives algorithm first signal",
+          "Fix follower:following ratio — unfollow 28 accounts TODAY"
+        ]
+      }
+    },
+
+    "profile_bio_rewrite": {
+      "title": "4. Profile Bio Rewrite — @meruru_tcbn",
+      "current_bio": "22 yo Japanese girl🌙 addicted SNS 📱",
+      "problems": [
+        "Lists traits (age + nationality + hobby) — reads like a dating profile, not a personality",
+        "'addicted SNS' is grammatically awkward and not compelling",
+        "No curiosity hook — nothing makes you think 'I need to see more'",
+        "Too generic — could be any account"
+      ],
+      "competitor_bio_patterns": {
+        "confident_provocation": "@imrubyreid: 'most viral girl on X for a reason 👇' — bold claim that creates curiosity",
+        "personality_with_hobby": "@katekarsyn: 'i just want to play Fortnite' — relatable, specific, memorable",
+        "playful_identity": "@Angelwithcakee: 'Just a blonde with a playful side 😇' — personality + intrigue",
+        "national_identity": "@IsabellaCruz_47: 'Your favorite Colombian 🇨🇴' — bold, warm, identity",
+        "minimal": "@sessypuuh: (empty bio, 7.6K followers) — lets images speak",
+        "relatable_casual": "@lucidevlinxyz: 'filipina 𓆩ꨄ︎𓆪 i just wanna watch anime and play val' — interests + casual"
+      },
+      "recommended_options": [
+        {
+          "bio": "just a girl who looks too good in mirror selfies 🪞",
+          "why": "Self-aware confidence. References our actual content style (mirror selfies). Playful tone. 52 chars.",
+          "style": "confident_provocation"
+        },
+        {
+          "bio": "your newest obsession maybe 🌙",
+          "why": "Bold, short, creates intrigue. Keeps the moon emoji from current brand. 30 chars.",
+          "style": "confident_provocation"
+        },
+        {
+          "bio": "i look better in person trust me",
+          "why": "Playful false modesty. Creates curiosity. Casual lowercase. 33 chars. No emoji.",
+          "style": "playful_identity"
+        },
+        {
+          "bio": "tokyo girl ☕ addicted to mirror selfies",
+          "why": "Location + specific interest. More specific than current bio. 40 chars.",
+          "style": "personality_with_hobby"
+        }
+      ],
+      "dont_include": ["age (listing age is resume-style)", "AI/art/generated (never reveal)", "multiple emoji strings (too try-hard)", "links (not until we have exclusive content)"]
+    },
+
+    "content_volume_rampup": {
+      "title": "5. Content Volume Ramp-Up Plan",
+      "current_state": {
+        "total_posts": 20,
+        "image_posts_on_meruru_tcbn": "~4 posts with images",
+        "average_per_day": "0.8 posts/day over 5 active days (far below target of 3-4)",
+        "best_day": "Mar 9: 4 posts (our only day at target)",
+        "consecutive_zero_days": 2
+      },
+      "foundation_threshold": "30-50 posts with images. Currently at ~4 image posts. We need 26-46 more.",
+      "ramp_schedule": [
+        {
+          "period": "Mar 11 (TODAY)",
+          "posts": 3,
+          "times": ["18:00 JST", "20:00 JST", "22:00 JST"],
+          "note": "Recovery day. Get back on track. Even late-day posting is better than silence."
+        },
+        {
+          "period": "Mar 12-14",
+          "posts_per_day": 3,
+          "times": ["12:00 JST", "18:00 JST", "20:00 JST"],
+          "note": "Establish 3/day baseline. Focus on image quality over everything. Every post must have a high-quality Higgsfield image."
+        },
+        {
+          "period": "Mar 15-18",
+          "posts_per_day": 4,
+          "times": ["12:00 JST", "15:00 JST", "18:00 JST", "21:00 JST"],
+          "note": "Scale to 4/day. Should hit 30+ image posts by Mar 18."
+        },
+        {
+          "period": "Mar 19+",
+          "posts_per_day": "3-4 (maintain)",
+          "note": "Maintain cadence. Never drop below 3/day. Quality > quantity if forced to choose."
+        }
+      ],
+      "projected_totals": {
+        "by_mar_14": "~20 + 12 = 32 total posts (including today's 3 + 3/day for 3 more days)",
+        "by_mar_18": "~32 + 16 = 48 total posts",
+        "foundation_threshold_date": "March 14-15 (crossing 30 posts)"
+      },
+      "image_pipeline": "Need to batch-generate images. Sunday sprint: generate 30+ images, curate to best 20. Maintain a 5-day image buffer. Don't let image generation be a bottleneck.",
+      "content_mix_per_day": {
+        "3_post_day": {"engagement_questions": 1, "image_showcase": 1, "grok_interactive": 1},
+        "4_post_day": {"engagement_questions": 2, "image_showcase": 1, "grok_interactive": 1},
+        "note": "Skip self_quote_chains until we have 30+ posts. Premature at current volume."
+      }
+    },
+
+    "outbound_quality_improvement": {
+      "title": "6. Outbound Quality Improvement",
+      "current_problems": [
+        "Reply templates are generic: 'genuinely stunning work', 'the lighting in this is actually insane' — these sound like bot comments",
+        "API replies are 100% blocked since Mar 10 — the mechanism is broken",
+        "Automated follows are worsening our profile ratio",
+        "No manual engagement from operator — the only working reply channel"
+      ],
+      "new_outbound_strategy": {
+        "automated": {
+          "likes": "25-30/day on target accounts. This works and creates profile-visit notifications.",
+          "follows": "ZERO until follower:following ratio exceeds 3:1 (need 100+ followers before resuming at 2/day)",
+          "replies": "ZERO via API until restriction lifts. All replies via operator manual."
+        },
+        "manual_operator": {
+          "daily_time": "15 minutes, split into two 7-min sessions at 12:15 and 18:15 JST",
+          "session_1": "Like 10 posts from target accounts. Reply to 2-3 with specific comments.",
+          "session_2": "Like 5-10 posts. Reply to 1-2. Check our own posts for any engagement and respond.",
+          "reply_quality_rules": [
+            "NEVER use generic compliments ('stunning', 'insane', 'fire')",
+            "Reference ONE specific thing in the image: the outfit, the setting, the lighting angle, the color palette",
+            "Ask a question about the specific content: 'where is this?', 'what filter gives that warm tone?'",
+            "Keep it 1 sentence, casual, lowercase"
+          ],
+          "example_good_replies": [
+            "the way the sunset hits the earrings in this one >>",
+            "okay but that mirror angle is actually genius",
+            "going from white to red in the last two posts was a power move",
+            "wait is this the same rooftop from last week? the light is completely different"
+          ],
+          "example_bad_replies": [
+            "genuinely stunning work (generic)",
+            "the lighting in this is actually insane (could apply to anything)",
+            "wait this is actually stunning (empty compliment)",
+            "this cosplay is next level honestly (vague)"
+          ]
+        }
+      },
+      "target_rotation": {
+        "today": ["@leahyunaxo", "@yuumi005", "@lucidevlinxyz", "@marylivbrown"],
+        "tomorrow": ["@katekarsyn", "@yogana_19", "@baharaykin", "@iiCoraMaay"],
+        "day_3": ["@Angelwithcakee", "@HannaJonso", "@IsabellaCruz_47", "@tanarainw"],
+        "principle": "Rotate through all 26 EN competitors over 7 days. Never engage the same account 2 days in a row. Mix large (>50K) and small (<20K) accounts."
+      }
+    },
+
+    "posting_strategy_dwell_time": {
+      "title": "7. Posting Strategy — Dwell Time Optimization",
+      "why_dwell_time_matters": "X's algorithm heavily weights dwell time (time spent looking at a post). Our current posts are consumed in <2 seconds: single image + 5-word caption = scroll past. We need posts that make people STOP.",
+      "current_posting_times": {
+        "mar_9": ["22:31 JST (13:31 UTC)", "02:30 JST (17:30 UTC)", "06:30 JST (21:30 UTC)", "09:30 JST (00:30 UTC)"],
+        "problem": "3 of 4 posts in dead zones. Zero posts in the 12-14h or 17-21h JST windows where JP users and US users overlap."
+      },
+      "new_posting_times": [
+        {"slot": 1, "time": "12:00 JST (03:00 UTC)", "audience": "JP lunch break + EU evening", "category": "engagement_questions"},
+        {"slot": 2, "time": "18:00 JST (09:00 UTC)", "audience": "JP evening + US East morning", "category": "image_showcase or grok_interactive"},
+        {"slot": 3, "time": "20:00 JST (11:00 UTC)", "audience": "JP prime time + US late morning", "category": "engagement_questions or image_showcase"},
+        {"slot": 4, "time": "15:00 JST (06:00 UTC)", "audience": "JP afternoon + US West late night", "category": "grok_interactive", "note": "Add this slot only at 4/day cadence (from Mar 15)"}
+      ],
+      "dwell_time_tactics": [
+        {
+          "tactic": "Curiosity-gap captions",
+          "examples": ["be honest with me rn 👀", "deleted this twice but whatever", "you weren't supposed to see this one"],
+          "why": "Forces mental formulation of a response. 3-5 seconds of dwell time just reading and thinking.",
+          "priority": "Use on EVERY engagement_questions post"
+        },
+        {
+          "tactic": "Multi-image posts",
+          "implementation": "Post 2-4 images in one tweet. Different angles, different outfits, or a mini photo-story.",
+          "why": "Each swipe = additional dwell time. Algorithm sees extended interaction.",
+          "target": "At least 1 multi-image post per day starting Mar 12"
+        },
+        {
+          "tactic": "Grok entertainment prompts",
+          "good_prompts": [".@grok turn me into a 90s anime character", ".@grok put me in a studio ghibli movie", ".@grok make this a vogue cover", ".@grok what would I look like as a villain"],
+          "bad_prompts": [".@grok remove white", ".@grok put me in a bikini"],
+          "why": "Creative Grok requests create a 'what will happen?' curiosity gap. Boring requests don't.",
+          "priority": "1 creative Grok post per day"
+        },
+        {
+          "tactic": "Image detail reward",
+          "implementation": "Images should have at least ONE element worth zooming in on: jewelry detail, reflection, background object, texture in clothing.",
+          "why": "Pinch-to-zoom = high dwell time signal to algorithm.",
+          "priority": "Include in every image prompt — add specific detail-rich elements"
+        }
+      ]
+    },
+
+    "updated_daily_action_checklist": {
+      "title": "8. Updated Daily Action Checklist",
+      "daily_routine": [
+        {"time": "09:00 JST", "action": "Operator reviews content plan in Telegram", "owner": "operator", "duration": "5 min"},
+        {"time": "09:30 JST", "action": "Marc triggers publishing for approved posts", "owner": "marc", "duration": "auto"},
+        {"time": "12:00 JST", "action": "Post #1 goes live (engagement_questions)", "owner": "auto"},
+        {"time": "12:05 JST", "action": "Operator likes the post (SEED ENGAGEMENT)", "owner": "operator", "duration": "1 min"},
+        {"time": "12:15 JST", "action": "Operator manual engagement session #1 — like 10 posts, reply to 2-3", "owner": "operator", "duration": "7 min"},
+        {"time": "15:00 JST", "action": "Post #2 goes live (grok_interactive) — only on 4/day days", "owner": "auto"},
+        {"time": "18:00 JST", "action": "Post #3 goes live (image_showcase or grok_interactive)", "owner": "auto"},
+        {"time": "18:05 JST", "action": "Operator likes the post (SEED ENGAGEMENT)", "owner": "operator", "duration": "1 min"},
+        {"time": "18:15 JST", "action": "Operator manual engagement session #2 — like 5-10 posts, reply to 1-2", "owner": "operator", "duration": "7 min"},
+        {"time": "20:00 JST", "action": "Post #4 goes live (engagement_questions)", "owner": "auto"},
+        {"time": "20:05 JST", "action": "Operator likes the post (SEED ENGAGEMENT)", "owner": "operator", "duration": "1 min"},
+        {"time": "21:00 JST", "action": "Automated outbound — 25 likes on target accounts (NO follows, NO replies)", "owner": "auto"}
+      ],
+      "operator_daily_total": "~22 minutes (5 review + 1+7+1+7+1 engagement). This is the minimum viable investment.",
+      "automated_daily_total": "3-4 posts published, 25 outbound likes, content plan generation, reporting"
+    },
+
+    "weekly_targets": {
+      "title": "9. Weekly Targets",
+      "week_of_mar_11_17": {
+        "target_name": "Recovery & Foundation Sprint",
+        "targets": [
+          {"metric": "Posts published", "target": "21 (3/day × 7 days)", "current": 20, "note": "Double our total post count in one week"},
+          {"metric": "Followers", "target": "15+", "current": 5, "note": "Triple from current. Aggressive but achievable with profile fix + consistent content"},
+          {"metric": "Following", "target": "≤5", "current": 33, "note": "Unfollow 28 accounts TODAY"},
+          {"metric": "Avg likes per post", "target": "3+", "current": 1.25, "note": "Better timing + better images + seed engagement should achieve this"},
+          {"metric": "Days with 3+ posts", "target": "7/7", "current": "1/7 (only Mar 9 had 4)", "note": "Zero tolerance for zero-post days"},
+          {"metric": "Operator manual engagement", "target": "7/7 days", "current": "0/7", "note": "15 min/day. Non-negotiable."},
+          {"metric": "Profile optimized", "target": "Yes", "current": "No", "note": "Bio rewrite, pin post, unfollow cleanup — all by end of day today"},
+          {"metric": "Bio rewritten", "target": "Yes", "current": "No"},
+          {"metric": "Best post likes", "target": "5+", "current": 2, "note": "At least one post breaking through the noise"}
+        ]
+      },
+      "week_of_mar_18_24": {
+        "target_name": "Consistency & Quality Escalation",
+        "targets": [
+          {"metric": "Total posts", "target": "50+", "note": "Foundation phase complete"},
+          {"metric": "Followers", "target": "30-50", "note": "Expect acceleration once profile is optimized and posting is consistent"},
+          {"metric": "Posts per day", "target": "4/day", "note": "Scale from 3 to 4"},
+          {"metric": "Multi-image posts", "target": "At least 3 this week", "note": "Test dwell time impact"},
+          {"metric": "Creative Grok posts", "target": "At least 5 this week", "note": "Test curiosity-gap prompts"},
+          {"metric": "Best post likes", "target": "10+", "note": "One breakout post"},
+          {"metric": "API reply restriction", "target": "Monitor — may start lifting", "note": "Check weekly by attempting one test reply"}
+        ]
+      }
+    },
+
+    "risks_and_dependencies": {
+      "title": "10. Risks & Dependencies",
+      "critical_dependency": "Operator must commit 20 min/day. Without manual engagement, nothing else matters at this stage. The API cannot do what human engagement does for a 5-follower account.",
+      "risks": [
+        {
+          "risk": "Image quality may not be competitive",
+          "impact": "HIGH",
+          "status": "UNKNOWN — no side-by-side comparison done yet",
+          "mitigation": "Do a side-by-side comparison of our Higgsfield images vs top competitor images this week. If our quality is significantly lower, all other optimizations are moot."
+        },
+        {
+          "risk": "Operator time commitment",
+          "impact": "CRITICAL",
+          "status": "0/7 days of manual engagement so far",
+          "mitigation": "Set phone alarms for 12:15 and 18:15 JST. Make it a habit. 15 min total."
+        },
+        {
+          "risk": "Account still API-reply-restricted",
+          "impact": "MEDIUM",
+          "status": "100% reply failure since Mar 10",
+          "mitigation": "Skip API replies entirely. Manual replies only. Re-test weekly."
+        },
+        {
+          "risk": "Inconsistent posting (another gap)",
+          "impact": "HIGH",
+          "status": "Already happened twice (Feb 25-Mar 6, Mar 10-11)",
+          "mitigation": "Pre-generate a 5-day image buffer. Pre-approve content plans. Auto-scheduling if possible. Make posting zero-friction."
+        }
+      ]
+    }
+  },
+
+  "executive_summary": {
+    "one_liner": "5 followers after 17 days. We posted content for 1 day, went silent for 2. Profile signals 'bot'. Fix today: rewrite bio, unfollow 28 accounts, post 3 times, operator spends 15 min engaging manually.",
+    "framework_scores": {"design": 5, "psychology": 3, "algorithm": 2, "product": 30, "max": 1000},
+    "top_3_immediate_actions": [
+      "1. Profile fix: Bio rewrite + unfollow to ≤5 + pin best post (10 minutes)",
+      "2. Post 3 times today at 18:00, 20:00, 22:00 JST (break the silence)",
+      "3. Operator manual engagement: 15 min on X — like 15 posts, reply to 3 (the ONLY working reply channel)"
+    ],
+    "this_week_goal": "21 new posts, 15+ followers, 3/day every day, optimized profile, operator engaging daily"
+  }
+}

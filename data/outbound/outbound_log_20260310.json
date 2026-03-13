@@ -1,0 +1,196 @@
+{
+  "date": "2026-03-10",
+  "actions": [
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@tanarainw",
+      "tweet_id": "2031006112204419419",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:14:04.495357+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@tanarainw",
+      "tweet_id": "2030994333772443778",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:15:23.914988+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@tanarainw",
+      "tweet_id": "2029946520481489260",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:16:14.055776+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@tanarainw",
+      "tweet_id": "2029735742931349748",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:17:42.179636+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@tanarainw",
+      "tweet_id": "2031006112204419419",
+      "reply_text": "@tanarainw the lighting in this is actually insane",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:19:12.313994+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@iiCoraMaay",
+      "tweet_id": "2030770416059363568",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:19:58.458139+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@iiCoraMaay",
+      "tweet_id": "2031010256407429451",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:21:27.770916+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@iiCoraMaay",
+      "tweet_id": "2030770416059363568",
+      "reply_text": "@iiCoraMaay wait this is actually stunning",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:22:00.278189+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "2030754636559196620",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:23:37.897092+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "2031052123438288989",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:25:26.113892+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "2031029789671264417",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:26:15.835909+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@baharaykin",
+      "tweet_id": "2031052123438288989",
+      "reply_text": "@baharaykin right but it's close",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:28:11.871697+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow",
+      "account": "EN",
+      "target": "@baharaykin",
+      "target_user_id": "1223324175802294273",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:29:31.360010+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@NotjustRen00",
+      "tweet_id": "2030638510596919777",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:30:56.525969+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@NotjustRen00",
+      "tweet_id": "2031030038368579907",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:31:48.804945+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@NotjustRen00",
+      "tweet_id": "2030997623298252819",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:33:38.456929+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@NotjustRen00",
+      "tweet_id": "2030638510596919777",
+      "reply_text": "@NotjustRen00 this cosplay is next level honestly",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-10T21:35:36.421676+09:00",
+      "dry_run": false
+    }
+  ],
+  "failed_replies": [
+    {
+      "target": "@tanarainw",
+      "tweet_id": "2031006112204419419",
+      "tweet_url": "https://x.com/tanarainw/status/2031006112204419419",
+      "reply_text": "the lighting in this is actually insane",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    },
+    {
+      "target": "@iiCoraMaay",
+      "tweet_id": "2030770416059363568",
+      "tweet_url": "https://x.com/iiCoraMaay/status/2030770416059363568",
+      "reply_text": "wait this is actually stunning",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    },
+    {
+      "target": "@baharaykin",
+      "tweet_id": "2031052123438288989",
+      "tweet_url": "https://x.com/baharaykin/status/2031052123438288989",
+      "reply_text": "right but it's close",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    },
+    {
+      "target": "@NotjustRen00",
+      "tweet_id": "2030638510596919777",
+      "tweet_url": "https://x.com/NotjustRen00/status/2030638510596919777",
+      "reply_text": "this cosplay is next level honestly",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    }
+  ]
+}

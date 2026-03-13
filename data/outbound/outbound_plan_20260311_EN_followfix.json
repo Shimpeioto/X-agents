@@ -1,0 +1,65 @@
+{
+  "date": "2026-03-11",
+  "account": "EN",
+  "generated_at": "2026-03-11T18:00:00+09:00",
+  "strategy_used": "manual_fix_task_20260311_008",
+  "content_plan_used": "N/A",
+  "safety_summary": {
+    "targets_checked": 3,
+    "targets_engaged": 3,
+    "targets_skipped": 0,
+    "already_followed_skipped": [],
+    "cooldown_skipped": [],
+    "planned_likes": 0,
+    "planned_replies": 0,
+    "planned_follows": 3,
+    "budget_remaining": {"likes": 0, "replies": 0, "follows": 3}
+  },
+  "targets": [
+    {
+      "handle": "@Estherbron1",
+      "user_id": "831028808098598912",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": "2026-03-09",
+        "days_since_last": 2,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [],
+      "follow": true,
+      "reasoning": "EN competitor with 1.2M followers, never followed. Verified via API."
+    },
+    {
+      "handle": "@KissofStarova",
+      "user_id": "1815218542247374848",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [],
+      "follow": true,
+      "reasoning": "EN competitor with 4.9K followers, never engaged. Verified via API."
+    },
+    {
+      "handle": "@itsluna_baby",
+      "user_id": "1548648751555682306",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [],
+      "follow": true,
+      "reasoning": "EN competitor with 50.5K followers, never engaged. Verified via API."
+    }
+  ]
+}

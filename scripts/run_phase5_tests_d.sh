@@ -39,7 +39,7 @@ run_test_18() {
 verify_test_18() {
   # Find today's date files
   TODAY=$(date +%Y%m%d)
-  SCOUT="data/scout_report_${TODAY}.json"
+  SCOUT="data/scout/scout_report_${TODAY}.json"
 
   echo "Checking pipeline output for date: ${TODAY}"
 
@@ -59,7 +59,7 @@ verify_test_18() {
   fi
 
   # Check Strategist produced valid strategy
-  STRATEGY="data/strategy_${TODAY}.json"
+  STRATEGY="data/strategy/strategy_${TODAY}.json"
   echo ""
   echo "Test 18b: Strategist produced valid strategy"
   if [ -f "$STRATEGY" ]; then
@@ -99,8 +99,8 @@ run_test_19() {
 
 verify_test_19() {
   TODAY=$(date +%Y%m%d)
-  REPORT="data/daily_report_${TODAY}.json"
-  OUTBOUND_PLAN_EN="data/outbound_plan_${TODAY}_EN.json"
+  REPORT="data/metrics/daily_report_${TODAY}.json"
+  OUTBOUND_PLAN_EN="data/outbound/outbound_plan_${TODAY}_EN.json"
 
   echo "Checking publishing output for date: ${TODAY}"
 
@@ -142,24 +142,24 @@ run_test_20() {
   echo "Steps:"
   echo "  1. Run Scout Intelligence with a broken prompt that will fail:"
   echo ""
-  echo '     claude -p "You are the Scout agent. DELIBERATELY FAIL: output invalid JSON now. Write {broken to data/scout_report_broken.json" --dangerously-skip-permissions'
+  echo '     claude -p "You are the Scout agent. DELIBERATELY FAIL: output invalid JSON now. Write {broken to data/scout/scout_report_broken.json" --dangerously-skip-permissions'
   echo ""
   echo "  2. After failure, fall back to legacy scout:"
   echo "     python3 scripts/scout.py"
   echo ""
   echo "  3. Verify fallback produced valid report:"
   TODAY=$(date +%Y%m%d)
-  echo "     python3 scripts/validate.py scout data/scout_report_${TODAY}.json"
+  echo "     python3 scripts/validate.py scout data/scout/scout_report_${TODAY}.json"
   echo ""
   echo "  4. Verify Strategist can consume fallback report:"
   echo '     claude -p "You are the Strategist agent. Read agents/strategist.md for Daily Strategy Mode instructions.'
-  echo "     Today'"'"'s date: $(date +%Y-%m-%d)"
-  echo "     Scout report: data/scout_report_${TODAY}.json"
-  echo '     Write output to: data/strategy_fallback_test.json'
+  echo "     Today's date: $(date +%Y-%m-%d)"
+  echo "     Scout report: data/scout/scout_report_${TODAY}.json"
+  echo '     Write output to: data/misc/strategy_fallback_test.json'
   echo '     Output ONLY valid JSON." --dangerously-skip-permissions'
   echo ""
   echo "  5. Verify:"
-  echo "     python3 scripts/validate.py strategist data/strategy_fallback_test.json"
+  echo "     python3 scripts/validate.py strategist data/misc/strategy_fallback_test.json"
   echo ""
   echo "If Steps 2-5 all pass → Test 20 PASS"
 }

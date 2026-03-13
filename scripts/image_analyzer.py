@@ -5,9 +5,9 @@ calls Claude Vision to analyze each image, outputs structured Higgsfield-format
 reference prompts for the Creator agent.
 
 Usage:
-    python3 scripts/image_analyzer.py data/scout_report_20260308.json
-    python3 scripts/image_analyzer.py data/scout_report_20260308.json --top 10
-    python3 scripts/image_analyzer.py data/scout_report_20260308.json --dry-run
+    python3 scripts/image_analyzer.py data/scout/scout_report_20260308.json
+    python3 scripts/image_analyzer.py data/scout/scout_report_20260308.json --top 10
+    python3 scripts/image_analyzer.py data/scout/scout_report_20260308.json --dry-run
 
 Exit codes: 0=success, 1=error
 """
@@ -338,7 +338,7 @@ def main():
             },
             "references": []
         }
-        output_path = f"data/image_references_{date_compact}.json"
+        output_path = os.path.join("data", "content", f"image_references_{date_compact}.json")
         with open(output_path, "w") as f:
             json.dump(output, f, indent=2, ensure_ascii=False)
         log.info("Wrote empty references to %s", output_path)
@@ -443,7 +443,7 @@ def main():
         log.error("Output JSON validation failed: %s", e)
         sys.exit(1)
 
-    output_path = f"data/image_references_{date_compact}.json"
+    output_path = os.path.join("data", "content", f"image_references_{date_compact}.json")
     with open(output_path, "w") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 

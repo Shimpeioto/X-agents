@@ -1,10 +1,11 @@
 """Publisher agent — Posts approved content to X and runs outbound engagement.
 
 Usage:
-    python3 scripts/publisher.py post --account EN          # Post all approved
-    python3 scripts/publisher.py post --account EN --slot 1 # Post specific slot
+    python3 scripts/publisher.py post --account EN          # Post approved, schedule-aware (skips future slots)
+    python3 scripts/publisher.py post --account EN --slot 1 # Post specific slot (bypasses schedule check)
+    python3 scripts/publisher.py post --account EN --force  # Post all approved (bypasses schedule check)
     python3 scripts/publisher.py outbound --account EN      # Run outbound engagement (legacy)
-    python3 scripts/publisher.py smart-outbound --account EN --plan data/outbound_plan_20260305_EN.json
+    python3 scripts/publisher.py smart-outbound --account EN --plan data/outbound/outbound_plan_20260305_EN.json
     python3 scripts/publisher.py --dry-run post --account EN # Log only, no API calls
 
 Exit codes: 0=success, 1=error, 2=usage error
@@ -19,14 +20,15 @@ import random
 import shutil
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 # Add project root to path
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(PROJECT, "scripts"))
 
-from x_api import XApiClient, XApiWriteClient, load_bearer_token
+from x_api import XApiClient, XApiWriteClient, load_bearer_token, load_account_credentials
+from data_paths import CONTENT_DIR, PIPELINE_DIR, OUTBOUND_DIR, STRATEGY_DIR
 
 JST = ZoneInfo("Asia/Tokyo")
 DATA_DIR = os.path.join(PROJECT, "data")
@@ -61,6 +63,55 @@ def now_iso() -> str:
     return datetime.now(JST).isoformat()
 
 
+def parse_scheduled_time(date_str: str, scheduled_time: str) -> datetime | None:
+    """Parse a scheduled_time like '17:00 UTC' or '21:00 JST' into a timezone-aware datetime.
+
+    Args:
+        date_str: Date in YYYYMMDD format (from the content plan date)
+        scheduled_time: Time string like '13:00 UTC' or '09:00 JST'
+
+    Returns:
+        Timezone-aware datetime, or None if parsing fails.
+    """
+    try:
+        parts = scheduled_time.strip().split()
+        time_part = parts[0]  # "17:00"
+        tz_label = parts[1].upper() if len(parts) > 1 else "UTC"
+
+        hour, minute = map(int, time_part.split(":"))
+        year = int(date_str[:4])
+        month = int(date_str[4:6])
+        day = int(date_str[6:8])
+
+        if tz_label == "JST":
+            tz = ZoneInfo("Asia/Tokyo")
+        else:
+            tz = ZoneInfo("UTC")
+
+        dt = datetime(year, month, day, hour, minute, tzinfo=tz)
+
+        # Handle next-day wrap: if scheduled_time is e.g. "00:30 UTC" for a plan
+        # dated by JST, the UTC time might actually be the next calendar day.
+        # We don't adjust here — the plan date is the reference date for the slot.
+        return dt
+    except Exception as e:
+        logger.warning(f"Could not parse scheduled_time '{scheduled_time}' for date {date_str}: {e}")
+        return None
+
+
+def is_scheduled_time_passed(date_str: str, scheduled_time: str) -> bool:
+    """Check if a post's scheduled time has already passed.
+
+    Returns True if the scheduled time is in the past (post should be published).
+    Returns True if parsing fails (fail-open: don't block posting on parse errors).
+    """
+    dt = parse_scheduled_time(date_str, scheduled_time)
+    if dt is None:
+        return True  # Fail-open
+    now = datetime.now(ZoneInfo("UTC"))
+    return now >= dt.astimezone(ZoneInfo("UTC"))
+
+
 def load_json(path: str) -> dict | None:
     try:
         with open(path) as f:
@@ -83,7 +134,7 @@ def save_json(path: str, data: dict) -> None:
 
 def load_rate_limits(date: str) -> dict:
     """Load or initialize rate limits for today."""
-    path = os.path.join(DATA_DIR, f"rate_limits_{date}.json")
+    path = os.path.join(PIPELINE_DIR, f"rate_limits_{date}.json")
     data = load_json(path)
     if data:
         return data
@@ -96,7 +147,7 @@ def load_rate_limits(date: str) -> dict:
 
 
 def save_rate_limits(date: str, limits: dict) -> None:
-    path = os.path.join(DATA_DIR, f"rate_limits_{date}.json")
+    path = os.path.join(PIPELINE_DIR, f"rate_limits_{date}.json")
     save_json(path, limits)
 
 
@@ -146,10 +197,10 @@ def post_url(account_handle: str, tweet_id: str) -> str:
 
 # --- Post Subcommand ---
 
-def run_post(account: str, slot: int | None, dry_run: bool) -> int:
+def run_post(account: str, slot: int | None, dry_run: bool, date_override: str | None = None, force: bool = False) -> int:
     """Post approved content for an account. Returns 0 on success, 1 on error."""
-    date = today_str()
-    plan_path = os.path.join(DATA_DIR, f"content_plan_{date}_{account}.json")
+    date = date_override if date_override else today_str()
+    plan_path = os.path.join(CONTENT_DIR, f"content_plan_{date}_{account}.json")
     plan = load_json(plan_path)
     if plan is None:
         logger.error(f"No content plan found: {plan_path}")
@@ -165,6 +216,12 @@ def run_post(account: str, slot: int | None, dry_run: bool) -> int:
             continue
         if slot is not None and p.get("slot") != slot:
             continue
+        # Schedule-aware posting: when no --slot and no --force, only post if scheduled_time has passed
+        if slot is None and not force and p.get("scheduled_time"):
+            if not is_scheduled_time_passed(date, p["scheduled_time"]):
+                scheduled = p["scheduled_time"]
+                logger.info(f"Skipping {p['id']} — scheduled for {scheduled}, not yet due")
+                continue
         targets.append(p)
 
     if not targets:
@@ -173,7 +230,8 @@ def run_post(account: str, slot: int | None, dry_run: bool) -> int:
         return 0
 
     logger.info(f"Publishing {len(targets)} post(s) for {account}" +
-                (f" (slot {slot})" if slot else ""))
+                (f" (slot {slot})" if slot else "") +
+                (" (--force: schedule check bypassed)" if force else ""))
 
     if dry_run:
         write_client = None
@@ -281,11 +339,11 @@ def run_outbound(account: str, dry_run: bool) -> int:
     date = today_str()
 
     # Load strategy for outbound config
-    strategy_path = os.path.join(DATA_DIR, f"strategy_{date}.json")
+    strategy_path = os.path.join(STRATEGY_DIR, f"strategy_{date}.json")
     strategy = load_json(strategy_path)
     if strategy is None:
         # Try current strategy
-        strategy_path = os.path.join(DATA_DIR, "strategy_current.json")
+        strategy_path = os.path.join(STRATEGY_DIR, "strategy_current.json")
         strategy = load_json(strategy_path)
     if strategy is None:
         logger.error("No strategy found for outbound engagement")
@@ -303,14 +361,14 @@ def run_outbound(account: str, dry_run: bool) -> int:
     reply_style = outbound_cfg.get("reply_style", "")
 
     # Load reply templates from content plan
-    plan_path = os.path.join(DATA_DIR, f"content_plan_{date}_{account}.json")
+    plan_path = os.path.join(CONTENT_DIR, f"content_plan_{date}_{account}.json")
     plan = load_json(plan_path)
     reply_templates = plan.get("reply_templates", []) if plan else []
 
     limits = load_rate_limits(date)
 
     # Initialize outbound log
-    outbound_log_path = os.path.join(DATA_DIR, f"outbound_log_{date}.json")
+    outbound_log_path = os.path.join(OUTBOUND_DIR, f"outbound_log_{date}.json")
     outbound_log = load_json(outbound_log_path) or {"date": f"{date[:4]}-{date[4:6]}-{date[6:8]}", "actions": []}
 
     if not target_accounts:
@@ -331,6 +389,12 @@ def run_outbound(account: str, dry_run: bool) -> int:
         except Exception as e:
             logger.error(f"Failed to initialize clients: {e}")
             return 1
+
+    # Pre-fetch real following list to prevent re-follow waste
+    if not dry_run:
+        real_following = _fetch_real_following(account)
+    else:
+        real_following = set()
 
     for target in target_accounts:
         handle = target.lstrip("@")
@@ -409,29 +473,40 @@ def run_outbound(account: str, dry_run: bool) -> int:
             date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
             _sqlite_log_outbound(date_iso, account, "reply", f"@{handle}", tweet["tweet_id"], True)
 
-        # Follow target (if within limits)
+        # Follow target — with real API verification to prevent re-follows
         if check_rate_limit(limits, account, "follows"):
-            if dry_run:
-                logger.info(f"[DRY-RUN] Would follow @{handle}")
+            if handle.lower() in real_following:
+                logger.info(f"SKIPPING follow @{handle} — already following (verified via API)")
+                outbound_log["actions"].append({
+                    "type": "follow_skipped",
+                    "account": account,
+                    "target": f"@{handle}",
+                    "reason": "already_following_verified",
+                    "timestamp": now_iso(),
+                })
             else:
-                _delay_random()
-                success = write_client.follow_user(target_user_id)
-                if success:
-                    logger.info(f"Followed @{handle}")
+                if dry_run:
+                    logger.info(f"[DRY-RUN] Would follow @{handle}")
                 else:
-                    logger.warning(f"Failed to follow @{handle}")
+                    _delay_random()
+                    success = write_client.follow_user(target_user_id)
+                    if success:
+                        logger.info(f"Followed @{handle}")
+                        real_following.add(handle.lower())
+                    else:
+                        logger.warning(f"Failed to follow @{handle}")
 
-            increment_rate_limit(limits, account, "follows")
-            outbound_log["actions"].append({
-                "type": "follow",
-                "account": account,
-                "target": f"@{handle}",
-                "target_user_id": target_user_id,
-                "timestamp": now_iso(),
-                "dry_run": dry_run,
-            })
-            date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
-            _sqlite_log_outbound(date_iso, account, "follow", f"@{handle}", None, True)
+                increment_rate_limit(limits, account, "follows")
+                outbound_log["actions"].append({
+                    "type": "follow",
+                    "account": account,
+                    "target": f"@{handle}",
+                    "target_user_id": target_user_id,
+                    "timestamp": now_iso(),
+                    "dry_run": dry_run,
+                })
+                date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
+                _sqlite_log_outbound(date_iso, account, "follow", f"@{handle}", None, True)
 
     # Save rate limits and outbound log
     save_rate_limits(date, limits)
@@ -450,6 +525,43 @@ def _delay_random():
     delay = random.uniform(OUTBOUND_DELAY_MIN, OUTBOUND_DELAY_MAX)
     logger.info(f"Waiting {delay:.0f}s before next operation...")
     time.sleep(delay)
+
+
+def _fetch_real_following(account: str) -> set[str]:
+    """Fetch the REAL following list from X API via bearer token.
+
+    Returns a set of lowercase usernames that the account is currently following.
+    This is the source of truth — local logs can be incomplete.
+    """
+    try:
+        bearer = load_bearer_token()
+        read_client = XApiClient(bearer)
+        creds = load_account_credentials(account)
+        user_id = creds.get("user_id")
+        if not user_id:
+            logger.warning(f"No user_id for {account}, cannot verify following list")
+            return set()
+
+        following = set()
+        pagination_token = None
+        for _ in range(10):  # Safety limit (10 pages x 100 = 1000 max)
+            kwargs = {"id": user_id, "max_results": 100, "user_fields": ["username"]}
+            if pagination_token:
+                kwargs["pagination_token"] = pagination_token
+            resp = read_client.client.get_users_following(**kwargs)
+            if resp.data:
+                for u in resp.data:
+                    following.add(u.username.lower())
+            if resp.meta and "next_token" in resp.meta:
+                pagination_token = resp.meta["next_token"]
+            else:
+                break
+
+        logger.info(f"Fetched real following list for {account}: {len(following)} accounts")
+        return following
+    except Exception as e:
+        logger.error(f"Failed to fetch real following list: {e}")
+        return set()
 
 
 # --- Smart Outbound Subcommand ---
@@ -481,7 +593,7 @@ def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
     limits = load_rate_limits(date)
 
     # Initialize outbound log
-    outbound_log_path = os.path.join(DATA_DIR, f"outbound_log_{date}.json")
+    outbound_log_path = os.path.join(OUTBOUND_DIR, f"outbound_log_{date}.json")
     outbound_log = load_json(outbound_log_path) or {
         "date": f"{date[:4]}-{date[4:6]}-{date[6:8]}", "actions": []
     }
@@ -497,6 +609,12 @@ def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
 
     targets = plan.get("targets", [])
     logger.info(f"Smart outbound for {account}: {len(targets)} targets from plan")
+
+    # 2b. Pre-fetch real following list to prevent re-follow waste
+    if not dry_run:
+        real_following = _fetch_real_following(account)
+    else:
+        real_following = set()
 
     # 3. Execute each target's actions
     for target in targets:
@@ -585,30 +703,43 @@ def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
             date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
             _sqlite_log_outbound(date_iso, account, "reply", f"@{handle}", reply_tweet_id, True)
 
-        # Follow
+        # Follow — with real API verification to prevent re-follows
         if target.get("follow", False) and check_rate_limit(limits, account, "follows"):
-            if dry_run:
-                logger.info(f"[DRY-RUN] Would follow @{handle}")
+            # CHECK: Skip if already following (real API source of truth)
+            if handle.lower() in real_following:
+                logger.info(f"SKIPPING follow @{handle} — already following (verified via API)")
+                outbound_log["actions"].append({
+                    "type": "follow_skipped",
+                    "account": account,
+                    "target": f"@{handle}",
+                    "reason": "already_following_verified",
+                    "source": "smart_outbound",
+                    "timestamp": now_iso(),
+                })
             else:
-                _delay_random()
-                success = write_client.follow_user(user_id)
-                if success:
-                    logger.info(f"Followed @{handle}")
+                if dry_run:
+                    logger.info(f"[DRY-RUN] Would follow @{handle}")
                 else:
-                    logger.warning(f"Failed to follow @{handle}")
+                    _delay_random()
+                    success = write_client.follow_user(user_id)
+                    if success:
+                        logger.info(f"Followed @{handle}")
+                        real_following.add(handle.lower())  # Update cache
+                    else:
+                        logger.warning(f"Failed to follow @{handle}")
 
-            increment_rate_limit(limits, account, "follows")
-            outbound_log["actions"].append({
-                "type": "follow",
-                "account": account,
-                "target": f"@{handle}",
-                "target_user_id": user_id,
-                "source": "smart_outbound",
-                "timestamp": now_iso(),
-                "dry_run": dry_run,
-            })
-            date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
-            _sqlite_log_outbound(date_iso, account, "follow", f"@{handle}", None, True)
+                increment_rate_limit(limits, account, "follows")
+                outbound_log["actions"].append({
+                    "type": "follow",
+                    "account": account,
+                    "target": f"@{handle}",
+                    "target_user_id": user_id,
+                    "source": "smart_outbound",
+                    "timestamp": now_iso(),
+                    "dry_run": dry_run,
+                })
+                date_iso = f"{date[:4]}-{date[4:6]}-{date[6:8]}"
+                _sqlite_log_outbound(date_iso, account, "follow", f"@{handle}", None, True)
 
     # 4. Save rate limits and outbound log
     save_rate_limits(date, limits)
@@ -627,6 +758,7 @@ def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
 def main():
     parser = argparse.ArgumentParser(description="Publisher agent — post and outbound engagement")
     parser.add_argument("--dry-run", action="store_true", help="Log actions without making API calls")
+    parser.add_argument("--date", default=None, help="Override date (YYYYMMDD) for content plan lookup")
 
     subparsers = parser.add_subparsers(dest="command", help="Subcommand")
 
@@ -634,6 +766,7 @@ def main():
     post_parser = subparsers.add_parser("post", help="Post approved content to X")
     post_parser.add_argument("--account", required=True, choices=["EN", "JP"], help="Account to post for")
     post_parser.add_argument("--slot", type=int, default=None, help="Post specific slot only")
+    post_parser.add_argument("--force", action="store_true", help="Bypass schedule enforcement (post all approved regardless of time)")
 
     # outbound subcommand
     outbound_parser = subparsers.add_parser("outbound", help="Run outbound engagement")
@@ -654,7 +787,7 @@ def main():
         logger.info("[DRY-RUN MODE] No API calls will be made")
 
     if args.command == "post":
-        exit_code = run_post(args.account, args.slot, args.dry_run)
+        exit_code = run_post(args.account, args.slot, args.dry_run, date_override=args.date, force=args.force)
     elif args.command == "outbound":
         exit_code = run_outbound(args.account, args.dry_run)
     elif args.command == "smart-outbound":

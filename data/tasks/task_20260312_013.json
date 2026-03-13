@@ -1,0 +1,13 @@
+{
+  "task_id": "20260312_013",
+  "description": "Publish post EN_20260311_04 from data/content_plan_20260311_EN.json. Steps: 1) Read the content plan, 2) Update EN_20260311_04 status from 'draft' to 'approved' if needed (operator has given explicit approval), 3) Run publisher.py to post it — check if publisher supports --file or --date flag, otherwise update the post status in the 2026-03-11 content plan and invoke publisher with the correct arguments to post that specific slot. 4) Report back with tweet URL and confirmation.",
+  "task_type": "publishing",
+  "agents_planned": [
+    "publisher"
+  ],
+  "notes": "Post is from 2026-03-11 content plan, not today's. Operator gave explicit 'publish now' approval. Check publisher.py CLI for --file or --date support before running.",
+  "created_at": "2026-03-12T23:09:11.915498+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-12T23:09:49.053101+09:00",
+  "exit_code": 0
+}

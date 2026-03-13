@@ -1,0 +1,15 @@
+{
+  "task_id": "20260309_001",
+  "description": "Hold a comprehensive agent meeting to review progress and create improvement plan.\n\n1. Scout: Run fresh competitor data collection (python3 scripts/scout.py --raw --compact) to benchmark our position\n2. Analyst: Collect current metrics for EN account (python3 scripts/analyst.py collect --account EN), generate summary\n3. Read all available data: account_status.json, recent strategy files, content plans, outbound logs, metrics\n4. Strategist-style analysis: Review all collected data comprehensively:\n   - Progress audit: Are we growing? Follower trajectory, engagement rates, posting consistency\n   - Competitor benchmark: Where do we stand vs competitors?\n   - Gap analysis: What's working vs what's not\n   - Improvement plan: Specific actionable steps to accelerate growth\n   - Next strategy: Updated approach for the coming week\n   - Timeline and priorities\n5. Compile everything into a comprehensive 'Agent Meeting Report' JSON\n6. Generate HTML report: python3 scripts/generate_html_report.py generic <json_path> --title 'Agent Meeting Report — Progress Review & Strategy'\n7. Send via Telegram: python3 scripts/telegram_send.py --document <html_path> 'Agent Meeting Report — Progress Review & Improvement Plan'\n\nEN account is active (@meruru_tcbn). JP is suspended (no account yet). Focus on EN progress and strategy.\nAll data files are in data/ directory. Check dates for most recent files.\nThe report should read like meeting minutes — what was discussed, key findings, decisions made, and action items.",
+  "task_type": "report",
+  "agents_planned": [
+    "scout",
+    "analyst",
+    "strategist"
+  ],
+  "notes": "Operator wants a comprehensive review meeting. Focus on honest assessment of progress, actionable improvements, and acceleration tactics. EN account only (JP suspended). Report should be detailed and structured like meeting minutes with clear action items.",
+  "created_at": "2026-03-09T14:26:29.295844+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-09T14:32:17.715232+09:00",
+  "exit_code": 0
+}

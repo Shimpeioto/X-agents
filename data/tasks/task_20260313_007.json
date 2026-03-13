@@ -1,0 +1,15 @@
+{
+  "task_id": "20260313_007",
+  "description": "Run full daily pipeline for 2026-03-13. Flow: 1) Scout data collection (python3 scripts/scout.py --raw --compact), 2) Scout analysis (produce data/scout_report_20260313.json), 3) Strategist reads scout report + strategy_feedback_20260312.json if exists → produces data/strategy_20260313.json, 4) Creator EN reads strategy → produces data/content_plan_20260313_EN.json. JP is suspended — skip JP. 5) Generate HTML preview and send to Telegram. Only EN account is active (@meruru_tcbn).",
+  "task_type": "pipeline",
+  "agents_planned": [
+    "scout",
+    "strategist",
+    "creator"
+  ],
+  "notes": "JP account is suspended — EN only. Check data/strategy_feedback_20260312.json for PDCA feedback to feed into Strategist. Use today's date 2026-03-13 for all file names.",
+  "created_at": "2026-03-13T17:01:57.449384+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-13T17:13:36.837551+09:00",
+  "exit_code": 0
+}

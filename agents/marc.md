@@ -108,13 +108,13 @@ When delivering any JSON output to the operator, use the **correct report type**
 
 ```bash
 # Content plans — use content_plan mode (full structured image prompts with Copy JSON)
-python3 scripts/generate_html_report.py content_plan data/content_plan_{YYYYMMDD}_{account}.json
+python3 scripts/generate_html_report.py content_plan data/content/content_plan_{YYYYMMDD}_{account}.json
 
 # Daily reports
-python3 scripts/generate_html_report.py daily_report data/daily_report_{YYYYMMDD}.json
+python3 scripts/generate_html_report.py daily_report data/metrics/daily_report_{YYYYMMDD}.json
 
 # Pipeline content preview (both accounts combined)
-python3 scripts/generate_html_report.py content_preview data/content_plan_{YYYYMMDD}_EN.json --strategy data/strategy_{YYYYMMDD}.json
+python3 scripts/generate_html_report.py content_preview data/content/content_plan_{YYYYMMDD}_EN.json --strategy data/strategy/strategy_{YYYYMMDD}.json
 
 # Fallback for other JSON (scout reports, strategy, etc.)
 python3 scripts/generate_html_report.py generic <json_path> --title "<Title>"
@@ -152,7 +152,7 @@ Two sessions per day:
 - **Morning (05:30 JST)**: Review yesterday's results, send operator briefing
 - **Evening (22:00 JST)**: Collect metrics, daily report, generate `strategy_feedback` for tomorrow's Strategist
 
-The evening war room produces `data/strategy_feedback_{YYYYMMDD}.json` — the bridge from Check to Act. Tomorrow's Strategist reads this file and adjusts content_mix, A/B tests, posting times, and outbound targets based on actual performance data.
+The evening war room produces `data/strategy/strategy_feedback_{YYYYMMDD}.json` — the bridge from Check to Act. Tomorrow's Strategist reads this file and adjusts content_mix, A/B tests, posting times, and outbound targets based on actual performance data.
 
 ### Schemas & Formats
 

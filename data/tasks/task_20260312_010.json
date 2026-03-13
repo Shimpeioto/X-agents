@@ -1,0 +1,13 @@
+{
+  "task_id": "20260312_010",
+  "description": "Regenerate EN content plan for 2026-03-12 with full, correct image prompts. The current content plan at data/content_plan_20260312_EN.json is missing detailed image_prompt fields (meta, subject, outfit, pose, scene, camera, lighting, mood). Reference data/content_plan_20260311_EN.json as the gold standard for correct image prompt format — it has fully detailed prompts with all structured fields. Steps: (1) Read data/content_plan_20260312_EN.json to see current (broken) state, (2) Read data/content_plan_20260311_EN.json to see correct format, (3) Read data/strategy_20260312.json for today's posting schedule and categories, (4) Read agents/creator.md for Creator's full instructions, (5) Read config/image_prompt_guide.md for image prompt structure and character profiles, (6) Regenerate a complete, valid content_plan_20260312_EN.json with ALL posts having full image_prompt objects including: tool, prompt (150+ word paragraph), negative_prompt (full exclusion list), aspect_ratio, meta (quality/camera/lens/style), subject (hair color/style, body_type, skin, expression, makeup), outfit (top with type/color/material/fit, bottom, accessories), pose (position/stance/hands/head_gaze/vibe), scene (location/time/atmosphere/background), camera (pov/angle/framing), lighting (type/effect), mood (energy/color_palette). Also ensure: EN posts have empty hashtags [], captions under 30 chars, grok posts use .@grok format. Write the corrected file to data/content_plan_20260312_EN.json, then generate HTML with python3 scripts/generate_html_report.py generic data/content_plan_20260312_EN.json --title 'EN Content Plan 2026-03-12 (Fixed)' and send via Telegram.",
+  "task_type": "custom",
+  "agents_planned": [
+    "creator"
+  ],
+  "notes": "This is a fix for a recurring bug — image_prompt fields are incomplete. The 2026-03-11 EN content plan is the gold standard reference. The image prompts must be fully detailed with all structured sub-fields, not just a text string. Character profiles and scene templates come from config/image_prompt_guide.md.",
+  "created_at": "2026-03-12T20:29:25.002832+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-12T20:30:51.705441+09:00",
+  "exit_code": 0
+}

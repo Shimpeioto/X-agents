@@ -1,0 +1,15 @@
+{
+  "task_id": "20260308_001",
+  "description": "Run the daily pipeline for 2026-03-08. Full flow: Scout data collection (python3 scripts/scout.py --raw --compact), Scout analysis to produce data/scout_report_20260308.json, Strategist to produce data/strategy_20260308.json (must enforce core strategy from data/core_strategy.json), Creator EN to produce data/content_plan_20260308_EN.json, Creator JP to produce data/content_plan_20260308_JP.json (EN and JP in parallel). Validate all outputs. Generate HTML reports and send via Telegram for operator review.",
+  "task_type": "pipeline",
+  "agents_planned": [
+    "scout",
+    "strategist",
+    "creator"
+  ],
+  "notes": "Enforce core strategy rules: zero EN hashtags, JP max 2 disclaimer-only, EN captions <30 chars, Grok integration mandatory 20-30%. Agent instructions were updated in Session 27 to enforce these. Send HTML reports to Telegram when done.",
+  "created_at": "2026-03-08T12:21:40.400418+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-08T12:37:57.431090+09:00",
+  "exit_code": 0
+}

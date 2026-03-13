@@ -47,7 +47,7 @@ for a in ["marc", "scout", "strategist", "creator", "publisher", "analyst"]:
     check(f"agents/{a}.md", os.path.isfile(os.path.join(PROJECT, f"agents/{a}.md")))
 
 print("\n💾 Database:")
-db = os.path.join(PROJECT, "data/metrics_history.db")
+db = os.path.join(PROJECT, "data", "metrics", "metrics_history.db")
 check("SQLite exists", os.path.isfile(db), "Run: python3 scripts/db_manager.py")
 if os.path.isfile(db):
     tables = [r[0] for r in sqlite3.connect(db).execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]

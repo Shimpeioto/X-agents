@@ -1,0 +1,13 @@
+{
+  "task_id": "20260313_003",
+  "description": "Fix posts 2, 3, and 4 in data/content_plan_20260312_EN.json. All three do not match the Meruru concept. Read config/meruru_concept.md and config/image_prompt_guide.md first. Regenerate text and image prompts for each of these posts to align with Meruru's character concept, voice, and content pillars. Post 3 was .@grok make me a mermaid — replace with a better grok_interactive post that fits Meruru. Maintain status: draft for all posts. Write updated content back to data/content_plan_20260312_EN.json.",
+  "task_type": "custom",
+  "agents_planned": [
+    "creator"
+  ],
+  "notes": "Posts 2, 3, and 4 flagged by operator as not matching Meruru concept. Post 3 was a grok_interactive post with mermaid theme — replace with something on-concept. Use config/meruru_concept.md as the primary reference. Full image prompts required per config/image_prompt_guide.md schema.",
+  "created_at": "2026-03-13T00:52:36.636249+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-13T00:57:48.038607+09:00",
+  "exit_code": 0
+}

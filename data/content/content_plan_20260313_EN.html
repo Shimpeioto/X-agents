@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Plan — EN — 2026-03-13</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Content Plan — EN</h1>
+  <div class="subtitle">4 Posts | EN Account</div>
+  <div class="date">2026-03-13</div>
+</div>
+<nav class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#posts">Posts</a>
+  <a href="#reply-templates">Reply Templates</a>
+</nav>
+<div class="container">
+<section id="overview">
+<h2>Overview</h2>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">4</div>
+    <div class="label">Total Posts</div>
+  </div>
+  <div class="stat-box en">
+    <div class="value">EN</div>
+    <div class="label">Account</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">4</div>
+    <div class="label">Draft</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">0</div>
+    <div class="label">Approved</div>
+  </div>
+</div>
+<div class="text-sm text-muted mt-4">Strategy: data/strategy_20260313.json</div>
+</section>
+<section id="posts">
+<h2>Posts</h2>
+<div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 1</span> <span class="tag">13:00 UTC</span> <span class="tag tag-en">image_showcase</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-green">Variant A</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260313_01</div>
+    <div class="post-text">just a vibe 🤍</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a modern minimalist bedroom. She has long jet-black hair falling past her shoulders in natural straight strands, parted slightly off-center. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs — natural body proportions with real skin texture and visible pores. She wears a fitted cream-colored ribbed spaghetti-strap bodysuit tucked into high-waisted light-wash wide-leg denim jeans. Simple gold thin hoop earrings and a delicate gold layered chain necklace visible at the collarbone. One hand holds an iPhone 15 Pro Max at chest height, the other rests lightly on her hip with fingers slightly curled. Her weight shifts to her right leg creating a subtle hip tilt left, body angled at a slight three-quarter angle toward the mirror. She gazes at the phone screen with an effortlessly relaxed expression and barely-there soft smile, eyes calm and confident. The room has a clean white-painted wall behind a large frameless full-length mirror leaning against the wall, light grey hardwood floor, a white linen-covered bed partially visible on the right edge of frame with a knit throw draped over the corner. Natural warm morning sunlight streams from a wide window to the right, casting soft warm highlights across her left side and a gentle directional shadow along the mirror frame. Soft ivory, clean white, warm gold, pale denim color palette. Effortless everyday influencer aesthetic. Shot at eye-level in portrait orientation, centered composition with slight three-quarter body framing. Photorealistic, high quality, high resolution, 9:16 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: raw iphone mirror selfie</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260313_01')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260313_01" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a modern minimalist bedroom. She has long jet-black hair falling past her shoulders in natural straight strands, parted slightly off-center. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs — natural body proportions with real skin texture and visible pores. She wears a fitted cream-colored ribbed spaghetti-strap bodysuit tucked into high-waisted light-wash wide-leg denim jeans. Simple gold thin hoop earrings and a delicate gold layered chain necklace visible at the collarbone. One hand holds an iPhone 15 Pro Max at chest height, the other rests lightly on her hip with fingers slightly curled. Her weight shifts to her right leg creating a subtle hip tilt left, body angled at a slight three-quarter angle toward the mirror. She gazes at the phone screen with an effortlessly relaxed expression and barely-there soft smile, eyes calm and confident. The room has a clean white-painted wall behind a large frameless full-length mirror leaning against the wall, light grey hardwood floor, a white linen-covered bed partially visible on the right edge of frame with a knit throw draped over the corner. Natural warm morning sunlight streams from a wide window to the right, casting soft warm highlights across her left side and a gentle directional shadow along the mirror frame. Soft ivory, clean white, warm gold, pale denim color palette. Effortless everyday influencer aesthetic. Shot at eye-level in portrait orientation, centered composition with slight three-quarter body framing. Photorealistic, high quality, high resolution, 9:16 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;raw iphone mirror selfie&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;jet black&quot;,
+      &quot;style&quot;: &quot;long straight, slightly off-center part&quot;
+    },
+    &quot;body_type&quot;: &quot;fitness hourglass, ample chest, toned core, wide hips, thick thighs&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, natural texture, visible pores&quot;,
+    &quot;expression&quot;: &quot;effortlessly relaxed, barely-there soft smile, calm confident eyes&quot;,
+    &quot;makeup&quot;: &quot;minimal natural brows, soft nude lip, no heavy makeup&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;spaghetti-strap bodysuit&quot;,
+      &quot;color&quot;: &quot;cream&quot;,
+      &quot;material&quot;: &quot;ribbed cotton&quot;,
+      &quot;fit&quot;: &quot;fitted&quot;,
+      &quot;details&quot;: &quot;tucked into jeans&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;wide-leg jeans&quot;,
+      &quot;color&quot;: &quot;light wash denim&quot;,
+      &quot;fit&quot;: &quot;high-waisted, wide-leg&quot;
+    },
+    &quot;accessories&quot;: [
+      &quot;thin gold hoop earrings&quot;,
+      &quot;delicate gold layered chain necklace&quot;,
+      &quot;iPhone 15 Pro Max&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing&quot;,
+    &quot;stance&quot;: &quot;weight on right leg, slight hip tilt left, slight three-quarter angle toward mirror&quot;,
+    &quot;hands&quot;: &quot;right hand holding iPhone at chest height, left hand resting on hip with fingers lightly curled&quot;,
+    &quot;head_gaze&quot;: &quot;slight tilt, eyes looking at phone screen&quot;,
+    &quot;vibe&quot;: &quot;effortless confidence&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;modern minimalist bedroom&quot;,
+    &quot;time&quot;: &quot;morning&quot;,
+    &quot;atmosphere&quot;: &quot;warm, clean, airy&quot;,
+    &quot;background&quot;: &quot;white wall, frameless full-length mirror leaning against wall, light grey hardwood floor, white linen bed with knit throw on right edge&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;mirror selfie&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;full body, slight three-quarter&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;natural warm morning sunlight from right window&quot;,
+    &quot;effect&quot;: &quot;soft warm highlights on left side, gentle directional shadow along mirror frame&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;confident, casual&quot;,
+    &quot;color_palette&quot;: &quot;soft ivory, clean white, warm gold, pale denim&quot;,
+    &quot;aesthetic&quot;: &quot;effortless everyday influencer&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;raw iphone mirror selfie&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;jet black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long straight, slightly off-center part&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;fitness hourglass, ample chest, toned core, wide hips, thick thighs&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, natural texture, visible pores&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;effortlessly relaxed, barely-there soft smile, calm confident eyes&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural brows, soft nude lip, no heavy makeup&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;spaghetti-strap bodysuit&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;cream&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;ribbed cotton&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;fitted&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;details&quot;</span></span>: <span class="json-str">&quot;tucked into jeans&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;wide-leg jeans&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;light wash denim&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;high-waisted, wide-leg&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;thin gold hoop earrings&quot;</span>,
+      <span class="json-str">&quot;delicate gold layered chain necklace&quot;</span>,
+      <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;weight on right leg, slight hip tilt left, slight three-quarter angle toward mirror&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;right hand holding iPhone at chest height, left hand resting on hip with fingers lightly curled&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;slight tilt, eyes looking at phone screen&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;effortless confidence&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;modern minimalist bedroom&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;morning&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;warm, clean, airy&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;white wall, frameless full-length mirror leaning against wall, light grey hardwood floor, white linen bed with knit throw on right edge&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;mirror selfie&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;full body, slight three-quarter&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;natural warm morning sunlight from right window&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;soft warm highlights on left side, gentle directional shadow along mirror frame&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;confident, casual&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;soft ivory, clean white, warm gold, pale denim&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;effortless everyday influencer&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Variant A: mirror selfie style. image_showcase — minimal caption lets the image speak. Slot 1 leads the day at US morning prime (13:00 UTC).</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 2</span> <span class="tag">17:00 UTC</span> <span class="tag tag-en">engagement_questions</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-pink">Variant B</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260313_02</div>
+    <div class="post-text">ur type? 👀</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic fashion lifestyle photo of a young Japanese woman in her early 20s standing confidently at the edge of a sunlit rooftop terrace in a modern urban setting. She has long dark brown hair styled in a sleek low ponytail tied with a thin black ribbon, face fully framed. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs visible through her outfit. Light-medium neutral smooth skin, naturally expressive features. She wears a structured caramel-colored leather blazer over a simple thin white ribbed turtleneck, tailored black high-waisted straight-leg trousers, and pointed black ankle boots. A minimal gold watch on her left wrist. She stands in a relaxed but intentional contrapposto pose — right hip pushed out slightly, left foot stepped forward, both hands loosely in blazer pockets. She looks directly into the camera with a steady, quietly confident expression — chin level, lips lightly pressed together in a natural closed-lip expression, eyes holding strong contact. The rooftop has a clean concrete railing behind her with an open city skyline stretching in the distance, glass and steel buildings catching the late-afternoon light. Potted olive trees in matte white planters flank her on each side. Golden afternoon sunlight from the left side casts warm side lighting across her face and jacket, a sharp shadow falling to her right, and a warm ambient glow in the cityscape background. Caramel brown, crisp white, deep black, muted gold, sky grey color palette. Modern editorial lifestyle aesthetic. Third-person shot at eye-level, three-quarter body framing, vertical portrait composition centered with slight negative space above. Photorealistic, high quality, high resolution, 4:5 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 4:5</span> <span>Camera: Sony A7R IV</span> <span>Lens: 85mm prime f/1.4</span> <span>Style: modern editorial lifestyle</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260313_02')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260313_02" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic fashion lifestyle photo of a young Japanese woman in her early 20s standing confidently at the edge of a sunlit rooftop terrace in a modern urban setting. She has long dark brown hair styled in a sleek low ponytail tied with a thin black ribbon, face fully framed. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs visible through her outfit. Light-medium neutral smooth skin, naturally expressive features. She wears a structured caramel-colored leather blazer over a simple thin white ribbed turtleneck, tailored black high-waisted straight-leg trousers, and pointed black ankle boots. A minimal gold watch on her left wrist. She stands in a relaxed but intentional contrapposto pose — right hip pushed out slightly, left foot stepped forward, both hands loosely in blazer pockets. She looks directly into the camera with a steady, quietly confident expression — chin level, lips lightly pressed together in a natural closed-lip expression, eyes holding strong contact. The rooftop has a clean concrete railing behind her with an open city skyline stretching in the distance, glass and steel buildings catching the late-afternoon light. Potted olive trees in matte white planters flank her on each side. Golden afternoon sunlight from the left side casts warm side lighting across her face and jacket, a sharp shadow falling to her right, and a warm ambient glow in the cityscape background. Caramel brown, crisp white, deep black, muted gold, sky grey color palette. Modern editorial lifestyle aesthetic. Third-person shot at eye-level, three-quarter body framing, vertical portrait composition centered with slight negative space above. Photorealistic, high quality, high resolution, 4:5 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;4:5&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;Sony A7R IV&quot;,
+    &quot;lens&quot;: &quot;85mm prime f/1.4&quot;,
+    &quot;style&quot;: &quot;modern editorial lifestyle&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;dark brown&quot;,
+      &quot;style&quot;: &quot;sleek low ponytail, black ribbon tie&quot;
+    },
+    &quot;body_type&quot;: &quot;fitness hourglass, ample chest, toned core, wide hips, thick thighs&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, naturally expressive&quot;,
+    &quot;expression&quot;: &quot;steady quietly confident, chin level, lips lightly pressed, strong eye contact&quot;,
+    &quot;makeup&quot;: &quot;minimal natural brows, soft nude-pink lip, clean skin finish&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;structured blazer over turtleneck&quot;,
+      &quot;color&quot;: &quot;caramel over white&quot;,
+      &quot;material&quot;: &quot;leather blazer, ribbed cotton turtleneck&quot;,
+      &quot;fit&quot;: &quot;structured, fitted&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;straight-leg trousers&quot;,
+      &quot;color&quot;: &quot;black&quot;,
+      &quot;fit&quot;: &quot;tailored high-waisted, straight&quot;
+    },
+    &quot;footwear&quot;: &quot;pointed black ankle boots&quot;,
+    &quot;accessories&quot;: [
+      &quot;minimal gold watch&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing&quot;,
+    &quot;stance&quot;: &quot;contrapposto, right hip slightly out, left foot forward&quot;,
+    &quot;hands&quot;: &quot;both hands loosely in blazer pockets&quot;,
+    &quot;head_gaze&quot;: &quot;facing camera directly, chin level, strong eye contact&quot;,
+    &quot;vibe&quot;: &quot;quiet confidence&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;sunlit rooftop terrace, modern urban setting&quot;,
+    &quot;time&quot;: &quot;late afternoon&quot;,
+    &quot;atmosphere&quot;: &quot;clean, polished, open air&quot;,
+    &quot;background&quot;: &quot;clean concrete railing, city skyline in distance, potted olive trees in matte white planters&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;third-person&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;three-quarter body, slight negative space above&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;golden afternoon sunlight from left side&quot;,
+    &quot;effect&quot;: &quot;warm side lighting on face and jacket, sharp shadow to right, warm ambient glow in cityscape&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;confident, bold&quot;,
+    &quot;color_palette&quot;: &quot;caramel brown, crisp white, deep black, muted gold, sky grey&quot;,
+    &quot;aesthetic&quot;: &quot;modern editorial lifestyle&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;Sony A7R IV&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;85mm prime f/1.4&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;modern editorial lifestyle&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark brown&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;sleek low ponytail, black ribbon tie&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;fitness hourglass, ample chest, toned core, wide hips, thick thighs&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, naturally expressive&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;steady quietly confident, chin level, lips lightly pressed, strong eye contact&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural brows, soft nude-pink lip, clean skin finish&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;structured blazer over turtleneck&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;caramel over white&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;leather blazer, ribbed cotton turtleneck&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;structured, fitted&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;straight-leg trousers&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;tailored high-waisted, straight&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;footwear&quot;</span></span>: <span class="json-str">&quot;pointed black ankle boots&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;minimal gold watch&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;contrapposto, right hip slightly out, left foot forward&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;both hands loosely in blazer pockets&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;facing camera directly, chin level, strong eye contact&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;quiet confidence&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;sunlit rooftop terrace, modern urban setting&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;late afternoon&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;clean, polished, open air&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;clean concrete railing, city skyline in distance, potted olive trees in matte white planters&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;third-person&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;three-quarter body, slight negative space above&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;golden afternoon sunlight from left side&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;warm side lighting on face and jacket, sharp shadow to right, warm ambient glow in cityscape&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;confident, bold&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;caramel brown, crisp white, deep black, muted gold, sky grey&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;modern editorial lifestyle&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Variant B: editorial/lifestyle style — outdoor rooftop setting, no phone in hand, professional natural lighting. engagement_questions — short question under 30 chars designed to drive replies.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 3</span> <span class="tag">21:00 UTC</span> <span class="tag tag-en">grok_interactive</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-green">Variant A</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260313_03</div>
+    <div class="post-text">.@grok change my outfit to something red</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a sleek modern bathroom with a wide frameless mirror above a white floating vanity. She has long dark brown hair loosely half-up — the top half clipped back in a tortoiseshell claw clip, the bottom half falling in soft natural waves past her shoulders. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs. Light-medium neutral smooth skin with natural texture. She wears a fitted dark sage green zip-up athletic set — a cropped zip-up hoodie with the zipper pulled halfway down, and matching high-waisted biker shorts. White no-show ankle socks visible at the bottom. She stands slightly angled away from the vanity, using its mirror to take the selfie — left hand holding the iPhone at shoulder height angled slightly down to capture full body, right hand on the countertop edge. She looks at her phone screen with a playful, just-rolled-out-of-bed casual expression — lips pressed in a relaxed smirk, one brow subtly raised. The bathroom has white subway tile walls, chrome fixtures, a white floating vanity with a small round succulent in a terracotta pot and a neatly folded off-white hand towel on the counter edge. Warm overhead recessed lighting gives a clean bright fill, with a secondary warm accent light from a small LED vanity light strip above the mirror adding soft warmth to her face. Clean white, sage green, warm chrome, off-white linen color palette. Casual athleisure morning routine aesthetic. Shot at eye-level in portrait orientation, mirror selfie POV, full body framing. Photorealistic, high quality, high resolution, 9:16 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: raw iphone mirror selfie</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260313_03')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260313_03" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone mirror selfie of a young Japanese woman in her early 20s standing in a sleek modern bathroom with a wide frameless mirror above a white floating vanity. She has long dark brown hair loosely half-up — the top half clipped back in a tortoiseshell claw clip, the bottom half falling in soft natural waves past her shoulders. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs. Light-medium neutral smooth skin with natural texture. She wears a fitted dark sage green zip-up athletic set — a cropped zip-up hoodie with the zipper pulled halfway down, and matching high-waisted biker shorts. White no-show ankle socks visible at the bottom. She stands slightly angled away from the vanity, using its mirror to take the selfie — left hand holding the iPhone at shoulder height angled slightly down to capture full body, right hand on the countertop edge. She looks at her phone screen with a playful, just-rolled-out-of-bed casual expression — lips pressed in a relaxed smirk, one brow subtly raised. The bathroom has white subway tile walls, chrome fixtures, a white floating vanity with a small round succulent in a terracotta pot and a neatly folded off-white hand towel on the counter edge. Warm overhead recessed lighting gives a clean bright fill, with a secondary warm accent light from a small LED vanity light strip above the mirror adding soft warmth to her face. Clean white, sage green, warm chrome, off-white linen color palette. Casual athleisure morning routine aesthetic. Shot at eye-level in portrait orientation, mirror selfie POV, full body framing. Photorealistic, high quality, high resolution, 9:16 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;raw iphone mirror selfie&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;dark brown&quot;,
+      &quot;style&quot;: &quot;half-up with tortoiseshell claw clip, bottom half in soft waves&quot;
+    },
+    &quot;body_type&quot;: &quot;fitness hourglass, ample chest, toned core, wide hips, thick thighs&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, natural texture&quot;,
+    &quot;expression&quot;: &quot;playful casual, relaxed smirk, one brow subtly raised&quot;,
+    &quot;makeup&quot;: &quot;minimal, natural brows, bare-faced look, soft lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;cropped zip-up hoodie&quot;,
+      &quot;color&quot;: &quot;dark sage green&quot;,
+      &quot;material&quot;: &quot;athletic fabric&quot;,
+      &quot;fit&quot;: &quot;cropped, fitted&quot;,
+      &quot;details&quot;: &quot;zipper pulled halfway down&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;biker shorts&quot;,
+      &quot;color&quot;: &quot;dark sage green matching set&quot;,
+      &quot;fit&quot;: &quot;high-waisted, fitted&quot;
+    },
+    &quot;footwear&quot;: &quot;white no-show ankle socks&quot;,
+    &quot;accessories&quot;: [
+      &quot;tortoiseshell claw clip&quot;,
+      &quot;iPhone 15 Pro Max&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing&quot;,
+    &quot;stance&quot;: &quot;slightly angled away from vanity, relaxed weight distribution&quot;,
+    &quot;hands&quot;: &quot;left hand holding iPhone at shoulder height angled slightly down, right hand on countertop edge&quot;,
+    &quot;head_gaze&quot;: &quot;looking at phone screen, playful expression&quot;,
+    &quot;vibe&quot;: &quot;casual playful energy&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;modern bathroom with floating vanity&quot;,
+    &quot;time&quot;: &quot;morning&quot;,
+    &quot;atmosphere&quot;: &quot;clean, bright, casual&quot;,
+    &quot;background&quot;: &quot;white subway tile walls, chrome fixtures, white floating vanity, small succulent in terracotta pot, folded off-white hand towel&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;mirror selfie via bathroom vanity mirror&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;full body&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;warm overhead recessed lighting plus LED vanity strip above mirror&quot;,
+    &quot;effect&quot;: &quot;clean bright fill overall, soft warm accent light on face from vanity strip&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;playful, casual&quot;,
+    &quot;color_palette&quot;: &quot;clean white, dark sage green, warm chrome, off-white linen&quot;,
+    &quot;aesthetic&quot;: &quot;casual athleisure morning routine&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;raw iphone mirror selfie&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark brown&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;half-up with tortoiseshell claw clip, bottom half in soft waves&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;fitness hourglass, ample chest, toned core, wide hips, thick thighs&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, natural texture&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;playful casual, relaxed smirk, one brow subtly raised&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal, natural brows, bare-faced look, soft lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;cropped zip-up hoodie&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark sage green&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;athletic fabric&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;cropped, fitted&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;details&quot;</span></span>: <span class="json-str">&quot;zipper pulled halfway down&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;biker shorts&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark sage green matching set&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;high-waisted, fitted&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;footwear&quot;</span></span>: <span class="json-str">&quot;white no-show ankle socks&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;tortoiseshell claw clip&quot;</span>,
+      <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;slightly angled away from vanity, relaxed weight distribution&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;left hand holding iPhone at shoulder height angled slightly down, right hand on countertop edge&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;looking at phone screen, playful expression&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;casual playful energy&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;modern bathroom with floating vanity&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;morning&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;clean, bright, casual&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;white subway tile walls, chrome fixtures, white floating vanity, small succulent in terracotta pot, folded off-white hand towel&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;mirror selfie via bathroom vanity mirror&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;full body&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;warm overhead recessed lighting plus LED vanity strip above mirror&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;clean bright fill overall, soft warm accent light on face from vanity strip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;playful, casual&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;clean white, dark sage green, warm chrome, off-white linen&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;casual athleisure morning routine&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Variant A: mirror selfie style — casual bathroom mirror shot, athleisure outfit, natural morning setting. grok_interactive post at US evening prime (21:00 UTC). Grok request asks to swap outfit to red — drives visual transformation engagement. Sage green outfit makes the color contrast with hypothetical red version striking.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 4</span> <span class="tag">00:30 UTC</span> <span class="tag tag-en">self_quote_chains</span> <span class="tag tag-medium">medium</span> <span class="tag tag-draft">draft</span> <span class="tag tag-pink">Variant B</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260313_04</div>
+    <div class="post-text">which look tho 🖤</div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic lifestyle photo of a young Japanese woman in her early 20s standing in a bright modern walk-in closet trying on an outfit. She has long jet-black hair styled in a sleek high bun with a few face-framing strands left loose at her temples. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs. Light-medium neutral smooth skin. She wears a fitted sleeveless charcoal grey ribbed midi dress with a slight cowl neckline that drapes softly over her chest, the fabric falling close to her curves down to mid-calf. Minimal thin gold chain anklet on her right ankle. She stands facing a rod of hanging clothes with her body turned three-quarters toward the camera, right arm extended reaching toward the clothes rack and lightly pulling at a hanger with two fingers, left arm hanging naturally at her side. She glances over her left shoulder directly at the camera with a slightly amused look — lips barely parted in a quiet smirk, eyes wide and direct. The closet has clean white painted walls, a double clothing rod filled with neatly organized garments sorted by color, open white shelving on the left side with folded knitwear and stacked shoe boxes, a full-length mirror on the far wall reflecting the back of her outfit, and a plush round cream ottoman in the center of the floor. Soft natural daylight from a frosted glass ceiling panel diffuses evenly throughout the space. Charcoal grey, clean white, muted warm cream, minimal gold color palette. Effortless closet styling aesthetic. Third-person shot at eye-level, three-quarter body framing, vertical portrait composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction</div>
+      <div class="prompt-meta"><span>Tool: higgsfield</span> <span>Aspect: 4:5</span> <span>Camera: Canon EOS R5</span> <span>Lens: 35mm f/1.4</span> <span>Style: lifestyle editorial</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260313_04')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260313_04" data-json="{
+  &quot;tool&quot;: &quot;higgsfield&quot;,
+  &quot;prompt&quot;: &quot;Ultra photorealistic lifestyle photo of a young Japanese woman in her early 20s standing in a bright modern walk-in closet trying on an outfit. She has long jet-black hair styled in a sleek high bun with a few face-framing strands left loose at her temples. Fitness hourglass figure with ample chest, toned core, wide hips, and thick thighs. Light-medium neutral smooth skin. She wears a fitted sleeveless charcoal grey ribbed midi dress with a slight cowl neckline that drapes softly over her chest, the fabric falling close to her curves down to mid-calf. Minimal thin gold chain anklet on her right ankle. She stands facing a rod of hanging clothes with her body turned three-quarters toward the camera, right arm extended reaching toward the clothes rack and lightly pulling at a hanger with two fingers, left arm hanging naturally at her side. She glances over her left shoulder directly at the camera with a slightly amused look — lips barely parted in a quiet smirk, eyes wide and direct. The closet has clean white painted walls, a double clothing rod filled with neatly organized garments sorted by color, open white shelving on the left side with folded knitwear and stacked shoe boxes, a full-length mirror on the far wall reflecting the back of her outfit, and a plush round cream ottoman in the center of the floor. Soft natural daylight from a frosted glass ceiling panel diffuses evenly throughout the space. Charcoal grey, clean white, muted warm cream, minimal gold color palette. Effortless closet styling aesthetic. Third-person shot at eye-level, three-quarter body framing, vertical portrait composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction&quot;,
+  &quot;aspect_ratio&quot;: &quot;4:5&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;Canon EOS R5&quot;,
+    &quot;lens&quot;: &quot;35mm f/1.4&quot;,
+    &quot;style&quot;: &quot;lifestyle editorial&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;jet black&quot;,
+      &quot;style&quot;: &quot;sleek high bun, loose face-framing strands at temples&quot;
+    },
+    &quot;body_type&quot;: &quot;fitness hourglass, ample chest, toned core, wide hips, thick thighs&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth&quot;,
+    &quot;expression&quot;: &quot;quietly amused, lips barely parted in a soft smirk, wide direct eyes&quot;,
+    &quot;makeup&quot;: &quot;minimal natural brows, soft nude lip, clean skin finish&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;sleeveless ribbed midi dress&quot;,
+      &quot;color&quot;: &quot;charcoal grey&quot;,
+      &quot;material&quot;: &quot;ribbed fabric&quot;,
+      &quot;fit&quot;: &quot;fitted, cowl neckline&quot;,
+      &quot;details&quot;: &quot;drapes over chest, falls to mid-calf&quot;
+    },
+    &quot;accessories&quot;: [
+      &quot;thin gold chain anklet on right ankle&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing&quot;,
+    &quot;stance&quot;: &quot;three-quarter toward camera, slight lean toward clothing rack&quot;,
+    &quot;hands&quot;: &quot;right hand lightly pulling at a hanger, left arm hanging naturally at side&quot;,
+    &quot;head_gaze&quot;: &quot;glancing over left shoulder at camera&quot;,
+    &quot;vibe&quot;: &quot;effortless casual styling&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;bright modern walk-in closet&quot;,
+    &quot;time&quot;: &quot;daytime&quot;,
+    &quot;atmosphere&quot;: &quot;clean, organized, aspirational&quot;,
+    &quot;background&quot;: &quot;white walls, double clothing rod with color-sorted garments, open white shelving with knitwear and shoe boxes, full-length mirror reflecting back of outfit, plush cream ottoman&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;third-person&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;three-quarter body&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;soft natural daylight from frosted glass ceiling panel&quot;,
+    &quot;effect&quot;: &quot;even diffused illumination throughout closet, clean soft shadows&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;confident, casual&quot;,
+    &quot;color_palette&quot;: &quot;charcoal grey, clean white, muted warm cream, minimal gold&quot;,
+    &quot;aesthetic&quot;: &quot;effortless closet styling&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;Canon EOS R5&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;35mm f/1.4&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;lifestyle editorial&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;jet black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;sleek high bun, loose face-framing strands at temples&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;fitness hourglass, ample chest, toned core, wide hips, thick thighs&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;quietly amused, lips barely parted in a soft smirk, wide direct eyes&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural brows, soft nude lip, clean skin finish&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;sleeveless ribbed midi dress&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;charcoal grey&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;material&quot;</span></span>: <span class="json-str">&quot;ribbed fabric&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;fitted, cowl neckline&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;details&quot;</span></span>: <span class="json-str">&quot;drapes over chest, falls to mid-calf&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;thin gold chain anklet on right ankle&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;three-quarter toward camera, slight lean toward clothing rack&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;right hand lightly pulling at a hanger, left arm hanging naturally at side&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;glancing over left shoulder at camera&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;effortless casual styling&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;bright modern walk-in closet&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;daytime&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;clean, organized, aspirational&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;white walls, double clothing rod with color-sorted garments, open white shelving with knitwear and shoe boxes, full-length mirror reflecting back of outfit, plush cream ottoman&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;third-person&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;three-quarter body&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;soft natural daylight from frosted glass ceiling panel&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;even diffused illumination throughout closet, clean soft shadows&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;confident, casual&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;charcoal grey, clean white, muted warm cream, minimal gold&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;effortless closet styling&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Variant B: editorial/lifestyle style — walk-in closet setting, no phone in hand, professional lifestyle lighting. self_quote_chains — chain_start. Will be quote-tweeted to an earlier post by Publisher. Short ambiguous question &#x27;which look tho&#x27; invites audience to engage and compare looks.</div>
+  </div></section>
+<section id="reply-templates">
+<h2>Reply Templates</h2>
+<div class="reply-grid">
+  <div class="reply-item">okay this is everything, love this</div>
+  <div class="reply-item">the vibe here is immaculate honestly</div>
+  <div class="reply-item">not me stopping mid-scroll for this 😭</div>
+  <div class="reply-item">this lighting tho... genuinely stunning</div>
+  <div class="reply-item">okay but why does this hit so hard</div>
+  <div class="reply-item">literally obsessed with this aesthetic</div>
+  <div class="reply-item">you have no business looking this good</div>
+  <div class="reply-item">the fit is perfect, love the color choice</div>
+  <div class="reply-item">this is giving everything it was supposed to give</div>
+  <div class="reply-item">can&#x27;t stop looking at this, seriously</div>
+</div>
+</section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-03-13 17:12 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

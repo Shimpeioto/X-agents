@@ -31,8 +31,8 @@ run_phase_a() {
   # --- Test 8: Scout --raw --compact file size ---
   echo "--- Test 8: Scout --raw --compact file size ---"
   python3 scripts/scout.py --dry-run --raw --compact
-  COMPACT_FILE="data/scout_compact_${DATE}.json"
-  RAW_FILE="data/scout_raw_${DATE}.json"
+  COMPACT_FILE="data/scout/scout_compact_${DATE}.json"
+  RAW_FILE="data/scout/scout_raw_${DATE}.json"
 
   if [ ! -f "$COMPACT_FILE" ]; then
     fail 8 "Compact file not created: $COMPACT_FILE"
@@ -69,23 +69,23 @@ run_phase_a() {
 
   python3 scripts/publisher.py --dry-run smart-outbound \
     --account EN \
-    --plan data/test_outbound_plan_rate_limit_EN.json 2>&1 | tee /tmp/test15_output.txt
+    --plan data/misc/test_outbound_plan_rate_limit_EN.json 2>&1 | tee /tmp/test15_output.txt
 
   echo ""
   # Check that rate limits were respected
   FINAL_LIKES=$(python3 -c "
 import json
-d = json.load(open('data/rate_limits_${DATE}.json'))
+d = json.load(open('data/pipeline/rate_limits_${DATE}.json'))
 print(d['EN']['likes']['used'])
 ")
   FINAL_REPLIES=$(python3 -c "
 import json
-d = json.load(open('data/rate_limits_${DATE}.json'))
+d = json.load(open('data/pipeline/rate_limits_${DATE}.json'))
 print(d['EN']['replies']['used'])
 ")
   FINAL_FOLLOWS=$(python3 -c "
 import json
-d = json.load(open('data/rate_limits_${DATE}.json'))
+d = json.load(open('data/pipeline/rate_limits_${DATE}.json'))
 print(d['EN']['follows']['used'])
 ")
 
@@ -119,7 +119,7 @@ print(d['EN']['follows']['used'])
 
   # Reset rate limits for Test 15 verification (don't contaminate other tests)
   # Restore original near-limit state
-  cat > "data/rate_limits_${DATE}.json" << 'RESET_EOF'
+  cat > "data/pipeline/rate_limits_${DATE}.json" << 'RESET_EOF'
 {
   "EN": {
     "likes": {"used": 28, "limit": 30},

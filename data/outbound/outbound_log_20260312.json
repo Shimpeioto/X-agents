@@ -1,0 +1,140 @@
+{
+  "date": "2026-03-12",
+  "actions": [
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@JosephinaM3131",
+      "tweet_id": "2031742045904343127",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:46:11.676881+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow_skipped",
+      "account": "EN",
+      "target": "@JosephinaM3131",
+      "reason": "already_following_verified",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:46:11.704949+09:00"
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2028624501857034601",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:47:38.689189+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2027554360943612398",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:48:19.814797+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@Angelwithcakee",
+      "tweet_id": "2028624501857034601",
+      "reply_text": "@Angelwithcakee everything about this honestly 😭 genuinely cannot fault it",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:49:04.195122+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2031817182217474247",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:50:28.996855+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2031900229327294708",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:51:15.934302+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2031722558836646117",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:52:05.612897+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@yogana_19",
+      "tweet_id": "2031817182217474247",
+      "reply_text": "@yogana_19 okay I said what I said and I'm not taking it back 🔥",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:53:41.050882+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "like",
+      "account": "EN",
+      "target": "@leahyunaxo",
+      "tweet_id": "2031826764788298122",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:55:41.091937+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "reply",
+      "account": "EN",
+      "target": "@leahyunaxo",
+      "tweet_id": "2031826764788298122",
+      "reply_text": "@leahyunaxo this stopped my scroll for a full minute I had to say something",
+      "success": false,
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:57:17.278241+09:00",
+      "dry_run": false
+    },
+    {
+      "type": "follow_skipped",
+      "account": "EN",
+      "target": "@leahyunaxo",
+      "reason": "already_following_verified",
+      "source": "smart_outbound",
+      "timestamp": "2026-03-12T12:57:17.286566+09:00"
+    }
+  ],
+  "failed_replies": [
+    {
+      "target": "@Angelwithcakee",
+      "tweet_id": "2028624501857034601",
+      "tweet_url": "https://x.com/Angelwithcakee/status/2028624501857034601",
+      "reply_text": "everything about this honestly 😭 genuinely cannot fault it",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    },
+    {
+      "target": "@yogana_19",
+      "tweet_id": "2031817182217474247",
+      "tweet_url": "https://x.com/yogana_19/status/2031817182217474247",
+      "reply_text": "okay I said what I said and I'm not taking it back 🔥",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    },
+    {
+      "target": "@leahyunaxo",
+      "tweet_id": "2031826764788298122",
+      "tweet_url": "https://x.com/leahyunaxo/status/2031826764788298122",
+      "reply_text": "this stopped my scroll for a full minute I had to say something",
+      "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+    }
+  ]
+}

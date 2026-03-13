@@ -1,0 +1,13 @@
+{
+  "task_id": "20260311_007",
+  "description": "Regenerate data/content_plan_20260311_EN.json with diversified content. Creator must read data/content_plan_20260309_EN.json first and explicitly avoid repeating the same caption patterns (short question + emoji, X or Y comparisons). Use varied styles: statements, reactions, incomplete thoughts, playful challenges. Read data/strategy_20260311.json for today's strategy. Read config/image_prompt_guide.md for image prompts. After generating, run python3 scripts/validate.py content data/content_plan_20260311_EN.json, then generate HTML report: python3 scripts/generate_html_report.py content-plan data/content_plan_20260311_EN.json and send via python3 scripts/telegram_send.py --document data/content_plan_20260311_EN.html 'Regenerated EN content plan — diversified captions'",
+  "task_type": "pipeline",
+  "agents_planned": [
+    "creator"
+  ],
+  "notes": "Operator flagged that 03/09 and 03/11 posts are 75% identical in text style. Creator MUST diversify: no repeated question+emoji formula, mix caption styles (statements, reactions, incomplete thoughts, challenges), vary emoji usage or skip entirely. Feed previous plan as anti-pattern reference.",
+  "created_at": "2026-03-11T18:12:03.139777+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-11T18:17:45.241044+09:00",
+  "exit_code": 0
+}

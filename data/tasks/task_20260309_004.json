@@ -1,0 +1,15 @@
+{
+  "task_id": "20260309_004",
+  "description": "Run daily pipeline for 2026-03-09. EN account only (JP suspended). Flow: Scout (python3 scripts/scout.py --raw --compact, then analysis) → Strategist (daily strategy) → Creator EN (content plan) → War Room (score drafts) → Generate HTML preview and send via Telegram for human approval. Use corrected account context: @meruru_tcbn has 6 total posts (4 image, 2 quote reposts). Read config/account_status.json for account details.",
+  "task_type": "pipeline",
+  "agents_planned": [
+    "scout",
+    "strategist",
+    "creator"
+  ],
+  "notes": "EN only, JP suspended. Account is @meruru_tcbn (sub-account, main @iammeruru shadowbanned). The agent meeting report was just regenerated with corrected metrics — use that context. Previous pipeline outputs may exist from earlier today, generate fresh ones.",
+  "created_at": "2026-03-09T15:19:40.880106+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-09T15:32:25.061794+09:00",
+  "exit_code": 0
+}

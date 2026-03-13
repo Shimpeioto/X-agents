@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tactical Reset — Immediate Changes (Mar 11) — 2026-03-11</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Tactical Reset — Immediate Changes (Mar 11)</h1>
+  <div class="subtitle">Generated from strategic_review_20260311.json</div>
+  <div class="date">2026-03-11</div>
+</div>
+<nav class="nav">
+  <a href="#type">Type</a>
+  <a href="#task_id">Task Id</a>
+  <a href="#framework">Framework</a>
+  <a href="#scope">Scope</a>
+  <a href="#scout_data_used">Scout Data Used</a>
+  <a href="#sections">Sections</a>
+  <a href="#executive_summary">Executive Summary</a>
+</nav>
+<div class="container">
+<section id="metadata">
+<h2>Report Info</h2>
+<div class="card">
+  <div style="margin: 4px 0"><strong class="text-accent">Date:</strong> <span class="text-muted">2026-03-11</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">Tactical Reset — Immediate Actionable Changes</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Generated At:</strong> <span class="text-muted">2026-03-11T15:55:00+09:00</span></div>
+</div>
+</section>
+<section id="type">
+<h2>Type</h2>
+<p>tactical_strategic_review</p>
+</section>
+<section id="task_id">
+<h2>Task Id</h2>
+<p>20260311_004</p>
+</section>
+<section id="framework">
+<h2>Framework</h2>
+<p>設計 × 心理 × アルゴリズム (Design × Psychology × Algorithm)</p>
+</section>
+<section id="scope">
+<h2>Scope</h2>
+<p>EN account only (@meruru_tcbn) — JP suspended</p>
+</section>
+<section id="scout_data_used">
+<h2>Scout Data Used</h2>
+<p>data/scout_raw_20260311.json (41 competitors, fresh collection)</p>
+</section>
+<section id="sections">
+<h2>Sections</h2>
+<h3>Honest Progress Audit</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">1. Honest Progress Audit — Where We Actually Are</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Overall Verdict:</strong> <span class="text-muted">Still pre-launch. 5 followers after 17 days. But the REAL problem is 2 days without posting (Mar 10-11). We broke momentum right when it was starting.</span></div>
+</div>
+<h4>Current Numbers</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Followers:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Following:</strong> <span class="text-muted">33</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Posts:</strong> <span class="text-muted">20</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Posts With Images On Meruru Tcbn:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Days Since Last Post:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Bio:</strong> <span class="text-muted">22 yo Japanese girl🌙 addicted SNS 📱</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Follower Following Ratio:</strong> <span class="text-muted">5:33 (catastrophic — screams bot)</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Avg Likes Per Post:</strong> <span class="text-muted">1.25</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Engagement Received:</strong> <span class="text-muted">5 likes, 2 RTs, 0 replies, 2 bookmarks across 4 posts</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Impression Data:</strong> <span class="text-muted">Only from old tweets: best was 133 impressions on &#x27;Sleepy&#x27; (3 likes = 2.3% impression ER)</span></div>
+</div>
+<h4>What Actually Happened Since Mar9</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">4 posts published (best day ever). 20 outbound likes, 3 successful replies, 5 follows. First real content day.</div>
+    <div class="label">Mar 9</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">0 posts. 12 outbound likes, 0 successful replies (ALL 4 failed with 403), 1 follow. Outbound only, no content.</div>
+    <div class="label">Mar 10</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">0 posts. No outbound. Complete silence.</div>
+    <div class="label">Mar 11</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">We had ONE good day (Mar 9) then stopped. This is the core problem — inconsistency kills new accounts. The algorithm gave us a tiny test window and we went silent.</div>
+    <div class="label">Verdict</div>
+  </div>
+</div>
+<h4>Outbound Audit</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Total Real Likes:</strong> <span class="text-muted">32</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Real Replies Attempted:</strong> <span class="text-muted">8</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Real Replies Succeeded:</strong> <span class="text-muted">3</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Real Replies Failed:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Reply Failure Rate:</strong> <span class="text-muted">62.5%</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Follows:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Verdict:</strong> <span class="text-muted">Likes work fine. Replies are 100% blocked since Mar 10 (X&#x27;s new-account spam prevention). Follows are HURTING us — each follow worsens the ratio. The 3 successful replies on Mar 9 were the ONLY community touchpoints we&#x27;ve made.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Cost Of Follows:</strong> <span class="text-muted">6 follows added to the already-bad ratio. Net result: profile looks MORE like a bot, not less.</span></div>
+</div>
+<h4>Competitor Context</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">En Market Avg Er:</strong> <span class="text-muted">3.7% (follower-based)</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Our Er:</strong> <span class="text-muted">~0.25 (meaningless at 5 followers, but directionally terrible)</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">What 5 Follower Accounts Should Focus On:</strong> <span class="text-muted">Not engagement rate. Focus on: post volume, profile optimization, image quality, and building any audience at all.</span></div>
+</div>
+<h4>Benchmark Accounts</h4>
+<div class="table-wrap"><table>
+<tr><th>Handle</th><th>Followers</th><th>Posts</th><th>Er</th><th>Frequency</th><th>Bio</th><th>Lesson</th></tr>
+<tr><td>@sessypuuh</td><td>7637</td><td>51</td><td>37.9%</td><td>0.7/day</td><td>(empty)</td><td>Ultra-quality images, minimal posts. Every post is a banger. Quality &gt; quantity at this stage.</td></tr>
+<tr><td>@yuumispm</td><td>12095</td><td>21</td><td>19.6%</td><td>1.1/day</td><td>20yo [link]</td><td>ONLY 21 posts but 12K followers. One viral post (16K likes) changed everything. Quality is the multiplier.</td></tr>
+<tr><td>@Angelwithcakee</td><td>35101</td><td>56</td><td>4.5%</td><td>1.2/day</td><td>Just a blonde with a playful side 😇</td><td>56 posts, 35K followers. 1.2 posts/day. Achievable model for us.</td></tr>
+<tr><td>@imrubyreid</td><td>695458</td><td>20</td><td>1.7%</td><td>2.3/day</td><td>most viral girl on X for a reason 👇</td><td>20 posts, 695K followers. Explosive viral growth from extreme quality.</td></tr>
+</table></div>
+<h3>What Changes Immediately</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">2. What Changes TODAY — Tactical Fixes</span></div>
+</div>
+<h4>Changes</h4>
+<div class="table-wrap"><table>
+<tr><th>Id</th><th>Action</th><th>Priority</th><th>Current</th><th>Problem</th><th>Recommended Bios</th><th>Bio Principles</th><th>Operator Action</th><th>Fix</th><th>Content Suggestions</th><th>Timing</th><th>Target Accounts Today</th><th>Selection Rationale</th></tr>
+<tr><td>FIX-01</td><td>REWRITE BIO NOW</td><td>DO RIGHT NOW</td><td>22 yo Japanese girl🌙 addicted SNS 📱</td><td>Bland, generic, no personality. &#x27;addicted SNS&#x27; is grammatically odd and doesn&#x27;t create curiosity. Compare to competitors: @IsabellaCruz_47 (&#x27;Your favorite Colombian 🇨🇴&#x27;), @katekarsyn (&#x27;i just want to play Fortnite&#x27;), @Angelwithcakee (&#x27;Just a blonde with a playful side 😇&#x27;).</td><td>[&quot;just a girl who looks too good in mirror selfies 🪞&quot;, &quot;your newest obsession maybe 🌙&quot;, &quot;i look bett</td><td>Under 50 chars. ONE personality trait. Casual lowercase. Creates curiosity or mild provocation. Never mention AI. Never list traits (age + nationality + hobby = resume, not personality).</td><td>Pick one of the above or write a variant. Update via X app immediately.</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>FIX-02</td><td>STOP ALL AUTOMATED FOLLOWS IMMEDIATELY</td><td>DO RIGHT NOW</td><td></td><td>Follower:following ratio is 5:33. This is the #1 bot signal on our profile. Every automated follow makes it worse. Top performers: @sessypuuh follows 8, @katekarsyn follows 3, @nene__chandayo follows 0. We follow 33.</td><td></td><td></td><td>Go to X app → Following list → Unfollow everyone except 3-5 accounts you want to keep. Then confirm to Marc that follows are disabled.</td><td>1) Disable follow actions in outbound config. 2) Manually unfollow all accounts except 3-5 that are either real community connections or aspirational peers. Target: following ≤ 5.</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>FIX-03</td><td>POST 3 TIMES TODAY</td><td>DO TODAY</td><td></td><td>2 consecutive days of silence (Mar 10-11). The algorithm penalizes inconsistency, especially for new accounts. Every day without a post is a step backward.</td><td></td><td></td><td>Approve these 3 posts via Telegram. Marc will generate images and publish immediately.</td><td>Generate and post 3 high-quality image posts today at: 18:00 JST, 20:00 JST, 22:00 JST (evening block to catch US morning + JP prime time). Even if times aren&#x27;t perfect, POSTING &gt; perfect timing.</td><td>[{&quot;slot&quot;: 1, &quot;time&quot;: &quot;18:00 JST&quot;, &quot;category&quot;: &quot;engagement_questions&quot;, &quot;caption&quot;: &quot;be honest with me </td><td></td><td></td><td></td></tr>
+<tr><td>FIX-04</td><td>PIN BEST POST</td><td>DO TODAY</td><td></td><td>No pinned post. When someone visits our profile, they see a thin feed of 10 posts. A pinned best post gives visitors the strongest first impression.</td><td></td><td></td><td>Go to https://x.com/meruru_tcbn/status/2031060275047313555 → Pin to profile.</td><td>Pin the post &#x27;Am I your type? 👀&#x27; (tweet ID 2031060275047313555) — it&#x27;s our highest-engagement post with 2 likes, 1 RT, 1 bookmark. Not great, but it&#x27;s the best we have and the caption + image format is strong.</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>FIX-05</td><td>OPERATOR MANUAL ENGAGEMENT — 15 MIN TODAY</td><td>DO TODAY — NON-NEGOTIABLE</td><td></td><td>Zero manual engagement from operator so far. API replies are 100% blocked. The ONLY way to build community presence right now is manual engagement from phone/browser. This was declared non-negotiable on Mar 10 and still hasn&#x27;t happened.</td><td></td><td></td><td>Open X app. Search for recent posts from: @sessypuuh, @Angelwithcakee, @yogana_19, @HannaJonso, @baharaykin. Like their posts. Reply with genuine comments about specific details in their images. Check our own posts for any engagement and respond immediately.</td><td>Spend 15 minutes on X from phone. Like 15-20 posts from AI beauty accounts. Reply manually to 3-5 posts (bypasses API restriction). Reply to any engagement on our own posts. Like posts from accounts we&#x27;ve followed.</td><td></td><td>Between 18:00-20:00 JST today.</td><td></td><td></td></tr>
+<tr><td>FIX-06</td><td>OUTBOUND: LIKES ONLY, NO FOLLOWS, NO API REPLIES</td><td>EFFECTIVE IMMEDIATELY</td><td></td><td>Automated follows worsen ratio. API replies fail 100%. Only likes reliably work and create notifications that might draw profile visits.</td><td></td><td></td><td></td><td>Outbound strategy: 25-30 likes/day on target accounts. ZERO follows. ZERO API replies. All reply engagement via operator manual only.</td><td></td><td></td><td>[&quot;@leahyunaxo&quot;, &quot;@yuumi005&quot;, &quot;@lucidevlinxyz&quot;, &quot;@marylivbrown&quot;]</td><td>Fresh targets not engaged in last 3 days. Mix of mid-tier (13K-81K) EN accounts with clean timelines and high engagement. Likes on their posts create notifications that might lead to profile visits.</td></tr>
+</table></div>
+<h3>Framework Analysis</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">3. 設計 × 心理 × アルゴリズム — Updated Scores</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Overall:</strong> <span class="text-muted">Design=5, Psychology=3, Algorithm=2. Product = 5×3×2 = 30 out of 1000. Previous was 4×3×2=24. Marginal improvement from better captions, but still fundamentally broken.</span></div>
+</div>
+<h4>Design</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Score:</strong> <span class="text-muted">5/10</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">What Works:</strong> <span class="text-muted">Short captions, zero hashtags, content pillar categories all correct. Image prompts are detailed and well-structured.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Immediate Fixes:</strong> <span class="text-muted">Bio rewrite (FIX-01), unfollow cleanup (FIX-02), pin best post (FIX-04). These three take 10 minutes and significantly improve profile conversion.</span></div>
+</div>
+<h4>What Doesnt</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">Bio is generic — fails the &#x27;3-second profile test&#x27;</li>
+  <li style="margin: 4px 0">No pinned post — wasted profile real estate</li>
+  <li style="margin: 4px 0">Following 33 — profile screams bot/desperate</li>
+  <li style="margin: 4px 0">No banner image optimization</li>
+  <li style="margin: 4px 0">Posting at wrong times (dead zones)</li>
+  <li style="margin: 4px 0">Image quality unknown — no side-by-side comparison with competitors done yet</li>
+</ul>
+<h4>Psychology</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Score:</strong> <span class="text-muted">3/10</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">What Works:</strong> <span class="text-muted">Provocative question format (&#x27;Am I your type?&#x27;) outperformed other styles. Shows the psychology lever IS there.</span></div>
+</div>
+<h4>What Doesnt</h4>
+<div class="insight">Captions are hooks that hook into nothing — no character depth yet</div>
+<div class="insight">Zero dwell time optimization — single image + 5 words = scroll past in 1 second</div>
+<div class="insight">Outbound replies are generic bot-sounding templates (&#x27;genuinely stunning work&#x27;)</div>
+<div class="insight">No emotional arc between posts — each post is disconnected</div>
+<h4>Tactical Fixes Skip Persona</h4>
+<div class="insight">Use dwell-time captions: &#x27;be honest with me rn&#x27; forces mental response (3+ seconds to formulate answer)</div>
+<div class="insight">Try multi-image posts: 2-4 images per post = swipe dwell time</div>
+<div class="insight">Make Grok prompts entertaining: &#x27;.@grok turn me into a 90s anime character&#x27; &gt; &#x27;.@grok put me in a bikini&#x27; (curiosity gap)</div>
+<div class="insight">Every caption should force a mental pause, not just announce the image</div>
+<h4>Algorithm</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Score:</strong> <span class="text-muted">2/10</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">What Works:</strong> <span class="text-muted">Posts are getting SOME impressions (best was 133 on &#x27;Sleepy&#x27;). The algorithm IS testing us — we&#x27;re just failing the test.</span></div>
+</div>
+<h4>What Doesnt</h4>
+<div class="insight">Zero first-30-minute engagement — algorithm test fails immediately every time</div>
+<div class="insight">Posting at dead times — content dies before anyone can see it</div>
+<div class="insight">2-day silence kills whatever algorithmic trust we built on Mar 9</div>
+<div class="insight">Follower:following ratio triggers spam detection heuristics</div>
+<div class="insight">Only 20 posts in feed — too thin for algorithmic categorization</div>
+<h4>Immediate Fixes</h4>
+<div class="insight">Post consistently — NEVER miss a day. This is the single biggest algorithm factor for new accounts.</div>
+<div class="insight">Post at 12:00, 18:00, 20:00 JST — overlap with JP prime time + US morning/afternoon</div>
+<div class="insight">Operator seeds every post with a like within 10 minutes — gives algorithm first signal</div>
+<div class="insight">Fix follower:following ratio — unfollow 28 accounts TODAY</div>
+<h3>Profile Bio Rewrite</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">4. Profile Bio Rewrite — @meruru_tcbn</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Current Bio:</strong> <span class="text-muted">22 yo Japanese girl🌙 addicted SNS 📱</span></div>
+</div>
+<h4>Problems</h4>
+<div class="insight">Lists traits (age + nationality + hobby) — reads like a dating profile, not a personality</div>
+<div class="insight">&#x27;addicted SNS&#x27; is grammatically awkward and not compelling</div>
+<div class="insight">No curiosity hook — nothing makes you think &#x27;I need to see more&#x27;</div>
+<div class="insight">Too generic — could be any account</div>
+<h4>Competitor Bio Patterns</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">@imrubyreid: &#x27;most viral girl on X for a reason 👇&#x27; — bold claim that creates curiosity</div>
+    <div class="label">Confident Provocation</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">@katekarsyn: &#x27;i just want to play Fortnite&#x27; — relatable, specific, memorable</div>
+    <div class="label">Personality With Hobby</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">@Angelwithcakee: &#x27;Just a blonde with a playful side 😇&#x27; — personality + intrigue</div>
+    <div class="label">Playful Identity</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">@IsabellaCruz_47: &#x27;Your favorite Colombian 🇨🇴&#x27; — bold, warm, identity</div>
+    <div class="label">National Identity</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">@sessypuuh: (empty bio, 7.6K followers) — lets images speak</div>
+    <div class="label">Minimal</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">@lucidevlinxyz: &#x27;filipina 𓆩ꨄ︎𓆪 i just wanna watch anime and play val&#x27; — interests + casual</div>
+    <div class="label">Relatable Casual</div>
+  </div>
+</div>
+<h4>Recommended Options</h4>
+<div class="table-wrap"><table>
+<tr><th>Bio</th><th>Why</th><th>Style</th></tr>
+<tr><td>just a girl who looks too good in mirror selfies 🪞</td><td>Self-aware confidence. References our actual content style (mirror selfies). Playful tone. 52 chars.</td><td>confident_provocation</td></tr>
+<tr><td>your newest obsession maybe 🌙</td><td>Bold, short, creates intrigue. Keeps the moon emoji from current brand. 30 chars.</td><td>confident_provocation</td></tr>
+<tr><td>i look better in person trust me</td><td>Playful false modesty. Creates curiosity. Casual lowercase. 33 chars. No emoji.</td><td>playful_identity</td></tr>
+<tr><td>tokyo girl ☕ addicted to mirror selfies</td><td>Location + specific interest. More specific than current bio. 40 chars.</td><td>personality_with_hobby</td></tr>
+</table></div>
+<h4>Dont Include</h4>
+<div class="insight">age (listing age is resume-style)</div>
+<div class="insight">AI/art/generated (never reveal)</div>
+<div class="insight">multiple emoji strings (too try-hard)</div>
+<div class="insight">links (not until we have exclusive content)</div>
+<h3>Content Volume Rampup</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">5. Content Volume Ramp-Up Plan</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Foundation Threshold:</strong> <span class="text-muted">30-50 posts with images. Currently at ~4 image posts. We need 26-46 more.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Image Pipeline:</strong> <span class="text-muted">Need to batch-generate images. Sunday sprint: generate 30+ images, curate to best 20. Maintain a 5-day image buffer. Don&#x27;t let image generation be a bottleneck.</span></div>
+</div>
+<h4>Current State</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">20</div>
+    <div class="label">Total Posts</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">~4 posts with images</div>
+    <div class="label">Image Posts On Meruru Tcbn</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">0.8 posts/day over 5 active days (far below target of 3-4)</div>
+    <div class="label">Average Per Day</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">Mar 9: 4 posts (our only day at target)</div>
+    <div class="label">Best Day</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">2</div>
+    <div class="label">Consecutive Zero Days</div>
+  </div>
+</div>
+<h4>Ramp Schedule</h4>
+<div class="table-wrap"><table>
+<tr><th>Period</th><th>Posts</th><th>Times</th><th>Note</th><th>Posts Per Day</th></tr>
+<tr><td>Mar 11 (TODAY)</td><td>3</td><td>[&quot;18:00 JST&quot;, &quot;20:00 JST&quot;, &quot;22:00 JST&quot;]</td><td>Recovery day. Get back on track. Even late-day posting is better than silence.</td><td></td></tr>
+<tr><td>Mar 12-14</td><td></td><td>[&quot;12:00 JST&quot;, &quot;18:00 JST&quot;, &quot;20:00 JST&quot;]</td><td>Establish 3/day baseline. Focus on image quality over everything. Every post must have a high-quality Higgsfield image.</td><td>3</td></tr>
+<tr><td>Mar 15-18</td><td></td><td>[&quot;12:00 JST&quot;, &quot;15:00 JST&quot;, &quot;18:00 JST&quot;, &quot;21:00 JST&quot;]</td><td>Scale to 4/day. Should hit 30+ image posts by Mar 18.</td><td>4</td></tr>
+<tr><td>Mar 19+</td><td></td><td></td><td>Maintain cadence. Never drop below 3/day. Quality &gt; quantity if forced to choose.</td><td>3-4 (maintain)</td></tr>
+</table></div>
+<h4>Projected Totals</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">~20 + 12 = 32 total posts (including today&#x27;s 3 + 3/day for 3 more days)</div>
+    <div class="label">By Mar 14</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">~32 + 16 = 48 total posts</div>
+    <div class="label">By Mar 18</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">March 14-15 (crossing 30 posts)</div>
+    <div class="label">Foundation Threshold Date</div>
+  </div>
+</div>
+<h4>Content Mix Per Day</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Note:</strong> <span class="text-muted">Skip self_quote_chains until we have 30+ posts. Premature at current volume.</span></div>
+</div>
+<h4>3 Post Day</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">1</div>
+    <div class="label">Engagement Questions</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">1</div>
+    <div class="label">Image Showcase</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">1</div>
+    <div class="label">Grok Interactive</div>
+  </div>
+</div>
+<h4>4 Post Day</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">2</div>
+    <div class="label">Engagement Questions</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">1</div>
+    <div class="label">Image Showcase</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">1</div>
+    <div class="label">Grok Interactive</div>
+  </div>
+</div>
+<h3>Outbound Quality Improvement</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">6. Outbound Quality Improvement</span></div>
+</div>
+<h4>Current Problems</h4>
+<div class="insight">Reply templates are generic: &#x27;genuinely stunning work&#x27;, &#x27;the lighting in this is actually insane&#x27; — these sound like bot comments</div>
+<div class="insight">API replies are 100% blocked since Mar 10 — the mechanism is broken</div>
+<div class="insight">Automated follows are worsening our profile ratio</div>
+<div class="insight">No manual engagement from operator — the only working reply channel</div>
+<h4>New Outbound Strategy</h4>
+<h4>Automated</h4>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">25-30/day on target accounts. This works and creates profile-visit notifications.</div>
+    <div class="label">Likes</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">ZERO until follower:following ratio exceeds 3:1 (need 100+ followers before resuming at 2/day)</div>
+    <div class="label">Follows</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">ZERO via API until restriction lifts. All replies via operator manual.</div>
+    <div class="label">Replies</div>
+  </div>
+</div>
+<h4>Manual Operator</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Daily Time:</strong> <span class="text-muted">15 minutes, split into two 7-min sessions at 12:15 and 18:15 JST</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Session 1:</strong> <span class="text-muted">Like 10 posts from target accounts. Reply to 2-3 with specific comments.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Session 2:</strong> <span class="text-muted">Like 5-10 posts. Reply to 1-2. Check our own posts for any engagement and respond.</span></div>
+</div>
+<h4>Reply Quality Rules</h4>
+<div class="insight">NEVER use generic compliments (&#x27;stunning&#x27;, &#x27;insane&#x27;, &#x27;fire&#x27;)</div>
+<div class="insight">Reference ONE specific thing in the image: the outfit, the setting, the lighting angle, the color palette</div>
+<div class="insight">Ask a question about the specific content: &#x27;where is this?&#x27;, &#x27;what filter gives that warm tone?&#x27;</div>
+<div class="insight">Keep it 1 sentence, casual, lowercase</div>
+<h4>Example Good Replies</h4>
+<div class="insight">the way the sunset hits the earrings in this one &gt;&gt;</div>
+<div class="insight">okay but that mirror angle is actually genius</div>
+<div class="insight">going from white to red in the last two posts was a power move</div>
+<div class="insight">wait is this the same rooftop from last week? the light is completely different</div>
+<h4>Example Bad Replies</h4>
+<div class="insight">genuinely stunning work (generic)</div>
+<div class="insight">the lighting in this is actually insane (could apply to anything)</div>
+<div class="insight">wait this is actually stunning (empty compliment)</div>
+<div class="insight">this cosplay is next level honestly (vague)</div>
+<h4>Target Rotation</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Principle:</strong> <span class="text-muted">Rotate through all 26 EN competitors over 7 days. Never engage the same account 2 days in a row. Mix large (&gt;50K) and small (&lt;20K) accounts.</span></div>
+</div>
+<h4>Today</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">@leahyunaxo</li>
+  <li style="margin: 4px 0">@yuumi005</li>
+  <li style="margin: 4px 0">@lucidevlinxyz</li>
+  <li style="margin: 4px 0">@marylivbrown</li>
+</ul>
+<h4>Tomorrow</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">@katekarsyn</li>
+  <li style="margin: 4px 0">@yogana_19</li>
+  <li style="margin: 4px 0">@baharaykin</li>
+  <li style="margin: 4px 0">@iiCoraMaay</li>
+</ul>
+<h4>Day 3</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">@Angelwithcakee</li>
+  <li style="margin: 4px 0">@HannaJonso</li>
+  <li style="margin: 4px 0">@IsabellaCruz_47</li>
+  <li style="margin: 4px 0">@tanarainw</li>
+</ul>
+<h3>Posting Strategy Dwell Time</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">7. Posting Strategy — Dwell Time Optimization</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Why Dwell Time Matters:</strong> <span class="text-muted">X&#x27;s algorithm heavily weights dwell time (time spent looking at a post). Our current posts are consumed in &lt;2 seconds: single image + 5-word caption = scroll past. We need posts that make people STOP.</span></div>
+</div>
+<h4>Current Posting Times</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Problem:</strong> <span class="text-muted">3 of 4 posts in dead zones. Zero posts in the 12-14h or 17-21h JST windows where JP users and US users overlap.</span></div>
+</div>
+<h4>Mar 9</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">22:31 JST (13:31 UTC)</li>
+  <li style="margin: 4px 0">02:30 JST (17:30 UTC)</li>
+  <li style="margin: 4px 0">06:30 JST (21:30 UTC)</li>
+  <li style="margin: 4px 0">09:30 JST (00:30 UTC)</li>
+</ul>
+<h4>New Posting Times</h4>
+<div class="table-wrap"><table>
+<tr><th>Slot</th><th>Time</th><th>Audience</th><th>Category</th><th>Note</th></tr>
+<tr><td>1</td><td>12:00 JST (03:00 UTC)</td><td>JP lunch break + EU evening</td><td>engagement_questions</td><td></td></tr>
+<tr><td>2</td><td>18:00 JST (09:00 UTC)</td><td>JP evening + US East morning</td><td>image_showcase or grok_interactive</td><td></td></tr>
+<tr><td>3</td><td>20:00 JST (11:00 UTC)</td><td>JP prime time + US late morning</td><td>engagement_questions or image_showcase</td><td></td></tr>
+<tr><td>4</td><td>15:00 JST (06:00 UTC)</td><td>JP afternoon + US West late night</td><td>grok_interactive</td><td>Add this slot only at 4/day cadence (from Mar 15)</td></tr>
+</table></div>
+<h4>Dwell Time Tactics</h4>
+<div class="table-wrap"><table>
+<tr><th>Tactic</th><th>Examples</th><th>Why</th><th>Priority</th><th>Implementation</th><th>Target</th><th>Good Prompts</th><th>Bad Prompts</th></tr>
+<tr><td>Curiosity-gap captions</td><td>[&quot;be honest with me rn 👀&quot;, &quot;deleted this twice but whatever&quot;, &quot;you weren&#x27;t supposed to see this one&quot;</td><td>Forces mental formulation of a response. 3-5 seconds of dwell time just reading and thinking.</td><td>Use on EVERY engagement_questions post</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Multi-image posts</td><td></td><td>Each swipe = additional dwell time. Algorithm sees extended interaction.</td><td></td><td>Post 2-4 images in one tweet. Different angles, different outfits, or a mini photo-story.</td><td>At least 1 multi-image post per day starting Mar 12</td><td></td><td></td></tr>
+<tr><td>Grok entertainment prompts</td><td></td><td>Creative Grok requests create a &#x27;what will happen?&#x27; curiosity gap. Boring requests don&#x27;t.</td><td>1 creative Grok post per day</td><td></td><td></td><td>[&quot;.@grok turn me into a 90s anime character&quot;, &quot;.@grok put me in a studio ghibli movie&quot;, &quot;.@grok make</td><td>[&quot;.@grok remove white&quot;, &quot;.@grok put me in a bikini&quot;]</td></tr>
+<tr><td>Image detail reward</td><td></td><td>Pinch-to-zoom = high dwell time signal to algorithm.</td><td>Include in every image prompt — add specific detail-rich elements</td><td>Images should have at least ONE element worth zooming in on: jewelry detail, reflection, background object, texture in clothing.</td><td></td><td></td><td></td></tr>
+</table></div>
+<h3>Updated Daily Action Checklist</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">8. Updated Daily Action Checklist</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Operator Daily Total:</strong> <span class="text-muted">~22 minutes (5 review + 1+7+1+7+1 engagement). This is the minimum viable investment.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Automated Daily Total:</strong> <span class="text-muted">3-4 posts published, 25 outbound likes, content plan generation, reporting</span></div>
+</div>
+<h4>Daily Routine</h4>
+<div class="table-wrap"><table>
+<tr><th>Time</th><th>Action</th><th>Owner</th><th>Duration</th></tr>
+<tr><td>09:00 JST</td><td>Operator reviews content plan in Telegram</td><td>operator</td><td>5 min</td></tr>
+<tr><td>09:30 JST</td><td>Marc triggers publishing for approved posts</td><td>marc</td><td>auto</td></tr>
+<tr><td>12:00 JST</td><td>Post #1 goes live (engagement_questions)</td><td>auto</td><td></td></tr>
+<tr><td>12:05 JST</td><td>Operator likes the post (SEED ENGAGEMENT)</td><td>operator</td><td>1 min</td></tr>
+<tr><td>12:15 JST</td><td>Operator manual engagement session #1 — like 10 posts, reply to 2-3</td><td>operator</td><td>7 min</td></tr>
+<tr><td>15:00 JST</td><td>Post #2 goes live (grok_interactive) — only on 4/day days</td><td>auto</td><td></td></tr>
+<tr><td>18:00 JST</td><td>Post #3 goes live (image_showcase or grok_interactive)</td><td>auto</td><td></td></tr>
+<tr><td>18:05 JST</td><td>Operator likes the post (SEED ENGAGEMENT)</td><td>operator</td><td>1 min</td></tr>
+<tr><td>18:15 JST</td><td>Operator manual engagement session #2 — like 5-10 posts, reply to 1-2</td><td>operator</td><td>7 min</td></tr>
+<tr><td>20:00 JST</td><td>Post #4 goes live (engagement_questions)</td><td>auto</td><td></td></tr>
+<tr><td>20:05 JST</td><td>Operator likes the post (SEED ENGAGEMENT)</td><td>operator</td><td>1 min</td></tr>
+<tr><td>21:00 JST</td><td>Automated outbound — 25 likes on target accounts (NO follows, NO replies)</td><td>auto</td><td></td></tr>
+</table></div>
+<h3>Weekly Targets</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">9. Weekly Targets</span></div>
+</div>
+<h4>Week Of Mar 11 17</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Target Name:</strong> <span class="text-muted">Recovery &amp; Foundation Sprint</span></div>
+</div>
+<h4>Targets</h4>
+<div class="table-wrap"><table>
+<tr><th>Metric</th><th>Target</th><th>Current</th><th>Note</th></tr>
+<tr><td>Posts published</td><td>21 (3/day × 7 days)</td><td>20</td><td>Double our total post count in one week</td></tr>
+<tr><td>Followers</td><td>15+</td><td>5</td><td>Triple from current. Aggressive but achievable with profile fix + consistent content</td></tr>
+<tr><td>Following</td><td>≤5</td><td>33</td><td>Unfollow 28 accounts TODAY</td></tr>
+<tr><td>Avg likes per post</td><td>3+</td><td>1.25</td><td>Better timing + better images + seed engagement should achieve this</td></tr>
+<tr><td>Days with 3+ posts</td><td>7/7</td><td>1/7 (only Mar 9 had 4)</td><td>Zero tolerance for zero-post days</td></tr>
+<tr><td>Operator manual engagement</td><td>7/7 days</td><td>0/7</td><td>15 min/day. Non-negotiable.</td></tr>
+<tr><td>Profile optimized</td><td>Yes</td><td>No</td><td>Bio rewrite, pin post, unfollow cleanup — all by end of day today</td></tr>
+<tr><td>Bio rewritten</td><td>Yes</td><td>No</td><td></td></tr>
+<tr><td>Best post likes</td><td>5+</td><td>2</td><td>At least one post breaking through the noise</td></tr>
+</table></div>
+<h4>Week Of Mar 18 24</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Target Name:</strong> <span class="text-muted">Consistency &amp; Quality Escalation</span></div>
+</div>
+<h4>Targets</h4>
+<div class="table-wrap"><table>
+<tr><th>Metric</th><th>Target</th><th>Note</th></tr>
+<tr><td>Total posts</td><td>50+</td><td>Foundation phase complete</td></tr>
+<tr><td>Followers</td><td>30-50</td><td>Expect acceleration once profile is optimized and posting is consistent</td></tr>
+<tr><td>Posts per day</td><td>4/day</td><td>Scale from 3 to 4</td></tr>
+<tr><td>Multi-image posts</td><td>At least 3 this week</td><td>Test dwell time impact</td></tr>
+<tr><td>Creative Grok posts</td><td>At least 5 this week</td><td>Test curiosity-gap prompts</td></tr>
+<tr><td>Best post likes</td><td>10+</td><td>One breakout post</td></tr>
+<tr><td>API reply restriction</td><td>Monitor — may start lifting</td><td>Check weekly by attempting one test reply</td></tr>
+</table></div>
+<h3>Risks And Dependencies</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Title:</strong> <span class="text-muted">10. Risks &amp; Dependencies</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Critical Dependency:</strong> <span class="text-muted">Operator must commit 20 min/day. Without manual engagement, nothing else matters at this stage. The API cannot do what human engagement does for a 5-follower account.</span></div>
+</div>
+<h4>Risks</h4>
+<div class="table-wrap"><table>
+<tr><th>Risk</th><th>Impact</th><th>Status</th><th>Mitigation</th></tr>
+<tr><td>Image quality may not be competitive</td><td>HIGH</td><td>UNKNOWN — no side-by-side comparison done yet</td><td>Do a side-by-side comparison of our Higgsfield images vs top competitor images this week. If our quality is significantly lower, all other optimizations are moot.</td></tr>
+<tr><td>Operator time commitment</td><td>CRITICAL</td><td>0/7 days of manual engagement so far</td><td>Set phone alarms for 12:15 and 18:15 JST. Make it a habit. 15 min total.</td></tr>
+<tr><td>Account still API-reply-restricted</td><td>MEDIUM</td><td>100% reply failure since Mar 10</td><td>Skip API replies entirely. Manual replies only. Re-test weekly.</td></tr>
+<tr><td>Inconsistent posting (another gap)</td><td>HIGH</td><td>Already happened twice (Feb 25-Mar 6, Mar 10-11)</td><td>Pre-generate a 5-day image buffer. Pre-approve content plans. Auto-scheduling if possible. Make posting zero-friction.</td></tr>
+</table></div>
+</section>
+<section id="executive_summary">
+<h2>Executive Summary</h2>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">One Liner:</strong> <span class="text-muted">5 followers after 17 days. We posted content for 1 day, went silent for 2. Profile signals &#x27;bot&#x27;. Fix today: rewrite bio, unfollow 28 accounts, post 3 times, operator spends 15 min engaging manually.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">This Week Goal:</strong> <span class="text-muted">21 new posts, 15+ followers, 3/day every day, optimized profile, operator engaging daily</span></div>
+</div>
+<h3>Framework Scores</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">5</div>
+    <div class="label">Design</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">3</div>
+    <div class="label">Psychology</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">2</div>
+    <div class="label">Algorithm</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">30</div>
+    <div class="label">Product</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">1000</div>
+    <div class="label">Max</div>
+  </div>
+</div>
+<h3>Top 3 Immediate Actions</h3>
+<div class="insight">1. Profile fix: Bio rewrite + unfollow to ≤5 + pin best post (10 minutes)</div>
+<div class="insight">2. Post 3 times today at 18:00, 20:00, 22:00 JST (break the silence)</div>
+<div class="insight">3. Operator manual engagement: 15 min on X — like 15 posts, reply to 3 (the ONLY working reply channel)</div>
+</section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-03-11 15:49 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

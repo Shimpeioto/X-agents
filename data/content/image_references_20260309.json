@@ -1,0 +1,16 @@
+{
+  "date": "2026-03-09",
+  "generated_at": "2026-03-09T15:24:59.808794+09:00",
+  "scout_report_used": "data/scout_report_20260309.json",
+  "images_analyzed": 0,
+  "visual_patterns": {
+    "dominant_scene_types": [],
+    "color_palette_trends": [],
+    "lighting_trends": "No successful analyses to derive patterns",
+    "pose_patterns": "No successful analyses to derive patterns",
+    "outfit_trends": "No successful analyses to derive patterns",
+    "style_summary": "No competitor images could be analyzed in this run.",
+    "key_insight": "No data available"
+  },
+  "references": []
+}

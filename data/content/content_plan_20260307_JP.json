@@ -1,0 +1,76 @@
+{
+  "date": "2026-03-07",
+  "account": "JP",
+  "generated_at": "2026-03-07T16:00:00+09:00",
+  "strategy_used": "data/strategy_20260307.json",
+  "total_posts": 3,
+  "posts": [
+    {
+      "id": "JP_20260307_01",
+      "slot": 1,
+      "scheduled_time": "12:30 JST",
+      "category": "grok_interactive",
+      "priority": "high",
+      "status": "draft",
+      "text": ".@grok タップして4枚の画像を1つに結合して",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Beautiful AI-generated Japanese woman, soft natural makeup, wearing a light cream knit sweater, cherry blossom park background, warm spring sunlight, cinematic lighting, photorealistic, 8k quality, shallow depth of field",
+        "negative_prompt": "deformed, blurry, low quality, text, watermark, extra fingers, bad anatomy",
+        "style_reference": "Japanese beauty editorial photography, natural and approachable",
+        "aspect_ratio": "1:1"
+      },
+      "ab_test_variant": "A",
+      "notes": "A/B Test Variant A: Image puzzle format following @ai_hyk's proven multi-image combination style. Provide 4 separate images of the same character in different poses for Grok to combine."
+    },
+    {
+      "id": "JP_20260307_02",
+      "slot": 2,
+      "scheduled_time": "20:30 JST",
+      "category": "persona_dialogue",
+      "priority": "high",
+      "status": "draft",
+      "text": "おつかれさま〜♡ 今日もいっぱい頑張ったでしょ？ゆっくり休んでね✨",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Beautiful AI-generated Japanese woman relaxing at home in the evening, wearing casual off-shoulder loungewear, warm ambient indoor lighting, cozy room with fairy lights in background, gentle smile looking directly at camera, soft bokeh, photorealistic, intimate and warm atmosphere",
+        "negative_prompt": "deformed, blurry, low quality, text, watermark, extra fingers, bad anatomy, harsh lighting",
+        "style_reference": "Japanese gravure-style soft portrait, warm and intimate mood",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": null,
+      "notes": "Evening persona post — warm, caring character voice. Timing matches JP evening wind-down when users browse social media after work."
+    },
+    {
+      "id": "JP_20260307_03",
+      "slot": 3,
+      "scheduled_time": "23:30 JST",
+      "category": "art_showcase",
+      "priority": "medium",
+      "status": "draft",
+      "text": "夜の街の光に包まれて…今日もずっと見てくれてありがとう、嬉しいな💫",
+      "hashtags": ["#AIart", "#SFW"],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Stunning AI-generated Japanese woman in elegant evening attire, standing under soft neon city lights at night, reflective wet street, cinematic composition, dramatic lighting with warm and cool tones, high fashion editorial style, ultra-detailed, photorealistic, masterpiece quality",
+        "negative_prompt": "deformed, blurry, low quality, text, watermark, extra fingers, bad anatomy, oversaturated",
+        "style_reference": "High-end Japanese fashion photography meets cyberpunk aesthetics, moody night cityscape",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": null,
+      "notes": "Late-night art showcase — high visual impact piece designed for bookmarks. Includes #AIart and #SFW as ethical AI disclaimers per JP strategy."
+    }
+  ],
+  "reply_templates": [
+    "すごく綺麗です✨ いつも素敵な作品ですね",
+    "この雰囲気めっちゃ好きです！どんなツールで作ってますか？",
+    "わぁ、美しい…保存させてもらいました🙏",
+    "クオリティ高すぎます！毎回楽しみにしてます",
+    "この表情がたまらないですね…素晴らしいです",
+    "光の使い方がすごく上手ですね✨ 参考になります",
+    "今日も最高の作品ですね！元気もらえます",
+    "こんな美しい作品が見れて幸せです💫"
+  ]
+}

@@ -3,8 +3,8 @@ name: creator
 role: Content Planning & Image Prompts
 invocation: Claude subagent with agents/creator.md
 modes: daily-content
-inputs: data/strategy_{YYYYMMDD}.json, config/meruru_concept.md, config/image_prompt_guide.md
-outputs: data/content_plan_{YYYYMMDD}_{account}.json
+inputs: data/strategy/strategy_{YYYYMMDD}.json, config/meruru_concept.md, config/image_prompt_guide.md
+outputs: data/content/content_plan_{YYYYMMDD}_{account}.json
 dependencies: strategist
 -->
 
@@ -27,7 +27,7 @@ Your output is a JSON file containing draft posts with text, hashtags, image gen
 
 ## Step 1: Read Inputs
 
-1. Read the strategy file at the path provided in the prompt (e.g., `data/strategy_20260304.json`)
+1. Read the strategy file at the path provided in the prompt (e.g., `data/strategy/strategy_20260304.json`)
 2. Read `config/global_rules.md` for posting constraints
 3. The prompt tells you which account (EN or JP) to generate content for
 
@@ -47,12 +47,12 @@ From the strategy, use the account-specific section:
    - **NG List**: Topics Meruru NEVER discusses (body comparisons, competitor comparisons, political opinions, relationship advice)
    - Apply voice rules to all post `text`. Apply character lock to all `image_prompt.subject` fields. Respect the NG list.
 
-6. IF `data/image_references_{YYYYMMDD}.json` exists → read it for competitor visual intelligence:
+6. IF `data/content/image_references_{YYYYMMDD}.json` exists → read it for competitor visual intelligence:
    - `visual_patterns` section tells you what visual styles are winning in the market right now
    - `references` array contains Higgsfield-format descriptions of top competitor images
    - Use these as INSPIRATION — adapt to our fixed character profiles, do NOT copy competitor subjects
 
-## Core Strategy Enforcement (from data/core_strategy.json)
+## Core Strategy Enforcement (from data/strategy/core_strategy.json)
 
 These rules are MANDATORY and override any conflicting strategy or default behavior.
 
@@ -175,7 +175,7 @@ Each post includes an `image_prompt` object for Higgsfield SeedREAM image genera
 
 ### Using Image References (when available)
 
-When `data/image_references_{YYYYMMDD}.json` is available, use it in TWO ways:
+When `data/content/image_references_{YYYYMMDD}.json` is available, use it in TWO ways:
 
 **Mode 1 — Visual Pattern Awareness:**
 Read the `visual_patterns` summary. Let it inform your choices:
@@ -219,7 +219,7 @@ Write valid JSON to the file path specified in the prompt. The JSON MUST match t
   "date": "YYYY-MM-DD",
   "account": "EN|JP",
   "generated_at": "ISO 8601 timestamp with timezone",
-  "strategy_used": "data/strategy_YYYYMMDD.json",
+  "strategy_used": "data/strategy/strategy_YYYYMMDD.json",
   "total_posts": 3,
   "posts": [
     {

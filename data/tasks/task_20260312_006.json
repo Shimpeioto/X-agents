@@ -1,0 +1,11 @@
+{
+  "task_id": "20260312_006",
+  "description": "Read data/content_plan_20260312_EN.json and present the content plan to the operator in a clear, scannable format. Show each post slot with: scheduled time, category, post text, hashtags, and image prompt summary. Also show reply templates. Then generate HTML report using: python3 scripts/generate_html_report.py generic data/content_plan_20260312_EN.json --title 'EN Content Plan 2026-03-12'. Send via: python3 scripts/telegram_send.py --document <html_path> 'EN Content Plan — 2026-03-12'",
+  "task_type": "report",
+  "agents_planned": [],
+  "notes": "Operator wants to review today's EN content plan before approving posts. Present all post drafts clearly.",
+  "created_at": "2026-03-12T19:58:33.413951+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-12T19:59:12.403252+09:00",
+  "exit_code": 0
+}

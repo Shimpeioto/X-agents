@@ -1,0 +1,14 @@
+{
+  "task_id": "20260307_003",
+  "description": "Fix agent instructions to enforce core strategy rules, then regenerate content plans.\n\n1. Read data/core_strategy.json to extract exact rules\n2. Update agents/strategist.md: add Core Strategy Enforcement section — zero EN hashtags, JP max 2 disclaimer-only (#SFW #AIart #digitalart), recommend 20-30% Grok posts in content_mix, short provocative EN captions\n3. Update agents/creator.md: add Core Strategy Enforcement section — EN posts zero hashtags (remove from text and hashtags array), JP posts max 2 disclaimer-only hashtags, EN captions must be short provocative questions under 30 chars, include Grok-style posts when strategy calls for it\n4. Add validation in both agents that checks output against core strategy constraints\n5. After updating agent instructions, run the daily pipeline (Scout data already exists from today): Strategist → Creator EN + Creator JP in parallel, using today's scout analysis at data/scout_analysis_20260307.json\n6. Validate all output against core strategy\n7. Generate HTML reports and deliver results",
+  "task_type": "custom",
+  "agents_planned": [
+    "strategist",
+    "creator"
+  ],
+  "notes": "Core strategy violations found: EN uses hashtags (should be zero), JP exceeds hashtag limits, EN captions too long (should be <30 char provocative questions), zero Grok posts (should be 20-30%). Root cause is agent instructions don't reference core strategy. Fix instructions first, then regenerate content.",
+  "created_at": "2026-03-07T14:56:38.400366+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-07T15:07:08.061895+09:00",
+  "exit_code": 0
+}

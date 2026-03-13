@@ -1,0 +1,92 @@
+{
+  "date": "2026-03-09",
+  "account": "EN",
+  "generated_at": "2026-03-09T13:05:00+09:00",
+  "strategy_used": "data/strategy_20260308.json",
+  "content_plan_used": "data/content_plan_20260308_EN.json",
+  "safety_summary": {
+    "targets_checked": 4,
+    "targets_engaged": 2,
+    "targets_skipped": 2,
+    "already_followed_skipped": [],
+    "cooldown_skipped": [],
+    "planned_likes": 8,
+    "planned_replies": 1,
+    "planned_follows": 1,
+    "budget_remaining": {"likes": 0, "replies": 0, "follows": 0}
+  },
+  "targets": [
+    {
+      "handle": "@IsabellaCruz_47",
+      "user_id": "1831461948040392704",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2028979307901579603",
+        "2030775578295517676",
+        "2025936957855961549",
+        "2025358080674816505"
+      ],
+      "reply_to": {
+        "tweet_id": "2030775578295517676",
+        "reply_text": "the vibes here are immaculate",
+        "reasoning": "Most recent tweet (yesterday), engagement prompt 'Would you wife me?' is a natural conversation entry point. 605 likes — good visibility. Using a reply template that's appreciative without being over-the-top."
+      },
+      "follow": true,
+      "reasoning": "92K followers — large account with strong AI beauty content. High engagement (4,556 likes on top post). Clean timeline with original engagement-question captions matching our content style. No prior engagement — fresh target. Good visibility value."
+    },
+    {
+      "handle": "@Estherbron1",
+      "user_id": "831028808098598912",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2030696123703218610",
+        "2030118455458885745",
+        "2027247292374208976",
+        "2026572134626054541"
+      ],
+      "reply_to": null,
+      "follow": false,
+      "reasoning": "1.2M followers — massive visibility from likes appearing in her notification feed. Active posting with strong engagement. No follow (budget exhausted, plus 1.2M account won't reciprocate). No reply (budget limited to 1, allocated to IsabellaCruz_47 where reciprocal engagement is more likely at 92K)."
+    },
+    {
+      "handle": "@itsluna_baby",
+      "user_id": "1548648751555682306",
+      "skip": true,
+      "skip_reason": "Bio is OF-promotional, recent tweet is an RT from collab partner. Less aligned with our AI beauty niche. Budget better spent on higher-visibility targets.",
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      }
+    },
+    {
+      "handle": "@KissofStarova",
+      "user_id": "1815218542247374848",
+      "skip": true,
+      "skip_reason": "Only 5K followers with very low engagement (5-22 likes per post). With limited remaining budget (8 likes, 1 reply, 1 follow), better to allocate to higher-visibility targets for maximum impression value.",
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      }
+    }
+  ]
+}

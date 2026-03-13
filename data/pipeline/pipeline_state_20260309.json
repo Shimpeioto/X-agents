@@ -1,0 +1,30 @@
+{
+  "date": "2026-03-09",
+  "status": "completed",
+  "started_at": "2026-03-09T17:00:00+09:00",
+  "completed_at": "2026-03-09T18:30:00+09:00",
+  "task_id": "20260309_005",
+  "active_accounts": ["EN"],
+  "suspended_accounts": ["JP"],
+  "steps": {
+    "scout": {"status": "reused", "note": "Reused existing scout_report_20260309.json (41/41 competitors, analysis included)"},
+    "strategist": {"status": "completed", "note": "4 EN posting slots, updated for launch phase cadence"},
+    "creator_en": {"status": "completed", "note": "4 draft posts generated"},
+    "creator_jp": {"status": "skipped", "note": "JP account suspended"},
+    "war_room": {
+      "status": "completed",
+      "EN": {
+        "score": 100,
+        "status": "Excellent",
+        "breakdown": {
+          "category_match": 20,
+          "hashtag_compliance": 20,
+          "text_quality": 20,
+          "image_prompt_variety": 15,
+          "reply_template_quality": 15,
+          "ab_test_compliance": 10
+        }
+      }
+    }
+  }
+}

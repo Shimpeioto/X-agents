@@ -1,0 +1,14 @@
+{
+  "task_id": "20260311_004",
+  "description": "Strategic review focused on IMMEDIATE actionable changes. Steps: 1) Scout: fresh competitor data collection (scout.py --raw --compact) + analysis. 2) Strategist: Review our current performance (check data/outbound_log files, content plans, rate_limits for what we've actually done), identify what's NOT working, and produce an updated strategy incorporating the 0→1000 article insights (design × psychology × algorithm). Focus areas: profile bio rewrite for @meruru_tcbn, content volume ramp-up plan, outbound quality improvement, posting strategy tweaks for dwell time. Skip persona/story design — operator wants tactical fixes only. 3) Produce meeting minutes as data/strategic_review_20260311.json covering: honest progress audit, what changes immediately, updated daily action checklist, weekly targets. 4) Generate HTML report and send via Telegram. Only EN account — JP is suspended.",
+  "task_type": "custom",
+  "agents_planned": [
+    "scout",
+    "strategist"
+  ],
+  "notes": "Operator is frustrated with slow progress. Skip persona design. Focus on immediate tactical changes we can implement TODAY. Reference the 0→1000 article framework: 設計 × 心理 × アルゴリズム. Be brutally honest about what's not working. EN account only (@meruru_tcbn).",
+  "created_at": "2026-03-11T15:44:32.934700+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-11T15:50:23.536157+09:00",
+  "exit_code": 0
+}

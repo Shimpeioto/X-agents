@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategy — 2026-03-12 — 2026-03-12</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Strategy — 2026-03-12</h1>
+  <div class="subtitle">Generated from strategy_20260312.json</div>
+  <div class="date">2026-03-12</div>
+</div>
+<nav class="nav">
+  <a href="#scout_report_used">Scout Report Used</a>
+  <a href="#EN">En</a>
+  <a href="#JP">Jp</a>
+</nav>
+<div class="container">
+<section id="metadata">
+<h2>Report Info</h2>
+<div class="card">
+  <div style="margin: 4px 0"><strong class="text-accent">Date:</strong> <span class="text-muted">2026-03-12</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Generated At:</strong> <span class="text-muted">2026-03-12T12:30:00+09:00</span></div>
+</div>
+</section>
+<section id="scout_report_used">
+<h2>Scout Report Used</h2>
+<p>data/scout_report_20260312.json</p>
+</section>
+<section id="EN">
+<h2>En</h2>
+<h3>Posting Schedule</h3>
+<div class="table-wrap"><table>
+<tr><th>Slot</th><th>Time</th><th>Category</th><th>Priority</th></tr>
+<tr><td>1</td><td>13:00 UTC</td><td>engagement_questions</td><td>high</td></tr>
+<tr><td>2</td><td>17:00 UTC</td><td>image_showcase</td><td>high</td></tr>
+<tr><td>3</td><td>21:00 UTC</td><td>grok_interactive</td><td>high</td></tr>
+<tr><td>4</td><td>00:30 UTC</td><td>self_quote_chains</td><td>medium</td></tr>
+</table></div>
+<h3>Content Mix</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">40</div>
+    <div class="label">Engagement Questions</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">25</div>
+    <div class="label">Image Showcase</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">20</div>
+    <div class="label">Grok Interactive</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">15</div>
+    <div class="label">Self Quote Chains</div>
+  </div>
+</div>
+<h3>Hashtag Strategy</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Max Per Post:</strong> <span class="text-muted">0</span></div>
+</div>
+<h4>Always Use</h4>
+<p class="text-muted">None</p>
+<h4>Rotate</h4>
+<p class="text-muted">None</p>
+<h4>Trending Today</h4>
+<p class="text-muted">None</p>
+<h3>Outbound Strategy</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Daily Likes:</strong> <span class="text-muted">20</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Daily Replies:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Daily Follows:</strong> <span class="text-muted">3</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Reply Style:</strong> <span class="text-muted">Casual, genuine, and conversational. Reference something specific in their image or caption. Sound like a real fan who appreciates the content. Keep it to 1-2 sentences, under 200 characters. Vary between enthusiastic (&#x27;this is insane&#x27;), thoughtful (&#x27;the lighting here tho&#x27;), and playful (&#x27;okay but why is this so good&#x27;). Never use hashtags in replies.</span></div>
+</div>
+<h4>Target Accounts</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">@JosephinaM3131</li>
+  <li style="margin: 4px 0">@Angelwithcakee</li>
+  <li style="margin: 4px 0">@yogana_19</li>
+  <li style="margin: 4px 0">@leahyunaxo</li>
+</ul>
+<h3>Ab Test</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">Caption style: provocative question vs ambient statement</div>
+    <div class="label">Variable</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Provocative question format — e.g., &#x27;Am I ur type?&#x27;, &#x27;Smash or pass?&#x27;, &#x27;Rate me 1-10&#x27; — direct audience engagement prompt</div>
+    <div class="label">Variant A</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">Ambient statement format — e.g., &#x27;single btw&#x27;, &#x27;lord have mercy...&#x27;, &#x27;built like this&#x27; — indirect confidence signaling without a question</div>
+    <div class="label">Variant B</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">5</div>
+    <div class="label">Duration Days</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">2026-03-08</div>
+    <div class="label">Start Date</div>
+  </div>
+</div>
+<h3>Key Insights</h3>
+<div class="insight">A/B test (provocative question vs ambient statement) concludes today — day 5 of 5. Trending data strongly validates BOTH styles: @imrubyreid&#x27;s &#x27;lord have mercy...&#x27; hit 21,948 likes (ambient), while @IsabellaCruz_47&#x27;s &#x27;Rate me from 1 to 10&#x27; hit 20,522 likes (question). Assign slots 1,4 to variant A (questions) and slots 2,3 to variant B (ambient statements) for final data collection. Evaluate tomorrow.</div>
+<div class="insight">Short captions remain the dominant EN engagement signal. Today&#x27;s trending posts confirm: &#x27;would u?&#x27; (16,850 likes), &#x27;can I get a hi?&#x27; (20,435 likes), &#x27;still single&#x27; (6,609 likes), &#x27;single btw&#x27; (10,517 likes) — all under 20 characters. The 12x engagement multiplier for sub-30-char posts continues to hold across the dataset. @sessypuuh (7.7K followers, 34.8% avg ER) is proof that even small accounts dominate with short-text strategy.</div>
+<div class="insight">Grok interactive remains a massive first-mover gap in EN. @ai_hiyo_ (389K followers) is the only EN account using Grok at scale but 90% of their sampled posts are replies, diluting real engagement. Our clean original-content Grok posts at slot 3 (21:00 UTC, US evening prime time) capture this underexploited format when competitor timeline noise is lower.</div>
+<div class="insight">Target rotation for outbound: All Mar 9 targets (@Angelwithcakee, @yogana_19, @IvoryLane_plus, @HannaJonso, @IsabellaCruz_47, @Estherbron1), Mar 10 targets (@tanarainw, @iiCoraMaay, @baharaykin, @NotjustRen00), and Mar 11 targets (@imrubyreid, @lucidevlinxyz, @yuumispm, @katekarsyn) are all within cooldown. Fresh targets: @JosephinaM3131 (44K, 0.7% ER — EN account of MIKENEKO with 3,016-like top post, zero reply contamination on original posts), @Angelwithcakee (35K, 4.5% ER — cooldown clears today from Mar 9 dry-run, 0% reply contamination), @yogana_19 (29.2K, 4.4% ER — cooldown clears today, viral 4,895-like post), @leahyunaxo (79.9K, 1.4% ER — never targeted, 5,689-like top post, growing fast).</div>
+<div class="insight">EN market avg engagement at 3.1% follower-based remains strong. Impression-based ER reveals @sessypuuh at 9.2%, @yuumi005 at 11.4%, and @yogana_19 at an extraordinary 79.3% — confirming X algorithm aggressively amplifies AI beauty content beyond follower bases. The 4-post cadence maximizes algorithmic distribution window opportunities.</div>
+<h3>Risks</h3>
+<div class="insight">Our EN account (@meruru_tcbn) continues to get 403 on ALL reply attempts — every reply across Mar 9, 10, and 11 failed. Plan replies for manual escalation but do not expect API replies to succeed. The 403 restriction is X&#x27;s spam prevention for new/low-follower accounts and should lift as the account gains organic engagement and standing.</div>
+<div class="insight">The A/B test concludes today (day 5). With limited post volume (10-16 total posts across 5 days), statistical significance will be weak. Use directional signals and trending post evidence rather than definitive conclusions when evaluating.</div>
+<div class="insight">90.2% of all tracked competitors use zero hashtags (up from 92.7% in core strategy baseline). This confirms the zero-hashtag EN strategy is correct and aligned with top performer behavior.</div>
+</section>
+<section id="JP">
+<h2>Jp</h2>
+<h3>Posting Schedule</h3>
+<div class="table-wrap"><table>
+<tr><th>Slot</th><th>Time</th><th>Category</th><th>Priority</th></tr>
+<tr><td>1</td><td>09:00 JST</td><td>grok_interactive</td><td>high</td></tr>
+<tr><td>2</td><td>12:30 JST</td><td>persona_dialogue</td><td>high</td></tr>
+<tr><td>3</td><td>20:30 JST</td><td>art_showcase</td><td>high</td></tr>
+<tr><td>4</td><td>23:30 JST</td><td>self_quote_chains</td><td>medium</td></tr>
+</table></div>
+<h3>Content Mix</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">30</div>
+    <div class="label">Grok Interactive</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">30</div>
+    <div class="label">Persona Dialogue</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">25</div>
+    <div class="label">Art Showcase</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">15</div>
+    <div class="label">Self Quote Chains</div>
+  </div>
+</div>
+<h3>Hashtag Strategy</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Max Per Post:</strong> <span class="text-muted">2</span></div>
+</div>
+<h4>Always Use</h4>
+<p class="text-muted">None</p>
+<h4>Rotate</h4>
+<p class="text-muted">None</p>
+<h4>Trending Today</h4>
+<p class="text-muted">None</p>
+<h3>Outbound Strategy</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Daily Likes:</strong> <span class="text-muted">15</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Daily Replies:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Daily Follows:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Reply Style:</strong> <span class="text-muted">Warm, appreciative, community-oriented. Use natural Japanese appropriate for peer interaction in the AI art community. Reference something specific about their image or creative approach. Keep it to 1-2 sentences, under 200 characters. Examples: &#x27;この雰囲気すごく好き&#x27;, &#x27;めっちゃ綺麗...光の使い方が素敵&#x27;, &#x27;クオリティ高すぎ！&#x27;.</span></div>
+</div>
+<h4>Target Accounts</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">@yunaelegant</li>
+  <li style="margin: 4px 0">@honoka_shiri</li>
+  <li style="margin: 4px 0">@tororo_223</li>
+</ul>
+<h3>Ab Test</h3>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">Grok post request type: transformation vs combination</div>
+    <div class="label">Variable</div>
+  </div>
+  <div class="stat-box pink">
+    <div class="value">Single-image transformation — e.g., &#x27;.@grok この画像をアニメ風にして&#x27;, &#x27;.@grok 服を変えて&#x27; — simple visual transformation of one image</div>
+    <div class="label">Variant A</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">Multi-image combination — e.g., &#x27;.@grok タップして4枚の画像を1つに結合して&#x27; — combining multiple images into a single composition (ai_hyk&#x27;s 6,844-like format)</div>
+    <div class="label">Variant B</div>
+  </div>
+  <div class="stat-box warning">
+    <div class="value">5</div>
+    <div class="label">Duration Days</div>
+  </div>
+  <div class="stat-box">
+    <div class="value">2026-03-08</div>
+    <div class="label">Start Date</div>
+  </div>
+</div>
+<h3>Key Insights</h3>
+<div class="insight">@ai_hyk continues to dominate JP with 6,844 likes on top post (124.3K followers, 0.94% avg ER). Reply-adjusted ER is 1.88% (50% reply contamination), confirming genuine original content performance. Grok remains the primary differentiator — their bio explicitly invites Grok interaction (&#x27;リプ・引ポでGrokの画像編集ご自由にどうぞ&#x27;). Our grok_interactive slot stays at 09:00 JST (morning commute peak) for maximum early-day traction.</div>
+<div class="insight">JP market avg follower-based ER at 0.23% masks strong impression-based performance. @ai_nontan_room shows 19.8% impression ER despite only 0.03% follower ER, and @ganbarukaisyain (337.5K followers) shows 11.8% impression ER. The X algorithm delivers JP AI beauty content broadly even when follower-based metrics look low — quality Grok content can break through.</div>
+<div class="insight">JP reply contamination remains severe: @ai_nontan_room (90%), @hakoirikumatan (100%), @seisei_ai_1st (90%), @Shizuku_AItuber (90%), @tororo_223 (80%), @2nd_karen_AI (80%), @BoobistR (70%), @nene__chandayo (70%). Clean original content accounts (@yunaelegant 0%, @AI_Girls_Studio 0%, @honoka_shiri 0%) serve as better engagement models for our strategy.</div>
+<div class="insight">Outbound targets rotated: @AIart_yama94 (targeted in yesterday&#x27;s strategy), @ai_nontan_room (targeted yesterday), @ganbarukaisyain (targeted yesterday). Fresh targets: @yunaelegant (20.6K, 0.57% ER, 0% reply contamination — clean SFW AI art creator, model account for our positioning), @honoka_shiri (36.3K, 0.12% ER, 0% reply contamination — authentic persona account, decent impression ER of 74.3%), @tororo_223 (11K, 0.27% ER — small but growing, 80% reply contamination but active community engagement signals good reciprocal potential).</div>
+<h3>Risks</h3>
+<div class="insight">JP account remains suspended (not yet created). All JP strategy is prepared for launch readiness — when the JP account is created, this strategy can be executed immediately.</div>
+<div class="insight">The @ai_hyk dominance gap (124.3K vs next JP competitor @AI_MIKENEKO at 134K followers but only 0.2% ER) is enormous in engagement terms. Our launch strategy focuses on Grok interactive as the primary differentiator, leveraging the format that drives @ai_hyk&#x27;s success.</div>
+<div class="insight">JP outbound limits remain ultra-conservative (15 likes, 5 replies, 2 follows) per outbound_rules.json. With the JP account not yet live, these targets serve as pre-planning for day-one execution.</div>
+</section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-03-12 12:14 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

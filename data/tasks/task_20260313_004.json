@@ -1,0 +1,11 @@
+{
+  "task_id": "20260313_004",
+  "description": "In data/content_plan_20260312_EN.json, find post EN_20260312_03 and change its text from '.@grok now put me in a leather jacket' to 'hey @grok now put me in a leather jacket'. Save the updated file. Then generate an HTML report and send via Telegram.",
+  "task_type": "custom",
+  "agents_planned": [],
+  "notes": "Simple text edit only — no image prompt changes needed. This is the grok_interactive post 3 in the 2026-03-12 EN plan.",
+  "created_at": "2026-03-13T01:01:20.874285+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-13T01:02:16.277110+09:00",
+  "exit_code": 0
+}

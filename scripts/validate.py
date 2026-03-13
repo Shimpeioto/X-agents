@@ -1,14 +1,14 @@
 """Unified validation script for Scout, Strategist, Creator, Analyst, Image References, and cross-validation.
 
 Usage:
-    python3 scripts/validate.py scout data/scout_report_20260303.json
-    python3 scripts/validate.py strategist data/strategy_20260303.json
-    python3 scripts/validate.py cross data/scout_report_20260303.json data/strategy_20260303.json
-    python3 scripts/validate.py creator data/content_plan_20260304_EN.json
-    python3 scripts/validate.py creator_cross data/content_plan_20260304_EN.json data/strategy_20260304.json
-    python3 scripts/validate.py analyst data/metrics_20260304_EN.json
-    python3 scripts/validate.py analyst_metrics data/metrics_history.db
-    python3 scripts/validate.py image_references data/image_references_20260308.json
+    python3 scripts/validate.py scout data/scout/scout_report_20260303.json
+    python3 scripts/validate.py strategist data/strategy/strategy_20260303.json
+    python3 scripts/validate.py cross data/scout/scout_report_20260303.json data/strategy/strategy_20260303.json
+    python3 scripts/validate.py creator data/content/content_plan_20260304_EN.json
+    python3 scripts/validate.py creator_cross data/content/content_plan_20260304_EN.json data/strategy/strategy_20260304.json
+    python3 scripts/validate.py analyst data/metrics/metrics_20260304_EN.json
+    python3 scripts/validate.py analyst_metrics data/metrics/metrics_history.db
+    python3 scripts/validate.py image_references data/content/image_references_20260308.json
 
 Exit codes: 0=pass, 1=fail, 2=usage error
 """

@@ -1,0 +1,540 @@
+{
+  "document_type": "core_strategy",
+  "version": "1.0",
+  "created_date": "2026-03-07",
+  "last_updated": "2026-03-07",
+  "data_sources": {
+    "scout_analysis": "data/scout_analysis_20260307.json",
+    "scout_compact": "data/scout_compact_20260307.json",
+    "growth_tweets": "data/growth_tweets_20260307.json",
+    "global_rules": "config/global_rules.md",
+    "competitors_analyzed": 41,
+    "en_competitors": 26,
+    "jp_competitors": 17,
+    "both_market_competitors": 2,
+    "growth_expert_tweets_analyzed": 5,
+    "expert_handles": ["@seisei_ai_1st", "@maind200", "@reon_x_1000man"],
+    "analysis_date": "2026-03-07"
+  },
+
+  "account_positioning": {
+    "EN": {
+      "persona_archetype": "Authentic-feeling AI beauty persona that does NOT reveal AI nature. The account presents as a real young woman sharing her life and photos. Confident, playful, casually flirty — never desperate or over-the-top. Think 'girl next door with stunning photos' rather than 'AI art showcase'. The persona is a character with interests, opinions, and personality — not just a photo feed.",
+      "bio_guidelines": "Keep the bio short (under 100 characters), personal, and casual. Include a personality detail or light humor. Reference a hobby or interest to feel human. Optionally include a link to exclusive content. Do NOT mention AI, art generation, or technical tools. Model after top performers: @imrubyreid (691K followers, 'most viral girl on X for a reason'), @sessypuuh (7.7K, 38% ER, empty bio), @katekarsyn (105K, 'i just want to play Fortnite'), @IsabellaCruz_47 (92K, 'Your favorite Colombian'). The common thread: they sound like real people with real personalities.",
+      "differentiation_strategy": "Position in the quality-over-quantity sweet spot that most competitors miss. The EN market is bifurcated: spam accounts posting 10x/day with near-zero engagement (LeahSunkissed: 11.7K followers, 9 likes per post) vs ultra-rare posters (IsabellaCruz_47: 0.3 posts/day, 92K followers). Our lane: 2-3 genuinely exceptional posts per day, combining sessypuuh's engagement question formula with ai_hiyo_'s Grok integration innovation. Most EN competitors have NOT adopted Grok integration — first-mover advantage remains wide open.",
+      "tone_and_voice": "Casual American English. Short sentences. Playful and confident. Uses lowercase, occasional emoji (max 1-2 per post), conversational. Never uses hashtags. Never sounds like a brand or marketer. Text exists to complement the image, not replace it. Model after @sessypuuh ('Am I ur type'), @IsabellaCruz_47 ('Rate me from 1 to 10'), @imrubyreid ('built like this and still single...'). Under 30 characters is the sweet spot — EN short posts average 2,043 likes vs 168 for long posts (>100 chars).",
+      "following_policy": "Follow extremely few accounts (target: under 50). Top EN performers follow 3-43 accounts. High follower-to-following ratios (1000:1+) signal exclusivity and maintain the persona of a desirable, selective individual. Never follow accounts as an outbound growth tactic at scale. Evidence: @imrubyreid follows 35 (691K followers), @sessypuuh follows 8 (7.7K followers), @katekarsyn follows 3 (105K followers), @Estherbron1 follows 25 (1.24M followers)."
+    },
+    "JP": {
+      "persona_archetype": "Transparent AI art creator with a warm, consistent character voice. The JP account openly acknowledges AI generation. The top JP persona account (@yunaelegant, 20.5K followers, 1% ER) explicitly states 'Stable DiffusionのAI技術で生成' in bio. The JP market rewards honesty about AI origin combined with creative quality and emotional persona building. The account presents as a dedicated AI artist sharing beautiful, SFW portraits with personal commentary.",
+      "bio_guidelines": "Explicitly state AI generation method. Include #SFW or similar safety disclaimers. Add a warm, personal touch that establishes the character voice. Optionally link to exclusive content platform. Mention that images are fictional and AI-generated. Model after @yunaelegant ('オリジナル女性ポートレートをStable Diffusionを中心としたAI技術で生成' + SFW disclaimer) and @AIart_yama94 (creator-focused with #SFW #Fictional #digitalart labels). Invite Grok interaction following @ai_hyk ('リプ・引ポでGrokの画像編集ご自由にどうぞ').",
+      "differentiation_strategy": "Combine three winning elements that no single JP competitor currently masters simultaneously: (1) @ai_hyk's Grok integration innovation (7,880 likes, 5.6M impressions on one post — more engagement than all other JP competitors combined), (2) @yunaelegant's warm persona consistency and SFW positioning (1% ER with zero reply contamination), (3) @AIart_yama94's transparent AI labeling (#SFW #Fictional). The JP market has a massive gap between #1 (ai_hyk at 124K) and the rest — a new entrant combining these approaches can capture significant share.",
+      "tone_and_voice": "Natural Japanese social media style. Warm, friendly, slightly intimate but never crude. Medium-length text (30-80 characters) hits the JP sweet spot — 758 avg likes vs 87 for short (<30) and 166 for long (>100). Use casual Japanese with personality. Character consistency is paramount — JP audiences value relationship simulation. Model after @yunaelegant ('おつかれさま〜♡ 今日もいっぱい頑張ったでしょ？') for persona warmth.",
+      "following_policy": "Follow selectively (target: under 100). JP top performers follow slightly more liberally than EN, reflecting JP social media norms of mutual following within communities. Follow relevant AI art creators, niche community members, and collaboration partners. Evidence: @ai_hyk follows 57 (124K followers), @yunaelegant follows 343 (20.5K followers), @AIart_yama94 follows 70 (37K followers)."
+    }
+  },
+
+  "content_pillars": {
+    "EN": {
+      "pillars": [
+        {
+          "name": "engagement_questions",
+          "description": "Short, provocative questions paired with a stunning AI-generated image. The question invites direct engagement through rating, choosing, or affirming. This is the single most proven content format in the EN AI beauty niche.",
+          "content_mix_pct": 30,
+          "text_guidelines": "Under 30 characters. One question or short statement. Use casual tone with lowercase. Binary choice questions and rating prompts perform best. Never start with @. Max 1-2 emoji.",
+          "example_formats": [
+            "Am I ur type 👀",
+            "Rate me from 1 to 10",
+            "built like this and still single...",
+            "Front or back?",
+            "wyd if you see me in person",
+            "Smash or pass?",
+            "you mind?"
+          ],
+          "data_evidence": "Question posts average 1,598 likes across EN competitors (31% of all successful original posts). @IsabellaCruz_47's 'Rate me from 1 to 10' = 20,670 likes, 697K impressions — highest single post in entire dataset of 41 competitors. @sessypuuh's 'Am I ur type' format drives 38% engagement rate with only 51 total tweets. Short posts (<30 chars) average 2,043 likes vs 168 for long posts (>100 chars) — a 12x difference."
+        },
+        {
+          "name": "image_showcase",
+          "description": "Let exceptional images speak for themselves with minimal or zero text. The visual IS the content. This format has the highest average likes of any category but requires the image to be genuinely stunning.",
+          "content_mix_pct": 35,
+          "text_guidelines": "Zero to 15 characters maximum. Can be completely text-free (image only). If text is used, keep it ambient — a mood word, a single emoji, or nothing. Never describe what is in the image.",
+          "example_formats": [
+            "(image only, no text)",
+            "💫",
+            "✨",
+            "good morning",
+            "..."
+          ],
+          "data_evidence": "Image-only posts average 2,275 likes — highest of any content category. @yuumispm: 16 total tweets, 12K followers, top post = 16,177 likes (134% of follower count). @imrubyreid: 13 total tweets, 691K followers — extreme quality-over-quantity proof. Media posts get 2.5x more likes than text-only (1,833 vs 745 avg)."
+        },
+        {
+          "name": "grok_interactive",
+          "description": "Use @grok to create interactive image transformation content. Post an image and ask Grok to modify it, creating a participatory experience. This is the #1 emerging engagement technique with enormous viral potential and very few competitors using it.",
+          "content_mix_pct": 20,
+          "text_guidelines": "Format: '.@grok [transformation request]' or 'Hey @grok [request]'. Leading dot prevents X from treating it as a reply. Keep requests creative and visual. Include Grok interaction invite in bio.",
+          "example_formats": [
+            ".@grok remove the jacket",
+            "Hey @grok put me in a red dress",
+            ".@grok turn this into anime style",
+            ".@grok what would I look like as a brunette?"
+          ],
+          "data_evidence": "Only 2 of 41 tracked competitors actively use Grok integration. @ai_hyk's single Grok post: 7,880 likes, 5,945 bookmarks (75% bookmark-to-like ratio), 5,606,027 impressions — reaching 45x the follower count. @ai_hiyo_ (EN, 387K) pioneered this format. Grok posts have bookmark-to-like ratios of 0.25-0.75, signaling high algorithmic value. Average Grok post: 890 likes (EN)."
+        },
+        {
+          "name": "self_quote_chains",
+          "description": "Instead of standalone posts, quote-tweet your own previous post to create content chains. Each post in the chain inherits algorithmic weight from the previous post's engagement, creating a cumulative amplification effect.",
+          "content_mix_pct": 15,
+          "text_guidelines": "Under 30 chars for each chain link. Add context connecting to the previous post: a new angle, follow-up question, or continuation of a theme. Max 3-4 posts per chain. Space chain links 4-8 hours apart.",
+          "example_formats": [
+            "Original: (stunning image) -> Self-quote: 'but what about this angle?'",
+            "Original: (outfit 1) -> Self-quote: 'or this one?' -> Self-quote: 'okay last one'",
+            "Original: (image) -> Self-quote with Grok transformation request"
+          ],
+          "data_evidence": "Self-quote chain technique (セルフ引用で数珠繋ぎ) documented by @seisei_ai_1st (57 likes, 21 bookmarks, 27,844 impressions). Claims 2x impression amplification. High bookmark rate (0.37 bookmark-to-like) indicates users save the technique. Not yet adopted by most top competitors. Low risk: self-quoting is standard X behavior, not a TOS violation."
+        }
+      ],
+      "total_mix_pct": 100
+    },
+    "JP": {
+      "pillars": [
+        {
+          "name": "grok_interactive",
+          "description": "Interactive Grok integration posts are the dominant engagement driver in JP by a massive margin. @ai_hyk's Grok posts generate more engagement than ALL other JP competitors combined. This is the cornerstone of JP content strategy.",
+          "content_mix_pct": 30,
+          "text_guidelines": "Use '.@grok [request in Japanese]' format — leading dot is CRITICAL to prevent X from hiding the post as a reply. Requests should be creative and invite community participation. Bio should explicitly invite followers to use Grok in replies.",
+          "example_formats": [
+            ".@grok タップして4枚の画像を1つに結合して",
+            ".@grok この画像をアニメ風にして",
+            ".@grok 服を変えて",
+            ".@grok 背景を桜に変えて"
+          ],
+          "data_evidence": "@ai_hyk's single Grok post: 7,880 likes, 5,945 bookmarks (75% bookmark-to-like ratio), 5,606,027 impressions — reaching 45x follower count. This ONE post's engagement exceeds all other JP competitors combined. Average Grok post likes in JP: 2,090. Bio invitation 'リプ・引ポでGrokの画像編集ご自由にどうぞ' creates ongoing engagement loop."
+        },
+        {
+          "name": "persona_dialogue",
+          "description": "Character-consistent Japanese text paired with AI portrait. The persona speaks in a warm, intimate voice like daily diary entries or greetings to a close friend. JP audiences value relationship simulation and character consistency more than EN audiences.",
+          "content_mix_pct": 30,
+          "text_guidelines": "30-80 characters in natural Japanese. Warm, friendly tone. Daily greetings, observations, gentle questions. Maintain character consistency across every post. Light emoji (1-2 max). Never break character. Optional #SFW disclaimer appended.",
+          "example_formats": [
+            "おつかれさま〜♡ 今日もいっぱい頑張ったでしょ？",
+            "何秒見つめられる？",
+            "今日は暖かくて気持ちいい〜✨",
+            "地獄トレ後 笑顔"
+          ],
+          "data_evidence": "@yunaelegant (20.5K followers, 1% ER, zero reply contamination) uses this format exclusively with consistent 200-300 likes per post. JP medium-length text (30-100 chars) averages 758 likes vs 87 for short and 166 for long. This format builds loyal, returning audience with high bookmark rates."
+        },
+        {
+          "name": "art_showcase",
+          "description": "High-quality AI art presented as creative work with transparent labeling. Short caption with optional #SFW disclaimer. Positions the account as an AI art creator, which is the higher-performing model in JP.",
+          "content_mix_pct": 25,
+          "text_guidelines": "Short Japanese caption (under 50 chars) describing the image theme, mood, or creation context. Append #SFW #Fictional if appropriate. Keep tone creator-focused. Can alternate between creator voice and persona voice across different pillars.",
+          "example_formats": [
+            "人多かった #SFW #Fictional #digitalart",
+            "春の光 ✨",
+            "新しいスタイル試してみた",
+            "朝日の中で #AIart"
+          ],
+          "data_evidence": "@AIart_yama94 (37K followers, 0.6% ER) uses #SFW/#Fictional/#digitalart consistently — the only JP competitor with sustained hashtag use that works. These function as ethical disclaimers rather than discovery tools, resonating with JP audience sensibilities about content transparency. Top posts get 800+ likes."
+        },
+        {
+          "name": "self_quote_chains",
+          "description": "Themed image chains using self-quote-tweets. Particularly effective in JP for outfit series, transformation sequences, and seasonal explorations. The chain format amplifies each post's reach through cumulative engagement signals.",
+          "content_mix_pct": 15,
+          "text_guidelines": "Japanese text per chain link, 30-60 chars. Each link adds a new dimension. Can combine with Grok integration (original image -> self-quote with Grok transformation). Maintain persona consistency throughout. Japanese connecting phrases: 'さっきの続き...', 'こっちも見て♡', '朝と夜で雰囲気変えてみた'.",
+          "example_formats": [
+            "Original: (outfit A) -> Quote: 'こっちも見て♡' -> Quote: 'どれが好き？'",
+            "Original: (image) -> Quote: '.@grok アニメ風にして' -> Quote: 'こっちも可愛い✨'",
+            "Seasonal theme chain: spring morning -> afternoon -> evening"
+          ],
+          "data_evidence": "Self-quote chain technique from @seisei_ai_1st (27,844 impressions, 21 bookmarks). Claims 2x impression amplification. Not yet adopted by top JP competitors — early mover advantage. Particularly synergistic with JP content styles that emphasize series and ongoing narratives."
+        }
+      ],
+      "total_mix_pct": 100
+    }
+  },
+
+  "image_style_guidelines": {
+    "EN": {
+      "primary_style": "Photorealistic AI-generated portraits indistinguishable from professional photography. The EN market rewards images that look like real photos. Natural lighting, real-world settings, casual but polished. Think high-end Instagram influencer photography, not AI art gallery.",
+      "quality_standards": "Every image must pass the 'would someone stop scrolling?' test. Top EN performers get 2,000-16,000 likes per image because the visual quality is exceptional. Artifacts, uncanny hands, distorted faces, or obvious AI tells are absolute dealbreakers. Resolution must be high enough for full-screen mobile viewing. The bar: @yuumispm (16,177 likes on a single image), @imrubyreid (7,396 likes with 13 total posts), @sessypuuh (5,424 likes on 'Am I ur type').",
+      "recommended_tools": ["Midjourney v6+", "Stable Diffusion XL with photorealistic models", "Flux"],
+      "aspect_ratios": {
+        "primary": "4:5 (portrait, optimal for X feed display)",
+        "secondary": "1:1 (square, versatile)",
+        "occasional": "9:16 (vertical, full-body or scene shots)"
+      },
+      "do_nots": [
+        "Never post images with visible AI artifacts (distorted hands, extra fingers, asymmetric eyes)",
+        "Never use obviously AI-generated backgrounds with surreal geometry",
+        "Never post images with text overlays or watermarks",
+        "Never post images that look like AI art gallery renders (too perfect, too 'rendering')",
+        "Never reuse the same face/pose with only outfit changes — vary expressions, angles, settings",
+        "Never post NSFW content that could trigger X content restrictions",
+        "Never use anime or cartoon styles on the EN account — photorealism only",
+        "Always compress to under 2MB before upload (global rule)"
+      ]
+    },
+    "JP": {
+      "primary_style": "High-quality AI portraits ranging from photorealistic to slightly stylized. JP market is more accepting of the 'AI art' aesthetic. Images can be more artistic and clearly AI-generated — what matters is beauty and emotional resonance. Think premium digital art rather than fake photography.",
+      "quality_standards": "Same high bar as EN for technical quality (no artifacts, high resolution), but the aesthetic can be more diverse. JP top performers range from photorealistic (@ai_hyk) to clearly AI-stylized (@AIart_yama94). Key differentiator: emotional impact and bookmark-worthiness. JP users bookmark content at very high rates (75% bookmark-to-like on top posts).",
+      "recommended_tools": ["Midjourney v6+", "Stable Diffusion (referenced explicitly by @yunaelegant in bio)", "Flux", "Grok image generation (for interactive posts)"],
+      "aspect_ratios": {
+        "primary": "4:5 (portrait, consistent with EN for workflow)",
+        "secondary": "1:1 (square, optimal for Grok integration posts)",
+        "occasional": "16:9 (landscape, for artistic scene compositions)"
+      },
+      "do_nots": [
+        "Never post images with visible AI artifacts",
+        "Never use overly sexualized imagery on the main feed (maintain SFW positioning per @yunaelegant and @AIart_yama94 model)",
+        "Never use non-Japanese cultural references without context — maintain cultural authenticity",
+        "Never post images that feel mass-produced — each should feel intentionally crafted",
+        "Never include English-only text in images meant for the JP account",
+        "Always compress to under 2MB before upload (global rule)"
+      ]
+    }
+  },
+
+  "posting_cadence": {
+    "EN": {
+      "posts_per_day": {
+        "minimum": 2,
+        "optimal": 4,
+        "maximum": 5,
+        "phase_note": "Launch phase (< 100 followers): 4/day to build content library and algorithmic presence. Reassess at 100 followers."
+      },
+      "optimal_times_utc": [
+        "13:00-14:00 UTC (8-9 AM ET — US morning browsing)",
+        "17:00-18:00 UTC (12-1 PM ET — US lunch break)",
+        "21:00-23:00 UTC (4-6 PM ET — US afternoon/evening)",
+        "00:00-01:00 UTC (7-8 PM ET — US prime evening)"
+      ],
+      "spacing_rules": "Minimum 3 hours between posts. Never post 2 images within the same hour. If posting 4x/day, spread across morning, lunch, afternoon, and evening US time. The goal is to appear in feeds at different times, reaching different audience segments.",
+      "quality_threshold": "Every post must pass the '100 likes minimum' mental bar. If you would not bet on a post getting at least 100 likes, do not post it. One exceptional image beats three mediocre ones. The X algorithm actively punishes low-engagement content by suppressing future reach.",
+      "data_evidence": "Top 8 EN performers by engagement all post 0.3-3.8x/day. @sessypuuh (0.7/day, 38% ER), @yuumispm (0.8/day, 26% ER), @IsabellaCruz_47 (0.3/day, 6% ER at 92K followers), @Angelwithcakee (1.2/day, 4.5% ER at 35K). Accounts at 10x/day: @LeahSunkissed (0.02% ER), @JosephinaM3131 (0.001% ER), @Lux_aeterna_ (0.001% ER). Correlation between high frequency and low engagement is absolute."
+    },
+    "JP": {
+      "posts_per_day": {
+        "minimum": 2,
+        "optimal": 4,
+        "maximum": 5,
+        "phase_note": "Launch phase (< 100 followers): 4/day to build content library and algorithmic presence. Reassess at 100 followers."
+      },
+      "optimal_times_jst": [
+        "09:00 JST (morning commute — phone browsing on train)",
+        "12:00-13:00 JST (lunch break browsing)",
+        "20:00-21:00 JST (evening relaxation)",
+        "23:00-00:00 JST (late-night browsing before sleep — highest volume window)"
+      ],
+      "spacing_rules": "Minimum 4 hours between posts. The late-night window (23:00-00:00 JST) is the highest-volume posting time across JP competitors (22-23 posts observed in that window), suggesting prime engagement when users browse before sleep. Prioritize this slot for the strongest content.",
+      "quality_threshold": "Same as EN — every post must clear a quality bar. JP has lower raw like counts (top JP posts: 200-800 likes vs EN's 2,000-16,000), so calibrate expectations. A JP post getting 200+ likes is performing well. Aim for consistent 150-300 likes rather than chasing viral moments (except Grok posts, which have viral potential).",
+      "data_evidence": "@ai_hyk (1.7/day, 1.35% ER), @yunaelegant (2.4/day, 1.05% ER), @AIart_yama94 (1.6/day, 0.6% ER). Accounts at 9-10x/day: @2nd_karen_AI, @seisei_ai_1st, @hakoirikumatan — all sub-0.2% ER. JP requires slightly more posts than EN for growth (100-300 posts to reach 20K vs EN's 50-100), but quality remains dominant."
+    }
+  },
+
+  "hashtag_strategy": {
+    "EN": {
+      "policy": "zero_hashtags",
+      "rationale": "EN AI beauty accounts do NOT use hashtags. Top performers universally avoid them. Hashtags in this niche signal inauthenticity and lower quality. The persona should feel like a real person who does not need hashtags to be discovered.",
+      "data_evidence": "92.7% of tracked EN competitors use ZERO hashtags. Only 3 of 26 EN accounts use any (11.5%), and those 3 are not top performers. The hashtags found (#恶搞, #AI变装, #Aicosplay) are Chinese-language tags from @NotjustRen00. Zero English hashtags used by ANY EN competitor. @sessypuuh (38% ER), @yuumispm (26% ER), @IsabellaCruz_47 (6% ER at 92K), @imrubyreid (691K followers) — all zero hashtags. Keyword searches show #AIbeauty and #AIgirl used by small accounts (<3K followers) or spammy accounts only."
+    },
+    "JP": {
+      "policy": "minimal_disclaimer_only",
+      "allowed_tags": ["#SFW", "#Fictional", "#AIart", "#digitalart"],
+      "max_per_post": 2,
+      "usage_rules": "Use 1-2 disclaimer tags on art_showcase pillar posts only. Zero hashtags on grok_interactive and persona_dialogue posts. Tags serve as ethical/legal disclaimers, NOT discovery tools.",
+      "rationale": "JP market has largely moved past hashtag-based discovery despite Japan's historical hashtag culture. The exception is ethical disclaimer tags: @AIart_yama94 (37K followers) consistently uses #SFW #Fictional #digitalart to signal content safety and transparency. These resonate with JP audience values around content responsibility.",
+      "data_evidence": "Only 2 of 17 JP-market competitors use any hashtags (11.8%). @AIart_yama94 uses #SFW/#Fictional/#digitalart consistently as disclaimers. @ai_nontan_room uses #ZImage (tool-specific). @ai_hyk (124K, top JP performer) uses zero hashtags. The broader #AI美女 and #AIイラスト spaces show heavy hashtag use by small accounts (<1K followers), confirming hashtags are a small-account tool, not a growth strategy."
+    }
+  },
+
+  "engagement_outbound": {
+    "daily_limits": {
+      "likes": 30,
+      "replies": 10,
+      "follows": 5,
+      "posts": 5,
+      "source": "config/global_rules.md"
+    },
+    "operational_targets": {
+      "EN": {
+        "likes": 20,
+        "replies": 5,
+        "follows": 3,
+        "rationale": "30-40% below hard limits as safety margin against shadow ban"
+      },
+      "JP": {
+        "likes": 15,
+        "replies": 5,
+        "follows": 2,
+        "rationale": "JP accounts face stricter monitoring per @seisei_ai_1st expert guidance; larger safety margin"
+      }
+    },
+    "targeting_criteria": [
+      "Target accounts must be in the AI beauty / AI art niche with topically relevant content",
+      "Minimum 1,000 followers (engaging with very small accounts provides little visibility benefit)",
+      "Must have posted original content (not just replies) within 48 hours",
+      "Prefer targets with high engagement rates (their audience is active and may notice our engagement)",
+      "Rotate targets daily — do not repeatedly engage with the same accounts on consecutive days",
+      "EN targets: EN-market competitors and adjacent niche accounts with English content",
+      "JP targets: JP-market competitors and AI art community members with Japanese content",
+      "Skip: reply-farming bots (100% reply rate), controversial/flagged accounts, pure retweet accounts"
+    ],
+    "reply_guidelines": {
+      "EN": {
+        "tone": "Casual, genuine, conversational. Sound like a real person who genuinely appreciates the content. Never sound like a bot or marketer.",
+        "length": "1-2 sentences, under 200 characters",
+        "rules": [
+          "NEVER start a reply with @ (Publisher handles @mentions separately)",
+          "Reference something specific in the target's post",
+          "Vary reply styles — some enthusiastic, some thoughtful, some curious",
+          "No copy-paste templates used verbatim — each reply must feel contextually unique",
+          "No emojis-only replies"
+        ],
+        "examples": [
+          "this is stunning, the lighting is perfect",
+          "okay wait this might be your best one yet",
+          "the confidence in this shot though",
+          "how do you always get the colors so right"
+        ]
+      },
+      "JP": {
+        "tone": "Warm, appreciative, community-oriented. JP reply culture is more polite and supportive. Use casual-polite register appropriate for peer interaction.",
+        "length": "1-2 sentences, under 200 characters",
+        "rules": [
+          "NEVER start a reply with @ (Publisher handles @mentions separately)",
+          "Use natural Japanese — not overly formal but respectful",
+          "Maintain persona consistency even in replies",
+          "Reference the specific content or technique in the target's post",
+          "Vary between enthusiastic and thoughtful tones"
+        ],
+        "examples": [
+          "この雰囲気すごく好き✨",
+          "めっちゃ綺麗...光の使い方が素敵",
+          "こういうスタイル大好きです",
+          "クオリティ高すぎ！どうやって作ってるんですか？"
+        ]
+      }
+    },
+    "shadow_ban_prevention": {
+      "rules": [
+        "Stay strictly within daily limits — operational targets are 30-40% below hard limits for safety margin",
+        "Random 30-120 second delays between ALL outbound operations (implemented in publisher.py)",
+        "Vary engagement patterns daily — do not like the same sequence of accounts in the same order",
+        "Do not engage in follow/unfollow cycling — follow and keep, or do not follow at all",
+        "Do not mass-like in rapid succession — space likes across the engagement session",
+        "Avoid repetitive content patterns that could trigger automated detection",
+        "Do not send identical reply text to multiple accounts",
+        "Never engage with flagged, controversial, or spam accounts — association triggers suppression",
+        "If shadow ban suspected: cease ALL outbound for 48-72 hours, continue posting original content only",
+        "After recovery period: resume at 50% of normal limits, gradually increase over 7 days"
+      ],
+      "monitoring": "Track daily impression counts via Analyst. If impressions drop >50% day-over-day without a change in content quality or posting frequency, investigate potential shadow ban. Log all outbound actions with timestamps for audit trail.",
+      "data_evidence": "@seisei_ai_1st's shadow ban prevention guide (143 likes, 68 bookmarks, 50,013 impressions) warns that X AI monitoring changes daily. The high bookmark rate (0.48 bookmark-to-like) confirms this is critical reference content. Our global rules (30/10/5 limits + random delays) align with best practices."
+    }
+  },
+
+  "growth_tactics": {
+    "self_quote_chains": {
+      "description": "Self-quote chain (セルフ引用で数珠繋ぎ) — instead of posting standalone tweets, quote-tweet your own previous tweet to create content chains. The X algorithm sees the quoted post's engagement metrics and boosts the new post's distribution. Each post in the chain amplifies the previous one, creating a cumulative reach multiplier.",
+      "when_to_use": "Themed image series (outfit changes, before/after transformations, style evolutions), Grok transformation follow-ups (post original, then self-quote with Grok result), multi-angle showcases. Maximum 3-4 posts per chain. Space chain links 4-8 hours apart within the same day.",
+      "max_frequency": "15% of total content. Approximately 1 chain per 2 days at 2-3 posts/day. Do not over-rely — chains supplement standalone posts, not replace them.",
+      "implementation_notes": "Creator agent flags posts as 'chain_start' or 'chain_continue' with reference to the quoted post. Publisher needs quote-tweet capability for own posts. Analyst tracks chain performance vs standalone posts.",
+      "evidence": "Technique documented by @seisei_ai_1st (57 likes, 21 bookmarks, 27,844 impressions). Claims 2x impression amplification ('投稿減らさずにインプ2倍'). High bookmark rate (0.37 bookmark-to-like) — users save it for reference. Not yet adopted by most top competitors. Low risk: self-quoting is standard X behavior."
+    },
+    "grok_integration": {
+      "description": "Use X's built-in @grok AI for interactive image transformation content. Post an image and request Grok to modify it, inviting followers to do the same in replies. Creates participatory content that drives replies, bookmarks, and massive algorithmic reach. X likely promotes Grok-related content as it is their own product.",
+      "format_en": "Use '.@grok [request in English]' or 'Hey @grok [request]'. The leading dot on .@grok is CRITICAL for feeds. Keep requests visual and creative. Include in bio: 'Edit my images using grok in the comments'.",
+      "format_jp": "Use '.@grok [request in Japanese]'. Same leading-dot rule. Bio invite: 'リプ・引ポでGrokの画像編集ご自由にどうぞ'. Mix single-image transformations with multi-image puzzle formats ('4枚の画像を1つに結合して').",
+      "frequency": "20-30% of content (approximately 1 Grok post per day). Treat each as a potential viral moment — invest in choosing the best image and most creative transformation request.",
+      "evidence": "@ai_hyk single Grok post: 7,880 likes, 5,945 bookmarks (75% ratio), 5,606,027 impressions — 45x follower count. Only 2 of 41 competitors use Grok. Average Grok post: 890 likes (EN), 2,090 likes (JP). This is the single most actionable finding in the entire competitive analysis."
+    },
+    "bookmark_optimization": {
+      "description": "High bookmark-to-like ratios strongly correlate with algorithmic reach. Bookmarks signal that content is valuable enough to revisit, which X's algorithm interprets as a quality signal. Content that gets bookmarked receives disproportionate distribution.",
+      "techniques": [
+        "Grok transformation posts naturally drive high bookmark rates (0.25-0.75 ratio)",
+        "Stunning, save-worthy images that users want to revisit",
+        "Content with utility — transformation techniques, style references, visual puzzles",
+        "Binary choice posts ('Front or back?') that users bookmark to compare later",
+        "Image series (chains) that function as mini-galleries worth saving"
+      ],
+      "target_ratio": "Aim for >10% bookmark-to-like ratio. Top performers achieve 20-75%.",
+      "evidence": "@Estherbron1 (1.24M followers): 'Front or back?' posts = 0.29-0.33 bookmark-to-like ratio. @ai_hyk: Grok posts = 0.64-0.75 ratio. Growth expert tweets: 0.36-1.23 ratios (educational content is extremely bookmark-worthy). @reon_x_1000man's article tweet had 177 bookmarks vs 144 likes (ratio >1.0 — more saves than likes)."
+    },
+    "cross_promotion": {
+      "description": "Top performers reference sister accounts or platforms to redistribute algorithmic boosts and create network effects that multiply reach across accounts.",
+      "approach": "Consider sister accounts or cross-promotion with allied accounts. Reference sister accounts in bio. Do NOT cross-promote between EN and JP accounts — they target different markets. Accounts that straddle both markets (@PinUpGirl_AI: 0.03% ER, @Lux_aeterna_: 0.001% ER) have the worst engagement rates in the dataset.",
+      "evidence": "@leahyunaxo (76K) -> @voidcina, @Angelwithcakee (35K) -> @siennacakee, @marylivbrown (14K) -> @chloemiabrown. These network accounts maintain separate identities but support each other's growth through audience overlap."
+    }
+  },
+
+  "market_specific_tactics": {
+    "EN": {
+      "what_works": [
+        "Short provocative questions paired with stunning images (31% of successful posts, 1,598 avg likes)",
+        "Image-only posts with zero or minimal text (21% of successful posts, 2,275 avg likes — highest category)",
+        "Grok integration for interactive content (19 examples found, 890 avg likes, massive viral potential)",
+        "Ultra-low following count maintaining persona exclusivity (top performers follow 3-43 accounts)",
+        "Empty or minimal bio that reads like a real person, not an AI creator",
+        "Binary choice and rating prompts ('Rate me 1-10' = 20,670 likes — dataset record)",
+        "Consistent persona voice — never break character",
+        "Very low total tweet count with high quality per tweet (@imrubyreid: 13 tweets, 691K followers)"
+      ],
+      "what_to_avoid": [
+        "Posting more than 3x per day (10x/day accounts average 0.001-0.02% ER)",
+        "Using any hashtags (92.7% of successful competitors use zero)",
+        "Long text posts over 100 characters (168 avg likes vs 2,043 for under 30 chars — 12x worse)",
+        "Reply farming as a growth strategy (100% reply accounts have near-zero original engagement)",
+        "Revealing the AI nature of the content in posts or bio",
+        "Following too many accounts (breaks exclusivity signal — top performers follow 3-43)",
+        "Posting low-quality images with visible AI artifacts",
+        "Volume posting without quality control (algorithm suppresses low-engagement content)"
+      ],
+      "text_strategy": "Under 30 characters is the sweet spot. Text exists to set up engagement with the image, not to provide information. Questions work best because they invite replies (algorithmic boost). Casual, lowercase, minimal emoji. The image is the content; the text is the invitation to engage.",
+      "engagement_style": "Flirty, confident, playful. The EN AI beauty audience engages most with content simulating attraction and personal connection. 'Am I ur type?' = yes/no trigger. 'Rate me 1-10' = numeric trigger. 'Smash or pass?' = binary trigger. Each format makes engagement effortless for the viewer."
+    },
+    "JP": {
+      "what_works": [
+        "Grok integration posts (7,880 likes, 5.6M impressions — dominant JP tactic by massive margin)",
+        "Medium-length Japanese text (30-100 chars) with personality (758 avg likes vs 87 for short, 166 for long)",
+        "Consistent persona voice with warm, intimate character dialogue",
+        "SFW positioning with explicit AI disclosure (builds trust in regulation-conscious JP market)",
+        "Late-night posting (23:00-00:00 JST) when browsing-before-sleep behavior peaks",
+        "High bookmark-worthy content (JP users bookmark at higher rates than EN — 75% ratio for top post)",
+        "Art-focused creator positioning over deceptive persona (higher long-term performance)",
+        "Seasonal content awareness (sakura, summer, autumn leaves — strong cultural resonance)"
+      ],
+      "what_to_avoid": [
+        "Posting more than 3x per day (9-10x/day JP accounts have sub-0.2% ER)",
+        "Reply farming at scale (100% reply JP accounts = 3 likes per post on original content)",
+        "Very short text under 30 chars (averages only 87 likes in JP — opposite of EN pattern)",
+        "Long text over 100 chars unless diary-style persona post (averages 166 likes)",
+        "Aggressive outbound engagement that could trigger shadow ban (JP monitoring reportedly stricter)",
+        "Hiding AI nature — JP audiences respect and reward transparency",
+        "Straddling both EN and JP markets with one account (worst-performing segment in entire dataset)",
+        "Using hashtags for discovery rather than as ethical disclaimers"
+      ],
+      "text_strategy": "30-80 characters is the sweet spot. Unlike EN where shorter is always better, JP audiences expect more textual content with personality. Think diary entries, gentle questions, daily greetings. Maintain consistent speech patterns. Text should feel like a message from a friend, not a photo caption.",
+      "engagement_style": "Warm, appreciative, community-oriented. JP engagement is less about flirtatious triggers and more about relationship building. Daily greetings ('おつかれさま'), gentle questions ('何秒見つめられる？'), appreciative responses build loyal community. Grok posts invite creative participation rather than simple yes/no engagement.",
+      "cultural_notes": "Seasonal awareness is important — sakura in spring, summer festivals, autumn leaves, year-end themes. JP social media culture values consistency and reliability. The 'overworked office worker' persona (@ganbarukaisyain, 338K) resonates because it taps into shared cultural experience. Community belonging matters more than individual admiration in JP engagement."
+    }
+  },
+
+  "growth_benchmarks": {
+    "EN": {
+      "month_3": {
+        "followers": "1,000-5,000",
+        "engagement_rate": "5-15%",
+        "posts_total": "30-60",
+        "key_metric": "At least one post exceeding 500 likes",
+        "evidence": "@sessypuuh reached 7.7K with 51 posts at 38% ER. @yuumispm reached 12K with 16 posts. Quality over quantity is the proven path."
+      },
+      "month_6": {
+        "followers": "5,000-15,000",
+        "engagement_rate": "3-8%",
+        "posts_total": "80-150",
+        "key_metric": "At least one post exceeding 1,000 likes, consistent >3% ER",
+        "evidence": "@Angelwithcakee at 35K with 56 tweets (4.5% ER). @marylivbrown at 14K with 79 tweets (3% ER). Grok integration should be generating standout engagement by this point."
+      },
+      "month_12": {
+        "followers": "20,000-100,000",
+        "engagement_rate": "1-6%",
+        "posts_total": "200-400",
+        "key_metric": "Regular posts exceeding 1,000 likes, at least one viral post (5,000+ likes)",
+        "evidence": "@yogana_19 at 27K with 7.6% ER. @katekarsyn at 105K with 1.2% ER. @IsabellaCruz_47 at 92K with 6% ER. Engagement rate naturally decreases as follower base expands — this is normal."
+      },
+      "breakout_scenario": {
+        "followers": "100,000+",
+        "conditions": "Requires viral posts (10K+ likes). @imrubyreid: 0 to 691K with 13 posts — each engineered for maximum viral potential. A single viral post can 10x an account in this niche.",
+        "evidence": "@imrubyreid (691K, 13 posts), @Estherbron1 (1.24M, 1,392 posts). The AI beauty space rewards quality dramatically over quantity."
+      }
+    },
+    "JP": {
+      "month_3": {
+        "followers": "500-3,000",
+        "engagement_rate": "1-3%",
+        "posts_total": "50-100",
+        "key_metric": "Regular posts exceeding 50 likes, bookmark-to-like ratio >15%",
+        "evidence": "JP market grows slower but builds more loyal audiences. Focus on persona consistency, SFW positioning, and Grok integration as growth accelerator."
+      },
+      "month_6": {
+        "followers": "5,000-20,000",
+        "engagement_rate": "0.5-2%",
+        "posts_total": "150-300",
+        "key_metric": "Grok posts regularly exceeding 200 likes, consistent original content engagement",
+        "evidence": "@yunaelegant at 20.5K with 715 tweets (1% ER). @BoobistR at 20.9K with 562 tweets. JP requires more posts than EN for equivalent follower growth."
+      },
+      "month_12": {
+        "followers": "20,000-50,000",
+        "engagement_rate": "0.3-1.5%",
+        "posts_total": "400-700",
+        "key_metric": "Regular 200-500 likes per post, recognized within JP AI art community",
+        "evidence": "@AIart_yama94 at 37K with 1,075 tweets. JP has lower raw numbers but higher impression-based rates and more dedicated audience (higher bookmark rates)."
+      },
+      "breakout_scenario": {
+        "followers": "50,000+",
+        "conditions": "Grok integration is currently the only proven path to JP breakout numbers. A single Grok viral moment (5M+ impressions) can transform trajectory. JP market is less saturated, so breakout threshold is lower.",
+        "evidence": "The gap between @ai_hyk (124K) and the next JP competitor is enormous. Grok mastery is the key differentiator."
+      }
+    }
+  },
+
+  "risk_management": {
+    "risks": [
+      {
+        "risk": "Shadow ban from automated engagement patterns",
+        "severity": "critical",
+        "mitigation": "Stay 30-40% below global rate limits. Random 30-120s delays between operations. Vary targets and timing daily. Monitor impression drops. If suspected, cease all outbound for 48-72 hours. @seisei_ai_1st warns X AI monitoring changes daily (143 likes, 68 bookmarks, 50K impressions on guide)."
+      },
+      {
+        "risk": "X platform policy changes requiring AI content labeling",
+        "severity": "critical",
+        "mitigation": "JP account already positioned transparently — minimal risk. EN account: maintain plausible deniability while having pivot plan ready. If X mandates AI labeling, pivot EN to 'digital artist' positioning. Archive all generation prompts and metadata for compliance."
+      },
+      {
+        "risk": "Account suspension or content restriction",
+        "severity": "critical",
+        "mitigation": "Maintain SFW content standards. Never post content violating X TOS. Keep images tasteful — suggestive is acceptable, explicit is not. Archive all content externally. If one account is suspended, the other remains operational."
+      },
+      {
+        "risk": "Algorithm change devaluing self-quote chains",
+        "severity": "medium",
+        "mitigation": "Self-quote chains are only 15% of content mix — not a dependency. If X discounts self-quotes, shift allocation to image_showcase or engagement_questions. Monitor chain performance vs standalone weekly."
+      },
+      {
+        "risk": "Grok integration being restricted or rate-limited",
+        "severity": "medium",
+        "mitigation": "Grok is X's own product, so restriction unlikely short-term. Keep Grok at 20-30% of content — not 100%. Have fallback strategies (questions, image-only) that do not depend on Grok."
+      },
+      {
+        "risk": "Market saturation in AI beauty niche",
+        "severity": "medium",
+        "mitigation": "Quality differentiation remains the primary moat. Most new entrants are spammy, high-frequency accounts that self-select out through low engagement. Focus on top 10% quality. Monitor new competitor emergence via Scout weekly scans."
+      },
+      {
+        "risk": "Follower count inflation without real engagement",
+        "severity": "medium",
+        "mitigation": "Monitor impression-based ER alongside follower-based ER. @hakoirikumatan (100K followers, 3 likes per post) is the cautionary example. Track bookmarks as quality signal — high bookmark rates indicate genuinely valued content."
+      },
+      {
+        "risk": "Image generation quality regression or tool changes",
+        "severity": "low",
+        "mitigation": "Maintain proficiency with multiple tools (Midjourney, Stable Diffusion, Flux). Test new models regularly. The quality bar is set by competitors producing 5,000+ like images."
+      }
+    ]
+  },
+
+  "principles": [
+    "Quality over quantity — every post must pass the '100 likes minimum' mental bar. Accounts posting 10x/day have 0.001% engagement; accounts at 1-3x/day average 5%+. The X algorithm actively suppresses low-quality volume posting. Data: @sessypuuh (51 tweets, 38% ER) vs @Lux_aeterna_ (31,552 tweets, 0.001% ER).",
+    "Image is king — the visual IS the content, text supports the image. Media posts get 2.5x more likes than text-only (1,833 vs 745). @yuumispm reached 12K followers with 16 image-only posts. Never post a mediocre image with great text — the image must carry the post.",
+    "Separate markets, separate strategies — EN and JP have fundamentally different audiences, text preferences, engagement patterns, and persona requirements. Accounts straddling both markets (@PinUpGirl_AI, @Lux_aeterna_) have the worst engagement rates in the entire dataset. Never cross-post or merge strategies.",
+    "Authenticity of voice over volume of content — maintain persona consistency in every single post. JP audiences value character consistency (@yunaelegant's daily warm greetings). EN audiences value casual confidence (@sessypuuh's 'Am I ur type?'). Breaking character destroys months of trust-building.",
+    "Innovate on engagement format, not just image quality — @ai_hyk's Grok integration produces more engagement than all other JP competitors combined (5.6M impressions from one technique). Format innovation (Grok, self-quote chains, interactive content) creates disproportionate returns vs incrementally better images.",
+    "Bookmarks are the hidden algorithm signal — high bookmark-to-like ratios (>20%) strongly correlate with algorithmic reach. @ai_hyk's 75% bookmark-to-like ratio drove 5.6M impressions. Create content worth saving, not just liking. Bookmarks indicate content that users want to revisit.",
+    "Follow few, be followed by many — top performers maintain extreme follower-to-following ratios. @imrubyreid: 691K/35, @katekarsyn: 105K/3, @sessypuuh: 7.7K/8. Low following count signals selectivity and perceived status. This is not vanity — it is a genuine algorithmic and social signal.",
+    "Shadow ban prevention is non-negotiable — one shadow ban can undo months of growth overnight. Stay conservative on outbound limits (30-40% below hard caps). Vary patterns. Monitor reach. When in doubt, do less. X AI monitoring evolves daily per @seisei_ai_1st's expert guidance.",
+    "The algorithm rewards less posting, not more — X now uses AI to evaluate content quality before distributing. Posts judged low-quality are suppressed even from followers' feeds. The era of volume posting is over. Each post must genuinely earn its place in the For You feed.",
+    "Data-driven iteration, not opinion-driven changes — every strategic decision must be traceable to competitor data, engagement metrics, or tested results. If data shows short text outperforms long text by 12x (2,043 vs 168 avg likes in EN), that is the strategy. Override data only with strong counter-evidence from own account performance.",
+    "Patience compounds — @imrubyreid built 691K with 13 posts. @sessypuuh built 38% ER with 51 posts. Growth in this niche is exponential, not linear. One viral post can transform an account's trajectory. Invest in creating conditions for viral moments rather than grinding out daily content.",
+    "Two accounts, two personalities, one quality standard — the EN and JP accounts should feel like they come from different people but maintain the same uncompromising quality bar for images. Differentiation is in voice, tone, and content format — never in image quality."
+  ]
+}

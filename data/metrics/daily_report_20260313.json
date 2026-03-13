@@ -1,0 +1,248 @@
+{
+  "date": "2026-03-13",
+  "generated_at": "2026-03-13T22:00:00+09:00",
+  "accounts": {
+    "EN": {
+      "followers": 8,
+      "followers_change": 3,
+      "total_likes": 0,
+      "account_metrics": {
+        "account": "EN",
+        "date": "2026-03-13",
+        "followers": 8,
+        "following": 41,
+        "total_posts": 35,
+        "followers_change": 3,
+        "following_change": 1
+      },
+      "anomaly": true,
+      "anomaly_detail": "+3 followers today (5→8, +60%) with no pipeline-published posts. total_posts jumped from 28 (Mar 12) to 35 (Mar 13) = +7 posts net. One post is confirmed pipeline-published (EN_20260312_01 'would u swipe right? 👀', tweet_id 2032145106837610741, posted 2026-03-13T02:22 JST). The remaining +6 posts are untracked — no content plan, no metrics record, no pipeline state. Operator likely posted manually outside the pipeline. The +3 follower gain may be partly attributable to EN_20260312_01 going live, partly to the manual posts, or to organic discovery from prior content. Following increased +1 (40→41) — likely manual follow by operator.",
+      "posts_today": 0,
+      "posts_today_note": "No pipeline posts tracked for Mar 13 (metrics_20260313_EN.json post_metrics array is empty). EN_20260312_01 was published at 02:22 JST today from the Mar 12 content plan. 3 additional Mar 12 pipeline posts (EN_20260312_02 image_showcase 'deadly', EN_20260312_03 grok_interactive 'hey @grok now put me in a leather jacket', EN_20260312_04 self_quote_chains 'u were warned') remain in 'approved' status — not yet posted. Additionally, +6 untracked posts appeared in account total — likely manual operator posts outside the pipeline with no associated tweet IDs or metrics.",
+      "post_metrics": [],
+      "totals": {
+        "likes": 0,
+        "retweets": 0,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 0
+      },
+      "category_breakdown": {
+        "engagement_questions": {
+          "posts": 1,
+          "likes": 2,
+          "retweets": 1,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 1,
+          "total_engagement": 4,
+          "avg_engagement_per_post": 4.0,
+          "rank": 1,
+          "note": "Historical data from Mar 9 (EN_20260309_01 'Am I your type? 👀', measured at ~37h post-publish). No new tracked posts in this category since Mar 9. Mar 12 plan has 1 post (EN_20260312_01 'would u swipe right? 👀') now published but no metrics captured yet."
+        },
+        "image_showcase": {
+          "posts": 1,
+          "likes": 2,
+          "retweets": 1,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 1,
+          "total_engagement": 4,
+          "avg_engagement_per_post": 4.0,
+          "rank": 1,
+          "note": "Historical data from Mar 9 (EN_20260309_02, measured at ~33h). Tied for top category. EN_20260312_02 'deadly' remains in 'approved' status, not yet posted."
+        },
+        "grok_interactive": {
+          "posts": 1,
+          "likes": 1,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 1,
+          "avg_engagement_per_post": 1.0,
+          "rank": 3,
+          "note": "Historical data from Mar 9 (EN_20260309_03, measured at ~20h). Lower engagement likely due to short measurement window and low follower count at time of posting. EN_20260312_03 'hey @grok now put me in a leather jacket' remains in 'approved' status, not yet posted."
+        },
+        "self_quote_chains": {
+          "posts": 1,
+          "likes": 0,
+          "retweets": 0,
+          "replies": 0,
+          "quotes": 0,
+          "bookmarks": 0,
+          "total_engagement": 0,
+          "avg_engagement_per_post": 0.0,
+          "rank": 4,
+          "note": "Historical data from Mar 9 (EN_20260309_04, measured at ~0h — unmeasured artifact). EN_20260312_04 'u were warned' remains in 'approved' status, not yet posted."
+        }
+      },
+      "best_performing_post": {
+        "post_id": "EN_20260309_01",
+        "category": "engagement_questions",
+        "text": "Am I your type? 👀",
+        "ab_test_variant": "A",
+        "likes": 2,
+        "retweets": 1,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 1,
+        "total_engagement": 4,
+        "note": "Unchanged from Mar 12 report — still the top pipeline post. Tied with EN_20260309_02 (image_showcase, variant B). No new pipeline posts have had metrics collected since Mar 9. EN_20260312_01 is now live but metrics not yet captured."
+      },
+      "ab_test_evaluation": {
+        "variable": "Caption style: provocative question vs ambient statement",
+        "variant_a": "Provocative question format (e.g., 'Am I your type?', 'would u swipe right?')",
+        "variant_b": "Ambient statement format (e.g., 'golden hour hits different', '.@grok put me in a bikini')",
+        "test_period": "2026-03-08 to 2026-03-12 (5-day window — officially expired)",
+        "status": "expired_insufficient_data",
+        "verdict": "insufficient_data",
+        "data_points": {
+          "variant_a": {
+            "posts": 2,
+            "total_likes": 2,
+            "total_retweets": 1,
+            "total_engagement": 4,
+            "avg_engagement": 2.0
+          },
+          "variant_b": {
+            "posts": 2,
+            "total_likes": 3,
+            "total_retweets": 1,
+            "total_engagement": 5,
+            "avg_engagement": 2.5
+          }
+        },
+        "directional_signal": "Variant B (ambient statement) shows marginally higher average engagement (2.5 vs 2.0) but 2 data points per variant is far too small for statistical significance. The test window expired due to the 4-day posting gap (Mar 10-13). Competitor data validates both styles at scale: ambient (@imrubyreid 'lord have mercy...' 21,948 likes) and question (@IsabellaCruz_47 'Rate me from 1 to 10' 20,522 likes). Caption style itself is not the limiting variable — posting volume and follower base are the binding constraints at this stage.",
+        "action": "Retire current test. Design a new A/B test on a different variable (recommended: image style — mirror selfie vs outdoor/lifestyle) when next pipeline runs. The Mar 12 content plan posts, if published, can serve as first data points for the new test cycle."
+      },
+      "engagement_trend": {
+        "followers": {"yesterday": 5, "today": 8, "change_pct": 60.0, "direction": "up"},
+        "following": {"yesterday": 40, "today": 41, "change_pct": 2.5, "direction": "up"},
+        "total_posts": {"yesterday": 28, "today": 35, "change_pct": 25.0, "direction": "up"},
+        "likes": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"},
+        "retweets": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"},
+        "replies": {"yesterday": 0, "today": 0, "change_pct": 0.0, "direction": "flat"}
+      },
+      "engagement_trend_note": "Engagement totals from pipeline posts are unchanged from Mar 12 (no new pipeline post metrics captured). The +3 follower gain is organic growth with no corresponding measurable engagement event from tracked posts — source is ambiguous between EN_20260312_01 going live and the +6 untracked manual posts.",
+      "outbound_summary": {
+        "date_of_outbound": "2026-03-12",
+        "source_file": "data/outbound_log_20260312.json",
+        "note": "No outbound ran on 2026-03-13. Summary reflects last outbound (Mar 12).",
+        "likes_given": 7,
+        "replies_attempted": 3,
+        "replies_sent": 0,
+        "replies_failed": 3,
+        "follows_executed": 0,
+        "follows_skipped": 2,
+        "targets_engaged": {
+          "@JosephinaM3131": {"likes": 1, "reply": "not_attempted", "follow": "skipped_already_following"},
+          "@Angelwithcakee": {"likes": 2, "reply": "failed_403", "follow": "not_attempted"},
+          "@yogana_19": {"likes": 3, "reply": "failed_403", "follow": "not_attempted"},
+          "@leahyunaxo": {"likes": 1, "reply": "failed_403", "follow": "skipped_already_following"}
+        },
+        "failed_replies": [
+          {
+            "target": "@Angelwithcakee",
+            "tweet_url": "https://x.com/Angelwithcakee/status/2028624501857034601",
+            "reply_text": "everything about this honestly 😭 genuinely cannot fault it",
+            "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+          },
+          {
+            "target": "@yogana_19",
+            "tweet_url": "https://x.com/yogana_19/status/2031817182217474247",
+            "reply_text": "okay I said what I said and I'm not taking it back 🔥",
+            "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+          },
+          {
+            "target": "@leahyunaxo",
+            "tweet_url": "https://x.com/leahyunaxo/status/2031826764788298122",
+            "reply_text": "this stopped my scroll for a full minute I had to say something",
+            "reason": "API 403 — reply restricted (account not mentioned/engaged by author)"
+          }
+        ]
+      }
+    },
+    "JP": {
+      "followers": 0,
+      "followers_change": 0,
+      "total_likes": 0,
+      "account_metrics": null,
+      "anomaly": false,
+      "anomaly_detail": null,
+      "posts_today": 0,
+      "post_metrics": [],
+      "totals": {
+        "likes": 0,
+        "retweets": 0,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 0
+      },
+      "category_breakdown": {},
+      "best_performing_post": null,
+      "ab_test_evaluation": null,
+      "engagement_trend": null,
+      "outbound_summary": null,
+      "note": "JP account is suspended. No JP data available. All JP fields are null placeholders."
+    }
+  },
+  "alerts": [
+    {
+      "level": "critical",
+      "account": "EN",
+      "type": "untracked_posts_anomaly",
+      "message": "total_posts jumped from 28 (Mar 12) to 35 (Mar 13) = +7 posts net. 1 post is confirmed pipeline-published (EN_20260312_01, tweet_id 2032145106837610741, 2026-03-13T02:22 JST). The remaining +6 posts are untracked — no content plan entries, no tweet IDs, no metrics. Operator action required: confirm whether these are manual posts and provide tweet IDs for metrics tracking."
+    },
+    {
+      "level": "warn",
+      "account": "EN",
+      "type": "reply_restriction_persists",
+      "message": "API replies continue to fail with 403 on ALL attempts across Mar 9, 10, 11, 12 (5 consecutive days). 3 failed replies from Mar 12 outbound still need manual posting. Restriction is X spam prevention for new/low-follower accounts — expected to lift with organic account growth."
+    },
+    {
+      "level": "warn",
+      "account": "EN",
+      "type": "pipeline_gap",
+      "message": "No pipeline ran on Mar 13 (no new strategy, content plan, or outbound). 3 approved posts from Mar 12 plan (EN_20260312_02, 03, 04) remain unposted. Account is running well below the 4-posts/day cadence target. Recommend resuming pipeline tomorrow."
+    },
+    {
+      "level": "info",
+      "account": "EN",
+      "type": "organic_growth_signal",
+      "message": "+3 followers today (5→8, +60%) with no tracked outbound or new approved pipeline posts. Possible sources: EN_20260312_01 going live at 02:22 JST, 6 untracked manual posts, or lagged discovery from prior content. First meaningful follower gain since launch — early traction signal worth monitoring."
+    },
+    {
+      "level": "info",
+      "account": "EN",
+      "type": "ab_test_expired",
+      "message": "A/B test (caption style: provocative question vs ambient statement) expired after 5-day window with insufficient data (2 posts per variant). Should be retired. New test recommended on next active posting phase — suggested variable: image style (mirror selfie vs outdoor lifestyle)."
+    }
+  ],
+  "manual_reply_escalation": {
+    "account_handle": "@meruru_tcbn",
+    "note": "The following replies from Mar 12 outbound failed via API (403). Please post manually from @meruru_tcbn if still relevant.",
+    "replies": [
+      {
+        "target": "@Angelwithcakee",
+        "reply_text": "everything about this honestly 😭 genuinely cannot fault it",
+        "tweet_url": "https://x.com/Angelwithcakee/status/2028624501857034601"
+      },
+      {
+        "target": "@yogana_19",
+        "reply_text": "okay I said what I said and I'm not taking it back 🔥",
+        "tweet_url": "https://x.com/yogana_19/status/2031817182217474247"
+      },
+      {
+        "target": "@leahyunaxo",
+        "reply_text": "this stopped my scroll for a full minute I had to say something",
+        "tweet_url": "https://x.com/leahyunaxo/status/2031826764788298122"
+      }
+    ]
+  },
+  "telegram_report": "Daily Report — Mar 13\n\n@meruru_tcbn (EN)\n Followers: 8 (+3, +60%) | Following: 41 (+1)\n First significant organic growth — 3 new followers with no new approved pipeline posts!\n total_posts: 28→35 (+7): 1 pipeline (EN_20260312_01 'would u swipe right?') + 6 untracked\n\nHistorical pipeline engagement (Mar 9, only measured posts):\n engagement_questions: 4 | image_showcase: 4 | grok_interactive: 1 | self_quote_chains: 0\n\nMar 12 outbound:\n 7 likes (4 targets) | 0 replies (3 failed 403) | 0 follows (2 already following)\n\nPending:\n 3 approved posts still waiting (EN_20260312_02, 03, 04)\n A/B test expired — recommend new test on next pipeline run\n\nJP: suspended",
+  "telegram_alerts": [
+    "ANOMALY @meruru_tcbn — +7 posts (28→35). 1 confirmed pipeline (EN_20260312_01). Are the other +6 manual posts? Tweet IDs needed for metrics tracking.",
+    "3 replies from Mar 12 outbound still need manual posting (API 403 blocking all replies, 5 consecutive days)."
+  ]
+}

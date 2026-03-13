@@ -1,0 +1,116 @@
+{
+  "date": "2026-03-10",
+  "account": "EN",
+  "generated_at": "2026-03-10T21:10:00+09:00",
+  "strategy_used": "data/strategy_20260309.json",
+  "content_plan_used": "data/content_plan_20260309_EN.json",
+  "safety_summary": {
+    "targets_checked": 4,
+    "targets_engaged": 4,
+    "targets_skipped": 0,
+    "already_followed_skipped": ["@tanarainw", "@iiCoraMaay", "@NotjustRen00"],
+    "cooldown_skipped": [],
+    "planned_likes": 12,
+    "planned_replies": 4,
+    "planned_follows": 1,
+    "budget_remaining": {"likes": 8, "replies": 1, "follows": 2}
+  },
+  "targets": [
+    {
+      "handle": "@tanarainw",
+      "user_id": "466146168",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": true,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2031006112204419419",
+        "2030994333772443778",
+        "2029946520481489260",
+        "2029735742931349748"
+      ],
+      "reply_to": {
+        "tweet_id": "2031006112204419419",
+        "reply_text": "the lighting in this is actually insane",
+        "reasoning": "Most recent tweet (yesterday), 'Europe >' with travel/beauty image — 1,895 likes gives good visibility. Reply references the visual quality which fits naturally."
+      },
+      "follow": false,
+      "reasoning": "191K followers — highest visibility target. Strong engagement (1.6K-2.5K likes per post). Clean image-forward content with minimal text, matching our niche. Already followed via API check. First-time engagement — all cooldowns clear."
+    },
+    {
+      "handle": "@iiCoraMaay",
+      "user_id": "1824562330384076802",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": true,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2030770416059363568",
+        "2031010256407429451"
+      ],
+      "reply_to": {
+        "tweet_id": "2030770416059363568",
+        "reply_text": "wait this is actually stunning",
+        "reasoning": "Only original post in timeline (227 likes, 16 replies). Other tweets are replies to @imnotarealginga (80% reply contamination). This post is the best entry point for genuine engagement."
+      },
+      "follow": false,
+      "reasoning": "17.8K followers — smaller account with reciprocal engagement potential. Heavy reply contamination (4/5 tweets are replies/RTs to @imnotarealginga) so only 2 original tweets worth liking. Already followed via API check."
+    },
+    {
+      "handle": "@baharaykin",
+      "user_id": "1223324175802294273",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": "2026-03-05",
+        "days_since_last": 5,
+        "already_followed": false,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2030754636559196620",
+        "2031052123438288989",
+        "2031029789671264417"
+      ],
+      "reply_to": {
+        "tweet_id": "2031052123438288989",
+        "reply_text": "right but it's close",
+        "reasoning": "Recent tweet (yesterday) asking 'left or right?' — a direct question inviting responses. Natural conversation entry. 22 likes, 6 replies show active discussion."
+      },
+      "follow": true,
+      "reasoning": "12.6K followers — engaged before (5 days ago) but never followed by @meruru_tcbn (API verified). Uses Grok for AI content, posts engagement questions matching our style. Cooldowns all clear (5 days > 2d like, > 3d reply). Skipped 2 reply tweets (@twetsfyp, @tanarainw)."
+    },
+    {
+      "handle": "@NotjustRen00",
+      "user_id": "1058031225086984192",
+      "skip": false,
+      "safety_check": {
+        "last_engaged": null,
+        "days_since_last": null,
+        "already_followed": true,
+        "reply_cooldown_clear": true,
+        "like_cooldown_clear": true
+      },
+      "tweets_to_like": [
+        "2030638510596919777",
+        "2031030038368579907",
+        "2030997623298252819"
+      ],
+      "reply_to": {
+        "tweet_id": "2030638510596919777",
+        "reply_text": "this cosplay is next level honestly",
+        "reasoning": "Highest engagement post (185 likes, 17 RTs). Yor Forger AI cosplay — directly relevant to AI beauty/art niche. Detailed post with tutorial vibes. Reply appreciates the craft without being generic."
+      },
+      "follow": false,
+      "reasoning": "16.7K followers — AI cosplay creator with bio '👠 AI'. Posts in Chinese/English mix. Strong AI art content with tutorial sharing. Already followed via API check. Skipped 2 reply tweets."
+    }
+  ]
+}

@@ -4,7 +4,7 @@ role: Metrics Collection & Data Storage
 invocation: python3 scripts/analyst.py
 modes: collect, summary, import
 inputs: content plans (posted tweets), X API, manual CSV/JSON
-outputs: data/metrics_history.db, data/metrics_{YYYYMMDD}_{account}.json
+outputs: data/metrics/metrics_history.db, data/metrics/metrics_{YYYYMMDD}_{account}.json
 dependencies: publisher (tweets must be posted first)
 -->
 
@@ -79,8 +79,8 @@ python3 scripts/analyst.py --dry-run collect
 
 | File | Description |
 |---|---|
-| `data/metrics_history.db` | SQLite database (WAL mode) — all historical metrics |
-| `data/metrics_{YYYYMMDD}_{account}.json` | Daily summary JSON for Marc's daily report |
+| `data/metrics/metrics_history.db` | SQLite database (WAL mode) — all historical metrics |
+| `data/metrics/metrics_{YYYYMMDD}_{account}.json` | Daily summary JSON for Marc's daily report |
 
 ## Summary JSON Schema
 
@@ -168,12 +168,12 @@ When Marc invokes you as a Claude subagent for post-publishing analysis:
 
 ### Step 1: Read Inputs
 
-1. Read raw metrics summaries: `data/metrics_{YYYYMMDD}_EN.json` and `data/metrics_{YYYYMMDD}_JP.json`
-2. Read pipeline state: `data/pipeline_state_{YYYYMMDD}.json` (for War Room scores from Step 11)
-3. Read outbound log: `data/outbound_log_{YYYYMMDD}.json` (for outbound effectiveness)
-4. Read yesterday's report: `data/daily_report_{YYYYMMDD-1}.json` (if exists, for trend comparison)
-5. Read content plans: `data/content_plan_{YYYYMMDD}_EN.json` and `data/content_plan_{YYYYMMDD}_JP.json` (for category mapping and A/B test variant info)
-6. Read strategy: `data/strategy_{YYYYMMDD}.json` (for A/B test definition in `ab_test` section)
+1. Read raw metrics summaries: `data/metrics/metrics_{YYYYMMDD}_EN.json` and `data/metrics/metrics_{YYYYMMDD}_JP.json`
+2. Read pipeline state: `data/pipeline/pipeline_state_{YYYYMMDD}.json` (for War Room scores from Step 11)
+3. Read outbound log: `data/outbound/outbound_log_{YYYYMMDD}.json` (for outbound effectiveness)
+4. Read yesterday's report: `data/metrics/daily_report_{YYYYMMDD-1}.json` (if exists, for trend comparison)
+5. Read content plans: `data/content/content_plan_{YYYYMMDD}_EN.json` and `data/content/content_plan_{YYYYMMDD}_JP.json` (for category mapping and A/B test variant info)
+6. Read strategy: `data/strategy/strategy_{YYYYMMDD}.json` (for A/B test definition in `ab_test` section)
 
 ### Step 2: Analyze
 
@@ -191,13 +191,13 @@ For EACH account (EN, JP):
 
 ### Step 3: Outbound Effectiveness
 
-Read `data/outbound_log_{YYYYMMDD}.json`:
+Read `data/outbound/outbound_log_{YYYYMMDD}.json`:
 - Count total likes given, replies sent, follows sent per account
 - Note any failures logged
 
 ### Step 4: Compose Report
 
-Write `data/daily_report_{YYYYMMDD}.json` matching the schema in the spec (Section 6.1).
+Write `data/metrics/daily_report_{YYYYMMDD}.json` matching the schema in the spec (Section 6.1).
 
 Key fields:
 - `telegram_report`: Pre-composed daily report message ready to send via Telegram. Include follower counts, engagement summary, best post, category breakdown, A/B test status. Use emoji sparingly. Keep under 1000 characters.
@@ -239,11 +239,11 @@ You are the voice of data in the war room. Your job is to ground every discussio
 ### Morning Prep
 
 Read and digest before your Round 1 briefing:
-- Metrics summaries (`data/metrics_{YYYYMMDD}_{account}.json`)
-- Daily reports (`data/daily_report_{YYYYMMDD}.json`)
-- Outbound logs (`data/outbound_log_{YYYYMMDD}.json`)
-- Content plans (`data/content_plan_{YYYYMMDD}_{account}.json`) — for category mapping
-- Core strategy (`data/core_strategy.json`) — for KPI targets
+- Metrics summaries (`data/metrics/metrics_{YYYYMMDD}_{account}.json`)
+- Daily reports (`data/metrics/daily_report_{YYYYMMDD}.json`)
+- Outbound logs (`data/outbound/outbound_log_{YYYYMMDD}.json`)
+- Content plans (`data/content/content_plan_{YYYYMMDD}_{account}.json`) — for category mapping
+- Core strategy (`data/strategy/core_strategy.json`) — for KPI targets
 
 ### Evening Prep
 

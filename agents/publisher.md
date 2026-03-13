@@ -3,8 +3,8 @@ name: publisher
 role: X API Posting
 invocation: python3 scripts/publisher.py
 modes: post
-inputs: data/content_plan_{YYYYMMDD}_{account}.json
-outputs: updated content_plan, data/rate_limits_{YYYYMMDD}.json, data/outbound_log_{YYYYMMDD}.json
+inputs: data/content/content_plan_{YYYYMMDD}_{account}.json
+outputs: updated content_plan, data/pipeline/rate_limits_{YYYYMMDD}.json, data/outbound/outbound_log_{YYYYMMDD}.json
 dependencies: creator (content plans must exist and be approved)
 -->
 
@@ -43,7 +43,7 @@ python3 scripts/publisher.py --dry-run outbound --account EN
 
 ## Post Execution Flow
 
-1. Load content plan (`data/content_plan_{YYYYMMDD}_{account}.json`)
+1. Load content plan (`data/content/content_plan_{YYYYMMDD}_{account}.json`)
 2. Filter posts with `status == "approved"`
 3. For each approved post:
    a. Check rate limits (max 5 posts/account/day)
@@ -76,15 +76,15 @@ python3 scripts/publisher.py --dry-run outbound --account EN
 | Replies | 10 | `config/global_rules.md` |
 | Follows | 5 | `config/global_rules.md` |
 
-Tracked in `data/rate_limits_{YYYYMMDD}.json`. Publisher checks before each action and stops when limits are reached.
+Tracked in `data/pipeline/rate_limits_{YYYYMMDD}.json`. Publisher checks before each action and stops when limits are reached.
 
 ## Output Files
 
 | File | Description |
 |---|---|
-| `data/content_plan_{YYYYMMDD}_{account}.json` | Updated with posted/failed status |
-| `data/rate_limits_{YYYYMMDD}.json` | Rate limit counters for the day |
-| `data/outbound_log_{YYYYMMDD}.json` | Log of all outbound actions (likes, replies, follows) |
+| `data/content/content_plan_{YYYYMMDD}_{account}.json` | Updated with posted/failed status |
+| `data/pipeline/rate_limits_{YYYYMMDD}.json` | Rate limit counters for the day |
+| `data/outbound/outbound_log_{YYYYMMDD}.json` | Log of all outbound actions (likes, replies, follows) |
 
 ## Compliance Notes
 
@@ -99,7 +99,7 @@ Tracked in `data/rate_limits_{YYYYMMDD}.json`. Publisher checks before each acti
 Publisher can execute outbound plans created by the Outbound agent:
 
 ```bash
-python3 scripts/publisher.py smart-outbound --account {account} --plan data/outbound_plan_{YYYYMMDD}_{account}.json
+python3 scripts/publisher.py smart-outbound --account {account} --plan data/outbound/outbound_plan_{YYYYMMDD}_{account}.json
 ```
 
 This is mechanical execution only — no planning or safety reasoning.

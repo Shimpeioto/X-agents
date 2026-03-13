@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategy Feedback — 2026-03-12 — 2026-03-12</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Strategy Feedback — 2026-03-12</h1>
+  <div class="subtitle">Generated from strategy_feedback_20260312.json</div>
+  <div class="date">2026-03-12</div>
+</div>
+<nav class="nav">
+  <a href="#daily_report_used">Daily Report Used</a>
+  <a href="#strategy_used">Strategy Used</a>
+  <a href="#accounts">Accounts</a>
+</nav>
+<div class="container">
+<section id="metadata">
+<h2>Report Info</h2>
+<div class="card">
+  <div style="margin: 4px 0"><strong class="text-accent">Date:</strong> <span class="text-muted">2026-03-12</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Generated At:</strong> <span class="text-muted">2026-03-12T22:00:00+09:00</span></div>
+</div>
+</section>
+<section id="daily_report_used">
+<h2>Daily Report Used</h2>
+<p>data/daily_report_20260312.json</p>
+</section>
+<section id="strategy_used">
+<h2>Strategy Used</h2>
+<p>data/strategy_20260312.json</p>
+</section>
+<section id="accounts">
+<h2>Accounts</h2>
+<div class="card">
+  <h3><span class="tag tag-en">EN</span> EN Account</h3>
+<h4>Category Performance</h4>
+<div class="table-wrap"><table>
+<tr><th>Category</th><th>Posts Count</th><th>Total Likes</th><th>Avg Engagement Per Post</th><th>Rank</th><th>Vs Average</th><th>Recommendation</th><th>Note</th></tr>
+<tr><td>engagement_questions</td><td>1</td><td>2</td><td>4</td><td>1</td><td>+78%</td><td>maintain_or_increase</td><td>Based on EN_20260309_01 measured at 37h post-publish. Tied for best with image_showcase. Very limited sample (1 post).</td></tr>
+<tr><td>image_showcase</td><td>1</td><td>2</td><td>4</td><td>1</td><td>+78%</td><td>maintain_or_increase</td><td>Based on EN_20260309_02 measured at 33h. Tied for best. Both top categories confirm that image-first content with short captions works.</td></tr>
+<tr><td>grok_interactive</td><td>1</td><td>1</td><td>1</td><td>3</td><td>-56%</td><td>maintain</td><td>Based on EN_20260309_03 measured at 20h. Lower engagement likely due to format novelty + low follower count limiting distribution, NOT format weakness. Competitor data strongly validates Grok interactive. Maintain at current allocation — reassess after 10+ Grok posts.</td></tr>
+<tr><td>self_quote_chains</td><td>1</td><td>0</td><td>0</td><td>4</td><td>-100%</td><td>maintain</td><td>Based on EN_20260309_04 measured at 0h — essentially unmeasured. Zero engagement is an artifact of measurement timing, not content quality. Cannot draw conclusions. Maintain allocation.</td></tr>
+</table></div>
+<h4>Ab Test Evaluation</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Variable:</strong> <span class="text-muted">Caption style: provocative question vs ambient statement</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Status:</strong> <span class="text-muted">insufficient_data</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Days Elapsed:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Days Remaining:</strong> <span class="text-muted">0</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Early Signal:</strong> <span class="text-muted">Variant B (ambient statement) marginally leads — avg 2.5 vs 2.0 engagement per post</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Confidence:</strong> <span class="text-muted">low</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Conclusion:</strong> <span class="text-muted">Test window expired (5/5 days) but only 4 posts were published (all on Mar 9), giving just 2 data points per variant. Sample far too small for any conclusion. Competitor trending data validates BOTH styles at massive scale (@imrubyreid &#x27;lord have mercy...&#x27; 21,948 likes ambient; @IsabellaCruz_47 &#x27;Rate me from 1 to 10&#x27; 20,522 likes question). Recommendation: design a NEW A/B test on a DIFFERENT variable since caption style is validated by competitor evidence. Suggested next test: posting time optimization (morning vs evening US time) or image style (mirror selfie vs editorial).</span></div>
+</div>
+<h4>Winner</h4>
+<h4>Posting Time Effectiveness</h4>
+<div class="table-wrap"><table>
+<tr><th>Slot</th><th>Time</th><th>Avg Engagement</th><th>Rank</th><th>Note</th></tr>
+<tr><td>1</td><td>13:00 UTC</td><td>4</td><td>1</td><td>Measured at 37h — longest measurement window, highest engagement</td></tr>
+<tr><td>2</td><td>17:00 UTC</td><td>4</td><td>1</td><td>Measured at 33h — tied for best</td></tr>
+<tr><td>3</td><td>21:00 UTC</td><td>1</td><td>3</td><td>Measured at 20h — shorter window may explain lower numbers</td></tr>
+<tr><td>4</td><td>00:30 UTC</td><td>0</td><td>4</td><td>Measured at 0h — essentially unmeasured, cannot rank</td></tr>
+</table></div>
+<h4>Outbound Effectiveness</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Total Likes Given:</strong> <span class="text-muted">16</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Replies Attempted:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Replies Succeeded:</strong> <span class="text-muted">0</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Follows:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Reciprocal Engagement:</strong> <span class="text-muted">0</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Note:</strong> <span class="text-muted">No reciprocal engagement detected — followers stayed flat at 5 (+0). All 4 reply attempts failed (403). The 403 restriction is X&#x27;s spam prevention for new/low-follower accounts. Outbound is currently likes-and-follows only. Consider pausing reply attempts until account gains standing, or continue escalating to operator for manual replies.</span></div>
+</div>
+<h4>Effective Targets</h4>
+<p class="text-muted">None</p>
+<h4>Ineffective Targets</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">@imrubyreid</li>
+  <li style="margin: 4px 0">@lucidevlinxyz</li>
+  <li style="margin: 4px 0">@yuumispm</li>
+  <li style="margin: 4px 0">@katekarsyn</li>
+</ul>
+<h4>Recommended Adjustments</h4>
+<div class="table-wrap"><table>
+<tr><th>Type</th><th>Confidence</th><th>Description</th><th>Rationale</th></tr>
+<tr><td>ab_test</td><td>medium</td><td>Close current caption style test (insufficient data after 5 days). Design new A/B test on image style: mirror selfie (slots 1,3) vs editorial/studio (slots 2,4). Both caption styles validated by competitor data at scale.</td><td>Only 4 posts across entire test period — cannot reach statistical significance. Competitor evidence validates both provocative questions and ambient statements equally. Image style variation is the next highest-leverage variable to test.</td></tr>
+<tr><td>content_mix</td><td>low</td><td>Maintain current content mix (engagement_questions 40%, image_showcase 25%, grok_interactive 20%, self_quote_chains 15%). No changes recommended.</td><td>Only 4 posts total (1 per category) with inconsistent measurement windows. Insufficient data to adjust mix. Engagement_questions and image_showcase tied at top, but sample too small. Need 10+ posts per category before making mix adjustments.</td></tr>
+<tr><td>posting_time</td><td>low</td><td>Maintain current posting schedule (13:00, 17:00, 21:00, 00:30 UTC). No changes recommended.</td><td>Measurement windows vary from 0h to 37h across slots. Cannot attribute engagement differences to time-of-day vs measurement duration. Need consistent 24h+ measurement for all slots before adjusting.</td></tr>
+<tr><td>outbound_target</td><td>medium</td><td>Rotate all 4 outbound targets (imrubyreid, lucidevlinxyz, yuumispm, katekarsyn) — all within cooldown period. Continue follow-only strategy until reply restriction lifts. Prioritize larger accounts (&gt;50K followers) for visibility value from likes.</td><td>Zero reciprocal engagement from 16 likes and 6 follows across Mar 11 targets. All reply attempts failed (403). Outbound ROI is currently unmeasurable. Fresh target rotation per cooldown rules is standard practice.</td></tr>
+</table></div>
+</div>
+</section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-03-12 12:49 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

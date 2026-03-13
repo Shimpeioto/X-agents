@@ -1,0 +1,614 @@
+{
+  "meeting_type": "comprehensive_agent_meeting",
+  "date": "2026-03-10",
+  "generated_at": "2026-03-10T22:30:00+09:00",
+  "title": "Comprehensive Strategic Review & 0→1000 Framework Integration",
+  "called_by": "Operator (via Marc)",
+  "attendees": ["Marc (COO)", "Analyst", "Scout", "Strategist"],
+  "mood": "Brutally honest. The operator is frustrated. Zero sugarcoating.",
+  "context": "Two weeks since project inception. EN account @meruru_tcbn has 3 followers (down from 6). Operator requested a wake-up call meeting with full data review and integration of the Japanese 0→1000 growth framework (設計×心理×アルゴリズム).",
+  "version": "v2_comprehensive",
+
+  "agenda": [
+    "1. Analyst: Performance data & hard numbers",
+    "2. Scout: Competitive landscape & our position",
+    "3. Strategist: Why we're failing & root causes",
+    "4. Strategist: 0→1000 Framework integration (設計×心理×アルゴリズム)",
+    "5. All: Our approach vs what winners do",
+    "6. Strategist: Revised action plan & path to 1000",
+    "7. Marc: Hard truths & operator action items"
+  ],
+
+  "section_1_analyst_report": {
+    "title": "Performance Data — The Unvarnished Numbers",
+    "speaker": "Analyst",
+    "tone": "Clinical. Just the numbers.",
+    "account_snapshot": {
+      "handle": "@meruru_tcbn",
+      "display_name": "meruru 🌙",
+      "bio": "22 yo Japanese girl🌙 addicted SNS 📱",
+      "followers": 3,
+      "following": 25,
+      "total_tweet_count_api": 13,
+      "media_count": 4,
+      "likes_given": 20,
+      "listed_count": 0,
+      "follower_trajectory": "DECLINING — was 6 on Mar 5, now 3. Lost 50% of followers.",
+      "account_age_days": 14,
+      "days_actually_posting": 4
+    },
+    "content_published": {
+      "total_original_posts": 6,
+      "image_posts": 4,
+      "grok_posts": 2,
+      "outbound_replies": 7,
+      "posts_per_day_actual": 0.43,
+      "posts_detail": [
+        {
+          "date": "2026-03-06",
+          "text": "(image only, no caption)",
+          "type": "image_post",
+          "impressions": 96,
+          "likes": 2,
+          "retweets": 2,
+          "replies": 1,
+          "bookmarks": 0,
+          "engagement_rate_impression": "5.21%"
+        },
+        {
+          "date": "2026-03-07",
+          "text": "Hi",
+          "type": "image_post",
+          "impressions": 283,
+          "likes": 2,
+          "retweets": 2,
+          "replies": 0,
+          "quotes": 1,
+          "bookmarks": 0,
+          "engagement_rate_impression": "1.77%",
+          "note": "Highest impressions — quote retweet amplified reach"
+        },
+        {
+          "date": "2026-03-07",
+          "text": "hey @grok remove white",
+          "type": "grok_quote_repost",
+          "impressions": 120,
+          "likes": 0,
+          "engagement_rate_impression": "0.83%",
+          "note": "Grok post — boring prompt, zero engagement"
+        },
+        {
+          "date": "2026-03-08",
+          "text": "hey @grok are you hungry?",
+          "type": "grok_image_post",
+          "impressions": 104,
+          "likes": 2,
+          "replies": 1,
+          "bookmarks": 0,
+          "engagement_rate_impression": "2.88%"
+        },
+        {
+          "date": "2026-03-08",
+          "text": "Sleepy",
+          "type": "image_post",
+          "impressions": 133,
+          "likes": 3,
+          "retweets": 1,
+          "bookmarks": 2,
+          "engagement_rate_impression": "4.51%",
+          "note": "BEST POST — bookmarks signal save-worthy content"
+        },
+        {
+          "date": "2026-03-09",
+          "text": "hey @grok remove white",
+          "type": "grok_quote_repost",
+          "impressions": 40,
+          "likes": 0,
+          "engagement_rate_impression": "2.50%",
+          "note": "Exact same Grok prompt as Mar 7. Repetitive and lazy."
+        }
+      ],
+      "aggregate": {
+        "total_impressions": 776,
+        "total_likes": 9,
+        "total_retweets": 5,
+        "total_replies": 4,
+        "total_quotes": 1,
+        "total_bookmarks": 2,
+        "total_engagements": 21,
+        "avg_impressions_per_post": 129,
+        "avg_likes_per_post": 1.5,
+        "avg_engagement_rate_impression": "2.71%"
+      }
+    },
+    "pipeline_efficiency": {
+      "pipeline_runs": 5,
+      "content_plans_generated": 17,
+      "posts_actually_published_on_active_account": 6,
+      "posts_on_wrong_account_iammeruru": 8,
+      "posts_stuck_as_draft_never_posted": 7,
+      "execution_rate": "35.3%",
+      "waste_rate": "64.7%",
+      "analyst_comment": "Almost two-thirds of our generated content was never published. 8 posts went to a shadowbanned account. 7 posts from Mar 7-8 were never approved. The pipeline generates content into a void."
+    },
+    "outbound_activity": {
+      "total_days_with_outbound": 2,
+      "first_outbound_date": "2026-03-09",
+      "days_with_zero_outbound": 12,
+      "total_likes_given": 32,
+      "total_replies_attempted": 8,
+      "total_replies_succeeded": 3,
+      "total_replies_failed_403": 5,
+      "reply_failure_rate": "62.5%",
+      "total_follows": 5,
+      "targets_engaged": ["@Angelwithcakee", "@yogana_19", "@IvoryLane_plus", "@HannaJonso", "@IsabellaCruz_47", "@Estherbron1", "@tanarainw", "@iiCoraMaay", "@baharaykin", "@NotjustRen00"],
+      "analyst_comment": "Outbound started 12 days late. When it finally started, replies mostly fail due to X's new-account restriction. Likes and follows work. Net effect on follower growth: zero or negative."
+    },
+    "jp_account": {
+      "status": "SUSPENDED — account not yet created",
+      "operations": "None"
+    },
+    "analyst_verdict": "The numbers tell a clear story: we've generated a lot of plans but shipped almost nothing. 6 posts in 14 days, 3 followers going in the wrong direction, and 62.5% of our outbound replies fail. The machine works — it just isn't being turned on consistently."
+  },
+
+  "section_2_scout_report": {
+    "title": "Competitive Landscape & Our Position",
+    "speaker": "Scout",
+    "data_source": "scout_report_20260309.json (41 competitors tracked)",
+    "en_market_overview": {
+      "competitors_tracked": 26,
+      "avg_followers": 141055,
+      "median_followers_approx": 50000,
+      "avg_engagement_rate": "3.71%",
+      "avg_posting_frequency": "4.6 posts/day"
+    },
+    "meruru_position": {
+      "followers_rank": "Dead last. 3 followers vs field average 141K.",
+      "engagement_quality": "2.71% impression ER — actually competitive when content IS seen",
+      "posting_frequency": "0.43/day vs field avg 4.6 — 10x below average",
+      "content_volume": "6 posts vs top performers with 50-300+",
+      "scout_comment": "Our content quality is not the problem. When people see our posts, they engage at a rate comparable to mid-tier competitors. The problem is that almost nobody sees our posts."
+    },
+    "role_models_for_our_stage": [
+      {
+        "handle": "@sessypuuh",
+        "followers": 7639,
+        "total_posts": 51,
+        "engagement_rate": "38.0%",
+        "posting_freq": "0.7/day",
+        "top_post_likes": 5413,
+        "lesson": "Quality-first growth. 51 posts → 7.6K followers. Zero hashtags. Proof that exceptional images + short provocative captions can achieve explosive growth even at moderate posting frequency.",
+        "key_difference_from_us": "Their images are jaw-dropping. Every single one. Ours are good-not-great."
+      },
+      {
+        "handle": "@Angelwithcakee",
+        "followers": 35139,
+        "total_posts": 56,
+        "engagement_rate": "4.48%",
+        "posting_freq": "1.2/day",
+        "lesson": "35K from 56 posts. Consistent aesthetic, engaging captions, zero hashtags. Our most direct blueprint.",
+        "key_difference_from_us": "They post consistently every day. We don't."
+      },
+      {
+        "handle": "@yuumispm",
+        "followers": 12025,
+        "engagement_rate": "17.5%",
+        "top_post_likes": 16177,
+        "lesson": "12K followers from ~17 posts. ONE viral image (16K likes) did most of the work. Proof that one extraordinary image can change everything.",
+        "key_difference_from_us": "They had THAT one image. We haven't had ours yet."
+      },
+      {
+        "handle": "@IsabellaCruz_47",
+        "followers": 91682,
+        "engagement_rate": "5.82%",
+        "posting_freq": "0.3/day",
+        "lesson": "91K followers, posts rarely. Quality so high that frequency barely matters at scale.",
+        "key_difference_from_us": "Professional-grade image quality that makes people stop scrolling."
+      }
+    ],
+    "key_competitive_patterns": [
+      "92.7% of top EN performers use ZERO hashtags — we follow this correctly",
+      "Ultra-short captions (<30 chars) correlate with 12x more likes — we're short but not provocative",
+      "Top 5 quality performers average 0.5-1.5 posts/day — NOT 5-10/day. Quality > volume.",
+      "Grok interactive is an emerging format — @ai_hyk got 7,880 likes on one Grok post",
+      "First 50 posts are the trust-building phase — X algorithm needs signal history before it amplifies",
+      "Successful accounts have a SIGNATURE LOOK — recognizable visual identity within 3 posts"
+    ],
+    "scout_bottom_line": "The market is booming for AI beauty content. X's algorithm actively promotes it. Competitors prove that explosive growth is possible even from zero. But our execution is nowhere near the quality and consistency bar needed to compete."
+  },
+
+  "section_3_root_cause_analysis": {
+    "title": "Why Our Strategy Isn't Delivering — Root Cause Analysis",
+    "speaker": "Strategist",
+    "diagnosis": "Strategy quality is A-tier. Execution quality is D-tier. The gap between what we plan and what we ship is catastrophic.",
+    "root_causes": [
+      {
+        "rank": 1,
+        "cause": "The Approval Bottleneck",
+        "severity": "CRITICAL",
+        "detail": "Content plans are generated daily, but the human operator must manually approve each post via Telegram. Mar 7: 3 planned, 0 posted. Mar 8: 2 planned, 0 posted. That's 5 posts — more than our total posted count — sitting unexecuted. The operator is running a startup. They cannot babysit a Telegram approval flow 4 times a day.",
+        "fix": "Batch approval (review week on Sunday, auto-publish) or trust threshold (auto-publish after 10 successful posts)"
+      },
+      {
+        "rank": 2,
+        "cause": "The 9-Day Launch Gap",
+        "severity": "CRITICAL",
+        "detail": "Account created Feb 25, first post Mar 6. New X accounts get an initial algorithmic boost window (7-14 days). We spent that entire window building infrastructure instead of posting. By the time we started, the algorithm classified us as dormant.",
+        "fix": "Cannot be undone. Must earn algorithmic trust the hard way through 30+ days of consistent daily posting."
+      },
+      {
+        "rank": 3,
+        "cause": "Wrong Account Migration",
+        "severity": "HIGH",
+        "detail": "Posted 8 tweets on @iammeruru (shadowbanned), then restarted on @meruru_tcbn from zero. Lost 8 posts of content and momentum.",
+        "fix": "Sunk cost. Focus entirely on @meruru_tcbn."
+      },
+      {
+        "rank": 4,
+        "cause": "Over-Engineering Before Shipping",
+        "severity": "HIGH",
+        "detail": "6 agents running daily for 3 followers. Strategy documents to posts ratio: ~50:1. Full pipeline per run takes hours of compute and produces JSON files nobody acts on.",
+        "fix": "Simplify: Creator daily, Scout + Strategist weekly."
+      },
+      {
+        "rank": 5,
+        "cause": "Image Quality Below the Bar",
+        "severity": "HIGH",
+        "detail": "In this niche, the image IS the product. Our best: 3 likes, 133 impressions. Competitors at similar stage: 100-500+ likes on breakout images. Algorithm gives us ~100 impressions to test with and we don't trigger amplification.",
+        "fix": "Generate 5-10 variants per slot, pick only the best. Build 5-day image buffer. Reverse-engineer top competitor images."
+      },
+      {
+        "rank": 6,
+        "cause": "Grok Posts Are Failing",
+        "severity": "MEDIUM",
+        "detail": "'hey @grok remove white' used TWICE — boring, uncreative. @ai_hyk gets 7,880 likes on creative Grok prompts. Our Grok posts average 0 likes.",
+        "fix": "Make Grok entertaining: '.@grok put me on a yacht', '.@grok anime version', '.@grok what do I look like as a blonde?'"
+      },
+      {
+        "rank": 7,
+        "cause": "No Community Presence Before Outbound",
+        "severity": "MEDIUM",
+        "detail": "Outbound with 3 followers and 6 posts. When someone sees a like from a 3-follower account, they don't visit. Profile too thin to convert.",
+        "fix": "Build content library first (20-30 posts), then ramp outbound."
+      },
+      {
+        "rank": 8,
+        "cause": "Follower Loss Signal Ignored",
+        "severity": "MEDIUM",
+        "detail": "6 → 3 followers = 50% churn. Should have triggered immediate investigation. People actively unfollowed us.",
+        "fix": "Profile overhaul + consistent posting to prevent further churn."
+      }
+    ],
+    "strategy_vs_execution_scorecard": {
+      "competitor_research": {"quality": "A", "note": "41 competitors, deep analysis. Excellent."},
+      "content_strategy": {"quality": "A", "note": "Pillars, hashtag policy, outbound framework — well-designed."},
+      "content_execution": {"quality": "D", "note": "6 posts in 14 days. Half the plans never posted."},
+      "image_quality": {"quality": "C+", "note": "Competitive ER but not stopping scrolls."},
+      "caption_quality": {"quality": "D", "note": "'Hi', 'Sleepy', 'hey @grok remove white' — zero hooks."},
+      "outbound_execution": {"quality": "D", "note": "Started 12 days late. Replies broken."},
+      "profile_optimization": {"quality": "F", "note": "Bio never optimized. No pinned post."},
+      "daily_consistency": {"quality": "F", "note": "9-day gap. Multiple zero-post days."}
+    }
+  },
+
+  "section_4_zero_to_1000_framework": {
+    "title": "0→1000 Framework (設計×心理×アルゴリズム) Applied to Our Account",
+    "speaker": "Strategist",
+    "framework_overview": "Growth from 0→1000 requires three forces in harmony: Design (設計), Psychology (心理), Algorithm (アルゴリズム). All three must score high. Zero on any axis = zero growth.",
+    "our_scores": {
+      "design": "4/10",
+      "psychology": "3/10",
+      "algorithm": "2/10",
+      "overall": "3/10 — which explains the 3 followers"
+    },
+
+    "design_axis": {
+      "title": "設計 (Design) — 4/10",
+      "principle": "Study 30 accounts. Design every profile element as a conversion funnel. Profile answers in 3 seconds: Who? What? Why follow?",
+      "what_we_did_right": [
+        "Studied 41 competitors (exceeds 30-account recommendation)",
+        "Developed clear content pillars from data",
+        "Established character positioning"
+      ],
+      "what_we_missed": [
+        "Profile optimization NEVER executed — analyzed competitors' bios but never redesigned our own",
+        "No pinned post strategy",
+        "No banner image optimization",
+        "No deliberate avatar selection",
+        "Framework says design these BEFORE posting. We posted without this foundation."
+      ],
+      "bio_audit": {
+        "current": "22 yo Japanese girl🌙 addicted SNS 📱",
+        "problems": [
+          "Does NOT answer 'Why follow?' — gives zero reason",
+          "Generic and forgettable",
+          "'22 yo Japanese girl' reads like a bot profile",
+          "Competitor bios: @imrubyreid ('most viral girl on X for a reason'), @katekarsyn ('i just want to play Fortnite'), @IsabellaCruz_47 ('Your favorite Colombian') — bold, memorable"
+        ],
+        "recommended_bios": ["your new obsession", "i know what you're thinking...", "the girl your gf warned you about", "you're staring btw", "most beautiful girl you'll never meet"]
+      }
+    },
+
+    "psychology_axis": {
+      "title": "心理 (Psychology) — 3/10",
+      "principle": "Target EMOTIONS not desires. Character × Worldview × Consistency. Every interaction feels 1-on-1 personal. People follow because of parasocial connection.",
+      "emotional_triggers": {
+        "winners": "'Am I ur type' (5,424 likes), 'Rate me 1 to 10' (20,670 likes), 'built like this and still single...' (20,329 likes)",
+        "us": "'Hi', 'Sleepy', 'hey @grok remove white' — triggers NOTHING",
+        "gap": "Short AND provocative is the formula. We have short. We don't have provocative."
+      },
+      "persona_depth": {
+        "current": "SHALLOW — concept exists but zero personality in posts. No voice, opinions, life details.",
+        "needed": [
+          "Backstory informing voice (where she lives, her vibe, what makes her unique)",
+          "Emotional arc across posts (not isolated images but a story unfolding)",
+          "Every post creates 'I want to respond' micro-moment",
+          "1-on-1 intimate feeling, not broadcast"
+        ]
+      },
+      "character_worldview_consistency": {
+        "formula": "Character × Worldview × Consistency",
+        "our_grade": "F — 6 posts, multi-day gaps, no consistent voice, mixed styles"
+      }
+    },
+
+    "algorithm_axis": {
+      "title": "アルゴリズム (Algorithm) — 2/10",
+      "three_critical_metrics": {
+        "初速反応率": {
+          "name": "Initial Response Rate (first 30 min)",
+          "importance": "Determines whether algorithm amplifies or suppresses",
+          "our_status": "FAILING — 3 followers = zero guaranteed first-30-min engagement. Algorithm tests with ~100 people, gets 0-3 likes, stops.",
+          "fix": "Until seed audience exists, images must be SO striking that random viewers stop scrolling"
+        },
+        "滞在時間": {
+          "name": "Dwell Time",
+          "importance": "How long people look at content. Higher = more distribution",
+          "our_status": "MIXED — Image posts probably decent dwell. Grok 'remove white' = near-zero dwell.",
+          "fix": "Every image worth zooming in on. Every caption makes someone pause."
+        },
+        "プロフィール遷移率": {
+          "name": "Profile Click-Through",
+          "importance": "Do viewers visit profile? High CTR = algorithm sees high-quality creator",
+          "our_status": "FAILING — 6 posts, boring bio, no pinned post. Visitors leave in 2 seconds.",
+          "fix": "Need 15-20 posts + optimized profile before this metric can improve"
+        }
+      },
+      "algorithmic_damage_done": [
+        "9-day dormancy flagged us as low-priority",
+        "Account switch means zero history",
+        "Inconsistent cadence confuses algorithm",
+        "Low engagement signals 'not worth distributing'"
+      ],
+      "recovery_plan": [
+        "Post every day for 30 days — teach algorithm we're consistent",
+        "Same times daily — regularity builds trust",
+        "Front-load best images in next 10 posts — each impression is a test",
+        "Self-quote chains to amplify reach"
+      ]
+    },
+
+    "framework_phase_mapping": [
+      {"phase": "Research (30 accounts)", "status": "COMPLETED ✓", "detail": "41 competitors analyzed. Best phase."},
+      {"phase": "Profile Design (ペルソナ設計)", "status": "INCOMPLETE ✗", "detail": "Concept exists but bio/avatar/banner/pinned never optimized."},
+      {"phase": "Foundation Posts (30-50)", "status": "12% ✗ (6/50)", "detail": "Need 24-44 more. At 3/day = 8-15 days."},
+      {"phase": "Community Building", "status": "JUST STARTED — BROKEN ✗", "detail": "Late start, replies blocked, profile too thin."},
+      {"phase": "Growth Phase", "status": "NOT REACHED", "detail": "2-3 weeks away if we execute daily."}
+    ],
+
+    "biggest_framework_violation": "The framework says first 30-50 posts are FOUNDATION — don't expect growth. Just ship consistently at high quality. We have 6 posts and are already frustrated. The framework says: stop worrying about followers, focus on shipping 25+ exceptional posts ASAP."
+  },
+
+  "section_5_our_approach_vs_winners": {
+    "title": "Our Actual Execution vs What Winners Do",
+    "speaker": "All agents",
+    "comparisons": [
+      {
+        "dimension": "Post Frequency",
+        "us": "0.43 posts/day (6 posts in 14 days)",
+        "winners": "@sessypuuh 0.7/day, @Angelwithcakee 1.2/day, @yuumispm 0.5/day",
+        "verdict": "Even quality-first accounts post more. And they never skip a day."
+      },
+      {
+        "dimension": "Caption Style",
+        "us": "'Hi', 'Sleepy', 'hey @grok remove white' — flat, uninspired, repetitive",
+        "winners": "'Am I ur type' (5,424 likes), 'Rate me 1 to 10' (20,670 likes), 'built like this and still single...' (20,329 likes)",
+        "verdict": "Short (correct) but EMOTIONALLY DEAD (wrong). Winners are short AND provocative."
+      },
+      {
+        "dimension": "Profile & Bio",
+        "us": "'22 yo Japanese girl addicted SNS'. 3:25 follower ratio.",
+        "winners": "'most viral girl on X for a reason' (691K), 'i just want to play Fortnite' (105K), 'Your favorite Colombian' (92K)",
+        "verdict": "Their bios are bold or personality reveals. Ours is generic bot-like description."
+      },
+      {
+        "dimension": "Visual Identity",
+        "us": "4 images, no consistent style",
+        "winners": "Signature look within 10-20 posts. Recognizable in feed without reading handle.",
+        "verdict": "We haven't established identity. 4 images isn't enough."
+      },
+      {
+        "dimension": "Community Engagement",
+        "us": "Zero for 12 days. Then 32 likes and 3 replies over 2 days.",
+        "winners": "Engage from day 1, even before first post.",
+        "verdict": "We waited 12 days. Nobody knows we exist."
+      },
+      {
+        "dimension": "Grok Posts",
+        "us": "'hey @grok remove white' (0 likes, used TWICE)",
+        "winners": "@ai_hyk: creative Grok = 7,880 likes",
+        "verdict": "Boring technical tests vs entertaining transformations."
+      }
+    ]
+  },
+
+  "section_6_revised_action_plan": {
+    "title": "Revised Daily Action Plan — Starting Tomorrow",
+    "speaker": "Strategist",
+    "philosophy_shift": "STOP optimizing strategy. START shipping content. Only metric for 30 days: did we post 3 stunning images today?",
+
+    "immediate_actions_today": {
+      "priority": "DO THESE BEFORE TOMORROW",
+      "actions": [
+        {"action": "Rewrite bio", "owner": "Operator", "time": "2 min", "options": ["your new obsession", "i know what you're thinking...", "the girl your gf warned you about", "you're staring btw"]},
+        {"action": "Pin best post", "owner": "Operator", "time": "2 min"},
+        {"action": "Unfollow to <10", "owner": "Operator", "time": "5 min"},
+        {"action": "Audit image quality vs competitors", "owner": "Operator", "time": "10 min"}
+      ]
+    },
+
+    "new_daily_routine": {
+      "operator_time": "30-45 min/day",
+      "schedule": [
+        {"time": "09:00 JST", "action": "Review & approve content", "owner": "Operator"},
+        {"time": "09:30 JST", "action": "Post 1 live", "owner": "Automation"},
+        {"time": "12:00 JST", "action": "Post 2 live", "owner": "Automation"},
+        {"time": "13:00 JST", "action": "Manual engagement 10 min", "owner": "Operator from phone"},
+        {"time": "21:00 JST", "action": "Post 3 live (US afternoon prime)", "owner": "Automation"},
+        {"time": "22:00 JST", "action": "Automated outbound (likes + follows only)", "owner": "Automation"}
+      ]
+    },
+
+    "content_changes": {
+      "posting_target": "3/day, every day, no exceptions, 30 days",
+      "quality_bar": "5-10 image variants, post only the best. Never 'good enough'.",
+      "caption_rules": [
+        "Every caption = engagement hook",
+        "Under 25 characters",
+        "BANNED: 'Hi', 'Hey', 'Sleepy', flat single words",
+        "Template bank: 'Am I your type?', 'rate me honestly', 'you like?', 'front or back?', 'thoughts?', 'be honest...', 'staring is free'"
+      ],
+      "grok_evolution": "Entertaining not technical. '.@grok put me on a yacht', '.@grok anime version'",
+      "content_mix": {
+        "engagement_questions": "50% (↑ from 40%)",
+        "image_showcase": "30% (↑ from 25%)",
+        "grok_interactive": "10% (↓ from 20%)",
+        "self_quote_chains": "10% (↓ from 15%)"
+      }
+    },
+
+    "pipeline_simplification": {
+      "current": "Daily: Scout → Strategist → Creator → War Room → approval → publish",
+      "revised": "Daily: Creator only → approval → publish. Weekly: Scout + Strategist.",
+      "reasoning": "Strategy doesn't change day-to-day for 3 followers. Save compute and attention."
+    },
+
+    "approval_fix_options": [
+      "Batch approval: review week Sunday, auto-publish Mon-Sat",
+      "Trust threshold: auto-publish after 10 good posts, post-hoc review",
+      "Reduce friction: 1 post needs approval, other 2 auto-publish"
+    ]
+  },
+
+  "section_7_path_to_1000": {
+    "title": "Path to 1,000 Followers — Milestone Roadmap",
+    "speaker": "Strategist",
+    "current": {"followers": 3, "posts": 6, "days_active": 4},
+    "phases": [
+      {
+        "phase": "Phase 0: Foundation Reset",
+        "timeline": "Days 1-7 (Mar 10-16)",
+        "follower_target": "10-20",
+        "actions": ["Profile overhaul", "3 images/day × 7 = 21 new posts", "Consistent times", "Manual engagement 15-20 likes + 3-5 replies daily", "20 auto likes + 3 follows daily", "Build 30+ image buffer"],
+        "success": "27+ posts, daily posting, 10+ followers"
+      },
+      {
+        "phase": "Phase 1: Content Library",
+        "timeline": "Days 8-21 (Mar 17-30)",
+        "follower_target": "50-100",
+        "actions": ["Continue 3/day", "Algorithm starts wider testing at post 30-40", "Creative Grok posts", "Self-quote chains", "Track best categories", "First breakout attempt"],
+        "success": "50+ posts, 50+ followers, one post with 50+ likes"
+      },
+      {
+        "phase": "Phase 2: Community Growth",
+        "timeline": "Days 22-45 (Mar 31 - Apr 13)",
+        "follower_target": "200-400",
+        "actions": ["Visual identity established", "Full pipeline reactivated", "Full outbound with replies", "Engage every comment", "Mid-tier collaborations"],
+        "success": "200+ followers, 500+ avg impressions"
+      },
+      {
+        "phase": "Phase 3: Momentum",
+        "timeline": "Days 46-75 (Apr 14 - May 13)",
+        "follower_target": "500-1000",
+        "actions": ["Data-driven optimization from 100+ posts", "1-2 breakout posts/week", "Consider JP launch", "Monetization angle"],
+        "success": "1,000 followers"
+      }
+    ],
+    "timeline_estimates": {
+      "fastest": {"to_100": "3-4 weeks", "to_500": "6-8 weeks", "to_1000": "8-12 weeks"},
+      "likely": {"to_100": "4-6 weeks", "to_500": "10-14 weeks", "to_1000": "14-20 weeks"},
+      "if_unchanged": {"to_100": "NEVER — at -0.2 followers/day we hit 0 before 100"}
+    },
+    "benchmarks": [
+      {"account": "@sessypuuh", "path": "0 → 7,639 in ~90 days at 0.7 posts/day"},
+      {"account": "@yuumispm", "path": "0 → 12,025 from ~17 posts. ONE viral image (16K likes) did most of it."},
+      {"account": "@Angelwithcakee", "path": "0 → 35,139 in ~50 days. 56 posts at 1.1/day."}
+    ]
+  },
+
+  "section_8_hard_truths": {
+    "title": "Hard Truths",
+    "speaker": "Marc (synthesizing all perspectives)",
+    "truths": [
+      {
+        "number": 1,
+        "statement": "We've been playing business instead of doing business.",
+        "detail": "50:1 ratio of strategy documents to posts. The entire agent system has produced LESS output than one person posting from their phone."
+      },
+      {
+        "number": 2,
+        "statement": "Image quality is the ONLY thing that matters right now.",
+        "detail": "The image IS the product. Our best: 3 likes. Competitors at similar stage: 100-500+. Should spend 80% effort on images, 20% everything else."
+      },
+      {
+        "number": 3,
+        "statement": "The approval bottleneck will kill this project.",
+        "detail": "7 of 17 planned posts died as drafts. Implement batch approval or auto-publish."
+      },
+      {
+        "number": 4,
+        "statement": "The multi-agent system is over-engineered for 3 followers.",
+        "detail": "Six agents daily is for 50K+ accounts. Simplify: Creator daily, everything else weekly."
+      },
+      {
+        "number": 5,
+        "statement": "If unchanged, we'll have fewer than 3 followers in 30 days.",
+        "detail": "Lost 3 in 5 days. No mechanism currently produces growth. Math, not pessimism."
+      },
+      {
+        "number": 6,
+        "statement": "Operator's 15 min/day manual engagement > all 6 agents combined.",
+        "detail": "Manual engagement bypasses API restrictions, builds real presence. The #1 growth lever."
+      },
+      {
+        "number": 7,
+        "statement": "Our character concept needs questioning.",
+        "detail": "Bio says 'Japanese girl' on EN-market account. Handle doesn't resonate like @IsabellaCruz_47. May need redesign."
+      }
+    ],
+    "the_one_thing": "Execution velocity. Ship 3 stunning images with provocative captions every day. Everything else is a distraction until we have 50 posts.",
+    "fundamental_changes": [
+      "Kill daily full pipeline → Creator daily, Scout+Strategist weekly",
+      "Batch approval → review Sunday, auto-publish through week",
+      "Operator manual engagement → 10-15 min/day. NON-NEGOTIABLE.",
+      "Image quality sprint → Generate 50, curate 15, build 5-day buffer",
+      "Profile overhaul → New bio, pinned post, reduce following",
+      "Caption template bank → 30+ proven hooks, no more flat captions"
+    ]
+  },
+
+  "meeting_conclusion": {
+    "speaker": "Marc",
+    "summary": "Wake-up call delivered. Strategy is A-tier, execution is D-tier. We scored 3/10 on the 0→1000 framework because we skipped fundamentals: profile optimization, consistent posting, community building. We've been building a Formula 1 car when we need to be running.",
+    "key_takeaway": "Starting tomorrow: 3 stunning images + provocative captions, every day, 30 days. Everything else is secondary until 50 posts exist.",
+    "next_meeting": "Mar 16 — Week 1 check-in. Target: 27+ posts, daily posting streak intact.",
+    "immediate_operator_actions": [
+      "1. Rewrite bio (2 min)",
+      "2. Pin best post (2 min)",
+      "3. Unfollow to <10 (5 min)",
+      "4. Decide on batch-approval system",
+      "5. Commit to 15 min/day manual engagement",
+      "6. Generate image batch for this week"
+    ]
+  }
+}

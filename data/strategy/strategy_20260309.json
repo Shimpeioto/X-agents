@@ -1,0 +1,146 @@
+{
+  "date": "2026-03-09",
+  "generated_at": "2026-03-09T16:30:00+09:00",
+  "scout_report_used": "data/scout_report_20260309.json",
+  "EN": {
+    "posting_schedule": [
+      {
+        "slot": 1,
+        "time": "13:30 UTC",
+        "category": "engagement_questions",
+        "priority": "high"
+      },
+      {
+        "slot": 2,
+        "time": "17:30 UTC",
+        "category": "image_showcase",
+        "priority": "high"
+      },
+      {
+        "slot": 3,
+        "time": "21:30 UTC",
+        "category": "grok_interactive",
+        "priority": "high"
+      },
+      {
+        "slot": 4,
+        "time": "00:30 UTC",
+        "category": "self_quote_chains",
+        "priority": "medium"
+      }
+    ],
+    "content_mix": {
+      "engagement_questions": 40,
+      "image_showcase": 25,
+      "grok_interactive": 20,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 0
+    },
+    "outbound_strategy": {
+      "daily_likes": 20,
+      "daily_replies": 5,
+      "daily_follows": 3,
+      "target_accounts": [
+        "@tanarainw",
+        "@iiCoraMaay",
+        "@baharaykin",
+        "@NotjustRen00"
+      ],
+      "reply_style": "Casual, genuine, and conversational. Reference something specific in their image or caption. Sound like a real person who appreciates the content. Keep it to 1-2 sentences, under 200 characters. Vary between enthusiastic ('okay this might be your best one'), thoughtful ('the lighting here is insane'), and curious ('how do you get that effect?'). Never use hashtags in replies."
+    },
+    "ab_test": {
+      "variable": "Caption style: provocative question vs ambient statement",
+      "variant_a": "Provocative question format — e.g., 'Am I ur type?', 'Smash or pass?', 'Rate me 1-10' — direct audience engagement prompt",
+      "variant_b": "Ambient statement format — e.g., 'single btw', 'lord have mercy...', 'built like this' — indirect confidence signaling without a question",
+      "duration_days": 5,
+      "start_date": "2026-03-08"
+    },
+    "key_insights": [
+      "Launch phase cadence increased to 4 posts/day across 4 US time windows (morning, lunch, afternoon, evening). Core strategy mandates this for accounts under 100 followers to build content library and algorithmic presence. Minimum 3-hour spacing between posts ensures each gets its own engagement window without self-cannibalization.",
+      "Ultra-short captions (<30 chars) remain the dominant EN engagement driver. @sessypuuh (7.6K followers, 38.0% avg ER) and @yuumispm (12K followers, 17.6% avg ER with a 16,116-like viral hit) both use minimal text. @imrubyreid (693K followers) continues to dominate trending with 'single btw' (20,329 likes) and similar ambient statements — confirming both A/B test variants are viable when kept under 30 chars.",
+      "Grok integration remains a wide-open first-mover opportunity. @ai_hiyo_ (389K followers) is still the only major EN competitor actively using Grok, with a top post getting 519 likes. No other EN account has adopted this format. Slot 3 at 21:30 UTC (US evening prime) captures this underexploited lane.",
+      "Impression-based engagement reveals strong algorithmic tailwind for AI beauty content: @IvoryLane_plus shows 12.3% impression ER vs 0.76% follower ER. X's algorithm is boosting this content type — our account can ride this wave with exceptional image quality. The 4-post cadence maximizes our chances of catching algorithmic distribution.",
+      "Target rotation: Avoiding accounts engaged today (@Angelwithcakee, @yogana_19, @IvoryLane_plus, @HannaJonso, @IsabellaCruz_47, @Estherbron1) and yesterday's planned targets (@lucidevlinxyz, @marylivbrown, @katekarsyn, @yuumi005). Fresh targets: @tanarainw (192K, 1.4% ER — large account for visibility), @iiCoraMaay (17.9K, 1.7% ER — mid-tier with viral potential, recent 2,529-like hit), @baharaykin (12.7K, 4.3% ER — smaller account for reciprocal engagement, 2,298-like top post), @NotjustRen00 (16.7K, 0.25% ER — mid-tier account, clean original content)."
+    ],
+    "risks": [
+      "Our EN account (@meruru_tcbn) is still very new — the 403 reply restriction on new accounts persists. Plan all outbound replies but expect some to fail. Likes and follows remain reliable. Failed replies should be escalated for manual posting.",
+      "The A/B test (provocative question vs ambient statement) is on day 2 of 5. With 4 posts today, we can assign 2 to each variant (slots 1 and 4 = variant A questions, slots 2 and 3 = variant B statements) for faster data accumulation.",
+      "Increasing from 2 to 4 posts/day is a launch-phase strategy. Monitor engagement per post closely — if average engagement drops significantly below peers, quality thresholds are not being met and we should reduce back to 2-3/day. Every post must pass the '100 likes minimum' mental bar."
+    ]
+  },
+  "JP": {
+    "posting_schedule": [
+      {
+        "slot": 1,
+        "time": "09:00 JST",
+        "category": "persona_dialogue",
+        "priority": "high"
+      },
+      {
+        "slot": 2,
+        "time": "12:30 JST",
+        "category": "grok_interactive",
+        "priority": "high"
+      },
+      {
+        "slot": 3,
+        "time": "20:30 JST",
+        "category": "art_showcase",
+        "priority": "high"
+      },
+      {
+        "slot": 4,
+        "time": "23:30 JST",
+        "category": "self_quote_chains",
+        "priority": "medium"
+      }
+    ],
+    "content_mix": {
+      "grok_interactive": 30,
+      "persona_dialogue": 30,
+      "art_showcase": 25,
+      "self_quote_chains": 15
+    },
+    "hashtag_strategy": {
+      "always_use": [],
+      "rotate": [],
+      "trending_today": [],
+      "max_per_post": 2
+    },
+    "outbound_strategy": {
+      "daily_likes": 15,
+      "daily_replies": 5,
+      "daily_follows": 2,
+      "target_accounts": [
+        "@BoobistR",
+        "@yunaelegant",
+        "@AI_Girls_Studio"
+      ],
+      "reply_style": "Warm, appreciative, community-oriented. Use natural Japanese appropriate for peer interaction in the AI art community. Reference something specific about their image or creative approach. Keep it to 1-2 sentences, under 200 characters. Examples: 'この雰囲気すごく好き', 'めっちゃ綺麗...光の使い方が素敵', 'クオリティ高すぎ！'."
+    },
+    "ab_test": {
+      "variable": "Grok post request type: transformation vs combination",
+      "variant_a": "Single-image transformation — e.g., '.@grok この画像をアニメ風にして', '.@grok 服を変えて' — simple visual transformation of one image",
+      "variant_b": "Multi-image combination — e.g., '.@grok タップして4枚の画像を1つに結合して' — combining multiple images into a single composition (ai_hyk's 7,872-like format)",
+      "duration_days": 5,
+      "start_date": "2026-03-08"
+    },
+    "key_insights": [
+      "Launch phase cadence increased to 4 posts/day for JP as well. Core strategy specifies 4 optimal time windows: 09:00 JST (morning commute), 12:00-13:00 JST (lunch), 20:00-21:00 JST (evening relaxation), 23:00-00:00 JST (late-night browsing — highest volume window per scout data). Minimum 4-hour spacing between posts.",
+      "@ai_hyk continues to dominate JP with 6,857 likes on a top post (124.6K followers, 0.88% avg ER). The Grok-interactive format drives massive engagement — the bookmark-to-like ratio of 75% on ai_hyk's top posts signals strong algorithmic boost potential. Our grok_interactive slot at 12:30 JST captures the lunch-hour peak.",
+      "@ai_nontan_room (35K followers, 1.18% ER) achieved a viral 3,996-like post, confirming that mid-tier JP accounts can break through with quality content. The JP market avg ER of 0.30% is lower than EN (3.7%), but differentiation through Grok interactivity and high image quality is the path forward.",
+      "JP reply contamination remains severe — 8 of 15 JP competitors have >50% reply rates with near-zero content engagement. Our strategy avoids reply-farming entirely and focuses on original content quality with Grok interactivity as the primary differentiator.",
+      "Outbound targets rotated from yesterday's strategy (@AIart_yama94, @tororo_223, @honoka_shiri). Fresh targets: @BoobistR (20.9K followers, 0.43% ER — mid-tier with clean timeline and recent 449-like post), @yunaelegant (20.5K, 0.79% ER — consistent quality, transparent AI labeling), @AI_Girls_Studio (61.4K, 0.24% ER — larger account for visibility, low posting frequency indicates quality-over-quantity approach)."
+    ],
+    "risks": [
+      "JP account is suspended (not yet created). All JP strategy is prepared for launch readiness — when the JP account is created, this 4-post cadence can be immediately executed without modification.",
+      "The gap between @ai_hyk (124.6K followers) and the next JP competitor remains enormous. Our launch-phase 4-post cadence is designed to build content library fast, but quality must not be sacrificed. Each post must clear the JP quality bar of 150-300 likes potential.",
+      "JP outbound limits kept ultra-conservative (15 likes, 5 replies, 2 follows) per expert guidance on stricter JP platform monitoring. Targets selected from mid-tier accounts with clean timelines for reciprocal engagement likelihood."
+    ]
+  }
+}

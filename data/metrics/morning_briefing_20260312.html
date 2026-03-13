@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Briefing — 2026-03-12 — 2026-03-12</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Morning Briefing — 2026-03-12</h1>
+  <div class="subtitle">Generated from morning_briefing_20260312.json</div>
+  <div class="date">2026-03-12</div>
+</div>
+<nav class="nav">
+  <a href="#type">Type</a>
+  <a href="#daily_report_used">Daily Report Used</a>
+  <a href="#data_sources">Data Sources</a>
+  <a href="#accounts">Accounts</a>
+  <a href="#manual_replies_needed">Manual Replies Needed</a>
+  <a href="#summary">Summary</a>
+  <a href="#telegram_message">Telegram Message</a>
+</nav>
+<div class="container">
+<section id="metadata">
+<h2>Report Info</h2>
+<div class="card">
+  <div style="margin: 4px 0"><strong class="text-accent">Date:</strong> <span class="text-muted">2026-03-12</span></div>
+  <div style="margin: 4px 0"><strong class="text-accent">Generated At:</strong> <span class="text-muted">2026-03-12T05:30:00+09:00</span></div>
+</div>
+</section>
+<section id="type">
+<h2>Type</h2>
+<p>morning_briefing</p>
+</section>
+<section id="daily_report_used">
+<h2>Daily Report Used</h2>
+<p>data/daily_report_20260312.json</p>
+</section>
+<section id="data_sources">
+<h2>Data Sources</h2>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">data/metrics_20260312_EN.json</li>
+  <li style="margin: 4px 0">data/content_plan_20260311_EN.json</li>
+  <li style="margin: 4px 0">data/outbound_log_20260311.json</li>
+  <li style="margin: 4px 0">data/strategy_20260311.json</li>
+  <li style="margin: 4px 0">data/daily_report_20260312.json</li>
+</ul>
+</section>
+<section id="accounts">
+<h2>Accounts</h2>
+<div class="card">
+  <h3><span class="tag tag-en">EN</span> EN Account</h3>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Followers:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Followers Change:</strong> <span class="text-muted">0</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Following:</strong> <span class="text-muted">40</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Following Change:</strong> <span class="text-muted">7</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Posts:</strong> <span class="text-muted">28</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Metrics Note:</strong> <span class="text-muted">Post metrics available only for Mar 9 posts (measured Mar 11). Mar 11 posts were published late — no metrics collected yet.</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Likes:</strong> <span class="text-muted">5</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Retweets:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Replies:</strong> <span class="text-muted">0</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Bookmarks:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Ab Test Status:</strong> <span class="text-muted">Caption style: provocative question vs ambient statement — day 5/5 concluded. Insufficient data (2 posts per variant). Variant B marginally ahead (avg 2.5 vs 2.0). Extending recommended.</span></div>
+</div>
+<h4>Top Post</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Post Id:</strong> <span class="text-muted">EN_20260309_01</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Category:</strong> <span class="text-muted">engagement_questions</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Text:</strong> <span class="text-muted">Am I your type? 👀</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Likes:</strong> <span class="text-muted">2</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Retweets:</strong> <span class="text-muted">1</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Bookmarks:</strong> <span class="text-muted">1</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Total Engagement:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Note:</strong> <span class="text-muted">Tied with EN_20260309_02 (image_showcase) at 4 total engagement each</span></div>
+</div>
+<h4>Posts Yesterday</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Total Planned:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Posted:</strong> <span class="text-muted">3</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Still Approved:</strong> <span class="text-muted">1</span></div>
+</div>
+<h4>Posted Details</h4>
+<div class="table-wrap"><table>
+<tr><th>Id</th><th>Text</th><th>Category</th><th>Variant</th><th>Posted At</th></tr>
+<tr><td>EN_20260311_01</td><td>be honest rn</td><td>engagement_questions</td><td>A</td><td>2026-03-11T22:18:40+09:00</td></tr>
+<tr><td>EN_20260311_02</td><td>.@grok put me on a yacht</td><td>grok_interactive</td><td>B</td><td>2026-03-12T01:45:21+09:00</td></tr>
+<tr><td>EN_20260311_03</td><td>she knows</td><td>image_showcase</td><td>B</td><td>2026-03-12T19:36:07+09:00</td></tr>
+</table></div>
+<h4>Pending Details</h4>
+<div class="table-wrap"><table>
+<tr><th>Id</th><th>Text</th><th>Category</th><th>Status</th></tr>
+<tr><td>EN_20260311_04</td><td>wait for it</td><td>self_quote_chains</td><td>approved</td></tr>
+</table></div>
+<h4>Outbound Summary</h4>
+<div class="card">
+  <div style="margin: 6px 0"><strong class="text-accent">Likes Given:</strong> <span class="text-muted">16</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Replies Attempted:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Replies Succeeded:</strong> <span class="text-muted">0</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Replies Failed:</strong> <span class="text-muted">4</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Follows:</strong> <span class="text-muted">6</span></div>
+  <div style="margin: 6px 0"><strong class="text-accent">Reply Failure Reason:</strong> <span class="text-muted">API 403 — reply restricted (account not mentioned/engaged by author)</span></div>
+</div>
+<h4>Targets Engaged</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">@imrubyreid</li>
+  <li style="margin: 4px 0">@lucidevlinxyz</li>
+  <li style="margin: 4px 0">@yuumispm</li>
+  <li style="margin: 4px 0">@katekarsyn</li>
+</ul>
+<h4>Additional Follows</h4>
+<ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted)">
+  <li style="margin: 4px 0">@Estherbron1</li>
+  <li style="margin: 4px 0">@KissofStarova</li>
+  <li style="margin: 4px 0">@itsluna_baby</li>
+</ul>
+<h4>Anomalies</h4>
+<p class="text-muted">None</p>
+<h4>Needs Attention</h4>
+<div class="insight">EN_20260311_04 (&#x27;wait for it&#x27;) approved but not posted — need to publish or reschedule</div>
+<div class="insight">4 reply attempts failed with 403 — manual replies needed if desired</div>
+<div class="insight">Today&#x27;s content plan (Mar 12): 4 drafts awaiting approval</div>
+<div class="insight">A/B test needs extension — design continuation in today&#x27;s strategy</div>
+</div>
+</section>
+<section id="manual_replies_needed">
+<h2>Manual Replies Needed</h2>
+<div class="table-wrap"><table>
+<tr><th>Target</th><th>Reply Text</th><th>Tweet Url</th></tr>
+<tr><td>@imrubyreid</td><td>okay the way this light hits is unreal</td><td>https://x.com/imrubyreid/status/2031468799476617218</td></tr>
+<tr><td>@lucidevlinxyz</td><td>honestly the boldness is what makes the timeline fun</td><td>https://x.com/lucidevlinxyz/status/2029271640052515298</td></tr>
+<tr><td>@yuumispm</td><td>this whole vibe is so clean, genuinely obsessed</td><td>https://x.com/yuumispm/status/2031475976102650021</td></tr>
+<tr><td>@katekarsyn</td><td>red is definitely your color, this looks amazing</td><td>https://x.com/katekarsyn/status/2031475349603934450</td></tr>
+</table></div>
+</section>
+<section id="summary">
+<h2>Summary</h2>
+<div class="card"><p>EN steady at 5 followers. 3/4 Mar 11 posts published, 1 pending. Mar 9 posts showing modest early traction (5 likes, 2 RTs, 2 bookmarks). Outbound: 16 likes, 6 follows successful; all 4 replies blocked by 403. A/B test concluded with insufficient data — extending recommended. One post still needs publishing, and today&#x27;s 4 draft posts await approval.</p></div>
+</section>
+<section id="telegram_message">
+<h2>Telegram Message</h2>
+<div class="card"><p>☀️ Morning Briefing — Mar 12
+
+📊 EN (@meruru_tcbn)
+• Followers: 5 (+0) | Following: 40 (+7)
+• Total posts: 28
+
+📝 Mar 11 Posts: 3/4 published
+• ✅ &quot;be honest rn&quot; (engagement, var A)
+• ✅ &quot;.@grok put me on a yacht&quot; (grok, var B)
+• ✅ &quot;she knows&quot; (image_showcase, var B)
+• ⏳ &quot;wait for it&quot; (chain) — approved, not posted
+
+📈 Mar 9 Engagement:
+• 5 likes, 2 RTs, 2 bookmarks across 4 posts
+• Top: &quot;Am I your type? 👀&quot; — 2 likes, 1 RT, 1 bookmark
+
+📤 Outbound (Mar 11): 16 likes, 6 follows ✅
+• Replies: 0/4 — 403 still blocking
+
+🧪 A/B Test: question vs statement
+• Day 5/5 done — insufficient data to conclude
+• B slightly ahead (2.5 vs 2.0) — extending
+
+⚠️ Action needed:
+1. Post EN_20260311_04 or reschedule
+2. Approve today&#x27;s 4 draft posts
+3. 403 reply block continues
+
+📅 Today: Pipeline → Outbound → Evening review</p></div>
+</section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-03-12 21:09 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

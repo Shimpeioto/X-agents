@@ -1,0 +1,11 @@
+{
+  "task_id": "20260313_009",
+  "description": "Update outbound reply policy to manual-only across all config files: 1) Set daily_replies to 0 in config/outbound_rules.json, 2) Add rule to config/global_rules.md: 'No auto-replies — all replies are manual. Outbound agent identifies best reply targets and escalates to operator with tweet URL + reply text', 3) Update agents/outbound.md to remove API reply execution and instead output a manual_replies recommendation list in the outbound plan JSON (handle, tweet_url, reply_text, reasoning), 4) Update agents/strategist.md to set daily_replies: 0 in outbound_strategy. Also update config/global_rules.md to reflect daily_replies: 0 permanently.",
+  "task_type": "custom",
+  "agents_planned": [],
+  "notes": "Operator directive: automatic replies always fail with 403 on new account. Policy change: replies are now manual-only permanently. No auto-replies should ever be planned or executed. Outbound workflow should output a recommendation list for the operator to post manually.",
+  "created_at": "2026-03-13T20:00:34.960947+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-13T20:03:23.146228+09:00",
+  "exit_code": 0
+}

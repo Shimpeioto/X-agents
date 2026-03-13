@@ -1,0 +1,14 @@
+{
+  "task_id": "20260312_003",
+  "description": "Check today's outbound status by reading data/outbound_log_20260312.json and data/outbound_plan_20260312_EN.json. Determine: (1) Was outbound executed today? (2) What actions were completed (likes, replies, follows)? (3) Were there any failures? If outbound has NOT been run yet, check if data/content_plan_20260312_EN.json exists and run the full outbound cycle for EN account: spawn Outbound agent to create plan, then execute via publisher.py smart-outbound. Send summary to operator via Telegram when done.",
+  "task_type": "publishing",
+  "agents_planned": [
+    "outbound",
+    "publisher"
+  ],
+  "notes": "Today is 2026-03-12. EN account only (JP suspended). Check existing files before running anything to avoid duplicate actions.",
+  "created_at": "2026-03-12T19:04:12.417634+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-12T19:05:14.205018+09:00",
+  "exit_code": 0
+}

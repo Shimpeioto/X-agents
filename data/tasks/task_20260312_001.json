@@ -1,0 +1,15 @@
+{
+  "task_id": "20260312_001",
+  "description": "Run the full daily pipeline for 2026-03-12. Flow: 1) Scout collects competitor data (python3 scripts/scout.py --raw --compact), 2) Scout analyzes and writes data/scout_report_20260312.json, 3) Strategist reads scout report + strategy_feedback_20260311.json (if exists) + strategy_current.json and writes data/strategy_20260312.json, 4) Creator EN reads strategy and writes data/content_plan_20260312_EN.json, 5) Generate HTML reports for both strategy and content plan, 6) Send Telegram preview to operator for approval. Skip JP (account suspended). Validate each output before proceeding.",
+  "task_type": "pipeline",
+  "agents_planned": [
+    "scout",
+    "strategist",
+    "creator"
+  ],
+  "notes": "Today is 2026-03-12 JST. EN only (JP suspended). Check data/strategy_feedback_20260311.json for PDCA feedback to feed into Strategist. Use model assignments: Scout=sonnet, Strategist=opus, Creator=sonnet.",
+  "created_at": "2026-03-12T12:03:49.169843+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-12T12:16:31.704739+09:00",
+  "exit_code": 0
+}

@@ -1,0 +1,11 @@
+{
+  "task_id": "20260311_006",
+  "description": "Fix scripts/generate_html_report.py to properly render content plan HTML reports with full image prompts. Currently the generic template truncates image_prompt objects. Add a 'content_plan' report type that shows each post's image prompt in a readable, expandable format with copy-able text. Then regenerate data/content_plan_20260311_EN.html with the fix.",
+  "task_type": "custom",
+  "agents_planned": [],
+  "notes": "Operator checked content_plan_20260311_EN.html and image prompts were missing. The JSON has them but HTML generator uses generic template that truncates nested objects. Fix the generator, then regenerate the HTML.",
+  "created_at": "2026-03-11T17:12:38.653074+09:00",
+  "status": "completed",
+  "completed_at": "2026-03-11T17:15:09.597637+09:00",
+  "exit_code": 0
+}

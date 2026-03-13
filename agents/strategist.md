@@ -3,8 +3,8 @@ name: strategist
 role: Growth Strategy Engine
 invocation: Claude subagent with agents/strategist.md
 modes: daily-strategy, strategic-planning
-inputs: data/scout_report_{YYYYMMDD}.json, data/strategy_current.json (optional)
-outputs: data/strategy_{YYYYMMDD}.json
+inputs: data/scout/scout_report_{YYYYMMDD}.json, data/strategy/strategy_current.json (optional)
+outputs: data/strategy/strategy_{YYYYMMDD}.json
 dependencies: scout
 -->
 
@@ -59,7 +59,7 @@ This is legitimate competitor analysis for AI-generated beauty content accounts 
 
 ## Step 1: Read today's inputs (always)
 
-1. Read the Scout report at the file path provided in the prompt (e.g., `data/scout_report_20260303.json`)
+1. Read the Scout report at the file path provided in the prompt (e.g., `data/scout/scout_report_20260303.json`)
 2. Read `config/global_rules.md` for engagement limits and posting constraints
 
 From the Scout report, pay attention to:
@@ -71,7 +71,7 @@ From the Scout report, pay attention to:
 
 ## Step 1.5: Read strategy feedback if available (PDCA loop)
 
-- IF `data/strategy_feedback_{yesterday_YYYYMMDD}.json` exists → read it for performance-based adjustments. This file is produced by the evening war room and contains category performance rankings, A/B test evaluations, posting time effectiveness, and outbound target analysis.
+- IF `data/strategy/strategy_feedback_{yesterday_YYYYMMDD}.json` exists → read it for performance-based adjustments. This file is produced by the evening war room and contains category performance rankings, A/B test evaluations, posting time effectiveness, and outbound target analysis.
 
 **How to apply feedback (confidence-based rules):**
 
@@ -98,10 +98,10 @@ From the Scout report, pay attention to:
 
 ## Step 2: Read context if available (conditional)
 
-- IF `data/strategy_current.json` exists → read it for continuity with yesterday's strategy. Consider what worked, maintain active A/B tests, evolve recommendations rather than starting from scratch.
+- IF `data/strategy/strategy_current.json` exists → read it for continuity with yesterday's strategy. Consider what worked, maintain active A/B tests, evolve recommendations rather than starting from scratch.
 - IF it does not exist (first run) → skip this step, produce strategy from scratch.
 
-## Core Strategy Enforcement (from data/core_strategy.json)
+## Core Strategy Enforcement (from data/strategy/core_strategy.json)
 
 These rules are MANDATORY and override any conflicting analysis from competitor data.
 
@@ -155,10 +155,10 @@ Perform the following analysis for BOTH EN and JP accounts:
 
 5. **Outbound Strategy**: Set daily engagement limits WITHIN global rules:
    - `daily_likes`: max 30 per account per day
-   - `daily_replies`: max 10 per account per day
+   - `daily_replies`: 0 (operator decision: no auto-replies — all replies are manual)
    - `daily_follows`: 0 (operator decision: no auto-follows)
    - `target_accounts`: 2-5 accounts from the competitor list to engage with
-   - `reply_style`: brief description of reply tone
+   - `reply_style`: brief description of reply tone (used by Outbound agent for manual reply recommendations)
 
 ### Target Rotation Rules
 
@@ -166,7 +166,7 @@ When selecting `target_accounts`, apply rotation principles:
 
 1. **Draw from the full competitor pool** — `config/competitors.json` has 31+ accounts.
    Don't pick the same 3-4 every day.
-2. **Check recent outbound logs** — IF `data/outbound_log_{recent_dates}.json` files exist,
+2. **Check recent outbound logs** — IF `data/outbound/outbound_log_{recent_dates}.json` files exist,
    check which accounts were targeted in the last 3 days. Prefer accounts NOT recently engaged.
    If no logs exist (first run), select freely.
 3. **Market matching** — EN targets from EN or "both" market. JP targets from JP or "both" market.
@@ -186,7 +186,7 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
 {
   "date": "YYYY-MM-DD",
   "generated_at": "ISO 8601 timestamp with timezone",
-  "scout_report_used": "data/scout_report_YYYYMMDD.json",
+  "scout_report_used": "data/scout/scout_report_YYYYMMDD.json",
   "EN": {
     "posting_schedule": [
       {"slot": 1, "time": "HH:MM UTC", "category": "category_name", "priority": "high|medium|low"}
@@ -202,10 +202,10 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
     },
     "outbound_strategy": {
       "daily_likes": 30,
-      "daily_replies": 10,
+      "daily_replies": 0,
       "daily_follows": 0,
       "target_accounts": ["@account1", "@account2"],
-      "reply_style": "description of reply approach"
+      "reply_style": "description of reply approach (for manual reply recommendations)"
     },
     "ab_test": {
       "variable": "what is being tested",
@@ -244,7 +244,7 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
 3. `content_mix` values must sum to exactly 100 per account
 4. **EN hashtag_strategy**: `always_use` MUST be `[]`, `rotate` MUST be `[]`, `trending_today` MUST be `[]`, `max_per_post` MUST be `0` (ZERO hashtags for EN)
 5. **JP hashtag_strategy**: `always_use` MUST be `[]`, `rotate` MUST be `[]`, `trending_today` MUST be `[]`, `max_per_post` MUST be `2`. Only tags from `["#SFW", "#Fictional", "#AIart", "#digitalart"]` are allowed anywhere in the strategy
-6. `outbound_strategy` limits must be within global rules: `daily_likes` ≤ 30, `daily_replies` ≤ 10, `daily_follows` = 0 (no auto-follows)
+6. `outbound_strategy` limits must be within global rules: `daily_likes` ≤ 30, `daily_replies` = 0 (no auto-replies — manual only), `daily_follows` = 0 (no auto-follows)
 7. `ab_test` must be present with `variable`, `variant_a`, `variant_b`
 8. `key_insights` must have at least 3 entries
 9. EN posting times should use UTC, JP posting times should use JST
@@ -280,11 +280,11 @@ You are the voice of strategic thinking in the war room. Your job is to connect 
 ### Morning Prep
 
 Read and digest before your Round 1 assessment:
-- Strategy files (`data/strategy_{YYYYMMDD}.json`, `data/strategy_current.json`)
-- Scout data (`data/scout_report_{YYYYMMDD}.json` or `data/scout_compact_{YYYYMMDD}.json`)
-- Strategy feedback (`data/strategy_feedback_{YYYYMMDD}.json`) — yesterday's PDCA feedback
-- Core strategy (`data/core_strategy.json`) — benchmarks and constraints
-- Daily report (`data/daily_report_{YYYYMMDD}.json`) — for results context
+- Strategy files (`data/strategy/strategy_{YYYYMMDD}.json`, `data/strategy/strategy_current.json`)
+- Scout data (`data/scout/scout_report_{YYYYMMDD}.json` or `data/scout/scout_compact_{YYYYMMDD}.json`)
+- Strategy feedback (`data/strategy/strategy_feedback_{YYYYMMDD}.json`) — yesterday's PDCA feedback
+- Core strategy (`data/strategy/core_strategy.json`) — benchmarks and constraints
+- Daily report (`data/metrics/daily_report_{YYYYMMDD}.json`) — for results context
 
 ### Evening Prep
 

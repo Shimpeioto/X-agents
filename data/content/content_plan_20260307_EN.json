@@ -1,0 +1,76 @@
+{
+  "date": "2026-03-07",
+  "account": "EN",
+  "generated_at": "2026-03-07T16:00:00+09:00",
+  "strategy_used": "data/strategy_20260307.json",
+  "total_posts": 3,
+  "posts": [
+    {
+      "id": "EN_20260307_01",
+      "slot": 1,
+      "scheduled_time": "13:30 UTC",
+      "category": "engagement_questions",
+      "priority": "high",
+      "status": "draft",
+      "text": "Am I ur type? \ud83d\udc40",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Portrait of a stunning AI-generated woman, soft golden hour lighting, looking directly at camera with a confident subtle smile, flawless skin, natural makeup, slightly messy hair, wearing a simple off-shoulder top, shallow depth of field with warm bokeh background, photorealistic, editorial beauty photography style",
+        "negative_prompt": "cartoon, anime, deformed, blurry, low quality, text, watermark, oversaturated",
+        "style_reference": "High-end beauty editorial, similar to Vogue portrait photography",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": null,
+      "notes": "Peak engagement slot. Short provocative question to maximize replies and likes. Golden hour portrait for high save/bookmark potential."
+    },
+    {
+      "id": "EN_20260307_02",
+      "slot": 2,
+      "scheduled_time": "21:30 UTC",
+      "category": "grok_interactive",
+      "priority": "high",
+      "status": "draft",
+      "text": ".@grok put me in a red dress",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Full body portrait of a beautiful AI-generated woman in casual street clothes, standing on a city sidewalk at dusk, confident relaxed pose, natural lighting, photorealistic, fashion photography style, clean background",
+        "negative_prompt": "cartoon, anime, deformed, blurry, low quality, text, watermark",
+        "style_reference": "Street style fashion photography, candid editorial look",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": "A",
+      "notes": "A/B test variant A: realistic transformation request. Grok will transform the attached image. The base image should be casual so the red dress transformation is visually striking."
+    },
+    {
+      "id": "EN_20260307_03",
+      "slot": 3,
+      "scheduled_time": "00:30 UTC",
+      "category": "image_showcase",
+      "priority": "medium",
+      "status": "draft",
+      "text": "save this one \ud83e\udd0d",
+      "hashtags": [],
+      "image_prompt": {
+        "tool": "midjourney",
+        "prompt": "Close-up beauty portrait of an AI-generated woman with ethereal soft lighting, dewy skin, subtle pink lip gloss, light eye makeup with shimmer, delicate jewelry, hair gently blowing, dreamy pastel background with soft purple and blue tones, ultra high detail, cinematic beauty photography",
+        "negative_prompt": "cartoon, anime, deformed, blurry, low quality, text, watermark, harsh lighting, oversaturated",
+        "style_reference": "K-beauty editorial, soft ethereal aesthetic, high bookmark-worthy visual quality",
+        "aspect_ratio": "4:5"
+      },
+      "ab_test_variant": null,
+      "notes": "Designed for high bookmark rate. Ethereal beauty aesthetic targets the save-worthy content that drives algorithmic reach (bookmark-to-like ratio >20% goal)."
+    }
+  ],
+  "reply_templates": [
+    "this is actually stunning wow",
+    "ok you win today",
+    "how do you always look this good?",
+    "wait this is so pretty",
+    "the lighting here is everything",
+    "saving this immediately",
+    "you never miss honestly",
+    "obsessed with this vibe"
+  ]
+}

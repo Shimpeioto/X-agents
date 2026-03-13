@@ -101,13 +101,13 @@ Review yesterday's results and send the operator a morning briefing before the p
 ### 1. Pre-Discussion: Gather Data
 
 Read data files to prepare file paths for the agents. For each **active** account, verify these exist:
-- `data/daily_report_{yesterday_YYYYMMDD}.json` — yesterday's daily report
-- `data/content_plan_{yesterday_YYYYMMDD}_{account}.json` — what was posted
-- `data/outbound_log_{yesterday_YYYYMMDD}.json` — outbound actions taken
-- `data/strategy_{yesterday_YYYYMMDD}.json` — yesterday's strategy
-- `data/strategy_current.json` — current active strategy
-- `data/strategy_feedback_{yesterday_YYYYMMDD}.json` — yesterday's feedback
-- `data/core_strategy.json` — KPI targets and benchmarks
+- `data/metrics/daily_report_{yesterday_YYYYMMDD}.json` — yesterday's daily report
+- `data/content/content_plan_{yesterday_YYYYMMDD}_{account}.json` — what was posted
+- `data/outbound/outbound_log_{yesterday_YYYYMMDD}.json` — outbound actions taken
+- `data/strategy/strategy_{yesterday_YYYYMMDD}.json` — yesterday's strategy
+- `data/strategy/strategy_current.json` — current active strategy
+- `data/strategy/strategy_feedback_{yesterday_YYYYMMDD}.json` — yesterday's feedback
+- `data/strategy/core_strategy.json` — KPI targets and benchmarks
 
 If `daily_report` does not exist: note this for the agents — they should work with whatever data is available.
 
@@ -124,11 +124,11 @@ Active accounts: {ACTIVE_ACCOUNTS}
 MORNING WAR ROOM — Round 1: Data Briefing
 
 Read these files and prepare a KPI briefing:
-- data/daily_report_{yesterday_YYYYMMDD}.json
-- data/content_plan_{yesterday_YYYYMMDD}_{account}.json (for each active account)
-- data/outbound_log_{yesterday_YYYYMMDD}.json
-- data/metrics_{yesterday_YYYYMMDD}_{account}.json (for each active account)
-- data/core_strategy.json (for KPI targets)
+- data/metrics/daily_report_{yesterday_YYYYMMDD}.json
+- data/content/content_plan_{yesterday_YYYYMMDD}_{account}.json (for each active account)
+- data/outbound/outbound_log_{yesterday_YYYYMMDD}.json
+- data/metrics/metrics_{yesterday_YYYYMMDD}_{account}.json (for each active account)
+- data/strategy/core_strategy.json (for KPI targets)
 
 Cover for each active account:
 1. Follower count, delta, growth trend
@@ -150,11 +150,11 @@ Active accounts: {ACTIVE_ACCOUNTS}
 MORNING WAR ROOM — Round 1: Strategy Assessment
 
 Read these files and prepare a strategy assessment:
-- data/strategy_{yesterday_YYYYMMDD}.json
-- data/strategy_current.json
-- data/strategy_feedback_{yesterday_YYYYMMDD}.json (if exists)
-- data/daily_report_{yesterday_YYYYMMDD}.json (for results context)
-- data/core_strategy.json
+- data/strategy/strategy_{yesterday_YYYYMMDD}.json
+- data/strategy/strategy_current.json
+- data/strategy/strategy_feedback_{yesterday_YYYYMMDD}.json (if exists)
+- data/metrics/daily_report_{yesterday_YYYYMMDD}.json (for results context)
+- data/strategy/core_strategy.json
 
 Cover for each active account:
 1. Is the current strategy working? Honest assessment.
@@ -258,14 +258,14 @@ Compile all subagent results into the output. Build three sections:
 
 ### 6. Write Output File
 
-Write `data/morning_briefing_{YYYYMMDD}.json`:
+Write `data/metrics/morning_briefing_{YYYYMMDD}.json`:
 
 ```json
 {
   "date": "YYYY-MM-DD",
   "generated_at": "ISO 8601",
   "type": "morning_briefing",
-  "daily_report_used": "data/daily_report_YYYYMMDD.json",
+  "daily_report_used": "data/metrics/daily_report_YYYYMMDD.json",
   "discussion": {
     "participants": ["Marc (COO)", "Analyst", "Strategist"],
     "rounds": [
@@ -338,7 +338,7 @@ Write `data/morning_briefing_{YYYYMMDD}.json`:
 ### 7. Validate and Send
 
 ```bash
-python3 scripts/validate.py morning_briefing data/morning_briefing_{YYYYMMDD}.json
+python3 scripts/validate.py morning_briefing data/metrics/morning_briefing_{YYYYMMDD}.json
 ```
 
 Compose Telegram message that includes discussion highlights:
@@ -364,8 +364,8 @@ python3 scripts/telegram_send.py "<morning briefing telegram message>"
 
 Generate and send HTML:
 ```bash
-python3 scripts/generate_html_report.py generic data/morning_briefing_{YYYYMMDD}.json --title "Morning Briefing — {YYYY-MM-DD}"
-python3 scripts/telegram_send.py --document data/morning_briefing_{YYYYMMDD}.html "Morning Briefing — {YYYY-MM-DD}"
+python3 scripts/generate_html_report.py generic data/metrics/morning_briefing_{YYYYMMDD}.json --title "Morning Briefing — {YYYY-MM-DD}"
+python3 scripts/telegram_send.py --document data/metrics/morning_briefing_{YYYYMMDD}.html "Morning Briefing — {YYYY-MM-DD}"
 ```
 
 ---
@@ -390,8 +390,8 @@ python3 scripts/analyst.py summary --account {account}
 
 Validate:
 ```bash
-python3 scripts/validate.py analyst data/metrics_{YYYYMMDD}_{account}.json
-python3 scripts/validate.py analyst_metrics data/metrics_history.db
+python3 scripts/validate.py analyst data/metrics/metrics_{YYYYMMDD}_{account}.json
+python3 scripts/validate.py analyst_metrics data/metrics/metrics_history.db
 ```
 
 ### 2. Round 1: Spawn Parallel Subagents
@@ -407,16 +407,16 @@ Active accounts: {ACTIVE_ACCOUNTS}
 EVENING WAR ROOM — Round 1: Daily Report + Post-Mortem Data
 
 FIRST: Produce the daily report. Follow agents/analyst.md 'Intelligence Mode' instructions.
-Write the daily report to: data/daily_report_{YYYYMMDD}.json
+Write the daily report to: data/metrics/daily_report_{YYYYMMDD}.json
 Output ONLY valid JSON — no markdown code fences, no commentary.
 
 Input files:
-- data/metrics_{YYYYMMDD}_{account}.json (for each active account)
-- data/strategy_{YYYYMMDD}.json
-- data/pipeline_state_{YYYYMMDD}.json
-- data/outbound_log_{YYYYMMDD}.json
-- data/content_plan_{YYYYMMDD}_{account}.json (for each active account)
-- Yesterday's report: data/daily_report_{prev_YYYYMMDD}.json (if exists)
+- data/metrics/metrics_{YYYYMMDD}_{account}.json (for each active account)
+- data/strategy/strategy_{YYYYMMDD}.json
+- data/pipeline/pipeline_state_{YYYYMMDD}.json
+- data/outbound/outbound_log_{YYYYMMDD}.json
+- data/content/content_plan_{YYYYMMDD}_{account}.json (for each active account)
+- Yesterday's report: data/metrics/daily_report_{prev_YYYYMMDD}.json (if exists)
 
 THEN: Prepare your post-mortem data briefing for the war room discussion.
 Cover for each active account:
@@ -438,11 +438,11 @@ Active accounts: {ACTIVE_ACCOUNTS}
 EVENING WAR ROOM — Round 1: Strategy Post-Mortem
 
 Read these files and prepare your strategy post-mortem:
-- data/strategy_{YYYYMMDD}.json (today's strategy — YOUR predictions)
-- data/content_plan_{YYYYMMDD}_{account}.json (what was actually posted)
-- data/metrics_{YYYYMMDD}_{account}.json (how it performed)
-- data/outbound_log_{YYYYMMDD}.json (outbound results)
-- data/core_strategy.json (benchmarks)
+- data/strategy/strategy_{YYYYMMDD}.json (today's strategy — YOUR predictions)
+- data/content/content_plan_{YYYYMMDD}_{account}.json (what was actually posted)
+- data/metrics/metrics_{YYYYMMDD}_{account}.json (how it performed)
+- data/outbound/outbound_log_{YYYYMMDD}.json (outbound results)
+- data/strategy/core_strategy.json (benchmarks)
 
 Cover for each active account:
 1. Grade your own strategy predictions vs actual results — be honest
@@ -461,7 +461,7 @@ Collect both results before proceeding.
 
 After Analyst subagent completes, validate the daily report:
 ```bash
-python3 scripts/validate.py analyst_report data/daily_report_{YYYYMMDD}.json
+python3 scripts/validate.py analyst_report data/metrics/daily_report_{YYYYMMDD}.json
 ```
 
 If validation fails: fall back to composing a basic Telegram message from the raw metrics summaries.
@@ -548,14 +548,14 @@ For EACH **active** account, extract from the discussion:
 
 5. **Recommended Adjustments**: Merged from Round 3 recommendations. Include confidence levels. If agents disagreed, use the more conservative recommendation.
 
-Write `data/strategy_feedback_{YYYYMMDD}.json`:
+Write `data/strategy/strategy_feedback_{YYYYMMDD}.json`:
 
 ```json
 {
   "date": "YYYY-MM-DD",
   "generated_at": "ISO 8601",
-  "daily_report_used": "data/daily_report_YYYYMMDD.json",
-  "strategy_used": "data/strategy_YYYYMMDD.json",
+  "daily_report_used": "data/metrics/daily_report_YYYYMMDD.json",
+  "strategy_used": "data/strategy/strategy_YYYYMMDD.json",
   "discussion": {
     "participants": ["Marc (COO)", "Analyst", "Strategist"],
     "rounds": [
@@ -640,7 +640,7 @@ Write `data/strategy_feedback_{YYYYMMDD}.json`:
 
 Validate:
 ```bash
-python3 scripts/validate.py strategy_feedback data/strategy_feedback_{YYYYMMDD}.json
+python3 scripts/validate.py strategy_feedback data/strategy/strategy_feedback_{YYYYMMDD}.json
 ```
 
 ### 7. Send Daily Report + Alerts via Telegram
@@ -671,8 +671,8 @@ python3 scripts/validate.py strategy_feedback data/strategy_feedback_{YYYYMMDD}.
    ```
 5. Generate and send HTML reports:
    ```bash
-   python3 scripts/generate_html_report.py daily_report data/daily_report_{YYYYMMDD}.json
-   python3 scripts/telegram_send.py --document data/daily_report_{YYYYMMDD}.html "Daily Report — {YYYY-MM-DD}"
+   python3 scripts/generate_html_report.py daily_report data/metrics/daily_report_{YYYYMMDD}.json
+   python3 scripts/telegram_send.py --document data/metrics/daily_report_{YYYYMMDD}.html "Daily Report — {YYYY-MM-DD}"
    ```
 
 ---
