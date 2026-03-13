@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 13, 2026 (Session 36: War Room subagent redesign, API replies disabled)
+**Last updated**: March 14, 2026 (Session 37: Cron auth failure fix — setup-token for headless auth)
 
 ---
 
@@ -889,6 +889,31 @@ The key new artifact is `data/strategy/strategy_feedback_{YYYYMMDD}.json` — th
 - `scripts/run_warroom.sh` — Removed `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. Updated prompts: "spawn as SUBAGENTS using the Agent tool" instead of "spawn as teammates". Explicit instructions to use blocking calls.
 - `config/outbound_rules.json` — `max_replies_per_day: 0` for both EN and JP
 - `config/global_rules.md` — Updated outbound limits: "0 replies" with reason (403 blocked for new accounts)
+
+### Session 37 — Cron Auth Failure Fix: Long-Lived Token for Headless Auth (March 14, 2026)
+
+**Problem**: All cron-scheduled jobs (morning warroom, evening warroom, pipeline, outbound) failed starting March 13 with `Not logged in · Please run /login`. The error appeared in every cron log:
+- `cron_morning_warroom_20260313.log`: Failed at 05:31
+- `cron_pipeline_20260313.log`: Failed at 06:00
+- `cron_evening_warroom_20260313.log`: Failed at 22:00
+
+Meanwhile, the same commands worked fine in interactive terminals.
+
+**Initial hypothesis (wrong)**: The plan proposed that `env -u CLAUDECODE` in shell scripts was stripping auth context. Testing proved this **incorrect** — `env -u CLAUDECODE` is required to allow nested `claude -p` invocations (prevents "Nested sessions share runtime resources" error). Removing it breaks all invocations from within Claude Code. From cron, `CLAUDECODE` is never set, so `env -u CLAUDECODE` is a no-op. All proposed changes were reverted.
+
+**Root cause (actual)**: Claude Code authenticates via OAuth tokens from `claude.ai`, stored in the macOS Keychain under `"Claude Code-credentials"`. These tokens have a limited lifetime (~12-24h). Cron processes can read the Keychain but cannot refresh expired tokens interactively. The token was last refreshed on March 12 21:06 JST (via interactive session) — by the next morning's cron run at 05:31 JST, it had expired.
+
+**Evidence**:
+- Keychain entry `"Claude Code-credentials"` created `2026-03-12 12:06:29 UTC`, last modified `2026-03-13 18:58:54 UTC`
+- March 12 warroom runs at 12:43 JST succeeded (fresh token from interactive session)
+- March 13 runs starting at 05:31 JST all failed (token expired, no interactive session to refresh)
+- `claude auth status` showed `loggedIn: true` only after an interactive session refreshed the token
+
+**Solution**: Ran `claude setup-token` to create a **long-lived authentication token** (valid ~1 year, prefix `sk-ant-oat01-`). This token is stored in the Keychain and used by all `claude -p` invocations without requiring interactive refresh. Verified auth works in a minimal cron-like environment (`env -i HOME=$HOME PATH=... claude auth status` → `loggedIn: true`).
+
+**No code changes required** — the shell scripts and telegram bot were correct all along. The fix was purely an auth credential setup.
+
+**Key lesson**: `claude -p` in cron requires `claude setup-token` for long-lived auth. The default OAuth flow (`claude auth login`) produces tokens that expire and need interactive refresh — unsuitable for headless/cron use. This is documented in Claude Code's headless mode docs.
 
 ---
 
