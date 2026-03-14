@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 14, 2026 (Session 38: Auto-schedule slot publishing on approval)
+**Last updated**: March 15, 2026 (Session 39: Following-aware target selection)
 
 ---
 
@@ -949,6 +949,42 @@ Previously, per-slot cron entries were manually added (March 13) to work around 
 - `scripts/schedule_slots.py` — new helper
 - `scripts/telegram_bot.py` — modified `cmd_approve` (~line 452)
 - `data/content/content_plan_20260314_EN.json` — rescheduled slots 02-04
+
+### Session 39 — Following-Aware Target Selection (March 15, 2026)
+
+**Problem**: The Outbound agent wasted follow budget because no upstream agent knew which accounts were already followed. On March 14, 0 of 3 follow slots executed — all 4 strategy targets were already followed. The Strategist picks targets from scout data and outbound logs but has no visibility into real follow status. The Outbound agent uses `outbound_history.py` (log-based, known to miss 22/34 actual follows per Session 35 analysis). Only `publisher.py`'s `_fetch_real_following()` knows the truth — but it runs at execution time, too late to find replacements.
+
+**Solution**: Persist the real following list to a shared file. Strategist and Outbound agent both read it to make informed decisions. One API call, shared by all agents.
+
+**Changes (5 files)**:
+
+1. **`scripts/publisher.py`** — Added `run_sync_following()` function + `sync-following` CLI subcommand. Fetches real following list via X API and saves to `data/outbound/following_{account}.json`. Also auto-refreshes after `run_smart_outbound()` completes.
+
+2. **`agents/strategist.md`** — Added Step 1.6 (read following list before analysis). Updated Target Rotation Rules to prioritize unfollowed targets — must include at least `daily_follows` unfollowed accounts. Added `target_follow_status` field to `outbound_strategy` output schema + validation rule 13.
+
+3. **`agents/outbound.md`** — Added input #5 (read `following_{account}.json` as source of truth for follow status). Updated Step 2 Safety Reasoning to use the file instead of `outbound_history.py` for follow decisions.
+
+4. **`agents/marc_pipeline.md`** — Added Step 3.6 (sync following before Strategist spawn).
+
+5. **`agents/marc_publishing.md`** — Added Step 2.5 (refresh following before Outbound spawn).
+
+**Data flow**:
+```
+Pipeline:  sync-following → Scout → Strategist (reads following list) → Creator → Preview
+Publishing: Publisher → sync-following → Outbound (reads following list) → smart-outbound → auto-sync
+```
+
+**Output format** (`data/outbound/following_EN.json`):
+```json
+{"account": "EN", "fetched_at": "...", "count": 41, "following": ["account1", "account2", ...]}
+```
+
+**Artifacts**:
+- `scripts/publisher.py` — added `run_sync_following()`, `sync-following` subcommand, auto-refresh after smart-outbound
+- `agents/strategist.md` — Step 1.6, updated Target Rotation Rules, `target_follow_status` in schema
+- `agents/outbound.md` — updated Steps 1 & 2 for following list as source of truth
+- `agents/marc_pipeline.md` — Step 3.6
+- `agents/marc_publishing.md` — Step 2.5
 
 ---
 

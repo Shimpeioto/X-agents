@@ -96,6 +96,13 @@ From the Scout report, pay attention to:
 
 - IF the file does not exist → skip this step (same as before — no feedback available yet).
 
+## Step 1.6: Read following list (always)
+
+- Read `data/outbound/following_{account}.json` for each active account (EN, JP).
+- This file contains the real list of accounts currently being followed (verified via X API by `publisher.py sync-following`).
+- Use this to ensure `target_accounts` includes enough **unfollowed** accounts to fill the follow budget (`daily_follows`).
+- IF the file does not exist → note in `key_insights` that follow status is unknown and select targets without follow awareness.
+
 ## Step 2: Read context if available (conditional)
 
 - IF `data/strategy/strategy_current.json` exists → read it for continuity with yesterday's strategy. Consider what worked, maintain active A/B tests, evolve recommendations rather than starting from scratch.
@@ -119,7 +126,7 @@ These rules are MANDATORY and override any conflicting analysis from competitor 
 ### EN Content Mix: MUST include these pillars
 - `image_showcase`: ~35% — let exceptional images speak for themselves
 - `engagement_questions`: ~30% — short provocative questions with stunning images
-- `grok_interactive`: ~20% — `.@grok [request]` interactive image transformation
+- `grok_interactive`: ~20% — `hey @grok [request]` interactive image transformation
 - `self_quote_chains`: ~15% — quote-tweet own posts to create content chains
 - Total: 100%. Grok posts are MANDATORY at 20-30%.
 
@@ -156,7 +163,7 @@ Perform the following analysis for BOTH EN and JP accounts:
 5. **Outbound Strategy**: Set daily engagement limits WITHIN global rules:
    - `daily_likes`: max 30 per account per day
    - `daily_replies`: 0 (operator decision: no auto-replies — all replies are manual)
-   - `daily_follows`: 0 (operator decision: no auto-follows)
+   - `daily_follows`: max 5 per account per day
    - `target_accounts`: 2-5 accounts from the competitor list to engage with
    - `reply_style`: brief description of reply tone (used by Outbound agent for manual reply recommendations)
 
@@ -164,17 +171,14 @@ Perform the following analysis for BOTH EN and JP accounts:
 
 When selecting `target_accounts`, apply rotation principles:
 
-1. **Draw from the full competitor pool** — `config/competitors.json` has 31+ accounts.
-   Don't pick the same 3-4 every day.
-2. **Check recent outbound logs** — IF `data/outbound/outbound_log_{recent_dates}.json` files exist,
-   check which accounts were targeted in the last 3 days. Prefer accounts NOT recently engaged.
-   If no logs exist (first run), select freely.
-3. **Market matching** — EN targets from EN or "both" market. JP targets from JP or "both" market.
-4. **Mix target sizes** — 1-2 larger accounts (>50K followers, for visibility) and
-   2-3 smaller accounts (<20K followers, for reciprocal engagement likelihood).
-5. **Skip known issues** — Accounts with >50% reply contamination in the scout report
-   should be deprioritized.
-6. **Target count** — EN: 4/day, JP: 3/day (per `config/outbound_rules.json`).
+1. **Read the following list** — `data/outbound/following_{account}.json` is the source of truth for follow status. Load the `following` array to know which accounts are already followed.
+2. **Ensure enough unfollowed targets** — Include AT LEAST `daily_follows` unfollowed accounts (EN: 3, JP: 2) so the Outbound agent can actually execute follow actions. Fill remaining slots with already-followed accounts for like engagement.
+3. **Draw from the full competitor pool** — `config/competitors.json` has 31+ accounts. Don't pick the same 3-4 every day.
+4. **Check recent outbound logs** — IF `data/outbound/outbound_log_{recent_dates}.json` files exist, check which accounts were targeted in the last 3 days. Prefer accounts NOT recently engaged. If no logs exist (first run), select freely.
+5. **Market matching** — EN targets from EN or "both" market. JP targets from JP or "both" market.
+6. **Mix target sizes** — 1-2 larger accounts (>50K followers, for visibility) and 2-3 smaller accounts (<20K followers, for reciprocal engagement likelihood).
+7. **Skip known issues** — Accounts with >50% reply contamination in the scout report should be deprioritized.
+8. **Target count** — EN: 4/day, JP: 3/day (per `config/outbound_rules.json`).
 
 6. **A/B Test**: Design ONE active test per account. Choose a variable to test (e.g., posting time, content category emphasis, caption style, Grok request type). Define two clear variants and a 3-7 day duration.
 
@@ -203,8 +207,12 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
     "outbound_strategy": {
       "daily_likes": 30,
       "daily_replies": 0,
-      "daily_follows": 0,
+      "daily_follows": 3,
       "target_accounts": ["@account1", "@account2"],
+      "target_follow_status": {
+        "@account1": "unfollowed",
+        "@account2": "already_followed"
+      },
       "reply_style": "description of reply approach (for manual reply recommendations)"
     },
     "ab_test": {
@@ -244,13 +252,14 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
 3. `content_mix` values must sum to exactly 100 per account
 4. **EN hashtag_strategy**: `always_use` MUST be `[]`, `rotate` MUST be `[]`, `trending_today` MUST be `[]`, `max_per_post` MUST be `0` (ZERO hashtags for EN)
 5. **JP hashtag_strategy**: `always_use` MUST be `[]`, `rotate` MUST be `[]`, `trending_today` MUST be `[]`, `max_per_post` MUST be `2`. Only tags from `["#SFW", "#Fictional", "#AIart", "#digitalart"]` are allowed anywhere in the strategy
-6. `outbound_strategy` limits must be within global rules: `daily_likes` ≤ 30, `daily_replies` = 0 (no auto-replies — manual only), `daily_follows` = 0 (no auto-follows)
+6. `outbound_strategy` limits must be within global rules: `daily_likes` ≤ 30, `daily_replies` = 0 (no auto-replies — manual only), `daily_follows` ≤ 5
 7. `ab_test` must be present with `variable`, `variant_a`, `variant_b`
 8. `key_insights` must have at least 3 entries
 9. EN posting times should use UTC, JP posting times should use JST
 10. **EN `content_mix` MUST include `grok_interactive` at 15-30%**
 11. **JP `content_mix` MUST include `grok_interactive` at 20-35%**
 12. **posting_schedule categories MUST use core strategy pillar names**: EN = engagement_questions, image_showcase, grok_interactive, self_quote_chains; JP = grok_interactive, persona_dialogue, art_showcase, self_quote_chains
+13. **`target_follow_status`** must be present in `outbound_strategy` with an entry for each account in `target_accounts`. Values must be `"unfollowed"` or `"already_followed"`. At least `daily_follows` targets should be `"unfollowed"` (if enough unfollowed accounts exist in the competitor pool).
 
 ## Format Rules
 

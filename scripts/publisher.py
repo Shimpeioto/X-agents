@@ -6,6 +6,7 @@ Usage:
     python3 scripts/publisher.py post --account EN --force  # Post all approved (bypasses schedule check)
     python3 scripts/publisher.py outbound --account EN      # Run outbound engagement (legacy)
     python3 scripts/publisher.py smart-outbound --account EN --plan data/outbound/outbound_plan_20260305_EN.json
+    python3 scripts/publisher.py sync-following --account EN  # Fetch and save real following list
     python3 scripts/publisher.py --dry-run post --account EN # Log only, no API calls
 
 Exit codes: 0=success, 1=error, 2=usage error
@@ -564,6 +565,27 @@ def _fetch_real_following(account: str) -> set[str]:
         return set()
 
 
+# --- Sync Following Subcommand ---
+
+def run_sync_following(account: str, dry_run: bool) -> int:
+    """Fetch real following list from X API and save to file."""
+    if dry_run:
+        logger.info(f"[DRY-RUN] Would fetch following list for {account}")
+        return 0
+    following = _fetch_real_following(account)
+    output = {
+        "account": account,
+        "fetched_at": now_iso(),
+        "count": len(following),
+        "following": sorted(following),
+    }
+    path = os.path.join(OUTBOUND_DIR, f"following_{account}.json")
+    save_json(path, output)
+    logger.info(f"Following list for {account}: {len(following)} accounts -> {path}")
+    print(f"Synced {len(following)} following for {account}")
+    return 0
+
+
 # --- Smart Outbound Subcommand ---
 
 def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
@@ -745,6 +767,10 @@ def run_smart_outbound(account: str, plan_path: str, dry_run: bool) -> int:
     save_rate_limits(date, limits)
     save_json(outbound_log_path, outbound_log)
 
+    # 5. Auto-refresh following list after outbound execution
+    if not dry_run:
+        run_sync_following(account, dry_run=False)
+
     acct_limits = limits.get(account, {})
     logger.info(f"Smart outbound complete for {account}. "
                 f"Likes: {acct_limits.get('likes', {}).get('used', 0)}/30, "
@@ -777,6 +803,10 @@ def main():
     smart_parser.add_argument("--account", required=True, choices=["EN", "JP"], help="Account to engage for")
     smart_parser.add_argument("--plan", required=True, help="Path to outbound plan JSON")
 
+    # sync-following subcommand
+    sync_parser = subparsers.add_parser("sync-following", help="Fetch and save real following list")
+    sync_parser.add_argument("--account", required=True, choices=["EN", "JP"], help="Account to sync following for")
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -792,6 +822,8 @@ def main():
         exit_code = run_outbound(args.account, args.dry_run)
     elif args.command == "smart-outbound":
         exit_code = run_smart_outbound(args.account, args.plan, args.dry_run)
+    elif args.command == "sync-following":
+        exit_code = run_sync_following(args.account, args.dry_run)
     else:
         parser.print_help()
         sys.exit(2)

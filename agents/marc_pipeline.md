@@ -97,6 +97,18 @@ python3 scripts/validate.py image_references data/content/image_references_{YYYY
 
 Update pipeline state with `image_analysis` step status.
 
+### 3.6. Sync Following List
+
+Refresh the following list so the Strategist has accurate follow data for target selection:
+
+```bash
+python3 scripts/publisher.py sync-following --account EN
+# Run for each active account (check config/account_status.json)
+```
+
+Output: `data/outbound/following_{account}.json` — used by Strategist to pick unfollowed targets.
+If this step fails: log warning and continue — Strategist will work without follow awareness.
+
 ### 4. Spawn Strategist Teammate
 
 Spawn with **model: opus**:

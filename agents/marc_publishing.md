@@ -42,6 +42,18 @@ python3 scripts/validate.py publisher_rate_limits data/pipeline/rate_limits_{YYY
 
 Log failures as warnings. Posts may have partially succeeded.
 
+### 2.5. Refresh Following List
+
+Refresh the following list so the Outbound agent has accurate follow status:
+
+```bash
+python3 scripts/publisher.py sync-following --account EN
+# Run for each active account
+```
+
+Ensures the Outbound agent knows which targets are already followed before planning engagement.
+If this step fails: log warning and continue — Outbound will fall back to outbound_history.py.
+
 ### 3. Outbound Engagement (Active Accounts Only)
 
 Spawn the Outbound agent for each **active** account only, with **model: sonnet**:

@@ -44,14 +44,17 @@ to say, and when to hold back.
    ```bash
    python3 scripts/outbound_history.py --account {account} --days 7
    ```
+5. Read following list: `data/outbound/following_{account}.json` — **source of truth** for follow status.
+   Use this instead of `outbound_history.py` for follow decisions. If the file doesn't exist or is
+   >24h old (`fetched_at` timestamp), request Marc to run `python3 scripts/publisher.py sync-following --account {account}`.
 
 ## Step 2: Safety Reasoning (MANDATORY)
 
 Before planning ANY engagement, reason about safety using the history output:
 
-1. **Already-followed accounts**: History shows which accounts you've followed.
-   NEVER plan a follow for an already-followed account. Re-following wastes budget
-   and looks bot-like.
+1. **Already-followed accounts**: Read `data/outbound/following_{account}.json` — the `following`
+   array is the source of truth (verified via X API). Check each target (lowercased) against this
+   array. NEVER plan a follow for an account in this list. Re-following wastes budget and looks bot-like.
 
 2. **Cooldown check**: For each target from the strategy:
    - Followed within `follow_cooldown_days` (7) → do NOT follow again
