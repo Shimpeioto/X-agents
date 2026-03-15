@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 15, 2026 (Session 39: Following-aware target selection)
+**Last updated**: March 15, 2026 (Session 39: Following-aware target selection + cron→launchd migration)
 
 ---
 
@@ -986,6 +986,54 @@ Publishing: Publisher → sync-following → Outbound (reads following list) →
 - `agents/marc_pipeline.md` — Step 3.6
 - `agents/marc_publishing.md` — Step 2.5
 
+### Session 39b — Cron→launchd Migration: Permanent Auth Fix (March 15, 2026)
+
+**Problem**: Every cron-scheduled job failed with "Not logged in" since Session 37. The `setup-token` fix (Session 37) stored a long-lived OAuth token in macOS Keychain, but cron runs in a separate security session that **cannot access Keychain items** — even after `security unlock-keychain` succeeds.
+
+**Investigation** (systematic elimination of approaches):
+
+1. **Keychain unlock (`security unlock-keychain`)**: Unlock succeeds (exit 0), but `security find-generic-password` returns "SecKeychainSearchCopyNext: The specified item could not be found in the keychain." The login keychain wasn't even in cron's search list. Adding it via `security list-keychains -d user -s` didn't help — the security session still blocks item-level access.
+
+2. **ANTHROPIC_API_KEY env var**: The OAuth token (`sk-ant-oat01-*`) is not a valid API key. `claude auth status` reports `loggedIn: true` but `claude -p` fails with "Invalid API key". The OAuth token only works through Keychain's OAuth flow.
+
+3. **`apiKeyHelper` setting**: Setting was reverted — incompatible with Claude.ai OAuth authentication method.
+
+**Root cause**: macOS security sessions are strictly isolated. Cron's security session fundamentally cannot access Keychain items created in the user's login session. This is a deliberate macOS security design, not a configuration issue.
+
+**Solution**: Replaced all crontab entries with macOS LaunchAgents (`~/Library/LaunchAgents/com.xagents.*.plist`). LaunchAgents run in the user's login session with full Keychain access.
+
+**Changes**:
+
+| Old (cron) | New (LaunchAgent) | Schedule |
+|---|---|---|
+| `30 5 * * *` morning_warroom | `com.xagents.morning-warroom.plist` | 05:30 daily |
+| `0 6 * * *` pipeline | `com.xagents.pipeline.plist` | 06:00 daily |
+| `0 14 * * *` outbound | `com.xagents.outbound.plist` | 14:00 daily |
+| `0 22 * * *` evening_warroom | `com.xagents.evening-warroom.plist` | 22:00 daily |
+
+Also updated:
+- **`scripts/cron_wrapper.sh`** — Removed Keychain unlock hack. Added note that this script is now invoked by launchd, not cron.
+- **`scripts/schedule_slots.py`** — Rewritten to create per-slot LaunchAgent plists (`com.xagents.publish-slot.{date}-{account}-{slot}.plist`) instead of crontab entries. Uses `plistlib` for proper plist generation and `launchctl load/unload` for agent management.
+
+**Verified**: `claude -p "Reply with exactly one word: AUTH_OK"` returned `AUTH_OK` from a LaunchAgent at 06:38 JST. Full Keychain access, Max subscription authenticated.
+
+**Prerequisite**: User must be logged in to macOS (screen-locked is fine; logged out is not).
+
+**Management commands**:
+```bash
+# List active agents
+launchctl list | grep xagents
+
+# Reload an agent after plist change
+launchctl unload ~/Library/LaunchAgents/com.xagents.pipeline.plist
+launchctl load ~/Library/LaunchAgents/com.xagents.pipeline.plist
+```
+
+**Artifacts**:
+- `~/Library/LaunchAgents/com.xagents.{morning-warroom,pipeline,outbound,evening-warroom}.plist` — 4 persistent scheduled agents
+- `scripts/cron_wrapper.sh` — updated (auth note, Keychain hack removed)
+- `scripts/schedule_slots.py` — rewritten for launchd
+
 ---
 
 ## 4. Decision Summary
@@ -994,7 +1042,7 @@ Publishing: Publisher → sync-following → Outbound (reads following list) →
 
 | # | Decision | Rationale |
 |---|---|---|
-| D1 | Claude Code + cron as the agent execution framework | Handles 80% natively; cron fills scheduling gap; avoids dependency on OpenClaw |
+| D1 | Claude Code + launchd as the agent execution framework | Handles 80% natively; launchd fills scheduling gap (replaced cron in Session 39b — cron cannot access macOS Keychain) |
 | D2 | VPS for always-on compute (Phase 6 deployment) | Cheaper than hardware ($12/mo Vultr Tokyo); only needed for autonomous operation |
 | D3 | Telegram Bot for human-agent communication | Simple (~50 lines Python), free, feature-rich; universal across any project |
 | D8 | CLAUDE.md for persistent behavioral memory | Native auto-loading; rules persist across sessions; no custom code needed |

@@ -1,17 +1,18 @@
-"""Schedule per-slot cron entries for approved posts.
+"""Schedule per-slot LaunchAgent entries for approved posts.
 
 Called by telegram_bot.py after /approve, or manually:
     python3 scripts/schedule_slots.py --account EN [--date YYYYMMDD]
 
-Creates date-specific cron entries that fire once at each slot's scheduled_time,
-executing: publisher.py post --account {account} --slot {slot}
+Creates date-specific LaunchAgent plists that fire once at each slot's scheduled_time,
+executing: cron_wrapper.sh publish_slot_{account}_{slot}
 
-All existing X-AGENTS-PUBLISH-SLOT entries are removed first (clean slate).
+All existing X-AGENTS slot LaunchAgents are removed first (clean slate).
 """
 
 import argparse
 import json
 import os
+import plistlib
 import re
 import subprocess
 import sys
@@ -21,7 +22,8 @@ from zoneinfo import ZoneInfo
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(PROJECT_DIR, "data")
-CRON_TAG = "# X-AGENTS-PUBLISH-SLOT"
+LAUNCH_AGENTS_DIR = os.path.expanduser("~/Library/LaunchAgents")
+SLOT_LABEL_PREFIX = "com.xagents.publish-slot"
 
 JST = ZoneInfo("Asia/Tokyo")
 UTC = ZoneInfo("UTC")
@@ -52,29 +54,57 @@ def parse_scheduled_time(time_str: str, date_str: str) -> datetime | None:
     return local_dt.astimezone(UTC)
 
 
-def get_current_crontab() -> str:
-    result = subprocess.run(["crontab", "-l"], capture_output=True, text=True)
-    if result.returncode != 0:
-        return ""
-    return result.stdout
+def remove_slot_agents() -> int:
+    """Unload and remove all existing slot LaunchAgent plists. Returns count removed."""
+    removed = 0
+    for fname in os.listdir(LAUNCH_AGENTS_DIR):
+        if fname.startswith(SLOT_LABEL_PREFIX) and fname.endswith(".plist"):
+            path = os.path.join(LAUNCH_AGENTS_DIR, fname)
+            label = fname.replace(".plist", "")
+            subprocess.run(["launchctl", "unload", path], capture_output=True)
+            os.remove(path)
+            removed += 1
+    return removed
 
 
-def set_crontab(content: str) -> None:
-    proc = subprocess.run(["crontab", "-"], input=content, capture_output=True, text=True)
-    if proc.returncode != 0:
-        print(f"ERROR: Failed to set crontab: {proc.stderr.strip()}", file=sys.stderr)
-        sys.exit(1)
+def create_slot_agent(account: str, slot: int, utc_dt: datetime, date_str: str) -> str:
+    """Create a LaunchAgent plist for a single slot. Returns the plist path."""
+    # Use JST for the calendar interval (launchd uses local time)
+    jst_dt = utc_dt.astimezone(JST)
 
+    label = f"{SLOT_LABEL_PREFIX}.{date_str}-{account.lower()}-{slot:02d}"
+    plist_path = os.path.join(LAUNCH_AGENTS_DIR, f"{label}.plist")
 
-def remove_slot_entries(crontab: str) -> str:
-    """Remove all lines containing the CRON_TAG."""
-    lines = crontab.splitlines()
-    filtered = [line for line in lines if CRON_TAG not in line]
-    return "\n".join(filtered) + "\n" if filtered else ""
+    plist_data = {
+        "Label": label,
+        "ProgramArguments": [
+            "/bin/bash", "-c",
+            f'source "$HOME/.zshrc" 2>/dev/null; cd {PROJECT_DIR} && python3 scripts/publisher.py post --account {account} --slot {slot} >> logs/launchd_publish_{date_str}.log 2>&1'
+        ],
+        "StartCalendarInterval": {
+            "Month": jst_dt.month,
+            "Day": jst_dt.day,
+            "Hour": jst_dt.hour,
+            "Minute": jst_dt.minute,
+        },
+        "StandardOutPath": os.path.join(PROJECT_DIR, "logs", f"launchd_publish_{date_str}.log"),
+        "StandardErrorPath": os.path.join(PROJECT_DIR, "logs", f"launchd_publish_{date_str}.log"),
+        "EnvironmentVariables": {
+            "HOME": os.path.expanduser("~"),
+            "TZ": "Asia/Tokyo",
+        },
+    }
+
+    with open(plist_path, "wb") as f:
+        plistlib.dump(plist_data, f)
+
+    # Load the agent
+    subprocess.run(["launchctl", "load", plist_path], capture_output=True)
+    return plist_path
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Schedule per-slot cron entries for approved posts")
+    parser = argparse.ArgumentParser(description="Schedule per-slot LaunchAgent entries for approved posts")
     parser.add_argument("--account", required=True, help="Account: EN or JP")
     parser.add_argument("--date", default=None, help="Date YYYYMMDD (default: today JST)")
     args = parser.parse_args()
@@ -106,27 +136,17 @@ def main():
             continue
         scheduled.append((slot, utc_dt, time_str))
 
-    # Build cron entries
-    cron_lines = []
-    for slot, utc_dt, orig_time in scheduled:
-        line = (
-            f"{utc_dt.minute} {utc_dt.hour} {utc_dt.day} {utc_dt.month} * "
-            f"cd {PROJECT_DIR} && python3 scripts/publisher.py post --account {account} --slot {slot} "
-            f">> logs/cron_publish_{date_str}.log 2>&1 {CRON_TAG}"
-        )
-        cron_lines.append(line)
+    # Clean slate: remove all existing slot agents
+    removed = remove_slot_agents()
 
-    # Update crontab: remove old slot entries, add new ones
-    current = get_current_crontab()
-    cleaned = remove_slot_entries(current)
-    if cron_lines:
-        new_crontab = cleaned.rstrip("\n") + "\n" + "\n".join(cron_lines) + "\n"
-    else:
-        new_crontab = cleaned
-    set_crontab(new_crontab)
+    # Create new LaunchAgent for each scheduled slot
+    for slot, utc_dt, orig_time in scheduled:
+        create_slot_agent(account, slot, utc_dt, date_str)
 
     # Print summary for Telegram
     lines = []
+    if removed:
+        lines.append(f"Cleared {removed} previous slot schedule(s)")
     if scheduled:
         lines.append(f"Scheduled {len(scheduled)} slot(s) for {account}:")
         for slot, utc_dt, orig_time in sorted(scheduled):

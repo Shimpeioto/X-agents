@@ -35,6 +35,11 @@ if ! command -v claude &> /dev/null; then
     exit 1
 fi
 
+# --- NOTE on auth ---
+# This script is invoked by macOS launchd (LaunchAgents), which runs in the
+# user's login session with full Keychain access. No special auth setup needed.
+# Do NOT use cron — cron cannot access macOS Keychain (different security session).
+
 # --- Log Start ---
 echo "[$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S')] [CRON] [INFO] Starting ${TASK} for ${DATE}" >> "$LOG_FILE"
 
