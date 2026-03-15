@@ -20,16 +20,23 @@ If no approved posts exist for any active account: log and **STOP**.
 
 ## Execution
 
-### 1. Publish Approved Posts (Active Accounts Only)
+### 1. Schedule Approved Posts at Slot Times (Active Accounts Only)
 
-For each **active** account with approved posts, run directly:
+For each **active** account with approved posts, **schedule per-slot publishing** — do NOT bulk-publish:
 
 ```bash
-# Only run for active accounts (check config/account_status.json)
-python3 scripts/publisher.py post --account EN
+# Schedule each approved post to publish at its Strategist-recommended time
+python3 scripts/schedule_slots.py --account EN
 ```
 
-Expected: Content plan updated with `status: "posted"`, `tweet_id`, `post_url`, `posted_at`.
+This creates a LaunchAgent for each approved slot that fires at the correct time and runs:
+`python3 scripts/publisher.py post --account EN --slot {N}`
+
+If some slot times have already passed, `schedule_slots.py` automatically reschedules them with 30-minute staggered gaps starting from now (to avoid ghost tweets on new accounts).
+
+**NEVER call `publisher.py post --account EN` without `--slot`** — this bulk-publishes all approved posts simultaneously, which causes ghost tweets on new accounts and wastes X API credits.
+
+Expected after each LaunchAgent fires: Content plan updated with `status: "posted"`, `tweet_id`, `post_url`, `posted_at`.
 If Publisher exits non-zero: log error, continue to next account (do NOT stop).
 
 ### 2. Validate Publisher Output (Active Accounts Only)

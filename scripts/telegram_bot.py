@@ -568,24 +568,43 @@ async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 async def cmd_publish(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Route /publish through conversational Marc → execution."""
+    """Schedule approved posts at their slot times (same as /approve scheduling).
+
+    This does NOT bulk-publish. It creates per-slot LaunchAgents that fire at
+    each post's Strategist-recommended time. Past slots are rescheduled with
+    30-minute staggered gaps to avoid ghost tweets.
+    """
     if not is_authorized(update):
         return
 
     args = context.args or []
-    account_str = args[0].upper() if args else "both EN and JP"
+    if args:
+        accounts = [args[0].upper()]
+    else:
+        accounts = get_active_accounts()
 
-    response_text, tool_call = await chat_with_marc(
-        f"[PUBLISH] Publish approved posts for {account_str} account(s). "
-        f"Today's date: {today_iso()}."
-    )
+    results = []
+    for account in accounts:
+        plan, path = load_content_plan(account)
+        if plan is None:
+            results.append(f"{account}: No content plan found for today")
+            continue
 
-    if response_text:
-        await update.message.reply_text(response_text)
+        approved = [p for p in plan.get("posts", []) if p.get("status") == "approved"]
+        if not approved:
+            results.append(f"{account}: No approved posts to schedule")
+            continue
 
-    if tool_call:
-        task_id = _generate_task_id()
-        await _execute_task(update, task_id, tool_call)
+        proc = subprocess.run(
+            ["python3", "scripts/schedule_slots.py", "--account", account],
+            capture_output=True, text=True, cwd=PROJECT,
+        )
+        if proc.returncode == 0 and proc.stdout.strip():
+            results.append(proc.stdout.strip())
+        elif proc.returncode != 0:
+            results.append(f"{account}: Failed to schedule — {proc.stderr.strip()}")
+
+    await update.message.reply_text("\n".join(results) if results else "No active accounts")
 
 
 async def cmd_pipeline(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

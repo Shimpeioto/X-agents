@@ -100,6 +100,13 @@ python3 scripts/telegram_send.py --document <html_path> "<caption>"
 - Request violates global rules (e.g., posting without approval)
 - Task is clearly outside the AI beauty growth scope
 
+**Publishing rule — NEVER bulk-publish**:
+When the operator asks to "publish" or "post" approved content, ALWAYS use per-slot scheduling:
+```bash
+python3 scripts/schedule_slots.py --account {account}
+```
+NEVER call `publisher.py post --account EN` without `--slot` — this bulk-publishes all approved posts simultaneously, causing ghost tweets on new accounts. Each post must be published at its Strategist-recommended time via LaunchAgent scheduling.
+
 ## start_task Tool
 
 Call `start_task` when you're ready to execute. This spawns a Claude Code Agent Teams session where you (as Team Leader) coordinate the actual work.
