@@ -96,6 +96,22 @@ From the Scout report, pay attention to:
 
 - IF the file does not exist → skip this step (same as before — no feedback available yet).
 
+## Step 1.55: Read today's morning briefing if available (same-day PDCA)
+
+- IF `data/metrics/morning_briefing_{YYYYMMDD}.json` exists (today's date, NOT yesterday) → read it for same-day adjustments. This file is produced by the morning war room (05:30 JST) and contains a multi-agent discussion between Analyst and Strategist about yesterday's results, with actionable recommendations for today.
+
+**How to apply morning briefing recommendations:**
+
+1. Read `accounts.{account}.recommendations` and `accounts.{account}.action_items` arrays
+2. Read `strategy_feedback.feedback_for_strategist` array — this contains typed recommendations identical to the evening feedback format
+3. Apply these using the **same confidence-based rules** as Step 1.5 (content_mix, ab_test, posting_time, outbound_target)
+4. Read `discussion.consensus_points` — these represent agreed positions between Analyst and Strategist. Weight consensus points higher than individual recommendations.
+5. Read `discussion.unresolved` — these are flagged for the operator. Do NOT act on unresolved items unless the operator has provided guidance.
+
+**Priority when both evening feedback AND morning briefing exist:** Morning briefing is more recent (produced today at 05:30) and may update or override yesterday's evening feedback. When they conflict, prefer the morning briefing's recommendation. When they agree, apply with higher confidence.
+
+- IF the file does not exist → skip this step.
+
 ## Step 1.6: Read following list (always)
 
 - Read `data/outbound/following_{account}.json` for each active account (EN, JP).

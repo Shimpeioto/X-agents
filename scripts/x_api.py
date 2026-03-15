@@ -15,7 +15,7 @@ RETRY_WAIT = 5  # seconds
 MAX_IMAGE_SIZE = 2 * 1024 * 1024  # 2MB per global rules
 
 USER_FIELDS = ["public_metrics", "description", "profile_image_url"]
-TWEET_FIELDS = ["public_metrics", "created_at", "entities"]
+TWEET_FIELDS = ["public_metrics", "created_at", "entities", "referenced_tweets"]
 MEDIA_FIELDS = ["type", "url", "preview_image_url", "alt_text"]
 
 
@@ -205,6 +205,10 @@ class XApiClient:
         hashtags = []
         if "hashtags" in entities:
             hashtags = [f"#{h['tag']}" for h in entities["hashtags"]]
+        # Extract referenced_tweets (retweets, quotes, replies)
+        ref_tweets = None
+        if hasattr(tweet, "referenced_tweets") and tweet.referenced_tweets:
+            ref_tweets = [{"type": rt.type, "id": str(rt.id)} for rt in tweet.referenced_tweets]
         return {
             "tweet_id": str(tweet.id),
             "text": tweet.text,
@@ -212,6 +216,7 @@ class XApiClient:
             "public_metrics": dict(tweet.public_metrics) if tweet.public_metrics else {},
             "entities": entities,
             "hashtags": hashtags,
+            "referenced_tweets": ref_tweets,
         }
 
     def _api_call_with_retry(self, func, *args, **kwargs):

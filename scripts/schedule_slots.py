@@ -4,7 +4,10 @@ Called by telegram_bot.py after /approve, or manually:
     python3 scripts/schedule_slots.py --account EN [--date YYYYMMDD]
 
 Creates date-specific LaunchAgent plists that fire once at each slot's scheduled_time,
-executing: cron_wrapper.sh publish_slot_{account}_{slot}
+executing: publisher.py post --account {account} --slot {slot}
+
+For slots whose scheduled time has already passed, posts them immediately with
+staggered delays (30min apart) to avoid ghost tweets on new accounts.
 
 All existing X-AGENTS slot LaunchAgents are removed first (clean slate).
 """
@@ -16,7 +19,7 @@ import plistlib
 import re
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from zoneinfo import ZoneInfo
 
@@ -119,8 +122,12 @@ def main():
 
     now_utc = datetime.now(UTC)
 
-    # Collect approved posts with future scheduled times
-    scheduled = []
+    # Minimum gap between posts to avoid ghost tweets (X removes rapid posts from new accounts)
+    MIN_GAP_MINUTES = 30
+
+    # Categorize approved posts: future (schedule normally) vs past (post soon with stagger)
+    future_slots = []
+    past_slots = []
     skipped = []
     for post in plan.get("posts", []):
         if post.get("status") != "approved":
@@ -132,27 +139,59 @@ def main():
             skipped.append((slot, time_str, "could not parse time"))
             continue
         if utc_dt <= now_utc:
-            skipped.append((slot, time_str, "time already passed"))
-            continue
-        scheduled.append((slot, utc_dt, time_str))
+            past_slots.append((slot, utc_dt, time_str))
+        else:
+            future_slots.append((slot, utc_dt, time_str))
+
+    # For past slots: reschedule with staggered times starting from now + 5 min
+    # Each subsequent past slot gets an additional MIN_GAP_MINUTES gap
+    rescheduled = []
+    if past_slots:
+        # Sort by original slot number to maintain order
+        past_slots.sort(key=lambda x: x[0])
+        next_time = now_utc + timedelta(minutes=5)
+
+        # Check if any future slots exist — ensure past slots don't collide with them
+        future_times = [utc_dt for _, utc_dt, _ in future_slots]
+
+        for slot, orig_utc, orig_time in past_slots:
+            # Ensure we don't schedule too close to a future slot
+            for ft in future_times:
+                if abs((next_time - ft).total_seconds()) < MIN_GAP_MINUTES * 60:
+                    next_time = ft + timedelta(minutes=MIN_GAP_MINUTES)
+
+            rescheduled.append((slot, next_time, orig_time))
+            next_time = next_time + timedelta(minutes=MIN_GAP_MINUTES)
 
     # Clean slate: remove all existing slot agents
     removed = remove_slot_agents()
 
-    # Create new LaunchAgent for each scheduled slot
-    for slot, utc_dt, orig_time in scheduled:
+    # Create LaunchAgents for future slots (at original time)
+    for slot, utc_dt, orig_time in future_slots:
+        create_slot_agent(account, slot, utc_dt, date_str)
+
+    # Create LaunchAgents for rescheduled past slots (at staggered times)
+    for slot, utc_dt, orig_time in rescheduled:
         create_slot_agent(account, slot, utc_dt, date_str)
 
     # Print summary for Telegram
     lines = []
     if removed:
         lines.append(f"Cleared {removed} previous slot schedule(s)")
-    if scheduled:
-        lines.append(f"Scheduled {len(scheduled)} slot(s) for {account}:")
-        for slot, utc_dt, orig_time in sorted(scheduled):
+
+    if future_slots:
+        lines.append(f"Scheduled {len(future_slots)} slot(s) at original times:")
+        for slot, utc_dt, orig_time in sorted(future_slots):
             jst_dt = utc_dt.astimezone(JST)
             lines.append(f"  Slot {slot}: {orig_time} ({jst_dt.strftime('%H:%M JST')})")
-    else:
+
+    if rescheduled:
+        lines.append(f"Rescheduled {len(rescheduled)} past slot(s) with 30min gaps:")
+        for slot, utc_dt, orig_time in rescheduled:
+            jst_dt = utc_dt.astimezone(JST)
+            lines.append(f"  Slot {slot}: was {orig_time}, now {jst_dt.strftime('%H:%M JST')} (rescheduled)")
+
+    if not future_slots and not rescheduled:
         lines.append(f"No slots to schedule for {account}")
 
     if skipped:

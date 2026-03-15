@@ -116,12 +116,14 @@ Spawn with **model: opus**:
 "You are Strategist. Read agents/strategist.md, section 'Daily Strategy Mode' for your instructions.
 Today's date: {YYYY-MM-DD}
 Scout report path: data/scout/scout_report_{YYYYMMDD}.json
-Generate today's growth strategy based on the scout report.
+Morning briefing path (if exists): data/metrics/morning_briefing_{YYYYMMDD}.json
+Generate today's growth strategy based on the scout report and morning briefing recommendations.
 Write the output to: data/strategy/strategy_{YYYYMMDD}.json
 Output ONLY valid JSON — no markdown code fences, no commentary."
 ```
 
 **NOTE**: Strategist writes ONLY the dated file. You (Marc) write `strategy_current.json` in the finalization step.
+**NOTE**: The morning briefing (produced at 05:30 by the morning war room) contains same-day recommendations from the Analyst-Strategist discussion. The Strategist reads it in Step 1.55 alongside the evening feedback (Step 1.5) to incorporate both feedback loops.
 
 ### 5. Validate Strategist + Cross-validate
 

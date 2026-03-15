@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 15, 2026 (Session 39: Following-aware target selection + cron→launchd migration)
+**Last updated**: March 16, 2026 (Session 40: Growth acceleration — outbound limits, tweet tracking, PDCA loop fix, schedule resilience)
 
 ---
 
@@ -1034,6 +1034,49 @@ launchctl load ~/Library/LaunchAgents/com.xagents.pipeline.plist
 - `scripts/cron_wrapper.sh` — updated (auth note, Keychain hack removed)
 - `scripts/schedule_slots.py` — rewritten for launchd
 
+### Session 40 — Growth Acceleration: Outbound Limits, Tweet Tracking, PDCA Loop Fix, Schedule Resilience (March 16, 2026)
+
+**Context**: @meruru_tcbn had 9 followers after 10 days of operation with 50 total posts. Growth was too slow. Root cause analysis identified four systemic issues: conservative outbound limits, untracked manual posts, a broken morning war room feedback loop, and past-slot scheduling failures.
+
+**Problem 1 — Outbound too conservative**: `config/outbound_rules.json` capped EN likes at 20/day and follows at 3/day, well below the global rules ceiling (30 likes, 5 follows). Actual daily usage was only 9 likes and 0-1 follows — leaving significant growth value unused.
+
+**Fix**: Increased EN limits to max — `max_likes_per_day: 30`, `max_follows_per_day: 5`, `max_targets_per_day: 5`. These match the global rules in `config/global_rules.md`.
+
+**Problem 2 — Manual posts invisible**: Operator was posting reposts and quote tweets manually (14+ untracked posts vs 1 pipeline post in 2 days). These posts had no metrics collection, no category tracking, and no performance feedback — a major blind spot for the war room and strategy optimization.
+
+**Fix**: Created `scripts/fetch_account_tweets.py` — fetches the account timeline via X API, cross-references against all content plans, and identifies untracked tweets. Classifies each as original/retweet/quote/reply using the new `referenced_tweets` field. Outputs to `data/metrics/untracked_tweets_{YYYYMMDD}_{account}.json`. With `--collect-metrics` flag, stores metrics in SQLite via `db_manager.insert_post_metrics()` with `source: "timeline_scan"`.
+
+Supporting change: Added `referenced_tweets` to `TWEET_FIELDS` in `scripts/x_api.py` and updated `_normalize_tweet()` to include tweet type data. All API callers (Scout, Analyst, Outbound) now receive tweet type information.
+
+**Problem 3 — Morning War Room feedback loop broken**: Morning war room (05:30 JST) produced recommendations via multi-agent discussion, but the pipeline (06:00 JST) never read them. The Strategist only consumed `strategy_feedback_{yesterday}.json` from the evening war room — morning briefing recommendations went to Telegram only and were completely ignored by the system.
+
+**Fix**: Added **Step 1.55** to `agents/strategist.md` — "Read today's morning briefing if available (same-day PDCA)". The Strategist now reads `data/metrics/morning_briefing_{YYYYMMDD}.json` and applies its recommendations using the same confidence-based rules as the evening feedback. Morning briefing takes priority over evening feedback when they conflict (it's more recent and incorporates the latest data). Updated `agents/marc_pipeline.md` Step 4 to pass the morning briefing path to the Strategist spawn prompt.
+
+**PDCA loop now complete**:
+```
+Evening War Room (22:00) → strategy_feedback_{yesterday}.json → Strategist Step 1.5
+Morning War Room (05:30) → morning_briefing_{today}.json → Strategist Step 1.55  ← NEW
+Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbound
+```
+
+**Problem 4 — Past-slot scheduling silently drops posts**: `schedule_slots.py` skipped any slot whose `scheduled_time` had already passed (line 134: `if utc_dt <= now_utc: skipped`). If the operator approved after a slot time, that post was permanently lost. This contributed to the low 1 post/day cadence vs the 4/day target.
+
+**Fix**: Rewrote the scheduling logic. Past slots are now **rescheduled** instead of skipped — starting at now + 5 minutes with 30-minute staggered gaps between posts (to avoid ghost tweets on new accounts). The script also avoids collision with any future scheduled slots. Example: if 2 of 4 slots have passed, they get rescheduled to 15:05 and 15:35, while the other 2 keep their original future times.
+
+**Decision 17**: Outbound limits should match global rules ceiling — conservative margins below the global max leave growth value unused with no safety benefit.
+
+**Decision 18**: Morning war room output must feed into the same-day pipeline. Any PDCA discussion that doesn't reach the agents it's meant to influence is wasted compute.
+
+**Files created** (1):
+- `scripts/fetch_account_tweets.py` — Timeline scanner for untracked tweet discovery and metrics collection (~200 lines)
+
+**Files modified** (5):
+- `config/outbound_rules.json` — EN likes 20→30, follows 3→5, targets 4→5
+- `scripts/x_api.py` — Added `referenced_tweets` to `TWEET_FIELDS`, updated `_normalize_tweet()` with tweet type extraction
+- `agents/strategist.md` — Added Step 1.55 (read morning briefing for same-day PDCA feedback)
+- `agents/marc_pipeline.md` — Updated Strategist spawn prompt to include morning briefing path
+- `scripts/schedule_slots.py` — Past slots rescheduled with 30-min stagger instead of silently skipped
+
 ---
 
 ## 4. Decision Summary
@@ -1063,6 +1106,8 @@ launchctl load ~/Library/LaunchAgents/com.xagents.pipeline.plist
 | D13 | Git + GitHub at Phase 0 completion | Version control established before agent development; private repo with secrets excluded via `.gitignore` |
 | D14 | Marc as Claude agent + `validate.py` + `run_pipeline.sh` | Orchestration = judgment (Claude's strength); deterministic checks = Python; avoids Phase 2 rewrite |
 | D15 | Marc is sole writer of `strategy_current.json` | Prevents unvalidated Strategist output from corrupting the current strategy file |
+| D17 | Outbound limits match global rules ceiling | Conservative margins below global max leave growth value unused with no safety benefit |
+| D18 | Morning war room output feeds into same-day pipeline | Any PDCA discussion that doesn't reach the agents it influences is wasted compute |
 
 ---
 
