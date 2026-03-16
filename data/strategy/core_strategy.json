@@ -71,12 +71,12 @@
           "name": "grok_interactive",
           "description": "Use @grok to create interactive image transformation content. Post an image and ask Grok to modify it, creating a participatory experience. This is the #1 emerging engagement technique with enormous viral potential and very few competitors using it.",
           "content_mix_pct": 20,
-          "text_guidelines": "Format: '.@grok [transformation request]' or 'Hey @grok [request]'. Leading dot prevents X from treating it as a reply. Keep requests creative and visual. Include Grok interaction invite in bio.",
+          "text_guidelines": "Format: 'hey @grok [transformation request]'. The 'hey' prefix prevents X from treating it as a reply. NEVER use '.@grok' (dot format is banned). Keep requests creative and visual. Include Grok interaction invite in bio.",
           "example_formats": [
-            ".@grok remove the jacket",
-            "Hey @grok put me in a red dress",
-            ".@grok turn this into anime style",
-            ".@grok what would I look like as a brunette?"
+            "hey @grok remove the jacket",
+            "hey @grok put me in a red dress",
+            "hey @grok turn this into anime style",
+            "hey @grok what would I look like as a brunette?"
           ],
           "data_evidence": "Only 2 of 41 tracked competitors actively use Grok integration. @ai_hyk's single Grok post: 7,880 likes, 5,945 bookmarks (75% bookmark-to-like ratio), 5,606,027 impressions — reaching 45x the follower count. @ai_hiyo_ (EN, 387K) pioneered this format. Grok posts have bookmark-to-like ratios of 0.25-0.75, signaling high algorithmic value. Average Grok post: 890 likes (EN)."
         },
@@ -101,12 +101,12 @@
           "name": "grok_interactive",
           "description": "Interactive Grok integration posts are the dominant engagement driver in JP by a massive margin. @ai_hyk's Grok posts generate more engagement than ALL other JP competitors combined. This is the cornerstone of JP content strategy.",
           "content_mix_pct": 30,
-          "text_guidelines": "Use '.@grok [request in Japanese]' format — leading dot is CRITICAL to prevent X from hiding the post as a reply. Requests should be creative and invite community participation. Bio should explicitly invite followers to use Grok in replies.",
+          "text_guidelines": "Use 'hey @grok [request in Japanese]' format — the 'hey' prefix prevents X from hiding the post as a reply. NEVER use '.@grok' (dot format is banned). Requests should be creative and invite community participation. Bio should explicitly invite followers to use Grok in replies.",
           "example_formats": [
-            ".@grok タップして4枚の画像を1つに結合して",
-            ".@grok この画像をアニメ風にして",
-            ".@grok 服を変えて",
-            ".@grok 背景を桜に変えて"
+            "hey @grok タップして4枚の画像を1つに結合して",
+            "hey @grok この画像をアニメ風にして",
+            "hey @grok 服を変えて",
+            "hey @grok 背景を桜に変えて"
           ],
           "data_evidence": "@ai_hyk's single Grok post: 7,880 likes, 5,945 bookmarks (75% bookmark-to-like ratio), 5,606,027 impressions — reaching 45x follower count. This ONE post's engagement exceeds all other JP competitors combined. Average Grok post likes in JP: 2,090. Bio invitation 'リプ・引ポでGrokの画像編集ご自由にどうぞ' creates ongoing engagement loop."
         },
@@ -143,7 +143,7 @@
           "text_guidelines": "Japanese text per chain link, 30-60 chars. Each link adds a new dimension. Can combine with Grok integration (original image -> self-quote with Grok transformation). Maintain persona consistency throughout. Japanese connecting phrases: 'さっきの続き...', 'こっちも見て♡', '朝と夜で雰囲気変えてみた'.",
           "example_formats": [
             "Original: (outfit A) -> Quote: 'こっちも見て♡' -> Quote: 'どれが好き？'",
-            "Original: (image) -> Quote: '.@grok アニメ風にして' -> Quote: 'こっちも可愛い✨'",
+            "Original: (image) -> Quote: 'hey @grok アニメ風にして' -> Quote: 'こっちも可愛い✨'",
             "Seasonal theme chain: spring morning -> afternoon -> evening"
           ],
           "data_evidence": "Self-quote chain technique from @seisei_ai_1st (27,844 impressions, 21 bookmarks). Claims 2x impression amplification. Not yet adopted by top JP competitors — early mover advantage. Particularly synergistic with JP content styles that emphasize series and ongoing narratives."
@@ -205,9 +205,10 @@
       "optimal_times_utc": [
         "13:00-14:00 UTC (8-9 AM ET — US morning browsing)",
         "17:00-18:00 UTC (12-1 PM ET — US lunch break)",
-        "21:00-23:00 UTC (4-6 PM ET — US afternoon/evening)",
-        "00:00-01:00 UTC (7-8 PM ET — US prime evening)"
+        "20:00-22:00 UTC (3-5 PM ET — US afternoon/evening)",
+        "23:00-23:59 UTC (6-7 PM ET — US early evening)"
       ],
+      "scheduling_constraint": "All EN times must be ascending UTC within 13:00-23:59 range. Times at 00:00+ UTC wrap to wrong JST date in schedule_slots.py.",
       "spacing_rules": "Minimum 3 hours between posts. Never post 2 images within the same hour. If posting 4x/day, spread across morning, lunch, afternoon, and evening US time. The goal is to appear in feeds at different times, reaching different audience segments.",
       "quality_threshold": "Every post must pass the '100 likes minimum' mental bar. If you would not bet on a post getting at least 100 likes, do not post it. One exceptional image beats three mediocre ones. The X algorithm actively punishes low-engagement content by suppressing future reach.",
       "data_evidence": "Top 8 EN performers by engagement all post 0.3-3.8x/day. @sessypuuh (0.7/day, 38% ER), @yuumispm (0.8/day, 26% ER), @IsabellaCruz_47 (0.3/day, 6% ER at 92K followers), @Angelwithcakee (1.2/day, 4.5% ER at 35K). Accounts at 10x/day: @LeahSunkissed (0.02% ER), @JosephinaM3131 (0.001% ER), @Lux_aeterna_ (0.001% ER). Correlation between high frequency and low engagement is absolute."
@@ -343,8 +344,8 @@
     },
     "grok_integration": {
       "description": "Use X's built-in @grok AI for interactive image transformation content. Post an image and request Grok to modify it, inviting followers to do the same in replies. Creates participatory content that drives replies, bookmarks, and massive algorithmic reach. X likely promotes Grok-related content as it is their own product.",
-      "format_en": "Use '.@grok [request in English]' or 'Hey @grok [request]'. The leading dot on .@grok is CRITICAL for feeds. Keep requests visual and creative. Include in bio: 'Edit my images using grok in the comments'.",
-      "format_jp": "Use '.@grok [request in Japanese]'. Same leading-dot rule. Bio invite: 'リプ・引ポでGrokの画像編集ご自由にどうぞ'. Mix single-image transformations with multi-image puzzle formats ('4枚の画像を1つに結合して').",
+      "format_en": "Use 'hey @grok [request in English]'. The 'hey' prefix prevents X from treating it as a reply. NEVER use '.@grok' (dot format is banned). Keep requests visual and creative. Include in bio: 'Edit my images using grok in the comments'.",
+      "format_jp": "Use 'hey @grok [request in Japanese]'. Same 'hey' prefix rule. NEVER use '.@grok'. Bio invite: 'リプ・引ポでGrokの画像編集ご自由にどうぞ'. Mix single-image transformations with multi-image puzzle formats ('4枚の画像を1つに結合して').",
       "frequency": "20-30% of content (approximately 1 Grok post per day). Treat each as a potential viral moment — invest in choosing the best image and most creative transformation request.",
       "evidence": "@ai_hyk single Grok post: 7,880 likes, 5,945 bookmarks (75% ratio), 5,606,027 impressions — 45x follower count. Only 2 of 41 competitors use Grok. Average Grok post: 890 likes (EN), 2,090 likes (JP). This is the single most actionable finding in the entire competitive analysis."
     },

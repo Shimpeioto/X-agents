@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 16, 2026 (Session 40: Growth acceleration — outbound limits, tweet tracking, PDCA loop fix, schedule resilience)
+**Last updated**: March 16, 2026 (Session 41: Fix EN posting slot time alignment — UTC wrap bug)
 
 ---
 
@@ -1076,6 +1076,25 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 - `agents/strategist.md` — Added Step 1.55 (read morning briefing for same-day PDCA feedback)
 - `agents/marc_pipeline.md` — Updated Strategist spawn prompt to include morning briefing path
 - `scripts/schedule_slots.py` — Past slots rescheduled with 30-min stagger instead of silently skipped
+
+### Session 41 — Fix EN Posting Slot Time Alignment: UTC Wrap Bug (March 16, 2026)
+
+**Context**: EN content plan for March 16 had Slot 4 scheduled at `00:30 UTC`. `schedule_slots.py` uses the content plan date (March 16) for all slots, converting `00:30 UTC` → `09:30 JST March 16`. This fired **before** Slot 1 (`13:00 UTC` → `22:00 JST March 16`), breaking the intended posting order. The post was published out of sequence.
+
+**Root cause**: The Strategist's EN optimal time window included `00:00-01:00 UTC`, which wraps to the previous JST day. `schedule_slots.py` correctly converts UTC to JST using the content plan date, so any UTC time before ~13:00 converts to a JST time earlier than the pipeline's 06:00 JST start — meaning it fires before the operator can prepare images.
+
+**Fix approach**: Constraint-based — no code changes to `schedule_slots.py`. Instead, constrained the Strategist to only pick EN times within `13:00-23:59 UTC`, which converts to `22:00 JST → 08:59 JST+1` — all safely after the pipeline runs. The `00:00-01:00 UTC` window (7-8 PM ET) shifted to `23:00-23:59 UTC` (6-7 PM ET), still capturing US evening audience.
+
+**Changes**:
+1. `agents/strategist.md` — Updated Posting Cadence section: EN optimal times now `13:00-14:00, 17:00-18:00, 20:00-22:00, 23:00-23:59 UTC`. Added scheduling constraint note explaining the 13:00-23:59 UTC requirement.
+2. `agents/strategist.md` — Added Validation Rule 14: EN posting times must be ascending UTC within 13:00-23:59 range.
+3. `data/strategy/core_strategy.json` — Updated `posting_cadence.EN.optimal_times_utc` last entry from `00:00-01:00 UTC` to `23:00-23:59 UTC`. Added `scheduling_constraint` field.
+
+**Decision 19**: Fix scheduling bugs through agent constraints (Strategist rules) rather than code complexity (schedule_slots.py date arithmetic). The Strategist has full freedom to pick times within the safe range based on daily scout data — only the unsafe wrap zone is excluded.
+
+**Files modified** (2):
+- `agents/strategist.md` — Posting Cadence update + Validation Rule 14
+- `data/strategy/core_strategy.json` — optimal_times_utc + scheduling_constraint
 
 ---
 

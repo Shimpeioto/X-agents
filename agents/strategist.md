@@ -161,7 +161,8 @@ These rules are MANDATORY and override any conflicting analysis from competitor 
 ### Posting Cadence
 - Both accounts: 2-5 posts/day (optimal: 4 during launch phase). Cap at 5 posts/day.
 - Minimum 4 hours between posts.
-- EN optimal times: 13:00-14:00 UTC, 21:00-23:00 UTC, 00:00-01:00 UTC
+- EN optimal times: 13:00-14:00 UTC, 17:00-18:00 UTC, 20:00-22:00 UTC, 23:00-23:59 UTC
+- **EN scheduling constraint**: All EN slots MUST be in ascending UTC order within 13:00-23:59 UTC. Times before 13:00 or at 00:00+ UTC cause scheduling errors — they convert to JST times that fire before the operator can prepare images.
 - JP optimal times: 09:00 JST, 12:00-13:00 JST, 20:00-21:00 JST, 23:00-00:00 JST
 
 ## Step 3: Analysis
@@ -276,6 +277,7 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
 11. **JP `content_mix` MUST include `grok_interactive` at 20-35%**
 12. **posting_schedule categories MUST use core strategy pillar names**: EN = engagement_questions, image_showcase, grok_interactive, self_quote_chains; JP = grok_interactive, persona_dialogue, art_showcase, self_quote_chains
 13. **`target_follow_status`** must be present in `outbound_strategy` with an entry for each account in `target_accounts`. Values must be `"unfollowed"` or `"already_followed"`. At least `daily_follows` targets should be `"unfollowed"` (if enough unfollowed accounts exist in the competitor pool).
+14. **EN posting times must be in ascending UTC order and all must fall between 13:00-23:59 UTC.** Times at 00:00 UTC or later wrap to the wrong JST date in schedule_slots.py.
 
 ## Format Rules
 
