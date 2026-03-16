@@ -3,9 +3,54 @@
 ## Overview
 
 - **Tool**: Higgsfield SeedREAM (`higgsfield`)
-- **Output**: Both a structured JSON object AND a flat `prompt` paragraph (150+ words)
+- **Output**: Both a structured JSON object AND a flat `prompt` paragraph (120-180 words — NOT 250+)
 - The structured fields ensure nothing is missed; the `prompt` text is what gets pasted into Higgsfield
-- All prompts must achieve ultra photorealistic quality — the goal is images indistinguishable from real iPhone/DSLR photos
+- All prompts must achieve ultra photorealistic quality — the goal is images indistinguishable from real iPhone photos
+
+## Competitor-Aligned Style Rules (MANDATORY — from gap analysis 2026-03-16)
+
+These rules override any conflicting guidance in the scene templates below. They are based on real competitor engagement data.
+
+### 1. iPhone Camera ONLY
+- Use `"camera": "iPhone 15 Pro Max"` and `"lens": "24mm wide"` for ALL slots, ALL categories
+- NEVER use Sony, Canon, or any DSLR/mirrorless camera spec — it produces polished editorial output that doesn't match this niche
+- `meta.style` must use casual terms: "raw iphone selfie", "casual mirror pic", "candid phone photo"
+- NEVER use the word "editorial" in any style label — it primes the AI for magazine-quality output
+
+### 2. Simple Scenes (Max 2-3 Background Elements)
+- The SUBJECT is the focus, not the environment
+- Max 2-3 background props per scene (e.g., "white wall, unmade bed" — done)
+- Remove architectural details, ornamental plants, terracotta tiles, gallery courtyards
+- Winning settings: bedroom, bathroom, gym, beach — simple everyday spaces
+
+### 3. High-Engagement Scene Types (Rotate These)
+These are the scenes that drive the highest engagement among competitors:
+
+| Scene Type | Examples | Engagement Signal |
+|---|---|---|
+| **Bedroom mirror selfie** | @sessypuuh (34.8% ER), @HannaJonso | Highest ER% category |
+| **Bathroom/post-shower** | @yuumispm (16.4% ER) | Intimate, casual aesthetic |
+| **Beach/pool/bikini** | @tanarainw (21.7K likes), @LeahSunkissed | Highest absolute likes |
+| **Gym/fitness** | @imrubyreid (33.7K likes) | Body-confidence content |
+| **Cozy bedroom casual** | @Angelwithcakee, @lucidevlinxyz | Girl-next-door relatability |
+
+Low-performing scenes to AVOID in regular rotation: rooftop terrace, urban park/gallery, professional studio, Tokyo street scenes.
+
+### 4. Simple Outfits (Body > Fashion)
+- Default to casual, body-revealing basics: sports bra + leggings, bikini, crop top + shorts, oversized tee, simple bodysuit, loungewear
+- The outfit should complement the figure, not compete for visual attention
+- AVOID fashion-magazine outfit specs (no "cream linen button-down midi dress with thin gold belt")
+- Save fashion outfits for occasional variety (max 1 in 4 posts)
+
+### 5. Lighting = 1 Sentence Max
+- "Natural window light" or "warm room lighting" — that's enough
+- NEVER describe multi-source lighting with shadow mapping
+- Over-specifying lighting makes AI generators produce unnatural studio-lit results
+
+### 6. Prompt Length = 120-180 Words Max
+- Image generation models have attention limits — every additional detail dilutes focus
+- Prioritize: subject (locked traits) > outfit (simple) > pose (vibe) > scene (location + 2 props) > lighting (1 sentence)
+- If your prompt exceeds 180 words, cut background props and lighting details first
 
 ## Fixed Character Profiles
 
@@ -41,9 +86,9 @@ Each `image_prompt` object must contain these structured fields:
 ```
 meta:
   quality      — always "ultra photorealistic"
-  camera       — e.g., "iPhone 15 Pro Max", "Sony A7R IV", "Canon EOS R5"
-  lens         — e.g., "24mm wide", "85mm prime f/1.4", "50mm f/1.8"
-  style        — e.g., "raw iphone mirror selfie", "fashion editorial", "casual lifestyle"
+  camera       — ALWAYS "iPhone 15 Pro Max" (see Competitor-Aligned Style Rules above)
+  lens         — ALWAYS "24mm wide"
+  style        — casual terms ONLY: "raw iphone selfie", "casual mirror pic", "candid phone photo" (NEVER "editorial")
 
 subject:
   (from fixed character profile — do NOT deviate)
@@ -209,53 +254,53 @@ mood:
 ```json
 {
   "tool": "higgsfield",
-  "prompt": "Ultra photorealistic photo of a young woman in her early 20s lounging by an infinity pool at a tropical resort. She has shoulder-length wavy blonde hair with sun-kissed highlights, slightly tousled from swimming. Athletic-toned hourglass figure with natural sun-kissed skin showing real texture and a light tan. She wears a sleek black string bikini, triangle top with thin straps and matching low-rise bottoms. Her skin glistens with a mix of pool water and sunscreen, water droplets visible on her stomach and thighs. She reclines on a white cushioned pool lounger, propped up on her elbows with her back slightly arched. Right leg extended, left knee bent up casually. She looks directly at the camera with a playful confident smirk, chin slightly down, eyes bright. Behind her the infinity pool edge blends into an ocean horizon view, palm trees frame the right side, white pool deck with another empty lounger to the left. Bright midday tropical sunlight from directly above creates strong highlights on her shoulders and chest with defined shadows beneath the lounger. Water reflections cast dancing light patterns on her lower body. Bright turquoise, tropical green, warm bronze, clean white color palette. Luxury vacation lifestyle aesthetic. Third-person shot, slightly low angle from foot of lounger, full body framing, vertical portrait composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+  "prompt": "Ultra photorealistic raw iPhone photo of a young woman in her early 20s at the beach. She has long dark brown hair slightly tousled by the wind. Fitness hourglass figure with light-medium skin glistening with sunscreen. She wears a simple black bikini. She stands in shallow water at the shoreline, one hand pushing hair back from her face, the other at her side. Weight on one hip, relaxed confident pose. She looks at the camera with a playful smirk. Sandy beach and blue ocean behind her. Bright natural sunlight. Warm bronze, ocean blue, clean white color palette. Casual beach selfie aesthetic. Full body, eye-level, 4:5 portrait. Photorealistic, high quality, high resolution.",
   "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
   "aspect_ratio": "4:5",
   "meta": {
     "quality": "ultra photorealistic",
-    "camera": "Sony A7R IV",
-    "lens": "35mm f/1.4",
-    "style": "luxury vacation lifestyle"
+    "camera": "iPhone 15 Pro Max",
+    "lens": "24mm wide",
+    "style": "casual beach photo"
   },
   "subject": {
-    "hair": {"color": "blonde with sun-kissed highlights", "style": "shoulder-length wavy, tousled"},
-    "body_type": "athletic-toned hourglass",
-    "skin": "sun-kissed natural tan, real texture, glistening with water and sunscreen",
-    "expression": "playful confident smirk, chin slightly down, bright eyes",
-    "makeup": "minimal, waterproof mascara, natural sun-flushed look"
+    "hair": {"color": "dark brown", "style": "long, tousled by wind"},
+    "body_type": "fitness hourglass",
+    "skin": "light-medium, glistening with sunscreen",
+    "expression": "playful smirk, confident",
+    "makeup": "minimal, natural sun-flushed look"
   },
   "outfit": {
-    "top": {"type": "string bikini top", "color": "black", "material": "stretch fabric", "fit": "triangle top, thin straps"},
-    "bottom": {"type": "bikini bottoms", "color": "black", "fit": "low-rise, string sides"},
+    "top": {"type": "bikini top", "color": "black", "fit": "simple triangle"},
+    "bottom": {"type": "bikini bottoms", "color": "black", "fit": "simple"},
     "accessories": []
   },
   "pose": {
-    "position": "reclining on lounger",
-    "stance": "propped on elbows, slight back arch, right leg extended, left knee bent",
-    "hands": "elbows on lounger supporting upper body",
-    "head_gaze": "looking directly at camera, chin slightly down",
+    "position": "standing in shallow water",
+    "stance": "weight on one hip, relaxed",
+    "hands": "one hand pushing hair back, other at side",
+    "head_gaze": "looking at camera",
     "vibe": "playful confidence"
   },
   "scene": {
-    "location": "tropical resort infinity pool",
+    "location": "beach shoreline",
     "time": "midday",
-    "atmosphere": "bright, energetic, tropical",
-    "background": "infinity pool edge into ocean horizon, palm trees right, white pool deck, empty lounger left"
+    "atmosphere": "bright, warm, natural",
+    "background": "sandy beach, blue ocean"
   },
   "camera": {
-    "pov": "third-person",
-    "angle": "slightly low angle from foot of lounger",
+    "pov": "friend-took-this-photo",
+    "angle": "eye-level",
     "framing": "full body"
   },
   "lighting": {
-    "type": "bright midday tropical sunlight from above",
-    "effect": "strong highlights on shoulders and chest, defined shadows under lounger, dancing water reflections on lower body"
+    "type": "bright natural sunlight",
+    "effect": "warm highlights on skin"
   },
   "mood": {
-    "energy": "playful, bold",
-    "color_palette": "bright turquoise, tropical green, warm bronze, clean white",
-    "aesthetic": "luxury vacation lifestyle"
+    "energy": "playful, carefree",
+    "color_palette": "warm bronze, ocean blue, clean white",
+    "aesthetic": "casual beach photo"
   }
 }
 ```
@@ -265,166 +310,165 @@ mood:
 ```json
 {
   "tool": "higgsfield",
-  "prompt": "Ultra photorealistic photo of a young Japanese woman in her early 20s sitting casually on an unmade bed in a cozy modern apartment bedroom. She has long straight dark brown hair draped over one shoulder with a few strands falling across her face. Fair porcelain skin with a natural warm glow, smooth with delicate features and almond-shaped eyes. Natural Korean-style makeup with defined soft brows, subtle brown eyeshadow, light mascara, dewy glass-skin finish, and a soft peach lip tint. Hourglass figure with full curves visible through her outfit. She wears an oversized cream-colored knit sweater that hangs off one shoulder revealing a bare collarbone and thin black bra strap, paired with short light-wash denim shorts. She sits cross-legged on rumpled white sheets and a chunky knit throw blanket, leaning forward slightly with her chin resting on her right hand, elbow on her knee. Left hand rests palm-down on the bed beside her. She looks at the camera with a warm inviting expression, soft eyes, gentle closed-lip smile. The bedroom has warm-toned wood furniture, a bedside table with a small brass lamp casting warm light, a potted succulent, and a softly lit string of fairy lights draped along the headboard. Warm lamplight from the bedside creates intimate golden tones across her face and sweater, soft shadows on the far wall, and a gentle highlight on her exposed shoulder. Warm cream, soft gold, cozy brown, muted denim blue color palette. Cozy intimate bedroom aesthetic. Third-person shot at eye-level, medium shot from waist up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+  "prompt": "Ultra photorealistic raw iPhone photo of a young Japanese woman in her early 20s sitting on her unmade bed. Long straight dark brown hair draped over one shoulder. Fitness hourglass figure, light-medium smooth skin. She wears an oversized white tee and black shorts, casual and relaxed. She sits cross-legged on rumpled white sheets, leaning forward with chin resting on one hand. She looks at the camera with a warm smile, soft eyes. Simple bedroom — white wall, unmade bed with white sheets. Warm natural light from a window. Cozy, intimate, everyday. Medium shot, eye-level, 4:5 portrait. Photorealistic, high quality, high resolution.",
   "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
   "aspect_ratio": "4:5",
   "meta": {
     "quality": "ultra photorealistic",
-    "camera": "Canon EOS R5",
-    "lens": "50mm f/1.8",
-    "style": "cozy intimate bedroom portrait"
+    "camera": "iPhone 15 Pro Max",
+    "lens": "24mm wide",
+    "style": "casual bedroom photo"
   },
   "subject": {
-    "hair": {"color": "dark brown", "style": "long straight, draped over one shoulder, strands across face"},
-    "body_type": "hourglass figure, full curves",
-    "skin": "fair porcelain, natural warm glow",
-    "expression": "warm inviting, soft eyes, gentle closed-lip smile",
-    "makeup": "natural Korean-style, defined soft brows, subtle brown eyeshadow, glass-skin finish, soft peach lip tint"
+    "hair": {"color": "dark brown", "style": "long straight, draped over one shoulder"},
+    "body_type": "fitness hourglass",
+    "skin": "light-medium, smooth",
+    "expression": "warm smile, soft eyes",
+    "makeup": "minimal natural"
   },
   "outfit": {
-    "top": {"type": "oversized knit sweater", "color": "cream", "material": "soft knit", "fit": "oversized, off-one-shoulder", "details": "reveals bare collarbone and thin black bra strap"},
-    "bottom": {"type": "denim shorts", "color": "light wash", "fit": "short"},
+    "top": {"type": "oversized tee", "color": "white", "fit": "oversized, casual"},
+    "bottom": {"type": "shorts", "color": "black", "fit": "simple"},
     "accessories": []
   },
   "pose": {
     "position": "sitting cross-legged on bed",
     "stance": "leaning forward slightly",
-    "hands": "right hand supporting chin (elbow on knee), left hand palm-down on bed",
-    "head_gaze": "facing camera, warm inviting gaze",
+    "hands": "chin resting on one hand",
+    "head_gaze": "facing camera, warm gaze",
     "vibe": "cozy warmth"
   },
   "scene": {
-    "location": "cozy modern apartment bedroom",
-    "time": "evening",
-    "atmosphere": "warm, intimate, cozy",
-    "background": "warm-toned wood furniture, bedside table with brass lamp, potted succulent, fairy lights on headboard, rumpled white sheets, chunky knit throw"
+    "location": "bedroom",
+    "time": "afternoon",
+    "atmosphere": "warm, cozy, everyday",
+    "background": "white wall, unmade bed with white sheets"
   },
   "camera": {
-    "pov": "third-person",
+    "pov": "friend-took-this-photo",
     "angle": "eye-level",
     "framing": "medium shot, waist-up"
   },
   "lighting": {
-    "type": "warm lamplight from bedside table",
-    "effect": "intimate golden tones on face and sweater, soft shadows on far wall, gentle highlight on exposed shoulder"
+    "type": "warm natural window light",
+    "effect": "soft warm tones on face"
   },
   "mood": {
     "energy": "quiet, intimate",
-    "color_palette": "warm cream, soft gold, cozy brown, muted denim blue",
-    "aesthetic": "cozy intimate bedroom"
+    "color_palette": "warm white, soft neutrals",
+    "aesthetic": "casual everyday bedroom"
   }
 }
 ```
 
-### 5. Fashion Editorial / Studio
+### 5. Gym / Fitness
 
 ```json
 {
   "tool": "higgsfield",
-  "prompt": "Ultra photorealistic fashion editorial photo of a young woman in her early 20s posing in a clean professional photography studio. She has sleek straight jet-black hair pulled into a tight low ponytail with a center part, face fully visible. Athletic-toned hourglass figure with natural skin texture showing real pores. She wears a structured emerald green satin blazer with sharp shoulders, no shirt underneath showing a plunging neckline to the sternum, paired with tailored high-waisted black trousers with a wide straight leg. Gold hoop earrings and a delicate gold chain necklace. She stands in a strong contrapposto pose with her right hip pushed out, left leg stepped slightly forward. Right hand in the blazer pocket, left arm hanging naturally at her side with fingers relaxed. She looks directly at the camera with a neutral focused expression, lips slightly parted, strong eye contact, chin level. The studio has a seamless light grey backdrop paper, no visible wrinkles or seams, a minimal clean environment. Professional studio lighting with a large softbox as key light from upper left creating soft even illumination with subtle shadows on the right side of her face and body, a fill light from the right reducing harsh shadows, and a hair light from behind creating a subtle rim highlight separating her from the background. Cool grey, rich emerald, warm gold, deep black color palette. High fashion editorial aesthetic. Shot at eye-level, full body framing with slight space above and below, centered vertical composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+  "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young woman in her early 20s at the gym. Long dark brown hair in a high ponytail, slightly sweaty. Fitness hourglass figure with toned arms and visible abs, light-medium skin with a natural post-workout flush. She wears a black sports bra and grey high-waisted leggings. She holds her iPhone at chest height in a gym mirror, other hand on hip. Confident expression, slight smirk, looking at phone screen. Gym mirror with weight rack visible behind her. Bright gym fluorescent lighting. Dark, grey, warm skin tones. Raw gym selfie aesthetic. Full body, eye-level, 9:16 portrait. Photorealistic, high quality, high resolution.",
   "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
   "aspect_ratio": "9:16",
   "meta": {
     "quality": "ultra photorealistic",
-    "camera": "Canon EOS R5",
-    "lens": "85mm prime f/1.4",
-    "style": "high fashion editorial"
+    "camera": "iPhone 15 Pro Max",
+    "lens": "24mm wide",
+    "style": "raw gym mirror selfie"
   },
   "subject": {
-    "hair": {"color": "jet black", "style": "sleek straight, tight low ponytail, center part"},
-    "body_type": "athletic-toned hourglass",
-    "skin": "natural texture, real pores",
-    "expression": "neutral focused, lips slightly parted, strong eye contact, chin level",
-    "makeup": "editorial glam, sculpted contour, bold defined brows, smoky neutral eye, matte nude lip"
+    "hair": {"color": "dark brown", "style": "high ponytail, slightly sweaty"},
+    "body_type": "fitness hourglass, toned arms, visible abs",
+    "skin": "light-medium, post-workout flush",
+    "expression": "confident smirk",
+    "makeup": "minimal, natural"
   },
   "outfit": {
-    "top": {"type": "structured blazer", "color": "emerald green", "material": "satin", "fit": "structured, sharp shoulders", "details": "no shirt, plunging neckline to sternum"},
-    "bottom": {"type": "trousers", "color": "black", "fit": "tailored high-waisted, wide straight leg"},
-    "accessories": ["gold hoop earrings", "delicate gold chain necklace"]
+    "top": {"type": "sports bra", "color": "black", "fit": "fitted"},
+    "bottom": {"type": "leggings", "color": "grey", "fit": "high-waisted"},
+    "accessories": ["iPhone 15 Pro Max"]
   },
   "pose": {
     "position": "standing",
-    "stance": "contrapposto, right hip pushed out, left leg stepped forward",
-    "hands": "right hand in blazer pocket, left arm hanging naturally, fingers relaxed",
-    "head_gaze": "facing camera directly, chin level, strong eye contact",
-    "vibe": "editorial power"
+    "stance": "weight on one hip, confident curve",
+    "hands": "one hand holding phone at chest, other on hip",
+    "head_gaze": "looking at phone screen, slight smirk",
+    "vibe": "post-workout confidence"
   },
   "scene": {
-    "location": "professional photography studio",
-    "time": "n/a (studio)",
-    "atmosphere": "clean, professional, minimal",
-    "background": "seamless light grey backdrop paper, no wrinkles or seams"
+    "location": "gym",
+    "time": "anytime",
+    "atmosphere": "energetic, casual",
+    "background": "gym mirror, weight rack"
   },
   "camera": {
-    "pov": "third-person",
+    "pov": "mirror selfie",
     "angle": "eye-level",
-    "framing": "full body with slight space above and below"
+    "framing": "full body"
   },
   "lighting": {
-    "type": "professional studio: large softbox key light upper left, fill light right, hair light from behind",
-    "effect": "soft even illumination, subtle shadows on right face/body, rim highlight separating from background"
+    "type": "bright gym fluorescent lighting",
+    "effect": "even illumination, highlights muscle definition"
   },
   "mood": {
-    "energy": "bold, commanding",
-    "color_palette": "cool grey, rich emerald, warm gold, deep black",
-    "aesthetic": "high fashion editorial"
+    "energy": "confident, strong",
+    "color_palette": "dark, grey, warm skin tones",
+    "aesthetic": "raw gym selfie"
   }
 }
 ```
 
-### 6. Lifestyle / Street
+### 6. Lifestyle / Casual Outdoor
 
 ```json
 {
   "tool": "higgsfield",
-  "prompt": "Ultra photorealistic candid street style photo of a young Japanese woman in her early 20s walking through a trendy Tokyo neighborhood. She has long straight dark brown hair flowing behind her in the breeze, catching the light. Fair porcelain skin with a natural glow. Delicate features with almond-shaped eyes and natural Korean-style makeup — soft filled brows, light peach eyeshadow, mascara, glass skin finish, MLBB lip color. Hourglass figure visible through her outfit. She wears a cropped vintage graphic tee knotted at the waist in faded black, a pleated beige mini skirt, white platform sneakers, small round sunglasses pushed up on her head, and a small crossbody leather bag in caramel. She walks mid-stride with her left foot forward, right arm swinging naturally holding iced coffee in a clear cup, left hand adjusting her hair behind her ear. She glances over her right shoulder toward the camera with a spontaneous genuine smile, caught mid-laugh, eyes crinkled. The street has an eclectic mix of small Japanese shop fronts with neon signs, potted plants on the sidewalk, a vintage bicycle parked against a wall, warm-toned brick and painted building facades. Late afternoon golden hour sunlight from behind and left creates a warm backlight halo effect on her hair and silhouette, long directional shadows on the pavement, and a warm amber glow across the entire scene. Warm amber, faded black, creamy beige, caramel brown, soft neon color palette. Candid Tokyo street style aesthetic. Third-person shot from behind and slightly right, three-quarter body framing as she looks back, slight dutch angle for dynamism. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+  "prompt": "Ultra photorealistic raw iPhone photo of a young Japanese woman in her early 20s outdoors in casual clothes. Long dark brown hair flowing naturally. Fitness hourglass figure, light-medium skin. She wears a simple crop top and jeans, holding iced coffee. She stands on a sidewalk, looking back at the camera with a natural smile. Simple urban background, slightly blurred. Warm afternoon sunlight. Casual candid photo aesthetic. Three-quarter body, eye-level, 4:5 portrait. Photorealistic, high quality, high resolution.",
   "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
   "aspect_ratio": "4:5",
   "meta": {
     "quality": "ultra photorealistic",
-    "camera": "Sony A7R IV",
-    "lens": "35mm f/1.4",
-    "style": "candid street style"
+    "camera": "iPhone 15 Pro Max",
+    "lens": "24mm wide",
+    "style": "candid phone photo"
   },
   "subject": {
-    "hair": {"color": "dark brown", "style": "long straight, flowing in breeze"},
-    "body_type": "hourglass figure",
-    "skin": "fair porcelain, natural glow",
-    "expression": "spontaneous genuine smile, caught mid-laugh, eyes crinkled",
-    "makeup": "natural Korean-style, soft filled brows, light peach eyeshadow, glass skin, MLBB lip"
+    "hair": {"color": "dark brown", "style": "long, flowing naturally"},
+    "body_type": "fitness hourglass",
+    "skin": "light-medium, natural",
+    "expression": "natural smile, looking back at camera",
+    "makeup": "minimal natural"
   },
   "outfit": {
-    "top": {"type": "cropped vintage graphic tee", "color": "faded black", "material": "cotton", "fit": "cropped, knotted at waist"},
-    "bottom": {"type": "pleated mini skirt", "color": "beige", "fit": "mini length, pleated"},
-    "footwear": "white platform sneakers",
-    "accessories": ["small round sunglasses on head", "caramel crossbody leather bag", "iced coffee in clear cup"]
+    "top": {"type": "crop top", "color": "white", "fit": "fitted"},
+    "bottom": {"type": "jeans", "color": "blue denim", "fit": "high-waisted"},
+    "accessories": ["iced coffee"]
   },
   "pose": {
-    "position": "walking mid-stride",
-    "stance": "left foot forward, natural walking momentum",
-    "hands": "right hand holding iced coffee, left hand adjusting hair behind ear",
-    "head_gaze": "glancing over right shoulder toward camera",
-    "vibe": "spontaneous joy"
+    "position": "standing, looking back",
+    "stance": "natural, relaxed",
+    "hands": "one hand holding coffee",
+    "head_gaze": "glancing over shoulder at camera",
+    "vibe": "spontaneous, carefree"
   },
   "scene": {
-    "location": "trendy Tokyo neighborhood street",
-    "time": "late afternoon golden hour",
-    "atmosphere": "warm, candid, urban energy",
-    "background": "small Japanese shop fronts with neon signs, potted plants on sidewalk, vintage bicycle against wall, brick and painted facades"
+    "location": "sidewalk outdoors",
+    "time": "afternoon",
+    "atmosphere": "warm, casual",
+    "background": "simple urban, slightly blurred"
   },
   "camera": {
-    "pov": "third-person from behind and slightly right",
-    "angle": "slight dutch angle for dynamism",
+    "pov": "friend-took-this-photo",
+    "angle": "eye-level",
     "framing": "three-quarter body"
   },
   "lighting": {
-    "type": "late afternoon golden hour backlight from behind-left",
-    "effect": "warm halo on hair and silhouette, long shadows on pavement, amber glow across scene"
+    "type": "warm afternoon sunlight",
+    "effect": "natural warm tones"
   },
   "mood": {
     "energy": "playful, spontaneous",
-    "color_palette": "warm amber, faded black, creamy beige, caramel brown, soft neon",
-    "aesthetic": "candid Tokyo street style"
+    "color_palette": "warm natural tones, denim blue, white",
+    "aesthetic": "casual candid photo"
   }
 }
 ```
@@ -469,14 +513,17 @@ blurry, low quality, low resolution, artifacts, text, watermark, logo, extra lim
 
 ## Prompt Writing Rules
 
-1. The `prompt` field must be a **single comprehensive paragraph, 150+ words**
-2. Weave ALL structured details into the paragraph naturally — do not use bullet points or field labels
-3. Start with the overall scene/shot type, then subject description, then outfit details, then pose, then scene/background, then lighting/mood
-4. Include camera simulation details in the prompt text (e.g., "Shot at eye-level" or "captured with iPhone 15 Pro Max")
-5. End with quality markers: "Photorealistic, high quality, high resolution, {aspect_ratio} aspect ratio."
-6. Use specific, concrete language — not "wearing a nice top" but "wearing a fitted white ribbed crop top"
-7. Describe physical actions precisely — not "posing" but "right hand in blazer pocket, left arm hanging naturally with fingers relaxed"
-8. Include environmental details that sell realism — water droplets, fabric textures, light reflections, shadow patterns
-9. The `negative_prompt` is always REQUIRED — use the standard combined block above as a baseline
-10. Subject details (age, body type, core features) come from the Fixed Character Profiles — do NOT vary these between posts
-11. Hair color/style and outfits SHOULD vary between posts for visual diversity
+1. The `prompt` field must be a **single paragraph, 120-180 words** (NOT 250+ — shorter prompts produce better results)
+2. Weave details into the paragraph naturally — do not use bullet points or field labels
+3. Order: shot type → subject → outfit → pose → scene (2-3 props max) → lighting (1 sentence) → quality markers
+4. ALWAYS specify "iPhone 15 Pro Max" in the prompt text — never DSLR cameras
+5. End with quality markers: "Photorealistic, high quality, high resolution."
+6. Use specific but concise language — "black sports bra and grey leggings" not "fitted seamless athletic-blend sports bra with thin adjustable straps"
+7. Pose description = vibe + 1-2 key elements, NOT per-limb anatomy
+8. Background = location name + 2-3 props MAX. The subject should dominate the image, not the environment
+9. Lighting = 1 sentence. "Warm natural window light" is enough. No multi-source lighting descriptions.
+10. The `negative_prompt` is always REQUIRED — use the standard combined block above as a baseline
+11. Subject details (age, body type, core features) come from the Fixed Character Profiles — do NOT vary these between posts
+12. Hair color/style and outfits SHOULD vary between posts for visual diversity
+13. NEVER use the word "editorial" anywhere in the prompt or meta.style — it produces magazine-quality output that doesn't match this niche
+14. Think "my friend took this photo of me" NOT "a photographer shot this for a magazine"

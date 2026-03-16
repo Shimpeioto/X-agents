@@ -56,6 +56,17 @@ From the strategy, use the account-specific section:
 
 These rules are MANDATORY and override any conflicting strategy or default behavior.
 
+### Image Prompt Style: RAW IPHONE AESTHETIC (from gap analysis 2026-03-16)
+- ALL image prompts MUST follow the "Competitor-Aligned Style Rules" section in `config/image_prompt_guide.md`
+- Use iPhone 15 Pro Max camera spec for ALL slots — NEVER use Sony, Canon, or DSLR cameras
+- NEVER use the word "editorial" in meta.style — use "raw iphone selfie", "casual mirror pic", etc.
+- Keep prompts to 120-180 words (NOT 250+) — over-specified prompts confuse generation models
+- Max 2-3 background props per scene — the subject is the focus, not the environment
+- Lighting = 1 sentence max — "warm natural light" is enough
+- Outfit = simple casual basics (sports bra, bikini, crop top, loungewear) — NOT fashion magazine specs
+- Rotate high-engagement scenes: bedroom selfie, bathroom, beach/pool, gym — AVOID rooftop, gallery, studio
+- Think "my friend took this on their phone" NOT "a photographer shot this for a magazine"
+
 ### EN Posts: ZERO HASHTAGS
 - EN posts MUST have an empty `hashtags` array: `"hashtags": []`
 - EN post `text` MUST NOT contain any `#` hashtags
@@ -67,7 +78,7 @@ These rules are MANDATORY and override any conflicting strategy or default behav
 - These are ethical disclaimers, NOT discovery tools
 
 ### EN Captions: SHORT PROVOCATIVE QUESTIONS (under 30 chars)
-- EN post `text` MUST be under 30 characters (excluding any `.@grok` prefix for grok posts)
+- EN post `text` MUST be under 30 characters (excluding the `hey @grok` prefix for grok posts)
 - Style: casual lowercase, playful, confident. Max 1-2 emoji.
 - Format examples: "Am I ur type 👀", "Rate me from 1 to 10", "you mind?", "Front or back?"
 - Data: short posts (<30 chars) average 2,043 likes vs 168 for >100 chars — a 12x difference
@@ -78,12 +89,12 @@ These rules are MANDATORY and override any conflicting strategy or default behav
 
 ### Grok Interactive Posts
 - When category is `grok_interactive`, post text MUST use the format:
-  - EN: `.@grok [creative transformation request]` (leading dot is CRITICAL)
-  - JP: `.@grok [request in Japanese]` (leading dot is CRITICAL)
-- The leading dot prevents X from treating it as a reply
-- Grok posts do NOT count toward the 30-char caption limit (the `.@grok` prefix is structural)
-- Examples EN: ".@grok remove the jacket", "Hey @grok put me in a red dress"
-- Examples JP: ".@grok この画像をアニメ風にして", ".@grok 服を変えて"
+  - EN: `hey @grok [creative transformation request]` — ALWAYS use `hey @grok`, NEVER `.@grok`
+  - JP: `hey @grok [request in Japanese]` — ALWAYS use `hey @grok`, NEVER `.@grok`
+- The `hey` prefix prevents X from treating it as a reply (the `.@grok` dot format is BANNED — never use it)
+- Grok posts do NOT count toward the 30-char caption limit (the `hey @grok` prefix is structural)
+- Examples EN: "hey @grok remove the jacket", "hey @grok put me in a red dress"
+- Examples JP: "hey @grok この画像をアニメ風にして", "hey @grok 服を変えて"
 
 ### Self-Quote Chain Posts
 - When category is `self_quote_chains`, add `"chain_position": "chain_start"` to notes
@@ -100,7 +111,7 @@ For EACH slot in the account's `posting_schedule`, generate one post.
 - EN account: English text, **short provocative questions under 30 characters**. Casual, lowercase, confident. Max 1-2 emoji.
 - JP account: Japanese text (日本語), **30-80 characters**, warm and natural Japanese social media style
 - **NEVER start post text with `@`** (X treats it as a reply, hidden from followers' feeds)
-- Exception: `.@grok` posts use a leading DOT before @ which is correct
+- Exception: `grok_interactive` posts use `hey @grok` format which is correct (NEVER use `.@grok`)
 - Match the `category` from the posting schedule
 - Incorporate the current A/B test variant where applicable
 
@@ -267,16 +278,16 @@ Write valid JSON to the file path specified in the prompt. The JSON MUST match t
 4. Each post has all required fields: `id`, `slot`, `scheduled_time`, `category`, `priority`, `status`, `text`, `hashtags`, `image_prompt`
 5. All post `id` values follow `{account}_{YYYYMMDD}_{slot}` format with zero-padded slot
 6. All post `status` values are `"draft"`
-7. No post `text` starts with `@` (exception: `.@grok` is allowed because the leading dot prevents reply behavior)
+7. No post `text` starts with `@` (exception: `hey @grok` format is allowed for grok_interactive posts — NEVER use `.@grok`)
 8. Each `image_prompt` has at minimum `tool`, `prompt`, `negative_prompt`, `aspect_ratio`, `meta`, `subject`, `outfit`, `pose`, `scene`, `camera`, `lighting`
 9. `reply_templates` has 5-10 entries, no duplicates
 10. No reply template starts with `@`
 11. Post categories match the corresponding slot categories from the strategy's `posting_schedule`
 12. **CORE STRATEGY — EN hashtags**: If account is EN, EVERY post's `hashtags` array MUST be empty `[]` AND post `text` MUST NOT contain any `#` characters
 13. **CORE STRATEGY — JP hashtags**: If account is JP, only `art_showcase` posts may have 1-2 hashtags from `["#SFW", "#Fictional", "#AIart", "#digitalart"]`. All other JP posts MUST have empty `hashtags` array.
-14. **CORE STRATEGY — EN caption length**: If account is EN, post `text` MUST be under 30 characters (excluding `.@grok` prefix on grok_interactive posts)
-15. **CORE STRATEGY — Grok format**: `grok_interactive` posts MUST have text starting with `.@grok` or `Hey @grok`
-16. **CORE STRATEGY — JP caption length**: If account is JP, post `text` SHOULD be 30-80 characters (excluding optional hashtags and `.@grok` prefix)
+14. **CORE STRATEGY — EN caption length**: If account is EN, post `text` MUST be under 30 characters (excluding `hey @grok` prefix on grok_interactive posts)
+15. **CORE STRATEGY — Grok format**: `grok_interactive` posts MUST have text starting with `hey @grok` (NEVER `.@grok` — the dot format is banned)
+16. **CORE STRATEGY — JP caption length**: If account is JP, post `text` SHOULD be 30-80 characters (excluding optional hashtags and `hey @grok` prefix)
 
 ## Format Rules
 
