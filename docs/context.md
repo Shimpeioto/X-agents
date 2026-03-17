@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 16, 2026 (Session 41: Fix EN posting slot time alignment — UTC wrap bug)
+**Last updated**: March 17, 2026 (Session 42: Self-improving Outbound agent — learning loop, cross-agent intelligence, adaptive targeting)
 
 ---
 
@@ -1095,6 +1095,41 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 **Files modified** (2):
 - `agents/strategist.md` — Posting Cadence update + Validation Rule 14
 - `data/strategy/core_strategy.json` — optimal_times_utc + scheduling_constraint
+
+### Session 42 — Self-Improving Outbound Agent: Learning Loop, Cross-Agent Intelligence, Adaptive Targeting (March 17, 2026)
+
+**Context**: Marc briefed the Outbound agent on a "beauty-first" targeting strategy shift (target beauty fans/followers of competitors, not competitors themselves). The briefing was saved to `data/outbound/outbound_briefing_beauty_first_20260317.json`, but Outbound's instructions had no step to read briefing files — it would have ignored the strategy shift entirely. More fundamentally, Outbound was a static executor: it read the strategy, executed likes/follows, and stopped. No review of past performance, no cross-agent intelligence, no adaptation.
+
+**Problem**: Outbound agent had no capability to:
+1. Read operator briefings or strategy shifts
+2. Review its own past performance (follow-back rates, engagement reciprocity)
+3. Learn from other agents' outputs (Scout discoveries, Analyst metrics, Strategist feedback)
+4. Adapt its targeting criteria based on accumulated learnings
+5. Propose strategic changes to Marc based on data patterns
+
+**Fix — Redesigned Outbound as a learning agent with 3 new capabilities:**
+
+1. **Step 0: Daily Intelligence & Adaptation** (runs before execution):
+   - **Self-review** (0.1): Reads past outbound logs, evaluates follow-back rates, engagement reciprocity, skip rates, wasted budget
+   - **Cross-agent intelligence** (0.2): Reads Scout reports (new accounts), strategy feedback (effective/ineffective targets), morning briefings, daily reports, operator briefings, and its own journal
+   - **Adaptive reasoning** (0.3): Decides what to change today — target sources, scoring thresholds, engagement style, new filters
+   - **Proposals to Marc** (0.4): Flags strategic changes that need Marc's or Strategist's attention (e.g., "follow-back rate dropped — recommend shifting targets")
+
+2. **Step 8: Outbound Journal** (persistent learning):
+   - Writes `data/outbound/outbound_journal_{account}.json` — cumulative learnings across runs
+   - Tracks: effective/ineffective target traits, follow-back rate history, scoring adjustments, active hypotheses with evidence
+   - Read at start of each run, appended after — institutional knowledge that compounds
+
+3. **Target priority system** (replaces static strategy targets):
+   - Priority order: briefing targets > journal-informed targets > strategy targets > scout discoveries
+   - Scoring thresholds and engagement styles adapt based on journal data
+
+**Design principle**: Agents should be learning systems, not static executors. The Outbound agent now has its own PDCA loop: review yesterday's results → adapt today's plan → execute → record learnings → feed tomorrow's review. This mirrors the war room PDCA loop for content strategy but operates at the individual agent level.
+
+**Decision 20**: Agents that interact with external systems (outbound, publisher) should maintain persistent journals tracking what works and what doesn't. The journal is the agent's institutional memory — it compounds over time and prevents repeating the same mistakes.
+
+**Files modified** (1):
+- `agents/outbound.md` — Added Step 0 (Daily Intelligence & Adaptation), Step 8 (Outbound Journal), target priority system, daily_adaptation field in plan schema
 
 ---
 
