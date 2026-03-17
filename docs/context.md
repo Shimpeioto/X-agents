@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 17, 2026 (Session 42: Self-improving Outbound agent — learning loop, cross-agent intelligence, adaptive targeting)
+**Last updated**: March 17, 2026 (Session 42: Self-improving Outbound agent + X Analytics CSV import pipeline)
 
 ---
 
@@ -1130,6 +1130,28 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 
 **Files modified** (1):
 - `agents/outbound.md` — Added Step 0 (Daily Intelligence & Adaptation), Step 8 (Outbound Journal), target priority system, daily_adaptation field in plan schema
+
+### Session 42b — X Analytics CSV Import: Daily Impressions & Engagement Data (March 17, 2026)
+
+**Context**: The X API Basic plan does not provide impression data. The Analyst's `post_metrics` table had `impressions: NULL` for all 36 tracked posts. Meanwhile, X's data export and Analytics dashboard provide daily account-level impressions, profile visits, bookmarks, new follows/unfollows — metrics unavailable via API.
+
+**Solution**: Built a CSV import pipeline for X Analytics dashboard exports:
+
+1. **New `daily_analytics` table** in SQLite — stores daily account-level metrics: impressions, likes, engagements, bookmarks, shares, new_follows, unfollows, replies, reposts, profile_visits, posts_created, video_views, media_views. Primary key: `(account, date)`.
+
+2. **`scripts/import_analytics_csv.py`** — Parses the X Analytics CSV format (`Date,Impressions,Likes,...`), converts dates, and writes to `daily_analytics` via `db_manager`. Supports `--dry-run` and `--account` flags. Uses `INSERT OR REPLACE` for safe re-imports.
+
+3. **`db_manager.py` updates** — Added `insert_daily_analytics()`, `get_daily_analytics()`, and `get_daily_analytics_range()` functions.
+
+**Initial import**: 7 days of EN data (Mar 11-17). Key finding: Mar 14 had 3,163 impressions (2.6x the 7-day average of 1,209) — worth investigating what drove the spike.
+
+**Operator workflow**: Periodically download CSV from X Analytics dashboard → run `python3 scripts/import_analytics_csv.py <csv_path> --account EN`. The Analyst and war room agents can now query `daily_analytics` for impression-based engagement rates and profile visit trends.
+
+**Files created** (1):
+- `scripts/import_analytics_csv.py` — CSV import script for X Analytics data
+
+**Files modified** (1):
+- `scripts/db_manager.py` — Added `daily_analytics` table schema, insert and query functions
 
 ---
 

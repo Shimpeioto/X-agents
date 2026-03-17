@@ -62,6 +62,26 @@ def init():
         resolved BOOLEAN NOT NULL DEFAULT 0
     )""")
 
+    c.execute("""CREATE TABLE IF NOT EXISTS daily_analytics (
+        account TEXT NOT NULL,
+        date DATE NOT NULL,
+        impressions INTEGER DEFAULT 0,
+        likes INTEGER DEFAULT 0,
+        engagements INTEGER DEFAULT 0,
+        bookmarks INTEGER DEFAULT 0,
+        shares INTEGER DEFAULT 0,
+        new_follows INTEGER DEFAULT 0,
+        unfollows INTEGER DEFAULT 0,
+        replies INTEGER DEFAULT 0,
+        reposts INTEGER DEFAULT 0,
+        profile_visits INTEGER DEFAULT 0,
+        posts_created INTEGER DEFAULT 0,
+        video_views INTEGER DEFAULT 0,
+        media_views INTEGER DEFAULT 0,
+        source TEXT NOT NULL DEFAULT 'csv_import',
+        PRIMARY KEY (account, date)
+    )""")
+
     # Migration: add timestamp column to outbound_log if missing
     cols = [row[1] for row in c.execute("PRAGMA table_info(outbound_log)").fetchall()]
     if "timestamp" not in cols:
@@ -117,6 +137,47 @@ def insert_outbound_log(date, account, action_type, target_handle, target_tweet_
          success, api_response_code, timestamp))
     conn.commit()
     conn.close()
+
+
+def insert_daily_analytics(account, date, impressions, likes, engagements, bookmarks,
+                           shares, new_follows, unfollows, replies, reposts,
+                           profile_visits, posts_created, video_views, media_views,
+                           source="csv_import"):
+    """Insert or replace a daily_analytics row."""
+    conn = _connect()
+    conn.execute(
+        """INSERT OR REPLACE INTO daily_analytics
+           (account, date, impressions, likes, engagements, bookmarks,
+            shares, new_follows, unfollows, replies, reposts,
+            profile_visits, posts_created, video_views, media_views, source)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (account, date, impressions, likes, engagements, bookmarks,
+         shares, new_follows, unfollows, replies, reposts,
+         profile_visits, posts_created, video_views, media_views, source))
+    conn.commit()
+    conn.close()
+
+
+def get_daily_analytics(account, date):
+    """Get daily_analytics for an account and date. Returns dict or None."""
+    conn = _connect()
+    row = conn.execute(
+        "SELECT * FROM daily_analytics WHERE account = ? AND date = ?",
+        (account, date)).fetchone()
+    conn.close()
+    return dict(row) if row else None
+
+
+def get_daily_analytics_range(account, start_date, end_date):
+    """Get daily_analytics rows for a date range. Returns list of dicts."""
+    conn = _connect()
+    rows = conn.execute(
+        """SELECT * FROM daily_analytics
+           WHERE account = ? AND date >= ? AND date <= ?
+           ORDER BY date""",
+        (account, start_date, end_date)).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
 
 
 def insert_error_log(timestamp, agent, error_type, error_message, resolution, resolved):
