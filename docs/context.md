@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 17, 2026 (Session 42: Self-improving Outbound agent + X Analytics CSV import pipeline)
+**Last updated**: March 18, 2026 (Session 42: Self-improving agents + X Analytics + per-post impressions + never-skip pipeline)
 
 ---
 
@@ -1152,6 +1152,41 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 
 **Files modified** (1):
 - `scripts/db_manager.py` — Added `daily_analytics` table schema, insert and query functions
+
+### Session 42c — Per-Post Impression Import + Analytics-Aware Agents + Never-Skip Pipeline (March 17-18, 2026)
+
+**Context**: Operator imported 2 weeks of X Analytics CSV data including **per-post impressions** — the missing metric. Analysis revealed critical insights: replies to large accounts generate 2-70x more impressions than original posts (@katekarsyn reply = 2,823 impressions, 24% of all account impressions from 1 reply). Original image posts outperform Grok posts (5.4% vs 3.6% ER). Mar 16 raw iPhone aesthetic posts hit 7-10% ER (3-4x previous average).
+
+**Per-post analytics import**: Extended `import_analytics_csv.py` to auto-detect CSV type (daily overview vs per-post content). Added `post_analytics` table to SQLite storing per-tweet: impressions, likes, engagements, bookmarks, profile_visits, detail_expands, url_clicks. Imported 66 posts (Mar 4-17).
+
+**Analytics-aware agents** — All four execution agents now read and learn from analytics data:
+
+1. **Strategist** (Steps 1.6, 1.65): Reads `post_analytics` and `daily_analytics` tables for impression-based content mix decisions, caption style optimization, reply target ROI analysis. Reads strategy meeting reports as high-confidence directives.
+
+2. **Creator** (Step 7): Reads past post performance to inform creative decisions — which captions drove highest ER, which categories got most impressions, which posts got bookmarked (save-worthy patterns), which drove profile visits (follower conversion content).
+
+3. **Analyst** (Step 1.7, enhanced Step 2.2, new Step 2.6): Reads X Analytics tables for impression-based ER, profile visit rates, bookmark rates. Category breakdown now includes impression-weighted metrics. New Reply Performance Analysis ranks reply targets by impression ROI for the Outbound agent.
+
+4. **Outbound** (already updated in Session 42): Step 0 learning loop already reads reports and adapts targeting.
+
+**Strategy meeting**: Marc + Strategist analyzed the full 2-week dataset. Key decisions: engagement_questions 30%→40%, image_showcase 35%→25%, manual replies elevated to #1 growth lever (4/day to Tier 1 targets), raw iPhone aesthetic locked as permanent default, new A/B test: questions vs statements.
+
+**Never-skip pipeline**: The regular 06:00 JST pipeline was skipping when it found existing pipeline state from ad-hoc runs. Fix: `marc_pipeline.md` Step 1 now explicitly instructs Marc to rename existing state to `_prev` and run fresh. `run_pipeline.sh` prompt reinforces "CRITICAL: NEVER skip."
+
+**Decision 21**: Per-post impression data from X Analytics CSV is the most valuable metric the system has. It enables impression-based engagement rates (more accurate than follower-based), reply target ROI analysis, and profile visit attribution. Periodic CSV import should be part of the operator's routine.
+
+**Decision 22**: Agents should never skip scheduled runs based on existing state. Ad-hoc runs create artifacts that confuse scheduled runs. Solution: archive existing state and run fresh.
+
+**Files created** (0 new — extended existing)
+
+**Files modified** (6):
+- `agents/strategist.md` — Steps 1.6 (analytics data), 1.65 (meeting reports)
+- `agents/creator.md` — Step 7 (performance data for content learning)
+- `agents/analyst.md` — Step 1.7 (X Analytics tables), Step 2.2 enhanced, Step 2.6 (reply performance)
+- `scripts/db_manager.py` — Added `post_analytics` table, `insert_post_analytics()`, `get_post_analytics()`
+- `scripts/import_analytics_csv.py` — Extended to auto-detect and import per-post content CSV
+- `agents/marc_pipeline.md` — Step 1: never skip, rename existing state to `_prev`
+- `scripts/run_pipeline.sh` — Added never-skip instruction to Marc's prompt
 
 ---
 
