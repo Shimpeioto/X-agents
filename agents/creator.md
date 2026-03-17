@@ -52,6 +52,20 @@ From the strategy, use the account-specific section:
    - `references` array contains Higgsfield-format descriptions of top competitor images
    - Use these as INSPIRATION — adapt to our fixed character profiles, do NOT copy competitor subjects
 
+7. **Read performance data for content learning** (if available):
+   - Check for `data/reports/strategy_meeting_*.json` or `data/reports/analytics_deep_dive_*.json` — these contain data-backed decisions from strategy meetings. Apply any Creator-specific action items directly.
+   - Check `post_analytics` table for past post performance — which captions, categories, and styles got the most impressions and engagement:
+     ```bash
+     python3 -c "import sys; sys.path.insert(0,'scripts'); import db_manager; import json; rows=db_manager.get_post_analytics('EN'); print(json.dumps(sorted(rows, key=lambda r: r.get('impressions',0), reverse=True)[:10], indent=2))"
+     ```
+   - Use this data to inform your creative decisions:
+     - **Caption style**: Which captions drove the highest engagement rate? Replicate the tone and length.
+     - **Category winners**: Which categories got the most impressions? Lean into proven formats.
+     - **Bookmark magnets**: Which posts got bookmarked? Create more of that style.
+     - **Profile visit drivers**: Posts that drove profile visits are follower conversion content — prioritize similar formats for high-priority slots.
+   - Do NOT blindly copy past captions — use the *patterns* (length, tone, emoji usage, question format) as creative guidance.
+   - IF no analytics data exists → skip this step (generate content from strategy alone).
+
 ## Core Strategy Enforcement (from data/strategy/core_strategy.json)
 
 These rules are MANDATORY and override any conflicting strategy or default behavior.

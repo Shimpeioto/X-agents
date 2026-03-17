@@ -112,8 +112,42 @@ From the Scout report, pay attention to:
 
 - IF the file does not exist → skip this step.
 
-## Step 1.6: Read following list (always)
+## Step 1.6: Read analytics data if available (impression-based intelligence)
 
+- IF `post_analytics` table has data → query it via `python3 -c "import db_manager; ..."` or read
+  the latest analysis report at `data/reports/analytics_deep_dive_*.json` or `data/reports/strategy_meeting_*.json`.
+- This table contains **per-post impression data** from X Analytics CSV imports — data the API cannot provide.
+  Fields: `tweet_id`, `impressions`, `likes`, `engagements`, `bookmarks`, `profile_visits`, `detail_expands`.
+- Use this data to make **evidence-based decisions** about:
+  - **Content mix**: Which categories actually get impressions vs just likes? Adjust mix based on impression-weighted ER, not just API metrics.
+  - **Caption style**: Short vs long captions — what drives impressions? What drives engagement?
+  - **Reply strategy**: Which reply targets generate the most impressions? (Reply reach varies 70x by target.)
+  - **Profile visit drivers**: Which post types make people click through to the profile? These are follower conversion posts.
+  - **Bookmark patterns**: What content gets saved? Bookmarks = return visitors = algorithm signal.
+- Also check `daily_analytics` table for daily impressions, profile visits, new follows/unfollows trends.
+- Query examples:
+  ```bash
+  python3 -c "import sys; sys.path.insert(0,'scripts'); import db_manager; import json; print(json.dumps(db_manager.get_post_analytics('EN'), indent=2))" | head -100
+  python3 -c "import sys; sys.path.insert(0,'scripts'); import db_manager; import json; print(json.dumps(db_manager.get_daily_analytics_range('EN','2026-03-04','2026-03-17'), indent=2))"
+  ```
+- IF no analytics data exists → skip this step (first run or CSV not yet imported).
+
+## Step 1.65: Read strategy meeting reports if available
+
+- Check for `data/reports/strategy_meeting_*.json` or `data/reports/analytics_deep_dive_*.json` files.
+- These contain **decisions and action items from strategy meetings** between Marc and Strategist.
+- When a meeting report exists, treat its decisions as **high-confidence directives** — apply them
+  directly unless they conflict with core strategy rules or global rules.
+- Meeting reports may contain:
+  - Content mix adjustments (with data backing)
+  - New A/B test designs
+  - Reply target prioritization based on impression data
+  - Changes to posting cadence or time slots
+- IF no meeting reports exist → skip this step.
+
+## Step 1.7: Read following list (always)
+
+(Previously Step 1.6)
 - Read `data/outbound/following_{account}.json` for each active account (EN, JP).
 - This file contains the real list of accounts currently being followed (verified via X API by `publisher.py sync-following`).
 - Use this to ensure `target_accounts` includes enough **unfollowed** accounts to fill the follow budget (`daily_follows`).

@@ -62,6 +62,29 @@ def init():
         resolved BOOLEAN NOT NULL DEFAULT 0
     )""")
 
+    c.execute("""CREATE TABLE IF NOT EXISTS post_analytics (
+        tweet_id TEXT NOT NULL,
+        account TEXT NOT NULL,
+        date DATE NOT NULL,
+        post_text TEXT,
+        post_link TEXT,
+        impressions INTEGER DEFAULT 0,
+        likes INTEGER DEFAULT 0,
+        engagements INTEGER DEFAULT 0,
+        bookmarks INTEGER DEFAULT 0,
+        shares INTEGER DEFAULT 0,
+        new_follows INTEGER DEFAULT 0,
+        replies INTEGER DEFAULT 0,
+        reposts INTEGER DEFAULT 0,
+        profile_visits INTEGER DEFAULT 0,
+        detail_expands INTEGER DEFAULT 0,
+        url_clicks INTEGER DEFAULT 0,
+        hashtag_clicks INTEGER DEFAULT 0,
+        permalink_clicks INTEGER DEFAULT 0,
+        source TEXT NOT NULL DEFAULT 'csv_import',
+        PRIMARY KEY (tweet_id, account)
+    )""")
+
     c.execute("""CREATE TABLE IF NOT EXISTS daily_analytics (
         account TEXT NOT NULL,
         date DATE NOT NULL,
@@ -137,6 +160,45 @@ def insert_outbound_log(date, account, action_type, target_handle, target_tweet_
          success, api_response_code, timestamp))
     conn.commit()
     conn.close()
+
+
+def insert_post_analytics(tweet_id, account, date, post_text, post_link,
+                          impressions, likes, engagements, bookmarks, shares,
+                          new_follows, replies, reposts, profile_visits,
+                          detail_expands, url_clicks, hashtag_clicks,
+                          permalink_clicks, source="csv_import"):
+    """Insert or replace a post_analytics row."""
+    conn = _connect()
+    conn.execute(
+        """INSERT OR REPLACE INTO post_analytics
+           (tweet_id, account, date, post_text, post_link,
+            impressions, likes, engagements, bookmarks, shares,
+            new_follows, replies, reposts, profile_visits,
+            detail_expands, url_clicks, hashtag_clicks,
+            permalink_clicks, source)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (tweet_id, account, date, post_text, post_link,
+         impressions, likes, engagements, bookmarks, shares,
+         new_follows, replies, reposts, profile_visits,
+         detail_expands, url_clicks, hashtag_clicks,
+         permalink_clicks, source))
+    conn.commit()
+    conn.close()
+
+
+def get_post_analytics(account, date=None):
+    """Get post_analytics rows. Optionally filter by date. Returns list of dicts."""
+    conn = _connect()
+    if date:
+        rows = conn.execute(
+            "SELECT * FROM post_analytics WHERE account = ? AND date = ? ORDER BY impressions DESC",
+            (account, date)).fetchall()
+    else:
+        rows = conn.execute(
+            "SELECT * FROM post_analytics WHERE account = ? ORDER BY date DESC, impressions DESC",
+            (account,)).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
 
 
 def insert_daily_analytics(account, date, impressions, likes, engagements, bookmarks,

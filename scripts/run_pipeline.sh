@@ -33,6 +33,8 @@ Read agents/marc_pipeline.md for the Pipeline Playbook.
 
 IMPORTANT: You are running in non-interactive mode. Execute ALL scripts directly using your bash tool — do not ask the user to run commands or paste output.
 
+CRITICAL: NEVER skip the pipeline. If pipeline_state_${DATE//-/}.json already exists, rename it to _prev and run fresh. The operator expects fresh content every day regardless of prior runs.
+
 Run today's pipeline for ${DATE}.
 Project directory: ${PROJECT_DIR}
 

@@ -51,6 +51,15 @@ python3 scripts/telegram_send.py "Pipeline skipped — no active accounts in con
 
 ### 1. Initialize Pipeline State
 
+**IMPORTANT — Never skip the pipeline.** If `data/pipeline/pipeline_state_{YYYYMMDD}.json` already exists
+(e.g., from an ad-hoc run the previous day), do NOT skip. Instead:
+1. Rename the existing file to `pipeline_state_{YYYYMMDD}_prev.json` (archive it)
+2. Rename any existing content plan, strategy, and scout report for this date with a `_prev` suffix
+3. Proceed with a fresh pipeline run
+
+The operator expects fresh content every day. An existing pipeline state means an earlier run happened
+(possibly ad-hoc, possibly at a different time), but the scheduled pipeline must always produce fresh output.
+
 Create `data/pipeline/pipeline_state_{YYYYMMDD}.json` — see [marc_schemas.md](marc_schemas.md) for the initial state template.
 
 ### 2. Spawn Scout Teammate

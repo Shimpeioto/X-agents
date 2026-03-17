@@ -174,6 +174,20 @@ When Marc invokes you as a Claude subagent for post-publishing analysis:
 4. Read yesterday's report: `data/metrics/daily_report_{YYYYMMDD-1}.json` (if exists, for trend comparison)
 5. Read content plans: `data/content/content_plan_{YYYYMMDD}_EN.json` and `data/content/content_plan_{YYYYMMDD}_JP.json` (for category mapping and A/B test variant info)
 6. Read strategy: `data/strategy/strategy_{YYYYMMDD}.json` (for A/B test definition in `ab_test` section)
+7. **Read X Analytics data** (if available in SQLite):
+   - `post_analytics` table: per-post impressions, engagements, bookmarks, profile visits, detail expands, URL clicks (from X Analytics CSV imports). Query via:
+     ```bash
+     python3 -c "import sys; sys.path.insert(0,'scripts'); import db_manager; import json; print(json.dumps(db_manager.get_post_analytics('EN', '{YYYY-MM-DD}'), indent=2))"
+     ```
+   - `daily_analytics` table: daily account-level impressions, profile visits, new follows/unfollows. Query via:
+     ```bash
+     python3 -c "import sys; sys.path.insert(0,'scripts'); import db_manager; import json; print(json.dumps(db_manager.get_daily_analytics_range('EN', '{start}', '{end}'), indent=2))"
+     ```
+   - When available, use impression data for **impression-based engagement rates** (more accurate than follower-based). Formula: `(likes + reposts + replies) / impressions`.
+   - Cross-reference `post_analytics.tweet_id` with `post_metrics.tweet_id` to enrich API data with impression counts.
+   - Track **profile visit rate** per post: `profile_visits / impressions` — high-visit posts are follower conversion content.
+   - Track **bookmark rate** per post: `bookmarks / impressions` — bookmarked content = return visitor signal.
+   - IF tables are empty → skip, use API-only metrics as before.
 
 ### Step 2: Analyze
 
@@ -182,12 +196,26 @@ For EACH account (EN, JP):
 1. **Follower Anomaly Detection**: If `abs(followers_change) > followers * 0.10` (>10% change), flag as anomaly. Include the percentage and absolute change.
 
 2. **Category Performance Breakdown**: Group posts by `category` (from content plan). For each category, compute total likes, retweets, replies, quotes, bookmarks. Identify best and worst performing categories.
+   - **If `post_analytics` data is available**: Enrich with impression-based metrics per category:
+     - Impression-based ER: `(likes + reposts + replies) / impressions`
+     - Profile visit rate: `profile_visits / impressions`
+     - Bookmark rate: `bookmarks / impressions`
+     - Rank categories by impression-weighted ER (more accurate than follower-based)
+   - Compare API metrics vs Analytics metrics — if they diverge, note the discrepancy.
 
 3. **A/B Test Evaluation**: Read the strategy's `ab_test` definition. Match posts by `ab_test_variant` field. Compare metrics between variant A and variant B. If fewer than 3 data points per variant, report `verdict: "insufficient_data"`. Otherwise, report which variant performed better and by what margin.
 
 4. **Engagement Trend**: If yesterday's report exists, compare today's total likes, retweets, etc. against yesterday's. Report direction (up/down) and percentage change.
 
 5. **Best Performing Post**: Identify the post with the highest total engagement (likes + RTs + replies + quotes). Include post_id, category, and headline metrics.
+   - **If `post_analytics` data is available**: Also report best post by impressions (may differ from best by engagement).
+
+6. **Reply Performance Analysis** (if `post_analytics` data is available):
+   - Identify all replies (post_text starts with `@`) in `post_analytics`
+   - Rank reply targets by impressions generated — which accounts give us the most reach when we reply?
+   - Flag high-ROI targets (>200 impressions per reply) for the Outbound agent
+   - Flag low-ROI targets (<20 impressions from multiple replies) as wasted effort
+   - Include in `telegram_report` as "Reply ROI" section
 
 ### Step 3: Outbound Effectiveness
 
