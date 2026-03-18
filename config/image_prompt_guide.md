@@ -194,6 +194,12 @@ mood:
 }
 ```
 
+#### Sub-variants (Bedroom Mirror)
+- **Clean minimalist**: white wall, made bed, morning golden hour light
+- **Cozy messy bed**: rumpled duvet, pillows, warm evening lamp light
+- **Hotel room**: hotel decor, neutral tones, warm recessed lighting
+- **Getting-ready vanity**: vanity table with products, warm ring light glow
+
 ### 2. Bathroom / Post-shower
 
 ```json
@@ -248,6 +254,11 @@ mood:
   }
 }
 ```
+
+#### Sub-variants (Bathroom)
+- **Home bathroom**: simple white tiles, basic mirror, everyday feel
+- **Hotel luxury marble**: marble countertop, chrome fixtures, plush towels
+- **Simple steamy minimal**: frosted glass, steam wisps, minimal background
 
 ### 3. Pool / Beach / Outdoor
 
@@ -305,6 +316,12 @@ mood:
 }
 ```
 
+#### Sub-variants (Beach / Pool)
+- **Shoreline standing**: feet in shallow water, ocean behind, midday sun
+- **Poolside lounging**: pool edge or lounge chair, bright natural light
+- **Sitting on sand**: beach towel or bare sand, relaxed golden hour
+- **Shallow water wading**: knee-deep, water splashing, playful energy
+
 ### 4. Bedroom / Indoor Casual
 
 ```json
@@ -361,6 +378,11 @@ mood:
 }
 ```
 
+#### Sub-variants (Bedroom Casual)
+- **Sitting on bed**: cross-legged on rumpled sheets, warm window light
+- **Couch lounging**: soft cushions, blanket, cozy evening vibe
+- **Floor sitting**: cross-legged on carpet/rug, relaxed intimate feel
+
 ### 5. Gym / Fitness
 
 ```json
@@ -416,6 +438,11 @@ mood:
   }
 }
 ```
+
+#### Sub-variants (Gym)
+- **Gym mirror by weights**: weight rack visible, bright fluorescent, post-workout
+- **Post-workout locker room**: bench, lockers, warm overhead light
+- **Yoga mat stretch**: studio floor, mat, natural light from windows
 
 ### 6. Lifestyle / Casual Outdoor
 

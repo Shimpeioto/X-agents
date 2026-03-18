@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 18, 2026 (Session 42: Self-improving agents + X Analytics + per-post impressions + never-skip pipeline)
+**Last updated**: March 18, 2026 (Session 43: Data-driven content variety — Strategist visual_guidance, Creator reference images, scene sub-variants, caption pattern library)
 
 ---
 
@@ -1188,6 +1188,31 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 - `agents/marc_pipeline.md` — Step 1: never skip, rename existing state to `_prev`
 - `scripts/run_pipeline.sh` — Added never-skip instruction to Marc's prompt
 
+### Session 43 — Data-Driven Content Variety System (March 18, 2026)
+
+**Context**: Creator agent was producing repetitive content — same captions ("not even trying 🤍"), same scenes (minimalist bedroom every plan), same outfits (sports bra 3x), all standing poses. A prior fix had arbitrarily expanded the scene list to 16 unproven scenes (kitchen, car selfie, staircase, etc.), which contradicted the data: only 5 scene types are proven high-engagement from competitor analysis. The fix: variety comes from **within** the 5 proven scenes (sub-variants) and from the Strategist making daily visual direction decisions, not arbitrary expansion.
+
+**Strategist `visual_guidance`**: Added Step 3.7 (Visual Variety Planning) to `agents/strategist.md`. Strategist now reads last 3 content plans, reads operator reference images from `media/reference/`, and outputs a `visual_guidance` block per account with: `scene_rotation` (slot-by-slot scene type + sub-variant assignment with rotation reasoning), `outfit_suggestions` (type + color per slot, no repeats), `pose_mix` (at least 2 different positions), and `recently_used` (scenes/outfits/captions from last 3 days for dedup). Added validation rule 15. This makes the Strategist the single source of truth for visual direction.
+
+**Creator reverted & refactored**: Reverted the arbitrary 16-scene expansion in `agents/creator.md` back to the 5 proven scene types (bedroom mirror, bathroom, beach/pool, gym, cozy casual). Creator now consumes `visual_guidance` from the strategy (Step 8) instead of self-managing dedup. Added Step 9: read operator reference images from `media/reference/` — Creator analyzes full visual composition (scene, outfit, pose, lighting, mood, framing) and uses as primary inspiration, distributed across slots. Fallback preserved for older strategy format without `visual_guidance`.
+
+**Scene sub-variants**: Added `#### Sub-variants` sections to each of the 5 main scene templates in `config/image_prompt_guide.md`. Bedroom mirror: 4 sub-variants (clean minimalist, cozy messy bed, hotel room, getting-ready vanity). Bathroom: 3 (home, hotel luxury marble, steamy minimal). Beach/pool: 4 (shoreline, poolside, sitting on sand, shallow water). Bedroom casual: 3 (sitting on bed, couch lounging, floor sitting). Gym: 3 (mirror by weights, locker room, yoga mat). This creates 17 distinct scene variations from 5 data-backed scene types.
+
+**Caption pattern library**: Added to `config/meruru_concept.md` under Voice section. Six pattern types derived from competitor data: rating ask, binary choice, casual flex, confidence statement, direct address, reaction bait. Rule: 3+ different patterns per 4-post plan, never reuse exact caption from last 5 plans.
+
+**`media/reference/` directory**: New directory for operator reference images. Flat folder — operator drops inspiration images (any format). Both Strategist and Creator read all images (Claude is multimodal) and analyze complete visual composition for scene/outfit/pose/lighting/mood guidance.
+
+**Decision 23**: Content variety should come from sub-variants within data-proven scene types and Strategist-driven visual guidance, not from arbitrary scene expansion. The Strategist owns visual direction; Creator executes it.
+
+**Files modified** (4):
+- `agents/strategist.md` — Step 3.7 (visual variety planning), `visual_guidance` in output schema, validation rule 15
+- `agents/creator.md` — Reverted 16-scene expansion, Step 8 (consume visual_guidance), Step 9 (reference images), updated validation rules 17-20
+- `config/image_prompt_guide.md` — Sub-variant sections for all 5 scene templates
+- `config/meruru_concept.md` — Caption pattern library (6 pattern types + rotation rules)
+
+**Files created** (1):
+- `media/reference/.gitkeep` — Operator reference image directory
+
 ---
 
 ## 4. Decision Summary
@@ -1595,7 +1620,7 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 36 — War Room Subagent Redesign (March 13, 2026). Fixed Agent Teams failure by switching to blocking subagent calls. Evening war room ran successfully with 3-round discussion. API replies disabled (0 for both accounts).
+**Latest**: Session 43 — Data-Driven Content Variety System (March 18, 2026). Strategist now owns visual direction with `visual_guidance` output (scene rotation, outfit suggestions, pose mix). Creator consumes this instead of self-managing variety. Reverted arbitrary 16-scene expansion to 5 proven scene types with 17 sub-variants. Added caption pattern library and operator reference image system.
 
 Session 36 files modified (4 files):
 - `agents/marc_warroom.md` — Rewrite: Agent Teams → subagents (blocking Agent tool calls)

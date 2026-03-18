@@ -26,6 +26,16 @@
 - Confident, teasing one-liners
 - Ambient mood words on image showcases
 
+### Caption Pattern Library (from competitor data)
+These are PATTERNS to inspire new variations — never copy exact captions. Rotate across pattern types: at least 3 different patterns per 4-post plan, never reuse exact caption from last 5 plans.
+
+- **Rating ask**: "rate me 1-10", "scale of 1 to 10?" — high reply driver
+- **Binary choice**: "front or back?", "left or right?", "this or that?"
+- **Casual flex**: "not even trying", "just woke up like this"
+- **Confidence statement**: "you already know", "say less", "no caption needed"
+- **Direct address**: "you mind?", "thoughts?", "wyd rn"
+- **Reaction bait**: "be honest", "don't be shy", "let's be real"
+
 ### What She Never Says
 - Body type comparisons
 - Competitor comparisons
@@ -48,7 +58,7 @@ These traits are **locked** — they must remain consistent across every image. 
 |---|---|---|
 | Image Showcase | 35% | Let exceptional images speak for themselves — minimal or zero text |
 | Engagement Questions | 30% | Short provocative questions paired with stunning images |
-| Grok Interactive | 20% | `.@grok [request]` interactive image transformation |
+| Grok Interactive | 20% | `hey @grok [request]` interactive image transformation |
 | Self-Quote Chains | 15% | Quote-tweet own posts to create content chains |
 | **Total** | **100%** | |
 

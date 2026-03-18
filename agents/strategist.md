@@ -199,7 +199,7 @@ These rules are MANDATORY and override any conflicting analysis from competitor 
 - **EN scheduling constraint**: All EN slots MUST be in ascending UTC order within 13:00-23:59 UTC. Times before 13:00 or at 00:00+ UTC cause scheduling errors — they convert to JST times that fire before the operator can prepare images.
 - JP optimal times: 09:00 JST, 12:00-13:00 JST, 20:00-21:00 JST, 23:00-00:00 JST
 
-## Step 3: Analysis
+## Step 3: Analysis (includes Visual Variety Planning)
 
 Perform the following analysis for BOTH EN and JP accounts:
 
@@ -232,6 +232,19 @@ When selecting `target_accounts`, apply rotation principles:
 8. **Target count** — EN: 4/day, JP: 3/day (per `config/outbound_rules.json`).
 
 6. **A/B Test**: Design ONE active test per account. Choose a variable to test (e.g., posting time, content category emphasis, caption style, Grok request type). Define two clear variants and a 3-7 day duration.
+
+7. **Visual Variety Planning** (feeds into Creator's image prompts):
+   - Read the last 3 content plans for each account:
+     ```bash
+     ls -t data/content/content_plan_*_EN.json | head -3
+     ls -t data/content/content_plan_*_JP.json | head -3
+     ```
+   - Extract recently used scenes, outfits, poses, and captions into `recently_used`
+   - Read images in `media/reference/` (if any exist) to understand the operator's current visual direction. Incorporate into scene/outfit/pose suggestions.
+   - Assign each slot a scene type from the **5 proven types** (bedroom_mirror, bathroom, beach_pool, gym, cozy_casual), rotating so no scene repeats from yesterday's plan
+   - Pick a **sub-variant** per scene (see `config/image_prompt_guide.md` Sub-variants sections): e.g., bedroom_mirror → "hotel room, warm evening light" vs "clean minimalist, morning golden hour"
+   - Suggest outfit type + color direction per slot — no two slots may have the same outfit type
+   - Specify pose mix — at least 2 different positions across the 4 slots (not all standing). Mix: sitting, standing, leaning, lying down, mid-turn, kneeling
 
 ## Output
 
@@ -273,6 +286,22 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
       "duration_days": 3,
       "start_date": "YYYY-MM-DD"
     },
+    "visual_guidance": {
+      "scene_rotation": [
+        {"slot": 1, "scene_type": "bedroom_mirror", "sub_variant": "hotel room, warm evening light", "reason": "Not used in last 2 days"},
+        {"slot": 2, "scene_type": "gym", "sub_variant": "free weights area, post-workout", "reason": "Gym not used since Mar 14"}
+      ],
+      "outfit_suggestions": [
+        {"slot": 1, "type": "oversized tee", "color": "neutral earth tones"},
+        {"slot": 2, "type": "sports bra + leggings", "color": "dark/black"}
+      ],
+      "pose_mix": ["sitting on bed", "standing", "leaning against wall", "mid-turn"],
+      "recently_used": {
+        "scenes_last_3_days": ["bedroom", "gym", "beach"],
+        "outfits_last_3_days": ["sports bra", "bikini", "crop top"],
+        "captions_last_3_days": ["not even trying 🤍", "rate me 1-10 👀"]
+      }
+    },
     "key_insights": [
       "Insight 1 — specific and data-driven",
       "Insight 2 — actionable recommendation",
@@ -290,6 +319,7 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
     "hashtag_strategy": { },
     "outbound_strategy": { },
     "ab_test": { },
+    "visual_guidance": { },
     "key_insights": [ ],
     "risks": [ ]
   }
@@ -312,6 +342,7 @@ Write valid JSON to the file path provided in the prompt. The JSON MUST match th
 12. **posting_schedule categories MUST use core strategy pillar names**: EN = engagement_questions, image_showcase, grok_interactive, self_quote_chains; JP = grok_interactive, persona_dialogue, art_showcase, self_quote_chains
 13. **`target_follow_status`** must be present in `outbound_strategy` with an entry for each account in `target_accounts`. Values must be `"unfollowed"` or `"already_followed"`. At least `daily_follows` targets should be `"unfollowed"` (if enough unfollowed accounts exist in the competitor pool).
 14. **EN posting times must be in ascending UTC order and all must fall between 13:00-23:59 UTC.** Times at 00:00 UTC or later wrap to the wrong JST date in schedule_slots.py.
+15. **`visual_guidance`** must be present for both EN and JP with: `scene_rotation` array matching slot count (each entry has `slot`, `scene_type`, `sub_variant`, `reason`), `outfit_suggestions` array matching slot count (each entry has `slot`, `type`, `color`), `pose_mix` array with at least 2 distinct position values, and `recently_used` object with `scenes_last_3_days`, `outfits_last_3_days`, `captions_last_3_days` arrays.
 
 ## Format Rules
 

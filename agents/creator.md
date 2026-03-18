@@ -66,6 +66,23 @@ From the strategy, use the account-specific section:
    - Do NOT blindly copy past captions — use the *patterns* (length, tone, emoji usage, question format) as creative guidance.
    - IF no analytics data exists → skip this step (generate content from strategy alone).
 
+8. **Read Strategist's visual guidance** (MANDATORY):
+   Read `visual_guidance` from the strategy file. Follow the Strategist's assignments for each slot:
+   - `scene_rotation` — use the assigned scene type and sub-variant for each slot
+   - `outfit_suggestions` — use the assigned outfit type and color direction for each slot
+   - `pose_mix` — distribute the specified poses across slots (at least 2 different positions)
+
+   **Caption dedup** — No exact or near-duplicate captions from the last 5 content plans. Check `visual_guidance.recently_used.captions_last_3_days` for recent captions to avoid. Use the caption pattern library in `config/meruru_concept.md` to rotate across different pattern types (at least 3 different patterns per 4-post plan).
+
+   **Fallback**: IF `visual_guidance` is not present in the strategy (older strategy format), read the last 3 content plans yourself:
+   ```bash
+   ls -t data/content/content_plan_*_{account}.json | head -3
+   ```
+   Extract recently used captions, scenes, outfits, and poses. Ensure no scene/outfit/caption repeats from yesterday. Use 4 different scenes from the 5 proven types, 4 different outfits, and at least 2 different pose positions.
+
+9. **Read operator reference images** (if available):
+   Read all images in `media/reference/`. For each image, analyze the complete visual composition — scene type, background details, outfit (type, color, style, fit), pose (body position, hand placement, head angle), lighting (direction, warmth, intensity), mood/energy, color palette, camera angle/framing. Use these as PRIMARY visual inspiration for today's prompts. Distribute reference influences across slots — don't apply all references to one post. Adapt everything to our locked character. Add `"reference_inspiration": "filename.jpg"` to the post's `notes` when used. IF the directory is empty or doesn't exist → skip this step.
+
 ## Core Strategy Enforcement (from data/strategy/core_strategy.json)
 
 These rules are MANDATORY and override any conflicting strategy or default behavior.
@@ -78,7 +95,7 @@ These rules are MANDATORY and override any conflicting strategy or default behav
 - Max 2-3 background props per scene — the subject is the focus, not the environment
 - Lighting = 1 sentence max — "warm natural light" is enough
 - Outfit = simple casual basics (sports bra, bikini, crop top, loungewear) — NOT fashion magazine specs
-- Rotate high-engagement scenes: bedroom selfie, bathroom, beach/pool, gym — AVOID rooftop, gallery, studio
+- Rotate high-engagement scenes: bedroom mirror selfie, bathroom, beach/pool, gym, cozy bedroom casual — AVOID rooftop, gallery, studio. Variety comes from **sub-variants within these 5 proven scene types** (see `config/image_prompt_guide.md` Sub-variants sections) and from the Strategist's daily `visual_guidance`.
 - Think "my friend took this on their phone" NOT "a photographer shot this for a magazine"
 
 ### EN Posts: ZERO HASHTAGS
@@ -302,6 +319,10 @@ Write valid JSON to the file path specified in the prompt. The JSON MUST match t
 14. **CORE STRATEGY — EN caption length**: If account is EN, post `text` MUST be under 30 characters (excluding `hey @grok` prefix on grok_interactive posts)
 15. **CORE STRATEGY — Grok format**: `grok_interactive` posts MUST have text starting with `hey @grok` (NEVER `.@grok` — the dot format is banned)
 16. **CORE STRATEGY — JP caption length**: If account is JP, post `text` SHOULD be 30-80 characters (excluding optional hashtags and `hey @grok` prefix)
+17. **DEDUP — No repeated captions**: No post `text` may be identical or near-identical to any post from the last 5 content plans for the same account. Use at least 3 different caption pattern types (from `config/meruru_concept.md` pattern library) per 4-post plan.
+18. **VISUAL — Scene variety**: Follow Strategist's `visual_guidance.scene_rotation`. All 4 posts should use different scene locations. If no `visual_guidance`, ensure no scene repeats from yesterday's plan.
+19. **VISUAL — Outfit variety**: All 4 posts must use different `image_prompt.outfit.top.type` values. Follow Strategist's `visual_guidance.outfit_suggestions` when available.
+20. **VISUAL — Pose variety**: At least 2 different `image_prompt.pose.position` values across the 4 posts (not all "standing"). Follow Strategist's `visual_guidance.pose_mix` when available.
 
 ## Format Rules
 
