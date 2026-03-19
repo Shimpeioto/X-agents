@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 19, 2026 (Session 43b: Cross-midnight publish fix + manual reply dedup)
+**Last updated**: March 20, 2026 (Session 43c: Require image for publish + image compression workflow)
 
 ---
 
@@ -1235,6 +1235,20 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 - `agents/outbound.md` — Manual reply dedup in Steps 0.1, 4.3, and validation rule 8
 - `docs/context.md` — Session 43b entry
 
+### Session 43c — Require Image for Publish + Image Compression Workflow (March 19-20, 2026)
+
+**Context**: Slot 1 of Mar 19 content plan posted text-only ("deadly 😮‍💨") without any image. The operator hadn't yet placed the image in `media/pending/`. Publisher silently posted text-only because `find_media()` returning `None` simply meant `media_ids=None` in the `create_post()` call — no warning, no skip. For a beauty account, text-only posts are essentially broken.
+
+**Fix — Require image**: Added a guard in `scripts/publisher.py` after `find_media()`: if no image is found and `--force` is not set, the post is SKIPPED with a warning log and status stays `"approved"` so it retries when the image is added. The `--force` flag overrides this for intentional text-only posts (e.g., grok posts where Grok generates the image).
+
+**Image compression workflow**: Multiple images were over the 2MB X API upload limit (3.3-5.0MB PNGs). Used macOS `sips -s format jpeg -s formatOptions 80` to compress to JPEG (typically 450-690KB). Original PNGs renamed to `.oversized`. This should be automated in the publisher in a future session.
+
+**Decision 25**: Publisher must never silently post text-only for beauty accounts. Missing image = skip and keep approved for retry. Text-only posting requires explicit `--force` flag.
+
+**Files modified** (2):
+- `scripts/publisher.py` — Image-required guard after `find_media()`, skip if no image unless `--force`
+- `docs/context.md` — Session 43c entry
+
 ---
 
 ## 4. Decision Summary
@@ -1642,7 +1656,7 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 43b — Cross-Midnight Publish Fix + Manual Reply Dedup (March 19, 2026). Fixed `schedule_slots.py` not passing `--date` to publisher, causing cross-midnight LaunchAgents to look for wrong day's content plan. Fixed Outbound agent recommending same manual reply tweet URLs across consecutive days (6/13 were duplicates).
+**Latest**: Session 43c — Require Image for Publish (March 19-20, 2026). Publisher now skips posts without images (keeps as "approved" for retry) instead of silently posting text-only. Pre-compressed oversized PNG images to JPEG via macOS `sips` before publish.
 
 Session 36 files modified (4 files):
 - `agents/marc_warroom.md` — Rewrite: Agent Teams → subagents (blocking Agent tool calls)

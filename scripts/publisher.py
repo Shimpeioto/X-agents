@@ -258,9 +258,16 @@ def run_post(account: str, slot: int | None, dry_run: bool, date_override: str |
             logger.warning(f"Skipping {post_id} — post rate limit reached")
             break
 
-        # Check for media
+        # Check for media — image is REQUIRED for beauty account posts
         media_path = find_media(post_id)
         media_ids = None
+
+        if media_path is None and not force:
+            logger.warning(f"Skipping {post_id} — no image found in media/pending/. "
+                           f"Expected: media/pending/{post_id}.{{png,jpg,jpeg,webp}}. "
+                           f"Use --force to post text-only.")
+            p["status"] = "approved"  # keep approved so it retries when image is added
+            continue
 
         if dry_run:
             logger.info(f"[DRY-RUN] Would post {post_id}: {p['text'][:80]}...")
