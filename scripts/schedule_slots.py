@@ -82,7 +82,7 @@ def create_slot_agent(account: str, slot: int, utc_dt: datetime, date_str: str) 
         "Label": label,
         "ProgramArguments": [
             "/bin/bash", "-c",
-            f'source "$HOME/.zshrc" 2>/dev/null; cd {PROJECT_DIR} && python3 scripts/publisher.py post --account {account} --slot {slot} >> logs/launchd_publish_{date_str}.log 2>&1'
+            f'source "$HOME/.zshrc" 2>/dev/null; cd {PROJECT_DIR} && python3 scripts/publisher.py --date {date_str} post --account {account} --slot {slot} >> logs/launchd_publish_{date_str}.log 2>&1'
         ],
         "StartCalendarInterval": {
             "Month": jst_dt.month,

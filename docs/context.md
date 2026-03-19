@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 18, 2026 (Session 43: Data-driven content variety — Strategist visual_guidance, Creator reference images, scene sub-variants, caption pattern library)
+**Last updated**: March 19, 2026 (Session 43b: Cross-midnight publish fix + manual reply dedup)
 
 ---
 
@@ -1213,6 +1213,28 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 **Files created** (1):
 - `media/reference/.gitkeep` — Operator reference image directory
 
+### Session 43b — Cross-Midnight Publish Fix + Manual Reply Dedup (March 19, 2026)
+
+**Context**: Two bugs discovered during live operation.
+
+**Bug 1 — Cross-midnight publish failure**: When posts are approved late (after 22:00 JST), `schedule_slots.py` creates LaunchAgent plists for slots whose UTC times fall after midnight JST (e.g., 17:30 UTC = 02:30 JST next day). When launchd fires these plists, `publisher.py` calls `today_str()` which returns the NEW day's date, so it looks for `content_plan_20260319_EN.json` instead of `content_plan_20260318_EN.json`. Result: "No content plan found" error, posts never published.
+
+**Fix**: Added `--date {date_str}` to the publisher command in `schedule_slots.py` line 85. Publisher already supports the `--date` flag (top-level arg before subcommand). Now the LaunchAgent plist always passes the correct content plan date regardless of when launchd actually fires the job.
+
+**Bug 2 — Manual reply dedup missing**: Outbound agent recommended the same tweet URLs for manual replies across consecutive days. 6 of 13 reply recommendations were duplicates from yesterday. Root cause: likes have dedup (via `outbound_history.py`), follows have dedup (via `following_{account}.json`), but manual replies had zero dedup — no mechanism to check previous `manual_replies` arrays.
+
+**Fix**: Three changes to `agents/outbound.md`:
+1. Step 0.1: Added manual reply dedup — reads last 3 days of outbound plans + manual reply files, builds `previously_recommended_reply_urls` set
+2. Step 4.3: Added dedup check as FIRST criterion before other filtering — tweet_url must NOT be in `previously_recommended_reply_urls`
+3. Added validation rule 8: No `tweet_url` in `manual_replies` may repeat from the last 3 days
+
+**Decision 24**: Publisher commands in LaunchAgent plists must always include explicit `--date` to prevent cross-midnight date drift. Never rely on `today_str()` for scheduled jobs that may fire on a different calendar day than intended.
+
+**Files modified** (3):
+- `scripts/schedule_slots.py` — Added `--date {date_str}` to publisher command in LaunchAgent plist
+- `agents/outbound.md` — Manual reply dedup in Steps 0.1, 4.3, and validation rule 8
+- `docs/context.md` — Session 43b entry
+
 ---
 
 ## 4. Decision Summary
@@ -1620,7 +1642,7 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 43 — Data-Driven Content Variety System (March 18, 2026). Strategist now owns visual direction with `visual_guidance` output (scene rotation, outfit suggestions, pose mix). Creator consumes this instead of self-managing variety. Reverted arbitrary 16-scene expansion to 5 proven scene types with 17 sub-variants. Added caption pattern library and operator reference image system.
+**Latest**: Session 43b — Cross-Midnight Publish Fix + Manual Reply Dedup (March 19, 2026). Fixed `schedule_slots.py` not passing `--date` to publisher, causing cross-midnight LaunchAgents to look for wrong day's content plan. Fixed Outbound agent recommending same manual reply tweet URLs across consecutive days (6/13 were duplicates).
 
 Session 36 files modified (4 files):
 - `agents/marc_warroom.md` — Rewrite: Agent Teams → subagents (blocking Agent tool calls)

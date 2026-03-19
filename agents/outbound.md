@@ -63,6 +63,12 @@ For each recent log, check:
 - **Skip rate**: What % of targets were skipped due to cooldowns or irrelevance? High skip
   rates (>50%) mean the target pool needs refreshing.
 - **Wasted budget**: Likes spent on accounts that never reciprocated or showed zero interest.
+- **Manual reply dedup**: Read recent outbound plans and manual reply files to build a set of already-recommended tweet URLs:
+  ```bash
+  ls -t data/outbound/outbound_plan_*_{account}.json | head -3
+  ls -t data/outbound/outbound_manual_replies_*_{account}.json | head -3
+  ```
+  Extract all `tweet_url` values from `manual_replies` arrays in these files. Store as `previously_recommended_reply_urls` — you will use this in Step 4.3 to avoid recommending the same tweets again.
 
 ### 0.2 Read New Intelligence from Other Agents
 
@@ -199,11 +205,25 @@ For each target:
    - NOT already liked (check history)
    Skip: personal tweets, controversial topics, pure retweets
 
-3. **Reply Target Selection (for manual recommendation)**: Pick ONE tweet for a manual reply recommendation. Criteria:
-   - Topically relevant to our niche
-   - Recent (within 24h preferred)
+3. **Reply Target Selection (for manual recommendation)**: Pick **2-3 tweets per target** for manual reply recommendations.
+   The goal is **10-15 total manual reply recommendations per outbound run** — replies are the #1 growth lever
+   (a single reply to @katekarsyn generated 2,823 impressions — more than any original post).
+
+   **DEDUP (MANDATORY)**: Check each candidate tweet_url against `previously_recommended_reply_urls` (built in Step 0.1). NEVER recommend a tweet that was already in any `manual_replies` array from the last 3 days of outbound plans or manual reply files. The operator has already seen (and likely replied to) those tweets — recommending them again wastes their time.
+
+   Criteria per tweet:
+   - **NOT in `previously_recommended_reply_urls`** (dedup — checked FIRST, before other criteria)
+   - Topically relevant to our niche (beauty, lifestyle, fashion, AI art)
+   - Recent (within 24h preferred, 48h acceptable for high-engagement posts)
    - Has a natural conversation entry point
    - Not a retweet or quote-tweet of someone else
+   - Higher engagement posts preferred (our reply gets more visibility)
+
+   **To reach 10-15 replies**: Don't limit yourself to the strategy's `target_accounts`. Also scan:
+   - Top competitors from `config/competitors.json` (especially Tier 1: @katekarsyn, @leahyunaxo, @imrubyreid, @IsabellaCruz_47)
+   - Accounts from Scout's `new_accounts_discovered` with high engagement
+   - Trending posts from the scout report
+   - Fetch recent tweets from 8-10 accounts total to have enough reply candidates
 
 4. **Contextual Reply Crafting (for manual recommendation)**: Write a reply that:
    - References something specific in the tweet's content
@@ -211,6 +231,7 @@ For each target:
    - Feels genuine and conversational (not bot-like)
    - Does NOT start with `@` (operator adds the @mention when posting manually)
    - 1-2 sentences, under 200 characters
+   - Vary reply styles: mix compliments, questions, observations, humor — don't use the same template
    - This reply will NOT be posted via API — it goes into `manual_replies` for the operator
 
 5. **Follow Decision**: If a briefing provides a scoring system, follow only targets at or above
@@ -250,8 +271,9 @@ Write `data/outbound/outbound_plan_{YYYYMMDD}_{account}.json`:
     "planned_likes": 9,
     "planned_replies": 0,
     "planned_follows": 2,
-    "manual_replies_recommended": 3,
-    "budget_remaining": {"likes": 11, "follows": 1}
+    "manual_replies_recommended": 12,
+    "budget_remaining": {"likes": 11, "follows": 1},
+    "note_replies": "planned_replies is API replies (always 0 — blocked for new accounts). manual_replies_recommended is operator-posted replies (target: 10-15/run)."
   },
   "targets": [
     {
@@ -386,15 +408,16 @@ Over time, this builds your institutional knowledge about what works for each ac
 ## Validation Rules
 
 1. `account` matches the invocation parameter
-2. `safety_summary` is present with all fields, `planned_replies` MUST be 0
+2. `safety_summary` is present with all fields. `planned_replies` MUST be 0 (API replies permanently disabled). `manual_replies_recommended` MUST be 10-15 (operator-posted replies — the #1 growth lever).
 3. Each target has `handle` and either actions or `skip: true`
 4. Every non-skipped target has a `safety_check` section
 5. `tweets_to_like` contains valid tweet IDs (from fetched data, not from history)
-6. `manual_replies` array is present at top level (may be empty if no good reply targets found)
+6. `manual_replies` array is present at top level with **10-15 entries** (target). Fewer than 8 is a failure — scan more accounts. May be fewer only if there are genuinely no suitable tweets in the last 48h.
 7. Each `manual_replies` entry has `handle`, `tweet_url`, `reply_text`, `reasoning` — `reply_text` does NOT start with `@`
-8. Language matches account (EN = English replies for EN, JP = Japanese replies for JP)
-9. No `follow: true` for any target where `safety_check.already_followed` is true
-10. Total planned actions within safety margins from outbound_rules.json (replies always 0 — manual only)
+8. **DEDUP — No repeated reply targets**: No `tweet_url` in `manual_replies` may appear in any outbound plan or manual replies file from the last 3 days for the same account.
+9. Language matches account (EN = English replies for EN, JP = Japanese replies for JP)
+10. No `follow: true` for any target where `safety_check.already_followed` is true
+11. Total planned actions within safety margins from outbound_rules.json (replies always 0 — manual only)
 
 ## Format Rules
 Output ONLY valid JSON — no markdown fences, no commentary. First character `{`, last character `}`.
