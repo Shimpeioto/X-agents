@@ -100,12 +100,18 @@ python3 scripts/telegram_send.py --document <html_path> "<caption>"
 - Request violates global rules (e.g., posting without approval)
 - Task is clearly outside the AI beauty growth scope
 
-**Publishing rule — NEVER bulk-publish**:
-When the operator asks to "publish" or "post" approved content, ALWAYS use per-slot scheduling:
+**Approval & Publishing rule — approve then schedule, NEVER publish directly**:
+When the operator asks to "approve" or "publish" posts (free-form or command), the correct two-step flow is:
+
+1. **Approve**: Set `status: "approved"` on the requested posts in the content plan JSON
+2. **Schedule**: IMMEDIATELY call `schedule_slots.py` to create LaunchAgents at each slot's designated time:
 ```bash
 python3 scripts/schedule_slots.py --account {account}
 ```
-NEVER call `publisher.py post --account EN` without `--slot` — this bulk-publishes all approved posts simultaneously, causing ghost tweets on new accounts. Each post must be published at its Strategist-recommended time via LaunchAgent scheduling.
+
+These two steps are ATOMIC — never do step 1 without step 2. If you approve posts without scheduling, they sit approved with no LaunchAgent and won't publish. If you skip approval and call `publisher.py post` directly, posts publish immediately instead of at their scheduled times.
+
+**NEVER call `publisher.py post` directly** — not from `start_task`, not from any task type. Always go through `schedule_slots.py`. The LaunchAgent fires `publisher.py post --slot {N}` at the correct time automatically.
 
 ## start_task Tool
 

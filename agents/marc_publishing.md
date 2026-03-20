@@ -18,6 +18,8 @@ Content plans must have approved posts (`status == "approved"`). Check active ac
 
 If no approved posts exist for any active account: log and **STOP**.
 
+**CRITICAL — Approve then schedule, NEVER publish directly**: If posts are still `"draft"`, you may approve them (set `status: "approved"` in the JSON) BUT you MUST immediately follow with `python3 scripts/schedule_slots.py --account {account}` to create LaunchAgents. These two steps are atomic — never approve without scheduling. NEVER call `publisher.py post` directly — always go through `schedule_slots.py`, which creates LaunchAgents that fire `publisher.py post --slot {N}` at each slot's designated time.
+
 ## Execution
 
 ### 1. Schedule Approved Posts at Slot Times (Active Accounts Only)

@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 20, 2026 (Session 43c: Require image for publish + image compression workflow)
+**Last updated**: March 21, 2026 (Session 44: Fix approval-bypasses-scheduling bug — enforce approve+schedule atomicity)
 
 ---
 
@@ -1249,6 +1249,24 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 - `scripts/publisher.py` — Image-required guard after `find_media()`, skip if no image unless `--force`
 - `docs/context.md` — Session 43c entry
 
+### Session 44 — Fix Approval-Bypasses-Scheduling Bug (March 21, 2026)
+
+**Problem**: When the operator sent a free-form message like "approve slot 1" to conversational Marc (instead of using the `/approve` Telegram command), Marc treated it as a publishing task. Marc approved the post by editing the content plan JSON directly and then called `publisher.py post` — publishing the post immediately instead of scheduling it at the Strategist-recommended time via LaunchAgent.
+
+**Evidence**: Slot 1 of the Mar 20 content plan was scheduled for 13:00 UTC (22:00 JST) but was published at 12:53 UTC (21:53 JST) — 7 minutes early — because Marc called `publisher.py post` directly instead of going through `schedule_slots.py`.
+
+**Root cause**: The `/approve` Telegram command performs two atomic steps: (1) set `status: "approved"`, (2) call `schedule_slots.py` to create LaunchAgents at each slot's designated time. When Marc handled approval via the execution layer, he did step 1 (approve) but skipped step 2 (schedule) and went straight to `publisher.py post` (immediate publish).
+
+**Fix**: Enforced approve+schedule atomicity across all agent instruction files. Marc may approve posts (set status in JSON), but MUST immediately follow with `schedule_slots.py`. Direct `publisher.py post` calls are banned — only LaunchAgents (created by `schedule_slots.py`) may call `publisher.py post --slot {N}` at the designated time.
+
+**Decision 26**: Approval and scheduling are atomic — never approve without scheduling. Never call `publisher.py post` directly. Always go through `schedule_slots.py`, which creates LaunchAgents that fire at each slot's Strategist-recommended time.
+
+**Files modified** (4):
+- `agents/marc.md` — Added "Approval & Publishing Boundary" section: approve+schedule atomicity, never call publisher.py directly
+- `agents/marc_conversation.md` — Updated publishing rule: approve then schedule, never publish directly
+- `agents/marc_publishing.md` — Added guard: approval requires immediate schedule_slots.py call
+- `config/global_rules.md` — Added rule: approval and scheduling are atomic (learned 2026-03-21)
+
 ---
 
 ## 4. Decision Summary
@@ -1280,6 +1298,7 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 | D15 | Marc is sole writer of `strategy_current.json` | Prevents unvalidated Strategist output from corrupting the current strategy file |
 | D17 | Outbound limits match global rules ceiling | Conservative margins below global max leave growth value unused with no safety benefit |
 | D18 | Morning war room output feeds into same-day pipeline | Any PDCA discussion that doesn't reach the agents it influences is wasted compute |
+| D26 | Approval and scheduling are atomic — always approve then schedule_slots.py | Marc bypassing schedule_slots.py caused immediate publish instead of slot-timed publish (Session 44) |
 
 ---
 
@@ -1656,7 +1675,7 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 43c — Require Image for Publish (March 19-20, 2026). Publisher now skips posts without images (keeps as "approved" for retry) instead of silently posting text-only. Pre-compressed oversized PNG images to JPEG via macOS `sips` before publish.
+**Latest**: Session 44 — Fix Approval-Bypasses-Scheduling Bug (March 21, 2026). Enforced approve+schedule atomicity: Marc may approve posts but MUST immediately call `schedule_slots.py`. Direct `publisher.py post` calls banned — only LaunchAgents fire at slot times.
 
 Session 36 files modified (4 files):
 - `agents/marc_warroom.md` — Rewrite: Agent Teams → subagents (blocking Agent tool calls)
