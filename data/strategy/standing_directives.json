@@ -1,0 +1,99 @@
+{
+  "version": 2,
+  "last_updated": "2026-03-21T22:45:00+09:00",
+  "updated_by": "Marc — Evening War Room 2026-03-21",
+  "description": "Persistent directives accumulated from war rooms, strategy meetings, and operator decisions. All agents read this file before each run. Marc updates it after each war room. Directives remain active until explicitly resolved or expired.",
+  "directives": [
+    {
+      "id": "DIR-001",
+      "created": "2026-03-21",
+      "type": "target_pool",
+      "status": "active",
+      "priority": "critical",
+      "directive": "Scout must sample followers of Tier 1 accounts (@katekarsyn, @imrubyreid, @leahyunaxo) for 15-20 fresh beauty-relevant outbound targets. This is BLOCKING follow budget deployment.",
+      "rationale": "Target pool exhausted — 63/63 competitors followed. Follow budget (3/day) structurally blocked for 4+ days. Recommended in 4 consecutive war rooms (Mar 18-21) but never executed. Elevated to CRITICAL priority.",
+      "assigned_to": "scout",
+      "expires": null,
+      "resolved_date": null,
+      "resolution": null
+    },
+    {
+      "id": "DIR-002",
+      "created": "2026-03-21",
+      "type": "content_mix",
+      "status": "active",
+      "priority": "high",
+      "directive": "Grok_interactive hard deadline: Mar 22. If the grok slot does NOT publish on Mar 22, cut allocation from 20% to 10% and redistribute to image_showcase (making it 45%). No further extensions.",
+      "rationale": "Original deadline was Mar 21 (from morning war room). Extended by 1 day per evening war room consensus. 1 clean data point after 14 days of 20% allocation. Both Analyst and Strategist agreed — performance gate must trigger. Categories must earn allocation with data.",
+      "assigned_to": "strategist",
+      "expires": "2026-03-22",
+      "resolved_date": null,
+      "resolution": null
+    },
+    {
+      "id": "DIR-003",
+      "created": "2026-03-21",
+      "type": "outbound",
+      "status": "active",
+      "priority": "high",
+      "directive": "Deploy full daily like budget every day. Minimum 80% floor (20/25 likes). When Tier 1 targets are cooldown-blocked, expand to secondary targets from follower_targets files or competitors.json rather than stopping. Zero tolerance for sub-80% deployment.",
+      "rationale": "Like budget utilization: Mar 20 = 24% (6/25), Mar 21 = 44% (11/25). Every unused like is a wasted growth touchpoint. Updated from original directive to add explicit 80% floor.",
+      "assigned_to": "outbound",
+      "expires": null,
+      "resolved_date": null,
+      "resolution": null
+    },
+    {
+      "id": "DIR-004",
+      "created": "2026-03-21",
+      "type": "reply_strategy",
+      "status": "active",
+      "priority": "high",
+      "directive": "Manual replies to Tier 1 targets (@katekarsyn, @imrubyreid, @leahyunaxo, @IsabellaCruz_47) are the #1 growth lever. Outbound must prioritize these in manual_replies recommendations. Target: 3-5 Tier 1 replies per day.",
+      "rationale": "Single reply to @katekarsyn generated 2,823 impressions (24% of all account impressions). 7-14x more impactful than original posts.",
+      "assigned_to": "outbound",
+      "expires": null,
+      "resolved_date": null,
+      "resolution": null
+    },
+    {
+      "id": "DIR-005",
+      "created": "2026-03-21",
+      "type": "engagement",
+      "status": "active",
+      "priority": "low",
+      "directive": "Engage @ai_hiyo_ (388K followers) with dedicated reply engagement, not just likes. Highest untapped potential in the market.",
+      "rationale": "@ai_hiyo_ posts with 122K impressions. Per-post conversion 60x worse than @sessypuuh — needs investigation and dedicated engagement.",
+      "assigned_to": "outbound",
+      "expires": null,
+      "resolved_date": null,
+      "resolution": null
+    },
+    {
+      "id": "DIR-006",
+      "created": "2026-03-21",
+      "type": "outbound",
+      "status": "active",
+      "priority": "high",
+      "directive": "Tier 1 outbound rotation schedule: Mon/Wed/Fri target @katekarsyn, @imrubyreid, @leahyunaxo (rotate one primary per day). Tue/Thu/Sat/Sun use secondary pool + Scout follower targets. Prevents cooldown cascade from targeting all Tier 1 on same day.",
+      "rationale": "Mar 19 sweep targeted all Tier 1 on same day, creating 2-day cooldown cascade that left Tier 1 unengaged Mar 20-21. Rotation ensures continuous Tier 1 contact. Consensus from evening war room cross-examination.",
+      "assigned_to": "outbound",
+      "expires": null,
+      "resolved_date": null,
+      "resolution": null
+    },
+    {
+      "id": "DIR-007",
+      "created": "2026-03-21",
+      "type": "posting_time",
+      "status": "active",
+      "priority": "medium",
+      "directive": "Slot 1 = 'Tonight Prep' priority. Marc sends Slot 1 image prompt to operator by 20:00 JST the evening before with explicit ask: 'prepare this 1 image before bed.' Other slots standard morning prep. Goal: at least 1/4 pipeline posts published per day.",
+      "rationale": "Pipeline execution: Mar 20 = 1/4, Mar 21 = 0/4. Image supply is the bottleneck. Behavioral nudge (1 specific ask) more likely to break stall than expecting 4 images by morning. Both Analyst and Strategist agreed: keep 4 slots, change workflow.",
+      "assigned_to": "creator",
+      "expires": null,
+      "resolved_date": null,
+      "resolution": null
+    }
+  ]
+}

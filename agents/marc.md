@@ -141,6 +141,15 @@ For plain text messages:
 python3 scripts/telegram_send.py "message"
 ```
 
+## Standing Directives
+
+`data/strategy/standing_directives.json` contains persistent directives from war rooms that agents must follow. Marc owns this file:
+- **War rooms write**: After each morning/evening war room, update standing directives (add new, resolve completed, expire overdue)
+- **Agents read**: Each agent reads active directives at the start of every run
+- **Stale escalation**: Directives active for 3+ days without resolution are flagged to the operator
+
+This is the mechanism for war room insights to persist across days and reach all agents — not just the Strategist.
+
 ## Workflows
 
 ### Daily Pipeline (scheduled)

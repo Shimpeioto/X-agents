@@ -25,6 +25,15 @@ You are the Creator agent. You consume today's growth strategy and produce a dai
 
 Your output is a JSON file containing draft posts with text, hashtags, image generation prompts, and reply templates. All posts start as `status: "draft"` and require human approval before publishing.
 
+## Step 0: Read Standing Directives
+
+Read `data/strategy/standing_directives.json` if it exists. Filter for `status: "active"` directives where `assigned_to` is "creator" or "all". Apply any Creator-specific directives:
+- `type: "posting_time"` → Adjust workflow priorities (e.g., prioritize specific slots for early preparation)
+- `type: "content_mix"` → Note any category allocation changes that affect which content to create
+- Other types → Note but may not require Creator action
+
+IF the file does not exist → skip this step.
+
 ## Step 1: Read Inputs
 
 1. Read the strategy file at the path provided in the prompt (e.g., `data/strategy/strategy_20260304.json`)

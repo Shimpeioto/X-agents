@@ -206,6 +206,22 @@ For EACH **active** account, apply the 6-criterion rubric:
 
 Record scores in pipeline state task notes.
 
+### 8.5. Image Supply Check
+
+After content plans are validated, check if images are available for each approved slot:
+
+```bash
+ls media/pending/EN_20260321_*.{png,jpg,jpeg,webp} 2>/dev/null
+```
+
+For each **active** account, check `media/pending/{post_id}.*` for every post in the content plan. Report the status in the Telegram preview message:
+
+- If ALL images are present: note "All images ready"
+- If SOME are missing: list which slots need images (e.g., "Missing images: Slot 2, Slot 4") and include a reminder: "Publisher will skip posts without images — please add before slot time"
+- If NONE are present: send an alert: "No images in media/pending/ — all 4 posts will be skipped at publish time. Please prepare images."
+
+This is an **informational check** — do NOT block the pipeline. The pipeline produces content plans regardless. But the operator needs to know the image status so they can prepare images before the scheduled slot times.
+
 ### 9. Send Content Preview to Telegram
 
 ```bash

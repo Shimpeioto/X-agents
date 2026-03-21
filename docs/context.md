@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 21, 2026 (Session 44: Fix approval-bypasses-scheduling bug — enforce approve+schedule atomicity)
+**Last updated**: March 22, 2026 (Session 44c: Self-improving agents — standing directives system)
 
 ---
 
@@ -1267,6 +1267,100 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 - `agents/marc_publishing.md` — Added guard: approval requires immediate schedule_slots.py call
 - `config/global_rules.md` — Added rule: approval and scheduling are atomic (learned 2026-03-21)
 
+### Session 44b — Claude Code Channels Evaluation (March 21, 2026)
+
+**Context**: Anthropic officially launched Claude Code Channels (research preview, v2.1.80+), which allows controlling a Claude Code session through MCP server plugins for Telegram and Discord. Since our system already has a custom Telegram integration (`telegram_bot.py`, 910+ lines), evaluated whether Channels could replace it.
+
+**What Channels Are**: MCP server plugins that push messages into a running Claude Code session. Claude reads the message and replies back through the same channel — a chat bridge between Telegram/Discord and a Claude Code terminal. Setup: install plugin via `/plugin install telegram@claude-plugins-official`, configure bot token, restart with `claude --channels plugin:telegram@claude-plugins-official`, pair via code.
+
+**Comparison**:
+
+| Aspect | Our System (`telegram_bot.py`) | Claude Code Channels |
+|---|---|---|
+| Architecture | Custom Python daemon with 2-layer design: conversational `claude -p` (Sonnet) + Agent Teams execution (Opus) | MCP plugin pushing messages into a running `claude` session |
+| Always-on | Bot runs as standalone daemon (independent process) | Requires Claude Code session to be open — session dies = bridge dies |
+| Custom commands | 13 commands (`/approve`, `/publish`, `/pipeline`, `/status`, etc.) with Python logic | No custom commands — everything through Claude's reasoning |
+| Atomic operations | `/approve` does approve + schedule in Python (guaranteed together) | Claude must reason about atomicity every time (proven unreliable — Session 44) |
+| Cost control | Conversational layer uses Sonnet (cheap, fast ~37s); execution uses Opus only when needed | Single model for everything — no per-layer model selection |
+| Image handling | Custom `handle_photo` with vision routing | Not documented for Channels |
+| URL enrichment | Custom `fetch_url.py` integration | Claude has native WebFetch |
+| Auth | Custom `AUTHORIZED_CHAT_ID` check | Pairing code + allowlist (built-in) |
+
+**Why our system is better (for now)**:
+1. **Atomic operations**: `/approve` does approve + schedule in Python code — guaranteed to happen together. With Channels, Claude would need to reason about this every time, and Session 44 proved Claude gets this wrong.
+2. **Always-on without a terminal**: Our bot runs as a daemon. Channels require a Claude Code session to be running.
+3. **Custom command logic**: 13 commands with specific Python implementations. Channels have zero custom commands — everything goes through Claude's reasoning, which is slower and less reliable for mechanical operations.
+4. **Cost efficiency**: Conversational layer uses Sonnet; execution layer uses Opus only when needed. Channels use whatever model the session is configured for.
+5. **Separation of concerns**: Mechanical operations (approve, schedule, rate limit tracking) stay in Python. Only reasoning tasks go to Claude.
+
+**Where Channels could be better**: Simpler setup (no 910-line custom bot), native Claude Code context (full access to project files without spawning processes), no conversation management code, and future Anthropic improvements.
+
+**Decision 27**: Keep our current custom Telegram bot system. Claude Code Channels are designed for a different use case — pushing events into a developer's active session (CI alerts, monitoring). Our system is an autonomous agent pipeline that needs always-on operation, atomic mechanical operations, custom command routing, per-layer model selection, and LaunchAgent scheduling integration. Worth re-evaluating when Channels exit research preview and add custom command hooks or persistent daemon mode.
+
+**Files modified** (1):
+- `docs/context.md` — Session 44b entry + Decision 27
+
+### Session 44c — Self-Improving Agents: Standing Directives System (March 21-22, 2026)
+
+**Problem**: War rooms produced insights daily (consensus points, recommendations, performance gates, target rotation rules), but those insights were trapped in per-day JSON files. Only the Strategist read yesterday's `strategy_feedback`. Scout, Outbound, Creator, and Analyst never saw accumulated learnings. Recommendations that required multi-day action (like "expand target pool") were repeated in 4 consecutive war rooms (Mar 18-21) but never executed — because no agent was instructed to read them.
+
+**Root cause**: The PDCA loop had a gap between "Check" (war room produces insights) and "Act" (agents apply insights). The `strategy_feedback_{date}.json` bridge only reached the Strategist, and only for typed recommendations (content_mix, ab_test, posting_time, outbound_target). New directive types (target pool expansion, performance-gated allocation, follow ratio thresholds, budget deployment floors, engagement rotation schedules) had no delivery mechanism to the agents that needed to act on them.
+
+**Solution — Standing Directives System**: A persistent `data/strategy/standing_directives.json` file that accumulates directives across days. War rooms write; all agents read.
+
+**Architecture**:
+```
+War Room (morning/evening)
+  → Discussion produces consensus + recommendations
+  → Marc writes standing_directives.json (new Step 8)
+  → Next day's agents read directives at startup
+  → Agents execute: Scout samples followers, Outbound deploys full budget, Strategist gates grok
+  → Results feed back into next war room
+  → War room resolves completed directives, adds new ones
+  → Cycle continues — agents self-improve
+```
+
+**Directive schema**: Each directive has `id`, `created`, `type`, `status` (active/resolved/expired), `priority`, `directive`, `rationale`, `assigned_to` (specific agent), `expires` (optional deadline), `resolved_date`, `resolution`.
+
+**Types**: `content_mix`, `target_pool`, `outbound`, `reply_strategy`, `engagement`, `posting_time`, `ab_test`.
+
+**Lifecycle**:
+- **Created** by Marc after war room consensus/recommendation
+- **Read** by assigned agent at startup of every daily run
+- **Resolved** by Marc when the required action is confirmed complete
+- **Expired** when deadline passes — Marc applies fallback action and creates a new directive
+- **Escalated** to operator via Telegram when active 3+ days without resolution
+
+**Agent integration**:
+- **Scout** (Step 0): Reads directives before data collection. Executes `target_pool` directives via new Follower Sampling Mode — samples followers of Tier 1 accounts, filters by beauty relevance, outputs to `data/scout/follower_targets_*.json`.
+- **Strategist** (Step 1.7): Reads directives. Applies `content_mix` gates (performance-based allocation with deadlines), `follow_ratio` threshold (pause/resume follows based on following/followers ratio from `outbound_rules.json`), `target_pool` flags for key_insights.
+- **Creator** (Step 0): Reads directives. Applies `posting_time` workflow changes (e.g., prioritize slot 1 for evening prep).
+- **Outbound** (Step 0.2.7): Reads directives. Applies `outbound` budget floors (80% minimum deployment), `reply_strategy` Tier 1 prioritization, `engagement` specific targets, rotation schedules. Step 2b: follow ratio check. Step 5: expand to secondary targets when primary pool exhausted.
+- **Marc War Room** (Step 8, both morning + evening): Writes new directives from consensus, resolves completed ones, expires overdue ones with fallback actions, escalates stale blockers.
+
+**Additional improvements from morning briefing feedback**:
+- `config/outbound_rules.json`: `follow_cooldown_days` 7→5, added `follow_ratio.pause_threshold: 1.2`
+- Scout: New Follower Sampling Mode for discovering fresh outbound targets from competitor follower audiences
+- Strategist: Performance-gated allocation rule — categories with <3 data points after 7+ days can be cut below core strategy minimum per deadline directives
+- Outbound: Budget expansion to secondary targets when primary pool is cooldown-blocked (never leave likes unused)
+- Pipeline: Image supply check (Step 8.5) — reports missing images to operator via Telegram after content plan validation
+
+**Decision 28**: Agents must be self-improving systems, not static executors. War room insights must persist across days via standing directives and reach ALL agents — not just the Strategist. The standing directives file is the mechanism for autonomous improvement: war rooms write, agents read, results feed back, and the cycle compounds.
+
+**Files created** (1):
+- `data/strategy/standing_directives.json` — 5 initial directives (later updated to 7 by evening war room)
+
+**Files modified** (9):
+- `agents/marc.md` — Added "Standing Directives" section
+- `agents/marc_warroom.md` — Added Step 8 to both morning + evening war rooms (write/update/resolve/expire directives)
+- `agents/scout.md` — Added Follower Sampling Mode + Step 0 reads directives
+- `agents/strategist.md` — Added Step 1.7 reads directives, performance-gated allocation, follow ratio gate
+- `agents/creator.md` — Added Step 0 reads directives
+- `agents/outbound.md` — Step 0.2.7 reads directives, Step 2b follow ratio check, Step 5 budget expansion
+- `agents/marc_pipeline.md` — Added Step 8.5 image supply check
+- `config/outbound_rules.json` — `follow_cooldown_days` 7→5, added `follow_ratio` section
+- `CLAUDE.md` — Added standing directives reference
+
 ---
 
 ## 4. Decision Summary
@@ -1299,6 +1393,8 @@ Pipeline (06:00) → Strategist applies BOTH → strategy → Creator → Outbou
 | D17 | Outbound limits match global rules ceiling | Conservative margins below global max leave growth value unused with no safety benefit |
 | D18 | Morning war room output feeds into same-day pipeline | Any PDCA discussion that doesn't reach the agents it influences is wasted compute |
 | D26 | Approval and scheduling are atomic — always approve then schedule_slots.py | Marc bypassing schedule_slots.py caused immediate publish instead of slot-timed publish (Session 44) |
+| D27 | Keep custom Telegram bot over Claude Code Channels | Channels lack always-on daemon, atomic operations, custom commands, per-layer model selection (Session 44b) |
+| D28 | Standing directives for self-improving agents | War room insights must persist across days and reach all agents — not just the Strategist. Directives accumulate, expire, and escalate autonomously (Session 44c) |
 
 ---
 
@@ -1675,7 +1771,7 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 44 — Fix Approval-Bypasses-Scheduling Bug (March 21, 2026). Enforced approve+schedule atomicity: Marc may approve posts but MUST immediately call `schedule_slots.py`. Direct `publisher.py post` calls banned — only LaunchAgents fire at slot times.
+**Latest**: Session 44c — Self-Improving Agents (March 22, 2026). Standing directives system: `data/strategy/standing_directives.json` persists war room insights across days. All agents read directives at startup; Marc updates after each war room. Includes Scout follower sampling, performance-gated allocation, follow ratio threshold, budget deployment floors, and image supply checks.
 
 Session 36 files modified (4 files):
 - `agents/marc_warroom.md` — Rewrite: Agent Teams → subagents (blocking Agent tool calls)

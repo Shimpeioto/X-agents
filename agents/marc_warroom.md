@@ -368,6 +368,37 @@ python3 scripts/generate_html_report.py generic data/metrics/morning_briefing_{Y
 python3 scripts/telegram_send.py --document data/metrics/morning_briefing_{YYYYMMDD}.html "Morning Briefing — {YYYY-MM-DD}"
 ```
 
+### 8. Update Standing Directives
+
+Read `data/strategy/standing_directives.json` and update it based on war room outcomes:
+
+1. **Add new directives**: For each consensus point or high-confidence recommendation that requires agent action beyond today, create a new directive with a unique `id` (DIR-NNN), `type`, `assigned_to`, and `priority`.
+
+2. **Resolve completed directives**: If a previous directive has been fulfilled (e.g., "Scout sampled followers" and `follower_targets_*.json` now exists), set `status: "resolved"`, add `resolved_date` and `resolution`.
+
+3. **Expire overdue directives**: If a directive has an `expires` date that has passed and the condition was not met, apply the fallback (e.g., reduce grok to 10%) by creating a NEW high-confidence directive with the fallback action, then set the original to `status: "expired"`.
+
+4. **Escalate stale directives**: If a directive has been `active` for 3+ days without resolution, include it in the Telegram message as a stale blocker for the operator.
+
+Directive schema:
+```json
+{
+  "id": "DIR-NNN",
+  "created": "YYYY-MM-DD",
+  "type": "content_mix|target_pool|outbound|reply_strategy|engagement|posting_time|ab_test",
+  "status": "active|resolved|expired",
+  "priority": "high|medium|low",
+  "directive": "What agents should do",
+  "rationale": "Why — data-backed reasoning from the war room discussion",
+  "assigned_to": "scout|strategist|outbound|analyst|creator|all",
+  "expires": "YYYY-MM-DD or null",
+  "resolved_date": "YYYY-MM-DD or null",
+  "resolution": "How it was resolved, or null"
+}
+```
+
+Write the updated file. This is the key mechanism for war room insights to **persist across days** and reach the agents they're assigned to. Without this step, consensus points and recommendations are trapped in daily JSON files that only the Strategist reads.
+
 ---
 
 ## Evening War Room (22:00 JST)
@@ -674,6 +705,16 @@ python3 scripts/validate.py strategy_feedback data/strategy/strategy_feedback_{Y
    python3 scripts/generate_html_report.py daily_report data/metrics/daily_report_{YYYYMMDD}.json
    python3 scripts/telegram_send.py --document data/metrics/daily_report_{YYYYMMDD}.html "Daily Report — {YYYY-MM-DD}"
    ```
+
+### 8. Update Standing Directives
+
+Same as Morning War Room Step 8 — read `data/strategy/standing_directives.json`, then:
+1. **Add new directives** from evening consensus/recommendations that require multi-day agent action
+2. **Resolve completed directives** where the required action has been taken
+3. **Expire overdue directives** and create fallback directives if conditions weren't met
+4. **Escalate stale directives** (active 3+ days) in the Telegram message
+
+The evening war room is especially important for standing directives because `strategy_feedback` only reaches the Strategist — standing directives reach ALL agents (Scout, Outbound, Creator, Analyst).
 
 ---
 

@@ -103,6 +103,14 @@ Check what other agents have produced since your last run:
    - Read your accumulated learnings from previous runs
    - What patterns have you identified? What rules have you added?
 
+7. **Standing directives** (`data/strategy/standing_directives.json`):
+   - Read all `status: "active"` directives where `assigned_to` is "outbound" or "all"
+   - `type: "outbound"` → Apply to today's budget deployment strategy (e.g., "deploy full like budget")
+   - `type: "reply_strategy"` → Apply to manual_replies target prioritization (e.g., "prioritize Tier 1 replies")
+   - `type: "engagement"` → Include specific accounts as high-priority targets
+   - `type: "target_pool"` → Check if Scout has produced `data/scout/follower_targets_*.json` files. If yes, use as fresh target source. If no, flag in `proposals_for_marc` that Scout follower sampling is still pending.
+   - Standing directives override strategy defaults when more specific.
+
 ### 0.3 Adaptive Reasoning
 
 Based on your review, decide what to change TODAY. Consider:
@@ -148,7 +156,8 @@ After Step 0, read the operational inputs for today's execution:
 1. Briefing targets (operator-directed, from Step 0.2.5) — always takes precedence
 2. Journal-informed targets (your own learnings from Step 0.2.6) — targets matching proven effective traits
 3. Strategy targets (Strategist's `target_accounts`) — baseline from daily strategy
-4. Scout discoveries (new accounts from Step 0.2.1) — fresh targets not yet in any list
+4. Scout follower targets (`data/scout/follower_targets_*.json`) — fresh beauty-relevant accounts sampled from competitor followers
+5. Scout discoveries (new accounts from Step 0.2.1) — fresh targets not yet in any list
 
 ## Step 2: Safety Reasoning (MANDATORY)
 
@@ -159,10 +168,16 @@ Before planning ANY engagement, reason about safety using the history output:
    array. NEVER plan a follow for an account in this list. Re-following wastes budget and looks bot-like.
 
 2. **Cooldown check**: For each target from the strategy:
-   - Followed within `follow_cooldown_days` (7) → do NOT follow again
+   - Followed within `follow_cooldown_days` (5) → do NOT follow again
    - Liked within `like_same_account_cooldown_days` (2) → engage cautiously, prefer other targets
    - Engaged at all within `max_repeat_within_days` (3) → prefer other targets first
    - (Replies are manual-only — no API cooldown needed, but avoid recommending replies to the same account within 3 days)
+
+2b. **Follow ratio check**: Read `data/outbound/following_{account}.json` for following count
+   and check strategy or metrics for current follower count. If `following / followers > 1.2`
+   (from `config/outbound_rules.json` `follow_ratio.pause_threshold`), set all follow actions
+   to false for today regardless of strategy's `daily_follows`. Note in `safety_summary` why
+   follows are paused. Resume when ratio drops below the threshold.
 
 3. **Volume budget**: Check today's usage (from history). Remaining = safety margin − today's used.
    Plan within remaining budget only.
@@ -170,9 +185,13 @@ Before planning ANY engagement, reason about safety using the history output:
 4. **Tweet deduplication**: History lists already-liked tweet IDs. NEVER include an
    already-liked tweet in `tweets_to_like`.
 
-5. **If all targets have cooldown conflicts**: Report to Marc that targets need rotation.
-   Do NOT force engagement on cooled-down accounts. It's better to skip outbound for a day
-   than to create a bot pattern.
+5. **If primary targets have cooldown conflicts**: Do NOT force engagement on cooled-down accounts.
+   Instead, **expand to secondary targets** to deploy the full like budget:
+   - Read `data/scout/follower_targets_*.json` (if exists) for fresh targets from Scout's follower sampling
+   - Fetch recent tweets from Tier 1 competitor accounts NOT in the strategy's `target_accounts` (draw from `config/competitors.json`)
+   - Pick accounts with high engagement in our niche (beauty, lifestyle, fashion)
+   - If no viable secondary targets exist after expansion: report to Marc that the target pool is exhausted and Scout needs to run follower sampling
+   - **Goal**: Deploy the full daily like budget (e.g., 25/25 or 30/30) every day. Leaving likes unused is wasted growth opportunity. Only stop if genuinely zero viable targets exist.
 
 Include your safety reasoning in each target's `safety_check` field.
 

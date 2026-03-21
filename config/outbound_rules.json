@@ -15,7 +15,7 @@
     }
   },
   "cooldowns": {
-    "follow_cooldown_days": 7,
+    "follow_cooldown_days": 5,
     "reply_cooldown_days": 3,
     "like_same_account_cooldown_days": 2,
     "min_delay_seconds": 30,
@@ -24,5 +24,9 @@
   "target_rotation": {
     "max_repeat_within_days": 3,
     "prefer_accounts_not_engaged_recently": true
+  },
+  "follow_ratio": {
+    "pause_threshold": 1.2,
+    "note": "Pause follows when following/followers ratio exceeds this threshold. Resume when ratio drops below. Prevents bot-signal detection."
   }
 }

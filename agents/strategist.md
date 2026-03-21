@@ -80,6 +80,7 @@ From the Scout report, pay attention to:
    - `confidence: "medium"` → Apply conservatively. Shift content_mix by half the recommended amount (2-5%).
    - `confidence: "low"` → Note in `key_insights` but do NOT change content_mix.
    - **Core strategy bounds are inviolable**: Never move a category below its minimum or above its maximum. EN `grok_interactive` must stay 15-30%, JP `grok_interactive` must stay 20-35%. Total must still equal 100.
+   - **Performance-gated allocation**: If a category has fewer than 3 measured data points after 7+ days of allocation, check the morning briefing and strategy feedback for deadline-triggered reallocation instructions (e.g., "cut grok to 10% if no data by date X"). Apply these as high-confidence adjustments. Categories must earn their allocation with data — unmeasured categories should not hold budget indefinitely. When reducing a category below its core strategy minimum due to a performance gate, note this in `key_insights` with the data justification and redistribute to the highest-performing category.
 
 2. **A/B test conclusions** (`type: "ab_test"`):
    - If `ab_test_evaluation.status == "concluded"` and `confidence == "high"` → Adopt the winner as the new default. Design a NEW A/B test on a DIFFERENT variable.
@@ -145,9 +146,22 @@ From the Scout report, pay attention to:
   - Changes to posting cadence or time slots
 - IF no meeting reports exist → skip this step.
 
-## Step 1.7: Read following list (always)
+## Step 1.7: Read standing directives (always)
 
-(Previously Step 1.6)
+- Read `data/strategy/standing_directives.json` — this file contains **persistent directives** accumulated from war rooms, strategy meetings, and operator decisions.
+- Filter to `status: "active"` directives. For each directive relevant to the Strategist (`assigned_to` is "strategist" or "all"):
+  - `type: "content_mix"` → Apply directly to today's content_mix (may override core strategy bounds if the directive has data justification, e.g., reducing grok below 15% due to performance gate).
+  - `type: "target_pool"` → Include in `key_insights` and flag if the directive requires Scout action.
+  - `type: "outbound"` → Apply to outbound_strategy section.
+  - `type: "reply_strategy"` → Inform target_accounts selection and reply_style.
+  - `type: "engagement"` → Include specific accounts in target_accounts if they match.
+- Check `expires` field — if a directive has expired and the condition was not met, apply the fallback action described in the directive (e.g., "reduce grok to 10%").
+- Directives override morning briefing/evening feedback when they are more specific.
+- IF the file does not exist → skip this step.
+
+## Step 1.8: Read following list (always)
+
+(Previously Step 1.7)
 - Read `data/outbound/following_{account}.json` for each active account (EN, JP).
 - This file contains the real list of accounts currently being followed (verified via X API by `publisher.py sync-following`).
 - Use this to ensure `target_accounts` includes enough **unfollowed** accounts to fill the follow budget (`daily_follows`).
@@ -214,9 +228,11 @@ Perform the following analysis for BOTH EN and JP accounts:
 5. **Outbound Strategy**: Set daily engagement limits WITHIN global rules:
    - `daily_likes`: max 30 per account per day
    - `daily_replies`: 0 (operator decision: no auto-replies — all replies are manual)
-   - `daily_follows`: max 5 per account per day
-   - `target_accounts`: 2-5 accounts from the competitor list to engage with
+   - `daily_follows`: max 5 per account per day — BUT check **follow ratio** first (see below)
+   - `target_accounts`: 2-5 accounts from the competitor list to engage with. When the competitor pool is exhausted (all targets cooldown-blocked), include targets from Scout's `data/scout/follower_targets_*.json` files if available.
    - `reply_style`: brief description of reply tone (used by Outbound agent for manual reply recommendations)
+
+   **Follow ratio gate**: Read `data/outbound/following_{account}.json` (count of following) and the latest account metrics or strategy for current follower count. Calculate `following / followers` ratio. If ratio exceeds `follow_ratio.pause_threshold` (1.2x) from `config/outbound_rules.json`, set `daily_follows: 0` and note in `key_insights` why follows are paused. Resume follows when ratio drops below the threshold.
 
 ### Target Rotation Rules
 
@@ -230,6 +246,7 @@ When selecting `target_accounts`, apply rotation principles:
 6. **Mix target sizes** — 1-2 larger accounts (>50K followers, for visibility) and 2-3 smaller accounts (<20K followers, for reciprocal engagement likelihood).
 7. **Skip known issues** — Accounts with >50% reply contamination in the scout report should be deprioritized.
 8. **Target count** — EN: 4/day, JP: 3/day (per `config/outbound_rules.json`).
+9. **Pool expansion** — If >50% of targets from `config/competitors.json` are cooldown-blocked (check recent outbound logs), flag in `key_insights` that Scout should run follower sampling on Tier 1 accounts (@katekarsyn, @imrubyreid, @leahyunaxo). Include any existing `data/scout/follower_targets_*.json` targets in `target_accounts` alongside competitor pool targets.
 
 6. **A/B Test**: Design ONE active test per account. Choose a variable to test (e.g., posting time, content category emphasis, caption style, Grok request type). Define two clear variants and a 3-7 day duration.
 

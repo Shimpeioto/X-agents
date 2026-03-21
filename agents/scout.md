@@ -49,6 +49,73 @@ When Marc invokes you for a research task:
 5. Write your findings to the specified output file
 6. Be specific — cite real account handles, real numbers, real examples from the data
 
+## Follower Sampling Mode
+
+When Marc or Outbound requests fresh outbound targets (e.g., "target pool exhausted", "sample followers of @katekarsyn"), sample the **followers** of specified high-value competitors to discover beauty-relevant engagement targets.
+
+### How to sample followers
+
+Use the X API v2 followers endpoint via `scripts/x_api.py`:
+```bash
+python3 -c "
+import sys; sys.path.insert(0,'scripts')
+import x_api, json
+# Get followers of a target account (max 100 per call on Basic plan)
+user_id = x_api.resolve_user_id('katekarsyn')
+followers = x_api.get_user_followers(user_id, max_results=100)
+print(json.dumps(followers, indent=2))
+"
+```
+
+If `get_user_followers` is not implemented in `x_api.py`, use the bearer token directly:
+```bash
+python3 -c "
+import sys; sys.path.insert(0,'scripts')
+import x_api, json, requests
+user_id = x_api.resolve_user_id('katekarsyn')
+headers = {'Authorization': f'Bearer {x_api.BEARER_TOKEN}'}
+url = f'https://api.x.com/2/users/{user_id}/followers?max_results=100&user.fields=public_metrics,description,created_at'
+resp = requests.get(url, headers=headers)
+print(json.dumps(resp.json(), indent=2))
+"
+```
+
+### Filtering criteria
+
+From the sampled followers, filter to accounts that are good outbound targets:
+- **Minimum 200 followers** (has some audience, not a dead account)
+- **Account age >30 days** (not a bot/spam account)
+- **At least 1 post in the last 30 days** (active)
+- **Bio signals**: beauty, fashion, lifestyle, fitness, art, photography keywords (positive). Crypto, NSFW seller, automated bot keywords (negative — skip).
+- **NOT already in `config/competitors.json`** (avoid duplicates)
+- **NOT already in `data/outbound/following_{account}.json`** (avoid already-followed)
+
+### Output
+
+Write filtered targets to `data/scout/follower_targets_{YYYYMMDD}_{source_handle}.json`:
+```json
+{
+  "date": "YYYY-MM-DD",
+  "source_account": "@katekarsyn",
+  "source_followers": 105000,
+  "sampled": 100,
+  "filtered": 22,
+  "targets": [
+    {
+      "handle": "@username",
+      "user_id": "...",
+      "followers": 1500,
+      "following": 800,
+      "description": "bio text...",
+      "beauty_relevance_score": 75,
+      "reasoning": "Why this is a good target"
+    }
+  ]
+}
+```
+
+Marc and Outbound can use this file as a fresh target source, prioritized above the static competitor pool.
+
 ## Daily Collection Mode
 
 ### Role
@@ -133,6 +200,14 @@ python3 scripts/scout.py --raw --compact       # both raw + compact (for Intelli
 ## Daily Intelligence Mode
 
 When Marc invokes you as a Claude subagent for the daily pipeline:
+
+### Step 0: Check Standing Directives
+
+Read `data/strategy/standing_directives.json` and filter for `status: "active"` directives where `assigned_to` is "scout". Execute any pending Scout directives:
+- `type: "target_pool"` → Run **Follower Sampling Mode** (see above) for the specified accounts before or after the regular data collection. Write results to `data/scout/follower_targets_{YYYYMMDD}_{source_handle}.json`.
+- Other types → Note them but they may not require Scout action.
+
+If no standing directives file exists or no Scout directives are active → skip this step.
 
 ### Step 1: Collect Raw Data
 

@@ -46,6 +46,7 @@ Entry points:
 - All times in JST
 - Post IDs: {account}_{YYYYMMDD}_{slot}
 - Log format: [YYYY-MM-DD HH:MM:SS] [AGENT] [LEVEL] message
+- Standing directives: `data/strategy/standing_directives.json` — persistent cross-day directives from war rooms. All agents read at startup; Marc updates after each war room.
 
 ## Tool Assignment (minimal per agent)
 - Scout: X API read only
