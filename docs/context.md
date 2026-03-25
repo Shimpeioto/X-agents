@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 22, 2026 (Session 44c: Self-improving agents — standing directives system)
+**Last updated**: March 25, 2026 (Session 46: Content quality fixes — reference adoption, expression, grok removal)
 
 ---
 
@@ -1363,6 +1363,84 @@ War Room (morning/evening)
 
 ---
 
+### Session 45 — v4 Architecture Redesign: Python Orchestrator + Strategic Manager (March 23, 2026)
+
+**Problem**: Marc spent 73% of runtime on mechanical coordination (spawning agents, passing files, validating). 4 critical issues documented in `docs/meruru_agent_issues_v1.md`: no autonomy, formulaic prompts, repetitive captions, low-value outbound.
+
+**Root cause**: Marc's role conflated two things — Coordinator (spawn, validate, sequence — mechanical, deterministic) and Project Manager (review quality, evaluate progress, propose improvements — requires judgment).
+
+**Solution**: Separate coordination (Python `orchestrator.py`) from management (Marc as Strategic Manager reviewing at end of every flow).
+
+**Architecture change**: v1-v3 (7 agents, Marc as coordinator, ~12 LLM calls, 73% coordination overhead) → v4 (orchestrator.py + 5 LLM agents, ~5-6 calls, 0% coordination overhead)
+
+**Pipeline flow** (3 LLM calls, zero API):
+```
+orchestrator.py pipeline
+  1. claude -p Strategist (opus)        # LLM 1
+  2. validate.py strategist             # Python
+  3. claude -p Creator (sonnet)         # LLM 2
+  4. validate.py creator                # Python
+  5. claude -p Marc Review (opus)       # LLM 3
+```
+
+**War Room flow** (2 LLM calls, zero API):
+```
+orchestrator.py warroom {morning|evening}
+  1. claude -p War Room (opus)          # LLM 1
+  2. validate.py warroom                # Python
+  3. claude -p Marc Review (opus)       # LLM 2
+  4. execute_ready_directives()         # Python
+```
+
+**Content quality architecture**:
+- 3-tier constraint hierarchy: Tier 1 (hard validation — character lock, iPhone, negative prompt), Tier 2 (strong defaults — scene types, outfits), Tier 3 (creative freedom — pose, mood, lighting, color)
+- Creative briefs replace prescriptive assignments: Strategist gives mood/intent, Creator has full visual autonomy
+- Caption patterns expanded from 6 to 12+, structural dedup enforced
+- Scene types expanded from 5 to 10+, each with sub-variants
+
+**New files**: `scripts/orchestrator.py`, `prompts/strategist.md`, `prompts/creator.md`, `prompts/warroom.md`, `prompts/marc_review.md`, `prompts/outbound.md`, `scripts/outbound_context.py`
+
+**Modified files**: `scripts/telegram_bot.py`, `scripts/cron_wrapper.sh`, `config/meruru_concept.md`, `config/image_prompt_guide.md`, `scripts/validate.py`, `agents/marc_conversation.md`, `CLAUDE.md`
+
+**Decisions**:
+- D29: Separate coordination (Python) from management (Marc LLM) — Marc spent 73% on mechanical tasks a script does better
+- D30: 3-tier constraint hierarchy — 40+ equally-enforced constraints killed creativity; only Tier 1 enforced by validation
+- D31: Creative briefs replace prescriptive assignments — Strategist gives mood/intent, Creator has full visual autonomy
+
+**Reference**: Full architecture in `docs/x-agent-redesign-architecture.md`
+
+---
+
+### Session 46 — Content Quality Fixes: Reference Adoption, Expression, Grok Removal (March 24-25, 2026)
+
+**Problem**: Content plan EN 0324 scored 98/100 structurally but failed visual review — scenes unrelated to references (art gallery, greenhouse, arcade vs intimate/body-focused), teeth-showing expression from "bright smile" keyword, "tool: higgsfield" in Copy JSON, grok_interactive still in EN despite testing showing zero impact.
+
+**Root cause (references)**: Creator read composition technique only (pose, angle) but ignored content type. Strategist moment_seeds were independent of reference direction.
+
+**Root cause (expression)**: "bright" keyword overrides "closed-mouth" in image generators. No teeth exclusions in negative prompt.
+
+**Root cause (tool)**: Legacy field in old plans context + HTML report hardcoded it in copy_obj.
+
+**Root cause (grok)**: Previous strategy context had grok; LLM copied it despite updated prompt.
+
+**Solution**:
+- orchestrator.py analyzes reference catalog for dominant visual direction, injects summary into Creator prompt
+- Creator prompt rewritten: references = content direction, not just composition
+- Strategist prompt: moment_seeds must match reference visual direction
+- Expression whitelist enforced (6 approved terms only, "bright smile" banned)
+- Negative prompt: teeth exclusions added to standard block + all 6 templates
+- Tool field: stripped from Creator output + removed from HTML copy_obj
+- Grok removed from EN: core_strategy.json, meruru_concept.md, strategist.md, creator.md
+- validate.py: hard rejection for EN grok_interactive in strategy
+
+**Verification**: 2 pipeline runs. Run 1: all 3 bugs fixed but grok leaked at 10%. Run 2 (after validation enforcement): all clean — 0 grok, approved expressions, teeth in neg, no tool field, reference-aligned scenes.
+
+**Decision D32**: Content quality requires validation enforcement, not just prompt instructions. When an LLM ignores a prohibition, add a hard check in validate.py.
+
+**Files modified** (10): `prompts/creator.md`, `prompts/strategist.md`, `config/image_prompt_guide.md`, `config/meruru_concept.md`, `data/strategy/core_strategy.json`, `scripts/generate_html_report.py`, `scripts/orchestrator.py`, `scripts/validate.py`, `data/strategy/strategy_current.json`, `data/strategy/strategy_20260324.json`
+
+---
+
 ## 4. Decision Summary
 
 ### Framework-Level Decisions (Apply to All Future Projects)
@@ -1373,7 +1451,7 @@ War Room (morning/evening)
 | D2 | VPS for always-on compute (Phase 6 deployment) | Cheaper than hardware ($12/mo Vultr Tokyo); only needed for autonomous operation |
 | D3 | Telegram Bot for human-agent communication | Simple (~50 lines Python), free, feature-rich; universal across any project |
 | D8 | CLAUDE.md for persistent behavioral memory | Native auto-loading; rules persist across sessions; no custom code needed |
-| D16 | Agent Teams for pipeline coordination; Subagents for war rooms | Agent Teams for long-running peer collaboration (pipeline). Subagents (blocking Agent calls) for coordinator patterns like war rooms — more reliable in `claude -p` mode (Session 36) |
+| D16 | ~~Agent Teams for pipeline coordination~~ **Superseded by D29** | Originally Agent Teams for pipeline, subagents for war rooms (Session 36). Replaced by Python orchestrator + `claude -p` in v4 (Session 45) |
 
 ### Demo-Specific Decisions (X Beauty Project)
 
@@ -1395,101 +1473,110 @@ War Room (morning/evening)
 | D26 | Approval and scheduling are atomic — always approve then schedule_slots.py | Marc bypassing schedule_slots.py caused immediate publish instead of slot-timed publish (Session 44) |
 | D27 | Keep custom Telegram bot over Claude Code Channels | Channels lack always-on daemon, atomic operations, custom commands, per-layer model selection (Session 44b) |
 | D28 | Standing directives for self-improving agents | War room insights must persist across days and reach all agents — not just the Strategist. Directives accumulate, expire, and escalate autonomously (Session 44c) |
+| D29 | Separate coordination (Python) from management (Marc LLM) | Marc spent 73% on mechanical tasks a script does better — orchestrator.py handles sequencing, Marc focuses on strategic review (Session 45) |
+| D30 | 3-tier constraint hierarchy | 40+ equally-enforced constraints killed creativity; only Tier 1 enforced by validation, Tier 2 as defaults, Tier 3 creative freedom (Session 45) |
+| D31 | Creative briefs replace prescriptive assignments | Strategist gives mood/intent, Creator has full visual autonomy — prescriptive scene/outfit/pose assignments killed variety (Session 45) |
+| D32 | Validation enforcement over prompt-only instructions | LLMs ignore prohibitions ~10% of the time; validate.py must enforce critical rules with hard rejection (Session 46) |
 
 ---
 
 ## 5. The Framework Architecture (Reusable Pattern)
 
-This is the general-purpose architecture that emerged from the research and is being validated through the X Beauty demo:
+This is the general-purpose architecture that emerged from the research and is being validated through the X Beauty demo. **Updated in Session 45** to replace Agent Teams with Python orchestrator + LLM agents.
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│                    AUTONOMOUS AGENT FRAMEWORK                     │
+│                    AUTONOMOUS AGENT FRAMEWORK (v4)                 │
 │                                                                   │
-│  ┌─────────┐                                                      │
-│  │  cron   │──┐                                                   │
-│  └─────────┘  │                                                   │
-│               │     ┌─────────────────────────────────────────┐   │
-│  ┌─────────┐  ├────▶│  CONVERSATIONAL LAYER                   │   │
-│  │Telegram │──┘     │  Lightweight `claude -p` (Marc)          │   │
-│  │  Bot    │◀───────│  - Receives messages / cron triggers     │   │
-│  │(daemon) │        │  - Reasons about tasks                   │   │
-│  └────┬────┘        │  - Asks clarifying questions             │   │
-│       │             │  - Decides when to execute               │   │
-│       │             └──────────────┬──────────────────────────┘   │
-│       │                            │ START_TASK: marker            │
-│       │                            ▼                               │
-│       │             ┌─────────────────────────────────────────┐   │
-│       │             │  EXECUTION LAYER (Agent Teams)           │   │
-│       │             │  Marc as Team Leader                     │   │
-│       │             │  - Spawns teammates via Agent tool       │   │
-│       │             │  - Shared task list coordination         │   │
-│       │             │  - Teammate messaging                    │   │
-│       │             │  - Parallel execution                    │   │
-│       │             └────────┬────────────────────────────────┘   │
-│       │                      │                                     │
-│       │       ┌──────────────┼──────────────┐                     │
-│       │       ▼              ▼              ▼                      │
-│       │  ┌────────┐    ┌────────┐    ┌────────┐                   │
-│       │  │Agent 1 │    │Agent 2 │    │Agent N │                   │
-│  [HUMAN] │(team-  │    │(team-  │    │(team-  │                   │
-│       │  │ mate)  │    │ mate)  │    │ mate)  │                   │
-│       │  └───┬────┘    └───┬────┘    └───┬────┘                   │
-│       │      │             │             │                         │
-│       │      ▼             ▼             ▼                         │
-│       │  ┌─────────────────────────────────────────────────┐      │
-│       │  │              Shared State Layer                   │     │
-│       │  │  CLAUDE.md (behavioral rules, auto-loaded)       │     │
-│       │  │  JSON files (agent-to-agent data exchange)       │     │
-│       │  │  SQLite (structured metrics & history)           │     │
-│       │  │  Task list (Agent Teams shared coordination)     │     │
-│       │  └─────────────────────────────────────────────────┘      │
-│       │                                                            │
-│       │  Tech stack: Claude Code CLI + Agent Teams + cron +        │
-│       │              Telegram Bot + CLAUDE.md + SQLite + JSON       │
-│       │                                                            │
-└───────┴────────────────────────────────────────────────────────────┘
+│  ┌──────────┐                                                     │
+│  │ launchd  │──┐                                                  │
+│  └──────────┘  │                                                  │
+│                │     ┌─────────────────────────────────────────┐  │
+│  ┌──────────┐  ├────▶│  CONVERSATIONAL LAYER                   │  │
+│  │ Telegram │──┘     │  Lightweight `claude -p` (Marc)          │  │
+│  │   Bot    │◀───────│  - Receives messages / launchd triggers  │  │
+│  │ (daemon) │        │  - Reasons about tasks                   │  │
+│  └────┬─────┘        │  - Asks clarifying questions             │  │
+│       │              │  - Routes commands to orchestrator        │  │
+│       │              └──────────────┬──────────────────────────┘  │
+│       │                             │ /pipeline, /warroom, etc.   │
+│       │                             ▼                              │
+│       │              ┌─────────────────────────────────────────┐  │
+│       │              │  ORCHESTRATOR (Python, zero LLM cost)    │  │
+│       │              │  orchestrator.py                          │  │
+│       │              │  - Sequences pipeline steps               │  │
+│       │              │  - Invokes `claude -p` for LLM reasoning  │  │
+│       │              │  - Validates outputs (validate.py)        │  │
+│       │              │  - Executes standing directives           │  │
+│       │              └────────┬────────────────────────────────┘  │
+│       │                       │                                    │
+│       │        ┌──────────────┼──────────────┐                    │
+│       │        ▼              ▼              ▼                     │
+│       │   ┌─────────┐   ┌─────────┐   ┌─────────┐               │
+│       │   │claude -p │   │claude -p │   │claude -p │              │
+│  [HUMAN]  │Strategist│   │ Creator │   │Marc Revw │              │
+│       │   │ (Opus)  │   │(Sonnet) │   │ (Opus)  │               │
+│       │   └────┬────┘   └────┬────┘   └────┬────┘               │
+│       │        │              │              │                     │
+│       │        ▼              ▼              ▼                     │
+│       │   ┌─────────────────────────────────────────────────┐     │
+│       │   │              Shared State Layer                   │    │
+│       │   │  CLAUDE.md (behavioral rules, auto-loaded)       │    │
+│       │   │  JSON files (agent-to-agent data exchange)       │    │
+│       │   │  SQLite (structured metrics & history)           │    │
+│       │   │  Standing directives (cross-day persistence)     │    │
+│       │   └─────────────────────────────────────────────────┘     │
+│       │                                                           │
+│       │   Tech stack: Claude Code CLI + Python orchestrator +     │
+│       │               launchd + Telegram Bot + CLAUDE.md +        │
+│       │               SQLite + JSON                               │
+│       │                                                           │
+└───────┴───────────────────────────────────────────────────────────┘
 ```
 
 **Key principles** (from the original article, validated and refined):
 
 1. **Single-responsibility agents** — each agent does one thing well
-2. **Hierarchical coordination via COO** — one agent orchestrates all others and owns human communication
-3. **Cron-triggered batch pipelines** — overnight execution, no always-listening daemon needed
+2. **Separate coordination from management** — Python orchestrator handles mechanical sequencing (zero LLM cost); Marc as Strategic Manager handles judgment calls (Session 45, D29)
+3. **launchd-triggered batch pipelines** — overnight execution, no always-listening daemon needed (replaced cron in Session 39b)
 4. **Persistent memory via CLAUDE.md** — behavioral rules auto-loaded; learned knowledge persists
 5. **Filesystem-based shared state** — agents communicate via JSON/SQLite, not in-memory
 6. **Human-in-the-loop at decision points** — approval gates before irreversible actions
 7. **Error handling with classification** — auto-retry vs. escalate vs. halt based on error type
 8. **Telegram as the single communication channel** — reports, alerts, commands, all unified
-9. **Hybrid agents ("Claude Brain, Python Hands")** — Agents that need both deterministic execution (API calls, rate limits, data storage) AND reasoning (analysis, filtering, composition) use a hybrid pattern: Python handles execution, Claude handles intelligence. Failures degrade gracefully to Python-only behavior.
-10. **Agent Teams with shared coordination** — Agents operate as teammates with shared task lists and messaging, enabling parallel execution and iterative collaboration. The conversational layer (lightweight `claude -p`) handles task intake; the execution layer (Agent Teams) handles the work.
+9. **Hybrid agents ("Claude Brain, Python Hands")** — Python handles deterministic execution (API calls, rate limits, data storage); Claude handles intelligence (analysis, filtering, composition). Failures degrade gracefully to Python-only behavior.
+10. **Validation enforcement** — critical rules enforced by Python validation, not just prompt instructions. LLMs ignore prohibitions ~10% of the time; validate.py catches violations (Session 46, D32).
 
 ---
 
 ## 6. Demo Project: X Beauty System
 
-### 6.1 Agent Architecture
+### 6.1 Agent Architecture (v4 — Session 45)
 
 ```
 Human (Shimpei)
 └── Telegram (unified communication)
-    └── 💬 Conversational Marc (claude -p, lightweight reasoning)
-        └── 🎖️ Marc (COO / Team Leader — Agent Teams execution layer)
-            ├── 🔍 Scout ──────── Competitor research & trend analysis      [Teammate + X API v2 + Claude Intelligence]
-            ├── 📊 Strategist ─── Data-driven growth strategy               [Teammate + Claude Code]
-            ├── ✍️ Creator ─────── Content drafting & image prompts          [Teammate + Claude Code]
-            ├── 📢 Publisher ──── Posting approved content to X              [Teammate + X API v2]
-            ├── 🤝 Outbound ───── Community engagement (likes/replies/follows) [Teammate + Claude Intelligence ⚠️]
-            └── 📈 Analyst ────── Metrics collection + daily reporting      [Teammate + X API + Claude Intelligence]
+    └── Conversational Marc (claude -p, chat + command routing)
+         ↓ (commands route to)
+    orchestrator.py (Python, zero LLM cost)
+    ├── Strategist ──── Growth strategy from metrics + directives          [claude -p Opus]
+    ├── validate.py ─── Output validation (Tier 1 enforcement)            [Python]
+    ├── Creator ─────── Content plans with creative freedom                [claude -p Sonnet]
+    ├── validate.py ─── Output validation (Tier 1 enforcement)            [Python]
+    ├── Marc Review ─── Strategic review + directive updates               [claude -p Opus]
+    ├── War Room ────── Multi-perspective analysis (morning/evening)       [claude -p Opus]
+    └── Outbound ────── Engagement planning + reply drafting               [claude -p Sonnet]
+
+Supporting scripts (no LLM):
+    ├── scout.py ────── Data collection only (Python)
+    ├── publisher.py ── Posting approved content to X (Python)
+    ├── analyst.py ──── Metrics collection + summary (Python)
+    └── outbound_context.py ── Pre-computed engagement context (Python)
 ```
 
-⚠️ = X Developer Terms compliance concerns logged. See `specs/x-developer-terms-compliance-review.md`.
+#### 6.1.1 v4 Architecture Pattern (Session 45)
 
-#### 6.1.1 Hybrid Agent Pattern (Phase 5) + Agent Teams (Session 24)
-
-Four agents operate as "Claude Brain, Python Hands" hybrids. Python scripts handle all API calls, rate limiting, and data storage. Claude subagents add intelligence: anomaly detection (Analyst), reply filtering & executive summaries (Scout), contextual engagement planning with safety reasoning (Outbound). If Claude fails, each agent falls back to Phase 4 Python-only behavior. Post publishing remains Python-only via Publisher (safety-critical, human-gated). Outbound engagement was extracted from Publisher into a dedicated Outbound agent (Session 30) to add safety layers: cooldown enforcement, follow/tweet deduplication, and history-aware volume budgets. See `docs/specs/phase-5-spec.md` §4.1 for the original pattern.
-
-As of Session 24, all agents operate as **teammates** within Claude Code Agent Teams. Marc spawns them via the Agent tool with shared task lists and messaging. This adds a coordination layer on top of the hybrid pattern — agents can now work in parallel (e.g., Creator EN + JP simultaneously), message each other, and claim tasks from a shared list. The conversational layer (Conversational Marc via `claude -p`) handles task intake and reasoning before spawning the heavier Agent Teams execution layer.
+The v4 architecture separates coordination from management. Python `orchestrator.py` handles all mechanical coordination (sequencing, file passing, validation) at zero LLM cost. LLM agents are invoked via `claude -p` with focused prompts from `prompts/`. Marc's role changed from Coordinator to Strategic Manager — he reviews outputs at the end of every flow, evaluates 10K follower goal progress, and updates standing directives. Content quality uses a 3-tier constraint hierarchy: Tier 1 (hard validation by validate.py), Tier 2 (strong defaults in prompts), Tier 3 (full creative freedom for the Creator LLM).
 
 ### 6.2 Key Details
 
@@ -1771,7 +1858,37 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 44c — Self-Improving Agents (March 22, 2026). Standing directives system: `data/strategy/standing_directives.json` persists war room insights across days. All agents read directives at startup; Marc updates after each war room. Includes Scout follower sampling, performance-gated allocation, follow ratio threshold, budget deployment floors, and image supply checks.
+**Latest**: Session 46 — Content Quality Fixes (March 24-25, 2026). Reference adoption overhaul (orchestrator analyzes reference catalog, injects visual direction into Creator prompt), expression whitelist enforcement (6 approved terms, teeth exclusions in negative prompt), tool field removal, grok removal from EN with validate.py hard rejection. Two verification pipeline runs confirmed all fixes.
+
+Session 46 files modified (10 files):
+- `prompts/creator.md` — References = content direction, expression whitelist
+- `prompts/strategist.md` — moment_seeds must match reference visual direction
+- `config/image_prompt_guide.md` — Expression whitelist, teeth exclusions in negative prompt + all 6 templates
+- `config/meruru_concept.md` — Grok removed from EN engagement tools
+- `data/strategy/core_strategy.json` — Grok removed from EN engagement_tools
+- `scripts/generate_html_report.py` — Tool field removed from HTML copy_obj
+- `scripts/orchestrator.py` — Reference catalog analysis + visual direction injection
+- `scripts/validate.py` — Hard rejection for EN grok_interactive in strategy
+- `data/strategy/strategy_current.json` — Grok removed
+- `data/strategy/strategy_20260324.json` — Clean strategy after fixes
+
+Session 45 files created (7 files):
+- `scripts/orchestrator.py` — Python coordinator (~430 lines)
+- `scripts/outbound_context.py` — Pre-computed outbound context (~220 lines)
+- `prompts/strategist.md` — Merged Scout analysis + Strategy prompt
+- `prompts/creator.md` — Simplified Creator with creative freedom
+- `prompts/warroom.md` — Single-call war room (3 perspectives)
+- `prompts/marc_review.md` — Marc's strategic review template
+- `prompts/outbound.md` — Focused outbound planning
+
+Session 45 files modified (7 files):
+- `scripts/telegram_bot.py` — Commands route to orchestrator, directive scheduler
+- `scripts/cron_wrapper.sh` — All tasks call orchestrator.py
+- `config/meruru_concept.md` — Caption patterns 6→12+
+- `config/image_prompt_guide.md` — 3-tier constraint hierarchy, +5 scene types
+- `scripts/validate.py` — Creator validation enforces Tier 1 only; added warroom mode
+- `agents/marc_conversation.md` — Slimmed to conversational rules, references orchestrator
+- `CLAUDE.md` — Updated architecture to v4
 
 Session 36 files modified (4 files):
 - `agents/marc_warroom.md` — Rewrite: Agent Teams → subagents (blocking Agent tool calls)
@@ -2049,6 +2166,8 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Session 25 | Production Testing (Real tasks via Telegram) | Local machine | **✅ Complete** — 5 tasks executed (3 ad-hoc + 1 image analysis + 1 daily pipeline), non-interactive bug fixed, media collection added, agent philosophy established |
 | Session 26 | HTML Report Generation for Telegram Review | Local machine | **✅ Complete** — `generate_html_report.py` with 3 report types, pipeline + publishing playbooks updated |
 | Session 32 | First Production Outbound + OAuth Fix + Agent Escalation | Local machine | **✅ Complete** — OAuth tokens fixed, 20 likes + 5 follows via API, 5 replies escalated to human. Agent escalation pattern established. |
+| Session 45 | v4 Architecture Redesign (Python Orchestrator + Strategic Manager) | Local machine | **✅ Complete** — orchestrator.py replaces Marc coordination, 3-tier constraints, creative briefs, 5 LLM agents, ~50% cost reduction |
+| Session 46 | Content Quality Fixes (Reference adoption, expression, grok removal) | Local machine | **✅ Complete** — reference adoption overhaul, expression whitelist, tool removal, grok removal, validation enforcement. 2 pipeline runs verified. |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 
@@ -2062,7 +2181,7 @@ OpenClaw is a daemon-based framework with native messaging and always-listening 
 
 ### Why a COO agent (Marc) instead of a simple orchestrator script?
 
-A shell script can handle sequencing (run A, then B, then C) and basic error handling (retry on failure). But it cannot make judgment calls: "Creator produced 3 posts but Strategist said 4 — should I ask Creator to regenerate or adjust the strategy?" "Follower count dropped 15% — is this a data error, a shadowban, or normal variance?" These require the reasoning capability of an LLM. Marc is the layer where orchestration meets judgment.
+**Updated in Session 45**: The original rationale proved partially wrong. Investigation showed Marc spent 73% of runtime on mechanical coordination (spawning agents, passing files, validating) — work a Python script does better and cheaper. The v4 redesign separated coordination (Python `orchestrator.py`) from management (Marc as Strategic Manager). Marc no longer orchestrates — he reviews every flow's output, evaluates 10K goal progress, updates standing directives, and proposes improvements. The judgment calls are real and valuable; they just don't need to happen at every step.
 
 ### Why X API + Playwright hybrid for the demo?
 
@@ -2078,7 +2197,7 @@ Each agent maps to a distinct skill domain. Combining any two would bloat contex
 
 ### Why Agent Teams instead of isolated subagents?
 
-The original architecture spawned each agent as an isolated `claude -p` subprocess. Agents couldn't communicate, share task state, or work in parallel. Agent Teams (experimental feature) enables shared task lists, teammate messaging, and parallel execution — Creator EN and JP can now run simultaneously. The trade-off is dependency on an experimental feature, mitigated by keeping `run_task.sh` and `run_pipeline.sh` as fallback entry points.
+**Superseded in Session 45**: Agent Teams were replaced by the Python orchestrator + `claude -p` pattern. Agent Teams had reliability issues in `claude -p` non-interactive mode (Session 36: async messaging didn't reliably deliver). The v4 architecture uses `orchestrator.py` to invoke each LLM agent as an isolated `claude -p` call with focused prompts — simpler, cheaper, and more reliable. Agents communicate via JSON files on the shared filesystem, not in-memory messaging.
 
 ### Why `claude -p` for the conversational layer instead of Anthropic API?
 
@@ -2092,23 +2211,23 @@ The operator subscribes to Claude Max ($100/mo) which includes unlimited `claude
 |---|---|
 | **Autonomous Agent Framework** | The general-purpose architecture for multi-agent systems being developed — the main project |
 | **X Beauty Demo** | The first demonstration project validating the framework: growing an AI beauty X account |
-| **Marc (COO)** | The orchestrator agent that coordinates all other agents, makes judgment calls, and communicates with the human via Telegram |
+| **Marc (Strategic Manager)** | Formerly COO/coordinator; as of v4 (Session 45), Marc is the Strategic Manager who reviews outputs at the end of every flow, evaluates 10K goal progress, updates standing directives, and proposes improvements. Also handles ad-hoc Telegram conversation. |
 | **Scout** | Demo agent: scrapes competitor data and identifies trends using X API |
 | **Strategist** | Demo agent: formulates growth strategy based on Scout and Analyst data |
 | **Creator** | Demo agent: drafts post content and image prompts |
 | **Publisher** | Demo agent: executes posting and outbound engagement via X API |
 | **Analyst** | Demo agent: collects post metrics via X API batch lookup, account snapshots, stores in SQLite, generates JSON summaries. Manual impression input via Telegram /metrics, screenshot parsing (Claude Vision), or CSV/JSON import. |
-| **War Room** | Marc's daily review session where all agent outputs are cross-checked for consistency |
-| **Pipeline** | The agent execution sequence — during development, triggered manually via CLI; in production, triggered by cron overnight |
+| **War Room** | Multi-perspective analysis session (Analyst, Strategist, Moderator perspectives in a single LLM call) — produces recommendations and directive updates |
+| **Pipeline** | The agent execution sequence — orchestrator.py runs Strategist → validate → Creator → validate → Marc Review |
 | **CLAUDE.md** | Claude Code's native memory system — markdown files auto-loaded at session start |
-| **Orchestrator Script** | Shell script that cron triggers; launches Marc who then invokes agents in sequence |
+| **Orchestrator** | `scripts/orchestrator.py` — Python script that sequences all pipeline steps, invokes `claude -p` for LLM reasoning, validates outputs, executes directives. Zero LLM cost for coordination. (Session 45) |
 | **Shared State** | The filesystem layer (JSON + SQLite) through which agents exchange data between sessions |
 | **OpenClaw** | Open-source agent framework evaluated and rejected in favor of Claude Code + cron |
 | **Compliance Review** | Living document tracking 7 X Developer Terms issues to resolve during implementation |
 | **Amarry Technologies** | Shimpei's company — the broader corporate context |
 | **UniModel** | Amarry's primary product — an AI model marketplace (separate from this project) |
-| **Agent Teams** | Claude Code experimental feature enabling multi-agent coordination with shared task lists, teammate messaging, and parallel execution |
-| **Teammate** | An agent spawned by Marc via the Agent tool within an Agent Teams session — can claim tasks, message other teammates, and work in parallel |
-| **Conversational Layer** | The lightweight `claude -p` layer that handles Telegram message intake, reasoning, and task routing before spawning the heavier execution layer |
-| **Execution Layer** | The Agent Teams session where Marc as Team Leader spawns teammates to do the actual work (Scout, Strategist, Creator, Publisher, Analyst) |
-| **START_TASK marker** | Text-based protocol (`START_TASK:{json}`) used by conversational Marc to signal that a task should be executed via the Agent Teams execution layer |
+| **Agent Teams** | Claude Code experimental feature — used in v1-v3, replaced by Python orchestrator in v4 (Session 45) due to reliability issues in non-interactive mode |
+| **Conversational Layer** | The lightweight `claude -p` layer that handles Telegram message intake, reasoning, and command routing to the orchestrator |
+| **Visual Direction Summary** | Orchestrator-computed analysis of reference catalog's dominant scenes/outfits/content types, injected into Creator prompt to ensure generated content matches brand image (Session 46) |
+| **Standing Directives** | `data/strategy/standing_directives.json` — persistent cross-day directives written by Marc after war rooms, read by all agents at startup. The mechanism for autonomous improvement (Session 44c) |
+| **3-Tier Constraint Hierarchy** | Content quality system: Tier 1 (hard validation by validate.py), Tier 2 (strong defaults in prompts), Tier 3 (full creative freedom). Replaced 40+ equally-enforced constraints (Session 45) |
