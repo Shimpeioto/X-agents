@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 25, 2026 (Session 46: Content quality fixes — reference adoption, expression, grok removal)
+**Last updated**: March 26, 2026 (Session 48: Purpose-driven posts + visual diversity matrix — replaced story arcs with standalone post purposes, enforced visual variety across 4-post sets)
 
 ---
 
@@ -1441,6 +1441,53 @@ orchestrator.py warroom {morning|evening}
 
 ---
 
+### Session 48 — Purpose-Driven Posts + Visual Diversity Matrix (March 26, 2026)
+
+**Problem**: The content pipeline created 4 daily posts as a "story arc" — imagining moments across Meruru's day. But on X, users see posts individually in their feed, never as a connected set. The narrative arc provided zero value. Additionally, all 4 posts often ended up visually similar (same framing, similar poses, same body emphasis), making the profile grid monotonous.
+
+**Solution**:
+- Replaced `moment_seed` with `post_purpose` + `visual_focus` in Strategist creative briefs
+- 5 post purposes: `body_showcase`, `face_beauty`, `lifestyle_vibe`, `engagement_hook`, `style_flex` — at least 3 different per day
+- `visual_focus` is a lightweight 2-field object: `emphasis` (bust/hips/silhouette/face/back/legs) + `framing` (close-up/medium/full-body)
+- Visual diversity matrix validated on Creator OUTPUT: framings≥2, angles≥2, poses≥3, outfit coverage≥2
+- Creator declares `visual_diversity` field in output for transparency
+
+**Design principle preserved**: D31 (Strategist sets intent, Creator has autonomy) — Strategist assigns purpose and focal dimension, Creator has full autonomy on scene, outfit, pose, lighting execution.
+
+**Verification**: Full pipeline run for EN on 2026-03-25 — Strategist produced 4 unique purposes (body_showcase, engagement_hook, lifestyle_vibe, face_beauty) with 4 unique emphases and 3 unique framings. Creator output passed all 14 validation checks including new diversity matrix. Strategy validation (16 checks) and creator cross-validation both passed.
+
+**Decision D34**: Validate visual diversity on Creator OUTPUT (actual image_prompt fields), not on Strategist input. Strategist provides intent; enforcement belongs at the output layer.
+
+**Files modified** (4): `prompts/strategist.md` (creative briefs rewrite + schema + validation checklist), `prompts/creator.md` (purpose-first process + visual diversity check), `scripts/validate.py` (diversity matrix + strategist brief checks), `scripts/orchestrator.py` (moment_seed comment cleanup)
+
+---
+
+### Session 47 — Metrics Visibility Fix: Real Data for Marc + Directive Dedup Enforcement (March 25, 2026)
+
+**Problem**: Marc's pipeline review reported "Day 7 of zero posts published" and "EN followers: 104" — both wrong. The operator had been posting daily (29 posts in 7 days, 499K impressions, +207 follows) and had 214 followers. Marc also generated 47 unnumbered duplicate directives over Mar 23-25 (8 "cleanup" directives that were themselves duplicated).
+
+**Root cause (metrics blindness)**: Orchestrator fed Marc only today's strategy JSON + content plan + standing directives. It never fed him SQLite analytics data (from CSV imports) or archive follower counts. Marc had zero visibility into actual posting activity or real follower counts.
+
+**Root cause (directive duplication)**: `_apply_directive_updates()` blindly appended new directives without checking for DIR-NNN IDs or duplicate detection. War rooms kept generating new directives for the same problems without checking if active directives already existed.
+
+**Solution**:
+- Added `get_account_metrics_summary()` to orchestrator.py — queries SQLite for daily analytics (impressions, posts created, follows), follower/following counts from Twitter archive, and top 5 posts by impressions
+- Injected real metrics into both Marc Review and Strategist contexts
+- `_apply_directive_updates()` now enforces DIR-NNN ID format (regex validation) and rejects duplicate IDs
+- Cleaned standing directives: 58 → 15 entries (removed 47 unnumbered duplicates, consolidated unique unnumbered content into DIR-012 through DIR-015)
+- Created `scripts/import_twitter_archive.py` for extracting follower/following lists from Twitter data archives
+- Imported analytics CSVs (7 daily rows Mar 19-25, 161 per-post rows Mar 12-25) and Twitter archive (214 followers, 64 following)
+
+**Verification**: Evening war room correctly reported "Followers: 214", "Week total: 499K impressions, +195 net followers", "Mar 24 Grok post: 204K impressions, +78 follows". Directive updates added DIR-016 through DIR-020 — all properly numbered, zero duplicates.
+
+**Decision D33**: Agent review context must include real operational data (from analytics imports and archives), not just pipeline-generated plans. Without metrics visibility, agents operate on assumptions that diverge from reality within days.
+
+**Files created** (1): `scripts/import_twitter_archive.py`
+
+**Files modified** (4): `scripts/orchestrator.py` (metrics summary + directive dedup), `prompts/strategist.md` (account_metrics placeholder), `prompts/marc_review.md` (metrics source guidance), `data/strategy/standing_directives.json` (cleanup 58→15)
+
+---
+
 ## 4. Decision Summary
 
 ### Framework-Level Decisions (Apply to All Future Projects)
@@ -1477,6 +1524,8 @@ orchestrator.py warroom {morning|evening}
 | D30 | 3-tier constraint hierarchy | 40+ equally-enforced constraints killed creativity; only Tier 1 enforced by validation, Tier 2 as defaults, Tier 3 creative freedom (Session 45) |
 | D31 | Creative briefs replace prescriptive assignments | Strategist gives mood/intent, Creator has full visual autonomy — prescriptive scene/outfit/pose assignments killed variety (Session 45) |
 | D32 | Validation enforcement over prompt-only instructions | LLMs ignore prohibitions ~10% of the time; validate.py must enforce critical rules with hard rejection (Session 46) |
+| D33 | Agent review context must include real operational data | Without metrics from CSV imports and archives, agents operate on assumptions that diverge from reality within days — Marc thought 0 posts published when 29 were (Session 47) |
+| D34 | Validate visual diversity on Creator output, not Strategist input | Strategist provides intent (purpose + focus); enforcement belongs at the output layer where actual image_prompt fields can be checked (Session 48) |
 
 ---
 
@@ -1858,11 +1907,26 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 46 — Content Quality Fixes (March 24-25, 2026). Reference adoption overhaul (orchestrator analyzes reference catalog, injects visual direction into Creator prompt), expression whitelist enforcement (6 approved terms, teeth exclusions in negative prompt), tool field removal, grok removal from EN with validate.py hard rejection. Two verification pipeline runs confirmed all fixes.
+**Latest**: Session 48 — Purpose-Driven Posts + Visual Diversity Matrix (March 26, 2026). Replaced story-arc `moment_seed` with standalone `post_purpose` + `visual_focus`. Visual diversity matrix enforced on Creator output (framings, angles, poses, outfit coverage). Pipeline run verified: 4 unique purposes, 4 unique emphases, all validations passed.
+
+Session 48 files modified (4 files):
+- `prompts/strategist.md` — Creative briefs rewrite: `moment_seed` → `post_purpose` (5 types) + `visual_focus` (emphasis + framing). Diversity rules. Updated schema + validation checklist.
+- `prompts/creator.md` — Purpose-first process replacing moment-first. Visual diversity check section. Emphasis→image and purpose→caption mapping tables.
+- `scripts/validate.py` — Added Check 14 (visual diversity matrix) to `validate_creator()`. Added Check 10 (creative_briefs structure + diversity) to `validate_strategist()`. Check counts updated.
+- `scripts/orchestrator.py` — Comment cleanup: `moment_seed` references → `post_purpose`/`visual_focus`
+
+Session 47 files created (1 file):
+- `scripts/import_twitter_archive.py` — Extract follower/following from Twitter data archive
+
+Session 47 files modified (4 files):
+- `scripts/orchestrator.py` — Added `get_account_metrics_summary()` (SQLite query + archive data), injected into Strategist + Marc Review contexts. `_apply_directive_updates()` enforces DIR-NNN ID format, rejects duplicates.
+- `prompts/strategist.md` — Added `{{account_metrics_EN}}` placeholder for real analytics
+- `prompts/marc_review.md` — Updated to reference `account_metrics_*` for real follower/posting data
+- `data/strategy/standing_directives.json` — Cleaned 58→15 entries (47 unnumbered duplicates removed)
 
 Session 46 files modified (10 files):
-- `prompts/creator.md` — References = content direction, expression whitelist
-- `prompts/strategist.md` — moment_seeds must match reference visual direction
+- `prompts/creator.md` — References = content direction, expression whitelist (further updated Session 48: purpose-first process)
+- `prompts/strategist.md` — moment_seeds must match reference visual direction (further updated Session 48: moment_seed → post_purpose + visual_focus)
 - `config/image_prompt_guide.md` — Expression whitelist, teeth exclusions in negative prompt + all 6 templates
 - `config/meruru_concept.md` — Grok removed from EN engagement tools
 - `data/strategy/core_strategy.json` — Grok removed from EN engagement_tools
@@ -2168,6 +2232,8 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Session 32 | First Production Outbound + OAuth Fix + Agent Escalation | Local machine | **✅ Complete** — OAuth tokens fixed, 20 likes + 5 follows via API, 5 replies escalated to human. Agent escalation pattern established. |
 | Session 45 | v4 Architecture Redesign (Python Orchestrator + Strategic Manager) | Local machine | **✅ Complete** — orchestrator.py replaces Marc coordination, 3-tier constraints, creative briefs, 5 LLM agents, ~50% cost reduction |
 | Session 46 | Content Quality Fixes (Reference adoption, expression, grok removal) | Local machine | **✅ Complete** — reference adoption overhaul, expression whitelist, tool removal, grok removal, validation enforcement. 2 pipeline runs verified. |
+| Session 47 | Metrics Visibility Fix (Real data for Marc + directive dedup) | Local machine | **✅ Complete** — orchestrator feeds SQLite analytics + archive data to all agents. Directive dedup enforcement. Standing directives cleaned 58→15. |
+| Session 48 | Purpose-Driven Posts + Visual Diversity Matrix | Local machine | **✅ Complete** — `moment_seed` → `post_purpose` + `visual_focus`. Visual diversity matrix enforced on Creator output. Pipeline verified: 4 unique purposes, all validations passed. |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 
@@ -2229,5 +2295,9 @@ The operator subscribes to Claude Max ($100/mo) which includes unlimited `claude
 | **Agent Teams** | Claude Code experimental feature — used in v1-v3, replaced by Python orchestrator in v4 (Session 45) due to reliability issues in non-interactive mode |
 | **Conversational Layer** | The lightweight `claude -p` layer that handles Telegram message intake, reasoning, and command routing to the orchestrator |
 | **Visual Direction Summary** | Orchestrator-computed analysis of reference catalog's dominant scenes/outfits/content types, injected into Creator prompt to ensure generated content matches brand image (Session 46) |
-| **Standing Directives** | `data/strategy/standing_directives.json` — persistent cross-day directives written by Marc after war rooms, read by all agents at startup. The mechanism for autonomous improvement (Session 44c) |
+| **Standing Directives** | `data/strategy/standing_directives.json` — persistent cross-day directives written by Marc after war rooms, read by all agents at startup. The mechanism for autonomous improvement (Session 44c). DIR-NNN ID format enforced since Session 47 to prevent duplication. |
+| **Account Metrics Summary** | Orchestrator-computed SQLite query combining daily analytics (from CSV imports), follower/following counts (from Twitter archive), and top posts. Injected into Strategist and Marc Review contexts to ensure agents see real operational data (Session 47) |
 | **3-Tier Constraint Hierarchy** | Content quality system: Tier 1 (hard validation by validate.py), Tier 2 (strong defaults in prompts), Tier 3 (full creative freedom). Replaced 40+ equally-enforced constraints (Session 45) |
+| **Post Purpose** | One of 5 strategic intents assigned per slot: `body_showcase`, `face_beauty`, `lifestyle_vibe`, `engagement_hook`, `style_flex`. Replaced `moment_seed` narrative arcs (Session 48) |
+| **Visual Focus** | Lightweight 2-field Strategist directive: `emphasis` (where the viewer's eye goes) + `framing` (how tight the shot is). Creator has full autonomy on everything else (Session 48) |
+| **Visual Diversity Matrix** | Validation check on Creator output ensuring variety across 4-post sets: framings≥2, angles≥2, poses≥3, outfit coverage levels≥2. Prevents monotonous profile grids (Session 48) |
