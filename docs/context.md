@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 26, 2026 (Session 48: Purpose-driven posts, visual diversity, 3-day visual dedup, no-text-in-images rule, auto reference analysis)
+**Last updated**: March 26, 2026 (Session 48: Purpose-driven posts, visual diversity, 3-day visual dedup, no-text-in-images rule, auto reference analysis, auto image generation plan)
 
 ---
 
@@ -1468,7 +1468,20 @@ orchestrator.py warroom {morning|evening}
 
 **Decision D35**: Auto-analyze reference images at pipeline start so operator can simply drop new images into `media/reference/` daily without running a separate script.
 
+**Decision D36**: Automate image generation via Browser Use CLI controlling the Higgsfield web UI (using existing Pro plan credits), not via the separate Higgsfield Cloud API (which requires additional pay-as-you-go credits). Browser Use acts as a robot controlling a real browser — Higgsfield sees a normal Pro plan session.
+
+**Auto image generation plan** (`docs/plan-auto-image-generation.md`):
+- **Approach**: Browser Use CLI automates the Higgsfield web UI using the operator's existing Pro plan ($29/mo). No extra API credits.
+- **Pipeline addition**: 2 new steps after Creator — `generate_images.py` (Browser Use) → `validate_images.py` (Claude Vision QA) with retry loop (max 2 retries per rejected image).
+- **Character consistency**: Generate-and-filter strategy — Claude Vision compares each generated image against canonical Meruru references. Auto-reject score <60, auto-accept ≥80.
+- **Graceful degradation**: When image gen fails, pipeline continues and operator gets prompts for manual generation.
+- **Extra cost**: ~$8-31/mo (Browser Use LLM + Claude Vision only). No extra Higgsfield charges.
+- **Effort**: ~15-17 hours. Step 1 (Browser Use + Higgsfield web UI mapping) is prerequisite before coding.
+- **Alternatives evaluated**: Higgsfield API (requires separate credits — rejected), Playwright (brittle to UI changes), Claude Computer Use (too expensive at $0.50-5/image).
+
 **Files modified** (5): `prompts/strategist.md` (creative briefs rewrite + schema + validation checklist), `prompts/creator.md` (purpose-first process + visual diversity check + visual history dedup + no-text rule), `scripts/validate.py` (diversity matrix + strategist brief checks + text-in-image checks), `scripts/orchestrator.py` (auto reference analysis + visual history extraction + moment_seed cleanup), `config/image_prompt_guide.md` (negative prompt text exclusions in base + combined + all 6 templates)
+
+**Files created** (1): `docs/plan-auto-image-generation.md` (full implementation plan for automated image generation)
 
 ---
 
@@ -1536,6 +1549,8 @@ orchestrator.py warroom {morning|evening}
 | D32 | Validation enforcement over prompt-only instructions | LLMs ignore prohibitions ~10% of the time; validate.py must enforce critical rules with hard rejection (Session 46) |
 | D33 | Agent review context must include real operational data | Without metrics from CSV imports and archives, agents operate on assumptions that diverge from reality within days — Marc thought 0 posts published when 29 were (Session 47) |
 | D34 | Validate visual diversity on Creator output, not Strategist input | Strategist provides intent (purpose + focus); enforcement belongs at the output layer where actual image_prompt fields can be checked (Session 48) |
+| D35 | Auto-analyze reference images at pipeline start | Operator drops images into `media/reference/` daily — pipeline picks them up automatically (Session 48) |
+| D36 | Automate image gen via Browser Use on web UI, not Higgsfield API | Higgsfield Cloud API requires separate pay-as-you-go credits ($23-68/mo extra). Browser Use controls the web UI using existing Pro plan — no extra cost (Session 48) |
 
 ---
 
@@ -2245,6 +2260,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Session 46 | Content Quality Fixes (Reference adoption, expression, grok removal) | Local machine | **✅ Complete** — reference adoption overhaul, expression whitelist, tool removal, grok removal, validation enforcement. 2 pipeline runs verified. |
 | Session 47 | Metrics Visibility Fix (Real data for Marc + directive dedup) | Local machine | **✅ Complete** — orchestrator feeds SQLite analytics + archive data to all agents. Directive dedup enforcement. Standing directives cleaned 58→15. |
 | Session 48 | Purpose-Driven Posts + Visual Diversity + 3-Day Dedup + No-Text | Local machine | **✅ Complete** — `moment_seed` → `post_purpose` + `visual_focus`. Visual diversity matrix. 3-day visual dedup. Auto ref analysis. No-text-in-images rule. Pipeline verified. |
+| Session 48b | Auto Image Generation Plan | Local machine | **📋 Planned** — Browser Use CLI to automate Higgsfield web UI using existing Pro plan. Plan at `docs/plan-auto-image-generation.md`. |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 
