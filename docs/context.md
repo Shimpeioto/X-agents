@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 26, 2026 (Session 48: Purpose-driven posts + visual diversity matrix — replaced story arcs with standalone post purposes, enforced visual variety across 4-post sets)
+**Last updated**: March 26, 2026 (Session 48: Purpose-driven posts, visual diversity, 3-day visual dedup, no-text-in-images rule, auto reference analysis)
 
 ---
 
@@ -1454,11 +1454,21 @@ orchestrator.py warroom {morning|evening}
 
 **Design principle preserved**: D31 (Strategist sets intent, Creator has autonomy) — Strategist assigns purpose and focal dimension, Creator has full autonomy on scene, outfit, pose, lighting execution.
 
-**Verification**: Full pipeline run for EN on 2026-03-25 — Strategist produced 4 unique purposes (body_showcase, engagement_hook, lifestyle_vibe, face_beauty) with 4 unique emphases and 3 unique framings. Creator output passed all 14 validation checks including new diversity matrix. Strategy validation (16 checks) and creator cross-validation both passed.
+**Additional improvements** (same session):
+
+1. **Auto reference analysis**: Pipeline Step 0 now runs `analyze_references.py` before Strategist, so new images added to `media/reference/` are automatically picked up. Non-fatal — pipeline continues with existing catalog if analysis fails.
+
+2. **3-day visual dedup**: Orchestrator extracts visual fingerprints (scene, pose, framing, angle, outfit top) from last 3 content plans (~12 posts) and injects as `{{recent_visual_history}}` blocklist into Creator prompt. Rules: no same scene location 3 days, no same pose+framing combo, no same outfit top 2 days, no same angle+framing combo 1 day.
+
+3. **No text/letters in images**: New Tier 1 rule — NEVER include words, letters, numbers, logos, brand names, or typography in image prompts, even if reference images have text. Negative prompt base block updated with `text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text`. Validation enforces both prompt content and negative_prompt inclusion.
+
+**Verification**: Full pipeline run for EN on 2026-03-25 — Strategist produced 4 unique purposes (body_showcase, engagement_hook, lifestyle_vibe, face_beauty) with 4 unique emphases and 3 unique framings. Creator output passed all validation checks including new diversity matrix. Strategy validation (16 checks) and creator cross-validation both passed.
 
 **Decision D34**: Validate visual diversity on Creator OUTPUT (actual image_prompt fields), not on Strategist input. Strategist provides intent; enforcement belongs at the output layer.
 
-**Files modified** (4): `prompts/strategist.md` (creative briefs rewrite + schema + validation checklist), `prompts/creator.md` (purpose-first process + visual diversity check), `scripts/validate.py` (diversity matrix + strategist brief checks), `scripts/orchestrator.py` (moment_seed comment cleanup)
+**Decision D35**: Auto-analyze reference images at pipeline start so operator can simply drop new images into `media/reference/` daily without running a separate script.
+
+**Files modified** (5): `prompts/strategist.md` (creative briefs rewrite + schema + validation checklist), `prompts/creator.md` (purpose-first process + visual diversity check + visual history dedup + no-text rule), `scripts/validate.py` (diversity matrix + strategist brief checks + text-in-image checks), `scripts/orchestrator.py` (auto reference analysis + visual history extraction + moment_seed cleanup), `config/image_prompt_guide.md` (negative prompt text exclusions in base + combined + all 6 templates)
 
 ---
 
@@ -1907,13 +1917,14 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 48 — Purpose-Driven Posts + Visual Diversity Matrix (March 26, 2026). Replaced story-arc `moment_seed` with standalone `post_purpose` + `visual_focus`. Visual diversity matrix enforced on Creator output (framings, angles, poses, outfit coverage). Pipeline run verified: 4 unique purposes, 4 unique emphases, all validations passed.
+**Latest**: Session 48 — Purpose-Driven Posts + Visual Diversity + 3-Day Dedup + No-Text Rule (March 26, 2026). Replaced story-arc `moment_seed` with standalone `post_purpose` + `visual_focus`. Visual diversity matrix enforced on Creator output. 3-day visual history dedup prevents similar image prompts across 12 posts. Auto reference analysis at pipeline start. No text/letters in images enforced as Tier 1 rule.
 
-Session 48 files modified (4 files):
+Session 48 files modified (5 files):
 - `prompts/strategist.md` — Creative briefs rewrite: `moment_seed` → `post_purpose` (5 types) + `visual_focus` (emphasis + framing). Diversity rules. Updated schema + validation checklist.
-- `prompts/creator.md` — Purpose-first process replacing moment-first. Visual diversity check section. Emphasis→image and purpose→caption mapping tables.
-- `scripts/validate.py` — Added Check 14 (visual diversity matrix) to `validate_creator()`. Added Check 10 (creative_briefs structure + diversity) to `validate_strategist()`. Check counts updated.
-- `scripts/orchestrator.py` — Comment cleanup: `moment_seed` references → `post_purpose`/`visual_focus`
+- `prompts/creator.md` — Purpose-first process replacing moment-first. Visual diversity check section. `{{recent_visual_history}}` 3-day dedup blocklist. No-text-in-images Tier 1 rule. Emphasis→image and purpose→caption mapping tables.
+- `scripts/validate.py` — Added Check 14 (visual diversity matrix) and text-in-image checks to `validate_creator()`. Added Check 10 (creative_briefs structure + diversity) to `validate_strategist()`.
+- `scripts/orchestrator.py` — Step 0 auto reference analysis. `_extract_recent_visual_history()` for 3-day visual dedup. `moment_seed` cleanup.
+- `config/image_prompt_guide.md` — Negative prompt base + combined + all 6 templates updated with text/letter/typography exclusions.
 
 Session 47 files created (1 file):
 - `scripts/import_twitter_archive.py` — Extract follower/following from Twitter data archive
@@ -1927,7 +1938,7 @@ Session 47 files modified (4 files):
 Session 46 files modified (10 files):
 - `prompts/creator.md` — References = content direction, expression whitelist (further updated Session 48: purpose-first process)
 - `prompts/strategist.md` — moment_seeds must match reference visual direction (further updated Session 48: moment_seed → post_purpose + visual_focus)
-- `config/image_prompt_guide.md` — Expression whitelist, teeth exclusions in negative prompt + all 6 templates
+- `config/image_prompt_guide.md` — Expression whitelist, teeth exclusions in negative prompt + all 6 templates (further updated Session 48: text/letter exclusions)
 - `config/meruru_concept.md` — Grok removed from EN engagement tools
 - `data/strategy/core_strategy.json` — Grok removed from EN engagement_tools
 - `scripts/generate_html_report.py` — Tool field removed from HTML copy_obj
@@ -2233,7 +2244,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Session 45 | v4 Architecture Redesign (Python Orchestrator + Strategic Manager) | Local machine | **✅ Complete** — orchestrator.py replaces Marc coordination, 3-tier constraints, creative briefs, 5 LLM agents, ~50% cost reduction |
 | Session 46 | Content Quality Fixes (Reference adoption, expression, grok removal) | Local machine | **✅ Complete** — reference adoption overhaul, expression whitelist, tool removal, grok removal, validation enforcement. 2 pipeline runs verified. |
 | Session 47 | Metrics Visibility Fix (Real data for Marc + directive dedup) | Local machine | **✅ Complete** — orchestrator feeds SQLite analytics + archive data to all agents. Directive dedup enforcement. Standing directives cleaned 58→15. |
-| Session 48 | Purpose-Driven Posts + Visual Diversity Matrix | Local machine | **✅ Complete** — `moment_seed` → `post_purpose` + `visual_focus`. Visual diversity matrix enforced on Creator output. Pipeline verified: 4 unique purposes, all validations passed. |
+| Session 48 | Purpose-Driven Posts + Visual Diversity + 3-Day Dedup + No-Text | Local machine | **✅ Complete** — `moment_seed` → `post_purpose` + `visual_focus`. Visual diversity matrix. 3-day visual dedup. Auto ref analysis. No-text-in-images rule. Pipeline verified. |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 
