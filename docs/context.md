@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 26, 2026 (Session 48: Purpose-driven posts, visual diversity, 3-day visual dedup, no-text-in-images rule, auto reference analysis, auto image generation plan)
+**Last updated**: March 29, 2026 (Session 48: Purpose-driven posts, visual diversity, personality captions, pipeline reliability fixes, false drought fix, auto image gen plan)
 
 ---
 
@@ -1462,26 +1462,35 @@ orchestrator.py warroom {morning|evening}
 
 3. **No text/letters in images**: New Tier 1 rule — NEVER include words, letters, numbers, logos, brand names, or typography in image prompts, even if reference images have text. Negative prompt base block updated with `text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text`. Validation enforces both prompt content and negative_prompt inclusion.
 
-**Verification**: Full pipeline run for EN on 2026-03-25 — Strategist produced 4 unique purposes (body_showcase, engagement_hook, lifestyle_vibe, face_beauty) with 4 unique emphases and 3 unique framings. Creator output passed all validation checks including new diversity matrix. Strategy validation (16 checks) and creator cross-validation both passed.
+**Verification**: Full pipeline run for EN on 2026-03-28 — Strategist produced 4 unique purposes with 4 unique emphases and 3 unique framings. Creator output: 4 posts with personality captions (e.g., "i started walking slower once i realized people were watching" — 61 chars). All validations passed except 1 caption at 20 chars (correctly caught by new 30-char minimum).
+
+**Additional improvements** (Mar 27-28, same session):
+
+4. **Personality captions**: Replaced 3-word fragments ("look back", "say less") with personality sentences showing Meruru's character. EN caption limit changed from <30 to 30-100 chars (aim 40-80). Validation enforces minimum. `meruru_concept.md` rewritten with personality-driven voice and examples.
+
+5. **False "pipeline drought" fix**: Agents claimed "zero posts published for 10 days" while operator was posting 3-5/day via X web UI. Root cause: agents looked at content plan `status: "draft"` instead of analytics `posts_created` data. Fixed: resolved 4 false-premise directives (DIR-025/034/036/037), added global rule forbidding drought claims when analytics shows posting, strengthened "operator posts manually" notes in Strategist + Marc prompts.
+
+6. **Pipeline reliability fixes**:
+   - `analyze_references.py` self-terminating `--timeout` (prevents pipeline crash from slow vision analysis)
+   - Reference catalog text compacted 302KB → 8KB (prevented Sonnet context overflow causing empty/fragment outputs)
+   - `_reconstruct_plan()` — when Creator outputs individual posts instead of wrapper JSON, orchestrator collects all post objects and reconstructs the full plan
+   - `run_claude_p()` retry logic (max 2 retries) for transient Bun/AVX crashes
+   - `extract_json()` detects post fragments and prefers full plan objects
+   - Creator timeout increased to 900s for large prompts
 
 **Decision D34**: Validate visual diversity on Creator OUTPUT (actual image_prompt fields), not on Strategist input. Strategist provides intent; enforcement belongs at the output layer.
 
 **Decision D35**: Auto-analyze reference images at pipeline start so operator can simply drop new images into `media/reference/` daily without running a separate script.
 
-**Decision D36**: Automate image generation via Browser Use CLI controlling the Higgsfield web UI (using existing Pro plan credits), not via the separate Higgsfield Cloud API (which requires additional pay-as-you-go credits). Browser Use acts as a robot controlling a real browser — Higgsfield sees a normal Pro plan session.
+**Decision D36**: Automate image generation via Browser Use CLI controlling the Higgsfield web UI (using existing Pro plan credits), not via the separate Higgsfield Cloud API (which requires additional pay-as-you-go credits).
 
-**Auto image generation plan** (`docs/plan-auto-image-generation.md`):
-- **Approach**: Browser Use CLI automates the Higgsfield web UI using the operator's existing Pro plan ($29/mo). No extra API credits.
-- **Pipeline addition**: 2 new steps after Creator — `generate_images.py` (Browser Use) → `validate_images.py` (Claude Vision QA) with retry loop (max 2 retries per rejected image).
-- **Character consistency**: Generate-and-filter strategy — Claude Vision compares each generated image against canonical Meruru references. Auto-reject score <60, auto-accept ≥80.
-- **Graceful degradation**: When image gen fails, pipeline continues and operator gets prompts for manual generation.
-- **Extra cost**: ~$8-31/mo (Browser Use LLM + Claude Vision only). No extra Higgsfield charges.
-- **Effort**: ~15-17 hours. Step 1 (Browser Use + Higgsfield web UI mapping) is prerequisite before coding.
-- **Alternatives evaluated**: Higgsfield API (requires separate credits — rejected), Playwright (brittle to UI changes), Claude Computer Use (too expensive at $0.50-5/image).
+**Decision D37**: Never claim "pipeline drought" when analytics `posts_created` shows active posting. Content plan `status: "draft"` is expected — operator posts manually via X web UI, not through publisher.py.
 
-**Files modified** (5): `prompts/strategist.md` (creative briefs rewrite + schema + validation checklist), `prompts/creator.md` (purpose-first process + visual diversity check + visual history dedup + no-text rule), `scripts/validate.py` (diversity matrix + strategist brief checks + text-in-image checks), `scripts/orchestrator.py` (auto reference analysis + visual history extraction + moment_seed cleanup), `config/image_prompt_guide.md` (negative prompt text exclusions in base + combined + all 6 templates)
+**Auto image generation plan** (`docs/plan-auto-image-generation.md`): Browser Use CLI automates the Higgsfield web UI using existing Pro plan ($29/mo). No extra API credits. ~15-17 hours effort. Plan only — not yet implemented.
 
-**Files created** (1): `docs/plan-auto-image-generation.md` (full implementation plan for automated image generation)
+**Files modified** (9): `prompts/strategist.md`, `prompts/creator.md`, `prompts/marc_review.md`, `scripts/validate.py`, `scripts/orchestrator.py`, `scripts/analyze_references.py`, `config/image_prompt_guide.md`, `config/meruru_concept.md`, `config/global_rules.md`
+
+**Files created** (1): `docs/plan-auto-image-generation.md`
 
 ---
 
@@ -1551,6 +1560,7 @@ orchestrator.py warroom {morning|evening}
 | D34 | Validate visual diversity on Creator output, not Strategist input | Strategist provides intent (purpose + focus); enforcement belongs at the output layer where actual image_prompt fields can be checked (Session 48) |
 | D35 | Auto-analyze reference images at pipeline start | Operator drops images into `media/reference/` daily — pipeline picks them up automatically (Session 48) |
 | D36 | Automate image gen via Browser Use on web UI, not Higgsfield API | Higgsfield Cloud API requires separate pay-as-you-go credits ($23-68/mo extra). Browser Use controls the web UI using existing Pro plan — no extra cost (Session 48) |
+| D37 | Never claim "pipeline drought" when analytics shows posting | Content plan `status: "draft"` is expected — operator posts manually. Trust `posts_created` from analytics over content plan statuses (Session 48) |
 
 ---
 
@@ -1932,14 +1942,18 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 48 — Purpose-Driven Posts + Visual Diversity + 3-Day Dedup + No-Text Rule (March 26, 2026). Replaced story-arc `moment_seed` with standalone `post_purpose` + `visual_focus`. Visual diversity matrix enforced on Creator output. 3-day visual history dedup prevents similar image prompts across 12 posts. Auto reference analysis at pipeline start. No text/letters in images enforced as Tier 1 rule.
+**Latest**: Session 48 — Purpose-Driven Posts + Personality Captions + Pipeline Fixes (March 26-29, 2026). Major content quality overhaul: purpose-driven posts, visual diversity matrix, personality captions (30-100 chars), 3-day visual dedup, no-text-in-images. Pipeline reliability: self-terminating ref analysis, compact reference text (302KB→8KB), plan reconstruction, claude -p retry logic. Fixed false "pipeline drought" caused by agents reading content plan statuses instead of analytics data.
 
-Session 48 files modified (5 files):
-- `prompts/strategist.md` — Creative briefs rewrite: `moment_seed` → `post_purpose` (5 types) + `visual_focus` (emphasis + framing). Diversity rules. Updated schema + validation checklist.
-- `prompts/creator.md` — Purpose-first process replacing moment-first. Visual diversity check section. `{{recent_visual_history}}` 3-day dedup blocklist. No-text-in-images Tier 1 rule. Emphasis→image and purpose→caption mapping tables.
-- `scripts/validate.py` — Added Check 14 (visual diversity matrix) and text-in-image checks to `validate_creator()`. Added Check 10 (creative_briefs structure + diversity) to `validate_strategist()`.
-- `scripts/orchestrator.py` — Step 0 auto reference analysis. `_extract_recent_visual_history()` for 3-day visual dedup. `moment_seed` cleanup.
-- `config/image_prompt_guide.md` — Negative prompt base + combined + all 6 templates updated with text/letter/typography exclusions.
+Session 48 files modified (9 files):
+- `prompts/strategist.md` — Creative briefs rewrite: `moment_seed` → `post_purpose` + `visual_focus`. Diversity rules. Updated schema + validation checklist. Strengthened "operator posts manually" note.
+- `prompts/creator.md` — Purpose-first process. Visual diversity check. `{{recent_visual_history}}` 3-day dedup. No-text-in-images Tier 1 rule. Personality captions (30-100 chars, aim 40-80). Emphasis→image and purpose→caption mapping tables.
+- `prompts/marc_review.md` — EN caption limit updated to 30-100 (minimum, not maximum).
+- `scripts/validate.py` — Visual diversity matrix, strategist brief checks, text-in-image checks, EN caption length 30-100 enforcement.
+- `scripts/orchestrator.py` — Step 0 auto ref analysis with `--timeout`. `_extract_recent_visual_history()`. `_reconstruct_plan()` for fragmented Creator output. `run_claude_p()` retry logic for Bun crashes. Compact reference text (20 most recent, 302KB→8KB). Creator timeout 900s.
+- `scripts/analyze_references.py` — Self-terminating `--timeout` flag. Saves partial progress before budget expires.
+- `config/image_prompt_guide.md` — Negative prompt text/letter/typography exclusions in base + combined + all 6 templates.
+- `config/meruru_concept.md` — Caption voice rewrite: personality sentences replacing fragments. New examples showing mood, humor, confessions.
+- `config/global_rules.md` — New rule: never claim drought when analytics shows `posts_created > 0`.
 
 Session 47 files created (1 file):
 - `scripts/import_twitter_archive.py` — Extract follower/following from Twitter data archive
@@ -2259,7 +2273,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Session 45 | v4 Architecture Redesign (Python Orchestrator + Strategic Manager) | Local machine | **✅ Complete** — orchestrator.py replaces Marc coordination, 3-tier constraints, creative briefs, 5 LLM agents, ~50% cost reduction |
 | Session 46 | Content Quality Fixes (Reference adoption, expression, grok removal) | Local machine | **✅ Complete** — reference adoption overhaul, expression whitelist, tool removal, grok removal, validation enforcement. 2 pipeline runs verified. |
 | Session 47 | Metrics Visibility Fix (Real data for Marc + directive dedup) | Local machine | **✅ Complete** — orchestrator feeds SQLite analytics + archive data to all agents. Directive dedup enforcement. Standing directives cleaned 58→15. |
-| Session 48 | Purpose-Driven Posts + Visual Diversity + 3-Day Dedup + No-Text | Local machine | **✅ Complete** — `moment_seed` → `post_purpose` + `visual_focus`. Visual diversity matrix. 3-day visual dedup. Auto ref analysis. No-text-in-images rule. Pipeline verified. |
+| Session 48 | Purpose-Driven Posts + Personality Captions + Pipeline Fixes | Local machine | **✅ Complete** — `moment_seed` → `post_purpose` + `visual_focus`. Visual diversity matrix. Personality captions (30-100 chars). 3-day visual dedup. No-text rule. Plan reconstruction. Retry logic. False drought fix. 9 files modified. |
 | Session 48b | Auto Image Generation Plan | Local machine | **📋 Planned** — Browser Use CLI to automate Higgsfield web UI using existing Pro plan. Plan at `docs/plan-auto-image-generation.md`. |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
@@ -2328,3 +2342,6 @@ The operator subscribes to Claude Max ($100/mo) which includes unlimited `claude
 | **Post Purpose** | One of 5 strategic intents assigned per slot: `body_showcase`, `face_beauty`, `lifestyle_vibe`, `engagement_hook`, `style_flex`. Replaced `moment_seed` narrative arcs (Session 48) |
 | **Visual Focus** | Lightweight 2-field Strategist directive: `emphasis` (where the viewer's eye goes) + `framing` (how tight the shot is). Creator has full autonomy on everything else (Session 48) |
 | **Visual Diversity Matrix** | Validation check on Creator output ensuring variety across 4-post sets: framings≥2, angles≥2, poses≥3, outfit coverage levels≥2. Prevents monotonous profile grids (Session 48) |
+| **Personality Captions** | EN captions must be 30-100 chars showing Meruru's character (mood, humor, confessions, inner monologue) — not 3-word fragments. Aim 40-80 chars. Validated by validate.py (Session 48) |
+| **Plan Reconstruction** | `_reconstruct_plan()` in orchestrator.py — when Creator (Sonnet) outputs individual post JSON objects instead of the wrapper, orchestrator collects all posts and rebuilds the full plan structure (Session 48) |
+| **Recent Visual History** | Orchestrator-extracted fingerprints (scene, pose, framing, angle, outfit) from last 3 content plans (~12 posts), injected as `{{recent_visual_history}}` blocklist to prevent Creator from repeating similar images (Session 48) |
