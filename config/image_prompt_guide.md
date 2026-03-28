@@ -61,9 +61,14 @@ These profiles are **locked** — use these exact traits for every post on the r
 - **Age**: Early 20s
 - **Ethnicity**: Japanese
 - **Hair**: Dark/jet-black or dark brown, long straight or wavy (style varies per post, color stays dark)
-- **Body**: Fitness hourglass figure, ample chest, toned core, wide hips, thick thighs
+- **Body**: Extreme hourglass figure, fit and toned
+- **Bust**: Large, full, heavy volume
+- **Waist**: Ultra-slim, snatched, high contrast between waist and hips
+- **Hips**: Extra wide, voluptuous, muscular and round
+- **Glutes**: Highly emphasized, large and rounded buttocks
 - **Skin**: Light-medium neutral, smooth
 - **Face**: Naturally attractive, expressive features
+- **Expression rule**: No teeth-showing smiles. ONLY permitted terms: "closed-mouth smile", "subtle smirk", "lips softly closed", "lips slightly parted", "neutral gaze", "soft pout". NEVER use "bright smile" — image generators interpret this as teeth-showing.
 - **Makeup**: Minimal — natural brows, soft lip
 - **Persona**: Real influencer feel — confident, playful, casually flirty. Never reveals AI nature. "Cute but Deadly" — effortlessly charming, quietly strategic.
 
@@ -72,7 +77,11 @@ These profiles are **locked** — use these exact traits for every post on the r
 - **Age**: Early 20s
 - **Ethnicity**: Japanese / East Asian
 - **Hair**: Dark (black or dark brown), long, straight or soft waves
-- **Body**: Hourglass figure, large full chest, slim waist, wide full hips
+- **Body**: Extreme hourglass figure, fit and toned
+- **Bust**: Large, full, heavy volume
+- **Waist**: Ultra-slim, snatched, high contrast between waist and hips
+- **Hips**: Extra wide, voluptuous, muscular and round
+- **Glutes**: Highly emphasized, large and rounded buttocks
 - **Skin**: Fair porcelain, smooth, natural glow
 - **Face**: Delicate features, almond-shaped eyes, natural Korean-style makeup
 - **Persona**: Warm, authentic, intimate. Natural Japanese social media style.
@@ -142,9 +151,8 @@ mood:
 
 ```json
 {
-  "tool": "higgsfield",
-  "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young woman in her early 20s standing in a modern minimalist bedroom. She has long dark brown hair falling past her shoulders in soft natural waves. Hourglass athletic-toned figure with natural skin texture and visible pores. She wears a fitted white ribbed crop top and high-waisted black yoga pants that hug her curves. One hand holds an iPhone 15 Pro Max at chest height, the other rests casually on her hip with fingers slightly spread. Her weight shifts to her left leg creating a subtle hip tilt. She gazes at the phone screen with a relaxed confident expression and soft natural smile. Slight head tilt to the right. The room has a clean white wall behind a large black-framed full-length mirror, grey carpet, and a neatly made bed with white linens visible in the background. Natural golden hour sunlight streams from a window to the left, casting warm highlights across her skin and soft directional shadows on the wall. The lighting creates a warm glow on her face and arms. Soft pink, clean white, warm gold color palette. Casual everyday influencer aesthetic. Shot at eye-level in portrait orientation, centered composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
-  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+    "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young woman in her early 20s standing in a modern minimalist bedroom. She has long dark brown hair falling past her shoulders in soft natural waves. Hourglass athletic-toned figure with natural skin texture and visible pores. She wears a fitted white ribbed crop top and high-waisted black yoga pants that hug her curves. One hand holds an iPhone 15 Pro Max at chest height, the other rests casually on her hip with fingers slightly spread. Her weight shifts to her left leg creating a subtle hip tilt. She gazes at the phone screen with a relaxed confident expression and soft natural smile. Slight head tilt to the right. The room has a clean white wall behind a large black-framed full-length mirror, grey carpet, and a neatly made bed with white linens visible in the background. Natural golden hour sunlight streams from a window to the left, casting warm highlights across her skin and soft directional shadows on the wall. The lighting creates a warm glow on her face and arms. Soft pink, clean white, warm gold color palette. Casual everyday influencer aesthetic. Shot at eye-level in portrait orientation, centered composition. Photorealistic, high quality, high resolution, 9:16 aspect ratio.",
+  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
   "aspect_ratio": "9:16",
   "meta": {
     "quality": "ultra photorealistic",
@@ -204,9 +212,8 @@ mood:
 
 ```json
 {
-  "tool": "higgsfield",
-  "prompt": "Ultra photorealistic photo of a young Japanese woman in her early 20s in a modern luxury hotel bathroom just after a shower. She has long straight black hair, wet and clinging to her shoulders and back with water droplets visible. Fair porcelain skin with a natural dewy glow, smooth with subtle water drops on her collarbones and shoulders. Hourglass figure with full curves. She wears a plush oversized white hotel towel wrapped around her torso, tucked above her chest, the towel ending at upper thigh. Delicate features with almond-shaped eyes and natural Korean-style makeup — subtle brow, light mascara, dewy skin finish, soft pink lip tint. She stands facing a large frameless bathroom mirror, holding her phone with both hands at face level, taking a selfie with a warm intimate expression, lips slightly parted, soft gaze at the screen. Slight forward lean toward the mirror. The bathroom has white marble countertop with chrome fixtures, warm recessed lighting overhead, a frosted glass shower door behind her with visible steam wisps, folded grey towels on the counter. Warm artificial lighting from above creates a soft diffused glow on her wet skin, highlights the water droplets, and produces gentle shadows under her jawline. Warm ivory, soft white, chrome silver color palette. Intimate post-shower aesthetic. Shot from mirror reflection POV, slightly low angle, medium shot waist-up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
-  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+    "prompt": "Ultra photorealistic photo of a young Japanese woman in her early 20s in a modern luxury hotel bathroom just after a shower. She has long straight black hair, wet and clinging to her shoulders and back with water droplets visible. Fair porcelain skin with a natural dewy glow, smooth with subtle water drops on her collarbones and shoulders. Hourglass figure with full curves. She wears a plush oversized white hotel towel wrapped around her torso, tucked above her chest, the towel ending at upper thigh. Delicate features with almond-shaped eyes and natural Korean-style makeup — subtle brow, light mascara, dewy skin finish, soft pink lip tint. She stands facing a large frameless bathroom mirror, holding her phone with both hands at face level, taking a selfie with a warm intimate expression, lips slightly parted, soft gaze at the screen. Slight forward lean toward the mirror. The bathroom has white marble countertop with chrome fixtures, warm recessed lighting overhead, a frosted glass shower door behind her with visible steam wisps, folded grey towels on the counter. Warm artificial lighting from above creates a soft diffused glow on her wet skin, highlights the water droplets, and produces gentle shadows under her jawline. Warm ivory, soft white, chrome silver color palette. Intimate post-shower aesthetic. Shot from mirror reflection POV, slightly low angle, medium shot waist-up, centered composition. Photorealistic, high quality, high resolution, 4:5 aspect ratio.",
+  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
   "aspect_ratio": "4:5",
   "meta": {
     "quality": "ultra photorealistic",
@@ -264,9 +271,8 @@ mood:
 
 ```json
 {
-  "tool": "higgsfield",
-  "prompt": "Ultra photorealistic raw iPhone photo of a young woman in her early 20s at the beach. She has long dark brown hair slightly tousled by the wind. Fitness hourglass figure with light-medium skin glistening with sunscreen. She wears a simple black bikini. She stands in shallow water at the shoreline, one hand pushing hair back from her face, the other at her side. Weight on one hip, relaxed confident pose. She looks at the camera with a playful smirk. Sandy beach and blue ocean behind her. Bright natural sunlight. Warm bronze, ocean blue, clean white color palette. Casual beach selfie aesthetic. Full body, eye-level, 4:5 portrait. Photorealistic, high quality, high resolution.",
-  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+    "prompt": "Ultra photorealistic raw iPhone photo of a young woman in her early 20s at the beach. She has long dark brown hair slightly tousled by the wind. Fitness hourglass figure with light-medium skin glistening with sunscreen. She wears a simple black bikini. She stands in shallow water at the shoreline, one hand pushing hair back from her face, the other at her side. Weight on one hip, relaxed confident pose. She looks at the camera with a playful smirk. Sandy beach and blue ocean behind her. Bright natural sunlight. Warm bronze, ocean blue, clean white color palette. Casual beach selfie aesthetic. Full body, eye-level, 4:5 portrait. Photorealistic, high quality, high resolution.",
+  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
   "aspect_ratio": "4:5",
   "meta": {
     "quality": "ultra photorealistic",
@@ -326,9 +332,8 @@ mood:
 
 ```json
 {
-  "tool": "higgsfield",
-  "prompt": "Ultra photorealistic raw iPhone photo of a young Japanese woman in her early 20s sitting on her unmade bed. Long straight dark brown hair draped over one shoulder. Fitness hourglass figure, light-medium smooth skin. She wears an oversized white tee and black shorts, casual and relaxed. She sits cross-legged on rumpled white sheets, leaning forward with chin resting on one hand. She looks at the camera with a warm smile, soft eyes. Simple bedroom — white wall, unmade bed with white sheets. Warm natural light from a window. Cozy, intimate, everyday. Medium shot, eye-level, 4:5 portrait. Photorealistic, high quality, high resolution.",
-  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+    "prompt": "Ultra photorealistic raw iPhone photo of a young Japanese woman in her early 20s sitting on her unmade bed. Long straight dark brown hair draped over one shoulder. Fitness hourglass figure, light-medium smooth skin. She wears an oversized white tee and black shorts, casual and relaxed. She sits cross-legged on rumpled white sheets, leaning forward with chin resting on one hand. She looks at the camera with a warm smile, soft eyes. Simple bedroom — white wall, unmade bed with white sheets. Warm natural light from a window. Cozy, intimate, everyday. Medium shot, eye-level, 4:5 portrait. Photorealistic, high quality, high resolution.",
+  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
   "aspect_ratio": "4:5",
   "meta": {
     "quality": "ultra photorealistic",
@@ -387,9 +392,8 @@ mood:
 
 ```json
 {
-  "tool": "higgsfield",
-  "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young woman in her early 20s at the gym. Long dark brown hair in a high ponytail, slightly sweaty. Fitness hourglass figure with toned arms and visible abs, light-medium skin with a natural post-workout flush. She wears a black sports bra and grey high-waisted leggings. She holds her iPhone at chest height in a gym mirror, other hand on hip. Confident expression, slight smirk, looking at phone screen. Gym mirror with weight rack visible behind her. Bright gym fluorescent lighting. Dark, grey, warm skin tones. Raw gym selfie aesthetic. Full body, eye-level, 9:16 portrait. Photorealistic, high quality, high resolution.",
-  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+    "prompt": "Ultra photorealistic raw iPhone mirror selfie of a young woman in her early 20s at the gym. Long dark brown hair in a high ponytail, slightly sweaty. Fitness hourglass figure with toned arms and visible abs, light-medium skin with a natural post-workout flush. She wears a black sports bra and grey high-waisted leggings. She holds her iPhone at chest height in a gym mirror, other hand on hip. Confident expression, slight smirk, looking at phone screen. Gym mirror with weight rack visible behind her. Bright gym fluorescent lighting. Dark, grey, warm skin tones. Raw gym selfie aesthetic. Full body, eye-level, 9:16 portrait. Photorealistic, high quality, high resolution.",
+  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
   "aspect_ratio": "9:16",
   "meta": {
     "quality": "ultra photorealistic",
@@ -448,9 +452,8 @@ mood:
 
 ```json
 {
-  "tool": "higgsfield",
-  "prompt": "Ultra photorealistic raw iPhone photo of a young Japanese woman in her early 20s outdoors in casual clothes. Long dark brown hair flowing naturally. Fitness hourglass figure, light-medium skin. She wears a simple crop top and jeans, holding iced coffee. She stands on a sidewalk, looking back at the camera with a natural smile. Simple urban background, slightly blurred. Warm afternoon sunlight. Casual candid photo aesthetic. Three-quarter body, eye-level, 4:5 portrait. Photorealistic, high quality, high resolution.",
-  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction",
+    "prompt": "Ultra photorealistic raw iPhone photo of a young Japanese woman in her early 20s outdoors in casual clothes. Long dark brown hair flowing naturally. Fitness hourglass figure, light-medium skin. She wears a simple crop top and jeans, holding iced coffee. She stands on a sidewalk, looking back at the camera with a natural smile. Simple urban background, slightly blurred. Warm afternoon sunlight. Casual candid photo aesthetic. Three-quarter body, eye-level, 4:5 portrait. Photorealistic, high quality, high resolution.",
+  "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
   "aspect_ratio": "4:5",
   "meta": {
     "quality": "ultra photorealistic",
@@ -508,7 +511,7 @@ Build the `negative_prompt` field by combining relevant blocks. **Always include
 
 ### Base (ALWAYS include)
 ```
-blurry, low quality, low resolution, artifacts, text, watermark, logo
+blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text
 ```
 
 ### Anatomy
@@ -531,10 +534,65 @@ plastic skin, airbrushed texture, skin smoothing, beautification filters
 anatomy normalization, body proportion averaging, aesthetic proportion correction
 ```
 
+### Expression Control
+```
+teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile
+```
+
 ### Standard Combined (use for most prompts)
 ```
-blurry, low quality, low resolution, artifacts, text, watermark, logo, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction
+blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile
 ```
+
+---
+
+## 3-Tier Constraint Hierarchy
+
+### Tier 1 — ENFORCED (validation fails if violated)
+- **Character lock**: Subject must match fixed character profile (age, body type, skin, ethnicity)
+- **iPhone only**: camera = "iPhone 15 Pro Max", lens = "24mm wide" — NEVER DSLR
+- **Negative prompt**: ALWAYS include the standard combined block
+- **Prompt length**: 120-180 words max
+- **meta.style**: casual terms ONLY (NEVER "editorial")
+
+### Tier 2 — STRONG DEFAULTS (recommended, not enforced)
+- **10 scene types**: bedroom mirror, bathroom, beach/pool, gym, cozy bedroom, car interior, kitchen, cafe, living room, rooftop outdoor
+- **Casual outfits**: sports bra, bikini, crop top, loungewear, oversized tee, bodysuit, shorts, leggings, sundress, tank top, hoodie
+- **Max 2-3 background props** per scene
+- **Lighting**: 1 sentence max
+
+### Tier 3 — CREATIVE FREEDOM (Creator chooses freely)
+- **Pose**: standing, sitting, lying, kneeling, leaning, mid-turn, crouching, stretching, walking, looking back, arms up
+- **Mood/energy**: quiet, bold, playful, intimate, confident, dreamy, fierce, serene, mischievous, powerful, vulnerable
+- **Lighting direction/warmth**: natural, warm lamp, cool blue, golden, dramatic, soft diffused
+- **Color palette**: any complementary palette
+- **Camera angle**: eye-level, low angle, high angle, dutch angle, over-shoulder
+- **Props**: phone, coffee, towel, pillow, sunglasses, jewelry, headphones, book, etc.
+- **Hair styling**: straight, wavy, ponytail, messy bun, braids, half-up, wet, windswept
+
+---
+
+## Additional Scene Types (beyond the 5 core)
+
+### 7. Car Interior
+- Sitting in passenger/driver seat, natural window light
+- Sub-variants: parked with window light, backseat casual, driving mirror selfie
+
+### 8. Kitchen / Morning
+- Counter leaning, coffee in hand, morning light from window
+- Sub-variants: kitchen counter lean, breakfast table, morning coffee moment
+
+### 9. Cafe / Coffee Shop
+- Window seat, ambient cafe lighting
+- Sub-variants: corner booth, outdoor terrace, counter stool
+
+### 10. Living Room / Couch
+- Lounging on sofa, TV glow, cozy evening
+- Sub-variants: couch curl-up, floor pillow, blanket nest
+
+### 11. Rooftop / Balcony (occasional — not every day)
+- City or nature backdrop, golden hour, wind in hair
+- Sub-variants: sunset balcony, morning rooftop, urban skyline
 
 ---
 

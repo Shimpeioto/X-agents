@@ -146,20 +146,21 @@ def validate_strategist(strategy_path: str) -> tuple[bool, list[str]]:
         if not isinstance(hs, dict):
             issues.append(f"hashtag_strategy_missing: {account} hashtag_strategy not found")
 
-        # Check 7: outbound_strategy within limits
-        os_section = section.get("outbound_strategy", {})
-        if isinstance(os_section, dict):
-            likes = os_section.get("daily_likes", 0)
-            replies = os_section.get("daily_replies", 0)
-            follows = os_section.get("daily_follows", 0)
-            if isinstance(likes, (int, float)) and likes > 30:
-                issues.append(f"outbound_likes: {account} daily_likes={likes}, max is 30")
-            if isinstance(replies, (int, float)) and replies > 10:
-                issues.append(f"outbound_replies: {account} daily_replies={replies}, max is 10")
-            if isinstance(follows, (int, float)) and follows > 5:
-                issues.append(f"outbound_follows: {account} daily_follows={follows}, max is 5")
-        else:
-            issues.append(f"outbound_missing: {account} outbound_strategy not found")
+        # Check: EN must NOT have grok_interactive (removed from EN pillars)
+        if account == "EN" and isinstance(content_mix, dict):
+            if "grok_interactive" in content_mix:
+                issues.append(f"en_grok_banned: EN content_mix contains 'grok_interactive' — grok is removed from EN pillars")
+            en_allowed = {"image_showcase", "engagement_questions", "self_quote_chains"}
+            for cat in content_mix:
+                if cat not in en_allowed:
+                    issues.append(f"en_invalid_category: EN content_mix contains '{cat}' — only allowed: {en_allowed}")
+        # Check: EN posting_schedule categories must not include grok_interactive
+        if account == "EN" and isinstance(schedule, list):
+            for i, slot in enumerate(schedule):
+                if isinstance(slot, dict) and slot.get("category") == "grok_interactive":
+                    issues.append(f"en_grok_in_schedule: EN posting_schedule slot {i+1} has category 'grok_interactive' — banned for EN")
+
+        # Check 7: (outbound_strategy discontinued — skip)
 
         # Check 8: ab_test present
         if "ab_test" not in section or not isinstance(section.get("ab_test"), dict):
@@ -169,6 +170,53 @@ def validate_strategist(strategy_path: str) -> tuple[bool, list[str]]:
         insights = section.get("key_insights", [])
         if not isinstance(insights, list) or len(insights) < 3:
             issues.append(f"key_insights_count: {account} has {len(insights) if isinstance(insights, list) else 0} insights, expected >= 3")
+
+        # Check 10: creative_briefs structure — post_purpose + visual_focus
+        briefs = section.get("creative_briefs", [])
+        if isinstance(briefs, list) and len(briefs) > 0:
+            valid_purposes = {"body_showcase", "face_beauty", "lifestyle_vibe", "engagement_hook", "style_flex"}
+            valid_emphasis = {"bust", "hips", "silhouette", "face", "back", "legs"}
+            valid_framing = {"close-up", "medium", "full-body"}
+            purposes_seen = set()
+            emphasis_seen = set()
+            framing_seen = set()
+
+            for i, brief in enumerate(briefs):
+                if not isinstance(brief, dict):
+                    continue
+
+                # Each brief must have post_purpose
+                pp = brief.get("post_purpose", "")
+                if pp not in valid_purposes:
+                    issues.append(f"creative_brief_purpose: {account} brief[{i}] post_purpose '{pp}' not in {valid_purposes}")
+                else:
+                    purposes_seen.add(pp)
+
+                # Each brief must have visual_focus (optional for JP grok_interactive)
+                vf = brief.get("visual_focus")
+                is_grok = account == "JP" and brief.get("post_purpose") == "grok_interactive"
+                if vf is None and not is_grok:
+                    issues.append(f"creative_brief_visual_focus: {account} brief[{i}] missing visual_focus")
+                elif isinstance(vf, dict):
+                    emp = vf.get("emphasis", "")
+                    frm = vf.get("framing", "")
+                    if emp and emp in valid_emphasis:
+                        emphasis_seen.add(emp)
+                    elif emp:
+                        issues.append(f"creative_brief_emphasis: {account} brief[{i}] emphasis '{emp}' not in {valid_emphasis}")
+                    if frm and frm in valid_framing:
+                        framing_seen.add(frm)
+                    elif frm:
+                        issues.append(f"creative_brief_framing: {account} brief[{i}] framing '{frm}' not in {valid_framing}")
+
+            # Diversity checks (only for 4+ briefs)
+            if len(briefs) >= 4:
+                if len(purposes_seen) < 3:
+                    issues.append(f"creative_brief_diversity: {account} only {len(purposes_seen)} unique post_purpose(s) {purposes_seen}, need 3+")
+                if len(emphasis_seen) < 2:
+                    issues.append(f"creative_brief_diversity: {account} only {len(emphasis_seen)} unique visual_focus.emphasis value(s) {emphasis_seen}, need 2+")
+                if len(framing_seen) < 2:
+                    issues.append(f"creative_brief_diversity: {account} only {len(framing_seen)} unique visual_focus.framing value(s) {framing_seen}, need 2+")
 
     passed = len(issues) == 0
     return passed, issues
@@ -329,46 +377,138 @@ def validate_creator(plan_path: str) -> tuple[bool, list[str]]:
         if isinstance(text, str) and text.lstrip().startswith("@"):
             issues.append(f"text_starts_with_at: post[{i}] text starts with '@' (hidden from feeds)")
 
-    # Check 10: Image prompts have required fields
-    valid_tools = {"higgsfield", "midjourney", "stable_diffusion", "dall_e"}
-    ip_extended_fields = ["meta", "subject", "outfit", "pose", "scene", "camera", "lighting"]
+    # Check 15: EN caption length (30-100 chars — personality sentence, not fragments)
+    if account == "EN":
+        for i, post in enumerate(posts):
+            text = post.get("text", "")
+            if isinstance(text, str):
+                text_len = len(text.strip())
+                if text_len > 0 and text_len < 30:
+                    issues.append(f"caption_too_short: post[{i}] EN caption is {text_len} chars ('{text}'), need 30+ — personality sentence required")
+                elif text_len > 100:
+                    issues.append(f"caption_too_long: post[{i}] EN caption is {text_len} chars, max 100")
+
+    # Check 10: Image prompts — Tier 1 constraints only
     for i, post in enumerate(posts):
         ip = post.get("image_prompt", {})
         if not isinstance(ip, dict):
             issues.append(f"invalid_image_prompt: post[{i}] image_prompt is not a dict")
         else:
-            ip_required = ["tool", "prompt", "negative_prompt", "aspect_ratio"]
+            # Tier 1: Required fields (tool removed — unnecessary)
+            ip_required = ["prompt", "negative_prompt", "aspect_ratio"]
             ip_missing = [f for f in ip_required if f not in ip]
             if ip_missing:
                 issues.append(f"image_prompt_missing: post[{i}] image_prompt missing {ip_missing}")
-            # Validate tool value
-            tool_val = ip.get("tool", "")
-            if tool_val and tool_val not in valid_tools:
-                issues.append(f"invalid_image_tool: post[{i}] image_prompt tool '{tool_val}' not in {valid_tools}")
-            # Validate negative_prompt is non-empty
+            # Tier 1: Negative prompt must be non-empty
             neg = ip.get("negative_prompt", "")
             if isinstance(neg, str) and not neg.strip():
                 issues.append(f"empty_negative_prompt: post[{i}] image_prompt negative_prompt is empty")
-            # Warn (not fail) for missing extended fields
+            # Tier 1: iPhone camera only (NEVER DSLR)
+            meta = ip.get("meta", {})
+            if isinstance(meta, dict):
+                camera = meta.get("camera", "")
+                if camera and "iphone" not in camera.lower():
+                    issues.append(f"non_iphone_camera: post[{i}] camera is '{camera}', must be iPhone")
+                style = meta.get("style", "")
+                if style and "editorial" in style.lower():
+                    issues.append(f"editorial_style: post[{i}] style contains 'editorial' (banned)")
+            # Tier 1: Prompt length 120-180 words
+            prompt_text = ip.get("prompt", "")
+            if isinstance(prompt_text, str):
+                word_count = len(prompt_text.split())
+                if word_count > 250:
+                    issues.append(f"prompt_too_long: post[{i}] prompt is {word_count} words, max ~180")
+            # Tier 1: No text/letters in image prompt
+            prompt_lower = prompt_text.lower() if isinstance(prompt_text, str) else ""
+            text_indicators = [
+                "text on", "printed text", "words on", "letters on",
+                "neon sign", "neon text", "logo on", "brand name",
+                "slogan on", "writing on", "typography",
+            ]
+            for indicator in text_indicators:
+                if indicator in prompt_lower:
+                    issues.append(f"text_in_prompt: post[{i}] prompt contains '{indicator}' — no text/letters allowed in images")
+                    break
+            # Tier 1: Negative prompt should include text exclusions
+            neg_lower = neg.lower() if isinstance(neg, str) else ""
+            if "text on clothing" not in neg_lower and "printed words" not in neg_lower:
+                issues.append(f"missing_text_exclusion: post[{i}] negative_prompt missing text/letter exclusions (need 'text on clothing, printed words')")
+            # Warn (not fail) for missing extended fields (Tier 2-3)
+            ip_extended_fields = ["meta", "subject", "outfit", "pose", "scene", "camera", "lighting"]
             ip_ext_missing = [f for f in ip_extended_fields if f not in ip]
             if ip_ext_missing:
-                print(f"  WARNING: post[{i}] image_prompt missing extended fields {ip_ext_missing} (recommended by image prompt guide)", file=sys.stderr)
+                print(f"  WARNING: post[{i}] image_prompt missing extended fields {ip_ext_missing} (recommended)", file=sys.stderr)
 
-    # Check 11: 5-10 reply templates, no duplicates
+    # Check 11: reply_templates is an array (may be empty — outbound discontinued)
     templates = plan.get("reply_templates", [])
     if not isinstance(templates, list):
         issues.append("reply_templates_not_array: reply_templates is not an array")
-    else:
-        if len(templates) < 5 or len(templates) > 10:
-            issues.append(f"reply_template_count: {len(templates)} templates, expected 5-10")
-        if len(set(templates)) != len(templates):
-            issues.append("reply_template_duplicates: duplicate reply templates found")
 
-    # Check 12: No reply template starts with @
-    if isinstance(templates, list):
-        for i, tmpl in enumerate(templates):
-            if isinstance(tmpl, str) and tmpl.lstrip().startswith("@"):
-                issues.append(f"reply_starts_with_at: reply_template[{i}] starts with '@'")
+    # Check 14: Visual diversity matrix (4-post set)
+    if len(posts) >= 4:
+        framings = set()
+        angles = set()
+        positions = set()
+        coverage_levels = set()
+
+        for post in posts:
+            ip = post.get("image_prompt", {})
+            cam = ip.get("camera", {})
+            pose = ip.get("pose", {})
+            outfit = ip.get("outfit", {})
+
+            if isinstance(cam, dict):
+                f_val = cam.get("framing", "").lower().strip()
+                a_val = cam.get("angle", "").lower().strip()
+                if f_val:
+                    framings.add(f_val)
+                if a_val:
+                    angles.add(a_val)
+
+            if isinstance(pose, dict):
+                p_val = pose.get("position", "").lower().strip()
+                if p_val:
+                    positions.add(p_val)
+
+            # Classify outfit coverage
+            top = outfit.get("top", {}) if isinstance(outfit, dict) else {}
+            top_type = (top.get("type", "") if isinstance(top, dict) else "").lower()
+            minimal_kw = {"lingerie", "bikini", "bralette", "slip", "bandeau", "lace"}
+            casual_kw = {"sports bra", "crop top", "tank top", "tube top", "bodysuit", "camisole"}
+            if any(m in top_type for m in minimal_kw):
+                coverage_levels.add("minimal")
+            elif any(c in top_type for c in casual_kw):
+                coverage_levels.add("casual")
+            else:
+                coverage_levels.add("styled")
+
+        # Hard failures
+        if len(framings) < 2:
+            issues.append(f"visual_diversity: only {len(framings)} unique framing(s) {framings}, need 2+")
+        if len(angles) < 2:
+            issues.append(f"visual_diversity: only {len(angles)} unique angle(s) {angles}, need 2+")
+        if len(positions) < 3:
+            issues.append(f"visual_diversity: only {len(positions)} unique pose(s) {positions}, need 3+")
+        if len(coverage_levels) < 2:
+            issues.append(f"visual_diversity: only {len(coverage_levels)} outfit coverage level(s) {coverage_levels}, need 2+")
+
+    # Check 13: Outfit dedup — no two posts may share the same outfit top type
+    outfit_types = []
+    for i, post in enumerate(posts):
+        ip = post.get("image_prompt", {})
+        outfit = ip.get("outfit", {})
+        top = outfit.get("top", {})
+        top_type = top.get("type", "").lower().strip() if isinstance(top, dict) else ""
+        if top_type:
+            outfit_types.append((i, top_type, top.get("color", "")))
+    seen_types = {}
+    for idx, otype, color in outfit_types:
+        key = otype
+        if key in seen_types:
+            prev_idx = seen_types[key]
+            issues.append(f"outfit_duplicate: post[{idx}] and post[{prev_idx}] both use outfit type '{otype}' — all posts must have different outfit types")
+        else:
+            seen_types[key] = idx
 
     passed = len(issues) == 0
     return passed, issues
@@ -1299,9 +1439,35 @@ def validate_morning_briefing(path: str) -> tuple[bool, list[str]]:
     return passed, issues
 
 
+def validate_warroom(path: str) -> tuple[bool, list[str]]:
+    """Validate war room output (auto-detects morning briefing vs strategy feedback).
+
+    Delegates to the appropriate specialized validator based on the 'type' field
+    or the presence of distinguishing fields.
+    """
+    try:
+        with open(path) as f:
+            content = f.read()
+        if not content.strip():
+            return False, ["file_empty: War room output file is empty"]
+    except FileNotFoundError:
+        return False, [f"file_not_found: {path} does not exist"]
+
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        return False, [f"invalid_json: {e}"]
+
+    # Auto-detect type
+    if data.get("type") == "morning_briefing" or "summary" in data:
+        return validate_morning_briefing(path)
+    else:
+        return validate_strategy_feedback(path)
+
+
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits|analyst|analyst_metrics|analyst_report|scout_analysis|outbound_plan|image_references|strategy_feedback|morning_briefing} <file1> [<file2>]", file=sys.stderr)
+        print("Usage: python3 scripts/validate.py {scout|strategist|cross|creator|creator_cross|publisher|publisher_rate_limits|analyst|analyst_metrics|analyst_report|scout_analysis|outbound_plan|image_references|strategy_feedback|morning_briefing|warroom} <file1> [<file2>]", file=sys.stderr)
         sys.exit(2)
 
     mode = sys.argv[1]
@@ -1396,12 +1562,18 @@ def main():
             sys.exit(2)
         passed, issues = validate_morning_briefing(sys.argv[2])
 
+    elif mode == "warroom":
+        if len(sys.argv) < 3:
+            print("Usage: python3 scripts/validate.py warroom <warroom_output.json>", file=sys.stderr)
+            sys.exit(2)
+        passed, issues = validate_warroom(sys.argv[2])
+
     else:
-        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', 'publisher_rate_limits', 'analyst', 'analyst_metrics', 'analyst_report', 'scout_analysis', 'outbound_plan', 'image_references', 'strategy_feedback', or 'morning_briefing'.", file=sys.stderr)
+        print(f"Unknown mode: {mode}. Use 'scout', 'strategist', 'cross', 'creator', 'creator_cross', 'publisher', 'publisher_rate_limits', 'analyst', 'analyst_metrics', 'analyst_report', 'scout_analysis', 'outbound_plan', 'image_references', 'strategy_feedback', 'morning_briefing', or 'warroom'.", file=sys.stderr)
         sys.exit(2)
 
     # Determine total checks from mode
-    check_counts = {"scout": 8, "strategist": 14, "cross": 4, "creator": 12, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6, "analyst_report": 8, "scout_analysis": 6, "outbound_plan": 7, "image_references": 6, "strategy_feedback": 8, "morning_briefing": 8}
+    check_counts = {"scout": 8, "strategist": 16, "cross": 4, "creator": 14, "creator_cross": 3, "publisher": 8, "publisher_rate_limits": 5, "analyst": 8, "analyst_metrics": 6, "analyst_report": 8, "scout_analysis": 6, "outbound_plan": 7, "image_references": 6, "strategy_feedback": 8, "morning_briefing": 8, "warroom": 8}
     total_checks = check_counts.get(mode, len(issues) + 1)
 
     if passed:
