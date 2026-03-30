@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 29, 2026 (Session 48: Purpose-driven posts, visual diversity, personality captions, pipeline reliability fixes, false drought fix, auto image gen plan)
+**Last updated**: March 30, 2026 (Session 48: Purpose-driven posts, visual diversity, personality captions, pipeline reliability fixes, false drought fix, Creator prompt optimization, auto image gen plan)
 
 ---
 
@@ -1478,6 +1478,10 @@ orchestrator.py warroom {morning|evening}
    - `extract_json()` detects post fragments and prefers full plan objects
    - Creator timeout increased to 900s for large prompts
 
+7. **Creator prompt optimization** (Mar 30): Creator prompt grew to 166K chars causing Sonnet to produce only 1 of 4 posts. Root cause: standing_directives (50K — included 34 resolved), strategy (25K — included both EN+JP), image_prompt_guide (32K — all 6 templates). Fix: inject only active creator-relevant directives (50K→10K), only current account's strategy section (25K→14K), cap image guide at 15K (32K→15K). **Result: 166K→98K prompt, all 4 posts generated reliably.** This is structurally bounded — directives will accumulate but only active ones reach Creator.
+
+**Decision D38**: Creator prompt must stay under ~120K chars. Orchestrator filters standing_directives to active+creator-relevant only, extracts single-account strategy, and caps large reference files. Prompt bloat is the #1 cause of incomplete Creator output.
+
 **Decision D34**: Validate visual diversity on Creator OUTPUT (actual image_prompt fields), not on Strategist input. Strategist provides intent; enforcement belongs at the output layer.
 
 **Decision D35**: Auto-analyze reference images at pipeline start so operator can simply drop new images into `media/reference/` daily without running a separate script.
@@ -1561,6 +1565,7 @@ orchestrator.py warroom {morning|evening}
 | D35 | Auto-analyze reference images at pipeline start | Operator drops images into `media/reference/` daily — pipeline picks them up automatically (Session 48) |
 | D36 | Automate image gen via Browser Use on web UI, not Higgsfield API | Higgsfield Cloud API requires separate pay-as-you-go credits ($23-68/mo extra). Browser Use controls the web UI using existing Pro plan — no extra cost (Session 48) |
 | D37 | Never claim "pipeline drought" when analytics shows posting | Content plan `status: "draft"` is expected — operator posts manually. Trust `posts_created` from analytics over content plan statuses (Session 48) |
+| D38 | Creator prompt must stay under ~120K chars | Orchestrator filters directives (active only), extracts single-account strategy, caps large files. Prompt bloat is #1 cause of incomplete Creator output — 166K produced 1/4 posts, 98K produces 4/4 (Session 48) |
 
 ---
 
@@ -1942,14 +1947,14 @@ context.md (this file)
 
 All development happens on your own machine. A VPS is only needed when the system is ready to run autonomously. Phases 0-5 are local CLI development. Phase 6 is VPS deployment. Phase 7 is autonomous operation.
 
-**Latest**: Session 48 — Purpose-Driven Posts + Personality Captions + Pipeline Fixes (March 26-29, 2026). Major content quality overhaul: purpose-driven posts, visual diversity matrix, personality captions (30-100 chars), 3-day visual dedup, no-text-in-images. Pipeline reliability: self-terminating ref analysis, compact reference text (302KB→8KB), plan reconstruction, claude -p retry logic. Fixed false "pipeline drought" caused by agents reading content plan statuses instead of analytics data.
+**Latest**: Session 48 — Purpose-Driven Posts + Personality Captions + Pipeline Fixes (March 26-30, 2026). Major content quality overhaul: purpose-driven posts, visual diversity matrix, personality captions (30-100 chars), 3-day visual dedup, no-text-in-images. Pipeline reliability: self-terminating ref analysis, compact reference text (302KB→8KB), plan reconstruction, claude -p retry logic. Fixed false "pipeline drought" caused by agents reading content plan statuses instead of analytics data. Creator prompt optimized from 166K→98K to prevent incomplete output (50K resolved directives removed, single-account strategy, capped image guide).
 
 Session 48 files modified (9 files):
 - `prompts/strategist.md` — Creative briefs rewrite: `moment_seed` → `post_purpose` + `visual_focus`. Diversity rules. Updated schema + validation checklist. Strengthened "operator posts manually" note.
 - `prompts/creator.md` — Purpose-first process. Visual diversity check. `{{recent_visual_history}}` 3-day dedup. No-text-in-images Tier 1 rule. Personality captions (30-100 chars, aim 40-80). Emphasis→image and purpose→caption mapping tables.
 - `prompts/marc_review.md` — EN caption limit updated to 30-100 (minimum, not maximum).
 - `scripts/validate.py` — Visual diversity matrix, strategist brief checks, text-in-image checks, EN caption length 30-100 enforcement.
-- `scripts/orchestrator.py` — Step 0 auto ref analysis with `--timeout`. `_extract_recent_visual_history()`. `_reconstruct_plan()` for fragmented Creator output. `run_claude_p()` retry logic for Bun crashes. Compact reference text (20 most recent, 302KB→8KB). Creator timeout 900s.
+- `scripts/orchestrator.py` — Step 0 auto ref analysis with `--timeout`. `_extract_recent_visual_history()`. `_reconstruct_plan()` for fragmented Creator output. `run_claude_p()` retry logic for Bun crashes. Compact reference text (20 most recent, 302KB→8KB). Creator timeout 900s. Creator prompt optimization: active-only directives (50K→10K), single-account strategy (25K→14K), capped image guide (32K→15K). Total: 166K→98K.
 - `scripts/analyze_references.py` — Self-terminating `--timeout` flag. Saves partial progress before budget expires.
 - `config/image_prompt_guide.md` — Negative prompt text/letter/typography exclusions in base + combined + all 6 templates.
 - `config/meruru_concept.md` — Caption voice rewrite: personality sentences replacing fragments. New examples showing mood, humor, confessions.

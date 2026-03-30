@@ -621,10 +621,18 @@ def run_pipeline(accounts: list[str] | None = None):
 
     # Step 2: Creator (1 LLM call per account)
     logger.info("Step 2: Creator")
-    strategy_data = read_file_content(strategy_path)
     meruru_concept = read_file_content("config/meruru_concept.md")
-    image_guide = read_file_content("config/image_prompt_guide.md")
+    image_guide = read_file_content("config/image_prompt_guide.md", max_chars=15000)  # Cap at 15K (was 32K)
     global_rules = read_file_content("config/global_rules.md")
+
+    # Extract only active directives for Creator (full list was 50K+, most resolved/irrelevant)
+    sd_full = load_json("data/strategy/standing_directives.json") or {"directives": []}
+    active_directives = [
+        d for d in sd_full.get("directives", [])
+        if d.get("status") == "active" and d.get("assigned_to") in ("creator", "all", "strategist")
+    ]
+    directives_for_creator = json.dumps({"directives": active_directives}, indent=2, ensure_ascii=False)
+    logger.info(f"Directives for Creator: {len(active_directives)} active (was {len(sd_full.get('directives', []))} total, {len(directives_for_creator)/1024:.0f}K chars)")
 
     # Load reference image catalog (pre-analyzed visual inspiration)
     ref_catalog = load_json("data/content/reference_catalog.json")
@@ -693,19 +701,26 @@ def run_pipeline(accounts: list[str] | None = None):
         # Extract visual history from last 3 days for image prompt dedup
         recent_visual_history = _extract_recent_visual_history(acct, max_plans=3)
 
+        # Extract only this account's strategy section (full strategy includes both EN+JP = 25K)
+        acct_strategy = strategy_json.get(acct, {})
+        acct_strategy_text = json.dumps(
+            {"date": strategy_json.get("date"), acct: acct_strategy},
+            indent=2, ensure_ascii=False
+        )
+
         prompt = build_prompt(
             "creator.md",
             date=date_iso,
             date_compact=date,
             account=acct,
-            strategy=strategy_data,
+            strategy=acct_strategy_text,
             meruru_concept=meruru_concept,
             image_prompt_guide=image_guide,
             global_rules=global_rules,
             recent_plans=recent_plans.get(acct, "[none]"),
             recent_captions=recent_captions_text,
             recent_visual_history=recent_visual_history,
-            standing_directives=directives_data,
+            standing_directives=directives_for_creator,
             reference_images=reference_images_text,
             visual_direction_summary=visual_direction_summary,
             output_path=plan_path,
