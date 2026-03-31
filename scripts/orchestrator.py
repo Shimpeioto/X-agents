@@ -563,7 +563,7 @@ def run_pipeline(accounts: list[str] | None = None):
         for pf in plan_files:
             try:
                 with open(pf) as f:
-                    plans_content.append(f.read()[:5000])
+                    plans_content.append(f.read()[:2000])
             except FileNotFoundError:
                 pass
         recent_plans[acct] = "\n---\n".join(plans_content) if plans_content else "[No recent plans]"
@@ -726,20 +726,39 @@ def run_pipeline(accounts: list[str] | None = None):
             output_path=plan_path,
         )
 
-        creator_output = run_claude_p(prompt, model="sonnet", timeout=900)
-        plan_json = extract_json(creator_output)
+        # Retry loop: if Creator produces fewer posts than expected, retry up to 2 times
+        expected_slots = len(strategy_json.get(acct, {}).get("posting_schedule", []))
+        max_creator_retries = 2
 
-        # Fix: If Creator output individual posts instead of the wrapper,
-        # collect ALL post objects and reconstruct the plan.
-        if "slot" in plan_json and "posts" not in plan_json:
-            logger.warning("Creator output a post fragment — reconstructing full plan from all JSON objects")
-            plan_json = _reconstruct_plan(creator_output, date_iso, acct, strategy_path)
+        for creator_attempt in range(max_creator_retries + 1):
+            creator_output = run_claude_p(prompt, model="sonnet", timeout=900)
+            plan_json = extract_json(creator_output)
 
-        # Strip "tool" field from image_prompt (defensive cleanup — Creator may copy from old plans)
-        for post in plan_json.get("posts", []):
-            ip = post.get("image_prompt", {})
-            if isinstance(ip, dict):
-                ip.pop("tool", None)
+            # If Creator output individual posts instead of the wrapper, reconstruct
+            if "slot" in plan_json and "posts" not in plan_json:
+                logger.warning("Creator output a post fragment — reconstructing full plan from all JSON objects")
+                plan_json = _reconstruct_plan(creator_output, date_iso, acct, strategy_path)
+
+            # Strip "tool" field from image_prompt (defensive cleanup)
+            for post in plan_json.get("posts", []):
+                ip = post.get("image_prompt", {})
+                if isinstance(ip, dict):
+                    ip.pop("tool", None)
+
+            actual_posts = len(plan_json.get("posts", []))
+            if actual_posts >= expected_slots:
+                break  # Got all posts
+
+            if creator_attempt < max_creator_retries:
+                logger.warning(
+                    f"Creator {acct} produced {actual_posts}/{expected_slots} posts "
+                    f"(attempt {creator_attempt + 1}/{max_creator_retries + 1}) — retrying"
+                )
+            else:
+                logger.error(
+                    f"Creator {acct} produced {actual_posts}/{expected_slots} posts "
+                    f"after {max_creator_retries + 1} attempts — accepting partial output"
+                )
 
         save_json(plan_path, plan_json)
 

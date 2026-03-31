@@ -166,7 +166,7 @@ Fields per brief:
   - `framing`: How tight the shot is — `close-up`, `medium`, `full-body`
 - `intent`: What this post should achieve strategically (e.g., "drive saves — let the silhouette carry", "drive profile clicks — personality in frame")
 - `energy`: One-word energy level: quiet, bold, playful, intimate, confident, dreamy, fierce, mischievous
-- `avoid`: Scenes/outfits/captions used in last 3 days (pull from `recent_plans_EN` / `recent_plans_JP` — list explicitly)
+- `avoid`: **MAX 5 items** — only the most important scenes/outfits to avoid (e.g., "gym (yesterday), beach (2 days ago), bikini top (yesterday)"). Do NOT list 20+ items — the Creator already has full dedup history. Keep avoid lists SHORT.
 
 ### Post Purpose Definitions
 
