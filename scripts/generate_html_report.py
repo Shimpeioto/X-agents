@@ -562,29 +562,41 @@ def render_post_card(post, account):
     ab_variant = post.get("ab_test_variant")
     notes = post.get("notes", "")
     img = post.get("image_prompt", {})
+    # v5 fields
+    post_type = post.get("type")  # "reference_based" | "creative" | None (legacy)
+    reference_filename = post.get("reference_filename")
 
-    tags_html = " ".join([
+    tag_list = [
         tag(f"Slot {slot}", ""),
         tag(time, ""),
         tag(category, "en" if account == "EN" else "jp"),
         priority_tag(priority),
         status_tag(status),
-    ])
+    ]
+    if post_type == "reference_based":
+        tag_list.append(tag("📎 ref-based", "purple"))
+    elif post_type == "creative":
+        tag_list.append(tag("✨ creative", "green"))
+    tags_html = " ".join(tag_list)
     if ab_variant:
         variant_style = "green" if ab_variant == "A" else "pink"
         tags_html += " " + tag(f"Variant {ab_variant}", variant_style)
+
+    # v5: show reference filename for ref-based posts
+    ref_html = ""
+    if reference_filename:
+        ref_html = f'<div class="text-sm text-muted" style="margin: 4px 0">Reference: <code>{h(reference_filename)}</code></div>'
 
     hashtags_html = " ".join(f'<span class="text-accent text-sm">{h(t)}</span>' for t in hashtags) if hashtags else ""
 
     img_html = ""
     if img:
-        tool = img.get("tool", "?")
         prompt = img.get("prompt", "")
         neg = img.get("negative_prompt", "")
         aspect = img.get("aspect_ratio", "?")
         meta_obj = img.get("meta", {})
 
-        meta_parts = [f"Tool: {h(tool)}", f"Aspect: {h(aspect)}"]
+        meta_parts = [f"Aspect: {h(aspect)}"]
         if meta_obj.get("camera"):
             meta_parts.append(f"Camera: {h(meta_obj['camera'])}")
         if meta_obj.get("lens"):
@@ -613,7 +625,7 @@ def render_post_card(post, account):
         if structured_obj:
             import json as _json
             # Full image_prompt JSON for copy (includes prompt, negative_prompt, aspect_ratio + all structured)
-            copy_obj = {"tool": tool, "prompt": prompt, "negative_prompt": neg, "aspect_ratio": aspect}
+            copy_obj = {"prompt": prompt, "negative_prompt": neg, "aspect_ratio": aspect}
             copy_obj.update(structured_obj)
             copy_json = _json.dumps(copy_obj, indent=2, ensure_ascii=False)
             # Escaped for data attribute
@@ -641,6 +653,7 @@ def render_post_card(post, account):
     <div style="margin-bottom: 8px">{tags_html}</div>
     <div class="font-bold" style="margin-bottom: 4px">{h(pid)}</div>
     <div class="post-text">{h(text)}</div>
+    {ref_html}
     <div style="margin: 8px 0">{hashtags_html}</div>
     {img_html}
     {notes_html}
@@ -1171,54 +1184,87 @@ def render_publish_post_card(post, account):
 # ─────────────────────────────────────────────
 
 def generate_content_plan(json_path, output_path=None):
-    """Generate an HTML report for a single content plan with full image prompts."""
+    """Generate an HTML report for a single content plan with full image prompts.
+
+    v5 (Session 49): Posts are split by `type` (reference_based vs creative).
+    The 6 candidates are grouped so the operator can quickly see both pools and
+    pick 4 to actually post. Falls back gracefully for legacy v4 plans (no `type`).
+    """
     data = load_json(json_path)
     account = data.get("account", "?")
     date = data.get("date", "?")
     posts = data.get("posts", [])
-    replies = data.get("reply_templates", [])
     strategy_used = data.get("strategy_used", "—")
 
-    subtitle = f"{len(posts)} Posts | {account} Account"
+    # v5: split posts by type
+    ref_posts = [p for p in posts if p.get("type") == "reference_based"]
+    creative_posts = [p for p in posts if p.get("type") == "creative"]
+    legacy_posts = [p for p in posts if p.get("type") not in ("reference_based", "creative")]
+    is_v5 = bool(ref_posts or creative_posts)
+
+    if is_v5:
+        subtitle = f"{len(posts)} Candidates | {len(ref_posts)} reference-based + {len(creative_posts)} creative | Pick 4 to post"
+    else:
+        subtitle = f"{len(posts)} Posts | {account} Account"
     out = html_head(f"Content Plan — {account}", subtitle, date)
 
-    nav_links = [
-        ("overview", "Overview"),
-        ("posts", "Posts"),
-        ("reply-templates", "Reply Templates"),
-    ]
+    if is_v5:
+        nav_links = [("overview", "Overview")]
+        if ref_posts:
+            nav_links.append(("ref-posts", "Reference-Based"))
+        if creative_posts:
+            nav_links.append(("creative-posts", "Creative"))
+        if legacy_posts:
+            nav_links.append(("legacy-posts", "Other"))
+    else:
+        nav_links = [("overview", "Overview"), ("posts", "Posts")]
     out += html_nav(nav_links)
     out += '<div class="container">\n'
 
     # ── Overview ──
     out += '<section id="overview">\n<h2>Overview</h2>\n'
     out += '<div class="stat-row">\n'
-    out += f'  {stat_box(len(posts), "Total Posts")}\n'
+    out += f'  {stat_box(len(posts), "Total Candidates" if is_v5 else "Total Posts")}\n'
     out += f'  {stat_box(account, "Account", "en" if account == "EN" else "pink")}\n'
-    draft_count = sum(1 for p in posts if p.get("status") == "draft")
-    approved_count = sum(1 for p in posts if p.get("status") == "approved")
-    out += f'  {stat_box(draft_count, "Draft", "warning")}\n'
-    out += f'  {stat_box(approved_count, "Approved", "green")}\n'
-    out += '</div>\n'
-    out += f'<div class="text-sm text-muted mt-4">Strategy: {h(strategy_used)}</div>\n'
-    out += '</section>\n'
-
-    # ── Posts with full image prompts ──
-    out += '<section id="posts">\n<h2>Posts</h2>\n'
-    for post in posts:
-        out += render_post_card(post, account)
-    out += '</section>\n'
-
-    # ── Reply Templates ──
-    out += '<section id="reply-templates">\n<h2>Reply Templates</h2>\n'
-    if replies:
-        out += '<div class="reply-grid">\n'
-        for r in replies:
-            out += f'  <div class="reply-item">{h(r)}</div>\n'
-        out += '</div>\n'
+    if is_v5:
+        out += f'  {stat_box(len(ref_posts), "Reference-Based", "purple")}\n'
+        out += f'  {stat_box(len(creative_posts), "Creative", "green")}\n'
     else:
-        out += '<p class="text-muted">No reply templates</p>\n'
+        draft_count = sum(1 for p in posts if p.get("status") == "draft")
+        approved_count = sum(1 for p in posts if p.get("status") == "approved")
+        out += f'  {stat_box(draft_count, "Draft", "warning")}\n'
+        out += f'  {stat_box(approved_count, "Approved", "green")}\n'
+    out += '</div>\n'
+    if is_v5:
+        out += '<div class="card mt-4"><p><strong>How to use this plan:</strong> Meruru generated 6 candidates (3 reference-based + 3 creative). Review all 6 and pick the 4 strongest to actually post on X. Reference-based posts adopt the costume + pose of a specific reference image (filename shown on the card) — generate them on Higgsfield from the structured prompt. Creative posts are pure Meruru with no reference.</p></div>\n'
+    if strategy_used and strategy_used != "—":
+        out += f'<div class="text-sm text-muted mt-4">Strategy: {h(strategy_used)}</div>\n'
     out += '</section>\n'
+
+    # ── Posts: grouped by type for v5, flat for legacy ──
+    if is_v5:
+        if ref_posts:
+            out += '<section id="ref-posts">\n<h2>📎 Reference-Based Candidates</h2>\n'
+            out += '<p class="text-muted">Adopt costume + pose from each reference; keep character lock; choose fresh background.</p>\n'
+            for post in ref_posts:
+                out += render_post_card(post, account)
+            out += '</section>\n'
+        if creative_posts:
+            out += '<section id="creative-posts">\n<h2>✨ Creative Candidates</h2>\n'
+            out += '<p class="text-muted">Pure Meruru creativity — no reference. Costume, pose, scene all chosen from her personality + visual style.</p>\n'
+            for post in creative_posts:
+                out += render_post_card(post, account)
+            out += '</section>\n'
+        if legacy_posts:
+            out += '<section id="legacy-posts">\n<h2>Other Posts</h2>\n'
+            for post in legacy_posts:
+                out += render_post_card(post, account)
+            out += '</section>\n'
+    else:
+        out += '<section id="posts">\n<h2>Posts</h2>\n'
+        for post in posts:
+            out += render_post_card(post, account)
+        out += '</section>\n'
 
     out += '</div>\n'  # container
     out += html_footer()

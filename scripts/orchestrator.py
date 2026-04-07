@@ -1,11 +1,17 @@
-"""Python orchestrator — replaces Marc's mechanical coordination.
-Sequences scripts, invokes claude -p for LLM reasoning, validates outputs.
+"""Python orchestrator — sequences scripts, invokes claude -p for LLM reasoning,
+validates outputs. v5 (Session 49) collapsed the multi-agent pipeline into a
+single Meruru creative agent.
 
-Usage:
-    python3 scripts/orchestrator.py pipeline
-    python3 scripts/orchestrator.py warroom {morning|evening}
-    python3 scripts/orchestrator.py outbound
-    python3 scripts/orchestrator.py publish
+v5 commands (primary):
+    python3 scripts/orchestrator.py create [--account EN] [--context "..."]
+    python3 scripts/orchestrator.py balance [--account EN]
+
+Legacy v4 commands (kept as fallback for ~2 weeks):
+    python3 scripts/orchestrator.py pipeline    # Strategist + Creator + Marc Review
+
+Removed in v5:
+    warroom (operator never reviewed outputs — feedback loop amplified wrong signal)
+    outbound (X API too expensive)
 """
 
 import argparse
@@ -221,8 +227,22 @@ def run_claude_p(prompt: str, model: str = "sonnet", timeout: int = 300, max_ret
 
 
 def build_prompt(template_name: str, **kwargs) -> str:
-    """Load a prompt template and substitute variables."""
-    template_path = os.path.join(PROJECT, "prompts", template_name)
+    """Load a prompt template and substitute variables.
+
+    Looks first in `prompts/`, then falls back to `prompts/archive/` for
+    legacy v4 templates (strategist.md, creator.md, marc_review.md, etc.).
+    """
+    primary_path = os.path.join(PROJECT, "prompts", template_name)
+    archive_path = os.path.join(PROJECT, "prompts", "archive", template_name)
+
+    if os.path.exists(primary_path):
+        template_path = primary_path
+    elif os.path.exists(archive_path):
+        template_path = archive_path
+        logger.info(f"Loading legacy prompt from archive: {template_name}")
+    else:
+        raise FileNotFoundError(f"Prompt template not found in prompts/ or prompts/archive/: {template_name}")
+
     with open(template_path) as f:
         template = f.read()
 
@@ -247,14 +267,30 @@ def read_file_content(path: str, max_chars: int = 50000) -> str:
 
 
 def send_telegram(message: str) -> None:
-    """Send a text message via Telegram."""
-    run_script(f'python3 scripts/telegram_send.py "{message}"')
+    """Send a text message via Telegram.
+
+    Uses subprocess.run with argument list (no shell) so messages with
+    apostrophes, quotes, or special characters are passed safely.
+    """
+    logger.info(f"Sending Telegram message ({len(message)} chars)")
+    result = subprocess.run(
+        ["python3", "scripts/telegram_send.py", message],
+        capture_output=True, text=True, timeout=60, cwd=PROJECT,
+    )
+    if result.returncode != 0:
+        logger.error(f"telegram_send failed (exit {result.returncode}): {result.stderr[:500]}")
 
 
 def send_telegram_document(path: str, caption: str) -> None:
     """Send a document via Telegram."""
     full_path = os.path.join(PROJECT, path) if not path.startswith("/") else path
-    run_script(f'python3 scripts/telegram_send.py --document "{full_path}" "{caption}"')
+    logger.info(f"Sending Telegram document: {full_path}")
+    result = subprocess.run(
+        ["python3", "scripts/telegram_send.py", "--document", full_path, caption],
+        capture_output=True, text=True, timeout=60, cwd=PROJECT,
+    )
+    if result.returncode != 0:
+        logger.error(f"telegram_send (document) failed (exit {result.returncode}): {result.stderr[:500]}")
 
 
 # ---------------------------------------------------------------------------
@@ -495,11 +531,336 @@ def _extract_recent_captions(account: str, max_plans: int = 7) -> list[str]:
 
 
 # ---------------------------------------------------------------------------
+# v5: Meruru unified creative agent flow (`/create`)
+# ---------------------------------------------------------------------------
+
+def _format_unused_references_for_prompt(refs: list[dict]) -> str:
+    """Format unused references as a compact list for the Meruru prompt.
+
+    References are for COSTUME + POSE adoption only. Scene, lighting, and mood
+    come from Meruru's identity and the feed balance — not the reference. So we
+    only inject one_line summary + outfit + pose per reference. Compact format.
+    """
+    if not refs:
+        return "[No unused references available. Operator should add new images to media/reference/ and run analyze_references.py.]"
+    lines = [
+        f"You have {len(refs)} unused references to choose from. Pick 3 of them (one per reference-based post). Each is single-use.",
+        "",
+        "Adopt the COSTUME and POSE from each reference. The scene, lighting, and mood are YOUR choice — informed by the feed balance and your visual style. Do NOT just copy the reference's setting.",
+        "",
+    ]
+    for i, ref in enumerate(refs, 1):
+        # Compact format: filename + one_line + outfit + pose only
+        lines.append(f"**[{i}] `{ref['filename']}`**")
+        if ref.get("one_line"):
+            lines.append(f"  • {ref['one_line'].strip()[:160]}")
+        if ref.get("outfit"):
+            lines.append(f"  • Outfit: {ref['outfit'].strip()[:200]}")
+        if ref.get("pose"):
+            lines.append(f"  • Pose: {ref['pose'].strip()[:200]}")
+        lines.append("")
+    return "\n".join(lines)
+
+
+def _build_tier1_constraints() -> str:
+    """Compact Tier 1 constraints block (extracted from image_prompt_guide essentials)."""
+    return """**Character lock (every image, never breaks):**
+- Age: early 20s Japanese woman
+- Body: extreme hourglass — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned
+- Skin: light-medium neutral, smooth, dewy
+- Hair: dark/jet-black or dark brown, long (style varies, color always dark)
+- Makeup: minimal — natural brows, soft lip
+- Expression: ONLY use these terms — "closed-mouth smile", "subtle smirk", "lips softly closed", "lips slightly parted", "neutral gaze", "soft pout". NEVER "bright smile" (image generators interpret it as teeth-showing).
+
+**Camera (every image):**
+- ALWAYS `iPhone 15 Pro Max` with `24mm wide` lens
+- NEVER DSLR, Sony, Canon, or any pro camera
+
+**Negative prompt (always include this exact block in `negative_prompt`):**
+`blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile`
+
+**Captions (EN):**
+- 30-100 chars (aim 40-80)
+- Lowercase, casual punctuation
+- Personality sentence — never 3-word fragments
+- Never start with "@" (X hides as reply)
+- Never repeat past captions
+- 1-2 emoji max per post, never 👀, max 1-2 posts in the batch with emoji
+
+**Hashtags (EN):**
+- ALWAYS empty array `[]`
+- Never use "#" anywhere in caption text
+
+**Image prompt:**
+- `prompt` field: 120-180 words
+- No text/letters/numbers in image content
+- Aspect ratio: 9:16 or 4:5 vertical (never landscape)"""
+
+
+def _build_image_prompt_format() -> str:
+    """Compact Higgsfield-compatible image_prompt schema."""
+    return """The `image_prompt` field must be an object with this structure:
+
+```json
+{
+  "prompt": "<120-180 word natural-language scene description tying everything together>",
+  "negative_prompt": "<the standard combined negative block from Tier 1>",
+  "aspect_ratio": "9:16",
+  "meta": {
+    "quality": "ultra photorealistic",
+    "camera": "iPhone 15 Pro Max",
+    "lens": "24mm wide",
+    "style": "<e.g. 'raw iphone selfie', 'casual mirror pic', 'candid phone photo'>"
+  },
+  "subject": {
+    "hair": { "color": "<dark>", "style": "<long wavy / straight / etc.>" },
+    "body_type": "extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned",
+    "skin": "light-medium neutral, smooth, dewy",
+    "expression": "<one of the allowed terms>",
+    "makeup": "minimal natural — clean brows, soft lip"
+  },
+  "outfit": {
+    "top": { "type": "<e.g. ribbed crop top, lace bralette, hotel towel>", "color": "<>", "fit": "<>" },
+    "bottom": { "type": "<>", "color": "<>" },
+    "accessories": [ "<optional>" ]
+  },
+  "pose": {
+    "position": "<standing / seated / reclined / kneeling / etc.>",
+    "stance": "<weight on one leg, hip-shifted, etc.>",
+    "hands": "<where they are>",
+    "head_gaze": "<direction & energy>",
+    "vibe": "<one phrase>"
+  },
+  "scene": {
+    "location": "<specific setting, e.g. 'luxury hotel bathroom'>",
+    "time": "<morning / evening / late night>",
+    "atmosphere": "<one phrase>",
+    "background": "<2-3 specific elements>"
+  },
+  "camera": {
+    "pov": "<mirror selfie / handheld / over-shoulder / etc.>",
+    "angle": "<eye-level / low-angle / high-angle>",
+    "framing": "<close-up / medium / full-body>"
+  },
+  "lighting": {
+    "type": "<warm recessed / hard direct / soft natural window / etc.>",
+    "effect": "<one phrase>"
+  },
+  "mood": {
+    "energy": "<one phrase>",
+    "color_palette": "<dominant colors>",
+    "aesthetic": "<one phrase>"
+  }
+}
+```
+
+The `prompt` field is a single 120-180 word paragraph weaving together all the structured fields naturally — this is what Higgsfield actually reads. The structured fields above are for clarity and validation."""
+
+
+def run_create(account: str = "EN", operator_context: str = ""):
+    """v5 Meruru unified creative agent flow.
+
+    Generates 6 candidate posts (3 reference-based + 3 creative) from a single
+    Opus call. Replaces the v4 Strategist → Creator → Marc Review pipeline.
+    """
+    import feed_balance  # local import — feed_balance.py lives in scripts/
+
+    date = today_str()
+    date_iso = today_iso()
+    account = account.upper()
+
+    logger.info(f"=== CREATE START: {date_iso} account={account} ===")
+    start_time = time.time()
+
+    # Step 0: Analyze any new reference images (picks up daily additions)
+    logger.info("Step 0: Analyze new reference images")
+    try:
+        ref_result = run_script("python3 scripts/analyze_references.py --timeout 240", timeout=300)
+        if ref_result.returncode != 0:
+            logger.warning(f"Reference analysis failed (non-fatal): {ref_result.stderr[:200]}")
+    except subprocess.TimeoutExpired:
+        logger.warning("Reference analysis timed out (non-fatal) — continuing with existing catalog")
+
+    # Step 1: Pre-compute feed balance (Python, instant, no LLM)
+    logger.info("Step 1: Compute feed balance")
+    balance = feed_balance.compute_feed_balance(account, days=14)
+    feed_balance_text = balance["summary"] + "\n\n[note] " + balance["note"]
+
+    # Step 2: Get unused reference pool (Python, instant)
+    logger.info("Step 2: Get unused references")
+    unused_refs = feed_balance.get_unused_references(account, count=12)
+    unused_refs_text = _format_unused_references_for_prompt(unused_refs)
+
+    # Step 3: Load identity document
+    logger.info("Step 3: Load Meruru identity")
+    identity = read_file_content("config/meruru_identity.md", max_chars=20000)
+
+    # Step 4: Extract recent caption blocklist
+    logger.info("Step 4: Extract recent captions blocklist")
+    recent_captions_list = _extract_recent_captions(account, max_plans=7)
+    if recent_captions_list:
+        recent_captions_text = "\n".join(f"- {c}" for c in recent_captions_list[:50])
+    else:
+        recent_captions_text = "[No recent captions to avoid — fresh feed]"
+
+    # Step 5: Build Meruru prompt
+    logger.info("Step 5: Build Meruru prompt")
+    prompt = build_prompt(
+        "meruru.md",
+        date=date_iso,
+        account=account,
+        identity=identity,
+        feed_balance=feed_balance_text,
+        unused_references=unused_refs_text,
+        recent_captions=recent_captions_text,
+        operator_context=operator_context.strip() or "[None — operator did not provide additional context.]",
+        tier1_constraints=_build_tier1_constraints(),
+        image_prompt_format=_build_image_prompt_format(),
+    )
+    logger.info(f"Meruru prompt size: {len(prompt)} chars")
+
+    # Step 6: Single Opus call
+    logger.info("Step 6: Invoke Meruru (Opus)")
+    raw_output = run_claude_p(prompt, model="opus", timeout=700)
+
+    plan_json = extract_json(raw_output)
+
+    # Defensive cleanup: strip "tool" field from image_prompt
+    for post in plan_json.get("posts", []):
+        ip = post.get("image_prompt", {})
+        if isinstance(ip, dict):
+            ip.pop("tool", None)
+
+    # Ensure required top-level fields are present
+    plan_json.setdefault("date", date_iso)
+    plan_json.setdefault("account", account)
+    plan_json.setdefault("generated_at", datetime.now(JST).isoformat())
+    plan_json["total_posts"] = len(plan_json.get("posts", []))
+
+    actual_posts = len(plan_json.get("posts", []))
+    if actual_posts != 6:
+        logger.warning(f"Meruru produced {actual_posts}/6 posts — accepting partial output")
+
+    # Step 7: Validate (Tier 1 only — creator mode)
+    plan_path = f"data/content/content_plan_{date}_{account}.json"
+    save_json(plan_path, plan_json)
+    logger.info(f"Step 7: Validate {plan_path}")
+    passed, val_output = run_validate("creator", plan_path)
+    if not passed:
+        logger.warning(f"Meruru validation warnings: {val_output[:500]}")
+
+    # Step 8: Mark used references
+    logger.info("Step 8: Mark used references")
+    try:
+        feed_balance.mark_references_used(plan_json)
+    except Exception as e:
+        logger.warning(f"mark_references_used failed (non-fatal): {e}")
+
+    # Step 9: Generate HTML report
+    logger.info("Step 9: Generate HTML report")
+    try:
+        html_result = run_script(
+            f"python3 scripts/generate_html_report.py content_plan {plan_path}",
+            timeout=60,
+        )
+        if html_result.returncode != 0:
+            logger.warning(f"HTML report generation failed: {html_result.stderr[:200]}")
+    except Exception as e:
+        logger.warning(f"HTML report generation error: {e}")
+
+    # Step 10: Send to Telegram
+    logger.info("Step 10: Send to Telegram")
+    try:
+        ref_based = sum(1 for p in plan_json.get("posts", []) if p.get("type") == "reference_based")
+        creative = sum(1 for p in plan_json.get("posts", []) if p.get("type") == "creative")
+        msg = (
+            f"🎨 Meruru content plan ready — {date_iso} ({account})\n"
+            f"{actual_posts} candidates generated: {ref_based} reference-based + {creative} creative\n"
+            f"Plan: {plan_path}\n"
+            f"Pick 4 from the 6 candidates to actually post."
+        )
+        send_telegram(msg)
+        # Try to also send the HTML report as a document
+        html_path = plan_path.replace(".json", ".html")
+        if os.path.exists(os.path.join(PROJECT, html_path)):
+            send_telegram_document(html_path, f"Meruru plan {date_iso} ({account})")
+    except Exception as e:
+        logger.warning(f"Telegram send failed: {e}")
+
+    elapsed = time.time() - start_time
+    logger.info(f"=== CREATE COMPLETE: {elapsed:.0f}s ({actual_posts} posts) ===")
+    return plan_json
+
+
+# ---------------------------------------------------------------------------
+# v5: Meruru balance check flow (`/balance`)
+# ---------------------------------------------------------------------------
+
+def run_balance(account: str = "EN") -> str:
+    """v5 Meruru balance check flow.
+
+    Computes feed balance (Python) then asks Meruru to interpret it and
+    recommend what to post next. Sends recommendation directly to Telegram.
+
+    Returns the recommendation text for testing convenience.
+    """
+    import feed_balance  # local import — feed_balance.py lives in scripts/
+
+    date_iso = today_iso()
+    account = account.upper()
+
+    logger.info(f"=== BALANCE START: {date_iso} account={account} ===")
+    start_time = time.time()
+
+    # Step 1: Compute feed balance
+    logger.info("Step 1: Compute feed balance")
+    balance = feed_balance.compute_feed_balance(account, days=14)
+    feed_balance_text = balance["summary"] + "\n\n[note] " + balance["note"]
+
+    # Step 2: Load identity
+    logger.info("Step 2: Load Meruru identity")
+    identity = read_file_content("config/meruru_identity.md", max_chars=20000)
+
+    # Step 3: Build balance prompt
+    logger.info("Step 3: Build balance prompt")
+    prompt = build_prompt(
+        "meruru_balance.md",
+        date=date_iso,
+        account=account,
+        identity=identity,
+        feed_balance=feed_balance_text,
+    )
+    logger.info(f"Balance prompt size: {len(prompt)} chars")
+
+    # Step 4: Single Opus call (lighter than /create)
+    logger.info("Step 4: Invoke Meruru balance (Opus)")
+    recommendation = run_claude_p(prompt, model="opus", timeout=300)
+
+    # Strip stray whitespace and any leading/trailing junk
+    recommendation = recommendation.strip()
+
+    # Step 5: Send to Telegram
+    logger.info("Step 5: Send recommendation to Telegram")
+    try:
+        msg = f"🪞 Meruru feed check — {account}\n\n{recommendation}"
+        send_telegram(msg)
+    except Exception as e:
+        logger.warning(f"Telegram send failed: {e}")
+
+    elapsed = time.time() - start_time
+    logger.info(f"=== BALANCE COMPLETE: {elapsed:.0f}s ===")
+    return recommendation
+
+
+# ---------------------------------------------------------------------------
 # Pipeline flow
 # ---------------------------------------------------------------------------
 
 def run_pipeline(accounts: list[str] | None = None):
-    """Run the daily content pipeline.
+    """**LEGACY v4 fallback** — Strategist + Creator + Marc Review.
+
+    Superseded by `run_create()` in v5 (Session 49). Kept temporarily for
+    fallback if v5 has issues. Will be removed after ~2 weeks of stable v5.
 
     Zero X API calls. Uses local data only:
     - Previous strategies and content plans
@@ -535,7 +896,13 @@ def run_pipeline(accounts: list[str] | None = None):
     feedback_data = read_file_content(feedback_path)
     briefing_path = f"data/metrics/morning_briefing_{date}.json"
     briefing_data = read_file_content(briefing_path)
-    directives_data = read_file_content("data/strategy/standing_directives.json")
+    # Only include active directives to keep prompt lean (resolved ones add ~40K of noise)
+    sd_raw = load_json("data/strategy/standing_directives.json")
+    if sd_raw and sd_raw.get("directives"):
+        active_directives = [d for d in sd_raw["directives"] if d.get("status") != "resolved"]
+        directives_data = json.dumps({"directives": active_directives, "active_count": len(active_directives), "total_count": len(sd_raw["directives"])}, indent=2)
+    else:
+        directives_data = read_file_content("data/strategy/standing_directives.json")
     core_strategy = read_file_content("data/strategy/core_strategy.json")
     prev_strategy = read_file_content("data/strategy/strategy_current.json")
 
@@ -569,14 +936,20 @@ def run_pipeline(accounts: list[str] | None = None):
         recent_plans[acct] = "\n---\n".join(plans_content) if plans_content else "[No recent plans]"
 
     # Load reference catalog for Strategist creative brief inspiration
+    # Cap at 30 random samples to keep prompt size manageable (full catalog can be 140K+)
     ref_catalog = load_json("data/content/reference_catalog.json")
     if ref_catalog and ref_catalog.get("images"):
-        ref_one_liners = [
-            f"- {fname}: {entry['analysis'].get('one_line', '')} (scene: {entry['analysis'].get('scene', '')}, mood: {entry['analysis'].get('mood', '')})"
-            for fname, entry in ref_catalog["images"].items()
+        import random
+        all_entries = [
+            (fname, entry) for fname, entry in ref_catalog["images"].items()
             if entry.get("analysis")
         ]
-        ref_summary = f"{len(ref_one_liners)} reference images available. Use these to inform post_purpose and visual_focus choices:\n" + "\n".join(ref_one_liners)
+        sampled = random.sample(all_entries, min(30, len(all_entries)))
+        ref_one_liners = [
+            f"- {fname}: {entry['analysis'].get('one_line', '')} (scene: {entry['analysis'].get('scene', '')}, mood: {entry['analysis'].get('mood', '')})"
+            for fname, entry in sampled
+        ]
+        ref_summary = f"{len(all_entries)} reference images available ({len(sampled)} shown). Use these to inform post_purpose and visual_focus choices:\n" + "\n".join(ref_one_liners)
     else:
         ref_summary = "[No reference catalog. Run: python3 scripts/analyze_references.py]"
 
@@ -781,100 +1154,17 @@ def run_pipeline(accounts: list[str] | None = None):
 
 
 # ---------------------------------------------------------------------------
-# War Room flow
+# War Room flow — REMOVED in v5
 # ---------------------------------------------------------------------------
-
-def run_warroom(session: str, accounts: list[str] | None = None):
-    """Run morning or evening war room.
-
-    Zero X API calls. Uses operator-provided metrics only
-    (CSV imports via analyst.py import, /metrics command, screenshots).
-    """
-    date = today_str()
-    date_iso = today_iso()
-    accounts = accounts or get_active_accounts()
-
-    logger.info(f"=== WAR ROOM {session.upper()} START: {date_iso} ===")
-    start_time = time.time()
-
-    # No API metrics collection — operator provides data via:
-    # - analyst.py import --file (CSV from X Analytics)
-    # - /metrics command (manual input)
-    # - screenshots parsed by Marc
-
-    # Step 1: War Room discussion (1 LLM call)
-    logger.info("Step 1: War Room discussion")
-
-    # Build context from local files only
-    context_parts = {}
-
-    if session == "morning":
-        y_date = yesterday_str()
-        context_parts["daily_report"] = read_file_content(f"data/metrics/daily_report_{y_date}.json")
-        context_parts["strategy_feedback"] = read_file_content(f"data/strategy/strategy_feedback_{y_date}.json")
-        context_parts["strategy"] = read_file_content("data/strategy/strategy_current.json")
-        context_parts["core_strategy"] = read_file_content("data/strategy/core_strategy.json")
-        context_parts["standing_directives"] = read_file_content("data/strategy/standing_directives.json")
-        for acct in accounts:
-            context_parts[f"metrics_{acct}"] = read_file_content(f"data/metrics/metrics_{y_date}_{acct}.json")
-            context_parts[f"content_plan_{acct}"] = read_file_content(f"data/content/content_plan_{y_date}_{acct}.json")
-        # Operator-posted replies
-        context_parts["replies_posted"] = read_file_content(f"data/outbound/replies_posted_{y_date}.json")
-
-        output_path = f"data/metrics/morning_briefing_{date}.json"
-        warroom_mode = "morning_briefing"
-    else:
-        context_parts["strategy"] = read_file_content(f"data/strategy/strategy_{date}.json")
-        context_parts["core_strategy"] = read_file_content("data/strategy/core_strategy.json")
-        context_parts["standing_directives"] = read_file_content("data/strategy/standing_directives.json")
-        for acct in accounts:
-            context_parts[f"metrics_{acct}"] = read_file_content(f"data/metrics/metrics_{date}_{acct}.json")
-            context_parts[f"content_plan_{acct}"] = read_file_content(f"data/content/content_plan_{date}_{acct}.json")
-        context_parts["yesterday_report"] = read_file_content(f"data/metrics/daily_report_{yesterday_str()}.json")
-        context_parts["replies_posted"] = read_file_content(f"data/outbound/replies_posted_{date}.json")
-
-        output_path = f"data/strategy/strategy_feedback_{date}.json"
-        warroom_mode = "strategy_feedback"
-
-    # Include real account metrics from SQLite (CSV imports + archive)
-    # NOTE: Operator posts manually, not through publisher.py.
-    # Content plan status "draft" does NOT mean unpublished.
-    for acct in accounts:
-        context_parts[f"account_metrics_{acct}"] = get_account_metrics_summary(acct, days=7)
-
-    # Format context for prompt
-    context_text = ""
-    for key, val in context_parts.items():
-        context_text += f"\n\n### {key}\n```\n{val}\n```"
-
-    prompt = build_prompt(
-        "warroom.md",
-        date=date_iso,
-        date_compact=date,
-        session=session,
-        accounts=", ".join(accounts),
-        context=context_text,
-        output_path=output_path,
-    )
-
-    warroom_output = run_claude_p(prompt, model="opus", timeout=600)
-    warroom_json = extract_json(warroom_output)
-    save_json(output_path, warroom_json)
-
-    # Validate
-    passed, val_output = run_validate(warroom_mode, output_path)
-    if not passed:
-        logger.warning(f"War Room validation failed: {val_output}")
-
-    # Step 2: Marc Strategic Review (1 LLM call)
-    logger.info("Step 2: Marc Strategic Review")
-    run_marc_review(date, date_iso, accounts, f"warroom_{session}")
-
-    # Step 3: Execute ready directives (local scripts only, no API)
-    execute_ready_directives()
-
-    elapsed = time.time() - start_time
-    logger.info(f"=== WAR ROOM {session.upper()} COMPLETE: {elapsed:.0f}s ===")
+# The war room flow was removed in v5 (Session 49) because the operator never
+# reviewed the outputs and the same recommendations were flagged for 8+
+# consecutive days with zero action. The feedback loop was amplifying the wrong
+# signal. If analytics feedback is ever needed again, reintroduce as an
+# optional, lighter tool — not a daily auto-run.
+#
+# The old run_warroom() function and its prompts are archived at:
+#   prompts/archive/warroom.md
+#   prompts/archive/marc_review.md (also handled war room reviews)
 
 
 # ---------------------------------------------------------------------------
@@ -1080,23 +1370,31 @@ def execute_ready_directives():
 
 def main():
     parser = argparse.ArgumentParser(description="X-Agents Orchestrator")
-    parser.add_argument("command", choices=["pipeline", "warroom"],
-                        help="Flow to execute (pipeline or warroom)")
-    parser.add_argument("session", nargs="?", choices=["morning", "evening"],
-                        help="War room session (required for warroom command)")
+    parser.add_argument("command", choices=["create", "balance", "pipeline"],
+                        help="Flow to execute (create=v5 primary, balance=v5 feed check, pipeline=legacy v4 fallback)")
+    parser.add_argument("session", nargs="?",
+                        help="(Unused — preserved for backward compat)")
     parser.add_argument("--account", help="Run for specific account only")
+    parser.add_argument("--context", default="",
+                        help="Optional free-text operator context for `create` command")
 
     args = parser.parse_args()
 
     accounts = [args.account.upper()] if args.account else None
 
     try:
-        if args.command == "pipeline":
+        if args.command == "create":
+            # v5 Meruru flow — single account per call
+            create_account = (accounts[0] if accounts else "EN")
+            run_create(create_account, operator_context=args.context)
+        elif args.command == "balance":
+            # v5 Meruru balance check — single account per call
+            balance_account = (accounts[0] if accounts else "EN")
+            run_balance(balance_account)
+        elif args.command == "pipeline":
+            # Legacy v4 fallback — Strategist + Creator + Marc Review
+            logger.warning("Running legacy v4 pipeline. v5 `create` is the primary command.")
             run_pipeline(accounts)
-        elif args.command == "warroom":
-            if not args.session:
-                parser.error("warroom requires a session argument: morning or evening")
-            run_warroom(args.session, accounts)
     except Exception as e:
         logger.error(f"Orchestrator failed: {e}", exc_info=True)
         try:

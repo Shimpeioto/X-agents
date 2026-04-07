@@ -331,7 +331,8 @@ def validate_creator(plan_path: str) -> tuple[bool, list[str]]:
         return False, issues
 
     # Check 3: Required top-level fields
-    required_top = ["date", "account", "posts", "reply_templates"]
+    # v5: reply_templates removed (was a v4 outbound field, no longer used)
+    required_top = ["date", "account", "posts"]
     for field in required_top:
         if field not in plan:
             issues.append(f"missing_field: top-level '{field}' not found")
@@ -439,12 +440,10 @@ def validate_creator(plan_path: str) -> tuple[bool, list[str]]:
             if ip_ext_missing:
                 print(f"  WARNING: post[{i}] image_prompt missing extended fields {ip_ext_missing} (recommended)", file=sys.stderr)
 
-    # Check 11: reply_templates is an array (may be empty — outbound discontinued)
-    templates = plan.get("reply_templates", [])
-    if not isinstance(templates, list):
-        issues.append("reply_templates_not_array: reply_templates is not an array")
+    # Check 11: reply_templates removed in v5 (was a v4 outbound field)
+    # If present (legacy v4 plans), allow it but don't require it.
 
-    # Check 14: Visual diversity matrix (4-post set)
+    # Check 14: Visual diversity matrix (4+ post set)
     if len(posts) >= 4:
         framings = set()
         angles = set()
@@ -492,7 +491,8 @@ def validate_creator(plan_path: str) -> tuple[bool, list[str]]:
         if len(coverage_levels) < 2:
             issues.append(f"visual_diversity: only {len(coverage_levels)} outfit coverage level(s) {coverage_levels}, need 2+")
 
-    # Check 13: Outfit dedup — no two posts may share the same outfit top type
+    # Check 13: Outfit dedup — v5: relaxed to a warning since 6 candidates → operator picks 4
+    # Some overlap in a candidate pool is acceptable; the operator will avoid duplicates when picking.
     outfit_types = []
     for i, post in enumerate(posts):
         ip = post.get("image_prompt", {})
@@ -506,7 +506,7 @@ def validate_creator(plan_path: str) -> tuple[bool, list[str]]:
         key = otype
         if key in seen_types:
             prev_idx = seen_types[key]
-            issues.append(f"outfit_duplicate: post[{idx}] and post[{prev_idx}] both use outfit type '{otype}' — all posts must have different outfit types")
+            print(f"  WARNING: post[{idx}] and post[{prev_idx}] both use outfit type '{otype}' — operator should avoid picking both", file=sys.stderr)
         else:
             seen_types[key] = idx
 

@@ -3,7 +3,7 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: March 30, 2026 (Session 48: Purpose-driven posts, visual diversity, personality captions, pipeline reliability fixes, false drought fix, Creator prompt optimization, auto image gen plan)
+**Last updated**: April 7, 2026 (Session 49: v5 redesign **complete through Phase 3**. Meruru unified creative agent shipped. `/create` generates 6 candidates per day (3 ref-based + 3 creative). `/balance` provides feed analysis. Telegram bot updated. v4 prompts archived. LaunchAgent switched to v5 `create` daily at 06:00 JST. First production run captured Meruru's "gm from the only person awake in this room" — exactly the character-first caption the operator described.)
 
 ---
 
@@ -1524,6 +1524,136 @@ orchestrator.py warroom {morning|evening}
 
 ---
 
+### Session 49 — v5 Architecture Redesign: Meruru as Unified Creative Agent (April 6-7, 2026)
+
+**Problem**: After 6 weeks of v4 operation, the operator assessed the entire system as **non-functional**. The 3-agent split (Strategist → Creator → Marc Review) preserved an architectural flaw: **no single entity "is" Meruru**. Strategist doesn't know what Meruru looks like or how she talks. Creator follows strategy briefs rather than thinking "what would Meruru post?" Marc reviews quality metrics but doesn't embody the character.
+
+**Operator's specific complaints**:
+1. **System adds overhead, not value** — operator spends 3hrs/day on content; only 30min is mechanics, the rest is creative decisions the system doesn't help with
+2. **Content has no soul** — image prompts repetitive (5 of 6 Slot 1 posts were luxury interiors), captions sound like AI strategy artifacts
+3. **Captions are backwards** — system creates captions from strategy+image; operator creates captions from character personality (image is secondary). "gm" is a valid Meruru caption regardless of image — system can't produce this
+4. **Reference images template-matched, not adopted** — operator stores 247 references for specific costume/pose adoption, but system only uses generic patterns
+5. **Feed balance not addressed** — operator manually checks close-ups/full-body, sexy/cute, poses, colors, clothing, lighting; system offers no help
+6. **War rooms are noise** — operator barely reviews them; same 2 action items flagged for 8+ consecutive days with zero execution
+7. **X API cost prohibitive** — pay-as-you-go, project not profitable, every API call is direct loss
+
+**Operator's vision**: Meruru should function like a **human influencer** — she knows her personality, looks at her recent feed, and suggests both image direction AND captions as one coherent creative vision. Like a real person who posts what feels right because they know who they are.
+
+**Solution (v5 architecture)**: Collapse Strategist + Creator + Marc Review into a single **Meruru agent** (Opus). She holds personality, visual sense, feed awareness, and voice in one prompt. Strategy/balance constraints are inputs TO her, not drivers above her.
+
+**Architecture changes**:
+- **3 LLM calls → 1 LLM call** per pipeline run (5-6/day → 1-2/day total)
+- **Strategist REMOVED** — feed balance analysis (Python) replaces content_mix percentages; creative briefs replaced by Meruru's own judgment
+- **Creator REPLACED** by Meruru agent (Opus instead of Sonnet)
+- **War Room REMOVED** — operator doesn't use it
+- **Marc Review (LLM) REMOVED** — replaced with Python-only Tier 1 validation
+- **Standing Directives REMOVED** — coordination mechanism for multi-agent system; single agent embeds rules in identity
+- **Marc Conversation KEPT** — still the Telegram interface, routes `/create` and `/balance` commands
+
+**New components**:
+- `config/meruru_identity.md` — first-person identity document (expanded from `meruru_concept.md`)
+- `scripts/feed_balance.py` — Python feed balance + unused reference pool + usage tracking
+- `data/content/reference_usage.json` — tracks which reference images have been used (single-use enforcement)
+- `prompts/meruru.md` — unified Meruru creative prompt
+- `prompts/meruru_balance.md` — balance analysis prompt for `/balance` command
+
+**Key design decisions**:
+- **6 candidates per day, operator picks 4** — 3 reference-based + 3 creative posts. Provides variety and natural training signal (which type does operator pick more?). As Meruru's creative quality improves, ratio may shift toward more creative, fewer reference-based.
+- **Caption-first / unified creation** — character personality drives both caption AND image direction. "gm" is valid regardless of image. Some posts are caption-driven, others image-driven.
+- **Reference adoption: keep costume + pose, change background** — Meruru adopts a specific unused reference's costume and pose, keeps her character lock, and chooses a fresh background based on feed needs. References are single-use (tracked in `reference_usage.json`).
+- **Visual style derived from posted images** — operator selected 12 high-performance posts + their actual Higgsfield prompts; analyzed into a first-person "My Visual Style" section saved at `docs/meruru_visual_style.md`. NOT computed from reference catalog (Aesthetic DNA was explicitly rejected as the wrong abstraction).
+- **Cron automation preserved** — LaunchAgent runs `/create` daily at 06:00 JST, operator wakes up with content plan ready.
+
+**Feed balance approach**:
+- Python `compute_feed_balance()` counts dimensions across last 14 days: framings, poses, scene types, outfit coverage, color palettes, moods, lighting, camera angles
+- Returns structured dict + human-readable summary of what's over/under-represented
+- Approximate (only counts system-generated plans, not operator's manual posts) — operator can supplement with free-text context via `/create EN "context"`
+
+**Cost & performance**:
+| Metric | v4 | v5 |
+|---|---|---|
+| LLM calls/day | 5-6 | 1-2 |
+| Pipeline runtime | 8-15 min | 3-5 min |
+| Prompt size | ~100K+ chars | ~13-19K chars |
+| Posts per plan | 4 | 6 candidates → operator picks 4 |
+| Operator overhead | ~3 hrs/day | Target 2-2.5 hrs/day |
+
+**Phase 0 (✅ Complete Apr 7)**:
+- Operator selected 12 high-performance posted images from `media/posted/`
+- Operator provided actual Higgsfield prompts (some images differed from content plan JSONs because operator generated independently)
+- Analyzed patterns: scenes, lighting, mood, framing, expression, outfits, color palette
+- Identified two distinct visual moods with no middle ground:
+  1. **Warm intimate glow** — soft ambient lighting, ivory/marble tones, hotel bathroom evenings, bedroom comfort, kitchen mornings
+  2. **Hard isolating light** — single dramatic source, deep shadows, plain wall corners, after-hours intensity
+- Universal traits: vertical orientation, restrained expression (never teeth), body-conscious styling, dewy skin sheen, high contrast color palette (dark + skin + bold accent, often red), "caught in private moment" energy
+- Notably absent: outdoor/public spaces, beach/pool/gym, daylight street, smiling poses
+- Result saved at `docs/meruru_visual_style.md` (approved by operator)
+
+**Decisions D39-D44**:
+- **D39**: Single creative agent over multi-agent split — Strategist + Creator + Marc Review collapsed into one Meruru agent because no single agent in v4 embodied the character (Session 49)
+- **D40**: Caption-first / unified creation — character personality drives both caption and image direction together. Images are context, not the driver. Operator confirmed: "gm" is a valid caption regardless of image (Session 49)
+- **D41**: 6 candidates per day with operator picking 4 — provides variety, natural training signal (creative vs reference-based selection rates), and gradual transition path as Meruru's creative independence improves (Session 49)
+- **D42**: References for costume/pose adoption only, single-use — operator stores 247 references specifically to adopt their costumes and poses while keeping character lock and changing background. Tracked in `reference_usage.json` to prevent reuse (Session 49)
+- **D43**: Visual style derived from posted images, not reference catalog — Aesthetic DNA (computed from reference catalog) was rejected as wrong abstraction. Real visual identity comes from what Meruru has actually posted and what the operator considers high-performance (Session 49)
+- **D44**: Remove War Room and Standing Directives — coordination mechanisms for multi-agent system. Single agent doesn't need cross-agent communication or persistent rule CRUD. Persistent rules embedded in identity document (Session 49)
+
+**Architecture document**: `docs/x-agent-redesign-v5-architecture.md` (~600 lines, fully reviewed in 4 rounds of third-party critique)
+
+**Implementation phases**:
+- **Phase 0**: ✅ Complete (Apr 7) — Visual style foundation
+- **Phase 1**: ✅ Complete (Apr 7) — Foundation
+- **Phase 2**: ✅ Complete (Apr 7) — Telegram integration
+- **Phase 3**: ✅ Complete (Apr 7) — Cleanup
+- **Phase 4**: Ongoing — Polish (observational; iterate on real-world output quality)
+
+**Phase 1 — Foundation (5 files)**:
+- `config/meruru_identity.md` — first-person identity expanded from `meruru_concept.md`, integrates `docs/meruru_visual_style.md` as Section 4
+- `scripts/feed_balance.py` — pure-Python module with `compute_feed_balance()`, `get_unused_references()`, `mark_references_used()` + CLI
+- `data/content/reference_usage.json` — initialized empty `{"EN": [], "JP": []}`
+- `prompts/meruru.md` — unified Meruru creative prompt (~5K template, ~30K when expanded with all placeholders)
+- `scripts/orchestrator.py` — added `run_create()`, `_format_unused_references_for_prompt()`, `_build_tier1_constraints()`, `_build_image_prompt_format()`, `create` CLI subcommand
+
+**Phase 1 first run results** (`/create EN`):
+- Runtime 312s (~5 min), 6 candidates generated (3 ref-based + 3 creative)
+- Captions character-driven and unique: `"stood here too long pretending this wasn't on purpose"`, `"shh i'm not telling you what i'm thinking"`, `"made coffee i'm not even gonna drink"`, etc.
+- 6 unique scenes across candidates (powder room, charcoal wall, living room, kitchen, hallway, bedroom)
+- Reference usage tracking working (3 references marked used)
+- Issue: prompt size 37K (vs 13-19K target) — reference descriptions were too verbose
+- Fix: trimmed `_format_unused_references_for_prompt()` to one_line + outfit + pose only, dropping scene/lighting/mood (per design intent — references are for COSTUME + POSE adoption only)
+- Re-run: prompt down to 30,919 chars; produced "gm from the only person awake in this room" — exactly the character-first "gm" caption the operator described
+
+**Phase 2 — Telegram integration (4 files)**:
+- `prompts/meruru_balance.md` — lightweight balance-check prompt (output is plain-text Telegram message, not JSON)
+- `scripts/orchestrator.py` — added `run_balance()` + `balance` CLI subcommand
+- `scripts/telegram_bot.py` — added `cmd_create()` and `cmd_balance()` handlers, registered, updated `/help` text grouping v5 commands as primary and v4 as legacy
+- `agents/marc_conversation.md` — fully rewritten for v5: knows about `/create` and `/balance`, marks v4 commands as legacy fallback
+
+**Phase 2 verification — `/balance` test**:
+- Runtime 11s (target ≤2 min ✅), prompt size 12,246 chars
+- Meruru's actual recommendation correctly identified gaps: "72% of my lighting is one mood. zero bright-airy, zero hard shadow drama, and i haven't been in a car or a cafe in two weeks"
+- Post ideas with character-first captions: "skipped class for an oat latte. worth it.", "parked for 20 mins just to finish this song", "the lighting in here is doing half the work"
+
+**Phase 2 bonus fix**: `send_telegram()` had a long-standing v4 bug — it built shell commands via f-string, breaking on apostrophes in messages. Fixed by switching to `subprocess.run` with argument list (no shell). This affects ALL callers of send_telegram, not just v5.
+
+**Phase 3 — Cleanup (7 changes)**:
+- Archived 5 v4 prompts to `prompts/archive/`: `strategist.md`, `creator.md`, `marc_review.md`, `warroom.md`, `outbound.md`
+- `scripts/validate.py` — removed `reply_templates` requirement (v4 leftover), relaxed outfit dedup to a warning (since 6-candidate pool allows some overlap when operator picks 4)
+- `scripts/orchestrator.py` — removed `run_warroom()` entirely; marked `run_pipeline()` as legacy fallback; updated CLI choices `{create, balance, pipeline}`; updated module docstring; added `build_prompt()` archive-fallback so legacy v4 templates load from `prompts/archive/`
+- `scripts/cron_wrapper.sh` — added `create` and `balance` task handlers; war room handlers removed with explanatory error
+- LaunchAgents: created `~/Library/LaunchAgents/com.xagents.create.plist` (06:00 JST daily, loaded), unloaded v4 plists (`com.xagents.morning-warroom`, `evening-warroom`, `pipeline`, `outbound`) but preserved .plist files for fallback re-enabling
+- `scripts/generate_html_report.py` — `generate_content_plan()` now groups posts by `type` (📎 reference-based / ✨ creative), shows `reference_filename`, drops `reply_templates` section. `render_post_card()` adds type badge and reference filename row. Falls back gracefully for legacy v4 plans without `type` field.
+- `CLAUDE.md` — fully rewritten for v5 architecture, removed Strategist/Creator/War Room references, added Meruru / feed_balance / 6-candidate documentation
+- `validate.py` re-test: **PASS — All 14 checks passed** on the v5 content plan
+
+**Telegram bot restarted Apr 7** to pick up new `/create` and `/balance` commands. PID 45356, "Application started" confirmed.
+
+**Files modified/created across all phases (~15)**:
+- Created: `config/meruru_identity.md`, `scripts/feed_balance.py`, `data/content/reference_usage.json`, `prompts/meruru.md`, `prompts/meruru_balance.md`, `~/Library/LaunchAgents/com.xagents.create.plist`, `docs/meruru_visual_style.md`, `docs/x-agent-redesign-v5-architecture.md`
+- Modified: `scripts/orchestrator.py`, `scripts/telegram_bot.py`, `scripts/validate.py`, `scripts/generate_html_report.py`, `scripts/cron_wrapper.sh`, `agents/marc_conversation.md`, `CLAUDE.md`, `docs/context.md`
+- Archived: `prompts/strategist.md`, `prompts/creator.md`, `prompts/marc_review.md`, `prompts/warroom.md`, `prompts/outbound.md` (moved to `prompts/archive/`)
+
+---
+
 ## 4. Decision Summary
 
 ### Framework-Level Decisions (Apply to All Future Projects)
@@ -2280,6 +2410,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Session 47 | Metrics Visibility Fix (Real data for Marc + directive dedup) | Local machine | **✅ Complete** — orchestrator feeds SQLite analytics + archive data to all agents. Directive dedup enforcement. Standing directives cleaned 58→15. |
 | Session 48 | Purpose-Driven Posts + Personality Captions + Pipeline Fixes | Local machine | **✅ Complete** — `moment_seed` → `post_purpose` + `visual_focus`. Visual diversity matrix. Personality captions (30-100 chars). 3-day visual dedup. No-text rule. Plan reconstruction. Retry logic. False drought fix. 9 files modified. |
 | Session 48b | Auto Image Generation Plan | Local machine | **📋 Planned** — Browser Use CLI to automate Higgsfield web UI using existing Pro plan. Plan at `docs/plan-auto-image-generation.md`. |
+| Session 49 | v5 Architecture Redesign (Meruru as Unified Creative Agent) | Local machine | **✅ Complete (Phases 0-3)** — Phase 0: visual style derived from 12 posted images. Phase 1: `meruru_identity.md`, `feed_balance.py`, `meruru.md`, `run_create()` — first run produced 6 character-driven candidates including "gm from the only person awake in this room". Phase 2: `/create` and `/balance` Telegram commands wired up; `meruru_balance.md` prompt; bonus fix to `send_telegram` apostrophe bug. Phase 3: cleanup — archived 5 v4 prompts, simplified `validate.py` (14/14 PASS), removed `run_warroom()`, updated `cron_wrapper.sh`, replaced LaunchAgent (`com.xagents.create.plist`), updated HTML report for 6-candidate split, rewrote `CLAUDE.md`. Bot restarted. Phase 4 (polish/iteration) ongoing. |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 

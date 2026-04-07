@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Plan — EN — 2026-04-07</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-hover: #273548;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: #334155;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 8px; }
+  .header .subtitle { color: var(--accent); font-size: 1.1em; font-weight: 500; }
+  .header .date { color: var(--text-muted); margin-top: 8px; }
+
+  /* Navigation */
+  .nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; }
+
+  /* Sections */
+  section { margin: 32px 0; }
+  h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 20px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--accent2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-box.pink .value { color: var(--accent2); }
+  .stat-box.green .value { color: var(--accent3); }
+  .stat-box.warning .value { color: var(--warning); }
+  .stat-box.danger .value { color: var(--danger); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th {
+    background: #1a1a2e;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(129, 140, 248, 0.05); }
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .tag-high { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+  .tag-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+  .tag-en { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-jp { background: rgba(244, 114, 182, 0.2); color: var(--accent2); }
+  .tag-draft { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+  .tag-approved { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+  .tag-posted { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
+  .tag-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+  /* Insight boxes */
+  .insight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight.warning {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.02) 100%);
+  }
+  .insight.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+  }
+  .insight.success {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+  .insight strong { color: var(--accent); }
+
+  /* Image prompt block */
+  .image-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 0.85em;
+  }
+  .image-prompt .prompt-label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .image-prompt .prompt-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .prompt-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .prompt-meta span { white-space: nowrap; }
+
+  /* Structured prompt details — single copyable block */
+  .prompt-structured-wrap {
+    margin-top: 12px;
+    position: relative;
+  }
+  .prompt-structured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .prompt-structured-header .prompt-label { margin-bottom: 0; }
+  .copy-btn {
+    background: rgba(129, 140, 248, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(129, 140, 248, 0.3); }
+  .copy-btn.copied { background: rgba(34, 197, 94, 0.2); color: var(--success); border-color: rgba(34, 197, 94, 0.3); }
+  .prompt-json-block {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .prompt-json-block .json-key { color: var(--accent2); }
+  .prompt-json-block .json-str { color: var(--accent3); }
+  .prompt-json-block .json-section { color: var(--accent); font-weight: 600; }
+
+  /* Bar chart */
+  .bar-chart { margin: 12px 0; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .bar-label {
+    width: 140px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+  }
+  .bar-fill.purple { background: linear-gradient(90deg, var(--accent), #6366f1); }
+  .bar-fill.pink { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+  .bar-fill.green { background: linear-gradient(90deg, var(--accent3), #10b981); }
+  .bar-fill.warning { background: linear-gradient(90deg, var(--warning), #d97706); }
+  .bar-fill.danger { background: linear-gradient(90deg, var(--danger), #dc2626); }
+
+  /* Post text block */
+  .post-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* Reply templates */
+  .reply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .reply-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+    margin: 32px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  /* Utility */
+  .text-muted { color: var(--text-muted); }
+  .text-accent { color: var(--accent); }
+  .text-pink { color: var(--accent2); }
+  .text-green { color: var(--accent3); }
+  .text-danger { color: var(--danger); }
+  .text-warning { color: var(--warning); }
+  .text-sm { font-size: 0.85em; }
+  .text-xs { font-size: 0.75em; }
+  .font-bold { font-weight: 700; }
+  .font-mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .mt-2 { margin-top: 8px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .reply-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .header h1 { font-size: 1.6em; }
+    .nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .bar-label { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Content Plan — EN</h1>
+  <div class="subtitle">6 Candidates | 3 reference-based + 3 creative | Pick 4 to post</div>
+  <div class="date">2026-04-07</div>
+</div>
+<nav class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#ref-posts">Reference-Based</a>
+  <a href="#creative-posts">Creative</a>
+</nav>
+<div class="container">
+<section id="overview">
+<h2>Overview</h2>
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="value">6</div>
+    <div class="label">Total Candidates</div>
+  </div>
+  <div class="stat-box en">
+    <div class="value">EN</div>
+    <div class="label">Account</div>
+  </div>
+  <div class="stat-box purple">
+    <div class="value">3</div>
+    <div class="label">Reference-Based</div>
+  </div>
+  <div class="stat-box green">
+    <div class="value">3</div>
+    <div class="label">Creative</div>
+  </div>
+</div>
+<div class="card mt-4"><p><strong>How to use this plan:</strong> Meruru generated 6 candidates (3 reference-based + 3 creative). Review all 6 and pick the 4 strongest to actually post on X. Reference-based posts adopt the costume + pose of a specific reference image (filename shown on the card) — generate them on Higgsfield from the structured prompt. Creative posts are pure Meruru with no reference.</p></div>
+</section>
+<section id="ref-posts">
+<h2>📎 Reference-Based Candidates</h2>
+<p class="text-muted">Adopt costume + pose from each reference; keep character lock; choose fresh background.</p>
+<div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 1</span> <span class="tag">14:00 UTC</span> <span class="tag tag-en">after-hours powder room</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-purple">📎 ref-based</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260407_01</div>
+    <div class="post-text">this room makes me feel a little dangerous tonight</div>
+    <div class="text-sm text-muted" style="margin: 4px 0">Reference: <code>481706679_18468305848064161_540295784627445341_n.jpg</code></div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman with extreme hourglass proportions — large full bust, ultra-slim waist, extra-wide hips, emphasized rounded glutes, fit and toned. Long straight jet-black hair falls past her shoulders. Light-medium dewy skin with minimal natural makeup, clean brows, soft lip, subtle smirk, lips softly closed. She wears a dark charcoal long-sleeve high-cut bodysuit with a deep square neckline, paired with black thigh-high boots that elongate her leg line. She stands slightly angled to camera, weight shifted to one leg to accentuate curves, left hand resting lightly on a polished black marble vanity, head tilted down-left with direct eye contact. Setting: a moody after-hours luxury powder room, single hard overhead spotlight carving deep shadows across the walls, black marble counters, brushed gunmetal fixtures, dim arch mirrors behind her. Eye-level medium full-body framing, handheld phone POV. High-contrast palette of deep black, charcoal, and warm skin tones. Quiet contained energy, held breath.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile</div>
+      <div class="prompt-meta"><span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: candid phone photo</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260407_01')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260407_01" data-json="{
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman with extreme hourglass proportions — large full bust, ultra-slim waist, extra-wide hips, emphasized rounded glutes, fit and toned. Long straight jet-black hair falls past her shoulders. Light-medium dewy skin with minimal natural makeup, clean brows, soft lip, subtle smirk, lips softly closed. She wears a dark charcoal long-sleeve high-cut bodysuit with a deep square neckline, paired with black thigh-high boots that elongate her leg line. She stands slightly angled to camera, weight shifted to one leg to accentuate curves, left hand resting lightly on a polished black marble vanity, head tilted down-left with direct eye contact. Setting: a moody after-hours luxury powder room, single hard overhead spotlight carving deep shadows across the walls, black marble counters, brushed gunmetal fixtures, dim arch mirrors behind her. Eye-level medium full-body framing, handheld phone POV. High-contrast palette of deep black, charcoal, and warm skin tones. Quiet contained energy, held breath.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;candid phone photo&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;jet-black&quot;,
+      &quot;style&quot;: &quot;long straight&quot;
+    },
+    &quot;body_type&quot;: &quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, dewy&quot;,
+    &quot;expression&quot;: &quot;subtle smirk&quot;,
+    &quot;makeup&quot;: &quot;minimal natural — clean brows, soft lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;long-sleeve high-cut bodysuit with deep square neckline&quot;,
+      &quot;color&quot;: &quot;dark charcoal&quot;,
+      &quot;fit&quot;: &quot;second-skin, body-conscious&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;thigh-high boots (no separate bottoms)&quot;,
+      &quot;color&quot;: &quot;black&quot;
+    },
+    &quot;accessories&quot;: []
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing&quot;,
+    &quot;stance&quot;: &quot;slightly angled, weight shifted to one leg, hip-shifted&quot;,
+    &quot;hands&quot;: &quot;left hand resting lightly on the vanity counter&quot;,
+    &quot;head_gaze&quot;: &quot;tilted down-left, direct eye contact&quot;,
+    &quot;vibe&quot;: &quot;contained, dangerous calm&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;luxury powder room&quot;,
+    &quot;time&quot;: &quot;late night&quot;,
+    &quot;atmosphere&quot;: &quot;moody, after-hours&quot;,
+    &quot;background&quot;: &quot;black marble vanity, dim arch mirrors, brushed gunmetal fixtures&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;handheld phone&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;medium full-body&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;hard direct overhead spotlight&quot;,
+    &quot;effect&quot;: &quot;deep shadow falloff carving the walls&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;quiet, dangerous&quot;,
+    &quot;color_palette&quot;: &quot;black, charcoal, warm skin&quot;,
+    &quot;aesthetic&quot;: &quot;after-hours luxury intensity&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;candid phone photo&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;jet-black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long straight&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, dewy&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;subtle smirk&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural — clean brows, soft lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;long-sleeve high-cut bodysuit with deep square neckline&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark charcoal&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;second-skin, body-conscious&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;thigh-high boots (no separate bottoms)&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;black&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: []
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;slightly angled, weight shifted to one leg, hip-shifted&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;left hand resting lightly on the vanity counter&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;tilted down-left, direct eye contact&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;contained, dangerous calm&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;luxury powder room&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;late night&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;moody, after-hours&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;black marble vanity, dim arch mirrors, brushed gunmetal fixtures&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;handheld phone&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;medium full-body&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;hard direct overhead spotlight&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;deep shadow falloff carving the walls&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;quiet, dangerous&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;black, charcoal, warm skin&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;after-hours luxury intensity&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Adopted from ref [1]: charcoal long-sleeve high-cut bodysuit + black thigh-high boots, standing-angled stance with hand on vanity and direct down-left gaze. Pulled the scene HARDER and DARKER than the reference&#x27;s golden arch-mirror setting because the feed is 72% warm-glow and only 4% hard-dramatic — this post deliberately injects hard isolating light to balance the grid.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 2</span> <span class="tag">17:30 UTC</span> <span class="tag tag-en">intimate close-up coy</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-purple">📎 ref-based</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260407_02</div>
+    <div class="post-text">shh i&#x27;m not telling you what i&#x27;m thinking</div>
+    <div class="text-sm text-muted" style="margin: 4px 0">Reference: <code>Gl2dMp_acAAfLsv.jpeg</code></div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman, extreme hourglass body — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long wavy dark brown hair frames her face. Light-medium dewy skin, minimal natural makeup, clean brows, soft lip, lips slightly parted. She wears a micro triangle bikini top in dusty mauve with black lace trim along the edges and thin halter ties. Medium close-up framing: she leans slightly toward camera, one finger raised to her lips in a coy bite gesture, head gently tilted, direct unbroken eye contact with the lens. Setting: a plain charcoal wall corner late at night, single hard side light from the left carving sharp shadows down her face and collarbone, deep falloff into pure black on the right side of the frame. Eye-level handheld phone shot at intimate proximity. Color palette of dusty mauve, warm skin, deep shadow black. Energy is quiet, intimate, slightly mischievous.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile</div>
+      <div class="prompt-meta"><span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: raw iphone close-up</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260407_02')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260407_02" data-json="{
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman, extreme hourglass body — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long wavy dark brown hair frames her face. Light-medium dewy skin, minimal natural makeup, clean brows, soft lip, lips slightly parted. She wears a micro triangle bikini top in dusty mauve with black lace trim along the edges and thin halter ties. Medium close-up framing: she leans slightly toward camera, one finger raised to her lips in a coy bite gesture, head gently tilted, direct unbroken eye contact with the lens. Setting: a plain charcoal wall corner late at night, single hard side light from the left carving sharp shadows down her face and collarbone, deep falloff into pure black on the right side of the frame. Eye-level handheld phone shot at intimate proximity. Color palette of dusty mauve, warm skin, deep shadow black. Energy is quiet, intimate, slightly mischievous.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;raw iphone close-up&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;dark brown&quot;,
+      &quot;style&quot;: &quot;long wavy&quot;
+    },
+    &quot;body_type&quot;: &quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, dewy&quot;,
+    &quot;expression&quot;: &quot;lips slightly parted&quot;,
+    &quot;makeup&quot;: &quot;minimal natural — clean brows, soft lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;micro triangle bikini top with black lace trim, thin halter ties&quot;,
+      &quot;color&quot;: &quot;dusty mauve&quot;,
+      &quot;fit&quot;: &quot;minimal coverage&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;not in frame&quot;,
+      &quot;color&quot;: &quot;—&quot;
+    },
+    &quot;accessories&quot;: []
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;slight forward lean toward camera&quot;,
+    &quot;stance&quot;: &quot;intimate proximity&quot;,
+    &quot;hands&quot;: &quot;one finger raised to lips in coy bite gesture&quot;,
+    &quot;head_gaze&quot;: &quot;gently tilted, direct unbroken eye contact&quot;,
+    &quot;vibe&quot;: &quot;shh, mischievous secret&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;plain charcoal wall corner&quot;,
+    &quot;time&quot;: &quot;late night&quot;,
+    &quot;atmosphere&quot;: &quot;private, hushed&quot;,
+    &quot;background&quot;: &quot;empty matte charcoal wall, deep shadow falloff&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;handheld phone&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;close-up&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;hard side light from camera-left&quot;,
+    &quot;effect&quot;: &quot;sharp shadow carving, falloff into pure black&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;intimate, mischievous&quot;,
+    &quot;color_palette&quot;: &quot;dusty mauve, warm skin, charcoal black&quot;,
+    &quot;aesthetic&quot;: &quot;after-hours private moment&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;raw iphone close-up&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark brown&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long wavy&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, dewy&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;lips slightly parted&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural — clean brows, soft lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;micro triangle bikini top with black lace trim, thin halter ties&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dusty mauve&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;minimal coverage&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;not in frame&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;—&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: []
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;slight forward lean toward camera&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;intimate proximity&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;one finger raised to lips in coy bite gesture&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;gently tilted, direct unbroken eye contact&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;shh, mischievous secret&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;plain charcoal wall corner&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;late night&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;private, hushed&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;empty matte charcoal wall, deep shadow falloff&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;handheld phone&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;close-up&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;hard side light from camera-left&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;sharp shadow carving, falloff into pure black&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;intimate, mischievous&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;dusty mauve, warm skin, charcoal black&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;after-hours private moment&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Adopted from ref [9]: dusty mauve micro triangle bikini with black lace trim, finger-to-lips coy bite gesture and direct close-up eye contact. Moved out of the reference&#x27;s neutral backdrop into a hard-side-lit charcoal corner because feed needs more close-ups (only 28%) AND more hard-dramatic light (only 4%). Two birds.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 3</span> <span class="tag">21:00 UTC</span> <span class="tag tag-en">lazy living room confidence</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-purple">📎 ref-based</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260407_03</div>
+    <div class="post-text">couldn&#x27;t be bothered to put on real pants today</div>
+    <div class="text-sm text-muted" style="margin: 4px 0">Reference: <code>G2Mo1ZdaIAYTAYx.jpeg</code></div>
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman with extreme hourglass proportions — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long straight jet-black hair, light-medium dewy skin, minimal natural makeup, clean brows, soft lip, subtle smirk. She wears a black fitted short-sleeve high-neck bodysuit paired with plain white knee-high athletic socks (no logos, no text), no bottoms visible. Reclined sideways on a low cream linen sofa, legs drawn up and crossed at the knee, one hand resting on a sock and slightly pulling it upward, head tilted down with a heavy-lidded direct gaze at the camera. Setting: a quiet luxury living room mid-afternoon, soft warm recessed downlighting from above, neutral cream walls, a single ceramic vase blurred behind her, a folded cashmere throw at the sofa edge. Low-angle medium framing, handheld phone POV from the floor side. Color palette of stark black-and-white against warm beige skin tones. Lazy contained confidence, slightly bored energy.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile</div>
+      <div class="prompt-meta"><span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: candid phone photo</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260407_03')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260407_03" data-json="{
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman with extreme hourglass proportions — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long straight jet-black hair, light-medium dewy skin, minimal natural makeup, clean brows, soft lip, subtle smirk. She wears a black fitted short-sleeve high-neck bodysuit paired with plain white knee-high athletic socks (no logos, no text), no bottoms visible. Reclined sideways on a low cream linen sofa, legs drawn up and crossed at the knee, one hand resting on a sock and slightly pulling it upward, head tilted down with a heavy-lidded direct gaze at the camera. Setting: a quiet luxury living room mid-afternoon, soft warm recessed downlighting from above, neutral cream walls, a single ceramic vase blurred behind her, a folded cashmere throw at the sofa edge. Low-angle medium framing, handheld phone POV from the floor side. Color palette of stark black-and-white against warm beige skin tones. Lazy contained confidence, slightly bored energy.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;candid phone photo&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;jet-black&quot;,
+      &quot;style&quot;: &quot;long straight&quot;
+    },
+    &quot;body_type&quot;: &quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, dewy&quot;,
+    &quot;expression&quot;: &quot;subtle smirk&quot;,
+    &quot;makeup&quot;: &quot;minimal natural — clean brows, soft lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;fitted short-sleeve high-neck bodysuit&quot;,
+      &quot;color&quot;: &quot;black&quot;,
+      &quot;fit&quot;: &quot;second-skin&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;plain white knee-high athletic socks (no text/logos)&quot;,
+      &quot;color&quot;: &quot;white&quot;
+    },
+    &quot;accessories&quot;: []
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;reclined sideways on sofa&quot;,
+    &quot;stance&quot;: &quot;legs drawn up, crossed at the knee&quot;,
+    &quot;hands&quot;: &quot;one hand resting on a sock, slightly pulling it&quot;,
+    &quot;head_gaze&quot;: &quot;tilted down, heavy-lidded direct gaze&quot;,
+    &quot;vibe&quot;: &quot;lazy, can&#x27;t-be-bothered confidence&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;luxury living room&quot;,
+    &quot;time&quot;: &quot;mid-afternoon&quot;,
+    &quot;atmosphere&quot;: &quot;quiet, lived-in luxury&quot;,
+    &quot;background&quot;: &quot;cream linen sofa, neutral cream wall, blurred ceramic vase, folded cashmere throw&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;handheld phone&quot;,
+    &quot;angle&quot;: &quot;low-angle&quot;,
+    &quot;framing&quot;: &quot;medium&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;warm recessed downlighting&quot;,
+    &quot;effect&quot;: &quot;soft ambient wrap&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;lazy, contained&quot;,
+    &quot;color_palette&quot;: &quot;black, white, warm beige&quot;,
+    &quot;aesthetic&quot;: &quot;effortless home confidence&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;candid phone photo&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;jet-black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long straight&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, dewy&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;subtle smirk&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural — clean brows, soft lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;fitted short-sleeve high-neck bodysuit&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;second-skin&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;plain white knee-high athletic socks (no text/logos)&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;white&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: []
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;reclined sideways on sofa&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;legs drawn up, crossed at the knee&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;one hand resting on a sock, slightly pulling it&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;tilted down, heavy-lidded direct gaze&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: &quot;lazy, can&#x27;t-be-bothered confidence<span class="json-str">&quot;
+  },
+  <span class="json-key">&quot;</span>scene<span class="json-str">&quot;</span>: {
+    <span class="json-key">&quot;</span>location<span class="json-str">&quot;</span>: &quot;</span>luxury living room<span class="json-str">&quot;,
+    <span class="json-key">&quot;</span>time<span class="json-str">&quot;</span>: &quot;</span>mid-afternoon<span class="json-str">&quot;,
+    <span class="json-key">&quot;</span>atmosphere<span class="json-str">&quot;</span>: &quot;</span>quiet, lived-in luxury<span class="json-str">&quot;,
+    <span class="json-key">&quot;</span>background<span class="json-str">&quot;</span>: &quot;</span>cream linen sofa, neutral cream wall, blurred ceramic vase, folded cashmere throw<span class="json-str">&quot;
+  },
+  <span class="json-key">&quot;</span>camera<span class="json-str">&quot;</span>: {
+    <span class="json-key">&quot;</span>pov<span class="json-str">&quot;</span>: &quot;</span>handheld phone<span class="json-str">&quot;,
+    <span class="json-key">&quot;</span>angle<span class="json-str">&quot;</span>: &quot;</span>low-angle<span class="json-str">&quot;,
+    <span class="json-key">&quot;</span>framing<span class="json-str">&quot;</span>: &quot;</span>medium<span class="json-str">&quot;
+  },
+  <span class="json-key">&quot;</span>lighting<span class="json-str">&quot;</span>: {
+    <span class="json-key">&quot;</span>type<span class="json-str">&quot;</span>: &quot;</span>warm recessed downlighting<span class="json-str">&quot;,
+    <span class="json-key">&quot;</span>effect<span class="json-str">&quot;</span>: &quot;</span>soft ambient wrap<span class="json-str">&quot;
+  },
+  <span class="json-key">&quot;</span>mood<span class="json-str">&quot;</span>: {
+    <span class="json-key">&quot;</span>energy<span class="json-str">&quot;</span>: &quot;</span>lazy, contained<span class="json-str">&quot;,
+    <span class="json-key">&quot;</span>color_palette<span class="json-str">&quot;</span>: &quot;</span>black, white, warm beige<span class="json-str">&quot;,
+    <span class="json-key">&quot;</span>aesthetic<span class="json-str">&quot;</span>: &quot;</span>effortless home confidence&quot;
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Adopted from ref [5]: black high-neck bodysuit with white knee-high socks, sideways-reclined sofa pose with hand pulling sock and heavy-lidded direct gaze. Stripped the branded text off the socks (Tier 1 negative prompt forbids text). Reclined pose addresses feed gap (only 12% reclined) and shifts away from 49% standing dominance. Living-room scene is only 6% of feed.</div>
+  </div></section>
+<section id="creative-posts">
+<h2>✨ Creative Candidates</h2>
+<p class="text-muted">Pure Meruru creativity — no reference. Costume, pose, scene all chosen from her personality + visual style.</p>
+<div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 4</span> <span class="tag">23:30 UTC</span> <span class="tag tag-en">midnight kitchen suspicion</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-green">✨ creative</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260407_04</div>
+    <div class="post-text">midnight snack but make it suspicious</div>
+    
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman, extreme hourglass body — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long wavy jet-black hair tied loosely off one shoulder, a few strands framing her face. Light-medium dewy skin, minimal natural makeup, clean brows, soft lip, neutral gaze. She wears a deep red lace bralette paired with black knit sleep shorts riding low on her hips. Standing at a dark marble kitchen island, one hip shifted out, one hand resting flat on the counter beside a single open glass jar, head turned slightly toward camera over her shoulder with a subtle smirk. Setting: her kitchen well past midnight, a single hard pendant downlight directly above the island carving her shoulders and collarbone out of deep darkness, the rest of the room dissolving into pure black. Eye-level medium framing, handheld phone shot from across the island. Palette of deep crimson, warm skin, charcoal black. Energy is quiet, suspicious, slightly chaotic.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile</div>
+      <div class="prompt-meta"><span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: candid phone photo</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260407_04')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260407_04" data-json="{
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman, extreme hourglass body — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long wavy jet-black hair tied loosely off one shoulder, a few strands framing her face. Light-medium dewy skin, minimal natural makeup, clean brows, soft lip, neutral gaze. She wears a deep red lace bralette paired with black knit sleep shorts riding low on her hips. Standing at a dark marble kitchen island, one hip shifted out, one hand resting flat on the counter beside a single open glass jar, head turned slightly toward camera over her shoulder with a subtle smirk. Setting: her kitchen well past midnight, a single hard pendant downlight directly above the island carving her shoulders and collarbone out of deep darkness, the rest of the room dissolving into pure black. Eye-level medium framing, handheld phone shot from across the island. Palette of deep crimson, warm skin, charcoal black. Energy is quiet, suspicious, slightly chaotic.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;candid phone photo&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;jet-black&quot;,
+      &quot;style&quot;: &quot;long wavy, loose off one shoulder&quot;
+    },
+    &quot;body_type&quot;: &quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, dewy&quot;,
+    &quot;expression&quot;: &quot;subtle smirk&quot;,
+    &quot;makeup&quot;: &quot;minimal natural — clean brows, soft lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;lace bralette&quot;,
+      &quot;color&quot;: &quot;deep red&quot;,
+      &quot;fit&quot;: &quot;second-skin&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;knit sleep shorts&quot;,
+      &quot;color&quot;: &quot;black&quot;
+    },
+    &quot;accessories&quot;: []
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing at kitchen island&quot;,
+    &quot;stance&quot;: &quot;hip shifted out&quot;,
+    &quot;hands&quot;: &quot;one hand flat on the counter beside an open glass jar&quot;,
+    &quot;head_gaze&quot;: &quot;turned slightly over shoulder toward camera&quot;,
+    &quot;vibe&quot;: &quot;caught mid-snack, unbothered&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;home kitchen&quot;,
+    &quot;time&quot;: &quot;well past midnight&quot;,
+    &quot;atmosphere&quot;: &quot;private, after-hours&quot;,
+    &quot;background&quot;: &quot;dark marble island, single open glass jar, room dissolving into pure black&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;handheld phone from across the island&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;medium&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;hard pendant downlight directly above&quot;,
+    &quot;effect&quot;: &quot;shoulders and collarbone carved out of deep darkness, total falloff&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;quiet, slightly chaotic&quot;,
+    &quot;color_palette&quot;: &quot;deep crimson, warm skin, charcoal black&quot;,
+    &quot;aesthetic&quot;: &quot;after-hours suspicion&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;candid phone photo&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;jet-black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long wavy, loose off one shoulder&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, dewy&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;subtle smirk&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural — clean brows, soft lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;lace bralette&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;deep red&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;second-skin&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;knit sleep shorts&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;black&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: []
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing at kitchen island&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;hip shifted out&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;one hand flat on the counter beside an open glass jar&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;turned slightly over shoulder toward camera&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;caught mid-snack, unbothered&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;home kitchen&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;well past midnight&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;private, after-hours&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;dark marble island, single open glass jar, room dissolving into pure black&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;handheld phone from across the island&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;medium&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;hard pendant downlight directly above&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;shoulders and collarbone carved out of deep darkness, total falloff&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;quiet, slightly chaotic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;deep crimson, warm skin, charcoal black&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;after-hours suspicion&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Creative reasoning: kitchen scene at 12% in feed but always shot warm/morning. Flipping it to a hard-pendant after-hours moment serves the missing accent-red (only 2%) AND hard-dramatic light (only 4%). The &#x27;suspicious&#x27; caption matches my mischievous self-aware voice — what&#x27;s in the jar? not telling. Caption first, image followed.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 5</span> <span class="tag">—</span> <span class="tag tag-en">hallway shadow corner</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-green">✨ creative</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260407_05</div>
+    <div class="post-text">the hallway light hits different at 2am 🖤</div>
+    
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman with extreme hourglass proportions — large full bust, ultra-slim waist, extra-wide hips, emphasized rounded glutes, fit and toned. Long straight dark brown hair falls past her shoulders. Light-medium dewy skin, minimal natural makeup, clean brows, soft lip, lips softly closed. She wears a thin ribbed white cropped tank and tiny black bike shorts that emphasize her hip-to-waist contrast. Standing in a narrow hallway corner late at night, weight shifted onto one hip, one hand pressed flat against the wall above her head, the other hanging loose at her side, head tilted down with a quiet direct gaze into the lens. Setting: a plain off-white residential hallway, a single hard wall sconce throwing dramatic side light across her body and pooling deep shadow into the corner behind her. Low-angle full-body framing, handheld phone POV from waist height. Palette of warm skin, white cotton, deep shadow black. Still, contained, late-night energy.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile</div>
+      <div class="prompt-meta"><span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: candid phone photo</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260407_05')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260407_05" data-json="{
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman with extreme hourglass proportions — large full bust, ultra-slim waist, extra-wide hips, emphasized rounded glutes, fit and toned. Long straight dark brown hair falls past her shoulders. Light-medium dewy skin, minimal natural makeup, clean brows, soft lip, lips softly closed. She wears a thin ribbed white cropped tank and tiny black bike shorts that emphasize her hip-to-waist contrast. Standing in a narrow hallway corner late at night, weight shifted onto one hip, one hand pressed flat against the wall above her head, the other hanging loose at her side, head tilted down with a quiet direct gaze into the lens. Setting: a plain off-white residential hallway, a single hard wall sconce throwing dramatic side light across her body and pooling deep shadow into the corner behind her. Low-angle full-body framing, handheld phone POV from waist height. Palette of warm skin, white cotton, deep shadow black. Still, contained, late-night energy.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;candid phone photo&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;dark brown&quot;,
+      &quot;style&quot;: &quot;long straight&quot;
+    },
+    &quot;body_type&quot;: &quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, dewy&quot;,
+    &quot;expression&quot;: &quot;lips softly closed&quot;,
+    &quot;makeup&quot;: &quot;minimal natural — clean brows, soft lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;thin ribbed cropped tank&quot;,
+      &quot;color&quot;: &quot;white&quot;,
+      &quot;fit&quot;: &quot;second-skin&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;tiny bike shorts&quot;,
+      &quot;color&quot;: &quot;black&quot;
+    },
+    &quot;accessories&quot;: []
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing in hallway corner&quot;,
+    &quot;stance&quot;: &quot;weight shifted onto one hip&quot;,
+    &quot;hands&quot;: &quot;one hand pressed flat against wall above head, other hanging loose&quot;,
+    &quot;head_gaze&quot;: &quot;tilted down, quiet direct gaze&quot;,
+    &quot;vibe&quot;: &quot;still, late-night contained&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;narrow residential hallway corner&quot;,
+    &quot;time&quot;: &quot;late night, ~2am&quot;,
+    &quot;atmosphere&quot;: &quot;private, hushed&quot;,
+    &quot;background&quot;: &quot;plain off-white hallway walls, deep shadow pooling into the corner&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;handheld phone from waist height&quot;,
+    &quot;angle&quot;: &quot;low-angle&quot;,
+    &quot;framing&quot;: &quot;full-body&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;single hard wall sconce side light&quot;,
+    &quot;effect&quot;: &quot;dramatic side carving, deep corner shadow&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;still, contained&quot;,
+    &quot;color_palette&quot;: &quot;warm skin, white cotton, deep shadow black&quot;,
+    &quot;aesthetic&quot;: &quot;after-hours hallway intimacy&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;candid phone photo&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;dark brown&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long straight&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, dewy&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;lips softly closed&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural — clean brows, soft lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;thin ribbed cropped tank&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;white&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;second-skin&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;tiny bike shorts&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;black&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: []
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing in hallway corner&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;weight shifted onto one hip&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;one hand pressed flat against wall above head, other hanging loose&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;tilted down, quiet direct gaze&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;still, late-night contained&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;narrow residential hallway corner&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;late night, ~2am&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;private, hushed&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;plain off-white hallway walls, deep shadow pooling into the corner&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;handheld phone from waist height&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;low-angle&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;full-body&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;single hard wall sconce side light&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;dramatic side carving, deep corner shadow&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;still, contained&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;warm skin, white cotton, deep shadow black&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;after-hours hallway intimacy&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Creative reasoning: hallway is only 3% in feed and almost never used. The 2am hard-sconce framing serves the chronic hard-dramatic gap. Casual loungewear (cropped tank + bike shorts) is one of my staples and contrasts the dressier ref-based posts. Caption is mine: small observation, no engagement bait, the 🖤 carries the after-hours mood.</div>
+  </div><div class="card">
+    <div style="margin-bottom: 8px"><span class="tag">Slot 6</span> <span class="tag">—</span> <span class="tag tag-en">soft morning towel mirror selfie</span> <span class="tag tag-high">high</span> <span class="tag tag-draft">draft</span> <span class="tag tag-green">✨ creative</span></div>
+    <div class="font-bold" style="margin-bottom: 4px">EN_20260407_06</div>
+    <div class="post-text">gm from the only person awake in this room</div>
+    
+    <div style="margin: 8px 0"></div>
+    <div class="image-prompt">
+      <div class="prompt-label">Image Prompt</div>
+      <div class="prompt-text">Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman, extreme hourglass body — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long wavy jet-black hair damp and pushed slightly back from her face, a few strands clinging to her temple. Light-medium dewy skin still flushed from a hot shower, minimal natural makeup, clean brows, soft lip, lips slightly parted. She is wrapped in a plush ivory hotel towel tucked snugly above her bust, bare shoulders and collarbone exposed, a delicate gold chain at her neck. Mirror selfie: she holds her phone at chest height in front of an oval bedroom mirror, free hand resting lightly on the towel knot, head tilted slightly, soft direct gaze into the lens. Setting: her bedroom early morning, a single warm bedside lamp casting an ivory glow, unmade linen sheets and a folded throw blurred softly behind her in the reflection. Eye-level close-up framing. Palette of cream, ivory, warm skin tones. Soft, intimate, just-woken-up energy.</div>
+      <div class="prompt-label mt-2">Negative Prompt</div>
+      <div class="prompt-text">blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile</div>
+      <div class="prompt-meta"><span>Aspect: 9:16</span> <span>Camera: iPhone 15 Pro Max</span> <span>Lens: 24mm wide</span> <span>Style: casual mirror pic</span></div>
+      <div class="prompt-structured-wrap">
+        <div class="prompt-structured-header">
+          <div class="prompt-label">Structured Fields</div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt-json-EN_20260407_06')">Copy JSON</button>
+        </div>
+        <div class="prompt-json-block" id="prompt-json-EN_20260407_06" data-json="{
+  &quot;prompt&quot;: &quot;Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman, extreme hourglass body — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long wavy jet-black hair damp and pushed slightly back from her face, a few strands clinging to her temple. Light-medium dewy skin still flushed from a hot shower, minimal natural makeup, clean brows, soft lip, lips slightly parted. She is wrapped in a plush ivory hotel towel tucked snugly above her bust, bare shoulders and collarbone exposed, a delicate gold chain at her neck. Mirror selfie: she holds her phone at chest height in front of an oval bedroom mirror, free hand resting lightly on the towel knot, head tilted slightly, soft direct gaze into the lens. Setting: her bedroom early morning, a single warm bedside lamp casting an ivory glow, unmade linen sheets and a folded throw blurred softly behind her in the reflection. Eye-level close-up framing. Palette of cream, ivory, warm skin tones. Soft, intimate, just-woken-up energy.&quot;,
+  &quot;negative_prompt&quot;: &quot;blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile&quot;,
+  &quot;aspect_ratio&quot;: &quot;9:16&quot;,
+  &quot;meta&quot;: {
+    &quot;quality&quot;: &quot;ultra photorealistic&quot;,
+    &quot;camera&quot;: &quot;iPhone 15 Pro Max&quot;,
+    &quot;lens&quot;: &quot;24mm wide&quot;,
+    &quot;style&quot;: &quot;casual mirror pic&quot;
+  },
+  &quot;subject&quot;: {
+    &quot;hair&quot;: {
+      &quot;color&quot;: &quot;jet-black&quot;,
+      &quot;style&quot;: &quot;long wavy, damp&quot;
+    },
+    &quot;body_type&quot;: &quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;,
+    &quot;skin&quot;: &quot;light-medium neutral, smooth, dewy&quot;,
+    &quot;expression&quot;: &quot;lips slightly parted&quot;,
+    &quot;makeup&quot;: &quot;minimal natural — clean brows, soft lip&quot;
+  },
+  &quot;outfit&quot;: {
+    &quot;top&quot;: {
+      &quot;type&quot;: &quot;plush hotel towel tucked above the bust&quot;,
+      &quot;color&quot;: &quot;ivory&quot;,
+      &quot;fit&quot;: &quot;wrapped snug&quot;
+    },
+    &quot;bottom&quot;: {
+      &quot;type&quot;: &quot;covered by towel&quot;,
+      &quot;color&quot;: &quot;—&quot;
+    },
+    &quot;accessories&quot;: [
+      &quot;delicate gold chain necklace&quot;
+    ]
+  },
+  &quot;pose&quot;: {
+    &quot;position&quot;: &quot;standing mirror selfie&quot;,
+    &quot;stance&quot;: &quot;relaxed, slight hip shift&quot;,
+    &quot;hands&quot;: &quot;phone at chest height, free hand lightly on the towel knot&quot;,
+    &quot;head_gaze&quot;: &quot;tilted slightly, soft direct gaze&quot;,
+    &quot;vibe&quot;: &quot;just-woken-up intimacy&quot;
+  },
+  &quot;scene&quot;: {
+    &quot;location&quot;: &quot;bedroom in front of an oval mirror&quot;,
+    &quot;time&quot;: &quot;early morning&quot;,
+    &quot;atmosphere&quot;: &quot;quiet, just-woken&quot;,
+    &quot;background&quot;: &quot;unmade linen sheets and folded throw softly blurred in the reflection&quot;
+  },
+  &quot;camera&quot;: {
+    &quot;pov&quot;: &quot;mirror selfie&quot;,
+    &quot;angle&quot;: &quot;eye-level&quot;,
+    &quot;framing&quot;: &quot;close-up&quot;
+  },
+  &quot;lighting&quot;: {
+    &quot;type&quot;: &quot;single warm bedside lamp&quot;,
+    &quot;effect&quot;: &quot;soft ivory wrap&quot;
+  },
+  &quot;mood&quot;: {
+    &quot;energy&quot;: &quot;soft, intimate&quot;,
+    &quot;color_palette&quot;: &quot;cream, ivory, warm skin&quot;,
+    &quot;aesthetic&quot;: &quot;morning soft hours&quot;
+  }
+}">{
+  <span class="json-key"><span class="json-str">&quot;meta&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;quality&quot;</span></span>: <span class="json-str">&quot;ultra photorealistic&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: <span class="json-str">&quot;iPhone 15 Pro Max&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;lens&quot;</span></span>: <span class="json-str">&quot;24mm wide&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;casual mirror pic&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;subject&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;hair&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;jet-black&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;style&quot;</span></span>: <span class="json-str">&quot;long wavy, damp&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;body_type&quot;</span></span>: <span class="json-str">&quot;extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;skin&quot;</span></span>: <span class="json-str">&quot;light-medium neutral, smooth, dewy&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;expression&quot;</span></span>: <span class="json-str">&quot;lips slightly parted&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;makeup&quot;</span></span>: <span class="json-str">&quot;minimal natural — clean brows, soft lip&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;outfit&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;top&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;plush hotel towel tucked above the bust&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;ivory&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;fit&quot;</span></span>: <span class="json-str">&quot;wrapped snug&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;bottom&quot;</span></span>: {
+      <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;covered by towel&quot;</span>,
+      <span class="json-key"><span class="json-str">&quot;color&quot;</span></span>: <span class="json-str">&quot;—&quot;</span>
+    },
+    <span class="json-key"><span class="json-str">&quot;accessories&quot;</span></span>: [
+      <span class="json-str">&quot;delicate gold chain necklace&quot;</span>
+    ]
+  },
+  <span class="json-key"><span class="json-str">&quot;pose&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;position&quot;</span></span>: <span class="json-str">&quot;standing mirror selfie&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;stance&quot;</span></span>: <span class="json-str">&quot;relaxed, slight hip shift&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;hands&quot;</span></span>: <span class="json-str">&quot;phone at chest height, free hand lightly on the towel knot&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;head_gaze&quot;</span></span>: <span class="json-str">&quot;tilted slightly, soft direct gaze&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;vibe&quot;</span></span>: <span class="json-str">&quot;just-woken-up intimacy&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;scene&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;location&quot;</span></span>: <span class="json-str">&quot;bedroom in front of an oval mirror&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;time&quot;</span></span>: <span class="json-str">&quot;early morning&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;atmosphere&quot;</span></span>: <span class="json-str">&quot;quiet, just-woken&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;background&quot;</span></span>: <span class="json-str">&quot;unmade linen sheets and folded throw softly blurred in the reflection&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;camera&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;pov&quot;</span></span>: <span class="json-str">&quot;mirror selfie&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;angle&quot;</span></span>: <span class="json-str">&quot;eye-level&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;framing&quot;</span></span>: <span class="json-str">&quot;close-up&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;lighting&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;type&quot;</span></span>: <span class="json-str">&quot;single warm bedside lamp&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;effect&quot;</span></span>: <span class="json-str">&quot;soft ivory wrap&quot;</span>
+  },
+  <span class="json-key"><span class="json-str">&quot;mood&quot;</span></span>: {
+    <span class="json-key"><span class="json-str">&quot;energy&quot;</span></span>: <span class="json-str">&quot;soft, intimate&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;color_palette&quot;</span></span>: <span class="json-str">&quot;cream, ivory, warm skin&quot;</span>,
+    <span class="json-key"><span class="json-str">&quot;aesthetic&quot;</span></span>: <span class="json-str">&quot;morning soft hours&quot;</span>
+  }
+}</div>
+      </div>
+    </div>
+    <div class="text-sm text-dim mt-2">Creative reasoning: balances the heavy after-hours mood of the other 5 posts with one soft-hours moment. Close-up framing serves the under-represented close-up bucket. Mirror-selfie POV is on-brand half-selfie but absent from recent feed. Caption is a small inside-my-head line, not a generic &#x27;gm&#x27; — softens the &#x27;gm&#x27; opening with a personality beat about being the only one up.</div>
+  </div></section>
+</div>
+
+<div class="footer">
+  <div>Generated 2026-04-07 21:09 JST by Marc COO Agent</div>
+</div>
+
+<script>
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.getAttribute('data-json');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

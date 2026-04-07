@@ -543,25 +543,27 @@ async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         return
     msg = (
         "Available commands:\n"
+        "\n*v5 (Meruru — primary):*\n"
+        "/create \u2014 Meruru creates 6 candidate posts (3 ref-based + 3 creative). You pick 4.\n"
+        "/create EN <free text> \u2014 Steer Meruru with optional context\n"
+        "/balance \u2014 Meruru reads your feed and recommends what to post next\n"
+        "\n*Approval & posting:*\n"
         "/approve \u2014 Approve all posts\n"
         "/approve EN \u2014 Approve all EN posts\n"
         "/approve EN 1,3 \u2014 Approve specific EN slots\n"
-        "/publish \u2014 Publish approved posts (both accounts)\n"
-        "/publish EN \u2014 Publish approved EN posts only\n"
-        "/pipeline \u2014 Run today's daily content pipeline\n"
+        "/details \u2014 All posts with statuses\n"
+        "\n*Operational:*\n"
+        "/replied <url> \u2014 Record manual reply\n"
         "/task <desc> \u2014 Send a task to Marc\n"
         "/status \u2014 Pipeline status summary\n"
-        "/details \u2014 All posts with statuses\n"
         "/metrics \u2014 View metrics summary\n"
-        "/metrics EN \u2014 View EN metrics\n"
-        "/metrics post_id key=value \u2014 Input manual metrics\n"
-        "Send photo \u2014 Parse metrics from screenshot\n"
-        "/confirm \u2014 Save parsed screenshot metrics\n"
-        "/cancel \u2014 Discard parsed screenshot metrics\n"
         "/running \u2014 Check active tasks\n"
         "/pause \u2014 Pause pipeline\n"
         "/resume \u2014 Resume pipeline\n"
         "/help \u2014 This message\n"
+        "\n*Legacy (v4 — kept for fallback):*\n"
+        "/pipeline \u2014 Old v4 pipeline (Strategist + Creator + Marc Review)\n"
+        "/warroom [morning|evening] \u2014 War room (no longer used)\n"
         "\nOr just send a message \u2014 Marc will respond conversationally."
     )
     await update.message.reply_text(msg)
@@ -608,20 +610,118 @@ async def cmd_publish(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 
 
 async def cmd_pipeline(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Run today's daily content pipeline via conversational Marc → execution."""
+    """Run today's daily content pipeline via orchestrator."""
     if not is_authorized(update):
         return
 
-    response_text, tool_call = await chat_with_marc(
-        f"[PIPELINE] Run today's daily content pipeline. Today's date: {today_iso()}."
+    await update.message.reply_text("Starting pipeline via orchestrator...")
+
+    def _run():
+        return subprocess.run(
+            ["python3", "scripts/orchestrator.py", "pipeline"],
+            capture_output=True, text=True, timeout=900, cwd=PROJECT,
+        )
+
+    try:
+        proc = await asyncio.get_event_loop().run_in_executor(None, _run)
+        if proc.returncode == 0:
+            await update.message.reply_text("Pipeline completed. Check Telegram for results.")
+        else:
+            await update.message.reply_text(f"Pipeline failed (exit {proc.returncode}):\n{proc.stderr[:500]}")
+    except subprocess.TimeoutExpired:
+        await update.message.reply_text("Pipeline timed out after 15 minutes.")
+
+
+async def cmd_create(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """v5 — Run Meruru's content creation flow.
+
+    Usage:
+        /create                    → EN, no operator context
+        /create EN                 → EN, no operator context
+        /create EN <free text>     → EN, with operator context (free text steers Meruru)
+        /create JP <free text>     → JP
+
+    Generates 6 candidate posts (3 reference-based + 3 creative). Operator picks 4 to actually post.
+    """
+    if not is_authorized(update):
+        return
+
+    args = context.args or []
+    account = "EN"
+    operator_context = ""
+
+    if args:
+        first = args[0].upper()
+        if first in ("EN", "JP"):
+            account = first
+            operator_context = " ".join(args[1:]).strip()
+        else:
+            # No account specified — entire arg list is operator context
+            operator_context = " ".join(args).strip()
+
+    ctx_note = f" with context: \"{operator_context[:80]}\"" if operator_context else ""
+    await update.message.reply_text(
+        f"🎨 Starting Meruru content creation for {account}{ctx_note}...\n"
+        f"Expected ~3-5 minutes. You'll get the plan in Telegram when done."
     )
 
-    if response_text:
-        await update.message.reply_text(response_text)
+    cmd = ["python3", "scripts/orchestrator.py", "create", "--account", account]
+    if operator_context:
+        cmd.extend(["--context", operator_context])
 
-    if tool_call:
-        task_id = _generate_task_id()
-        await _execute_task(update, task_id, tool_call)
+    def _run():
+        return subprocess.run(cmd, capture_output=True, text=True, timeout=900, cwd=PROJECT)
+
+    try:
+        proc = await asyncio.get_event_loop().run_in_executor(None, _run)
+        if proc.returncode == 0:
+            # Orchestrator already sends the plan to Telegram. Just confirm.
+            await update.message.reply_text(f"✅ Meruru created the {account} content plan. Check above for the plan + HTML report.")
+        else:
+            await update.message.reply_text(
+                f"❌ /create failed (exit {proc.returncode}):\n{proc.stderr[:500]}"
+            )
+    except subprocess.TimeoutExpired:
+        await update.message.reply_text("⏱ /create timed out after 15 minutes.")
+
+
+async def cmd_balance(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """v5 — Run Meruru's feed balance check.
+
+    Usage:
+        /balance      → EN
+        /balance EN   → EN
+        /balance JP   → JP
+
+    Meruru reads the last 14 days of feed balance and recommends what to post next.
+    """
+    if not is_authorized(update):
+        return
+
+    args = context.args or []
+    account = "EN"
+    if args:
+        first = args[0].upper()
+        if first in ("EN", "JP"):
+            account = first
+
+    await update.message.reply_text(f"🪞 Asking Meruru to check the {account} feed balance...")
+
+    def _run():
+        return subprocess.run(
+            ["python3", "scripts/orchestrator.py", "balance", "--account", account],
+            capture_output=True, text=True, timeout=600, cwd=PROJECT,
+        )
+
+    try:
+        proc = await asyncio.get_event_loop().run_in_executor(None, _run)
+        if proc.returncode != 0:
+            await update.message.reply_text(
+                f"❌ /balance failed (exit {proc.returncode}):\n{proc.stderr[:500]}"
+            )
+        # On success, orchestrator already sent the recommendation to Telegram
+    except subprocess.TimeoutExpired:
+        await update.message.reply_text("⏱ /balance timed out after 10 minutes.")
 
 
 async def cmd_task(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -936,6 +1036,73 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await update.message.reply_text(f"Error processing message: {e}")
 
 
+async def cmd_replied(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Record that operator manually posted a reply. Tracks reply execution for ROI analysis.
+
+    Usage:
+        /replied https://x.com/user/status/123456
+        /replied https://x.com/user/status/123456 Got 500 impressions
+    """
+    if not is_authorized(update):
+        return
+
+    args = context.args or []
+    if not args:
+        await update.message.reply_text(
+            "Usage: /replied <tweet_url> [notes]\n"
+            "Example: /replied https://x.com/katekarsyn/status/123456 Got great engagement"
+        )
+        return
+
+    tweet_url = args[0]
+    notes = " ".join(args[1:]) if len(args) > 1 else ""
+
+    # Save to replies_posted file
+    date = today_str()
+    replies_path = os.path.join(DATA_DIR, "outbound", f"replies_posted_{date}.json")
+    os.makedirs(os.path.dirname(replies_path), exist_ok=True)
+
+    replies = load_json(replies_path) or {"date": today_iso(), "replies": []}
+    replies["replies"].append({
+        "tweet_url": tweet_url,
+        "posted_at": datetime.now().astimezone().isoformat(),
+        "notes": notes,
+    })
+    save_json(replies_path, replies)
+
+    count = len(replies["replies"])
+    await update.message.reply_text(f"Recorded reply #{count} for today. URL: {tweet_url}")
+
+
+async def cmd_warroom(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Run a war room session via orchestrator."""
+    if not is_authorized(update):
+        return
+
+    args = context.args or []
+    session = args[0] if args else "morning"
+    if session not in ("morning", "evening"):
+        await update.message.reply_text("Usage: /warroom [morning|evening]")
+        return
+
+    await update.message.reply_text(f"Starting {session} war room via orchestrator...")
+
+    def _run():
+        return subprocess.run(
+            ["python3", "scripts/orchestrator.py", "warroom", session],
+            capture_output=True, text=True, timeout=900, cwd=PROJECT,
+        )
+
+    try:
+        proc = await asyncio.get_event_loop().run_in_executor(None, _run)
+        if proc.returncode == 0:
+            await update.message.reply_text(f"{session.title()} war room completed.")
+        else:
+            await update.message.reply_text(f"War room failed (exit {proc.returncode}):\n{proc.stderr[:500]}")
+    except subprocess.TimeoutExpired:
+        await update.message.reply_text("War room timed out after 15 minutes.")
+
+
 async def cmd_stub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not is_authorized(update):
         return
@@ -957,6 +1124,10 @@ def main():
     app.add_handler(CommandHandler("approve", cmd_approve))
     app.add_handler(CommandHandler("publish", cmd_publish))
     app.add_handler(CommandHandler("pipeline", cmd_pipeline))
+    app.add_handler(CommandHandler("create", cmd_create))
+    app.add_handler(CommandHandler("balance", cmd_balance))
+    app.add_handler(CommandHandler("warroom", cmd_warroom))
+    app.add_handler(CommandHandler("replied", cmd_replied))
     app.add_handler(CommandHandler("status", cmd_status))
     app.add_handler(CommandHandler("details", cmd_details))
     app.add_handler(CommandHandler("metrics", cmd_metrics))
@@ -968,6 +1139,43 @@ def main():
     app.add_handler(CommandHandler("running", cmd_running))
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
+
+    # Directive scheduler — checks standing_directives.json every 30 min
+    async def directive_scheduler(context: ContextTypes.DEFAULT_TYPE) -> None:
+        """Periodically check and execute script-type directives."""
+        try:
+            sd_path = os.path.join(DATA_DIR, "strategy", "standing_directives.json")
+            sd = load_json(sd_path)
+            if not sd:
+                return
+
+            changed = False
+            for d in sd.get("directives", []):
+                if d.get("status") == "active" and d.get("execution_type") == "script":
+                    cmd = d.get("command", "")
+                    if cmd:
+                        logger.info(f"Directive scheduler executing {d.get('id', '?')}: {cmd}")
+                        result = subprocess.run(
+                            cmd, shell=True, capture_output=True, text=True,
+                            timeout=300, cwd=PROJECT,
+                        )
+                        if result.returncode == 0:
+                            d["status"] = "resolved"
+                            d["resolved_date"] = today_iso()
+                            d["resolution"] = "Executed by directive scheduler"
+                            changed = True
+                            logger.info(f"Directive {d.get('id', '?')} resolved")
+                        else:
+                            logger.error(f"Directive {d.get('id', '?')} failed: {result.stderr[:200]}")
+            if changed:
+                save_json(sd_path, sd)
+        except Exception as e:
+            logger.error(f"Directive scheduler error: {e}")
+
+    if app.job_queue:
+        app.job_queue.run_repeating(directive_scheduler, interval=1800, first=60)
+    else:
+        logger.warning("JobQueue not available — directive scheduler disabled. Install with: pip install 'python-telegram-bot[job-queue]'")
 
     # Stub handlers for future phases
     for cmd in ["edit", "competitors"]:

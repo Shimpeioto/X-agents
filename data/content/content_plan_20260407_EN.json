@@ -1,0 +1,448 @@
+{
+  "date": "2026-04-07",
+  "account": "EN",
+  "generated_at": "2026-04-07T09:00:00+09:00",
+  "total_posts": 6,
+  "posts": [
+    {
+      "id": "EN_20260407_01",
+      "slot": 1,
+      "scheduled_time": "14:00 UTC",
+      "type": "reference_based",
+      "category": "after-hours powder room",
+      "priority": "high",
+      "status": "draft",
+      "text": "this room makes me feel a little dangerous tonight",
+      "hashtags": [],
+      "reference_filename": "481706679_18468305848064161_540295784627445341_n.jpg",
+      "image_prompt": {
+        "prompt": "Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman with extreme hourglass proportions — large full bust, ultra-slim waist, extra-wide hips, emphasized rounded glutes, fit and toned. Long straight jet-black hair falls past her shoulders. Light-medium dewy skin with minimal natural makeup, clean brows, soft lip, subtle smirk, lips softly closed. She wears a dark charcoal long-sleeve high-cut bodysuit with a deep square neckline, paired with black thigh-high boots that elongate her leg line. She stands slightly angled to camera, weight shifted to one leg to accentuate curves, left hand resting lightly on a polished black marble vanity, head tilted down-left with direct eye contact. Setting: a moody after-hours luxury powder room, single hard overhead spotlight carving deep shadows across the walls, black marble counters, brushed gunmetal fixtures, dim arch mirrors behind her. Eye-level medium full-body framing, handheld phone POV. High-contrast palette of deep black, charcoal, and warm skin tones. Quiet contained energy, held breath.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "candid phone photo"
+        },
+        "subject": {
+          "hair": {
+            "color": "jet-black",
+            "style": "long straight"
+          },
+          "body_type": "extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned",
+          "skin": "light-medium neutral, smooth, dewy",
+          "expression": "subtle smirk",
+          "makeup": "minimal natural — clean brows, soft lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "long-sleeve high-cut bodysuit with deep square neckline",
+            "color": "dark charcoal",
+            "fit": "second-skin, body-conscious"
+          },
+          "bottom": {
+            "type": "thigh-high boots (no separate bottoms)",
+            "color": "black"
+          },
+          "accessories": []
+        },
+        "pose": {
+          "position": "standing",
+          "stance": "slightly angled, weight shifted to one leg, hip-shifted",
+          "hands": "left hand resting lightly on the vanity counter",
+          "head_gaze": "tilted down-left, direct eye contact",
+          "vibe": "contained, dangerous calm"
+        },
+        "scene": {
+          "location": "luxury powder room",
+          "time": "late night",
+          "atmosphere": "moody, after-hours",
+          "background": "black marble vanity, dim arch mirrors, brushed gunmetal fixtures"
+        },
+        "camera": {
+          "pov": "handheld phone",
+          "angle": "eye-level",
+          "framing": "medium full-body"
+        },
+        "lighting": {
+          "type": "hard direct overhead spotlight",
+          "effect": "deep shadow falloff carving the walls"
+        },
+        "mood": {
+          "energy": "quiet, dangerous",
+          "color_palette": "black, charcoal, warm skin",
+          "aesthetic": "after-hours luxury intensity"
+        }
+      },
+      "notes": "Adopted from ref [1]: charcoal long-sleeve high-cut bodysuit + black thigh-high boots, standing-angled stance with hand on vanity and direct down-left gaze. Pulled the scene HARDER and DARKER than the reference's golden arch-mirror setting because the feed is 72% warm-glow and only 4% hard-dramatic — this post deliberately injects hard isolating light to balance the grid."
+    },
+    {
+      "id": "EN_20260407_02",
+      "slot": 2,
+      "scheduled_time": "17:30 UTC",
+      "type": "reference_based",
+      "category": "intimate close-up coy",
+      "priority": "high",
+      "status": "draft",
+      "text": "shh i'm not telling you what i'm thinking",
+      "hashtags": [],
+      "reference_filename": "Gl2dMp_acAAfLsv.jpeg",
+      "image_prompt": {
+        "prompt": "Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman, extreme hourglass body — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long wavy dark brown hair frames her face. Light-medium dewy skin, minimal natural makeup, clean brows, soft lip, lips slightly parted. She wears a micro triangle bikini top in dusty mauve with black lace trim along the edges and thin halter ties. Medium close-up framing: she leans slightly toward camera, one finger raised to her lips in a coy bite gesture, head gently tilted, direct unbroken eye contact with the lens. Setting: a plain charcoal wall corner late at night, single hard side light from the left carving sharp shadows down her face and collarbone, deep falloff into pure black on the right side of the frame. Eye-level handheld phone shot at intimate proximity. Color palette of dusty mauve, warm skin, deep shadow black. Energy is quiet, intimate, slightly mischievous.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "raw iphone close-up"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown",
+            "style": "long wavy"
+          },
+          "body_type": "extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned",
+          "skin": "light-medium neutral, smooth, dewy",
+          "expression": "lips slightly parted",
+          "makeup": "minimal natural — clean brows, soft lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "micro triangle bikini top with black lace trim, thin halter ties",
+            "color": "dusty mauve",
+            "fit": "minimal coverage"
+          },
+          "bottom": {
+            "type": "not in frame",
+            "color": "—"
+          },
+          "accessories": []
+        },
+        "pose": {
+          "position": "slight forward lean toward camera",
+          "stance": "intimate proximity",
+          "hands": "one finger raised to lips in coy bite gesture",
+          "head_gaze": "gently tilted, direct unbroken eye contact",
+          "vibe": "shh, mischievous secret"
+        },
+        "scene": {
+          "location": "plain charcoal wall corner",
+          "time": "late night",
+          "atmosphere": "private, hushed",
+          "background": "empty matte charcoal wall, deep shadow falloff"
+        },
+        "camera": {
+          "pov": "handheld phone",
+          "angle": "eye-level",
+          "framing": "close-up"
+        },
+        "lighting": {
+          "type": "hard side light from camera-left",
+          "effect": "sharp shadow carving, falloff into pure black"
+        },
+        "mood": {
+          "energy": "intimate, mischievous",
+          "color_palette": "dusty mauve, warm skin, charcoal black",
+          "aesthetic": "after-hours private moment"
+        }
+      },
+      "notes": "Adopted from ref [9]: dusty mauve micro triangle bikini with black lace trim, finger-to-lips coy bite gesture and direct close-up eye contact. Moved out of the reference's neutral backdrop into a hard-side-lit charcoal corner because feed needs more close-ups (only 28%) AND more hard-dramatic light (only 4%). Two birds."
+    },
+    {
+      "id": "EN_20260407_03",
+      "slot": 3,
+      "scheduled_time": "21:00 UTC",
+      "type": "reference_based",
+      "category": "lazy living room confidence",
+      "priority": "high",
+      "status": "draft",
+      "text": "couldn't be bothered to put on real pants today",
+      "hashtags": [],
+      "reference_filename": "G2Mo1ZdaIAYTAYx.jpeg",
+      "image_prompt": {
+        "prompt": "Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman with extreme hourglass proportions — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long straight jet-black hair, light-medium dewy skin, minimal natural makeup, clean brows, soft lip, subtle smirk. She wears a black fitted short-sleeve high-neck bodysuit paired with plain white knee-high athletic socks (no logos, no text), no bottoms visible. Reclined sideways on a low cream linen sofa, legs drawn up and crossed at the knee, one hand resting on a sock and slightly pulling it upward, head tilted down with a heavy-lidded direct gaze at the camera. Setting: a quiet luxury living room mid-afternoon, soft warm recessed downlighting from above, neutral cream walls, a single ceramic vase blurred behind her, a folded cashmere throw at the sofa edge. Low-angle medium framing, handheld phone POV from the floor side. Color palette of stark black-and-white against warm beige skin tones. Lazy contained confidence, slightly bored energy.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "candid phone photo"
+        },
+        "subject": {
+          "hair": {
+            "color": "jet-black",
+            "style": "long straight"
+          },
+          "body_type": "extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned",
+          "skin": "light-medium neutral, smooth, dewy",
+          "expression": "subtle smirk",
+          "makeup": "minimal natural — clean brows, soft lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "fitted short-sleeve high-neck bodysuit",
+            "color": "black",
+            "fit": "second-skin"
+          },
+          "bottom": {
+            "type": "plain white knee-high athletic socks (no text/logos)",
+            "color": "white"
+          },
+          "accessories": []
+        },
+        "pose": {
+          "position": "reclined sideways on sofa",
+          "stance": "legs drawn up, crossed at the knee",
+          "hands": "one hand resting on a sock, slightly pulling it",
+          "head_gaze": "tilted down, heavy-lidded direct gaze",
+          "vibe": "lazy, can't-be-bothered confidence"
+        },
+        "scene": {
+          "location": "luxury living room",
+          "time": "mid-afternoon",
+          "atmosphere": "quiet, lived-in luxury",
+          "background": "cream linen sofa, neutral cream wall, blurred ceramic vase, folded cashmere throw"
+        },
+        "camera": {
+          "pov": "handheld phone",
+          "angle": "low-angle",
+          "framing": "medium"
+        },
+        "lighting": {
+          "type": "warm recessed downlighting",
+          "effect": "soft ambient wrap"
+        },
+        "mood": {
+          "energy": "lazy, contained",
+          "color_palette": "black, white, warm beige",
+          "aesthetic": "effortless home confidence"
+        }
+      },
+      "notes": "Adopted from ref [5]: black high-neck bodysuit with white knee-high socks, sideways-reclined sofa pose with hand pulling sock and heavy-lidded direct gaze. Stripped the branded text off the socks (Tier 1 negative prompt forbids text). Reclined pose addresses feed gap (only 12% reclined) and shifts away from 49% standing dominance. Living-room scene is only 6% of feed."
+    },
+    {
+      "id": "EN_20260407_04",
+      "slot": 4,
+      "scheduled_time": "23:30 UTC",
+      "type": "creative",
+      "category": "midnight kitchen suspicion",
+      "priority": "high",
+      "status": "draft",
+      "text": "midnight snack but make it suspicious",
+      "hashtags": [],
+      "reference_filename": null,
+      "image_prompt": {
+        "prompt": "Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman, extreme hourglass body — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long wavy jet-black hair tied loosely off one shoulder, a few strands framing her face. Light-medium dewy skin, minimal natural makeup, clean brows, soft lip, neutral gaze. She wears a deep red lace bralette paired with black knit sleep shorts riding low on her hips. Standing at a dark marble kitchen island, one hip shifted out, one hand resting flat on the counter beside a single open glass jar, head turned slightly toward camera over her shoulder with a subtle smirk. Setting: her kitchen well past midnight, a single hard pendant downlight directly above the island carving her shoulders and collarbone out of deep darkness, the rest of the room dissolving into pure black. Eye-level medium framing, handheld phone shot from across the island. Palette of deep crimson, warm skin, charcoal black. Energy is quiet, suspicious, slightly chaotic.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "candid phone photo"
+        },
+        "subject": {
+          "hair": {
+            "color": "jet-black",
+            "style": "long wavy, loose off one shoulder"
+          },
+          "body_type": "extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned",
+          "skin": "light-medium neutral, smooth, dewy",
+          "expression": "subtle smirk",
+          "makeup": "minimal natural — clean brows, soft lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "lace bralette",
+            "color": "deep red",
+            "fit": "second-skin"
+          },
+          "bottom": {
+            "type": "knit sleep shorts",
+            "color": "black"
+          },
+          "accessories": []
+        },
+        "pose": {
+          "position": "standing at kitchen island",
+          "stance": "hip shifted out",
+          "hands": "one hand flat on the counter beside an open glass jar",
+          "head_gaze": "turned slightly over shoulder toward camera",
+          "vibe": "caught mid-snack, unbothered"
+        },
+        "scene": {
+          "location": "home kitchen",
+          "time": "well past midnight",
+          "atmosphere": "private, after-hours",
+          "background": "dark marble island, single open glass jar, room dissolving into pure black"
+        },
+        "camera": {
+          "pov": "handheld phone from across the island",
+          "angle": "eye-level",
+          "framing": "medium"
+        },
+        "lighting": {
+          "type": "hard pendant downlight directly above",
+          "effect": "shoulders and collarbone carved out of deep darkness, total falloff"
+        },
+        "mood": {
+          "energy": "quiet, slightly chaotic",
+          "color_palette": "deep crimson, warm skin, charcoal black",
+          "aesthetic": "after-hours suspicion"
+        }
+      },
+      "notes": "Creative reasoning: kitchen scene at 12% in feed but always shot warm/morning. Flipping it to a hard-pendant after-hours moment serves the missing accent-red (only 2%) AND hard-dramatic light (only 4%). The 'suspicious' caption matches my mischievous self-aware voice — what's in the jar? not telling. Caption first, image followed."
+    },
+    {
+      "id": "EN_20260407_05",
+      "slot": 5,
+      "scheduled_time": "—",
+      "type": "creative",
+      "category": "hallway shadow corner",
+      "priority": "high",
+      "status": "draft",
+      "text": "the hallway light hits different at 2am 🖤",
+      "hashtags": [],
+      "reference_filename": null,
+      "image_prompt": {
+        "prompt": "Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman with extreme hourglass proportions — large full bust, ultra-slim waist, extra-wide hips, emphasized rounded glutes, fit and toned. Long straight dark brown hair falls past her shoulders. Light-medium dewy skin, minimal natural makeup, clean brows, soft lip, lips softly closed. She wears a thin ribbed white cropped tank and tiny black bike shorts that emphasize her hip-to-waist contrast. Standing in a narrow hallway corner late at night, weight shifted onto one hip, one hand pressed flat against the wall above her head, the other hanging loose at her side, head tilted down with a quiet direct gaze into the lens. Setting: a plain off-white residential hallway, a single hard wall sconce throwing dramatic side light across her body and pooling deep shadow into the corner behind her. Low-angle full-body framing, handheld phone POV from waist height. Palette of warm skin, white cotton, deep shadow black. Still, contained, late-night energy.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "candid phone photo"
+        },
+        "subject": {
+          "hair": {
+            "color": "dark brown",
+            "style": "long straight"
+          },
+          "body_type": "extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned",
+          "skin": "light-medium neutral, smooth, dewy",
+          "expression": "lips softly closed",
+          "makeup": "minimal natural — clean brows, soft lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "thin ribbed cropped tank",
+            "color": "white",
+            "fit": "second-skin"
+          },
+          "bottom": {
+            "type": "tiny bike shorts",
+            "color": "black"
+          },
+          "accessories": []
+        },
+        "pose": {
+          "position": "standing in hallway corner",
+          "stance": "weight shifted onto one hip",
+          "hands": "one hand pressed flat against wall above head, other hanging loose",
+          "head_gaze": "tilted down, quiet direct gaze",
+          "vibe": "still, late-night contained"
+        },
+        "scene": {
+          "location": "narrow residential hallway corner",
+          "time": "late night, ~2am",
+          "atmosphere": "private, hushed",
+          "background": "plain off-white hallway walls, deep shadow pooling into the corner"
+        },
+        "camera": {
+          "pov": "handheld phone from waist height",
+          "angle": "low-angle",
+          "framing": "full-body"
+        },
+        "lighting": {
+          "type": "single hard wall sconce side light",
+          "effect": "dramatic side carving, deep corner shadow"
+        },
+        "mood": {
+          "energy": "still, contained",
+          "color_palette": "warm skin, white cotton, deep shadow black",
+          "aesthetic": "after-hours hallway intimacy"
+        }
+      },
+      "notes": "Creative reasoning: hallway is only 3% in feed and almost never used. The 2am hard-sconce framing serves the chronic hard-dramatic gap. Casual loungewear (cropped tank + bike shorts) is one of my staples and contrasts the dressier ref-based posts. Caption is mine: small observation, no engagement bait, the 🖤 carries the after-hours mood."
+    },
+    {
+      "id": "EN_20260407_06",
+      "slot": 6,
+      "scheduled_time": "—",
+      "type": "creative",
+      "category": "soft morning towel mirror selfie",
+      "priority": "high",
+      "status": "draft",
+      "text": "gm from the only person awake in this room",
+      "hashtags": [],
+      "reference_filename": null,
+      "image_prompt": {
+        "prompt": "Ultra photorealistic raw iPhone 15 Pro Max photo, 24mm wide lens, of an early-20s Japanese woman, extreme hourglass body — large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned. Long wavy jet-black hair damp and pushed slightly back from her face, a few strands clinging to her temple. Light-medium dewy skin still flushed from a hot shower, minimal natural makeup, clean brows, soft lip, lips slightly parted. She is wrapped in a plush ivory hotel towel tucked snugly above her bust, bare shoulders and collarbone exposed, a delicate gold chain at her neck. Mirror selfie: she holds her phone at chest height in front of an oval bedroom mirror, free hand resting lightly on the towel knot, head tilted slightly, soft direct gaze into the lens. Setting: her bedroom early morning, a single warm bedside lamp casting an ivory glow, unmade linen sheets and a folded throw blurred softly behind her in the reflection. Eye-level close-up framing. Palette of cream, ivory, warm skin tones. Soft, intimate, just-woken-up energy.",
+        "negative_prompt": "blurry, low quality, low resolution, artifacts, text, watermark, logo, text on clothing, printed words, letters, numbers, typography, signage, brand logo, neon text, extra limbs, distorted face, bad anatomy, deformed hands, extra fingers, cartoon, illustration, CGI, painting, anime, sketch, plastic skin, airbrushed texture, skin smoothing, beautification filters, anatomy normalization, body proportion averaging, aesthetic proportion correction, teeth showing, open mouth smile, visible teeth, toothy grin, toothy smile",
+        "aspect_ratio": "9:16",
+        "meta": {
+          "quality": "ultra photorealistic",
+          "camera": "iPhone 15 Pro Max",
+          "lens": "24mm wide",
+          "style": "casual mirror pic"
+        },
+        "subject": {
+          "hair": {
+            "color": "jet-black",
+            "style": "long wavy, damp"
+          },
+          "body_type": "extreme hourglass, large full bust, ultra-slim waist, extra-wide hips, emphasized glutes, fit and toned",
+          "skin": "light-medium neutral, smooth, dewy",
+          "expression": "lips slightly parted",
+          "makeup": "minimal natural — clean brows, soft lip"
+        },
+        "outfit": {
+          "top": {
+            "type": "plush hotel towel tucked above the bust",
+            "color": "ivory",
+            "fit": "wrapped snug"
+          },
+          "bottom": {
+            "type": "covered by towel",
+            "color": "—"
+          },
+          "accessories": [
+            "delicate gold chain necklace"
+          ]
+        },
+        "pose": {
+          "position": "standing mirror selfie",
+          "stance": "relaxed, slight hip shift",
+          "hands": "phone at chest height, free hand lightly on the towel knot",
+          "head_gaze": "tilted slightly, soft direct gaze",
+          "vibe": "just-woken-up intimacy"
+        },
+        "scene": {
+          "location": "bedroom in front of an oval mirror",
+          "time": "early morning",
+          "atmosphere": "quiet, just-woken",
+          "background": "unmade linen sheets and folded throw softly blurred in the reflection"
+        },
+        "camera": {
+          "pov": "mirror selfie",
+          "angle": "eye-level",
+          "framing": "close-up"
+        },
+        "lighting": {
+          "type": "single warm bedside lamp",
+          "effect": "soft ivory wrap"
+        },
+        "mood": {
+          "energy": "soft, intimate",
+          "color_palette": "cream, ivory, warm skin",
+          "aesthetic": "morning soft hours"
+        }
+      },
+      "notes": "Creative reasoning: balances the heavy after-hours mood of the other 5 posts with one soft-hours moment. Close-up framing serves the under-represented close-up bucket. Mirror-selfie POV is on-brand half-selfie but absent from recent feed. Caption is a small inside-my-head line, not a generic 'gm' — softens the 'gm' opening with a personality beat about being the only one up."
+    }
+  ]
+}
