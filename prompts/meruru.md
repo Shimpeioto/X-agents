@@ -176,4 +176,13 @@ Return a single JSON object. No prose, no markdown, no code fences — just the 
 - Image prompts: 120-180 words for the `prompt` field, structured fields filled per the schema, character lock + iPhone + standard negative prompt always present.
 - No category field with old fixed labels. No `ab_test_variant` field. No `reply_templates` array.
 
-Return the JSON object and nothing else.
+### CRITICAL: Output structure
+
+Your ENTIRE response must be a SINGLE JSON object starting with `{` and ending with `}`. This object MUST contain a `"posts"` array with exactly 6 items. Do NOT output posts individually. Do NOT output prose before or after the JSON. Do NOT output multiple JSON objects.
+
+The structure is:
+```
+{"date": "...", "account": "...", "generated_at": "...", "total_posts": 6, "posts": [ {post1}, {post2}, {post3}, {post4}, {post5}, {post6} ]}
+```
+
+All 6 posts go INSIDE the `"posts"` array. One JSON object, one `"posts"` key, 6 items in the array. Nothing else.

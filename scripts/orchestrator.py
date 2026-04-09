@@ -719,11 +719,36 @@ def run_create(account: str = "EN", operator_context: str = ""):
     )
     logger.info(f"Meruru prompt size: {len(prompt)} chars")
 
-    # Step 6: Single Opus call
-    logger.info("Step 6: Invoke Meruru (Opus)")
-    raw_output = run_claude_p(prompt, model="opus", timeout=700)
+    # Step 6: Opus call with retry on fragment output
+    max_create_retries = 1
+    raw_output = ""
+    plan_json = {}
 
-    plan_json = extract_json(raw_output)
+    for create_attempt in range(max_create_retries + 1):
+        logger.info(f"Step 6: Invoke Meruru (Opus, attempt {create_attempt + 1}/{max_create_retries + 1})")
+        raw_output = run_claude_p(prompt, model="opus", timeout=700)
+        plan_json = extract_json(raw_output)
+
+        # Check if we got a proper wrapper with posts array
+        if isinstance(plan_json.get("posts"), list) and len(plan_json["posts"]) > 0:
+            break  # Got a valid plan
+
+        # Fragment detected — retry or reconstruct
+        if "slot" in plan_json and "posts" not in plan_json:
+            if create_attempt < max_create_retries:
+                logger.warning(
+                    f"Meruru output a post fragment (attempt {create_attempt + 1}) — retrying for proper wrapper"
+                )
+                continue
+            else:
+                logger.warning(
+                    f"Meruru output fragments after {max_create_retries + 1} attempts — reconstructing from all JSON objects"
+                )
+                plan_json = _reconstruct_plan(raw_output, date_iso, account, "meruru_v5")
+        else:
+            # Some other unexpected output structure — try reconstruction as last resort
+            logger.warning(f"Unexpected Meruru output structure (keys: {list(plan_json.keys())[:10]}) — attempting reconstruction")
+            plan_json = _reconstruct_plan(raw_output, date_iso, account, "meruru_v5")
 
     # Defensive cleanup: strip "tool" field from image_prompt
     for post in plan_json.get("posts", []):
