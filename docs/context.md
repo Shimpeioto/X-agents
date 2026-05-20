@@ -3,7 +3,9 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: April 7, 2026 (Session 49: v5 redesign **complete through Phase 3**. Meruru unified creative agent shipped. `/create` generates 6 candidates per day (3 ref-based + 3 creative). `/balance` provides feed analysis. Telegram bot updated. v4 prompts archived. LaunchAgent switched to v5 `create` daily at 06:00 JST. First production run captured Meruru's "gm from the only person awake in this room" — exactly the character-first caption the operator described.)
+**Last updated**: May 20, 2026 (Session 50: all daily automation halted. Operator unloaded every X-agents LaunchAgent — `create` (06:00), `pipeline` (06:00), `morning-warroom` (05:30), `evening-warroom` (22:00), `outbound` (14:00). Daily Telegram messages from Marc stop with them (they were sent at end of `create`). Three `publish-slot.20260322-en-*` plists remain on disk but are expired one-shots from March 22-23, 2026 — they will never fire and were left in place. .plist files for the 5 daily jobs are kept so the system can be re-enabled later via `launchctl load`.)
+
+**Previous**: April 7, 2026 (Session 49: v5 redesign **complete through Phase 3**. Meruru unified creative agent shipped. `/create` generates 6 candidates per day (3 ref-based + 3 creative). `/balance` provides feed analysis. Telegram bot updated. v4 prompts archived. LaunchAgent switched to v5 `create` daily at 06:00 JST. First production run captured Meruru's "gm from the only person awake in this room" — exactly the character-first caption the operator described.)
 
 ---
 
@@ -1654,6 +1656,46 @@ orchestrator.py warroom {morning|evening}
 
 ---
 
+### Session 50 — All Daily Automation Halted (May 20, 2026)
+
+**Context**: Operator decided to stop every daily auto-task. The audit revealed that even though Session 49's notes said v4 LaunchAgents were unloaded, `launchctl list` showed them still loaded and erroring out daily (exit status 1) — only `com.xagents.create` was healthy.
+
+**Inventory before shutdown**:
+
+| Loaded LaunchAgent | Schedule (JST) | Wrapper task | State |
+|---|---|---|---|
+| `com.xagents.create` | daily 06:00 | `cron_wrapper.sh create` | exit 0 — was the only working job (v5 Meruru) |
+| `com.xagents.pipeline` | daily 06:00 | `cron_wrapper.sh pipeline` | exit 1 — legacy v4 |
+| `com.xagents.morning-warroom` | daily 05:30 | `cron_wrapper.sh morning_warroom` | exit 1 — removed in v5, wrapper errors out |
+| `com.xagents.evening-warroom` | daily 22:00 | `cron_wrapper.sh evening_warroom` | exit 1 — removed in v5, wrapper errors out |
+| `com.xagents.outbound` | daily 14:00 | `cron_wrapper.sh outbound` | exit 1 — legacy v4, no `outbound` case in wrapper |
+| `com.xagents.publish-slot.20260322-en-02` | one-shot, Mar 23 02:30 | `publisher.py post --slot 2` | expired (date in past) |
+| `com.xagents.publish-slot.20260322-en-03` | one-shot, Mar 23 06:00 | `publisher.py post --slot 3` | expired |
+| `com.xagents.publish-slot.20260322-en-04` | one-shot, Mar 23 08:30 | `publisher.py post --slot 4` | expired |
+
+No cron entries. No background daemons (telegram_bot.py not running).
+
+**Action taken**:
+- `launchctl unload` on all 5 daily plists (`create`, `pipeline`, `morning-warroom`, `evening-warroom`, `outbound`)
+- `.plist` files preserved in `~/Library/LaunchAgents/` — can be re-enabled later with `launchctl load`
+- 3 expired `publish-slot.20260322-*` plists left in place (already past their `StartCalendarInterval` date, will not fire)
+
+**Effect on Telegram messages**: The daily content plan Telegram message was the end of the `create` task (orchestrator.py sends the HTML report via `send_telegram` after generation). With `create` unloaded, **Marc sends no scheduled daily messages**. Telegram bot remains available for `/create`, `/balance`, and free-form conversation if the operator manually starts the daemon — those are operator-triggered, not scheduled.
+
+**Discrepancy resolved**: CLAUDE.md and Session 49 notes claimed the v4 plists were unloaded. They were not (or were reloaded since). After Session 50, all 5 are confirmed unloaded.
+
+**To resume any single task**:
+```
+launchctl load ~/Library/LaunchAgents/com.xagents.create.plist
+```
+
+**To clean up the 3 expired publish-slot plists** (optional, not done this session):
+```
+rm ~/Library/LaunchAgents/com.xagents.publish-slot.20260322-en-*.plist
+```
+
+---
+
 ## 4. Decision Summary
 
 ### Framework-Level Decisions (Apply to All Future Projects)
@@ -2411,6 +2453,7 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Session 48 | Purpose-Driven Posts + Personality Captions + Pipeline Fixes | Local machine | **✅ Complete** — `moment_seed` → `post_purpose` + `visual_focus`. Visual diversity matrix. Personality captions (30-100 chars). 3-day visual dedup. No-text rule. Plan reconstruction. Retry logic. False drought fix. 9 files modified. |
 | Session 48b | Auto Image Generation Plan | Local machine | **📋 Planned** — Browser Use CLI to automate Higgsfield web UI using existing Pro plan. Plan at `docs/plan-auto-image-generation.md`. |
 | Session 49 | v5 Architecture Redesign (Meruru as Unified Creative Agent) | Local machine | **✅ Complete (Phases 0-3)** — Phase 0: visual style derived from 12 posted images. Phase 1: `meruru_identity.md`, `feed_balance.py`, `meruru.md`, `run_create()` — first run produced 6 character-driven candidates including "gm from the only person awake in this room". Phase 2: `/create` and `/balance` Telegram commands wired up; `meruru_balance.md` prompt; bonus fix to `send_telegram` apostrophe bug. Phase 3: cleanup — archived 5 v4 prompts, simplified `validate.py` (14/14 PASS), removed `run_warroom()`, updated `cron_wrapper.sh`, replaced LaunchAgent (`com.xagents.create.plist`), updated HTML report for 6-candidate split, rewrote `CLAUDE.md`. Bot restarted. Phase 4 (polish/iteration) ongoing. |
+| Session 50 | All Daily Automation Halted | Local machine | **🛑 Stopped (May 20, 2026)** — Operator unloaded all 5 daily LaunchAgents (`create`, `pipeline`, `morning-warroom`, `evening-warroom`, `outbound`). No daily Telegram messages from Marc (they were emitted by the `create` task). 3 `publish-slot.20260322-en-*` plists left in place — expired one-shots from Mar 22-23, 2026, will never fire. All `.plist` files preserved for future re-enable via `launchctl load`. |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 
