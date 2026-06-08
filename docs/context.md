@@ -3,9 +3,9 @@
 
 **Purpose of this document**: Enable any third party to fully understand the project vision, decision history, current state, and deliverables without needing to read the full conversation transcript.
 
-**Last updated**: May 20, 2026 (Session 50: all daily automation halted. Operator unloaded every X-agents LaunchAgent — `create` (06:00), `pipeline` (06:00), `morning-warroom` (05:30), `evening-warroom` (22:00), `outbound` (14:00). Daily Telegram messages from Marc stop with them (they were sent at end of `create`). Three `publish-slot.20260322-en-*` plists remain on disk but are expired one-shots from March 22-23, 2026 — they will never fire and were left in place. .plist files for the 5 daily jobs are kept so the system can be re-enabled later via `launchctl load`.)
+**Last updated**: June 8, 2026 (Session 51: daily automation actually halted. Session 50's `launchctl unload` was not persistent — macOS auto-loaded every `.plist` in `~/Library/LaunchAgents/` at the next login, so all 5 daily jobs had been firing every day since Session 50. Today's `create` ran 06:02→08:15 and pushed a Telegram message + HTML doc, which is what the operator noticed. Fix: moved the 5 daily plists into `~/Library/LaunchAgents/xagents-disabled/` and `launchctl bootout`'d each. Structurally impossible to auto-reload now. Verified: `launchctl list` shows only the 3 expired `publish-slot.20260322-en-*` (harmless).)
 
-**Previous**: April 7, 2026 (Session 49: v5 redesign **complete through Phase 3**. Meruru unified creative agent shipped. `/create` generates 6 candidates per day (3 ref-based + 3 creative). `/balance` provides feed analysis. Telegram bot updated. v4 prompts archived. LaunchAgent switched to v5 `create` daily at 06:00 JST. First production run captured Meruru's "gm from the only person awake in this room" — exactly the character-first caption the operator described.)
+**Previous**: May 20, 2026 (Session 50: daily automation thought to be halted — `launchctl unload` run on all 5 daily LaunchAgents. In fact only effective until next login; see Session 51 for actual halt.)
 
 ---
 
@@ -1696,6 +1696,53 @@ rm ~/Library/LaunchAgents/com.xagents.publish-slot.20260322-en-*.plist
 
 ---
 
+### Session 51 — Daily Automation Actually Halted (June 8, 2026)
+
+**Context**: Operator noticed daily Telegram messages from Marc were still arriving despite Session 50 documenting that all daily LaunchAgents had been halted. Investigation showed Session 50's halt was not effective in practice.
+
+**Root cause**: `launchctl unload` only removes a service from the *current* launchd session. macOS automatically (re-)loads every `.plist` it finds in `~/Library/LaunchAgents/` at the next user login. Session 50 deliberately left the `.plist` files in that directory "for future re-enable" — which meant the next reboot/login silently restored all 5 daily jobs. From that point on (~May 20 onward) they kept firing every day.
+
+**Evidence at investigation time (today, June 8)**:
+
+| Job | Last fire | Source |
+|---|---|---|
+| `com.xagents.create` | 06:02 → 08:15 (sent Telegram message + HTML doc) | `logs/cron_create_20260608.log` Step 10: `Sending Telegram document` |
+| `com.xagents.pipeline` | 10:12 | `logs/cron_pipeline_20260608.log` |
+| `com.xagents.morning-warroom` | 05:46 | `logs/cron_morning_warroom_20260608.log` |
+| `com.xagents.evening-warroom` | yesterday 22:00 | `logs/cron_evening_warroom_20260607.log` |
+| `com.xagents.outbound` | yesterday 14:00 | `logs/cron_outbound_20260607.log` |
+
+`launchctl list | grep xagent` confirmed all 5 daily agents loaded alongside the 3 expired publish-slot agents.
+
+**Action taken** ("Option B" — move plists out of auto-load path so re-load is structurally impossible):
+```
+mkdir -p ~/Library/LaunchAgents/xagents-disabled
+mv ~/Library/LaunchAgents/com.xagents.{create,pipeline,morning-warroom,evening-warroom,outbound}.plist \
+   ~/Library/LaunchAgents/xagents-disabled/
+for j in create pipeline morning-warroom evening-warroom outbound; do
+  launchctl bootout gui/$(id -u)/com.xagents.$j
+done
+```
+
+**Verification after halt**:
+- `launchctl list | grep xagent` → only the 3 expired `publish-slot.20260322-en-*` remain (one-shot dates in March 2026, will never fire)
+- `~/Library/LaunchAgents/` → no daily plists (moved to `xagents-disabled/`)
+- No running `orchestrator.py` / `cron_wrapper.sh` / `telegram_bot.py` processes
+- No lockfiles, no crontab entries
+
+**Why Option B over `launchctl disable`**: Option A (`disable` + `bootout`) is also persistent, but the disabled state lives inside launchctl's database — invisible if you only look at the LaunchAgents folder. Session 50 was already burned by an invisible "the agents are off, trust me" state. Moving the files makes the off-state self-evident — `ls ~/Library/LaunchAgents/` shows no daily jobs.
+
+**What's still off-by-default (not changed this session)**:
+- `telegram_bot.py` — the conversational Marc layer is not running. The daily Telegram messages were sent by `orchestrator.py → telegram_send.py` directly, not via the bot. Halting the LaunchAgents alone is sufficient to stop scheduled messages regardless of bot state.
+
+**To resume any single task** (now requires both move-back and bootstrap):
+```
+mv ~/Library/LaunchAgents/xagents-disabled/com.xagents.create.plist ~/Library/LaunchAgents/
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.xagents.create.plist
+```
+
+---
+
 ## 4. Decision Summary
 
 ### Framework-Level Decisions (Apply to All Future Projects)
@@ -2453,7 +2500,8 @@ Pipeline fix applied: `run_pipeline.sh` updated to unset `CLAUDECODE` env var (p
 | Session 48 | Purpose-Driven Posts + Personality Captions + Pipeline Fixes | Local machine | **✅ Complete** — `moment_seed` → `post_purpose` + `visual_focus`. Visual diversity matrix. Personality captions (30-100 chars). 3-day visual dedup. No-text rule. Plan reconstruction. Retry logic. False drought fix. 9 files modified. |
 | Session 48b | Auto Image Generation Plan | Local machine | **📋 Planned** — Browser Use CLI to automate Higgsfield web UI using existing Pro plan. Plan at `docs/plan-auto-image-generation.md`. |
 | Session 49 | v5 Architecture Redesign (Meruru as Unified Creative Agent) | Local machine | **✅ Complete (Phases 0-3)** — Phase 0: visual style derived from 12 posted images. Phase 1: `meruru_identity.md`, `feed_balance.py`, `meruru.md`, `run_create()` — first run produced 6 character-driven candidates including "gm from the only person awake in this room". Phase 2: `/create` and `/balance` Telegram commands wired up; `meruru_balance.md` prompt; bonus fix to `send_telegram` apostrophe bug. Phase 3: cleanup — archived 5 v4 prompts, simplified `validate.py` (14/14 PASS), removed `run_warroom()`, updated `cron_wrapper.sh`, replaced LaunchAgent (`com.xagents.create.plist`), updated HTML report for 6-candidate split, rewrote `CLAUDE.md`. Bot restarted. Phase 4 (polish/iteration) ongoing. |
-| Session 50 | All Daily Automation Halted | Local machine | **🛑 Stopped (May 20, 2026)** — Operator unloaded all 5 daily LaunchAgents (`create`, `pipeline`, `morning-warroom`, `evening-warroom`, `outbound`). No daily Telegram messages from Marc (they were emitted by the `create` task). 3 `publish-slot.20260322-en-*` plists left in place — expired one-shots from Mar 22-23, 2026, will never fire. All `.plist` files preserved for future re-enable via `launchctl load`. |
+| Session 50 | All Daily Automation Halted (attempt) | Local machine | **⚠️ Halt not persistent (May 20, 2026)** — `launchctl unload` was effective only until the next login; macOS auto-reloaded all 5 plists from `~/Library/LaunchAgents/`. Jobs continued firing daily until Session 51. |
+| Session 51 | Daily Automation Actually Halted | Local machine | **🛑 Stopped (June 8, 2026)** — Moved 5 daily plists to `~/Library/LaunchAgents/xagents-disabled/` and `launchctl bootout`'d each. Structurally impossible to auto-reload. Verified `launchctl list` shows only the 3 expired publish-slot agents. No daily Telegram messages from Marc going forward. |
 | Phase 6 | VPS Deployment (provision, copy project, install cron) | VPS | Not started |
 | Phase 7 | Autonomous Operation (cron runs agents overnight) | VPS | Not started |
 
